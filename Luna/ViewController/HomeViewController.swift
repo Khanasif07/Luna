@@ -31,10 +31,7 @@ class HomeViewController: UIViewController, ASAuthorizationControllerPresentatio
     var database: Database!
     var storage: Storage!
     private let biometricIDAuth = BiometricIDAuth()
-    // Initialize Database, Auth, Storage
-   
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         database = Database.database()
