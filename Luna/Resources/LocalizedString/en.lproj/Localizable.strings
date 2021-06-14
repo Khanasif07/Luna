@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  Luna
+
+  Created by Admin on 10/06/21.
+  
+*/
+"signInWithFaceID" = "Sign In with Face ID";
+"signInWithFingerPrint" = "Sign In with Fingerprint";
+"invalidBiometrics" = "Invalid biometric input";
+"lockedOutBiometric" = "Biometric locked out";
+"loginError" = "Your biometric is not associated with any account";
+"biometricAuthNotAvailable" = "Your device doesn't support biometric authentication";
+"overrideBioMetricMessage" = "Your biometric is already associated with one account. Do you want to replace your biometric with this account?";
+"error" = "Error!";
+"biometric" = "Biometric";

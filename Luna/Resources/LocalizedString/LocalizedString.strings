@@ -1,0 +1,601 @@
+/* 
+  LocalizedString.strings
+  Luna
+
+  Created by Admin on 03/06/21.
+  
+*/
+
+/ MARK: - Alert Values
+//==============================
+"chooseOptions" = "Choose Options";
+"chooseFromGallery" = "Choose From Gallery";
+"takePhoto" = "Camera";
+"cancel" = "Cancel";
+"send" = "Send";
+"ok" = "Ok";
+"removePicture" = "Remove Picture";
+"alert" = "Alert";
+"settings" = "Settings";
+"submit" = "Submit";
+"login" = "Login";
+"sendOtp" = "Send OTP";
+"english" = "English";
+"arabic" = "عربى";
+"continueTitle" = "Continue";
+"logout" = "Sign out";
+"mobileNo" = "Mobile Number";
+"name" = "Name";
+"gallery" = "Gallery";
+"camera" = "Camera";
+
+//MARK: - Home TabBar Values
+//========================
+"home" = "Home";
+"setting" = "Setting";
+"notification" = "Notification";
+"profile" = "Profile";
+"notifications" = "Notifications";
+
+// MARK: - Tutorial Screen
+//==============================
+"tutorialTitle1" = "A hassle free car tire repair service";
+"tutorialTitle2" = "Battery is the lifeline of any vehicle";
+"tutorialTitle3" = "A high quality oil is the lifeline of any vehicle";
+"chooseLanguage" = "Choose Language";
+"login_with_emailId" = "Login with Email Id";
+"accept" = "Accept";
+"reject" = "Reject";
+"accepted" = "Accepted";
+"thisBidIsProposedBy" = "This bid is proposed by ";
+"asPerYourTyreService" = " as per your tire\nservice request.";
+"status" = "Status";
+
+// MARK: - Login VC Values
+//==============================
+"emailId" = "Email Id";
+"password" = "Password";
+"emailIdPlaceHolder" = "Email";
+"usePhoneNumber" = "Use Phone Number";
+"forgotPassword" = "Forgot Password";
+"sign_in" = "Sign in";
+"sign_in_Cap" = "SIGN IN";
+"signupcap" = "SIGN UP";
+"signup" = "Sign up";
+"signup_with_social_accounts" = "Sign up with Social Accounts";
+"Login_with_social_accounts" = "Login with Social Accounts";
+"sKIP_LOGIN_CONTINUE" = "SKIP LOGIN & CONTINUE";
+"skip_signup_continue" = "Continue without Sign up";
+"dont_have_an_account" = "Don’t have an account?";
+"imageUploadingFailed" = "Image uploading failed";
+"accountNumberAreNotSame" = "Account number doesn't match";
+"minTenDigitInAccountNumber" = "Minimum Ten Digit In Account Number";
+"choosePdf" = "Choose PDF";
+
+// MARK: - Validation Messages
+//==================================
+"newPassword" = "New Password";
+"pleaseEnterValidEmail" = "Enter a valid Email address";
+"pleaseEnterValidPassword" = "Please enter a valid password (Minimum 6 and max 25 characters, one uppercase and one number)";
+"nameShouldBeAtleastMinCharacters" = "Minimum length of first name should be greater than or equal to 3";
+"phoneNoShouldBeAtleastMinCharacters" = "Phone number length must be 8 to 14 charcters long";
+"pleaseEnterEmail" = "Please enter email address";
+"pleaseEnterPassword" = "Please enter password";
+"pleaseEnterPhoneNumber" = "Please enter Phone number";
+"pleaseEnterminimumdigitsphonenumber" = "Please enter minimum 7 digits phone number";
+"enterPhoneNumber" = "Enter Phone number";
+"pleaseEntertName" = "Please enter name";
+"pleaseEnterNickName" = "Please enter nickname";
+"pleaseFillAllTheFields" = "Please fill all the fields";
+"pleaseEnterNewPassword" = "Please enter New Password";
+"pleaseEnterConfirmNewPassword" = "Please enter Confirm Password";
+"passwordsDoNotMatch" = "New Password and Confirm Password should be same";
+"pleaseChooseCountryCode" = "Please choose CountryCode";
+"pleaseEnterValidPhoneNo" = "Please enter valid Phone number";
+"pleaseEnterEducation" = "Please enter education";
+"pleaseEnterExperience" = "Please enter experience";
+"pleaseEnterDob" = "Please enter date of birth";
+"phoneNumber" = "Phone Number";
+"enterYourName" = "Enter Your Name";
+"enterYourEmailId" = "Enter Your Email Id";
+"enterYourMobNumber" = "Enter Your Mobile No";
+"confirmPassword" = "Confirm Password";
+"alreadyHaveAnAccount" = "Already have an account?";
+"enterNewPassword" = "Enter New Password";
+"confirmNewPassword" = "Confirm New Password";
+"passwordDoesNotMatch" = "Password doesn\'t match";
+"pleaseEnterMinTwoChar" = "Please enter minimum 2 characters";
+"addPhoneNumber" = "Add Phone Number";
+"wait_Img_Upload" = "Please wait until media has finished uploading";
+// MARK: - Signup VC Values
+//==============================
+"bySigningDec" = "By Signing Up you are agreeing to our";
+"tos" = " ToS ";
+"privacyPolicy" = "Privacy Policy";
+
+// MARK: - Profile VC Values
+//==============================
+"my_vehicle" = "My Vehicle";
+"my_Services" = "My Services";
+"service_history" = "Service History";
+"payments" = "Payments";
+"saved_cards" = "Saved Cards";
+"added_location" = "Added Location";
+"change_password" = "Change Password";
+
+// MARK: - Profile Setting VC Values
+//==============================
+"aboutUs" = "About us";
+"terms_Condition" = "Terms & Conditions";
+"privacy_policy" = "Privacy Policy";
+"contactUs" = "Contact us";
+"changeLanguage" = "Change Language";
+"switchProfileTogarage" = "Switch to Garage Account";
+"switchProfileToUser" = "Switch to User Account";
+"createGarageProfile" = "Create Garage Account";
+"reportAnIssue" = "Report an Issue";
+"faq" = "FAQ";
+"referFriend" = "Rafer a Friend";
+
+"garageRegistration" = "Garage Registration";
+"startRegistration" = "Start Registration";
+"requirementToRegister" = "Requirements for registering\nyour garage";
+
+"garageLogo" = "1. Garage Logo";
+"authorisedNameOfServiceCenter" = "2. Authorised Name of Service Center";
+"locationOfYourServiceCenter" = "3. Location of your Service center";
+"imagesOfyourServiceCenter" = "4. Images of your Service Center";
+"govtIssuedlicensesandDocuments" = "5. Government Issued licenses and documents.";
+
+"garageLogoDesc" = "You will have to upload a logo Image(JPG/JPEG) of your Garage or Service center.";
+"authorisedNameOfServiceCenterDesc" = "You will be entering the authorised name of your Garage or Service Center.";
+"locationOfYourServiceCenterDesc" = "You will have to mark the exact location of your Garage or Service center on provided MAP.";
+"imagesOfyourServiceCenterDesc" = "Upload Multiple Images(JPG/JPEG) of your Garage or Service center.";
+"govtIssuedlicensesandDocumentsDesc" = "You will have to upload the following documents: Commercial Registration,VAT Certificate,Municipal License and ID of the owner.";
+
+"addDetails" = "Add Details";
+"thisAllAboutMyServiceCenter" = "These are all the details about my service center";
+"addFollowingGarageDetails" = "Add garage details";
+"addLogo" = "Add Logo";
+"saveContinue" = "Save & Continue";
+"enterServiceCenterName" = "Enter Service Center Name";
+"serviceCenterNames" = "Service Center Name";
+"help" = "Help";
+"registerAgain" = "Register Again";
+"completeProfile" = "Complete Profile";
+"yourRegistrationRequestIsStillUnder" = "your registration request is still under review we’ll let you know when it’s done";
+"addFollowingGovtIssuedLicenceOrDocumentsHereForVerification" = "Add Following Government Issued Licenses or Documents here for verification";
+"govtIssuedDoc" = "Government Issued Documents";
+"commercialRegister" = "Commercial Register";
+"vatCertificate" = "Vat certificate";
+"idOfTheOwner" = "ID of the owner";
+"municipalityLicense" = "Municipality License";
+"addAccounts" = "Add Accounts";
+"addBankAccountDetails" = "Add Bank Account Details";
+"addCreditDebitCardDetails" = "Add Credit/Debit Card Details";
+"register" = "Register";
+"and" = "and";
+"iAgreeTo" = "I Agree to";
+"add" = "Add";
+"selectYourBank" = "Select Your Bank";
+"enterAccountNumber" = "Enter Account Number";
+"confirmAccountNumber" = "Confirm Account Number";
+"selectBank" = "Select Bank";
+"AccountNo" = "Account No";
+"confirmAccountNo" = "Confirm Account No";
+"pleaseEnterYourBankAccountDetails" = "Please Enter Your Bank Account Details";
+"linkedAccount" = "Linked Account";
+"completeProfile" = "Complete Profile";
+"selectServiceCenterFacility" = "Select Service Center’s Facility";
+"serviceCenterFacility" = "Service Center’s Facility";
+"serviceCenterImage" = "Service Center Image";
+"done" = "Done";
+"clearAll" = "CLEAR ALL";
+"uploadGarageLogo" = "Upload Garage Logo";
+"enterVehicleMake" = "Enter Vehicle Make";
+"enterVehicleModel" = "Enter Vehicle Model";
+"enterModelYear" = "Enter Model Year";
+"enteryYourVehicleDetails" = "Enter your Vehicle Details";
+"wellGetYouExactTyreSize" = "We’ll get you exact tire size according to the\nprovided details";
+"vehicleMake" = "Vehicle Make";
+"vehicleModel" = "Vehicle Model";
+"modelYear" = "Model Year";
+"thePreferredOriginForMytyreWouldBe" = "The preferred Origin for my\ntire would be";
+"setYourPreferencesAmongTyreBrandOrCountryOrigin" = "Set your preferences among tire brand or\ncountry origin";
+"tyreBrand" = "Tire Brand";
+"countryOrigin" = "Country Origin";
+"selectTyreBrand" = "Select Tire Brands";
+"selectCountryOrigin" = "Select Country Origin";
+"brands" = "Brands";
+"origin" = "Origin";
+"selectBrand" = "Select Brands";
+"brandName" = "Brand’s Name";
+"selectCountry" = "Select Country";
+"countryName" = "Country’s Name";
+"arabianTyresWantToAccessYourCurrentLocation" = "Arabian Tires want to access\nyour current location";
+"allowCureentLocationWillHelpYouInGettingGreatOffers" = "Allow current location will help you\nin getting great offers";
+"allow" = "Allow";
+"installationPriceRange" = "Installation Price Range";
+"viewTutorial" = "View Tutorial";
+"underDevelopment" = "Under Development";
+"pleaseSelectServices" = "Please Select Services";
+"pleaseSelectServiceCenterImage" = "Please Select Service Center Image";
+"ongoingServices" = "Ongoing Services";
+"ongoingService" = "Ongoing Service";
+"update" = "Update";
+"tyreServiceRequest" = "Tire Service Request";
+"batteryServiceRequest" = "Battery Service Request";
+"oilServiceRequest" = "Oil Service Request";
+"regNo" = "Reg. No.";
+"serviceStatus" = "Service Status";
+"enterBiddingAmount" = "Enter Bidding Amount";
+"placeBid" = "Place Bid";
+"biddingAmountOnceSubmittedWillNeverBeChanged" = "bidding amount once submitted will\nnever be changed";
+"sar" = "SAR";
+"notNow" = "Not Now";
+"placeABid" = "Place a Bid";
+"weHaveSent" = "We’ve sent an ";
+"otp" = "Otp ";
+"to" = "to ";
+"verify" = "Verify";
+"pleaseVerifyTheSameInOrderToStartServicing" = "Please verify the order to start servicing";
+"filters" = "Filters";
+"apply" = "Apply";
+"requestCreatedBy" = "Request Created By";
+"requestAcceptedOn" = "Request Accepted On";
+"paybleAmount" = "Payble Amount";
+"serviceDetails" = "Service Details";
+"tyreSize" = "Tire Size";
+"preferredBrand" = "Preferred Brand:";
+"startService" = "Start Service";
+"chat" = "Chat";
+"userDetails" = "User Details";
+"paymentStatus" = "Payment Status";
+"amountPaid" = "Amount Paid";
+"serviceRequest" = " Service Request";
+"distance" = "Distance";
+"bidReceived" = "Bid Received";
+"howWasOverAllExp" = "How was your overall experience at";
+"rateOutOfFive" = "Rate out of five";
+"describeWhy" = "Describe Why";
+"uploadAnyPictureOfYourExperience" = "Upload any picture of your experience";
+"rateService" = "Rate Service";
+"typeHere" = "type here......";
+"byDate" = "By Date";
+"byServiceType" = "By Service Type";
+"byStatus" = "By Status";
+"PLEASEUNBLOCKUSERTOSENDMESSAGES" = "Please unblock user to send messages";
+"PLEASEUNBLOCKUSERTOPERFORMTHISACTION" = "Please unblock user to perform this action";
+"you_can_not_perform_this_action_as_you_are_blocked" = "You can not perform this action as the garage has blocked you";
+"you_can_not_perform_this_action_as_request_rejected" = "You can't perform this action as the request has rejected";
+"service" = "Service";
+"tyreServices" = "Tire Services";
+"oilSevices" = "Oil Sevices";
+"batteryServices" = "Battery Services";
+"serviceOn" = "Serviced On";
+"offerAccepted" = "Offer Accepted";
+"offerRejected" = "Offer Rejected";
+"offerExpired" = "Offer Expired";
+"offerReceived" = "Offer Received";
+"noOffers" = "No Offers";
+"noNotificationAvailable" = "No notification available";
+"garageDetails" = "Garage Details";
+"requestNumber" = "Request Number";
+"fromDate" = "From Date";
+"endDate" = "End Date";
+"description" = "Description";
+"bidFinalized" = "Bid Finalized";
+"openForBid" = "Open for Bid";
+"bidPlaced" = "Bid Placed";
+"bidRejected" = "Bid Rejected";
+"serviceCompleted" = "Service Completed";
+"lowToHigh" = "Cost: Low to High";
+"highToLow" = "Cost: High to Low";
+"ratingHighToLow" = "Rating: High to Low";
+"imageUploadFailed" = "Image upload failed";
+"applyFilters" = "Apply Filters";
+"editProfile" = "Edit Profile";
+"save" = "Save";
+"enterOldPassWord" = "Enter Old Password";
+"enterNewPassWord" = "Enter New Password";
+"reviewAndRatings" = "Review & Ratings";
+"noDataFound" = "No data found";
+"carReceived" = "Car Received";
+"inGarage" = "In Garage";
+"readyToBeTaken" = "Ready To Be Taken";
+"delivered" = "Delivered";
+"inABid" = "In a Bid";
+"bidFinalised" = "Bid Finalised";
+"closedForBid" = "Closed for bidding";
+"expired" = "Expired";
+"bidClosed" = "Bid Closed";
+"openForBidding" = "open For Bidding";
+"resend" = "Resend";
+"no" = "No";
+"yes" = "Yes";
+"viewDetails" = "View Details";
+"hiUser" = "Hi, User";
+"hi" = "Hi, ";
+"toContinuePerformingThisAction" = "To continue performing this action, please complete your profile";
+"successfullyRequested" = "Successfully Requested";
+"yourRequestForTyreServiceHasBeenSubmittedSuccessfully" = "Your request for tire service has been submitted successfully.";
+"yourRequestForBatteryServiceHasBeenSubmitted" = "Your request for battery service has been submitted successfully.";
+"yourRequestForOilServiceHasBeenSubmitted" = "Your request for oil service has been submitted successfully.";
+ // MARK: - Home  VC Values
+//==============================
+"tyre" = "Tire";
+"oil" = "Oil";
+"battery" = "Battery";
+"yourRegRequestHasBeenAccepted" = "Your Registration Request has been Accepted. Kindly complete your profile";
+"garageQuestionMark" = "Garage?";
+"supportChat" = "Support Chat";
+"pleaseUploadAtlestOneImage" = "Please upload atleast an image";
+"vehicle" = "Vehicle";
+"regNumber" = "Registration number";
+"payableAmount" = "Payable Amount";
+"requestedBy" = "Requested By:";
+ // MARK: - Complete profile 1  VC Values
+ //==============================
+"enterServiceCenterDist" = "Enter Service Center’s District";
+"enterServiceCenterAddress" = "Enter Service Center Address";
+"serviceCenterName" = "meService Center’s Name";
+"serviceCenterDist" = "Service Center’s District";
+"serviceCenterAddress" = "Service Center Address";
+"chooseOilType" = "Choose Oil Type";
+"theTypeOfOilAreYouLookingFor" = "The type of oil are you\nlooking for?";
+"thePreferredBrandForMyOilWouldBe" = "The preferred brand for my oil\nwould be";
+"chooseOilBrand" = "Choose Oil Brands";
+"width" = "Width";
+"rimSize" = "Rim Size";
+"quantity" = "Quantity";
+"quantityShort" = "Quantity";
+"enter_number_of_tyre_you_want" = "Enter number of tire you want";
+"oilType" = "Oil type";
+"selectType" = "Select type";
+"selectTyreSize" = "Select Tire Size";
+"weHaveFoundSutiableTyreForYourVehicleAsPerTheProvidedDetails" = "We have found sutiable tires for your vehicle as per the provided details.";
+
+"pleaseSelectAnyTyreToProceed" = "Please select any tire to proceed";
+
+"selectViscosity" = "Select Viscosity";
+"weHaveFoundSutiableOilViscosity" = "We have found sutiable oil viscosity for your vehicle as per the provided details.";
+"pleaseSelectAnyViscosityToProceed" = "Please select any viscosity to proceed";
+"next" = "Next";
+"proceed" = "Proceed";
+"thePreferredBrandForBatteryWouldBe" = "The preferred battery brand is ";
+"chooseBatteryBrands" = "Choose Battery Brand";
+"enterNumber" = "Enter number";
+"country" = "Country";
+"countries" = "Countries";
+"chooseYourVehicleDetails" = "Choose Your Vehicle Details";
+"wellGetYouOilAccordingToTheProvidedDetails" = "We have found suitable oil for your vehicle as per the provided details.";
+"numberOfTyre" = "Number of Tire";
+"edit" = "Edit";
+"submitRequest" = "Submit Request";
+"youAreRequestingForTyreServiceWith" = "You’ve requested Tire \\n Service with";
+"sizeOfTyre" = "Size of tire";
+"originOfTyre" = "Origin of Tire";
+"productYear" = "Production Year";
+"skipAndSubmit" = "Skip & Submit ";
+"chooseQuantity" = "Choose Quantity";
+"vehicleDetails" = "Vehicle Details";
+"batteyRequest" = "You’ve requested Battery \\n Service with";
+"oilRequest"  = "You’ve requested Oil \\n Service with";
+"batteryBrand" = "Battery Brands";
+"numberOfBattery" = "Number of Batteries";
+"oilBrands" = "Oil Brands";
+"numberOfUnit" = "Number of Unit";
+"oilImage" = "Oil Image";
+"selectNumberOfUnitYouWant" = "Select number of unit you want";
+"verifyEmail" = "Verify Email";
+"anOTPWillBeSendToYourPhoneNumber" = "An OTP has been sent to your Mobile Number";
+"aVerificationLinkWillBeSendToYourEmailAddress" = "A verification link has been sent to your email address";
+"verifyPhone" = "Verify Phone";
+"unitPriceShouldNotBeEmpty" = "Unit Price should not be 0 or empty";
+"cancelBid" = "Cancel Bid";
+"milesAway" = " Kilometers away";
+"hereIsYourOTPForTyreService" = "Here is your OTP for Tire Service\n";
+
+
+
+ // MARK: - Garage Profile Values
+//==============================
+"service_Completed" = "Service Completed";
+"bank_Account" = "Bank Account";
+"my_Subscription" = "My Subscription";
+"installation_price_range" = "Installation Price Range:";
+"location" = "Location";
+
+// MARK: - Garage Home Values
+//==============================
+"requestAccepted" = "Request Accepted";
+"newRequest" = "New Request";
+"service_sheduled_for_today" = "Services Scheduled for Today";
+"today_Revenue" = "Today’s Revenue";
+"today" = "Today";
+"yesterday" = "Yesterday";
+"requests" = "Requests";
+"allRequests" = "All Requests";
+"bookedRequests" = "Booked Requests";
+
+// MARK: - OneToOneChat VC Values
+//==============================
+"holdThisToRecord" = "Hold this to record";
+"block" = "Block";
+"blockUser" = "Block User";
+"unBlock" = "UnBlock";
+"are_you_sure_you_want_to_block_this_user" = "Are you sure you want to block this user?";
+"are_you_sure_you_want_to_unblock_this_user" = "Are you sure you want to unblock this user?";
+"no_service_request_available" = "No service request available";
+"kindly_provide_the_access_to_record_audio" = "Kindly provide access to record audio";
+"please_enter_different_amount_to_edit_bid" = "Please enter different amount to edit bid";
+"make_Payment_to_get_hassle_free_service" = "Make Payment to get hassle free service";
+
+// MARK: - Chat Screen
+//==============================
+"payNow" = "Pay Now";
+"pay" = "Pay";
+"decline" = "Decline";
+"paymentPaid" = "Payment Paid";
+"paymentDeclined" = "Payment Declined";
+"pending" = "Payment Pending";
+"paid" = "Payment Paid";
+"paid_Caps" = "PAID";
+"refunded" = "Payment Refunded";
+"failed" = "Payment Failed";
+"you" = "You";
+"delete" = "Delete";
+"delete_Message" = "Delete Message";
+"do_you_want_to_delete_message" = "Do you want to delete message?";
+"offerSmall" = "offer";
+"paymentSmall" = "payment";
+"successful" = "Successful";
+"password_has_been_reset_successfully" = "Password has been reset successfully";
+"otp_Verified" = "OTP Verified";
+"you_have_successfully_verified_your_mobile_no" = "You have successfully verified your mobile no.";
+"are_you_sure_you_want_to_logout" = "Are you sure you want to Sign out?";
+
+
+// MARK: - Updated Screen
+//==============================
+"requestSeen" = "Request Seen";
+"bid_Received" = "Bid Received";
+"lowest_Bid" = "Lowest Bid";
+"nearest_Bid" = "Nearest Bidder";
+"bid_Amount" = "Bid Amount";
+"request_Detail" = "Request Detail";
+"unit" = "Unit";
+"tyres" = "Tires";
+"leave_us_a_message_desc" = "Leave us a message, we will get back to you as soon as possible.";
+"do_you_have_an_issue_with_service" = "Do you have an issue with service?";
+"mode_Of_Payment" = "Payment Method";
+"request_No" = "Request No";
+"offers" = "Offers";
+"need_Help" = "Need Help?";
+"download_Invoice" = "Download Invoice";
+"what_service_are_you_looking_for" = "What service are you looking for?";
+"allOffers" = "All Offers";
+"proposalDetails" = "Proposal Details";
+"viewProposal" = "View Proposal";
+"miles" = "Kilometers ";
+"total_Amount" = "Total Amount";
+
+
+//Updated
+"please_Enter_Your_Mobile_Number_with_Country_Code" =  "Please Enter Your Mobile Number with Country Code";
+"whatTyreOfTyreAreYouLookingFor" = "What type of a tire are you\nlooking for?";
+"searchWithCar" = "Search with Car";
+"chooseTheSizeOfTyre" = "Choose the size of tire";
+"notSureAboutTheSize" = "Not sure about the size?";
+"chatWithExpert" = "Chat with an expert.";
+"createNewAccount" = "Create New Account";
+"pleaseSetNewPassword" = "Please Set a New Password";
+"resetPassword" = "Reset Password";
+"selectCountryCode" = "Select Country Code";
+"oneTimePassword" = "One Time Password";
+"pleaseEnter4DigitOtpCode" = "Please enter the 4 Digit OTP sent to ";
+"resendOtp" = "Resend Otp";
+"welcomeToTara" = "WELCOME TO";
+"login_with_Social_Accounts" = "Login with Social Accounts";
+"log_in" = "Log in";
+"addImages" = "Add Images";
+"addressAndLocation" = "Address & Location";
+"addImagesOfServiceCenter" = "Add Images of the Service Center";
+"addLocation" = "Add Location";
+"dragPointerToSetExactLocation" = "Drag pointer to set exact location of your service center";
+"searchBankByName" = "Search bank by name";
+"make" = "Make";
+"model" = "Model";
+"selectVehicleMake" = "Select vehicle make";
+"selectVehicleModel" = "Select vehicle model";
+"unitPrice" = "Unit Price";
+"unBlockUser" = "UnBlock User";
+"offerPrice" = "Offer Price";
+"paymentRequest" = "Payment Request";
+"audio_Attachment" = "Audio Attachment";
+"to_continue_performing_this_action_please_login" = "To continue performing this action, please login";
+"batteryImage" = "Battery Image";
+"uploadImage" = "Upload Image";
+"your_request_for_battery_service_has_been_submited_successfully" = "Your request for battery service has been submited successfully.";
+"your_request_for_oil_service_has_been_submited_successfully"= "Your request for oil service has been submited successfully.";
+"allBrands" = "All Brands";
+"search_Brand_by_name" = "Search Brand by name";
+"search_Country_by_name" = "Search Country by name";
+"ignore" = "Ignore";
+"view" = "View";
+"justNow" = "Just now";
+"weHaveReceivedYourRegistrationRequest" = "We’ve received your registration request";
+"yourRegistrationRequestMadeOn" = "Your Registration Request\nmade on";
+"hasBeenRejectedDueToFollowingReasons" = "has been Rejected\ndue to following reasons: ";
+"hasBeenAcceptedKindlyCompleteYourProfile" = "has been Accepted.\nKindly complete your profile";
+"selectFacility" = "Select Facility";
+"services" = "Services";
+"on" = "on";
+"requestedOn" = "Requested On";
+"productImage" = "Product Image:";
+"address" = "Address";
+"rim" = "Rim";
+"vehicleYear" = "Vehicle Year";
+"suitableFor" = "Suitable For";
+"please_select_vehicle_width" = "Please select vehicle width";
+"please_select_vehicle_profile" = "Please select vehicle profile";
+"please_fill_the_options_to_place_bid" = "Please fill the options to place bid";
+"photo_Attachment" = "Photo Attachment";
+"editBid" = "Edit Bid";
+"paybleAmt" = "Payable Amount";
+"previousService" = "Previous Service";
+"request_Rejected" = "Request Rejected";
+"at" = "at";
+"garage" = "Garage";
+"pleaseShowThisCodeToTheGarageToStartYourService" = "Please show this code to the garage to start your service";
+"reset" = "Reset";
+"serviceNo" = "Service No";
+"amountRefunded" = "Amount Refunded";
+"carServiceInProgress" = "Car service in progress";
+"carServiceCompleted" = "Car service completed";
+"carReadyToBeTaken" = "Car ready to be taken";
+"review" = "Review";
+"noRating" = "No Rating";
+"notSatisfying" = "Not Satisfying";
+"threatsOfVoilance" = "Threats of Voilance";
+"defamation" = "Defamation";
+"obscenity" = "Obscenity";
+"inappropriateReview" = "Inappropriate Review";
+"reasonOfReport" = "Reason of Report";
+"goToChat" = "Go to chat";
+"sendMessage" = "Send Message";
+"subject" = "Subject";
+
+//Updated Localized String
+"type_your_message_here" = "Type your message here";
+"view_All_Offer" = "View All Offers";
+"minutesAgo" = "minutes ago";
+"oneMinuteAgo" = "1 minute ago";
+"oneHourAgo" = "1 hour ago";
+"hoursAgo" = "hours ago";
+"daysAgo" = "days ago";
+"lastWeek" = "Last week";
+"secondsAgo" = "seconds ago";
+"weeksAgo" = "weeks ago";
+"lastMonth" = "Last month";
+"monthsAgo" = "months ago";
+"lastYear" = "Last year";
+"rejectRequest" = "Reject Request";
+"type_Your_Message_Here" = "Type your message here";
+"search" = "Search";
+"myRatings" =  "My Ratings:";
+"more" = "More";
+"total_price" = "Total Price";
+"please_select_one_option_to_proceed" = "Please select any option to proceed.";
+
+"ongoing" = "Ongoing";
+"_pending" = "Pending";
+"completed" = "Completed";
+"cancelled" = "Cancelled";
+"serviceStarted" = "Service started";
+"readyToPick" = "Ready to pick";
+"carReceived_QM" = "Car Received?";
+"ratingAndReview" = "Rating and Review";
+"reviewReportedOn" = "Review Reported on";
+"reason" = "Reason:";
+"reportReview" = "Report Review";
