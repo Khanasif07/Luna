@@ -110,7 +110,7 @@ extension AppDelegate {
         var filePath = ""
 //        #if ENV_DEV
 //        filePath = Bundle.main.path(forResource: "GoogleService-Info-Prod", ofType: "plist")!
-        filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")!
+        filePath = Bundle.main.path(forResource: "GoogleService-Info-1", ofType: "plist")!
 //        #elseif ENV_STAG
 //        filePath = Bundle.main.path(forResource: "GoogleService-Info-Prod", ofType: "plist")!
 //        #elseif ENV_QA
@@ -125,14 +125,6 @@ extension AppDelegate {
         } else {
             FirebaseApp.configure()
         }
-    }
-    
-    func getGoogleClientID() {
-        let filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")!
-//        if let options = FirebaseOptions(contentsOfFile: filePath) {
-//            GoogleLoginController.shared.configure(withClientId: options.clientID ?? "")
-//            GIDSignIn.sharedInstance().clientID = options.clientID
-//        }
     }
 }
 

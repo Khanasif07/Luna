@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSFaceIDUsageDescription</key>
-	<string>This App uses  to receice data from my sensor</string>
-	<key>FirebaseAppDelegateProxyEnabled</key>
-	<false/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -29,16 +25,20 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.955069293587-tmksrmskfka7btq2m9q6lh774hgf0ron</string>
+				<string>com.googleusercontent.apps.164373428024-93590uoigfhlppin1tps1fgu3m1n1o7s</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>This App uses bluettoth to receice data from my sensor</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>This App uses  to receice data from my sensor</string>
 	<key>Privacy – Bluetooth Peripheral Usage Description</key>
 	<string>This App uses bluettoth to receice data from my sensor</string>
 	<key>UIApplicationSceneManifest</key>

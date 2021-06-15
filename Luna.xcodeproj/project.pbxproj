@@ -10,6 +10,7 @@
 		10BD91E0179A10717FF4BFEB /* Pods_Luna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48268DD2D5F8BF64205F2462 /* Pods_Luna.framework */; };
 		8432A1992672294200859B47 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8432A19B2672294200859B47 /* Localizable.strings */; };
 		8432A19F2672319B00859B47 /* BiometricIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8432A19E2672319B00859B47 /* BiometricIDAuth.swift */; };
+		846F1A202678C2220034ACE0 /* GoogleService-Info-1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 846F1A1F2678C2220034ACE0 /* GoogleService-Info-1.plist */; };
 		84CC129A2668C822009316FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC12992668C822009316FC /* AppDelegate.swift */; };
 		84CC129C2668C822009316FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC129B2668C822009316FC /* SceneDelegate.swift */; };
 		84CC12A12668C822009316FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84CC129F2668C822009316FC /* Main.storyboard */; };
@@ -45,7 +46,6 @@
 		84CC13192668D25B009316FC /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC13182668D25B009316FC /* UIView+Extension.swift */; };
 		84CC13212668D588009316FC /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC13202668D588009316FC /* LocalizedString.swift */; };
 		84CC135C2669F15F009316FC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC135B2669F15F009316FC /* HomeViewController.swift */; };
-		84CC1360266A0717009316FC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84CC135F266A0717009316FC /* GoogleService-Info.plist */; };
 		84F7BC51266F11BA006C94DA /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7BC50266F11BA006C94DA /* AppleLoginManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +53,7 @@
 		48268DD2D5F8BF64205F2462 /* Pods_Luna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Luna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8432A19A2672294200859B47 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8432A19E2672319B00859B47 /* BiometricIDAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuth.swift; sourceTree = "<group>"; };
+		846F1A1F2678C2220034ACE0 /* GoogleService-Info-1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-1.plist"; sourceTree = "<group>"; };
 		84CC12962668C822009316FC /* Luna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Luna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84CC12992668C822009316FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84CC129B2668C822009316FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,7 +91,6 @@
 		84CC13182668D25B009316FC /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		84CC13202668D588009316FC /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
 		84CC135B2669F15F009316FC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		84CC135F266A0717009316FC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		84F7BC4E266F06A1006C94DA /* Luna.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Luna.entitlements; sourceTree = "<group>"; };
 		84F7BC50266F11BA006C94DA /* AppleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManager.swift; sourceTree = "<group>"; };
 		8AEA7181BDAC85A8A469C807 /* Pods-Luna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Luna.release.xcconfig"; path = "Target Support Files/Pods-Luna/Pods-Luna.release.xcconfig"; sourceTree = "<group>"; };
@@ -126,10 +126,18 @@
 			path = BiometricAuth;
 			sourceTree = "<group>";
 		};
+		846F1A1B2678BFFE0034ACE0 /* Certificates */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Certificates;
+			sourceTree = "<group>";
+		};
 		84CC128D2668C822009316FC = {
 			isa = PBXGroup;
 			children = (
 				84CC12982668C822009316FC /* Luna */,
+				846F1A1B2678BFFE0034ACE0 /* Certificates */,
 				84CC12972668C822009316FC /* Products */,
 				2D90EB116D7AE5068B0109C8 /* Pods */,
 				F2201812782A54B48AE7EE35 /* Frameworks */,
@@ -184,9 +192,7 @@
 		84CC12B22668CCDB009316FC /* CommonController */ = {
 			isa = PBXGroup;
 			children = (
-				84CC12C42668CEE2009316FC /* GoogleManager */,
 				84CC12C32668CECC009316FC /* AppleManager */,
-				84CC12C22668CEC1009316FC /* FacebookManager */,
 			);
 			path = CommonController;
 			sourceTree = "<group>";
@@ -212,7 +218,7 @@
 				84CC12C52668CF13009316FC /* LocalizedString */,
 				84CC12A22668C823009316FC /* Assets.xcassets */,
 				84CC12A72668C823009316FC /* Info.plist */,
-				84CC135F266A0717009316FC /* GoogleService-Info.plist */,
+				846F1A1F2678C2220034ACE0 /* GoogleService-Info-1.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -305,26 +311,12 @@
 			path = CustomClasses;
 			sourceTree = "<group>";
 		};
-		84CC12C22668CEC1009316FC /* FacebookManager */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = FacebookManager;
-			sourceTree = "<group>";
-		};
 		84CC12C32668CECC009316FC /* AppleManager */ = {
 			isa = PBXGroup;
 			children = (
 				84F7BC50266F11BA006C94DA /* AppleLoginManager.swift */,
 			);
 			path = AppleManager;
-			sourceTree = "<group>";
-		};
-		84CC12C42668CEE2009316FC /* GoogleManager */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = GoogleManager;
 			sourceTree = "<group>";
 		};
 		84CC12C52668CF13009316FC /* LocalizedString */ = {
@@ -406,8 +398,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8432A1992672294200859B47 /* Localizable.strings in Resources */,
+				846F1A202678C2220034ACE0 /* GoogleService-Info-1.plist in Resources */,
 				84CC12A62668C823009316FC /* LaunchScreen.storyboard in Resources */,
-				84CC1360266A0717009316FC /* GoogleService-Info.plist in Resources */,
 				84CC12A32668C823009316FC /* Assets.xcassets in Resources */,
 				84CC12A12668C822009316FC /* Main.storyboard in Resources */,
 			);
@@ -688,18 +680,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9S43J8Y2GN;
 				INFOPLIST_FILE = "$(SRCROOT)/Luna/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Luna.betaapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lunadiabetes.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -710,17 +704,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U2BCNKKUHZ;
+				DEVELOPMENT_TEAM = 9S43J8Y2GN;
 				INFOPLIST_FILE = "$(SRCROOT)/Luna/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Luna.betaapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lunadiabetes.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
