@@ -113,7 +113,7 @@ extension UILabel {
         let maxSize = CGSize(width: width ?? frame.size.width, height: CGFloat(Float.infinity))
         let charSize = font.lineHeight
         let text = (self.text ?? "") as NSString
-        let textSize = text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: AppFonts.MuliRegular.withSize(13)], context: nil)
+        let textSize = text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Regular.withSize(.x13)], context: nil)
         let h = Float(textSize.height/charSize)
         let linesRoundedUp = Int(ceil(h))
         return linesRoundedUp

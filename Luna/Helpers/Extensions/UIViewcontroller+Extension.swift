@@ -10,6 +10,7 @@ import UIKit
 import AssetsLibrary
 import AVFoundation
 import Photos
+import NVActivityIndicatorView
 import MobileCoreServices
 
 protocol RemovePictureDelegate{
@@ -310,8 +311,8 @@ extension UIViewController {
     }
     
     func showAlert( title : String = "", msg : String,_ completion : (()->())? = nil) {
-        let titleFont = [NSAttributedString.Key.font: AppFonts.MuliRegular.withSize(16)]
-        let messageFont = [NSAttributedString.Key.font: AppFonts.MuliRegular.withSize(14)]
+        let titleFont = [NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Regular.withSize(.x16)]
+        let messageFont = [NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Regular.withSize(.x14)]
         
         _ = NSMutableAttributedString(string: title, attributes: titleFont)
         _ = NSMutableAttributedString(string: msg, attributes: messageFont)
@@ -332,8 +333,8 @@ extension UIViewController {
                               actionTitle : String = LocalizedString.ok.localized,
                               actioncompletion : (()->())? = nil,
                               cancelcompletion : (()->())? = nil) {
-        let titleFont = [NSAttributedString.Key.font: AppFonts.MuliRegular.withSize(16)]
-        let messageFont = [NSAttributedString.Key.font: AppFonts.MuliRegular.withSize(14)]
+        let titleFont = [NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Regular.withSize(.x16)]
+        let messageFont = [NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Regular.withSize(.x14)]
         
         _ = NSMutableAttributedString(string: title, attributes: titleFont)
         _ = NSMutableAttributedString(string: msg, attributes: messageFont)
@@ -378,13 +379,13 @@ extension UIViewController {
     
     // Start Loader
     func startNYLoader() {
-//        let view = NVActivityIndicatorView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
-//        view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-//        view.type = .ballSpinFadeLoader
-//        view.color = AppColors.appRedColor
-//        view.padding =  160
-//        view.startAnimating()
-//        self.view.addSubview(view)
+        let view = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        view.type = .ballSpinFadeLoader
+        view.color = AppColors.appRedColor
+        view.padding =  160
+        view.startAnimating()
+        self.view.addSubview(view)
     }
     
     func stopAnimating() {

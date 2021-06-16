@@ -297,7 +297,7 @@ extension UITextField {
         label.text = string
         label.textColor = .white
         label.numberOfLines = 0
-        label.font = self.font ?? AppFonts.MuliRegular.withSize(CGFloat(labelFontSize))//UIFont.systemFont(ofSize: CGFloat(labelFontSize))
+        label.font = self.font ?? AppFonts.SF_Pro_Display_Regular.withSize(.x12)//UIFont.systemFont(ofSize: CGFloat(labelFontSize))
         label.textColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         label.backgroundColor = .clear
         label.textAlignment = .right

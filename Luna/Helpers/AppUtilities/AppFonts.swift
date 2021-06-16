@@ -10,50 +10,45 @@ import UIKit
 
 
 enum AppFonts : String {
+    
+    case SF_Pro_Display_Thin         = "SF-Pro-Display-Thin"
+    case SF_Pro_Display_SemiboldItalic      = "SF-Pro-Display-SemiboldItalic"
+    case SF_Pro_Display_RegularItalic               = "SF-Pro-Display-RegularItalic"
+    case SF_Pro_Display_Light                    = "SF-Pro-Display-Light"
+    case SF_Pro_Display_Regular  = "SF-Pro-Display-Regular"
+    case SF_Pro_Display_Bold                   = "SF-Pro-Display-Bold"
+    case SF_Pro_Display_Medium  = "SF-Pro-Display-Medium"
+    case SF_Pro_Display_Semibold                = "SF-Pro-Display-Semibold"
+    case SF_Pro_Display_Black                     = "SF-Pro-Display-Black"
+}
 
-    case MuliExtraLight              = "Muli-ExtraLight"
-    case MuliExtraLightItalic        = "Muli-ExtraLightItalic"
-    case MuliBoldItalic              = "Muli-BoldItalic"
-    case MuliBlack                   = "Muli-Black"
-    case MuliItalicVariableFontwght  = "Muli-Italic-VariableFont_wght"
-    case MuliMedium                  = "Muli-Medium"
-    case MuliMediumItalic            = "Muli-MediumItalic"
-    case MuliExtraBold               = "Muli-ExtraBold"
-    case MuliBold                    = "Muli-Bold"
-    case MuliExtraBoldItalic         = "Muli-ExtraBoldItalic"
-    case MuliItalic                  = "Muli-Italic"
-    case MuliVariableFontwght        = "Muli-VariableFont_wght"
-    case MuliSemiBold                = "Muli-SemiBold"
-    case MuliSemiBoldItalic          = "Muli-SemiBoldItalic"
-    case MuliBlackItalic             = "Muli-BlackItalic"
-    case MuliLight                   = "Muli-Light"
-    case MuliRegular                 = "Muli-Regular"
-    case MuliLightItalic             = "Muli-LightItalic"
-    
-    case NunitoSansBold             = "NunitoSans-Bold"
-    case NunitoSansRegular          = "NunitoSans-Regular"
-    case NunitoSansLight            = "NunitoSans-Light"
-    case NunitoSansItalic           = "NunitoSans-Italic"
-    case NunitoSansSemiBold         = "NunitoSans-SemiBold"
-    
-    case NunitoSansBlack            = "NunitoSans-Black"
-    case NunitoSansBlackItalic      = "NunitoSans-BlackItalic"
-    case NunitoSansBoldItalic       = "NunitoSans-BoldItalic"
-    case NunitoSansExtraBold        = "NunitoSans-ExtraBold"
-    case NunitoSansExtraBoldItalic  = "NunitoSans-ExtraBoldItalic"
-
-    
+//Custom font size
+enum FontSize: CGFloat {
+    case x8 = 8.0
+    case x10 = 10.0
+    case x12 = 12.0
+    case x13 = 13.0
+    case x15 = 15.0
+    case x14 = 14.0
+    case x16 = 16.0
+    case x17 = 17.0
+    case x18 = 18.0
+    case x20 = 20.0
+    case x22 = 22.0
+    case x24 = 24.0
+    case x26 = 26.0
+    case x28 = 28.0
+    case x30 = 30.0
+    case x31 = 31.0
+    case x32 = 32.0
     
 }
 
 extension AppFonts {
     
-    func withSize(_ fontSize: CGFloat) -> UIFont {
-        var size = fontSize
-        if UIScreen.width < 375{
-            size = size - 2
-        }
-        return UIFont(name: self.rawValue, size: size) ?? UIFont.systemFont(ofSize: size)
+    func withSize(_ fontSize: FontSize) -> UIFont {
+        let size = fontSize
+        return UIFont(name: self.rawValue, size: size.rawValue) ?? UIFont.systemFont(ofSize: size.rawValue)
     }
     
     func withDefaultSize() -> UIFont {

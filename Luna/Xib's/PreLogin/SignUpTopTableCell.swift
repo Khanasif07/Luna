@@ -21,6 +21,13 @@ class SignUpTopTableCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setUpTextField()
+        self.setUpFont()
+    }
+    
+    public func setUpFont(){
+        signUpBtn.titleLabel?.font = AppFonts.SF_Pro_Display_Medium.withSize(.x15)
+        titleLbl.font = AppFonts.SF_Pro_Display_Bold.withSize(.x24)
+        titleLbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
     }
 
     public func setUpTextField(){

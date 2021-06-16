@@ -113,13 +113,16 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
             [cell.emailIdTxtField,cell.passTxtField].forEach({$0?.delegate = self})
             cell.signUpBtnTapped = { [weak self]  (sender) in
                 guard let `self` = self else { return }
+                CommonFunctions.showActivityLoader()
                 if (Auth.auth().currentUser?.uid == nil) {
                     FirestoreController.createUserNode(userId: "", email: self.emailTxt, password: self.passTxt, name: "", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
                         print("Success")
+                        CommonFunctions.hideActivityLoader()
                     }) { (error) -> (Void)  in
                         print( error.localizedDescription)
                     }
                 }else{
+                    CommonFunctions.hideActivityLoader()
                     self.showAlert(msg: "User is already login.")
                 }
             }

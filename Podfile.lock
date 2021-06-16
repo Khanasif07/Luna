@@ -405,6 +405,9 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
+  - NVActivityIndicatorView (5.1.1):
+    - NVActivityIndicatorView/Base (= 5.1.1)
+  - NVActivityIndicatorView/Base (5.1.1)
   - PromisesObjC (1.2.12)
   - SwiftKeychainWrapper (4.0.1)
   - SwiftyJSON (5.0.1)
@@ -421,6 +424,7 @@ DEPENDENCIES:
   - GoogleSignIn
   - IQKeyboardManagerSwift
   - MessageKit
+  - NVActivityIndicatorView
   - SwiftKeychainWrapper
   - SwiftyJSON
 
@@ -453,6 +457,7 @@ SPEC REPOS:
     - leveldb-library
     - MessageKit
     - nanopb
+    - NVActivityIndicatorView
     - PromisesObjC
     - SwiftKeychainWrapper
     - SwiftyJSON
@@ -485,10 +490,11 @@ SPEC CHECKSUMS:
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   MessageKit: d153fbbbcb12f3f4045a1ba8874298924dacfb62
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 786e0069b460784df79676ec76fad3c0d2caf72f
+PODFILE CHECKSUM: 26a9969b2b71d04bf5934e2f8f0227250d3cc636
 
 COCOAPODS: 1.10.1

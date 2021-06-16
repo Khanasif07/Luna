@@ -6,6 +6,7 @@ target 'Luna' do
   use_frameworks!
 
   # Pods for Luna
+  pod 'NVActivityIndicatorView'
   pod 'SwiftyJSON'
   pod 'IQKeyboardManagerSwift'
   pod 'Firebase/Auth'
