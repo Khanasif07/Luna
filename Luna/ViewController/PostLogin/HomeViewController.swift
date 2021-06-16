@@ -108,8 +108,8 @@ class HomeViewController: UIViewController, ASAuthorizationControllerPresentatio
     
     @IBAction func signInBtnAction(_ sender: UIButton) {
         if   (Auth.auth().currentUser?.isEmailVerified ?? false)  ||  (Auth.auth().currentUser?.uid == nil) {
-            FirestoreController.login(userId: "123456@654321", withEmail: self.emailTxtField.text!, with: self.passTxtField.text!, success: {
-                FirestoreController.setFirebaseData(userId: "123456@654321", email: self.emailTxtField.text!, password: self.passTxtField.text!, name:"Mohd Asif Khan", imageURL: "", phoneNo: "8896880327", countryCode: "+91", status: "", completion: {
+            FirestoreController.login(userId: "", withEmail: self.emailTxtField.text!, with: self.passTxtField.text!, success: {
+                FirestoreController.setFirebaseData(userId: "123456@654321", email: self.emailTxtField.text!, password: self.passTxtField.text!, name:"", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
                     print("Success")
                 }) { (error) -> (Void) in
                     AppUserDefaults.removeValue(forKey: .accesstoken)
@@ -117,7 +117,7 @@ class HomeViewController: UIViewController, ASAuthorizationControllerPresentatio
                 }
             }) { (message, code) in
                 if code == 17011 {
-                    FirestoreController.createUserNode(userId: "", email: self.emailTxtField.text!, password: self.passTxtField.text!, name: "Asif Khan", imageURL: "", phoneNo: "8896880327", countryCode: "+91", status: "Active", completion: {
+                    FirestoreController.createUserNode(userId: "", email: self.emailTxtField.text!, password: self.passTxtField.text!, name: "", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
                         print("Success")
                     })  { (error) -> (Void)  in
                         print( error.localizedDescription)

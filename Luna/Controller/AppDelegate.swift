@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
   
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         sleep(2)
+        setUpKeyboardSetup()
         getGoogleInfoPlist()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
@@ -75,14 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         UIToolbar.appearance().tintColor = AppColors.fontPrimaryColor
         UIButton.appearance().tintColor = AppColors.fontPrimaryColor
     }
-    
-    func setUpKeyboard(){
-        IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.enableAutoToolbar = true
-        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-    }
-    
-    
+
     func registerPushNotification() {
         UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {

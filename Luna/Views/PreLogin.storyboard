@@ -129,6 +129,98 @@
             </objects>
             <point key="canvasLocation" x="435" y="98"/>
         </scene>
+        <!--Terms ConditionVC-->
+        <scene sceneID="lCo-z2-xpd">
+            <objects>
+                <viewController storyboardIdentifier="TermsConditionVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vyd-51-gag" customClass="TermsConditionVC" customModule="Luna" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cjx-Uk-2fO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b5F-Qv-4wb">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pBg-0V-SB4">
+                                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms &amp; Conditions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocK-aD-bgE">
+                                                <rect key="frame" x="132" y="11.5" width="150" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRh-cY-KPa">
+                                                <rect key="frame" x="345" y="7" width="49" height="30"/>
+                                                <state key="normal" title="Accept"/>
+                                                <connections>
+                                                    <action selector="acceptBtnAction:" destination="vyd-51-gag" eventType="touchUpInside" id="zZ0-yW-Ke6"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="51T-Ba-hCT"/>
+                                            <constraint firstItem="ocK-aD-bgE" firstAttribute="centerX" secondItem="pBg-0V-SB4" secondAttribute="centerX" id="59k-dn-8Sy"/>
+                                            <constraint firstItem="ocK-aD-bgE" firstAttribute="centerY" secondItem="pBg-0V-SB4" secondAttribute="centerY" id="JcQ-3F-4Bg"/>
+                                            <constraint firstAttribute="trailing" secondItem="QRh-cY-KPa" secondAttribute="trailing" constant="20" id="aVf-iv-jVn"/>
+                                            <constraint firstItem="QRh-cY-KPa" firstAttribute="centerY" secondItem="pBg-0V-SB4" secondAttribute="centerY" id="kKr-Ap-GWo"/>
+                                        </constraints>
+                                    </view>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="orZ-MA-dip">
+                                        <rect key="frame" x="20" y="88" width="374" height="788"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huG-EI-2Mh">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="751"/>
+                                                <mutableString key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa faucibus rutrum. Integer nec sodales arcu, id sodales dui. Morbi eros sapien, pretium pharetra sollicitudin a, auctor vitae massa. Quisque ultrices, nunc sit amet ultricies condimentum, ex massa laoreet sapien, vitae pretium orci enim eget libero. Donec interdum mi non mauris cursus fringilla. Sed id sodales est. Phasellus consequat tempus magna, sit amet porta lacus faucibus et. Fusce gravida varius tempus. Phasellus congue leo magna, in pretium nisl feugiat ac. Cras libero turpis, vestibulum a ante et, lobortis ornare ex. Nunc ut magna vitae diam ornare malesuada. Vestibulum sed nisl euismod, molestie ligula fringilla, sollicitudin leo. Quisque accumsan gravida lectus, et posuere justo molestie in.
+
+Maecenas finibus ultricies ullamcorper. Vivamus a enim tellus. Mauris condimentum auctor tortor, non lobortis augue semper quis. Nulla vel interdum ante. Nam porttitor efficitur viverra. Praesent sit amet rhoncus ex, accumsan rutrum turpis. Donec pulvinar, dolor ut volutpat lacinia, turpis purus rhoncus nisl, vel varius odio ante vel nisl. Duis eget felis enim. Etiam sed tristique risus. In hac habitasse platea dictumst. Praesent dapibus est sit amet egestas dignissim. In sagittis lorem eu arcu placerat, quis fermentum est blandit.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa faucibus rutrum. Integer nec sodales arcu, id sodales dui. Morbi eros sapien, pretium pharetra sollicitudin a, auctor vitae massa. Quisque ultrices, nunc sit amet ultricies condimentum, ex</mutableString>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="huG-EI-2Mh" firstAttribute="top" secondItem="orZ-MA-dip" secondAttribute="top" id="6F4-Ss-bLa"/>
+                                            <constraint firstItem="huG-EI-2Mh" firstAttribute="leading" secondItem="orZ-MA-dip" secondAttribute="leading" id="eSq-6a-3Oa"/>
+                                            <constraint firstAttribute="trailing" secondItem="huG-EI-2Mh" secondAttribute="trailing" id="mYj-O6-xNX"/>
+                                            <constraint firstAttribute="bottom" secondItem="huG-EI-2Mh" secondAttribute="bottom" id="zjE-S1-89q"/>
+                                        </constraints>
+                                    </scrollView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="orZ-MA-dip" secondAttribute="trailing" constant="20" id="9Vs-YL-ZO8"/>
+                                    <constraint firstItem="orZ-MA-dip" firstAttribute="leading" secondItem="b5F-Qv-4wb" secondAttribute="leading" constant="20" id="GCo-1o-h0x"/>
+                                    <constraint firstAttribute="trailing" secondItem="pBg-0V-SB4" secondAttribute="trailing" id="MbA-1o-EBR"/>
+                                    <constraint firstItem="huG-EI-2Mh" firstAttribute="width" secondItem="pBg-0V-SB4" secondAttribute="width" constant="-40" id="hb8-hE-Zs7"/>
+                                    <constraint firstItem="orZ-MA-dip" firstAttribute="top" secondItem="pBg-0V-SB4" secondAttribute="bottom" id="krf-gX-n6E"/>
+                                    <constraint firstAttribute="bottom" secondItem="orZ-MA-dip" secondAttribute="bottom" constant="20" symbolic="YES" id="lbH-NB-A6d"/>
+                                    <constraint firstItem="pBg-0V-SB4" firstAttribute="leading" secondItem="b5F-Qv-4wb" secondAttribute="leading" id="nnF-QJ-7LI"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Gwi-GC-JTJ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Gwi-GC-JTJ" firstAttribute="trailing" secondItem="b5F-Qv-4wb" secondAttribute="trailing" id="Igc-dA-VPn"/>
+                            <constraint firstAttribute="bottom" secondItem="b5F-Qv-4wb" secondAttribute="bottom" id="XLp-Y6-nyl"/>
+                            <constraint firstItem="b5F-Qv-4wb" firstAttribute="top" secondItem="cjx-Uk-2fO" secondAttribute="top" id="Y19-1x-EIq"/>
+                            <constraint firstItem="pBg-0V-SB4" firstAttribute="top" secondItem="Gwi-GC-JTJ" secondAttribute="top" id="ZvR-kG-2Nb"/>
+                            <constraint firstItem="b5F-Qv-4wb" firstAttribute="leading" secondItem="Gwi-GC-JTJ" secondAttribute="leading" id="uCx-1V-qTd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textLbl" destination="huG-EI-2Mh" id="C5P-Le-Og7"/>
+                        <outlet property="textScrollView" destination="orZ-MA-dip" id="699-xF-PzD"/>
+                        <outlet property="titleLbl" destination="ocK-aD-bgE" id="xi2-Dq-EzP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5TV-1Y-0Ot" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1225" y="98"/>
+        </scene>
     </scenes>
     <resources>
         <image name="signUpIllustration" width="355" height="198"/>

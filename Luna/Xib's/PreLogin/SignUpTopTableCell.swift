@@ -25,9 +25,7 @@ class SignUpTopTableCell: UITableViewCell {
 
     public func setUpTextField(){
            self.passTxtField.placeholder = LocalizedString.password.localized
-           self.emailIdTxtField.placeholder = LocalizedString.emailIdPlaceHolder.localized
-           self.emailIdTxtField.placeholder = LocalizedString.enterYourEmailId.localized
-           self.passTxtField.placeholder = LocalizedString.password.localized
+           self.emailIdTxtField.placeholder = LocalizedString.emailID.localized
            self.signUpBtn.backgroundColor = AppColors.primaryBlueColor
            self.signUpBtn.isEnabled = false
            self.passTxtField.isSecureTextEntry = true

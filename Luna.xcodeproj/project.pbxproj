@@ -53,6 +53,7 @@
 		84CC13192668D25B009316FC /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC13182668D25B009316FC /* UIView+Extension.swift */; };
 		84CC13212668D588009316FC /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC13202668D588009316FC /* LocalizedString.swift */; };
 		84CC135C2669F15F009316FC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC135B2669F15F009316FC /* HomeViewController.swift */; };
+		84D1F4B42679C12900F131E0 /* TermsConditionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1F4B32679C12900F131E0 /* TermsConditionVC.swift */; };
 		84F7BC51266F11BA006C94DA /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7BC50266F11BA006C94DA /* AppleLoginManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -105,6 +106,7 @@
 		84CC13182668D25B009316FC /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		84CC13202668D588009316FC /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
 		84CC135B2669F15F009316FC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		84D1F4B32679C12900F131E0 /* TermsConditionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsConditionVC.swift; sourceTree = "<group>"; };
 		84F7BC4E266F06A1006C94DA /* Luna.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Luna.entitlements; sourceTree = "<group>"; };
 		84F7BC50266F11BA006C94DA /* AppleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManager.swift; sourceTree = "<group>"; };
 		8AEA7181BDAC85A8A469C807 /* Pods-Luna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Luna.release.xcconfig"; path = "Target Support Files/Pods-Luna/Pods-Luna.release.xcconfig"; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			children = (
 				8455491B2678DDBA000CC13D /* SignupViewController.swift */,
 				8455491F2678DDE6000CC13D /* LoginViewController.swift */,
+				84D1F4B32679C12900F131E0 /* TermsConditionVC.swift */,
 			);
 			path = PreLogin;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				84CC12BC2668CDF4009316FC /* FirestoreController.swift in Sources */,
 				84CC12F22668D0E6009316FC /* UITextFieldExtension.swift in Sources */,
 				84CC12E02668D036009316FC /* AppConstants.swift in Sources */,
+				84D1F4B42679C12900F131E0 /* TermsConditionVC.swift in Sources */,
 				84CC12E32668D042009316FC /* AppGlobals.swift in Sources */,
 				84CC129A2668C822009316FC /* AppDelegate.swift in Sources */,
 				84CC12DA2668D00E009316FC /* AppFonts.swift in Sources */,

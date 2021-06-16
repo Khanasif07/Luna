@@ -35,7 +35,7 @@ enum AppRouter {
             AppRouter.goToSignUpVC()
         } else {
             AppUserDefaults.removeAllValues()
-            self.goToSignUpVC()
+            self.goToTermsConditionVC()
         }
     }
     
@@ -48,6 +48,11 @@ enum AppRouter {
           let signupVC = SignupViewController.instantiate(fromAppStoryboard: .PreLogin)
           setAsWindowRoot(signupVC)
       }
+    
+   static func goToTermsConditionVC() {
+        let termsVC = TermsConditionVC.instantiate(fromAppStoryboard: .PreLogin)
+        setAsWindowRoot(termsVC)
+    }
       
     
 }
