@@ -67,7 +67,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GH2-y4-vCO">
                                                 <rect key="frame" x="0.0" y="25" width="359" height="48"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Hello" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pf6-gC-Uqd" customClass="AppTextField" customModule="Luna" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pf6-gC-Uqd" customClass="AppTextField" customModule="Luna" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="359" height="48"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits"/>

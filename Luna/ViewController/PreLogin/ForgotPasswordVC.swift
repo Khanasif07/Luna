@@ -42,6 +42,7 @@ class ForgotPasswordVC: UIViewController {
     
     
     @IBAction func confirmEmailAction(_ sender: AppButton) {
+        self.gotoPassResetPopUpVC()
     }
     
     
@@ -55,6 +56,11 @@ extension ForgotPasswordVC {
         self.emailTxtField.delegate = self
         self.emailTxtField.placeholder = LocalizedString.emailID.localized
         self.confirmBtn.isEnabled = false
+    }
+    
+    private func gotoPassResetPopUpVC(){
+        let scene =  PassResetPopUpVC.instantiate(fromAppStoryboard: .PreLogin)
+        self.present(scene, animated: true, completion: nil)
     }
 }
 

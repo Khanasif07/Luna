@@ -307,7 +307,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate,ASAuthorization
                     if let error = error {
                         print(error.localizedDescription)
                     } else {
-                        print("Updated display name: \(Auth.auth().currentUser!.displayName!)")
+                        print("Updated display name: \(Auth.auth().currentUser!.email!)")
                     }
                 })
             }

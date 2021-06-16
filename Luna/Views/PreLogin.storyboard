@@ -158,7 +158,7 @@
                                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms &amp; Conditions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocK-aD-bgE">
-                                                <rect key="frame" x="129.5" y="11.5" width="155" height="21.5"/>
+                                                <rect key="frame" x="128.5" y="11.5" width="157" height="21"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -187,7 +187,7 @@
                                         <rect key="frame" x="20" y="88" width="374" height="788"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huG-EI-2Mh">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="485"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="506"/>
                                                 <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa faucibus rutrum. Integer nec sodales arcu, id sodales dui. Morbi eros sapien, pretium pharetra sollicitudin a, auctor vitae massa. Quisque ultrices, nunc sit amet ultricies condimentum, ex massa laoreet sapien, vitae pretium orci enim eget libero. Donec interdum mi non mauris cursus fringilla. Sed id sodales est. Phasellus consequat tempus magna, sit amet porta lacus faucibus et. Fusce gravida varius tempus. Phasellus congue leo magna, in pretium nisl feugiat ac. Cras libero turpis, vestibulum a ante et, lobortis ornare ex. Nunc ut magna vitae diam ornare malesuada. Vestibulum sed nisl euismod, molestie ligula fringilla, sollicitudin leo. Quisque accumsan gravida lectus, et posuere justo molestie in.
 
 Maecenas finibus ultricies ullamcorper. Vivamus a enim tellus. Mauris condimentum auctor tortor, non lobortis augue semper quis. Nulla vel interdum ante. Nam porttitor efficitur viverra. Praesent sit amet rhoncus ex, accumsan rutrum turpis. Donec pulvinar, dolor ut volutpat lacinia, turpis purus rhoncus nisl, vel varius odio ante vel nisl. Duis eget felis enim. Etiam sed tristique risus. In hac habitasse platea dictumst. Praesent dapibus est sit amet egestas dignissim. In sagittis lorem eu arcu placerat, quis fermentum est blandit.
@@ -287,19 +287,19 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="Zg4-WL-GC9">
-                                        <rect key="frame" x="20" y="228" width="374" height="237.5"/>
+                                        <rect key="frame" x="20" y="228" width="374" height="235.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="XBQ-RG-X5n">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="70.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="69"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Jl-YD-hxc">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="29"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="28"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm the email address where we should send the new password." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eb8-Ap-n1C">
-                                                        <rect key="frame" x="0.0" y="37" width="374" height="33.5"/>
+                                                        <rect key="frame" x="0.0" y="36" width="374" height="33"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                         <color key="textColor" red="0.45098039220000002" green="0.46274509800000002" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -307,16 +307,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="GOJ-xl-t14">
-                                                <rect key="frame" x="0.0" y="95.5" width="374" height="73"/>
+                                                <rect key="frame" x="0.0" y="94" width="374" height="72.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gUc-z5-ZZh">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="17"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="16.5"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                         <color key="textColor" red="0.45098039220000002" green="0.46274509800000002" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tDK-sP-OPl">
-                                                        <rect key="frame" x="0.0" y="25" width="374" height="48"/>
+                                                        <rect key="frame" x="0.0" y="24.5" width="374" height="48"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fQ8-HS-jxd" customClass="AppTextField" customModule="Luna" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="48"/>
@@ -336,7 +336,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kaT-Uw-RJB" customClass="AppButton" customModule="Luna" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="193.5" width="374" height="44"/>
+                                                <rect key="frame" x="0.0" y="191.5" width="374" height="44"/>
                                                 <color key="backgroundColor" red="0.52941176469999995" green="0.74509803919999995" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="LAL-eU-LTI"/>
@@ -384,10 +384,109 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
             </objects>
             <point key="canvasLocation" x="1977" y="106"/>
         </scene>
+        <!--Pass Reset Pop UpVC-->
+        <scene sceneID="Ore-by-Djv">
+            <objects>
+                <viewController storyboardIdentifier="PassResetPopUpVC" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FoH-W6-ROB" customClass="PassResetPopUpVC" customModule="Luna" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Q0Q-MI-QC6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vWA-ey-WOy">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bzb-r8-loO">
+                                        <rect key="frame" x="28" y="283.5" width="358" height="329"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mailSent" translatesAutoresizingMaskIntoConstraints="NO" id="FU9-38-cps">
+                                                <rect key="frame" x="139" y="32" width="80" height="80"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="80" id="YaZ-d7-8rZ"/>
+                                                    <constraint firstAttribute="width" secondItem="FU9-38-cps" secondAttribute="height" id="YlO-tY-s8H"/>
+                                                </constraints>
+                                            </imageView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="9nO-jj-FBB">
+                                                <rect key="frame" x="20" y="142" width="318" height="93"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password Reset" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tB2-zf-0gO">
+                                                        <rect key="frame" x="95.5" y="0.0" width="127" height="21.5"/>
+                                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We have shared the updated login password on your registered email. Check the same and set up login permissions." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jv2-ZT-v75">
+                                                        <rect key="frame" x="5.5" y="42.5" width="307" height="50.5"/>
+                                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                                                        <color key="textColor" red="0.45098039215686275" green="0.46274509803921571" blue="0.48627450980392156" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWW-aC-tm2" customClass="AppButton" customModule="Luna" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="265" width="318" height="44"/>
+                                                <color key="backgroundColor" red="0.52941176469999995" green="0.74509803919999995" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="4cE-A6-K9K"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                                <state key="normal" title="Ok">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="confirmEmailAction:" destination="H8n-Fy-8bq" eventType="touchUpInside" id="yL1-0M-Oyl"/>
+                                                    <action selector="okBtnTapped:" destination="FoH-W6-ROB" eventType="touchUpInside" id="mBW-3w-Wx6"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="RWW-aC-tm2" secondAttribute="bottom" constant="20" id="2OV-TF-xBs"/>
+                                            <constraint firstAttribute="trailing" secondItem="RWW-aC-tm2" secondAttribute="trailing" constant="20" id="J9e-aB-pJ3"/>
+                                            <constraint firstAttribute="trailing" secondItem="9nO-jj-FBB" secondAttribute="trailing" constant="20" id="ODH-eo-swt"/>
+                                            <constraint firstItem="RWW-aC-tm2" firstAttribute="leading" secondItem="Bzb-r8-loO" secondAttribute="leading" constant="20" id="P88-sO-2yn"/>
+                                            <constraint firstItem="9nO-jj-FBB" firstAttribute="leading" secondItem="Bzb-r8-loO" secondAttribute="leading" constant="20" id="PcY-kK-WYq"/>
+                                            <constraint firstItem="9nO-jj-FBB" firstAttribute="centerX" secondItem="Bzb-r8-loO" secondAttribute="centerX" id="TL6-vW-gS8"/>
+                                            <constraint firstItem="9nO-jj-FBB" firstAttribute="top" secondItem="FU9-38-cps" secondAttribute="bottom" constant="30" id="UCV-Xs-f02"/>
+                                            <constraint firstItem="RWW-aC-tm2" firstAttribute="top" secondItem="9nO-jj-FBB" secondAttribute="bottom" constant="30" id="YTZ-3P-irf"/>
+                                            <constraint firstItem="FU9-38-cps" firstAttribute="top" secondItem="Bzb-r8-loO" secondAttribute="top" constant="32" id="oVQ-JF-QDW"/>
+                                            <constraint firstItem="FU9-38-cps" firstAttribute="centerX" secondItem="Bzb-r8-loO" secondAttribute="centerX" id="tik-3L-Cg4"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Bzb-r8-loO" secondAttribute="trailing" constant="28" id="ISL-83-HkA"/>
+                                    <constraint firstItem="Bzb-r8-loO" firstAttribute="leading" secondItem="vWA-ey-WOy" secondAttribute="leading" constant="28" id="asY-Ja-13k"/>
+                                    <constraint firstItem="Bzb-r8-loO" firstAttribute="centerX" secondItem="vWA-ey-WOy" secondAttribute="centerX" id="eaK-Aj-GdX"/>
+                                    <constraint firstItem="Bzb-r8-loO" firstAttribute="centerY" secondItem="vWA-ey-WOy" secondAttribute="centerY" id="nW2-4c-ptP"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="1lU-wz-ijs"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vWA-ey-WOy" firstAttribute="top" secondItem="Q0Q-MI-QC6" secondAttribute="top" id="dOw-Ly-JKj"/>
+                            <constraint firstItem="1lU-wz-ijs" firstAttribute="trailing" secondItem="vWA-ey-WOy" secondAttribute="trailing" id="mIq-id-kEJ"/>
+                            <constraint firstAttribute="bottom" secondItem="vWA-ey-WOy" secondAttribute="bottom" id="mxI-J6-ZPc"/>
+                            <constraint firstItem="vWA-ey-WOy" firstAttribute="leading" secondItem="1lU-wz-ijs" secondAttribute="leading" id="wpK-Zw-vUN"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dataContainerView" destination="Bzb-r8-loO" id="8bb-Rw-gA1"/>
+                        <outlet property="okBtn" destination="RWW-aC-tm2" id="CIQ-Ju-1gd"/>
+                        <outlet property="subtitleLbl" destination="Jv2-ZT-v75" id="zxY-KA-cLX"/>
+                        <outlet property="titleLbl" destination="tB2-zf-0gO" id="ZT9-0P-itm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Js-Jd-et0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2729" y="106"/>
+        </scene>
     </scenes>
     <resources>
         <image name="back" width="40" height="40"/>
         <image name="forgotPassword" width="80" height="80"/>
+        <image name="mailSent" width="80" height="80"/>
         <image name="signUpIllustration" width="355" height="198"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
