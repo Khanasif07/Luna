@@ -91,6 +91,11 @@ extension LoginViewController {
         GIDSignIn.sharedInstance().delegate=self
         GIDSignIn.sharedInstance().signIn()
     }
+    
+    private func goToForgotPassVC(){
+        let forgotPassVC  = ForgotPasswordVC.instantiate(fromAppStoryboard: .PreLogin)
+        self.navigationController?.pushViewController(forgotPassVC, animated: true)
+    }
 }
 
 // MARK: - Extension For TableView
@@ -109,6 +114,7 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
             cell.titleLbl.text = LocalizedString.login.localized
             cell.subTitleLbl.text = LocalizedString.please_login_to_get_good_sleep.localized
             cell.signUpBtn.setTitle(LocalizedString.login.localized, for: .normal)
+            cell.forgotPassBtn.isHidden = false
             [cell.emailIdTxtField,cell.passTxtField].forEach({$0?.delegate = self})
             cell.signUpBtnTapped = { [weak self]  (sender) in
                 guard let `self` = self else { return }
@@ -129,6 +135,10 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                         print("sendEmailVerificationfailed=================")
                     }
                 }
+            }
+            cell.forgotPassBtnTapped = { [weak self]  (sender) in
+                guard let `self` = self else { return }
+                self.goToForgotPassVC()
             }
             return cell
         default:
@@ -176,12 +186,14 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
 //====================================
 extension LoginViewController : UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
-        let _ = textField.text?.byRemovingLeadingTrailingWhiteSpaces ?? ""
+        let txt = textField.text?.byRemovingLeadingTrailingWhiteSpaces ?? ""
         let cell = loginTableView.cell(forItem: textField) as? SignUpTopTableCell
         switch textField {
         case cell?.emailIdTxtField:
+            self.emailTxt = txt
             cell?.signUpBtn.isEnabled = signUpBtnStatus()
         case cell?.passTxtField:
+            self.passTxt = txt
             cell?.signUpBtn.isEnabled = signUpBtnStatus()
         default:
             cell?.signUpBtn.isEnabled = signUpBtnStatus()

@@ -73,6 +73,7 @@
 		84D1F4FE2679D52700F131E0 /* SF-Pro-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 84D1F4EC2679D52700F131E0 /* SF-Pro-Display-Black.otf */; };
 		84D1F4FF2679D52700F131E0 /* SF-Pro-Display-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 84D1F4ED2679D52700F131E0 /* SF-Pro-Display-ThinItalic.otf */; };
 		84D1F5002679D52700F131E0 /* SF-Pro-Display-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 84D1F4EE2679D52700F131E0 /* SF-Pro-Display-BoldItalic.otf */; };
+		84D1F5052679E95A00F131E0 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1F5042679E95A00F131E0 /* ForgotPasswordVC.swift */; };
 		84F7BC51266F11BA006C94DA /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7BC50266F11BA006C94DA /* AppleLoginManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -145,6 +146,7 @@
 		84D1F4EC2679D52700F131E0 /* SF-Pro-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Black.otf"; sourceTree = "<group>"; };
 		84D1F4ED2679D52700F131E0 /* SF-Pro-Display-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-ThinItalic.otf"; sourceTree = "<group>"; };
 		84D1F4EE2679D52700F131E0 /* SF-Pro-Display-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-BoldItalic.otf"; sourceTree = "<group>"; };
+		84D1F5042679E95A00F131E0 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
 		84F7BC4E266F06A1006C94DA /* Luna.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Luna.entitlements; sourceTree = "<group>"; };
 		84F7BC50266F11BA006C94DA /* AppleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManager.swift; sourceTree = "<group>"; };
 		8AEA7181BDAC85A8A469C807 /* Pods-Luna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Luna.release.xcconfig"; path = "Target Support Files/Pods-Luna/Pods-Luna.release.xcconfig"; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				8455491B2678DDBA000CC13D /* SignupViewController.swift */,
 				8455491F2678DDE6000CC13D /* LoginViewController.swift */,
 				84D1F4B32679C12900F131E0 /* TermsConditionVC.swift */,
+				84D1F5042679E95A00F131E0 /* ForgotPasswordVC.swift */,
 			);
 			path = PreLogin;
 			sourceTree = "<group>";
@@ -616,6 +619,7 @@
 				84CC12E92668D083009316FC /* UITableView+ UITableViewCellExtension.swift in Sources */,
 				84CC12BC2668CDF4009316FC /* FirestoreController.swift in Sources */,
 				84CC12F22668D0E6009316FC /* UITextFieldExtension.swift in Sources */,
+				84D1F5052679E95A00F131E0 /* ForgotPasswordVC.swift in Sources */,
 				84CC12E02668D036009316FC /* AppConstants.swift in Sources */,
 				84D1F4B42679C12900F131E0 /* TermsConditionVC.swift in Sources */,
 				84CC12E32668D042009316FC /* AppGlobals.swift in Sources */,

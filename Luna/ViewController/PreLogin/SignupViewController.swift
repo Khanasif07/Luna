@@ -110,6 +110,7 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
             cell.titleLbl.text = LocalizedString.signup.localized
             cell.subTitleLbl.text = LocalizedString.please_create_account_to_get_good_sleep.localized
             cell.signUpBtn.setTitle(LocalizedString.signup.localized, for: .normal)
+            cell.forgotPassBtn.isHidden = true
             [cell.emailIdTxtField,cell.passTxtField].forEach({$0?.delegate = self})
             cell.signUpBtnTapped = { [weak self]  (sender) in
                 guard let `self` = self else { return }
@@ -120,6 +121,7 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
                         CommonFunctions.hideActivityLoader()
                     }) { (error) -> (Void)  in
                         print( error.localizedDescription)
+                        CommonFunctions.hideActivityLoader()
                     }
                 }else{
                     CommonFunctions.hideActivityLoader()
@@ -170,6 +172,19 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
 // MARK: - Extension For TextField Delegate
 //====================================
 extension SignupViewController : UITextFieldDelegate{
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let cell = signupTableView.cell(forItem: textField) as? SignUpTopTableCell
+        switch textField {
+        case cell?.emailIdTxtField:
+            cell?.emailIdTxtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
+        case cell?.passTxtField:
+            cell?.passTxtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
+        default:
+            cell?.signUpBtn.isEnabled = signUpBtnStatus()
+        }
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         let txt = textField.text?.byRemovingLeadingTrailingWhiteSpaces ?? ""
         let cell = signupTableView.cell(forItem: textField) as? SignUpTopTableCell
@@ -177,9 +192,11 @@ extension SignupViewController : UITextFieldDelegate{
         case cell?.emailIdTxtField:
             self.emailTxt = txt
             cell?.signUpBtn.isEnabled = signUpBtnStatus()
+            cell?.emailIdTxtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         case cell?.passTxtField:
             self.passTxt = txt
             cell?.signUpBtn.isEnabled = signUpBtnStatus()
+            cell?.passTxtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         default:
             cell?.signUpBtn.isEnabled = signUpBtnStatus()
         }

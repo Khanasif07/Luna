@@ -382,7 +382,7 @@ extension UIViewController {
         let view = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         view.type = .ballSpinFadeLoader
-        view.color = AppColors.appRedColor
+        view.color = AppColors.appGreenColor
         view.padding =  160
         view.startAnimating()
         self.view.addSubview(view)

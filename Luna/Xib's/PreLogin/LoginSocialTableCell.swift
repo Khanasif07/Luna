@@ -52,10 +52,10 @@ class LoginSocialTableCell: UITableViewCell {
     
     public func setUpAttributedString(){
         let attributedString = NSMutableAttributedString(string: signupLoginDescText , attributes: [
-            .font: UIFont.systemFont(ofSize: 12.0),
+            .font: AppFonts.SF_Pro_Display_Regular.withSize(.x14),
             .foregroundColor: UIColor.black
         ])
-        let privactAttText = (NSAttributedString(string: signupLoginText, attributes: [NSAttributedString.Key.foregroundColor: UIColor(r: 61, g: 201, b: 147, alpha: 1.0),NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 13.0)]))
+        let privactAttText = (NSAttributedString(string: signupLoginText, attributes: [NSAttributedString.Key.foregroundColor: UIColor(r: 61, g: 201, b: 147, alpha: 1.0),NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Semibold.withSize(.x14)]))
         attributedString.append(privactAttText)
         loginSocialLbl.attributedText = attributedString
         loginSocialLbl.isUserInteractionEnabled = true

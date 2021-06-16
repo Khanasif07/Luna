@@ -973,26 +973,9 @@ class AppButton: UIButton {
     open  var isBorderSelected: Bool = false{
         didSet {
             backgroundColor = isBorderSelected ? .white : AppColors.appPinkColor
-            setTitleColor(isBorderSelected ? AppColors.appRedColor : AppColors.fontTertiaryColor, for: .normal)
-            borderColor = AppColors.appRedColor
+            setTitleColor(isBorderSelected ? AppColors.fontTertiaryColor : AppColors.fontTertiaryColor, for: .normal)
+            borderColor = AppColors.fontTertiaryColor
             borderWidth = 1.0
         }
     }
 }
-
-
-//extension AVAsset{
-//    var generateThumbnail : UIImage? {
-//        do {
-//            let imageGenerator = AVAssetImageGenerator(asset: self)
-//            imageGenerator.appliesPreferredTrackTransform = true
-//            let cgImage = try imageGenerator.copyCGImage(at: CMTime.zero, actualTime: nil)
-//            
-//            return UIImage(cgImage: cgImage)
-//        } catch {
-//            print(error.localizedDescription)
-//            
-//            return nil
-//        }
-//    }
-//}
