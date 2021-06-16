@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="132" id="KGk-i7-Jjw" customClass="LoginSocialTableCell" customModule="Luna" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="357" height="192"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="357" height="192"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NBT-CB-U9v">
+                        <rect key="frame" x="0.0" y="0.0" width="357" height="192"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or continue with" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vou-bB-wPb">
+                                <rect key="frame" x="20" y="10" width="122.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="k92-eR-OAv">
+                                <rect key="frame" x="20" y="40.5" width="317" height="48"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bNr-lz-5pz">
+                                        <rect key="frame" x="0.0" y="0.0" width="154.5" height="48"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ojS-84-MVp">
+                                                <rect key="frame" x="0.0" y="0.0" width="154.5" height="48"/>
+                                                <state key="normal" title="Google" image="flatColorIconsGoogle">
+                                                    <color key="titleColor" name="label"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="googleBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ddd-ZN-I9O"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="ojS-84-MVp" secondAttribute="bottom" id="NK1-rs-xeo"/>
+                                            <constraint firstItem="ojS-84-MVp" firstAttribute="leading" secondItem="bNr-lz-5pz" secondAttribute="leading" id="Nkk-15-ezJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="ojS-84-MVp" secondAttribute="trailing" id="gXQ-ol-0K7"/>
+                                            <constraint firstItem="ojS-84-MVp" firstAttribute="top" secondItem="bNr-lz-5pz" secondAttribute="top" id="uZn-jZ-rD5"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aot-pI-XTe">
+                                        <rect key="frame" x="162.5" y="0.0" width="154.5" height="48"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wv-2O-56j">
+                                                <rect key="frame" x="0.0" y="0.0" width="154.5" height="48"/>
+                                                <state key="normal" title="Apple" image="apple">
+                                                    <color key="titleColor" name="label"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="appleBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="BGb-gS-0M9"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="6wv-2O-56j" secondAttribute="trailing" id="PiU-X6-XqE"/>
+                                            <constraint firstAttribute="bottom" secondItem="6wv-2O-56j" secondAttribute="bottom" id="WdO-Gf-Cbf"/>
+                                            <constraint firstItem="6wv-2O-56j" firstAttribute="leading" secondItem="Aot-pI-XTe" secondAttribute="leading" id="htc-8x-ID7"/>
+                                            <constraint firstItem="6wv-2O-56j" firstAttribute="top" secondItem="Aot-pI-XTe" secondAttribute="top" id="nWf-jx-53t"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="umk-I0-HgO"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iam-fF-NYY">
+                                <rect key="frame" x="20" y="143.5" width="317" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="iam-fF-NYY" firstAttribute="leading" secondItem="NBT-CB-U9v" secondAttribute="leading" constant="20" id="9oo-2j-VwN"/>
+                            <constraint firstAttribute="trailing" secondItem="k92-eR-OAv" secondAttribute="trailing" constant="20" id="Hgs-f0-Fw4"/>
+                            <constraint firstItem="vou-bB-wPb" firstAttribute="top" secondItem="NBT-CB-U9v" secondAttribute="top" constant="10" id="Ho6-Kt-yh7"/>
+                            <constraint firstItem="iam-fF-NYY" firstAttribute="top" secondItem="k92-eR-OAv" secondAttribute="bottom" constant="55" id="IBB-u4-E4y"/>
+                            <constraint firstItem="k92-eR-OAv" firstAttribute="top" secondItem="vou-bB-wPb" secondAttribute="bottom" constant="10" id="NTP-Lq-cqL"/>
+                            <constraint firstItem="k92-eR-OAv" firstAttribute="leading" secondItem="NBT-CB-U9v" secondAttribute="leading" constant="20" id="TTt-0e-yft"/>
+                            <constraint firstAttribute="trailing" secondItem="iam-fF-NYY" secondAttribute="trailing" constant="20" id="X0r-fq-qbx"/>
+                            <constraint firstItem="vou-bB-wPb" firstAttribute="leading" secondItem="NBT-CB-U9v" secondAttribute="leading" constant="20" id="bHj-yz-FKV"/>
+                            <constraint firstAttribute="bottom" secondItem="iam-fF-NYY" secondAttribute="bottom" constant="28" id="cDD-7k-GDB"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vou-bB-wPb" secondAttribute="trailing" constant="20" id="xOB-KL-UDV"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="NBT-CB-U9v" secondAttribute="bottom" id="K6W-RK-NHN"/>
+                    <constraint firstItem="NBT-CB-U9v" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="jCc-Kw-gyu"/>
+                    <constraint firstItem="NBT-CB-U9v" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="trY-ki-Pte"/>
+                    <constraint firstAttribute="trailing" secondItem="NBT-CB-U9v" secondAttribute="trailing" id="ub0-2c-bIF"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="appleBtn" destination="6wv-2O-56j" id="LW1-SG-Odz"/>
+                <outlet property="appleBtnView" destination="Aot-pI-XTe" id="gfN-Jf-e4f"/>
+                <outlet property="googleBtn" destination="ojS-84-MVp" id="ycv-qd-KZ7"/>
+                <outlet property="googleBtnView" destination="bNr-lz-5pz" id="1uu-kW-EMM"/>
+                <outlet property="loginSocialLbl" destination="iam-fF-NYY" id="MV2-Z2-wqt"/>
+                <outlet property="socialBtnStackView" destination="k92-eR-OAv" id="GS8-QJ-9Ab"/>
+            </connections>
+            <point key="canvasLocation" x="119.56521739130436" y="121.20535714285714"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="apple" width="22" height="22"/>
+        <image name="flatColorIconsGoogle" width="24" height="24"/>
+        <namedColor name="label">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

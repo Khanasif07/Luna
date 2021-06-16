@@ -32,16 +32,21 @@ enum AppRouter {
     //===========================
     static func checkAppInitializationFlow() {
         if isUserLoggedin {
-            AppRouter.goToUserHome()
+            AppRouter.goToSignUpVC()
         } else {
             AppUserDefaults.removeAllValues()
-            self.goToUserHome()
+            self.goToSignUpVC()
         }
     }
     
     static func goToUserHome() {
-          let homeScene = HomeViewController.instantiate(fromAppStoryboard: .Main)
+          let homeScene = HomeViewController.instantiate(fromAppStoryboard: .PostLogin)
           setAsWindowRoot(homeScene)
+      }
+    
+    static func goToSignUpVC() {
+          let signupVC = SignupViewController.instantiate(fromAppStoryboard: .PreLogin)
+          setAsWindowRoot(signupVC)
       }
       
     

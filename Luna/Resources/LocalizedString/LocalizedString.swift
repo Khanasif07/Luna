@@ -338,6 +338,8 @@ enum LocalizedString : String {
     case editProfile
     case save
     case PLEASEUNBLOCKUSERTOSENDMESSAGES
+    case please_create_account_to_get_good_sleep
+    case please_login_to_get_good_sleep
     case PLEASEUNBLOCKUSERTOPERFORMTHISACTION
     case you_can_not_perform_this_action_as_you_are_blocked
     case you_can_not_perform_this_action_as_request_rejected

@@ -121,4 +121,8 @@ extension UIColor{
         static let iron = UIColor.colorHex(hexString:"0xD1D5D8")
         static let ironGray = UIColor.colorHex(hexString:"0x75706B")
     }
+    
+    @nonobjc class var black16: UIColor {
+        return UIColor(white: 48.0 / 255.0, alpha: 0.16)
+    }
 }

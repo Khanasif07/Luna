@@ -10,7 +10,7 @@ import UIKit
 
 enum AppStoryboard : String {
     
-    case Prelogin, PostLogin , Home ,Main
+    case PreLogin, PostLogin , Home ,Main
 }
 
 extension AppStoryboard {

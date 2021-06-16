@@ -965,19 +965,19 @@ class AppButton: UIButton {
     open override var isEnabled: Bool{
         didSet {
             alpha = isEnabled ? 1.0 : 0.5
-            backgroundColor = isEnabled ? AppColors.appRedColor : AppColors.appPinkColor
-            setTitleColor(isEnabled ? .white : AppColors.fontTertiaryColor, for: .normal)
+            backgroundColor = isEnabled ? #colorLiteral(red: 0.2392156863, green: 0.7882352941, blue: 0.5764705882, alpha: 1) : #colorLiteral(red: 0.2392156863, green: 0.7882352941, blue: 0.5764705882, alpha: 0.5)
+            setTitleColor(isEnabled ? .white : .white, for: .normal)
         }
     }
     
     open  var isBorderSelected: Bool = false{
-           didSet {
+        didSet {
             backgroundColor = isBorderSelected ? .white : AppColors.appPinkColor
             setTitleColor(isBorderSelected ? AppColors.appRedColor : AppColors.fontTertiaryColor, for: .normal)
             borderColor = AppColors.appRedColor
             borderWidth = 1.0
-           }
-       }
+        }
+    }
 }
 
 

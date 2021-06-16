@@ -14,3 +14,7 @@
 "overrideBioMetricMessage" = "Your biometric is already associated with one account. Do you want to replace your biometric with this account?";
 "error" = "Error!";
 "biometric" = "Biometric";
+"alreadyHaveAnAccount" = "Already have an account ? ";
+"login" = "Login";
+"please_create_account_to_get_good_sleep" = "Please create account to get good night's sleep";
+"please_login_to_get_good_sleep" = "Please login to get good night's sleep";
