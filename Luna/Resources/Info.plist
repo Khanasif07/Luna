@@ -2,17 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>SF-Pro-Display-Black.otf</string>
-		<string>SF-Pro-Display-Semibold.otf</string>
-		<string>SF-Pro-Display-Medium.otf</string>
-		<string>SF-Pro-Display-Bold.otf</string>
-		<string>SF-Pro-Display-Regular.otf</string>
-		<string>SF-Pro-Display-Light.otf</string>
-		<string>SF-Pro-Display-SemiboldItalic.otf</string>
-		<string>SF-Pro-Display-Thin.otf</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -52,6 +41,17 @@
 	<string>This App uses  to receice data from my sensor</string>
 	<key>Privacy – Bluetooth Peripheral Usage Description</key>
 	<string>This App uses bluettoth to receice data from my sensor</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SF-Pro-Display-Black.otf</string>
+		<string>SF-Pro-Display-Semibold.otf</string>
+		<string>SF-Pro-Display-Medium.otf</string>
+		<string>SF-Pro-Display-Bold.otf</string>
+		<string>SF-Pro-Display-Regular.otf</string>
+		<string>SF-Pro-Display-Light.otf</string>
+		<string>SF-Pro-Display-SemiboldItalic.otf</string>
+		<string>SF-Pro-Display-Thin.otf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -61,7 +61,6 @@
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>bluetooth-central</string>
 		<string>bluetooth-peripheral</string>
 		<string>remote-notification</string>
 	</array>

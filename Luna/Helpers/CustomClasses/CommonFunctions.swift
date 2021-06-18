@@ -9,25 +9,26 @@ import UIKit
 import NVActivityIndicatorView
 import MobileCoreServices
 import AVFoundation
+import Toaster
 import AVKit
 
 class CommonFunctions {
 
     /// Show Toast With Message
-//    static func showToastWithMessage(_ msg: String, completion: (() -> Swift.Void)? = nil) {
-//        DispatchQueue.mainQueueAsync {
-//            ToastView.appearance().font = UIFont.systemFont(ofSize: 14.0)
-//            ToastView.appearance().textColor = .white
-//            ToastView.appearance().backgroundColor = .black
-//            if msg.count > 60 {
-//                let toast = Toast(text: msg, delay: 0.3, duration: 2)
-//                toast.show()
-//            } else {
-//                let toast = Toast(text: msg, delay: 0.3, duration: 2)
-//                toast.show()
-//            }
-//        }
-//    }
+    static func showToastWithMessage(_ msg: String, completion: (() -> Swift.Void)? = nil) {
+        DispatchQueue.mainQueueAsync {
+            ToastView.appearance().font = UIFont.systemFont(ofSize: 14.0)
+            ToastView.appearance().textColor = .white
+            ToastView.appearance().backgroundColor = .black
+            if msg.count > 60 {
+                let toast = Toast(text: msg, delay: 0.3, duration: 2)
+                toast.show()
+            } else {
+                let toast = Toast(text: msg, delay: 0.3, duration: 2)
+                toast.show()
+            }
+        }
+    }
     
     
     /// Delay Functions

@@ -411,6 +411,7 @@ PODS:
   - PromisesObjC (1.2.12)
   - SwiftKeychainWrapper (4.0.1)
   - SwiftyJSON (5.0.1)
+  - Toaster (2.3.0)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -427,6 +428,7 @@ DEPENDENCIES:
   - NVActivityIndicatorView
   - SwiftKeychainWrapper
   - SwiftyJSON
+  - Toaster
 
 SPEC REPOS:
   trunk:
@@ -461,6 +463,7 @@ SPEC REPOS:
     - PromisesObjC
     - SwiftKeychainWrapper
     - SwiftyJSON
+    - Toaster
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -494,7 +497,8 @@ SPEC CHECKSUMS:
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
+  Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: 26a9969b2b71d04bf5934e2f8f0227250d3cc636
+PODFILE CHECKSUM: dbb48fdd08ca5dbb1fa8b63033914f6372eba140
 
 COCOAPODS: 1.10.1

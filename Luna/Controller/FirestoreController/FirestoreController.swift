@@ -41,22 +41,24 @@ class FirestoreController:NSObject{
         }
         Auth.auth().signIn(withEmail: emailId, password: password) { (result, error) in
             if let err = error {
-                print(err.localizedDescription)
                 failure(err.localizedDescription, (err as NSError).code)
             } else {
-                AppUserDefaults.save(value: userId, forKey: .uid)
+                let uid = Auth.auth().currentUser?.uid ?? ""
+                AppUserDefaults.save(value: uid, forKey: .uid)
+                AppUserDefaults.save(value: uid, forKey: .accesstoken)
                 AppUserDefaults.save(value: withEmail, forKey: .defaultEmail)
                 AppUserDefaults.save(value: password, forKey: .defaultPassword)
-                if !userId.isEmpty {
-                    print("login successfull")
-                    db.collection(ApiKey.users).document(userId).updateData([ApiKey.onlineStatus: true, ApiKey.deviceToken: AppUserDefaults.value(forKey: .fcmToken).stringValue,
-                                                                             ApiKey.deviceId:"2",
-                                                                             ApiKey.deviceType: "iOS"])
-                    success()
-                } else {
-                    print("documentFetchingError")
-                    failure("documentFetchingError", 110)
-                }
+                success()
+//                if !userId.isEmpty {
+//                    print("login successfull")
+//                    db.collection(ApiKey.users).document(userId).updateData([ApiKey.onlineStatus: true, ApiKey.deviceToken: AppUserDefaults.value(forKey: .fcmToken).stringValue,
+//                                                                             ApiKey.deviceId:"2",
+//                                                                             ApiKey.deviceType: "iOS"])
+//                    success()
+//                } else {
+//                    print("documentFetchingError")
+//                    failure("documentFetchingError", 110)
+//                }
             }
         }
     }
@@ -72,6 +74,13 @@ class FirestoreController:NSObject{
             completion(true)
         }
         completion(false)
+    }
+    
+    //MARK:- IsEMailVerified
+    //=======================
+    static func IsEmailVerified(completion:@escaping(_ success: Bool) -> Void)  {
+        let isEmailVerification  = Auth.auth().currentUser?.isEmailVerified ??  false
+        completion(isEmailVerification)
     }
 
     
@@ -114,22 +123,22 @@ class FirestoreController:NSObject{
                 AppUserDefaults.save(value: userId, forKey: .uid)
                 AppUserDefaults.save(value: email, forKey: .defaultEmail)
                 AppUserDefaults.save(value: password, forKey: .defaultPassword)
-                db.collection(ApiKey.users).document(userId).setData([ApiKey.deviceType:"iOS",
-                                                                      ApiKey.deviceId:"2",
-                                                                      ApiKey.email: email,
-                                                                      ApiKey.deviceToken:AppUserDefaults.value(forKey: .fcmToken).stringValue,
-                                                                      ApiKey.userName:name,
-                                                                      ApiKey.userImage: imageURL,
-                                                                      ApiKey.onlineStatus:true,
-                                                                      ApiKey.countryCode:countryCode,
-                                                                      ApiKey.userId: userId,
-                    ApiKey.phoneNo: phoneNo]){ err in
-                        if let err = err {
-                            print("Error writing document: \(err)")
-                        } else {
-                            print("Document successfully written!")
-                        }
-                    }
+//                db.collection(ApiKey.users).document(userId).setData([ApiKey.deviceType:"iOS",
+//                                                                      ApiKey.deviceId:"2",
+//                                                                      ApiKey.email: email,
+//                                                                      ApiKey.deviceToken:AppUserDefaults.value(forKey: .fcmToken).stringValue,
+//                                                                      ApiKey.userName:name,
+//                                                                      ApiKey.userImage: imageURL,
+//                                                                      ApiKey.onlineStatus:true,
+//                                                                      ApiKey.countryCode:countryCode,
+//                                                                      ApiKey.userId: userId,
+//                    ApiKey.phoneNo: phoneNo]){ err in
+//                        if let err = err {
+//                            print("Error writing document: \(err)")
+//                        } else {
+//                            print("Document successfully written!")
+//                        }
+//                    }
                 completion()
             }
         }
@@ -142,7 +151,7 @@ class FirestoreController:NSObject{
                                failure: @escaping FailureResponse) {
         var emailId  = email
         if emailId.isEmpty{
-            emailId = "" + "@tara.com"
+            emailId = "" + "@luna.com"
         }
         Auth.auth().sendPasswordReset(withEmail: emailId) { (error) in
             if error == nil {

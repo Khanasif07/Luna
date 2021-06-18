@@ -76,6 +76,7 @@
 		84D1F5052679E95A00F131E0 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1F5042679E95A00F131E0 /* ForgotPasswordVC.swift */; };
 		84F7BC51266F11BA006C94DA /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7BC50266F11BA006C94DA /* AppleLoginManager.swift */; };
 		84F819A8267A12A500A4C758 /* PassResetPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F819A7267A12A500A4C758 /* PassResetPopUpVC.swift */; };
+		84F819CE267B6FE000A4C758 /* BLEIntegrationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F819CD267B6FE000A4C758 /* BLEIntegrationVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -151,6 +152,7 @@
 		84F7BC4E266F06A1006C94DA /* Luna.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Luna.entitlements; sourceTree = "<group>"; };
 		84F7BC50266F11BA006C94DA /* AppleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManager.swift; sourceTree = "<group>"; };
 		84F819A7267A12A500A4C758 /* PassResetPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassResetPopUpVC.swift; sourceTree = "<group>"; };
+		84F819CD267B6FE000A4C758 /* BLEIntegrationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEIntegrationVC.swift; sourceTree = "<group>"; };
 		8AEA7181BDAC85A8A469C807 /* Pods-Luna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Luna.release.xcconfig"; path = "Target Support Files/Pods-Luna/Pods-Luna.release.xcconfig"; sourceTree = "<group>"; };
 		F4623A1A786ED367659EFB05 /* Pods-Luna.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Luna.debug.xcconfig"; path = "Target Support Files/Pods-Luna/Pods-Luna.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -200,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				84CC135B2669F15F009316FC /* HomeViewController.swift */,
+				84F819CD267B6FE000A4C758 /* BLEIntegrationVC.swift */,
 			);
 			path = PostLogin;
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 				84CC12F22668D0E6009316FC /* UITextFieldExtension.swift in Sources */,
 				84D1F5052679E95A00F131E0 /* ForgotPasswordVC.swift in Sources */,
 				84CC12E02668D036009316FC /* AppConstants.swift in Sources */,
+				84F819CE267B6FE000A4C758 /* BLEIntegrationVC.swift in Sources */,
 				84D1F4B42679C12900F131E0 /* TermsConditionVC.swift in Sources */,
 				84CC12E32668D042009316FC /* AppGlobals.swift in Sources */,
 				84CC129A2668C822009316FC /* AppDelegate.swift in Sources */,

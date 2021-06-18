@@ -7,6 +7,7 @@ target 'Luna' do
 
   # Pods for Luna
   pod 'NVActivityIndicatorView'
+  pod 'Toaster'
   pod 'SwiftyJSON'
   pod 'IQKeyboardManagerSwift'
   pod 'Firebase/Auth'

@@ -16,6 +16,7 @@ import FirebaseDatabase
 import FirebaseCore
 import LocalAuthentication
 import AuthenticationServices
+import SwiftKeychainWrapper
 
 class LoginViewController: UIViewController {
     
@@ -30,6 +31,7 @@ class LoginViewController: UIViewController {
     var emailTxt = ""
     var passTxt = ""
     var currentNonce : String?
+    private let biometricIDAuth = BiometricIDAuth()
     
     // MARK: - Lifecycle
     //===========================
@@ -71,6 +73,7 @@ extension LoginViewController {
     
     private func initialSetup() {
         self.tableViewSetUp()
+        self.bioMetricSignin()
     }
     
     public func tableViewSetUp(){
@@ -96,6 +99,80 @@ extension LoginViewController {
         let forgotPassVC  = ForgotPasswordVC.instantiate(fromAppStoryboard: .PreLogin)
         self.navigationController?.pushViewController(forgotPassVC, animated: true)
     }
+    
+    func goToBLEVC(){
+       let bleVC = BLEIntegrationVC.instantiate(fromAppStoryboard: .PostLogin)
+       self.navigationController?.pushViewController(bleVC, animated: true)
+   }
+    
+    private func showAlertForBiometric(){
+        var bioMetricReason = ""
+        var biometric = ""
+        if hasTopNotch {
+            bioMetricReason = LocalizedString.allowFaceId.localized
+            biometric =  LocalizedString.faceID.localized
+        } else {
+            bioMetricReason = LocalizedString.allowTouchId.localized
+            biometric =  LocalizedString.touchID.localized
+        }
+        self.showAlertWithAction(title: bioMetricReason, msg: "Use \(biometric) to sign into Luna without entering your password.", cancelTitle: "Don’t Allow", actionTitle: "Allow") {
+            KeychainWrapper.standard.set(self.emailTxt, forKey: ApiKey.email)
+            KeychainWrapper.standard.set(self.passTxt, forKey: ApiKey.password)
+            self.goToBLEVC()
+        } cancelcompletion: {
+            KeychainWrapper.standard.set("", forKey: ApiKey.email)
+            KeychainWrapper.standard.set("", forKey: ApiKey.password)
+            self.goToBLEVC()
+        }
+    }
+    
+    private func bioMetricSignin() {
+        var error: NSError?
+        if #available(iOS 8.0, macOS 10.12.1, *) {
+            biometricIDAuth.canEvaluate { (canEvaluate, _, canEvaluateError) in
+                guard canEvaluate else {
+                    // Face ID/Touch ID may not be available or configured
+                    return
+                }
+                biometricIDAuth.evaluate { [weak self] (success, error) in
+                    guard let `self` = self else { return }
+                    DispatchQueue.main.async {
+                    if success{
+                        //
+                        guard let email = KeychainWrapper.standard.string(forKey: ApiKey.email), let password = KeychainWrapper.standard.string(forKey: ApiKey.password) else {
+                            return
+                        }
+                        if !email.isEmpty && !password.isEmpty{
+                            if    (Auth.auth().currentUser?.uid == nil) {
+                                FirestoreController.login(userId: "", withEmail: email, with: password, success: {
+                                    self.goToBLEVC()
+                                    //                        FirestoreController.setFirebaseData(userId: "", email: self.emailTxt, password: self.passTxt, name:"", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
+                                    //                            CommonFunctions.hideActivityLoader()
+                                    //                            self.goToBLEVC()
+                                    //                        }) { (error) -> (Void) in
+                                    //                            AppUserDefaults.removeValue(forKey: .accesstoken)
+                                    //                            CommonFunctions.hideActivityLoader()
+                                    //                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                                    //                        }
+                                }) { (message, code) in
+                                    CommonFunctions.showToastWithMessage(message)
+                                }
+                            }
+                        }
+                        //
+                    } else {
+                        if (error! as NSError).code != -2 {
+                            self.showAlert(msg: "Invalid biometric input")
+                        }
+                    }
+                  }
+                }
+            }
+        }else {
+            guard let error = error else { return }
+            showAlert(title: LocalizedString.biometricAuthNotAvailable.localized, msg: error.localizedDescription)
+        }
+    }
 }
 
 // MARK: - Extension For TableView
@@ -118,16 +195,22 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
             [cell.emailIdTxtField,cell.passTxtField].forEach({$0?.delegate = self})
             cell.signUpBtnTapped = { [weak self]  (sender) in
                 guard let `self` = self else { return }
+                CommonFunctions.showActivityLoader()
                 if   (Auth.auth().currentUser?.isEmailVerified ?? false)  ||  (Auth.auth().currentUser?.uid == nil) {
                     FirestoreController.login(userId: "", withEmail: self.emailTxt, with: self.passTxt, success: {
-                        FirestoreController.setFirebaseData(userId: "", email: self.emailTxt, password: self.passTxt, name:"", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
-                            print("Success")
-                        }) { (error) -> (Void) in
-                            AppUserDefaults.removeValue(forKey: .accesstoken)
-                            print(error.localizedDescription)
-                        }
+                        CommonFunctions.hideActivityLoader()
+                        self.showAlertForBiometric()
+//                        FirestoreController.setFirebaseData(userId: "", email: self.emailTxt, password: self.passTxt, name:"", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
+//                            CommonFunctions.hideActivityLoader()
+//                            self.goToBLEVC()
+//                        }) { (error) -> (Void) in
+//                            AppUserDefaults.removeValue(forKey: .accesstoken)
+//                            CommonFunctions.hideActivityLoader()
+//                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+//                        }
                     }) { (message, code) in
-                        print(message)
+                        CommonFunctions.hideActivityLoader()
+                        CommonFunctions.showToastWithMessage(message)
                     }
                 } else {
                     FirestoreController.sendEmailVerification { (errors) -> (Void) in
@@ -185,6 +268,19 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
 // MARK: - Extension For TextField Delegate
 //====================================
 extension LoginViewController : UITextFieldDelegate{
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let cell = loginTableView.cell(forItem: textField) as? SignUpTopTableCell
+        switch textField {
+        case cell?.emailIdTxtField:
+            cell?.emailIdTxtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
+        case cell?.passTxtField:
+            cell?.passTxtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
+        default:
+            cell?.signUpBtn.isEnabled = signUpBtnStatus()
+        }
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         let txt = textField.text?.byRemovingLeadingTrailingWhiteSpaces ?? ""
         let cell = loginTableView.cell(forItem: textField) as? SignUpTopTableCell
@@ -192,9 +288,11 @@ extension LoginViewController : UITextFieldDelegate{
         case cell?.emailIdTxtField:
             self.emailTxt = txt
             cell?.signUpBtn.isEnabled = signUpBtnStatus()
+            cell?.emailIdTxtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         case cell?.passTxtField:
             self.passTxt = txt
             cell?.signUpBtn.isEnabled = signUpBtnStatus()
+            cell?.passTxtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         default:
             cell?.signUpBtn.isEnabled = signUpBtnStatus()
         }
@@ -292,13 +390,17 @@ extension LoginViewController: ASAuthorizationControllerDelegate,ASAuthorization
                                                               rawNonce: nonce)
             
             // Sign in with Firebase
+            CommonFunctions.showActivityLoader()
             Auth.auth().signIn(with: firebaseCredential) { (authResult, error) in
                 
                 if let error = error {
                     print(error.localizedDescription)
+                    CommonFunctions.hideActivityLoader()
+                    CommonFunctions.showToastWithMessage(error.localizedDescription)
                     return
                 }
-                
+                CommonFunctions.hideActivityLoader()
+                self.goToBLEVC()
                 // Mak a request to set user's display name on Firebase
                 let changeRequest = authResult?.user.createProfileChangeRequest()
                 changeRequest?.displayName = appleIDCredential.fullName?.givenName
@@ -341,13 +443,15 @@ extension LoginViewController: GIDSignInDelegate {
             if let error = error {
                 print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
             }
+            
+            self.goToBLEVC()
             print("post notification after user successfully sign in")
-            FirestoreController.setFirebaseData(userId: user.userID, email: user.profile.email, password: "", name: user.profile.name, imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
-                print("Success")
-            }) { (error) -> (Void) in
-                AppUserDefaults.removeValue(forKey: .accesstoken)
-                print(error.localizedDescription)
-            }
+//            FirestoreController.setFirebaseData(userId: user.userID, email: user.profile.email, password: "", name: user.profile.name, imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
+//                print("Success")
+//            }) { (error) -> (Void) in
+//                AppUserDefaults.removeValue(forKey: .accesstoken)
+//                print(error.localizedDescription)
+//            }
         }
     }
     

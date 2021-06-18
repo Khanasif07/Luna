@@ -72,6 +72,10 @@ enum LocalizedString : String {
     case minTenDigitInAccountNumber
     case enterOldPassWord
     case enterNewPassWord
+    case allowFaceId
+    case allowTouchId
+    case faceID
+    case touchID
     // MARK: - Validation Messages
     //==================================
     case pleaseEnterValidEmail = "pleaseEnterValidEmail"

@@ -77,7 +77,7 @@ extension AppUserDefaults {
     enum Key : String, CaseIterable {
         case authorization
         case accesstoken
-        case isLanguageSelect
+        case isTermsAndConditionSelected
         case isGuestMode
         case tutorialDisplayed
         case userType

@@ -55,7 +55,7 @@ class LoginSocialTableCell: UITableViewCell {
             .font: AppFonts.SF_Pro_Display_Regular.withSize(.x14),
             .foregroundColor: UIColor.black
         ])
-        let privactAttText = (NSAttributedString(string: signupLoginText, attributes: [NSAttributedString.Key.foregroundColor: UIColor(r: 61, g: 201, b: 147, alpha: 1.0),NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Semibold.withSize(.x14)]))
+        let privactAttText = (NSAttributedString(string: signupLoginText, attributes: [NSAttributedString.Key.foregroundColor: UIColor(r: 61, g: 201, b: 147, alpha: 1.0),NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Bold.withSize(.x15)]))
         attributedString.append(privactAttText)
         loginSocialLbl.attributedText = attributedString
         loginSocialLbl.isUserInteractionEnabled = true
@@ -76,8 +76,8 @@ class LoginSocialTableCell: UITableViewCell {
     }
     
     public func setUpButtonInset(){
-        googleBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 20.0, bottom: 0, right: 0)
-        appleBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 20.0, bottom: 0, right: 0)
+        googleBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 7.5, bottom: 0, right: 0)
+        appleBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 7.5, bottom: 0, right: 0)
     }
     
     @IBAction func googleBtnAction(_ sender: UIButton) {

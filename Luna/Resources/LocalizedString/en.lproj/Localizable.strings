@@ -20,3 +20,9 @@
 "please_create_account_to_get_good_sleep" = "Please create account to get good night's sleep";
 "please_login_to_get_good_sleep" = "Please login to get good night's sleep";
 "dont_have_an_account" = "Don’t have an account ? ";
+"password" = "Password";
+"emailId" = "Email";
+"allowFaceId" = "Allow Face ID";
+"allowTouchId" = "Allow Touch ID";
+"faceID" = " FaceID ";
+"touchID" = " TouchID ";

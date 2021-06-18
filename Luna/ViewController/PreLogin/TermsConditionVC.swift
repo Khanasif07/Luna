@@ -28,6 +28,7 @@ class TermsConditionVC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func acceptBtnAction(_ sender: UIButton) {
+        AppUserDefaults.save(value: true, forKey: .isTermsAndConditionSelected)
         self.goToSignUpVC()
     }
     
@@ -46,5 +47,11 @@ extension TermsConditionVC {
         let signupVC = SignupViewController.instantiate(fromAppStoryboard: .PreLogin)
         self.navigationController?.pushViewController(signupVC, animated: true)
     }
+    
+     func goToBLEVC(){
+        let bleVC = BLEIntegrationVC.instantiate(fromAppStoryboard: .PostLogin)
+        self.navigationController?.pushViewController(bleVC, animated: true)
+    }
+  
       
 }

@@ -7,8 +7,6 @@
 
 import UIKit
 import GoogleSignIn
-import GoogleUtilities
-import CoreBluetooth
 import CryptoKit
 import Firebase
 import FirebaseStorage
@@ -17,6 +15,7 @@ import FirebaseDatabase
 import FirebaseCore
 import LocalAuthentication
 import AuthenticationServices
+import SwiftKeychainWrapper
 
 class SignupViewController: UIViewController {
     
@@ -31,6 +30,7 @@ class SignupViewController: UIViewController {
     var emailTxt = ""
     var passTxt = ""
     var currentNonce : String?
+    private let biometricIDAuth = BiometricIDAuth()
     
     // MARK: - Lifecycle
     //===========================
@@ -88,9 +88,69 @@ extension SignupViewController {
         return !self.emailTxt.isEmpty && !self.passTxt.isEmpty
     }
     
+    func reloadUser(_ callback: ((Error?) -> ())? = nil){
+        Auth.auth().currentUser?.reload(completion: { (error) in
+            callback?(error)
+        })
+    }
+    
     private func gotoLoginVC(){
         let loginVC = LoginViewController.instantiate(fromAppStoryboard: .PreLogin)
         self.navigationController?.pushViewController(loginVC, animated: true)
+    }
+    
+    func goToBLEVC(){
+       let bleVC = BLEIntegrationVC.instantiate(fromAppStoryboard: .PostLogin)
+       self.navigationController?.pushViewController(bleVC, animated: true)
+   }
+    
+    private func bioMetricSignin() {
+        var error: NSError?
+        if #available(iOS 8.0, macOS 10.12.1, *) {
+            biometricIDAuth.canEvaluate { (canEvaluate, _, canEvaluateError) in
+                guard canEvaluate else {
+                    // Face ID/Touch ID may not be available or configured
+                    return
+                }
+                biometricIDAuth.evaluate { [weak self] (success, error) in
+                    guard let `self` = self else { return }
+                    if success{
+                        print("Succesfully verified")
+                        //
+                        guard let email = KeychainWrapper.standard.string(forKey: ApiKey.email), let password = KeychainWrapper.standard.string(forKey: ApiKey.password) else {
+                            return
+                        }
+                        if !email.isEmpty && !password.isEmpty{
+                            if    (Auth.auth().currentUser?.uid == nil) {
+                                FirestoreController.login(userId: "", withEmail: email, with: password, success: {
+                                    CommonFunctions.hideActivityLoader()
+                                    self.goToBLEVC()
+                                    //                        FirestoreController.setFirebaseData(userId: "", email: self.emailTxt, password: self.passTxt, name:"", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
+                                    //                            CommonFunctions.hideActivityLoader()
+                                    //                            self.goToBLEVC()
+                                    //                        }) { (error) -> (Void) in
+                                    //                            AppUserDefaults.removeValue(forKey: .accesstoken)
+                                    //                            CommonFunctions.hideActivityLoader()
+                                    //                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                                    //                        }
+                                }) { (message, code) in
+                                    CommonFunctions.hideActivityLoader()
+                                    CommonFunctions.showToastWithMessage(message)
+                                }
+                            }
+                        }
+                        //
+                    } else {
+                        if (error! as NSError).code != -2 {
+                            self.showAlert(msg: "Invalid biometric input")
+                        }
+                    }
+                }
+            }
+        }else {
+            guard let error = error else { return }
+            showAlert(title: LocalizedString.biometricAuthNotAvailable.localized, msg: error.localizedDescription)
+        }
     }
 }
 
@@ -117,11 +177,15 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
                 CommonFunctions.showActivityLoader()
                 if (Auth.auth().currentUser?.uid == nil) {
                     FirestoreController.createUserNode(userId: "", email: self.emailTxt, password: self.passTxt, name: "", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
-                        print("Success")
+                        self.reloadUser { (reloadMsg) in
+                            print(reloadMsg?.localizedDescription ?? "")
+                        }
                         CommonFunctions.hideActivityLoader()
+                        self.goToBLEVC()
                     }) { (error) -> (Void)  in
                         print( error.localizedDescription)
                         CommonFunctions.hideActivityLoader()
+                        CommonFunctions.showToastWithMessage(error.localizedDescription)
                     }
                 }else{
                     CommonFunctions.hideActivityLoader()

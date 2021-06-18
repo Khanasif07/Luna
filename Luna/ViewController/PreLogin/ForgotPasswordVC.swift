@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class ForgotPasswordVC: UIViewController {
     
@@ -42,7 +44,14 @@ class ForgotPasswordVC: UIViewController {
     
     
     @IBAction func confirmEmailAction(_ sender: AppButton) {
-        self.gotoPassResetPopUpVC()
+        CommonFunctions.showActivityLoader()
+            FirestoreController.forgetPassword(email:  self.emailTxt, completion: {
+                CommonFunctions.hideActivityLoader()
+                self.gotoPassResetPopUpVC()
+            }) { (error) -> (Void) in
+                CommonFunctions.hideActivityLoader()
+                CommonFunctions.showToastWithMessage(error.localizedDescription)
+            }
     }
     
     
@@ -55,6 +64,7 @@ extension ForgotPasswordVC {
     private func initialSetup() {
         self.emailTxtField.delegate = self
         self.emailTxtField.placeholder = LocalizedString.emailID.localized
+        self.emailTxtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         self.confirmBtn.isEnabled = false
     }
     
