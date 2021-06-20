@@ -74,9 +74,18 @@
 		84D1F4FF2679D52700F131E0 /* SF-Pro-Display-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 84D1F4ED2679D52700F131E0 /* SF-Pro-Display-ThinItalic.otf */; };
 		84D1F5002679D52700F131E0 /* SF-Pro-Display-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 84D1F4EE2679D52700F131E0 /* SF-Pro-Display-BoldItalic.otf */; };
 		84D1F5052679E95A00F131E0 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1F5042679E95A00F131E0 /* ForgotPasswordVC.swift */; };
+		84E5505A267E027A008C02F8 /* TypeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E55058267E027A008C02F8 /* TypeTableCell.swift */; };
+		84E5505B267E027A008C02F8 /* TypeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E55059267E027A008C02F8 /* TypeTableCell.xib */; };
 		84F7BC51266F11BA006C94DA /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7BC50266F11BA006C94DA /* AppleLoginManager.swift */; };
 		84F819A8267A12A500A4C758 /* PassResetPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F819A7267A12A500A4C758 /* PassResetPopUpVC.swift */; };
 		84F819CE267B6FE000A4C758 /* BLEIntegrationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F819CD267B6FE000A4C758 /* BLEIntegrationVC.swift */; };
+		84FDA0A3267DC5D700AC8BE9 /* ProfileSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FDA0A2267DC5D700AC8BE9 /* ProfileSetupVC.swift */; };
+		84FDA0A7267DCB1000AC8BE9 /* MessageSenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FDA0A5267DCB1000AC8BE9 /* MessageSenderCell.swift */; };
+		84FDA0A8267DCB1000AC8BE9 /* MessageSenderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84FDA0A6267DCB1000AC8BE9 /* MessageSenderCell.xib */; };
+		84FDA0AC267DCB5600AC8BE9 /* MessageReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FDA0AA267DCB5600AC8BE9 /* MessageReceiverCell.swift */; };
+		84FDA0AD267DCB5600AC8BE9 /* MessageReceiverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84FDA0AB267DCB5600AC8BE9 /* MessageReceiverCell.xib */; };
+		84FDA0B1267DE8B600AC8BE9 /* DecisionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FDA0AF267DE8B600AC8BE9 /* DecisionCell.swift */; };
+		84FDA0B2267DE8B600AC8BE9 /* DecisionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84FDA0B0267DE8B600AC8BE9 /* DecisionCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -149,10 +158,19 @@
 		84D1F4ED2679D52700F131E0 /* SF-Pro-Display-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-ThinItalic.otf"; sourceTree = "<group>"; };
 		84D1F4EE2679D52700F131E0 /* SF-Pro-Display-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-BoldItalic.otf"; sourceTree = "<group>"; };
 		84D1F5042679E95A00F131E0 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
+		84E55058267E027A008C02F8 /* TypeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeTableCell.swift; sourceTree = "<group>"; };
+		84E55059267E027A008C02F8 /* TypeTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TypeTableCell.xib; sourceTree = "<group>"; };
 		84F7BC4E266F06A1006C94DA /* Luna.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Luna.entitlements; sourceTree = "<group>"; };
 		84F7BC50266F11BA006C94DA /* AppleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManager.swift; sourceTree = "<group>"; };
 		84F819A7267A12A500A4C758 /* PassResetPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassResetPopUpVC.swift; sourceTree = "<group>"; };
 		84F819CD267B6FE000A4C758 /* BLEIntegrationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEIntegrationVC.swift; sourceTree = "<group>"; };
+		84FDA0A2267DC5D700AC8BE9 /* ProfileSetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetupVC.swift; sourceTree = "<group>"; };
+		84FDA0A5267DCB1000AC8BE9 /* MessageSenderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSenderCell.swift; sourceTree = "<group>"; };
+		84FDA0A6267DCB1000AC8BE9 /* MessageSenderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageSenderCell.xib; sourceTree = "<group>"; };
+		84FDA0AA267DCB5600AC8BE9 /* MessageReceiverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReceiverCell.swift; sourceTree = "<group>"; };
+		84FDA0AB267DCB5600AC8BE9 /* MessageReceiverCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageReceiverCell.xib; sourceTree = "<group>"; };
+		84FDA0AF267DE8B600AC8BE9 /* DecisionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionCell.swift; sourceTree = "<group>"; };
+		84FDA0B0267DE8B600AC8BE9 /* DecisionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DecisionCell.xib; sourceTree = "<group>"; };
 		8AEA7181BDAC85A8A469C807 /* Pods-Luna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Luna.release.xcconfig"; path = "Target Support Files/Pods-Luna/Pods-Luna.release.xcconfig"; sourceTree = "<group>"; };
 		F4623A1A786ED367659EFB05 /* Pods-Luna.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Luna.debug.xcconfig"; path = "Target Support Files/Pods-Luna/Pods-Luna.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -194,6 +212,7 @@
 				84D1F4B32679C12900F131E0 /* TermsConditionVC.swift */,
 				84D1F5042679E95A00F131E0 /* ForgotPasswordVC.swift */,
 				84F819A7267A12A500A4C758 /* PassResetPopUpVC.swift */,
+				84FDA0A2267DC5D700AC8BE9 /* ProfileSetupVC.swift */,
 			);
 			path = PreLogin;
 			sourceTree = "<group>";
@@ -222,6 +241,14 @@
 				845549272678FAEF000CC13D /* SignUpTopTableCell.xib */,
 				8455492B2678FFFD000CC13D /* LoginSocialTableCell.swift */,
 				8455492C2678FFFD000CC13D /* LoginSocialTableCell.xib */,
+				84FDA0A5267DCB1000AC8BE9 /* MessageSenderCell.swift */,
+				84FDA0A6267DCB1000AC8BE9 /* MessageSenderCell.xib */,
+				84FDA0AA267DCB5600AC8BE9 /* MessageReceiverCell.swift */,
+				84FDA0AB267DCB5600AC8BE9 /* MessageReceiverCell.xib */,
+				84FDA0AF267DE8B600AC8BE9 /* DecisionCell.swift */,
+				84FDA0B0267DE8B600AC8BE9 /* DecisionCell.xib */,
+				84E55058267E027A008C02F8 /* TypeTableCell.swift */,
+				84E55059267E027A008C02F8 /* TypeTableCell.xib */,
 			);
 			path = PreLogin;
 			sourceTree = "<group>";
@@ -536,14 +563,18 @@
 				84554932267908B9000CC13D /* PostLogin.storyboard in Resources */,
 				84CC12A62668C823009316FC /* LaunchScreen.storyboard in Resources */,
 				84D1F4F52679D52700F131E0 /* SF-Pro-Display-Medium.otf in Resources */,
+				84E5505B267E027A008C02F8 /* TypeTableCell.xib in Resources */,
 				84CC12A32668C823009316FC /* Assets.xcassets in Resources */,
 				84D1F4F12679D52700F131E0 /* SF-Pro-Display-RegularItalic.otf in Resources */,
+				84FDA0A8267DCB1000AC8BE9 /* MessageSenderCell.xib in Resources */,
 				84D1F5002679D52700F131E0 /* SF-Pro-Display-BoldItalic.otf in Resources */,
+				84FDA0AD267DCB5600AC8BE9 /* MessageReceiverCell.xib in Resources */,
 				8455492E2678FFFD000CC13D /* LoginSocialTableCell.xib in Resources */,
 				84D1F4F72679D52700F131E0 /* SF-Pro-Display-Semibold.otf in Resources */,
 				84D1F4F22679D52700F131E0 /* SF-Pro-Display-Light.otf in Resources */,
 				84D1F4FF2679D52700F131E0 /* SF-Pro-Display-ThinItalic.otf in Resources */,
 				845549292678FAEF000CC13D /* SignUpTopTableCell.xib in Resources */,
+				84FDA0B2267DE8B600AC8BE9 /* DecisionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,9 +651,12 @@
 				84CC13012668D191009316FC /* Date+Extension.swift in Sources */,
 				845549282678FAEF000CC13D /* SignUpTopTableCell.swift in Sources */,
 				84CC12D32668CFE9009316FC /* ApiKeys.swift in Sources */,
+				84FDA0B1267DE8B600AC8BE9 /* DecisionCell.swift in Sources */,
 				84CC12EC2668D0B8009316FC /* UIColorExtension.swift in Sources */,
 				8432A19F2672319B00859B47 /* BiometricIDAuth.swift in Sources */,
 				84CC12E92668D083009316FC /* UITableView+ UITableViewCellExtension.swift in Sources */,
+				84FDA0A3267DC5D700AC8BE9 /* ProfileSetupVC.swift in Sources */,
+				84FDA0A7267DCB1000AC8BE9 /* MessageSenderCell.swift in Sources */,
 				84CC12BC2668CDF4009316FC /* FirestoreController.swift in Sources */,
 				84CC12F22668D0E6009316FC /* UITextFieldExtension.swift in Sources */,
 				84D1F5052679E95A00F131E0 /* ForgotPasswordVC.swift in Sources */,
@@ -647,8 +681,10 @@
 				84CC13102668D20A009316FC /* String+Extension.swift in Sources */,
 				84CC13072668D1BD009316FC /* UIScreen+Extension.swift in Sources */,
 				84F819A8267A12A500A4C758 /* PassResetPopUpVC.swift in Sources */,
+				84FDA0AC267DCB5600AC8BE9 /* MessageReceiverCell.swift in Sources */,
 				84CC12FE2668D17A009316FC /* UICollectionView+Extension.swift in Sources */,
 				84F7BC51266F11BA006C94DA /* AppleLoginManager.swift in Sources */,
+				84E5505A267E027A008C02F8 /* TypeTableCell.swift in Sources */,
 				84CC12D72668D005009316FC /* AppColors.swift in Sources */,
 				84CC135C2669F15F009316FC /* HomeViewController.swift in Sources */,
 				84CC12F82668D12D009316FC /* UIApplicationExtension.swift in Sources */,

@@ -28,8 +28,8 @@ class LoginViewController: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var emailTxt = ""
-    var passTxt = ""
+    var emailTxt: String = ""
+    var passTxt : String =  ""
     var currentNonce : String?
     private let biometricIDAuth = BiometricIDAuth()
     
@@ -89,6 +89,12 @@ extension LoginViewController {
         return !self.emailTxt.isEmpty && !self.passTxt.isEmpty
     }
     
+    func reloadUser(_ callback: ((Error?) -> ())? = nil){
+        Auth.auth().currentUser?.reload(completion: { (error) in
+            callback?(error)
+        })
+    }
+    
     private func googleSetUp(){
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance().delegate=self
@@ -105,6 +111,12 @@ extension LoginViewController {
        self.navigationController?.pushViewController(bleVC, animated: true)
    }
     
+    func goToProfileSetupVC(){
+       let bleVC = ProfileSetupVC.instantiate(fromAppStoryboard: .PreLogin)
+       self.navigationController?.pushViewController(bleVC, animated: true)
+   }
+    
+    
     private func showAlertForBiometric(){
         var bioMetricReason = ""
         var biometric = ""
@@ -118,11 +130,13 @@ extension LoginViewController {
         self.showAlertWithAction(title: bioMetricReason, msg: "Use \(biometric) to sign into Luna without entering your password.", cancelTitle: "Don’t Allow", actionTitle: "Allow") {
             KeychainWrapper.standard.set(self.emailTxt, forKey: ApiKey.email)
             KeychainWrapper.standard.set(self.passTxt, forKey: ApiKey.password)
-            self.goToBLEVC()
+            AppUserDefaults.save(value: true, forKey: .isBiometricSelected)
+            self.goToProfileSetupVC()
         } cancelcompletion: {
             KeychainWrapper.standard.set("", forKey: ApiKey.email)
             KeychainWrapper.standard.set("", forKey: ApiKey.password)
-            self.goToBLEVC()
+            AppUserDefaults.save(value: true, forKey: .isBiometricSelected)
+            self.goToProfileSetupVC()
         }
     }
     
@@ -145,7 +159,7 @@ extension LoginViewController {
                         if !email.isEmpty && !password.isEmpty{
                             if    (Auth.auth().currentUser?.uid == nil) {
                                 FirestoreController.login(userId: "", withEmail: email, with: password, success: {
-                                    self.goToBLEVC()
+                                    self.goToProfileSetupVC()
                                     //                        FirestoreController.setFirebaseData(userId: "", email: self.emailTxt, password: self.passTxt, name:"", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
                                     //                            CommonFunctions.hideActivityLoader()
                                     //                            self.goToBLEVC()
@@ -162,7 +176,7 @@ extension LoginViewController {
                         //
                     } else {
                         if (error! as NSError).code != -2 {
-                            self.showAlert(msg: "Invalid biometric input")
+                            CommonFunctions.showToastWithMessage("Invalid biometric input")
                         }
                     }
                   }
@@ -188,6 +202,8 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueCell(with: SignUpTopTableCell.self, indexPath: indexPath)
+            cell.emailIdTxtField.text = emailTxt
+            cell.passTxtField.text = passTxt
             cell.titleLbl.text = LocalizedString.login.localized
             cell.subTitleLbl.text = LocalizedString.please_login_to_get_good_sleep.localized
             cell.signUpBtn.setTitle(LocalizedString.login.localized, for: .normal)
@@ -196,26 +212,65 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
             cell.signUpBtnTapped = { [weak self]  (sender) in
                 guard let `self` = self else { return }
                 CommonFunctions.showActivityLoader()
-                if   (Auth.auth().currentUser?.isEmailVerified ?? false)  ||  (Auth.auth().currentUser?.uid == nil) {
+                self.reloadUser { (reloadMsg) in
+                    print(reloadMsg?.localizedDescription ?? "")
+                    print("--====--")
+                }
+                if let currentUser = Auth.auth().currentUser {
+                    if  (currentUser.isEmailVerified) {
+                        FirestoreController.login(userId: "", withEmail: self.emailTxt, with: self.passTxt, success: {
+                            CommonFunctions.hideActivityLoader()
+                            if  AppUserDefaults.value(forKey: .isBiometricSelected).boolValue{
+                                self.goToProfileSetupVC()
+                            }else{
+                                self.showAlertForBiometric()
+                            }
+                            //                        FirestoreController.setFirebaseData(userId: "", email: self.emailTxt, password: self.passTxt, name:"", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
+                            //                            CommonFunctions.hideActivityLoader()
+                            //                            self.goToBLEVC()
+                            //                        }) { (error) -> (Void) in
+                            //                            AppUserDefaults.removeValue(forKey: .accesstoken)
+                            //                            CommonFunctions.hideActivityLoader()
+                            //                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                            //                        }
+                        }) { (message, code) in
+                            CommonFunctions.hideActivityLoader()
+                            CommonFunctions.showToastWithMessage(message)
+                        }
+                    } else {
+                        CommonFunctions.hideActivityLoader()
+                        FirestoreController.sendEmailVerification { (errors) -> (Void) in
+                            print(errors.localizedDescription)
+                        }
+                        CommonFunctions.showToastWithMessage("Please verify your email - A verification link has been sent to your registered email account.")
+                    }
+                } else {
                     FirestoreController.login(userId: "", withEmail: self.emailTxt, with: self.passTxt, success: {
                         CommonFunctions.hideActivityLoader()
-                        self.showAlertForBiometric()
-//                        FirestoreController.setFirebaseData(userId: "", email: self.emailTxt, password: self.passTxt, name:"", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
-//                            CommonFunctions.hideActivityLoader()
-//                            self.goToBLEVC()
-//                        }) { (error) -> (Void) in
-//                            AppUserDefaults.removeValue(forKey: .accesstoken)
-//                            CommonFunctions.hideActivityLoader()
-//                            CommonFunctions.showToastWithMessage(error.localizedDescription)
-//                        }
+                        if Auth.auth().currentUser?.isEmailVerified ?? false {
+                            if  AppUserDefaults.value(forKey: .isBiometricSelected).boolValue{
+                                self.goToProfileSetupVC()
+                            }else{
+                                self.showAlertForBiometric()
+                            }
+                        } else {
+                            FirestoreController.sendEmailVerification { (errors) -> (Void) in
+                                print(errors.localizedDescription)
+                            }
+                            CommonFunctions.showToastWithMessage("Please verify your email - A verification link has been sent to your registered email account.")
+                        }
+                       
+                        //                        FirestoreController.setFirebaseData(userId: "", email: self.emailTxt, password: self.passTxt, name:"", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
+                        //                            CommonFunctions.hideActivityLoader()
+                        //                            self.goToBLEVC()
+                        //                        }) { (error) -> (Void) in
+                        //                            AppUserDefaults.removeValue(forKey: .accesstoken)
+                        //                            CommonFunctions.hideActivityLoader()
+                        //                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                        //                        }
                     }) { (message, code) in
                         CommonFunctions.hideActivityLoader()
                         CommonFunctions.showToastWithMessage(message)
-                    }
-                } else {
-                    FirestoreController.sendEmailVerification { (errors) -> (Void) in
-                        print(errors.localizedDescription)
-                        print("sendEmailVerificationfailed=================")
                     }
                 }
             }
@@ -399,19 +454,25 @@ extension LoginViewController: ASAuthorizationControllerDelegate,ASAuthorization
                     CommonFunctions.showToastWithMessage(error.localizedDescription)
                     return
                 }
-                CommonFunctions.hideActivityLoader()
-                self.goToBLEVC()
+                let uid = Auth.auth().currentUser?.uid ?? ""
+                AppUserDefaults.save(value: uid, forKey: .uid)
+                AppUserDefaults.save(value: uid, forKey: .accesstoken)
+                AppUserDefaults.save(value: self.emailTxt, forKey: .defaultEmail)
+                AppUserDefaults.save(value: self.passTxt, forKey: .defaultPassword)
+                DispatchQueue.main.async {
+                    self.goToProfileSetupVC()
+                }
                 // Mak a request to set user's display name on Firebase
-                let changeRequest = authResult?.user.createProfileChangeRequest()
-                changeRequest?.displayName = appleIDCredential.fullName?.givenName
-                changeRequest?.commitChanges(completion: { (error) in
-                    
-                    if let error = error {
-                        print(error.localizedDescription)
-                    } else {
-                        print("Updated display name: \(Auth.auth().currentUser!.email!)")
-                    }
-                })
+//                let changeRequest = authResult?.user.createProfileChangeRequest()
+//                changeRequest?.displayName = appleIDCredential.fullName?.givenName
+//                changeRequest?.commitChanges(completion: { (error) in
+//
+//                    if let error = error {
+//                        print(error.localizedDescription)
+//                    } else {
+//                        print("Updated display name: \(Auth.auth().currentUser!.email!)")
+//                    }
+//                })
             }
             
         }
@@ -444,7 +505,7 @@ extension LoginViewController: GIDSignInDelegate {
                 print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
             }
             
-            self.goToBLEVC()
+            self.goToProfileSetupVC()
             print("post notification after user successfully sign in")
 //            FirestoreController.setFirebaseData(userId: user.userID, email: user.profile.email, password: "", name: user.profile.name, imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
 //                print("Success")

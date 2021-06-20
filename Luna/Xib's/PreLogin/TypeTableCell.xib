@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="79" id="KGk-i7-Jjw" customClass="TypeTableCell" customModule="Luna" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="376" height="64"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="376" height="64"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="by8-Ja-6sU">
+                        <rect key="frame" x="188" y="10" width="168" height="44"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJk-QU-eqf">
+                                <rect key="frame" x="0.0" y="0.0" width="76" height="44"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <state key="normal" title="Type 1">
+                                    <color key="titleColor" red="0.20392156859999999" green="0.20392156859999999" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="type1BtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="UhW-X4-QsY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kcq-Xf-2eq">
+                                <rect key="frame" x="92" y="0.0" width="76" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="76" id="EZE-fq-nG1"/>
+                                    <constraint firstAttribute="height" constant="44" id="rhT-K1-apU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <state key="normal" title="Type 2">
+                                    <color key="titleColor" red="0.20392156859999999" green="0.20392156859999999" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="type2BtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="WO3-r1-JGU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="by8-Ja-6sU" secondAttribute="trailing" constant="20" id="E4Y-U2-qAE"/>
+                    <constraint firstItem="by8-Ja-6sU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="hAj-S8-0hf"/>
+                    <constraint firstAttribute="bottom" secondItem="by8-Ja-6sU" secondAttribute="bottom" constant="10" id="vDK-a5-Z7Q"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="type1Btn" destination="wJk-QU-eqf" id="XOM-4v-J9v"/>
+                <outlet property="type2Btn" destination="Kcq-Xf-2eq" id="d0s-E5-U14"/>
+            </connections>
+            <point key="canvasLocation" x="62.318840579710148" y="99.441964285714278"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -220,6 +220,20 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hkd-c7-DG8">
+                                <rect key="frame" x="20" y="323" width="374" height="44"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="UfC-Pi-VSh"/>
+                                </constraints>
+                                <state key="normal" title="Disconnect BLE">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="disconnectBLETapped:" destination="NVG-4x-AFE" eventType="touchUpInside" id="g4y-qC-NFg"/>
+                                    <action selector="logoutAction:" destination="NVG-4x-AFE" eventType="touchUpInside" id="QVV-SJ-zSG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SfA-je-MHo"/>
                         <color key="backgroundColor" red="0.52941176469999995" green="0.74509803919999995" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
@@ -227,8 +241,11 @@
                             <constraint firstItem="wsy-WM-JAE" firstAttribute="leading" secondItem="71X-SA-gMg" secondAttribute="leading" constant="20" id="0Au-dG-qqJ"/>
                             <constraint firstAttribute="trailing" secondItem="wsy-WM-JAE" secondAttribute="trailing" constant="20" id="9PC-T0-w75"/>
                             <constraint firstItem="y73-N9-LzX" firstAttribute="top" secondItem="wsy-WM-JAE" secondAttribute="bottom" constant="50" id="HHq-iy-4vU"/>
+                            <constraint firstItem="hkd-c7-DG8" firstAttribute="top" secondItem="y73-N9-LzX" secondAttribute="bottom" constant="25" id="QRi-0i-3tL"/>
                             <constraint firstItem="y73-N9-LzX" firstAttribute="leading" secondItem="71X-SA-gMg" secondAttribute="leading" constant="20" id="alc-Nc-WVC"/>
+                            <constraint firstItem="hkd-c7-DG8" firstAttribute="trailing" secondItem="y73-N9-LzX" secondAttribute="trailing" id="dE3-HH-JY9"/>
                             <constraint firstItem="wsy-WM-JAE" firstAttribute="top" secondItem="SfA-je-MHo" secondAttribute="top" constant="50" id="dpC-4J-tQp"/>
+                            <constraint firstItem="hkd-c7-DG8" firstAttribute="leading" secondItem="y73-N9-LzX" secondAttribute="leading" id="f7h-S0-Qo6"/>
                             <constraint firstAttribute="trailing" secondItem="y73-N9-LzX" secondAttribute="trailing" constant="20" id="jUf-Ws-iYL"/>
                         </constraints>
                     </view>

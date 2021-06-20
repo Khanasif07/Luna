@@ -9,6 +9,11 @@ import UIKit
 
 class PassResetPopUpVC: UIViewController {
     
+    enum PopupType{
+        case resetPassword
+        case emailVerification
+    }
+    
     // MARK: - IBOutlets
     //===========================
     @IBOutlet weak var dataContainerView: UIView!
@@ -18,6 +23,11 @@ class PassResetPopUpVC: UIViewController {
     
     // MARK: - Variables
     //===========================
+    var popupType: PopupType = .resetPassword
+    var titleDesc: String = "Password Reset"
+    var subTitleDesc : String = "We have shared the updated login password on your registered email. Check the same and set up login permissions."
+    var emailVerificationSuccess: (()->())?
+    var resetPasswordSuccess: (()->())?
     
     // MARK: - Lifecycle
     //===========================
@@ -35,10 +45,21 @@ class PassResetPopUpVC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func okBtnTapped(_ sender: AppButton) {
-        self.dismiss(animated: true, completion: nil)
+        switch popupType {
+        case .emailVerification:
+            self.dismiss(animated: true) {
+                if let handle = self.emailVerificationSuccess{
+                    handle()
+                }
+            }
+        default:
+            self.dismiss(animated: true) {
+                if let handle = self.resetPasswordSuccess{
+                    handle()
+                }
+            }
+        }
     }
-    
-    
 }
 
 // MARK: - Extension For Functions
@@ -46,6 +67,8 @@ class PassResetPopUpVC: UIViewController {
 extension PassResetPopUpVC {
     
     private func initialSetup() {
+        self.titleLbl.text = titleDesc
+        self.subtitleLbl.text = subTitleDesc
         self.okBtn.isEnabled = true
     }
 }

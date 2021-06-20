@@ -78,6 +78,7 @@ extension AppUserDefaults {
         case authorization
         case accesstoken
         case isTermsAndConditionSelected
+        case isBiometricSelected
         case isGuestMode
         case tutorialDisplayed
         case userType

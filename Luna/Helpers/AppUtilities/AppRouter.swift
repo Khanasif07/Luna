@@ -32,7 +32,7 @@ enum AppRouter {
     //===========================
     static func checkAppInitializationFlow() {
         if isUserLoggedin {
-            AppRouter.goToBLEVC()
+            AppRouter.goToProfileSetupVC()
         } else {
             if AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue {
                 AppRouter.goToSignUpVC()
@@ -43,8 +43,8 @@ enum AppRouter {
         }
     }
     
-    static func goToUserHome() {
-          let homeScene = HomeViewController.instantiate(fromAppStoryboard: .PostLogin)
+    static func goToProfileSetupVC() {
+          let homeScene = ProfileSetupVC.instantiate(fromAppStoryboard: .PreLogin)
           setAsWindowRoot(homeScene)
       }
     

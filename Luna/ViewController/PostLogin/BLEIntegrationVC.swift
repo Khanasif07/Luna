@@ -37,6 +37,9 @@ class BLEIntegrationVC: UIViewController {
     
     // MARK: - IBActions
     //===========================
+    @IBAction func disconnectBLETapped(_ sender: Any) {
+        centralManager.cancelPeripheralConnection(heartRatePeripheral)
+    }
     
     @IBAction func logoutAction(_ sender: UIButton) {
         FirestoreController.logOut { (successMsg) in
@@ -113,6 +116,11 @@ extension BLEIntegrationVC: CBCentralManagerDelegate {
       print("Connected!")
       heartRatePeripheral.discoverServices(nil)
     }
+    
+    func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+        central.connect(peripheral, options: nil)
+    }
+    
 
 
 }

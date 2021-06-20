@@ -96,13 +96,34 @@ extension SignupViewController {
     
     private func gotoLoginVC(){
         let loginVC = LoginViewController.instantiate(fromAppStoryboard: .PreLogin)
+        loginVC.emailTxt = AppUserDefaults.value(forKey: .defaultEmail).stringValue
+        loginVC.passTxt = AppUserDefaults.value(forKey: .defaultPassword).stringValue
         self.navigationController?.pushViewController(loginVC, animated: true)
     }
+    
+    func goToProfileSetupVC(){
+       let bleVC = ProfileSetupVC.instantiate(fromAppStoryboard: .PreLogin)
+       self.navigationController?.pushViewController(bleVC, animated: true)
+   }
     
     func goToBLEVC(){
        let bleVC = BLEIntegrationVC.instantiate(fromAppStoryboard: .PostLogin)
        self.navigationController?.pushViewController(bleVC, animated: true)
    }
+    
+    private func gotoEmailVerificationPopUpVC(){
+        let scene =  PassResetPopUpVC.instantiate(fromAppStoryboard: .PreLogin)
+        scene.emailVerificationSuccess = { [weak self] in
+            guard let selff = self else { return }
+            selff.gotoLoginVC()
+            AppUserDefaults.save(value: "", forKey: .defaultEmail)
+            AppUserDefaults.save(value: "", forKey: .defaultPassword)
+        }
+        scene.popupType = .emailVerification
+        scene.titleDesc = "Email Verification"
+        scene.subTitleDesc = "Please check your email - A verification link has been sent to your registered email account."
+        self.present(scene, animated: true, completion: nil)
+    }
     
     private func bioMetricSignin() {
         var error: NSError?
@@ -124,7 +145,7 @@ extension SignupViewController {
                             if    (Auth.auth().currentUser?.uid == nil) {
                                 FirestoreController.login(userId: "", withEmail: email, with: password, success: {
                                     CommonFunctions.hideActivityLoader()
-                                    self.goToBLEVC()
+                                    self.goToProfileSetupVC()
                                     //                        FirestoreController.setFirebaseData(userId: "", email: self.emailTxt, password: self.passTxt, name:"", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
                                     //                            CommonFunctions.hideActivityLoader()
                                     //                            self.goToBLEVC()
@@ -142,7 +163,7 @@ extension SignupViewController {
                         //
                     } else {
                         if (error! as NSError).code != -2 {
-                            self.showAlert(msg: "Invalid biometric input")
+                            CommonFunctions.showToastWithMessage("Invalid biometric input")
                         }
                     }
                 }
@@ -175,22 +196,26 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
             cell.signUpBtnTapped = { [weak self]  (sender) in
                 guard let `self` = self else { return }
                 CommonFunctions.showActivityLoader()
-                if (Auth.auth().currentUser?.uid == nil) {
                     FirestoreController.createUserNode(userId: "", email: self.emailTxt, password: self.passTxt, name: "", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
                         self.reloadUser { (reloadMsg) in
                             print(reloadMsg?.localizedDescription ?? "")
                         }
                         CommonFunctions.hideActivityLoader()
-                        self.goToBLEVC()
+                        if Auth.auth().currentUser?.isEmailVerified ?? false{
+                            self.goToProfileSetupVC()
+                        }else{
+                            AppUserDefaults.save(value: "", forKey: .uid)
+                            AppUserDefaults.save(value: "", forKey: .accesstoken)
+                            FirestoreController.sendEmailVerification { (errors) -> (Void) in
+                                CommonFunctions.showToastWithMessage(errors.localizedDescription)
+                            }
+                            self.gotoEmailVerificationPopUpVC()
+                        }
                     }) { (error) -> (Void)  in
                         print( error.localizedDescription)
                         CommonFunctions.hideActivityLoader()
                         CommonFunctions.showToastWithMessage(error.localizedDescription)
                     }
-                }else{
-                    CommonFunctions.hideActivityLoader()
-                    self.showAlert(msg: "User is already login.")
-                }
             }
             return cell
         default:
@@ -363,18 +388,25 @@ extension SignupViewController: ASAuthorizationControllerDelegate,ASAuthorizatio
                     print(error.localizedDescription)
                     return
                 }
-                
+                let uid = Auth.auth().currentUser?.uid ?? ""
+                AppUserDefaults.save(value: uid, forKey: .uid)
+                AppUserDefaults.save(value: uid, forKey: .accesstoken)
+                AppUserDefaults.save(value: self.emailTxt, forKey: .defaultEmail)
+                AppUserDefaults.save(value: self.passTxt, forKey: .defaultPassword)
+                DispatchQueue.main.async {
+                    self.self.goToProfileSetupVC()
+                }
                 // Mak a request to set user's display name on Firebase
-                let changeRequest = authResult?.user.createProfileChangeRequest()
-                changeRequest?.displayName = appleIDCredential.fullName?.givenName
-                changeRequest?.commitChanges(completion: { (error) in
-                    
-                    if let error = error {
-                        print(error.localizedDescription)
-                    } else {
-                        print("Updated display name: \(Auth.auth().currentUser!.displayName!)")
-                    }
-                })
+//                let changeRequest = authResult?.user.createProfileChangeRequest()
+//                changeRequest?.displayName = appleIDCredential.fullName?.givenName
+//                changeRequest?.commitChanges(completion: { (error) in
+//                    
+//                    if let error = error {
+//                        print(error.localizedDescription)
+//                    } else {
+//                        print("Updated display name: \(Auth.auth().currentUser!.email!)")
+//                    }
+//                })
             }
             
         }
@@ -407,12 +439,13 @@ extension SignupViewController: GIDSignInDelegate {
                 print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
             }
             print("post notification after user successfully sign in")
-            FirestoreController.setFirebaseData(userId: user.userID, email: user.profile.email, password: "", name: user.profile.name, imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
-                print("Success")
-            }) { (error) -> (Void) in
-                AppUserDefaults.removeValue(forKey: .accesstoken)
-                print(error.localizedDescription)
-            }
+            self.goToProfileSetupVC()
+//            FirestoreController.setFirebaseData(userId: user.userID, email: user.profile.email, password: "", name: user.profile.name, imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
+//                print("Success")
+//            }) { (error) -> (Void) in
+//                AppUserDefaults.removeValue(forKey: .accesstoken)
+//                print(error.localizedDescription)
+//            }
         }
     }
     

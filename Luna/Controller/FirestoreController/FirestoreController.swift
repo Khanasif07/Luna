@@ -120,7 +120,9 @@ class FirestoreController:NSObject{
             if let err = error {
                 failure(err)
             } else {
-                AppUserDefaults.save(value: userId, forKey: .uid)
+                let uid = Auth.auth().currentUser?.uid ?? ""
+                AppUserDefaults.save(value: uid, forKey: .uid)
+                AppUserDefaults.save(value: uid, forKey: .accesstoken)
                 AppUserDefaults.save(value: email, forKey: .defaultEmail)
                 AppUserDefaults.save(value: password, forKey: .defaultPassword)
 //                db.collection(ApiKey.users).document(userId).setData([ApiKey.deviceType:"iOS",

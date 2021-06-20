@@ -83,14 +83,30 @@ extension UITableView {
     }
     
     func reloadWithAnimation() {
-        UIView.transition(with: self,
-                          duration: 0.5,
-                          options: .transitionCrossDissolve,
-                          animations:
-            { () -> Void in
-                self.reloadData()
-        },completion: nil)
+        self.reloadData()
+        let tableViewHeight = self.bounds.size.height
+        let cells = self.visibleCells
+        var delayCounter = 0
+        for cell in cells {
+            cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
+        }
+        for cell in cells {
+            UIView.animate(withDuration: 1.0, delay: 0.05 * Double(delayCounter),usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                cell.transform = CGAffineTransform.identity
+            }, completion: nil)
+            delayCounter += 1
+        }
     }
+    
+//    func reloadWithAnimation() {
+//        UIView.transition(with: self,
+//                          duration: 0.5,
+//                          options: .transitionCrossDissolve,
+//                          animations:
+//            { () -> Void in
+//                self.reloadData()
+//        },completion: nil)
+//    }
 }
 
 extension UITableViewCell {
