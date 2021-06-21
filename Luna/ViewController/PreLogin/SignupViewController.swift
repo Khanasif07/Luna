@@ -116,8 +116,6 @@ extension SignupViewController {
         scene.emailVerificationSuccess = { [weak self] in
             guard let selff = self else { return }
             selff.gotoLoginVC()
-            AppUserDefaults.save(value: "", forKey: .defaultEmail)
-            AppUserDefaults.save(value: "", forKey: .defaultPassword)
         }
         scene.popupType = .emailVerification
         scene.titleDesc = "Email Verification"
@@ -204,12 +202,36 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
                         if Auth.auth().currentUser?.isEmailVerified ?? false{
                             self.goToProfileSetupVC()
                         }else{
-                            AppUserDefaults.save(value: "", forKey: .uid)
-                            AppUserDefaults.save(value: "", forKey: .accesstoken)
-                            FirestoreController.sendEmailVerification { (errors) -> (Void) in
-                                CommonFunctions.showToastWithMessage(errors.localizedDescription)
+//                            FirestoreController.sendEmailVerification { (errors) -> (Void) in
+//                                CommonFunctions.showToastWithMessage(errors.localizedDescription)
+//                            }
+                            //
+                            var actionCodeSettings =  ActionCodeSettings.init()
+                            actionCodeSettings.handleCodeInApp = true
+                            var components = URLComponents()
+                            
+                            let queryItemEmailName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppQueryItemEmail")
+                            let querySchemeName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppScheme")
+                            let queryUrlPrefixName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppURLPrefix")
+                            components.scheme = querySchemeName
+                            components.host = queryUrlPrefixName
+                            let emailUrlQueryItem = URLQueryItem(name: queryItemEmailName, value: self.emailTxt)
+                            components.queryItems = [emailUrlQueryItem]
+                            guard let linkUrl = components.url else { return }
+                            print("link parameter is \(linkUrl)")
+                            actionCodeSettings.url = linkUrl
+                            actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
+//                            actionCodeSettings.dynamicLinkDomain = "lunadiabetes.page.link"
+                            Auth.auth().sendSignInLink(toEmail: self.emailTxt, actionCodeSettings: actionCodeSettings) { (err) in
+                                if let err = err {
+                                    print(err.localizedDescription)
+                                    return
+                                }
+                                print("link has been sent")
+                                self.gotoEmailVerificationPopUpVC()
                             }
-                            self.gotoEmailVerificationPopUpVC()
+                            //
+//                            self.gotoEmailVerificationPopUpVC()
                         }
                     }) { (error) -> (Void)  in
                         print( error.localizedDescription)

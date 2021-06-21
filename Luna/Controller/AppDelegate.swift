@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 import Firebase
 import FirebaseMessaging
 import IQKeyboardManagerSwift
@@ -179,6 +180,28 @@ extension AppDelegate{
         print("User credential: \(credential)")
     }
     
+   
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        return userActivity.webpageURL.flatMap(handlePasswordLessSignin)!
+    }
+    
+    func handlePasswordLessSignin(_ withurl: URL)-> Bool{
+        let link = withurl.absoluteString
+        if Auth.auth().isSignIn(withEmailLink: link){
+            let email = AppUserDefaults.value(forKey: .defaultEmail).stringValue
+            Auth.auth().signIn(withEmail: email, link: link) { (result, error ) in
+                if let error = error{
+                    print(error.localizedDescription)
+                    return
+                }
+                guard let result = result else { return}
+                let uid = result.user.uid
+                print(uid)
+            }
+        }
+        return true
+    }
+    
     
 }
 
@@ -187,16 +210,6 @@ extension AppDelegate{
 extension AppDelegate {
     func application(_ app: UIApplication, open url: URL,
                      options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-//        if let scheme = url.scheme,
-//            scheme.localizedCaseInsensitiveCompare("com.tara") == .orderedSame,
-//            let view = url.host {
-//            var parameters: [String: String] = [:]
-//            URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems?.forEach {
-//                parameters[$0.name] = $0.value
-//            }
-//        }
-//        return true
-//    }
     return GIDSignIn.sharedInstance().handle(url)
     }
 }

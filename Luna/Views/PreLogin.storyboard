@@ -527,11 +527,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                                 <subviews>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ymu-vX-DZ5">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="706"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </tableView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jOm-o1-tYg">
-                                                        <rect key="frame" x="0.0" y="706" width="414" height="68"/>
+                                                        <rect key="frame" x="0.0" y="774" width="414" height="68"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="BP4-NN-OyK">
                                                                 <rect key="frame" x="20" y="16" width="374" height="40"/>
@@ -575,7 +575,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                                                     <constraint firstItem="ymu-vX-DZ5" firstAttribute="leading" secondItem="94c-8a-bkJ" secondAttribute="leading" id="OhK-fe-Ymi"/>
                                                     <constraint firstItem="jOm-o1-tYg" firstAttribute="leading" secondItem="94c-8a-bkJ" secondAttribute="leading" id="U43-ab-RvP"/>
                                                     <constraint firstItem="jOm-o1-tYg" firstAttribute="top" secondItem="ymu-vX-DZ5" secondAttribute="bottom" id="ehy-f8-OJh"/>
-                                                    <constraint firstAttribute="bottom" secondItem="jOm-o1-tYg" secondAttribute="bottom" id="nnm-SL-xeZ"/>
+                                                    <constraint firstAttribute="bottom" secondItem="jOm-o1-tYg" secondAttribute="bottom" constant="-68" id="nnm-SL-xeZ"/>
                                                     <constraint firstItem="ymu-vX-DZ5" firstAttribute="top" secondItem="94c-8a-bkJ" secondAttribute="top" id="z1c-gk-G4Y"/>
                                                 </constraints>
                                             </view>
@@ -612,6 +612,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomContainerBtmConst" destination="nnm-SL-xeZ" id="cGN-qd-vh4"/>
                         <outlet property="bottomContainerView" destination="jOm-o1-tYg" id="tUQ-aO-cWt"/>
                         <outlet property="containerScrollView" destination="kaL-XL-3nU" id="hRb-kW-Fc1"/>
                         <outlet property="messageTableView" destination="ymu-vX-DZ5" id="0PT-sQ-75Z"/>

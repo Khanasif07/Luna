@@ -34,12 +34,16 @@ class ProfileSetupVC: UIViewController {
     @IBOutlet weak var msgTxtField: UITextField!
     @IBOutlet weak var messageTableView: UITableView!
     @IBOutlet weak var bottomContainerView: UIView!
+    @IBOutlet weak var bottomContainerBtmConst: NSLayoutConstraint!
     @IBOutlet weak var containerScrollView: UIScrollView!
     
     // MARK: - Variables
     //===========================
     public var messageListing = [Message]()
     var senderName: String = ""
+    var topSafeArea: CGFloat = 0.0
+    var bottomSafeArea: CGFloat = 0.0
+
     
     // MARK: - Lifecycle
     //===========================
@@ -56,6 +60,13 @@ class ProfileSetupVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         bottomContainerView.addShadowToTopOrBottom(location: .top,color: UIColor.black16)
+        if #available(iOS 11.0, *) {
+            topSafeArea = view.safeAreaInsets.top
+            bottomSafeArea = view.safeAreaInsets.bottom
+        } else {
+            topSafeArea = topLayoutGuide.length
+            bottomSafeArea = bottomLayoutGuide.length
+        }
     }
     
     //MARK: ACTIONS
@@ -92,6 +103,7 @@ class ProfileSetupVC: UIViewController {
             }
         case 6:
             msgTxtField.keyboardType = .numberPad
+            msgTxtField.placeholder = "01/01/2000"
             let senderMessage = Message(txt, "Sender")
             self.messageListing.append(senderMessage)
             self.messageTableView.reloadData()
@@ -102,6 +114,9 @@ class ProfileSetupVC: UIViewController {
                 self.scrollMsgToBottom()
             }
         case 8:
+            msgTxtField.keyboardType = .default
+            msgTxtField.placeholder = ""
+            self.bottomContainerBtmConst.constant = (-68.0 - bottomSafeArea)
             let senderMessage = Message(txt, "Sender")
             self.messageListing.append(senderMessage)
             self.messageTableView.reloadData()
@@ -126,6 +141,8 @@ class ProfileSetupVC: UIViewController {
 extension ProfileSetupVC {
     
     private func initialSetup() {
+        bottomContainerBtmConst.constant = (-68.0 - bottomSafeArea)
+        msgTxtField.delegate = self
         containerScrollView.delegate = self
         setupTableView()
         registerNotification()
@@ -218,6 +235,7 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                 senderDecisionCell.yesBtnTapped  = {[weak self] in
                     guard let self = `self` else { return }
                     if  self.messageListing.endIndex == 3 {
+                    self.bottomContainerBtmConst.constant = 0.0
                     senderDecisionCell.yesBtn.isSelected = true
                     let message = Message("What is your first name?", "Receiver")
                     self.messageListing.append(message)
@@ -240,9 +258,10 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                 typeCell.type1BtnTapped = {[weak self] in
                     guard let self = `self` else { return }
                     if  self.messageListing.endIndex == 11 {
+                        self.bottomContainerBtmConst.constant = (-68.0 - self.bottomSafeArea)
                         typeCell.type1Btn.isSelected = true
                         let message = Message("Thank you \(self.senderName) for providing this information, now let us get the rest of the Luna system setup. Are you ready?", "Receiver")
-                    let lastMessage = Message("Yes", "Sender")
+                    let lastMessage = Message("Yes", "Sender","Type")
                     self.messageListing.append(message)
                     self.messageListing.append(lastMessage)
                     self.messageTableView.reloadData()
@@ -252,6 +271,7 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                 typeCell.type2BtnTapped = {[weak self] in
                     guard let self = `self` else { return }
                     if  self.messageListing.endIndex == 11 {
+                        self.bottomContainerBtmConst.constant = (-68.0 - self.bottomSafeArea)
                         typeCell.type2Btn.isSelected = true
                     let message = Message("Thank you \(self.senderName) for providing this information, now let us get the rest of the Luna system setup. Are you ready?", "Receiver")
                     let lastMessage = Message("Yes", "Sender","Type")
@@ -291,4 +311,48 @@ extension ProfileSetupVC: UIGestureRecognizerDelegate, UIScrollViewDelegate {
             
         }
     }
+}
+
+// MARK: - Extension For UITextFieldDelegate
+//===========================
+extension ProfileSetupVC: UITextFieldDelegate{
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        let txt = textField.text?.byRemovingLeadingTrailingWhiteSpaces ?? ""
+//        switch self.messageListing.endIndex {
+//        case 8:
+//            switch txt.count {
+//            case 2:
+//                msgTxtField.text = txt + "/"
+//            case 5:
+//                msgTxtField.text = txt + "/"
+//            default:
+//                msgTxtField.text = txt + "/"
+//            }
+//        default:
+//            msgTxtField.text = txt
+//        }
+    }
+
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let txt = textField.text?.byRemovingLeadingTrailingWhiteSpaces ?? ""
+        let currentString: NSString = textField.text! as NSString
+        let newString: NSString =
+            currentString.replacingCharacters(in: range, with: string) as NSString
+        switch self.messageListing.endIndex {
+        case 8:
+            switch txt.count {
+            case 2:
+                msgTxtField.text = txt + "/"
+            case 5:
+                msgTxtField.text = txt + "/"
+            default:
+                msgTxtField.text = txt
+            }
+            return (string.checkIfValidCharaters(.name) || string.isEmpty) && newString.length <= 10
+        default:
+            return (string.checkIfValidCharaters(.name) || string.isEmpty) && newString.length <= 25
+        }
+    }
+    
 }

@@ -33,6 +33,12 @@
 	<string>1</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
+	<key>FirebaseOpenAppQueryItemEmail</key>
+	<string>email</string>
+	<key>FirebaseOpenAppScheme</key>
+	<string>https</string>
+	<key>FirebaseOpenAppURLPrefix</key>
+	<string>lunadiabetes.page.link</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSBluetoothAlwaysUsageDescription</key>

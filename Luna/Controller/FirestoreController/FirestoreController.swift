@@ -44,8 +44,10 @@ class FirestoreController:NSObject{
                 failure(err.localizedDescription, (err as NSError).code)
             } else {
                 let uid = Auth.auth().currentUser?.uid ?? ""
-                AppUserDefaults.save(value: uid, forKey: .uid)
-                AppUserDefaults.save(value: uid, forKey: .accesstoken)
+                if Auth.auth().currentUser?.isEmailVerified ?? false {
+                    AppUserDefaults.save(value: uid, forKey: .uid)
+                    AppUserDefaults.save(value: uid, forKey: .accesstoken)
+                }
                 AppUserDefaults.save(value: withEmail, forKey: .defaultEmail)
                 AppUserDefaults.save(value: password, forKey: .defaultPassword)
                 success()
@@ -121,8 +123,10 @@ class FirestoreController:NSObject{
                 failure(err)
             } else {
                 let uid = Auth.auth().currentUser?.uid ?? ""
-                AppUserDefaults.save(value: uid, forKey: .uid)
-                AppUserDefaults.save(value: uid, forKey: .accesstoken)
+                if Auth.auth().currentUser?.isEmailVerified ?? false{
+                    AppUserDefaults.save(value: uid, forKey: .uid)
+                    AppUserDefaults.save(value: uid, forKey: .accesstoken)
+                }
                 AppUserDefaults.save(value: email, forKey: .defaultEmail)
                 AppUserDefaults.save(value: password, forKey: .defaultPassword)
 //                db.collection(ApiKey.users).document(userId).setData([ApiKey.deviceType:"iOS",

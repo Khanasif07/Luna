@@ -19,6 +19,7 @@
 		8455492D2678FFFD000CC13D /* LoginSocialTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455492B2678FFFD000CC13D /* LoginSocialTableCell.swift */; };
 		8455492E2678FFFD000CC13D /* LoginSocialTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8455492C2678FFFD000CC13D /* LoginSocialTableCell.xib */; };
 		84554932267908B9000CC13D /* PostLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84554931267908B9000CC13D /* PostLogin.storyboard */; };
+		8455A3BF26805AA80061C55F /* InfoPlistParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455A3BE26805AA80061C55F /* InfoPlistParser.swift */; };
 		84CC129A2668C822009316FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC12992668C822009316FC /* AppDelegate.swift */; };
 		84CC129C2668C822009316FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC129B2668C822009316FC /* SceneDelegate.swift */; };
 		84CC12A32668C823009316FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84CC12A22668C823009316FC /* Assets.xcassets */; };
@@ -100,6 +101,7 @@
 		8455492B2678FFFD000CC13D /* LoginSocialTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSocialTableCell.swift; sourceTree = "<group>"; };
 		8455492C2678FFFD000CC13D /* LoginSocialTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginSocialTableCell.xib; sourceTree = "<group>"; };
 		84554931267908B9000CC13D /* PostLogin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PostLogin.storyboard; sourceTree = "<group>"; };
+		8455A3BE26805AA80061C55F /* InfoPlistParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlistParser.swift; sourceTree = "<group>"; };
 		846F1A1F2678C2220034ACE0 /* GoogleService-Info-1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-1.plist"; sourceTree = "<group>"; };
 		84CC12962668C822009316FC /* Luna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Luna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84CC12992668C822009316FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -448,6 +450,7 @@
 			isa = PBXGroup;
 			children = (
 				84D1F4D92679CF4C00F131E0 /* CommonFunctions.swift */,
+				8455A3BE26805AA80061C55F /* InfoPlistParser.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -684,6 +687,7 @@
 				84FDA0AC267DCB5600AC8BE9 /* MessageReceiverCell.swift in Sources */,
 				84CC12FE2668D17A009316FC /* UICollectionView+Extension.swift in Sources */,
 				84F7BC51266F11BA006C94DA /* AppleLoginManager.swift in Sources */,
+				8455A3BF26805AA80061C55F /* InfoPlistParser.swift in Sources */,
 				84E5505A267E027A008C02F8 /* TypeTableCell.swift in Sources */,
 				84CC12D72668D005009316FC /* AppColors.swift in Sources */,
 				84CC135C2669F15F009316FC /* HomeViewController.swift in Sources */,
