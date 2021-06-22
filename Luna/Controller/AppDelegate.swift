@@ -14,7 +14,7 @@ import UserNotifications
 import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenterDelegate,GIDSignInDelegate{
+class AppDelegate: UIResponder, UIApplicationDelegate ,GIDSignInDelegate{
    
     
     public var window: UIWindow?
@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         registerPushNotification()
+        Messaging.messaging().delegate = self
         removeAllNotifications()
         AppRouter.checkAppInitializationFlow()
         return true
@@ -125,11 +126,12 @@ extension AppDelegate {
 
 //MARK:- Push Notification
 //=========================
-extension AppDelegate{
+extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-//        AppUserDefaults.save(value: deviceTokenString, forKey: .token)
+        AppUserDefaults.save(value: deviceTokenString, forKey: .token)
+        Messaging.messaging().apnsToken = deviceToken
         print("APNs device token: \(deviceTokenString)")
     }
     
@@ -166,8 +168,10 @@ extension AppDelegate{
     func applicationDidEnterBackground(_ application: UIApplication) {
     }
     
+    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
+            print(error.localizedDescription)
             return
         }
         print("User Email: \(user.profile.email ?? "No EMail")")
@@ -201,6 +205,8 @@ extension AppDelegate{
         }
         return true
     }
+    
+   
     
     
 }
