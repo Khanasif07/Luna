@@ -43,14 +43,4 @@ extension MessageReceiverCell {
     private func initialSetup() {
     }
     
-    
-//    public func configureCellWith(model: Message) {
-//        self.msgLabel.isHidden = false
-//        self.msgLabel.text = model.messageText
-//        let date = model.messageTime.dateValue()
-////        self.deliveredImgview.image = model.messageStatus < 2 ? #imageLiteral(resourceName: "icSingletick") : #imageLiteral(resourceName: "redTickOne")
-////        self.readImageView.isHidden = model.messageStatus < 2
-//        self.timeLabel.text = date.convertToTimeString()
-//    }
-    
 }

@@ -26,7 +26,7 @@
                         <rect key="frame" x="154.5" y="11" width="191.5" height="39"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello and welcome to luna" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXX-MG-dLu">
-                                <rect key="frame" x="16" y="10" width="157.5" height="17"/>
+                                <rect key="frame" x="16" y="11" width="157.5" height="17"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -35,9 +35,9 @@
                         <color key="backgroundColor" red="0.20392156862745098" green="0.20392156862745098" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="FXX-MG-dLu" firstAttribute="leading" secondItem="AVW-JG-vzv" secondAttribute="leading" constant="16" id="5Ft-eD-ccM"/>
-                            <constraint firstItem="FXX-MG-dLu" firstAttribute="top" secondItem="AVW-JG-vzv" secondAttribute="top" constant="10" id="Edw-gP-RQO"/>
+                            <constraint firstItem="FXX-MG-dLu" firstAttribute="top" secondItem="AVW-JG-vzv" secondAttribute="top" constant="11" id="Edw-gP-RQO"/>
                             <constraint firstAttribute="trailing" secondItem="FXX-MG-dLu" secondAttribute="trailing" constant="18" id="WTU-m9-6W9"/>
-                            <constraint firstAttribute="bottom" secondItem="FXX-MG-dLu" secondAttribute="bottom" constant="12" id="csR-0x-858"/>
+                            <constraint firstAttribute="bottom" secondItem="FXX-MG-dLu" secondAttribute="bottom" constant="11" id="csR-0x-858"/>
                         </constraints>
                     </view>
                 </subviews>

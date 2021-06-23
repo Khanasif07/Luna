@@ -32,7 +32,7 @@ class ProfileSetupVC: UIViewController {
     
     // MARK: - IBOutlets
     //===========================
-    @IBOutlet weak var sendBtn: UIButton!
+    @IBOutlet weak var sendBtn: AppButton!
     @IBOutlet weak var msgTxtField: UITextField!
     @IBOutlet weak var messageTableView: UITableView!
     @IBOutlet weak var bottomContainerView: UIView!
@@ -81,7 +81,8 @@ class ProfileSetupVC: UIViewController {
     
     // MARK: - IBActions
     //===========================
-    @IBAction func sendBtnTapped(_ sender: UIButton) {
+    @IBAction func sendBtnTapped(_ sender: AppButton) {
+        self.view.endEditing(true)
         guard let txt = msgTxtField.text,!txt.isEmpty else { return }
         self.msgTxtField.text = ""
         switch self.messageListing.endIndex {
@@ -137,6 +138,7 @@ extension ProfileSetupVC {
     
     private func initialSetup() {
         bottomContainerBtmConst.constant = (-68.0 - bottomSafeArea)
+        sendBtn.isEnabledWithoutBackground = false
         msgTxtField.delegate = self
         containerScrollView.delegate = self
         setupTableView()
@@ -358,12 +360,13 @@ extension ProfileSetupVC: UITextFieldDelegate{
             default:
                 msgTxtField.text = txt
             }
+            sendBtn.isEnabledWithoutBackground = !(newString.length != 10)
             return (string.checkIfValidCharaters(.name) || string.isEmpty) && newString.length <= 10
         default:
+            sendBtn.isEnabledWithoutBackground = !(newString.length == 0)
             return (string.checkIfValidCharaters(.name) || string.isEmpty) && newString.length <= 25
         }
     }
-    
 }
 
 

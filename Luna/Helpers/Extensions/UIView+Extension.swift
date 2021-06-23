@@ -992,12 +992,10 @@ class AppButton: UIButton {
         }
     }
     
-    open  var isBorderSelected: Bool = false{
+    open  var isEnabledWithoutBackground: Bool = false{
         didSet {
-            backgroundColor = isBorderSelected ? .white : AppColors.appPinkColor
-            setTitleColor(isBorderSelected ? AppColors.fontTertiaryColor : AppColors.fontTertiaryColor, for: .normal)
-            borderColor = AppColors.fontTertiaryColor
-            borderWidth = 1.0
+            alpha = isEnabledWithoutBackground ? 1.0 : 0.5
+            isUserInteractionEnabled = isEnabledWithoutBackground ? true : false
         }
     }
 }

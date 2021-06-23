@@ -535,7 +535,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                                                                         <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2r-0S-DvU">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2r-0S-DvU" customClass="AppButton" customModule="Luna" customModuleProvider="target">
                                                                         <rect key="frame" x="334" y="0.0" width="40" height="40"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" secondItem="N2r-0S-DvU" secondAttribute="height" id="XSv-CR-xuI"/>
@@ -543,7 +543,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                                                                         </constraints>
                                                                         <state key="normal" image="send"/>
                                                                         <connections>
-                                                                            <action selector="sendBtnTapped:" destination="p8z-xT-HIy" eventType="touchUpInside" id="NCt-BM-5gj"/>
+                                                                            <action selector="sendBtnTapped:" destination="p8z-xT-HIy" eventType="touchUpInside" id="8TH-nh-2Ji"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
@@ -607,7 +607,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                         <outlet property="containerScrollView" destination="kaL-XL-3nU" id="hRb-kW-Fc1"/>
                         <outlet property="messageTableView" destination="ymu-vX-DZ5" id="0PT-sQ-75Z"/>
                         <outlet property="msgTxtField" destination="Fyo-uS-ocG" id="iEA-GV-7sN"/>
-                        <outlet property="sendBtn" destination="N2r-0S-DvU" id="P9C-p7-U5e"/>
+                        <outlet property="sendBtn" destination="N2r-0S-DvU" id="L3i-sW-7em"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JUY-t5-1cd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

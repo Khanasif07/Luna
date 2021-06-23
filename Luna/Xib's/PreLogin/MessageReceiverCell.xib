@@ -26,7 +26,7 @@
                         <rect key="frame" x="20" y="10" width="228.5" height="45"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello and welcome to luna.Hello and welcome to luna." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HYL-MR-oyM">
-                                <rect key="frame" x="16" y="10" width="194.5" height="23"/>
+                                <rect key="frame" x="16" y="11" width="194.5" height="23"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -34,8 +34,8 @@
                         </subviews>
                         <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="HYL-MR-oyM" firstAttribute="top" secondItem="zsD-Ok-N60" secondAttribute="top" constant="10" id="Sk5-Z8-Acq"/>
-                            <constraint firstAttribute="bottom" secondItem="HYL-MR-oyM" secondAttribute="bottom" constant="12" id="Vae-kg-gFI"/>
+                            <constraint firstItem="HYL-MR-oyM" firstAttribute="top" secondItem="zsD-Ok-N60" secondAttribute="top" constant="11" id="Sk5-Z8-Acq"/>
+                            <constraint firstAttribute="bottom" secondItem="HYL-MR-oyM" secondAttribute="bottom" constant="11" id="Vae-kg-gFI"/>
                             <constraint firstItem="HYL-MR-oyM" firstAttribute="leading" secondItem="zsD-Ok-N60" secondAttribute="leading" constant="16" id="gPR-4C-kJW"/>
                             <constraint firstAttribute="trailing" secondItem="HYL-MR-oyM" secondAttribute="trailing" constant="18" id="oru-bs-9xm"/>
                         </constraints>
