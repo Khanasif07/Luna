@@ -75,10 +75,12 @@ enum AppUserDefaults {
 extension AppUserDefaults {
     
     enum Key : String, CaseIterable {
+        case authVerificationID
         case authorization
         case accesstoken
         case isTermsAndConditionSelected
         case isBiometricSelected
+        case isProfileStepCompleted
         case isGuestMode
         case tutorialDisplayed
         case userType

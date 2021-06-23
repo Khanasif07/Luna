@@ -32,7 +32,11 @@ enum AppRouter {
     //===========================
     static func checkAppInitializationFlow() {
         if isUserLoggedin {
-            AppRouter.goToProfileSetupVC()
+            if   AppUserDefaults.value(forKey: .isProfileStepCompleted).boolValue{
+                AppRouter.gotoSettingVC()
+            }else{
+                AppRouter.goToProfileSetupVC()
+            }
         } else {
             if AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue {
                 AppRouter.goToSignUpVC()
@@ -61,6 +65,11 @@ enum AppRouter {
     static func goToBLEVC(){
         let bleVC = BLEIntegrationVC.instantiate(fromAppStoryboard: .PostLogin)
         setAsWindowRoot(bleVC)
+    }
+    
+    static func gotoSettingVC(){
+        let vc = SettingsVC.instantiate(fromAppStoryboard: .PostLogin)
+        setAsWindowRoot(vc)
     }
       
     

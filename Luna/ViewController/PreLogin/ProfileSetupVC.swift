@@ -200,6 +200,11 @@ extension ProfileSetupVC {
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
     
+    private func gotoSettingVC(){
+        let vc = SettingsVC.instantiate(fromAppStoryboard: .PostLogin)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
 
@@ -279,6 +284,10 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                     self.messageListing.append(lastMessage)
                     self.messageTableView.reloadData()
                     self.scrollMsgToBottom()
+                    }
+                    if  self.messageListing.endIndex == 13 {
+                        AppUserDefaults.save(value: true, forKey: .isProfileStepCompleted)
+                        AppRouter.gotoSettingVC()
                     }
                 }
                 return typeCell

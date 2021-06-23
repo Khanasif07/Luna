@@ -20,6 +20,9 @@
 		8455492E2678FFFD000CC13D /* LoginSocialTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8455492C2678FFFD000CC13D /* LoginSocialTableCell.xib */; };
 		84554932267908B9000CC13D /* PostLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84554931267908B9000CC13D /* PostLogin.storyboard */; };
 		8455A3BF26805AA80061C55F /* InfoPlistParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455A3BE26805AA80061C55F /* InfoPlistParser.swift */; };
+		8455A3C226820E010061C55F /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455A3C126820E010061C55F /* SettingsVC.swift */; };
+		8455A3C7268211770061C55F /* SettingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455A3C5268211770061C55F /* SettingTableCell.swift */; };
+		8455A3C8268211770061C55F /* SettingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8455A3C6268211770061C55F /* SettingTableCell.xib */; };
 		84CC129A2668C822009316FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC12992668C822009316FC /* AppDelegate.swift */; };
 		84CC129C2668C822009316FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC129B2668C822009316FC /* SceneDelegate.swift */; };
 		84CC12A32668C823009316FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84CC12A22668C823009316FC /* Assets.xcassets */; };
@@ -102,6 +105,9 @@
 		8455492C2678FFFD000CC13D /* LoginSocialTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginSocialTableCell.xib; sourceTree = "<group>"; };
 		84554931267908B9000CC13D /* PostLogin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PostLogin.storyboard; sourceTree = "<group>"; };
 		8455A3BE26805AA80061C55F /* InfoPlistParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlistParser.swift; sourceTree = "<group>"; };
+		8455A3C126820E010061C55F /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		8455A3C5268211770061C55F /* SettingTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableCell.swift; sourceTree = "<group>"; };
+		8455A3C6268211770061C55F /* SettingTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTableCell.xib; sourceTree = "<group>"; };
 		846F1A1F2678C2220034ACE0 /* GoogleService-Info-1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-1.plist"; sourceTree = "<group>"; };
 		84CC12962668C822009316FC /* Luna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Luna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84CC12992668C822009316FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -224,6 +230,7 @@
 			children = (
 				84CC135B2669F15F009316FC /* HomeViewController.swift */,
 				84F819CD267B6FE000A4C758 /* BLEIntegrationVC.swift */,
+				8455A3C126820E010061C55F /* SettingsVC.swift */,
 			);
 			path = PostLogin;
 			sourceTree = "<group>";
@@ -231,6 +238,7 @@
 		845549242678E07C000CC13D /* Xib's */ = {
 			isa = PBXGroup;
 			children = (
+				8455A3C426820EA30061C55F /* PostLogin */,
 				845549252678FA9E000CC13D /* PreLogin */,
 			);
 			path = "Xib's";
@@ -253,6 +261,15 @@
 				84E55059267E027A008C02F8 /* TypeTableCell.xib */,
 			);
 			path = PreLogin;
+			sourceTree = "<group>";
+		};
+		8455A3C426820EA30061C55F /* PostLogin */ = {
+			isa = PBXGroup;
+			children = (
+				8455A3C5268211770061C55F /* SettingTableCell.swift */,
+				8455A3C6268211770061C55F /* SettingTableCell.xib */,
+			);
+			path = PostLogin;
 			sourceTree = "<group>";
 		};
 		846F1A1B2678BFFE0034ACE0 /* Certificates */ = {
@@ -574,6 +591,7 @@
 				84FDA0AD267DCB5600AC8BE9 /* MessageReceiverCell.xib in Resources */,
 				8455492E2678FFFD000CC13D /* LoginSocialTableCell.xib in Resources */,
 				84D1F4F72679D52700F131E0 /* SF-Pro-Display-Semibold.otf in Resources */,
+				8455A3C8268211770061C55F /* SettingTableCell.xib in Resources */,
 				84D1F4F22679D52700F131E0 /* SF-Pro-Display-Light.otf in Resources */,
 				84D1F4FF2679D52700F131E0 /* SF-Pro-Display-ThinItalic.otf in Resources */,
 				845549292678FAEF000CC13D /* SignUpTopTableCell.xib in Resources */,
@@ -656,6 +674,7 @@
 				84CC12D32668CFE9009316FC /* ApiKeys.swift in Sources */,
 				84FDA0B1267DE8B600AC8BE9 /* DecisionCell.swift in Sources */,
 				84CC12EC2668D0B8009316FC /* UIColorExtension.swift in Sources */,
+				8455A3C226820E010061C55F /* SettingsVC.swift in Sources */,
 				8432A19F2672319B00859B47 /* BiometricIDAuth.swift in Sources */,
 				84CC12E92668D083009316FC /* UITableView+ UITableViewCellExtension.swift in Sources */,
 				84FDA0A3267DC5D700AC8BE9 /* ProfileSetupVC.swift in Sources */,
@@ -696,6 +715,7 @@
 				8455492D2678FFFD000CC13D /* LoginSocialTableCell.swift in Sources */,
 				84CC12F52668D10E009316FC /* UILabelExtension.swift in Sources */,
 				84CC129C2668C822009316FC /* SceneDelegate.swift in Sources */,
+				8455A3C7268211770061C55F /* SettingTableCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

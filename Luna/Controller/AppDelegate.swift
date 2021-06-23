@@ -132,6 +132,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
         AppUserDefaults.save(value: deviceTokenString, forKey: .token)
         Messaging.messaging().apnsToken = deviceToken
+        Auth.auth().setAPNSToken(deviceToken, type: .sandbox)
         print("APNs device token: \(deviceTokenString)")
     }
     
@@ -146,6 +147,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
     
     func application(_ application: UIApplication,didReceiveRemoteNotification userInfo: [AnyHashable: Any],fetchCompletionHandler completionHandler:@escaping (UIBackgroundFetchResult) -> Void) {
         
+        if Auth.auth().canHandleNotification(userInfo) {
+            completionHandler(.noData)
+            return
+        }
+       // handleNotification(userInfo)
         let state : UIApplication.State = application.applicationState
         if (state == .inactive || state == .background) {
             print("background")

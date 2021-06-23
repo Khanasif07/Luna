@@ -12,6 +12,8 @@ class SignUpTopTableCell: UITableViewCell {
     var signUpBtnTapped: ((UIButton)->())?
     var forgotPassBtnTapped: ((UIButton)->())?
     
+    @IBOutlet weak var phoneTxtField: AppTextField!
+    @IBOutlet weak var phoneNumberView: UIView!
     @IBOutlet weak var forgotPassBtn: UIButton!
     @IBOutlet weak var subTitleLbl: UILabel!
     @IBOutlet weak var titleLbl: UILabel!
@@ -35,7 +37,7 @@ class SignUpTopTableCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        [emailIdTxtField,passTxtField].forEach { (txtField) in
+        [emailIdTxtField,passTxtField,phoneNumberView].forEach { (txtField) in
             txtField?.layer.cornerRadius = 8.0
             txtField?.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         }
@@ -43,6 +45,7 @@ class SignUpTopTableCell: UITableViewCell {
     }
     
     public func setUpTextField(){
+        self.phoneTxtField.keyboardType = .numberPad
         self.passTxtField.placeholder = LocalizedString.password.localized
         self.emailIdTxtField.placeholder = LocalizedString.emailID.localized
         self.signUpBtn.backgroundColor = AppColors.primaryBlueColor

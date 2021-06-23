@@ -85,7 +85,8 @@ extension SignupViewController {
     }
     
     private func signUpBtnStatus()-> Bool{
-        return !self.emailTxt.isEmpty && !self.passTxt.isEmpty
+//        return !self.emailTxt.isEmpty && !self.passTxt.isEmpty
+        return true
     }
     
     func reloadUser(_ callback: ((Error?) -> ())? = nil){
@@ -194,7 +195,35 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
             cell.signUpBtnTapped = { [weak self]  (sender) in
                 guard let `self` = self else { return }
                 CommonFunctions.showActivityLoader()
-                    FirestoreController.createUserNode(userId: "", email: self.emailTxt, password: self.passTxt, name: "", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
+//                Auth.auth().languageCode = "en"
+//                let phoneNumber = "+1 889-688-9688"
+//                PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
+//                  if let error = error {
+//                    print(error.localizedDescription)
+//                    CommonFunctions.showToastWithMessage(error.localizedDescription)
+//                    return
+//                  }
+//                    AppUserDefaults.save(value: verificationID, forKey: .authVerificationID)
+//                    print(verificationID)
+//                    let verificationCode = "123456"
+//                    let credential = PhoneAuthProvider.provider().credential(withVerificationID: AppUserDefaults.value(forKey: .authVerificationID).stringValue, verificationCode: verificationCode)
+//
+//                    Auth.auth().signIn(with: credential) { (authResult, error) in
+//                      if let error = error {
+//                        let authError = error as NSError
+//                        print(authError.description)
+//                        return
+//                      }
+//                        let currentUserInstance = Auth.auth().currentUser
+//                        AppUserDefaults.save(value: currentUserInstance?.uid, forKey: .uid)
+//                        CommonFunctions.hideActivityLoader()
+//                        print("Sign in using the verificationID and the code sent to the user")
+//
+//                    }
+//                  // Sign in using the verificationID and the code sent to the user
+//                  // ...
+//                }
+                FirestoreController.createUserNode(userId: "", email: self.emailTxt, password: self.passTxt, name: "", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
                         self.reloadUser { (reloadMsg) in
                             print(reloadMsg?.localizedDescription ?? "")
                         }
@@ -205,7 +234,7 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
                             FirestoreController.sendEmailVerification { (errors) -> (Void) in
                                 CommonFunctions.showToastWithMessage(errors.localizedDescription)
                             }
-                            //
+                            
 //                            var actionCodeSettings =  ActionCodeSettings.init()
 //                            actionCodeSettings.handleCodeInApp = true
 //                            var components = URLComponents()
@@ -230,7 +259,7 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
 //                                print("link has been sent")
 //                                self.gotoEmailVerificationPopUpVC()
 //                            }
-                            //
+                            
                             self.gotoEmailVerificationPopUpVC()
                         }
                     }) { (error) -> (Void)  in

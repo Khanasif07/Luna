@@ -502,20 +502,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jOQ-K1-bhH">
-                                                <rect key="frame" x="332" y="4" width="62" height="36"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <state key="normal" title="Logout"/>
-                                                <connections>
-                                                    <action selector="logoutBtnAction:" destination="p8z-xT-HIy" eventType="touchUpInside" id="JZD-3l-Kw1"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="I0v-YV-Xca" firstAttribute="leading" secondItem="qyg-fs-Qdz" secondAttribute="leading" constant="20" id="5wx-YC-bOK"/>
-                                            <constraint firstItem="jOQ-K1-bhH" firstAttribute="centerY" secondItem="qyg-fs-Qdz" secondAttribute="centerY" id="LL8-Xb-WCs"/>
-                                            <constraint firstAttribute="trailing" secondItem="jOQ-K1-bhH" secondAttribute="trailing" constant="20" id="Nzc-LL-IDN"/>
                                             <constraint firstItem="I0v-YV-Xca" firstAttribute="centerY" secondItem="qyg-fs-Qdz" secondAttribute="centerY" id="hmk-EI-b62"/>
                                             <constraint firstAttribute="height" constant="44" id="xkl-Pw-RNc"/>
                                         </constraints>

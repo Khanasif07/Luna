@@ -8,6 +8,11 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-Pro-Display-Semibold.otf">
+            <string>SFProDisplay-Semibold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Home View Controller-->
         <scene sceneID="H7W-P7-97A">
@@ -256,11 +261,96 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fMr-N2-juQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="853" y="178"/>
+            <point key="canvasLocation" x="846" y="72"/>
+        </scene>
+        <!--SettingsVC-->
+        <scene sceneID="YhL-iz-gTV">
+            <objects>
+                <viewController storyboardIdentifier="SettingsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fwn-TY-XhP" customClass="SettingsVC" customModule="Luna" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Iik-js-72b">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ana-mf-IHz">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sni-B3-Adi">
+                                        <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="faG-ym-N0H">
+                                                <rect key="frame" x="20" y="5" width="40" height="40"/>
+                                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="SWh-Kr-G4E"/>
+                                                    <constraint firstAttribute="width" secondItem="faG-ym-N0H" secondAttribute="height" id="ly8-Ue-MlX"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Brp-NK-kRn">
+                                                <rect key="frame" x="20" y="5" width="40" height="40"/>
+                                                <state key="normal" image="back"/>
+                                                <connections>
+                                                    <action selector="backBtnAction:" destination="fwn-TY-XhP" eventType="touchUpInside" id="V5S-el-RvR"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4UY-rN-9xl">
+                                                <rect key="frame" x="174" y="14.5" width="66.5" height="21.5"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="0Sz-Kd-4TQ"/>
+                                            <constraint firstItem="4UY-rN-9xl" firstAttribute="centerX" secondItem="sni-B3-Adi" secondAttribute="centerX" id="1nj-En-3Sd"/>
+                                            <constraint firstItem="Brp-NK-kRn" firstAttribute="leading" secondItem="faG-ym-N0H" secondAttribute="leading" id="2yM-yM-ShJ"/>
+                                            <constraint firstItem="faG-ym-N0H" firstAttribute="leading" secondItem="sni-B3-Adi" secondAttribute="leading" constant="20" id="9Nx-fg-WvL"/>
+                                            <constraint firstItem="Brp-NK-kRn" firstAttribute="bottom" secondItem="faG-ym-N0H" secondAttribute="bottom" id="AKv-Eh-9Qt"/>
+                                            <constraint firstItem="faG-ym-N0H" firstAttribute="centerY" secondItem="sni-B3-Adi" secondAttribute="centerY" id="ZqF-T2-50Y"/>
+                                            <constraint firstItem="4UY-rN-9xl" firstAttribute="centerY" secondItem="sni-B3-Adi" secondAttribute="centerY" id="et4-Pj-i2a"/>
+                                            <constraint firstItem="Brp-NK-kRn" firstAttribute="top" secondItem="faG-ym-N0H" secondAttribute="top" id="gYs-zx-ArL"/>
+                                            <constraint firstItem="Brp-NK-kRn" firstAttribute="trailing" secondItem="faG-ym-N0H" secondAttribute="trailing" id="vcA-fj-LQi"/>
+                                        </constraints>
+                                    </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Zgn-IR-8nv">
+                                        <rect key="frame" x="0.0" y="104" width="414" height="792"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="Zgn-IR-8nv" firstAttribute="top" secondItem="sni-B3-Adi" secondAttribute="bottom" constant="10" id="J6C-Ew-Ufl"/>
+                                    <constraint firstAttribute="bottom" secondItem="Zgn-IR-8nv" secondAttribute="bottom" id="VcF-fi-P64"/>
+                                    <constraint firstAttribute="trailing" secondItem="Zgn-IR-8nv" secondAttribute="trailing" id="bI2-zO-BWf"/>
+                                    <constraint firstAttribute="trailing" secondItem="sni-B3-Adi" secondAttribute="trailing" id="chi-ig-sRt"/>
+                                    <constraint firstItem="Zgn-IR-8nv" firstAttribute="leading" secondItem="Ana-mf-IHz" secondAttribute="leading" id="e5d-Fw-Y5G"/>
+                                    <constraint firstItem="sni-B3-Adi" firstAttribute="leading" secondItem="Ana-mf-IHz" secondAttribute="leading" id="hfc-7l-c18"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Cej-Fk-lHw"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Cej-Fk-lHw" firstAttribute="trailing" secondItem="Ana-mf-IHz" secondAttribute="trailing" id="9IN-5g-X32"/>
+                            <constraint firstAttribute="bottom" secondItem="Ana-mf-IHz" secondAttribute="bottom" id="MvG-fg-TFe"/>
+                            <constraint firstItem="Ana-mf-IHz" firstAttribute="leading" secondItem="Cej-Fk-lHw" secondAttribute="leading" id="WON-5P-9PY"/>
+                            <constraint firstItem="sni-B3-Adi" firstAttribute="top" secondItem="Cej-Fk-lHw" secondAttribute="top" id="jgk-pv-rcb"/>
+                            <constraint firstItem="Ana-mf-IHz" firstAttribute="top" secondItem="Iik-js-72b" secondAttribute="top" id="vBa-C6-VWn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backView" destination="faG-ym-N0H" id="lvo-ZC-80R"/>
+                        <outlet property="settingTableView" destination="Zgn-IR-8nv" id="1I6-x7-cqL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SnB-xd-8gM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1876.8115942028987" y="53.571428571428569"/>
         </scene>
     </scenes>
     <resources>
         <image name="Car" width="1072" height="800"/>
+        <image name="back" width="40" height="40"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
