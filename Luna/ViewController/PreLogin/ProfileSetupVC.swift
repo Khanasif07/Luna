@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 import FirebaseAuth
 import Firebase
+
 //MARK : - Message
 //================
 struct Message{
@@ -79,13 +81,6 @@ class ProfileSetupVC: UIViewController {
     
     // MARK: - IBActions
     //===========================
-    @IBAction func logoutBtnAction(_ sender: Any) {
-        FirestoreController.logOut { (successMsg) in
-            self.performCleanUp()
-            AppRouter.goToSignUpVC()
-        }
-    }
-    
     @IBAction func sendBtnTapped(_ sender: UIButton) {
         guard let txt = msgTxtField.text,!txt.isEmpty else { return }
         self.msgTxtField.text = ""
@@ -160,6 +155,9 @@ extension ProfileSetupVC {
        private func setupTData() {
         self.messageListing = [Message("Hello and welcome to Luna !", "Receiver"),Message("Do you have 15 minutes now to set up the system ?", "Receiver"),Message("", "Sender","Decision")]
         self.messageTableView.reloadWithAnimation()
+        if  AppUserDefaults.value(forKey: .isBiometricSelected).boolValue{}else{
+            self.showAlertForBiometric()
+        }
        }
     
     private func registerNotification(){
@@ -191,18 +189,32 @@ extension ProfileSetupVC {
         }
     }
     
-    private func performCleanUp() {
-        let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
-        let isBiometricSelected  = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
-        AppUserDefaults.removeAllValues()
-        AppUserDefaults.save(value: isBiometricSelected, forKey: .isBiometricSelected)
-        AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
-        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-    }
-    
     private func gotoSettingVC(){
         let vc = SettingsVC.instantiate(fromAppStoryboard: .PostLogin)
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func showAlertForBiometric(){
+        var bioMetricReason = ""
+        var biometric = ""
+        if hasTopNotch {
+            bioMetricReason = LocalizedString.allowFaceId.localized
+            biometric =  LocalizedString.faceID.localized
+        } else {
+            bioMetricReason = LocalizedString.allowTouchId.localized
+            biometric =  LocalizedString.touchID.localized
+        }
+        self.showAlertWithAction(title: bioMetricReason, msg: "Use \(biometric) to sign into Luna without entering your password.", cancelTitle: "Don’t Allow", actionTitle: "Allow") {
+            let email = AppUserDefaults.value(forKey: .defaultEmail).stringValue
+            let password = AppUserDefaults.value(forKey: .defaultPassword).stringValue
+            KeychainWrapper.standard.set(email, forKey: ApiKey.email)
+            KeychainWrapper.standard.set(password, forKey: ApiKey.password)
+            AppUserDefaults.save(value: true, forKey: .isBiometricSelected)
+        } cancelcompletion: {
+            KeychainWrapper.standard.set("", forKey: ApiKey.email)
+            KeychainWrapper.standard.set("", forKey: ApiKey.password)
+            AppUserDefaults.save(value: true, forKey: .isBiometricSelected)
+        }
     }
     
 }
@@ -275,6 +287,10 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                 }
                 typeCell.type2BtnTapped = {[weak self] in
                     guard let self = `self` else { return }
+                    if  self.messageListing.endIndex == 13 {
+                        AppUserDefaults.save(value: true, forKey: .isProfileStepCompleted)
+                        AppRouter.gotoSettingVC()
+                    }
                     if  self.messageListing.endIndex == 11 {
                         self.bottomContainerBtmConst.constant = (-68.0 - self.bottomSafeArea)
                         typeCell.type2Btn.isSelected = true
@@ -284,10 +300,6 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                     self.messageListing.append(lastMessage)
                     self.messageTableView.reloadData()
                     self.scrollMsgToBottom()
-                    }
-                    if  self.messageListing.endIndex == 13 {
-                        AppUserDefaults.save(value: true, forKey: .isProfileStepCompleted)
-                        AppRouter.gotoSettingVC()
                     }
                 }
                 return typeCell
@@ -327,19 +339,7 @@ extension ProfileSetupVC: UIGestureRecognizerDelegate, UIScrollViewDelegate {
 extension ProfileSetupVC: UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         let txt = textField.text?.byRemovingLeadingTrailingWhiteSpaces ?? ""
-//        switch self.messageListing.endIndex {
-//        case 8:
-//            switch txt.count {
-//            case 2:
-//                msgTxtField.text = txt + "/"
-//            case 5:
-//                msgTxtField.text = txt + "/"
-//            default:
-//                msgTxtField.text = txt + "/"
-//            }
-//        default:
-//            msgTxtField.text = txt
-//        }
+        print(txt)
     }
 
     
@@ -365,3 +365,5 @@ extension ProfileSetupVC: UITextFieldDelegate{
     }
     
 }
+
+

@@ -85,8 +85,7 @@ extension SignupViewController {
     }
     
     private func signUpBtnStatus()-> Bool{
-//        return !self.emailTxt.isEmpty && !self.passTxt.isEmpty
-        return true
+        return !self.emailTxt.isEmpty && !self.passTxt.isEmpty
     }
     
     func reloadUser(_ callback: ((Error?) -> ())? = nil){
@@ -195,34 +194,6 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
             cell.signUpBtnTapped = { [weak self]  (sender) in
                 guard let `self` = self else { return }
                 CommonFunctions.showActivityLoader()
-//                Auth.auth().languageCode = "en"
-//                let phoneNumber = "+1 889-688-9688"
-//                PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
-//                  if let error = error {
-//                    print(error.localizedDescription)
-//                    CommonFunctions.showToastWithMessage(error.localizedDescription)
-//                    return
-//                  }
-//                    AppUserDefaults.save(value: verificationID, forKey: .authVerificationID)
-//                    print(verificationID)
-//                    let verificationCode = "123456"
-//                    let credential = PhoneAuthProvider.provider().credential(withVerificationID: AppUserDefaults.value(forKey: .authVerificationID).stringValue, verificationCode: verificationCode)
-//
-//                    Auth.auth().signIn(with: credential) { (authResult, error) in
-//                      if let error = error {
-//                        let authError = error as NSError
-//                        print(authError.description)
-//                        return
-//                      }
-//                        let currentUserInstance = Auth.auth().currentUser
-//                        AppUserDefaults.save(value: currentUserInstance?.uid, forKey: .uid)
-//                        CommonFunctions.hideActivityLoader()
-//                        print("Sign in using the verificationID and the code sent to the user")
-//
-//                    }
-//                  // Sign in using the verificationID and the code sent to the user
-//                  // ...
-//                }
                 FirestoreController.createUserNode(userId: "", email: self.emailTxt, password: self.passTxt, name: "", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
                         self.reloadUser { (reloadMsg) in
                             print(reloadMsg?.localizedDescription ?? "")
@@ -231,36 +202,30 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
                         if Auth.auth().currentUser?.isEmailVerified ?? false{
                             self.goToProfileSetupVC()
                         }else{
-                            FirestoreController.sendEmailVerification { (errors) -> (Void) in
-                                CommonFunctions.showToastWithMessage(errors.localizedDescription)
-                            }
-                            
-//                            var actionCodeSettings =  ActionCodeSettings.init()
-//                            actionCodeSettings.handleCodeInApp = true
-//                            var components = URLComponents()
-//
-//                            let queryItemEmailName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppQueryItemEmail")
-//                            let querySchemeName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppScheme")
-//                            let queryUrlPrefixName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppURLPrefix")
-//                            components.scheme = querySchemeName
-//                            components.host = queryUrlPrefixName
-//                            let emailUrlQueryItem = URLQueryItem(name: queryItemEmailName, value: self.emailTxt)
-//                            components.queryItems = [emailUrlQueryItem]
-//                            guard let linkUrl = components.url else { return }
-//                            print("link parameter is \(linkUrl)")
-//                            actionCodeSettings.url = linkUrl
-//                            actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
-////                            actionCodeSettings.dynamicLinkDomain = "lunadiabetes.page.link"
-//                            Auth.auth().sendSignInLink(toEmail: self.emailTxt, actionCodeSettings: actionCodeSettings) { (err) in
-//                                if let err = err {
-//                                    print(err.localizedDescription)
-//                                    return
-//                                }
-//                                print("link has been sent")
-//                                self.gotoEmailVerificationPopUpVC()
-//                            }
-                            
-                            self.gotoEmailVerificationPopUpVC()
+                            let actionCodeSettings =  ActionCodeSettings.init()
+                            actionCodeSettings.handleCodeInApp = true
+                            var components = URLComponents()
+                            let queryItemEmailName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppQueryItemEmail")
+                            let querySchemeName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppScheme")
+                            let queryUrlPrefixName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppURLPrefix")
+                            components.scheme = querySchemeName
+                            components.host = queryUrlPrefixName
+                            let emailUrlQueryItem = URLQueryItem(name: queryItemEmailName, value: self.emailTxt)
+                            components.queryItems = [emailUrlQueryItem]
+                            guard let linkUrl = components.url else { return }
+                            print("link parameter is \(linkUrl)")
+                            actionCodeSettings.url = linkUrl
+                            actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
+                            Auth.auth().currentUser?.sendEmailVerification(with: actionCodeSettings, completion: { (err) in
+                                if let err = err {
+                                    print(err.localizedDescription)
+                                    CommonFunctions.showToastWithMessage(err.localizedDescription)
+                                    return
+                                }
+                                DispatchQueue.main.async {
+                                    self.gotoEmailVerificationPopUpVC()
+                                }
+                            })
                         }
                     }) { (error) -> (Void)  in
                         print( error.localizedDescription)
@@ -433,6 +398,7 @@ extension SignupViewController: ASAuthorizationControllerDelegate,ASAuthorizatio
                                                               rawNonce: nonce)
             
             // Sign in with Firebase
+            CommonFunctions.showActivityLoader()
             Auth.auth().signIn(with: firebaseCredential) { (authResult, error) in
                 
                 if let error = error {
@@ -444,6 +410,7 @@ extension SignupViewController: ASAuthorizationControllerDelegate,ASAuthorizatio
                 AppUserDefaults.save(value: uid, forKey: .accesstoken)
                 AppUserDefaults.save(value: self.emailTxt, forKey: .defaultEmail)
                 AppUserDefaults.save(value: self.passTxt, forKey: .defaultPassword)
+                CommonFunctions.hideActivityLoader()
                 DispatchQueue.main.async {
                     self.self.goToProfileSetupVC()
                 }
@@ -477,6 +444,7 @@ extension SignupViewController: GIDSignInDelegate {
         if error != nil {
             return
         }
+        CommonFunctions.showActivityLoader()
         print("User Email: \(user.profile.email ?? "No EMail")")
         print("User Name: \(user.profile.name ?? "No Name")")
         print("User FaMILYNAME: \(user.profile.familyName ?? "No Name")")
@@ -487,10 +455,14 @@ extension SignupViewController: GIDSignInDelegate {
         // Authenticate with Firebase using the credential object
         Auth.auth().signIn(with: credential) { (authResult, error) in
             if let error = error {
+                CommonFunctions.hideActivityLoader()
                 print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
             }
             print("post notification after user successfully sign in")
-            self.goToProfileSetupVC()
+            CommonFunctions.hideActivityLoader()
+            DispatchQueue.main.async {
+                self.self.goToProfileSetupVC()
+            }
 //            FirestoreController.setFirebaseData(userId: user.userID, email: user.profile.email, password: "", name: user.profile.name, imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
 //                print("Success")
 //            }) { (error) -> (Void) in

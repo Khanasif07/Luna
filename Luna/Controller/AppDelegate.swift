@@ -12,6 +12,8 @@ import FirebaseMessaging
 import IQKeyboardManagerSwift
 import UserNotifications
 import GoogleSignIn
+import FirebaseFirestore
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate ,GIDSignInDelegate{
@@ -172,6 +174,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
+        
     }
     
     
@@ -192,7 +195,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
     
    
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        return userActivity.webpageURL.flatMap(handlePasswordLessSignin)!
+        return userActivity.webpageURL.flatMap(handleVerificationLink)!
     }
     
     func handlePasswordLessSignin(_ withurl: URL)-> Bool{
@@ -212,7 +215,50 @@ extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
         return true
     }
     
-   
+    func handleVerificationLink(_ url: URL?) -> Bool {
+        guard let url = url else { return false }
+        let deepLinkUrl = AppDelegate.queryParameters(from: url)
+        if let outerLinkString = deepLinkUrl?["link"] {
+            if let deeplinkUrl = URL(string: outerLinkString) {
+                if let oobCode = deeplinkUrl.getQueryString(parameter: "oobCode"){
+                    Auth.auth().applyActionCode(oobCode) { error in
+                        if let error = error as NSError? {
+                            print(error.localizedDescription)
+                        } else {
+                            self.reloadUser { (reloadMsg) in
+                                print(reloadMsg?.localizedDescription ?? "")
+                            }
+                            print("Email was successfully verified")
+                        }
+                    }
+                }
+            }
+        }
+        return true
+    }
+    
+    
+    static func queryParameters(from url: URL) -> [String: String]? {
+        let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        var queryParams: [String : String]? = nil
+        if let components = urlComponents?.queryItems {
+            queryParams = [String: String]()
+            for queryItem in components {
+                if queryItem.value == nil {
+                    continue
+                }
+                queryParams?[queryItem.name] = queryItem.value
+            }
+        }
+        return queryParams
+    }
+    
+    func reloadUser(_ callback: ((Error?) -> ())? = nil){
+        Auth.auth().currentUser?.reload(completion: { (error) in
+            callback?(error)
+        })
+    }
+    
     
     
 }
@@ -224,4 +270,16 @@ extension AppDelegate {
                      options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
     return GIDSignIn.sharedInstance().handle(url)
     }
+}
+
+//MARK:- URL Extension
+//=========================
+extension URL {
+    func getQueryString(parameter: String) -> String? {
+        if let urlComponents = URLComponents(string: self.absoluteString) {
+            return urlComponents.queryItems?.filter({ item in item.name == parameter }).first?.value
+        }
+        return nil
+    }
+    
 }

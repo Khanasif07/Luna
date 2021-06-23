@@ -178,6 +178,14 @@ class FirestoreController:NSObject{
         })
     }
     
+    //MARK:- SEND VERIFICATION MAIL WitH ACTIONCODE
+       //=======================
+    static func sendEmailVerificationWithActionCode(actionCodeSettings: ActionCodeSettings, completion:  @escaping FailureResponse){
+//        Auth.auth().currentUser?.sendEmailVerification(with: actionCodeSettings, completion: { (error) in
+//            completion(error)
+//        })
+    }
+    
     //MARK:- setFirebaseData
     //=======================
     static func setFirebaseData(userId: String,
@@ -578,7 +586,6 @@ class FirestoreController:NSObject{
     }
     
     static func showAlert( title : String = "", msg : String,_ completion : (()->())? = nil) {
-        
         let alertViewController = UIAlertController(title: title, message: msg, preferredStyle: UIAlertController.Style.alert)
         let okAction = UIAlertAction(title:"ok", style: UIAlertAction.Style.default) { (action : UIAlertAction) -> Void in
             alertViewController.dismiss(animated: true, completion: nil)

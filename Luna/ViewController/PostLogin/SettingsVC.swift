@@ -53,6 +53,13 @@ extension SettingsVC {
         self.settingTableView.dataSource = self
         self.settingTableView.registerCell(with: SettingTableCell.self)
     }
+    
+    private func performCleanUp() {
+        let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
+        AppUserDefaults.removeAllValues()
+        AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+    }
 }
 
 // MARK: - Extension For TableView
@@ -82,6 +89,14 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        switch sections[indexPath.row].1 {
+        case "Delete Account":
+            FirestoreController.logOut { (successMsg) in
+                self.performCleanUp()
+                AppRouter.goToSignUpVC()
+            }
+        default:
+            CommonFunctions.showToastWithMessage("Under Development")
+        }
     }
 }
