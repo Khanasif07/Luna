@@ -23,6 +23,12 @@
 		8455A3C226820E010061C55F /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455A3C126820E010061C55F /* SettingsVC.swift */; };
 		8455A3C7268211770061C55F /* SettingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455A3C5268211770061C55F /* SettingTableCell.swift */; };
 		8455A3C8268211770061C55F /* SettingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8455A3C6268211770061C55F /* SettingTableCell.xib */; };
+		847899732684824F00D1DF36 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847899722684824F00D1DF36 /* HomeVC.swift */; };
+		847899762684870F00D1DF36 /* AboutSectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847899752684870F00D1DF36 /* AboutSectionVC.swift */; };
+		84861D7726848DB1004B046C /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84861D7626848DB1004B046C /* ProfileVC.swift */; };
+		84861D7F26848EDD004B046C /* ProfileTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84861D7D26848EDD004B046C /* ProfileTableCell.swift */; };
+		84861D8026848EDD004B046C /* ProfileTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84861D7E26848EDD004B046C /* ProfileTableCell.xib */; };
+		84861D8326849FDB004B046C /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84861D8226849FDB004B046C /* ChangePasswordVC.swift */; };
 		84CC129A2668C822009316FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC12992668C822009316FC /* AppDelegate.swift */; };
 		84CC129C2668C822009316FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC129B2668C822009316FC /* SceneDelegate.swift */; };
 		84CC12A32668C823009316FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84CC12A22668C823009316FC /* Assets.xcassets */; };
@@ -109,6 +115,12 @@
 		8455A3C5268211770061C55F /* SettingTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableCell.swift; sourceTree = "<group>"; };
 		8455A3C6268211770061C55F /* SettingTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTableCell.xib; sourceTree = "<group>"; };
 		846F1A1F2678C2220034ACE0 /* GoogleService-Info-1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-1.plist"; sourceTree = "<group>"; };
+		847899722684824F00D1DF36 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		847899752684870F00D1DF36 /* AboutSectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSectionVC.swift; sourceTree = "<group>"; };
+		84861D7626848DB1004B046C /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		84861D7D26848EDD004B046C /* ProfileTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableCell.swift; sourceTree = "<group>"; };
+		84861D7E26848EDD004B046C /* ProfileTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableCell.xib; sourceTree = "<group>"; };
+		84861D8226849FDB004B046C /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		84CC12962668C822009316FC /* Luna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Luna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84CC12992668C822009316FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84CC129B2668C822009316FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -231,6 +243,10 @@
 				84CC135B2669F15F009316FC /* HomeViewController.swift */,
 				84F819CD267B6FE000A4C758 /* BLEIntegrationVC.swift */,
 				8455A3C126820E010061C55F /* SettingsVC.swift */,
+				847899722684824F00D1DF36 /* HomeVC.swift */,
+				847899752684870F00D1DF36 /* AboutSectionVC.swift */,
+				84861D7626848DB1004B046C /* ProfileVC.swift */,
+				84861D8226849FDB004B046C /* ChangePasswordVC.swift */,
 			);
 			path = PostLogin;
 			sourceTree = "<group>";
@@ -268,6 +284,8 @@
 			children = (
 				8455A3C5268211770061C55F /* SettingTableCell.swift */,
 				8455A3C6268211770061C55F /* SettingTableCell.xib */,
+				84861D7D26848EDD004B046C /* ProfileTableCell.swift */,
+				84861D7E26848EDD004B046C /* ProfileTableCell.xib */,
 			);
 			path = PostLogin;
 			sourceTree = "<group>";
@@ -595,6 +613,7 @@
 				84D1F4F22679D52700F131E0 /* SF-Pro-Display-Light.otf in Resources */,
 				84D1F4FF2679D52700F131E0 /* SF-Pro-Display-ThinItalic.otf in Resources */,
 				845549292678FAEF000CC13D /* SignUpTopTableCell.xib in Resources */,
+				84861D8026848EDD004B046C /* ProfileTableCell.xib in Resources */,
 				84FDA0B2267DE8B600AC8BE9 /* DecisionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -682,6 +701,7 @@
 				84CC12BC2668CDF4009316FC /* FirestoreController.swift in Sources */,
 				84CC12F22668D0E6009316FC /* UITextFieldExtension.swift in Sources */,
 				84D1F5052679E95A00F131E0 /* ForgotPasswordVC.swift in Sources */,
+				847899732684824F00D1DF36 /* HomeVC.swift in Sources */,
 				84CC12E02668D036009316FC /* AppConstants.swift in Sources */,
 				84F819CE267B6FE000A4C758 /* BLEIntegrationVC.swift in Sources */,
 				84D1F4B42679C12900F131E0 /* TermsConditionVC.swift in Sources */,
@@ -690,6 +710,7 @@
 				84CC12DA2668D00E009316FC /* AppFonts.swift in Sources */,
 				84CC12CA2668CF8D009316FC /* AppEnums.swift in Sources */,
 				84CC12EF2668D0CE009316FC /* NotificationExtension.swift in Sources */,
+				847899762684870F00D1DF36 /* AboutSectionVC.swift in Sources */,
 				84CC12FB2668D15D009316FC /* UIViewcontroller+Extension.swift in Sources */,
 				84CC12CD2668CFBF009316FC /* AppRouter.swift in Sources */,
 				84CC13042668D1A6009316FC /* Double+Extension.swift in Sources */,
@@ -698,6 +719,7 @@
 				84CC13192668D25B009316FC /* UIView+Extension.swift in Sources */,
 				84CC130D2668D1F3009316FC /* Dictionary+Extension.swift in Sources */,
 				8455491C2678DDBA000CC13D /* SignupViewController.swift in Sources */,
+				84861D8326849FDB004B046C /* ChangePasswordVC.swift in Sources */,
 				84CC130A2668D1DB009316FC /* UIImage+Extension.swift in Sources */,
 				84CC13162668D23C009316FC /* Url+Extension.swift in Sources */,
 				84CC13102668D20A009316FC /* String+Extension.swift in Sources */,
@@ -707,10 +729,12 @@
 				84CC12FE2668D17A009316FC /* UICollectionView+Extension.swift in Sources */,
 				84F7BC51266F11BA006C94DA /* AppleLoginManager.swift in Sources */,
 				8455A3BF26805AA80061C55F /* InfoPlistParser.swift in Sources */,
+				84861D7F26848EDD004B046C /* ProfileTableCell.swift in Sources */,
 				84E5505A267E027A008C02F8 /* TypeTableCell.swift in Sources */,
 				84CC12D72668D005009316FC /* AppColors.swift in Sources */,
 				84CC135C2669F15F009316FC /* HomeViewController.swift in Sources */,
 				84CC12F82668D12D009316FC /* UIApplicationExtension.swift in Sources */,
+				84861D7726848DB1004B046C /* ProfileVC.swift in Sources */,
 				84CC12D02668CFD8009316FC /* AppUserDefaults.swift in Sources */,
 				8455492D2678FFFD000CC13D /* LoginSocialTableCell.swift in Sources */,
 				84CC12F52668D10E009316FC /* UILabelExtension.swift in Sources */,

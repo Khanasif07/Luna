@@ -90,11 +90,24 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch sections[indexPath.row].1 {
-        case "Delete Account":
-            FirestoreController.logOut { (successMsg) in
+        case sections[0].1:
+            let vc = ProfileVC.instantiate(fromAppStoryboard: .PostLogin)
+            self.navigationController?.pushViewController(vc, animated: true)
+        case sections[1].1:
+            let vc = ChangePasswordVC.instantiate(fromAppStoryboard: .PostLogin)
+            self.navigationController?.pushViewController(vc, animated: true)
+        case sections[6].1:
+            FirestoreController.currentUser?.delete { error in
+              if let error = error {
+                CommonFunctions.showToastWithMessage(error.localizedDescription)
+              } else {
                 self.performCleanUp()
                 AppRouter.goToSignUpVC()
+              }
             }
+        case sections[5].1:
+            let vc = AboutSectionVC.instantiate(fromAppStoryboard: .PostLogin)
+            self.navigationController?.pushViewController(vc, animated: true)
         default:
             CommonFunctions.showToastWithMessage("Under Development")
         }

@@ -33,7 +33,7 @@ enum AppRouter {
     static func checkAppInitializationFlow() {
         if isUserLoggedin {
             if   AppUserDefaults.value(forKey: .isProfileStepCompleted).boolValue{
-                AppRouter.gotoSettingVC()
+                AppRouter.gotoHomeVC()
             }else{
                 AppRouter.goToProfileSetupVC()
             }
@@ -75,10 +75,8 @@ enum AppRouter {
         navigationController.pushViewController(loginVC, animated: true)
     }
     
-    static func gotoSettingVC(){
-        let vc = SettingsVC.instantiate(fromAppStoryboard: .PostLogin)
+    static func gotoHomeVC(){
+        let vc = HomeVC.instantiate(fromAppStoryboard: .PostLogin)
         setAsWindowRoot(vc)
     }
-      
-    
 }

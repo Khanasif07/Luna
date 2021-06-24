@@ -43,6 +43,9 @@ class ProfileSetupVC: UIViewController {
     //===========================
     public var messageListing = [Message]()
     var senderName: String = ""
+    var senderDob : String = ""
+    var senderLastName : String = ""
+    var diabetesType  : String = ""
     var topSafeArea: CGFloat = 0.0
     var bottomSafeArea: CGFloat = 0.0
 
@@ -101,6 +104,7 @@ class ProfileSetupVC: UIViewController {
         case 6:
             msgTxtField.keyboardType = .numberPad
             msgTxtField.placeholder = "01/01/2000"
+            self.senderLastName = txt
             let senderMessage = Message(txt, "Sender")
             self.messageListing.append(senderMessage)
             self.messageTableView.reloadData()
@@ -113,6 +117,7 @@ class ProfileSetupVC: UIViewController {
         case 8:
             msgTxtField.keyboardType = .default
             msgTxtField.placeholder = ""
+            self.senderDob = txt
             self.bottomContainerBtmConst.constant = (-68.0 - bottomSafeArea)
             let senderMessage = Message(txt, "Sender")
             self.messageListing.append(senderMessage)
@@ -253,6 +258,7 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                     if  self.messageListing.endIndex == 11 {
                         self.bottomContainerBtmConst.constant = (-68.0 - self.bottomSafeArea)
                         typeCell.type1Btn.isSelected = true
+                        self.diabetesType = typeCell.type1Btn.titleLabel?.text ?? ""
                         let message = Message("Thank you \(self.senderName) for providing this information, now let us get the rest of the Luna system setup. Are you ready?", "Receiver")
                     let lastMessage = Message("Yes", "Sender","Type")
                     self.messageListing.append(message)
@@ -265,11 +271,13 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                     guard let self = `self` else { return }
                     if  self.messageListing.endIndex == 13 {
                         AppUserDefaults.save(value: true, forKey: .isProfileStepCompleted)
-                        AppRouter.gotoSettingVC()
+                        print("\(self.senderName)=\(self.senderLastName)=\(self.senderDob)=\(self.diabetesType)")
+                        AppRouter.gotoHomeVC()
                     }
                     if  self.messageListing.endIndex == 11 {
                         self.bottomContainerBtmConst.constant = (-68.0 - self.bottomSafeArea)
                         typeCell.type2Btn.isSelected = true
+                        self.diabetesType = typeCell.type2Btn.titleLabel?.text ?? ""
                     let message = Message("Thank you \(self.senderName) for providing this information, now let us get the rest of the Luna system setup. Are you ready?", "Receiver")
                     let lastMessage = Message("Yes", "Sender","Type")
                     self.messageListing.append(message)

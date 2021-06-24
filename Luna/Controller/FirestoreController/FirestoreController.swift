@@ -24,6 +24,7 @@ typealias LogoutSuccess = (_ message: String) -> ()
 
 class FirestoreController:NSObject{
     
+    static let currentUser = Auth.auth().currentUser
     static let db = Firestore.firestore()
     static var ownUnreadCount = 0
     static var otherUnreadCount = 0
