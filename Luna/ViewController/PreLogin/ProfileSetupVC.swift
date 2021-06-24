@@ -83,6 +83,7 @@ class ProfileSetupVC: UIViewController {
     //===========================
     @IBAction func sendBtnTapped(_ sender: AppButton) {
         self.view.endEditing(true)
+        sendBtn.isEnabledWithoutBackground = false
         guard let txt = msgTxtField.text,!txt.isEmpty else { return }
         self.msgTxtField.text = ""
         switch self.messageListing.endIndex {
@@ -157,9 +158,6 @@ extension ProfileSetupVC {
        private func setupTData() {
         self.messageListing = [Message("Hello and welcome to Luna !", "Receiver"),Message("Do you have 15 minutes now to set up the system ?", "Receiver"),Message("", "Sender","Decision")]
         self.messageTableView.reloadWithAnimation()
-        if  AppUserDefaults.value(forKey: .isBiometricSelected).boolValue{}else{
-            self.showAlertForBiometric()
-        }
        }
     
     private func registerNotification(){
@@ -195,30 +193,6 @@ extension ProfileSetupVC {
         let vc = SettingsVC.instantiate(fromAppStoryboard: .PostLogin)
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-    private func showAlertForBiometric(){
-        var bioMetricReason = ""
-        var biometric = ""
-        if hasTopNotch {
-            bioMetricReason = LocalizedString.allowFaceId.localized
-            biometric =  LocalizedString.faceID.localized
-        } else {
-            bioMetricReason = LocalizedString.allowTouchId.localized
-            biometric =  LocalizedString.touchID.localized
-        }
-        self.showAlertWithAction(title: bioMetricReason, msg: "Use \(biometric) to sign into Luna without entering your password.", cancelTitle: "Don’t Allow", actionTitle: "Allow") {
-            let email = AppUserDefaults.value(forKey: .defaultEmail).stringValue
-            let password = AppUserDefaults.value(forKey: .defaultPassword).stringValue
-            KeychainWrapper.standard.set(email, forKey: ApiKey.email)
-            KeychainWrapper.standard.set(password, forKey: ApiKey.password)
-            AppUserDefaults.save(value: true, forKey: .isBiometricSelected)
-        } cancelcompletion: {
-            KeychainWrapper.standard.set("", forKey: ApiKey.email)
-            KeychainWrapper.standard.set("", forKey: ApiKey.password)
-            AppUserDefaults.save(value: true, forKey: .isBiometricSelected)
-        }
-    }
-    
 }
 
 

@@ -168,7 +168,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         guard let userInfo = response.notification.request.content.userInfo as? [String: Any] else { return }
-//        PushNotificationRedirection.redirectionOnNotification(userInfo)
         print("tap on on forground app", userInfo)
         completionHandler()
     }
@@ -218,9 +217,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
     func handleVerificationLink(_ url: URL?) -> Bool {
         guard let url = url else { return false }
         let deepLinkUrl = AppDelegate.queryParameters(from: url)
-        if let outerLinkString = deepLinkUrl?["link"] {
+        if let outerLinkString = deepLinkUrl?[ApiKey.link] {
             if let deeplinkUrl = URL(string: outerLinkString) {
-                if let oobCode = deeplinkUrl.getQueryString(parameter: "oobCode"){
+                if let oobCode = deeplinkUrl.getQueryString(parameter: ApiKey.oobCode){
                     Auth.auth().applyActionCode(oobCode) { error in
                         if let error = error as NSError? {
                             print(error.localizedDescription)
@@ -228,7 +227,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
                             self.reloadUser { (reloadMsg) in
                                 print(reloadMsg?.localizedDescription ?? "")
                             }
-                            print("Email was successfully verified")
+                            CommonFunctions.showToastWithMessage("Email was successfully verified")
                         }
                     }
                 }

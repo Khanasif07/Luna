@@ -73,7 +73,7 @@ extension LoginViewController {
     
     private func initialSetup() {
         self.tableViewSetUp()
-        if  AppUserDefaults.value(forKey: .isBiometricSelected).boolValue{
+        if  AppUserDefaults.value(forKey: .isBiometricSelected).boolValue && !AppUserDefaults.value(forKey: .isSignupCompleted).boolValue {
             self.bioMetricSignin()
         }
     }
@@ -112,6 +112,36 @@ extension LoginViewController {
        let bleVC = ProfileSetupVC.instantiate(fromAppStoryboard: .PreLogin)
        self.navigationController?.pushViewController(bleVC, animated: true)
    }
+    
+    private func gotoEmailVerificationPopUpVC(){
+        let scene =  PassResetPopUpVC.instantiate(fromAppStoryboard: .PreLogin)
+        scene.emailVerificationSuccess = { [weak self] in
+            guard let selff = self else { return }
+            print(selff)
+        }
+        scene.popupType = .emailVerification
+        scene.titleDesc = "Email Verification"
+        scene.subTitleDesc = "Please check your email - A verification link has been sent to your registered email account."
+        self.present(scene, animated: true, completion: nil)
+    }
+    
+    private func getActionCodes()->ActionCodeSettings{
+        let actionCodeSettings =  ActionCodeSettings.init()
+        actionCodeSettings.handleCodeInApp = true
+        var components = URLComponents()
+        let queryItemEmailName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppQueryItemEmail")
+        let querySchemeName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppScheme")
+        let queryUrlPrefixName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppURLPrefix")
+        components.scheme = querySchemeName
+        components.host = queryUrlPrefixName
+        let emailUrlQueryItem = URLQueryItem(name: queryItemEmailName, value: self.emailTxt)
+        components.queryItems = [emailUrlQueryItem]
+        guard let linkUrl = components.url else { return  ActionCodeSettings.init() }
+        print("link parameter is \(linkUrl)")
+        actionCodeSettings.url = linkUrl
+        actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
+        return actionCodeSettings
+    }
     
     private func bioMetricSignin() {
         var error: NSError?
@@ -204,10 +234,16 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                             }
                         } else {
                             CommonFunctions.hideActivityLoader()
-                            FirestoreController.sendEmailVerification { (errors) -> (Void) in
-                                print(errors.localizedDescription)
-                            }
-                            CommonFunctions.showToastWithMessage("Please verify your email - A verification link has been sent to your registered email account.")
+                            Auth.auth().currentUser?.sendEmailVerification(with: self.getActionCodes(), completion: { (err) in
+                                if let err = err {
+                                    print(err.localizedDescription)
+                                    CommonFunctions.showToastWithMessage(err.localizedDescription)
+                                    return
+                                }
+                                DispatchQueue.main.async {
+                                    self.gotoEmailVerificationPopUpVC()
+                                }
+                            })
                         }
                     }
                 } else {
@@ -217,10 +253,16 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                                 self.goToProfileSetupVC()
                         } else {
                             CommonFunctions.hideActivityLoader()
-                            FirestoreController.sendEmailVerification { (errors) -> (Void) in
-                                print(errors.localizedDescription)
-                            }
-                            CommonFunctions.showToastWithMessage("Please verify your email - A verification link has been sent to your registered email account.")
+                            Auth.auth().currentUser?.sendEmailVerification(with: self.getActionCodes(), completion: { (err) in
+                                if let err = err {
+                                    print(err.localizedDescription)
+                                    CommonFunctions.showToastWithMessage(err.localizedDescription)
+                                    return
+                                }
+                                DispatchQueue.main.async {
+                                    self.gotoEmailVerificationPopUpVC()
+                                }
+                            })
                         }
                        
                         //                        FirestoreController.setFirebaseData(userId: "", email: self.emailTxt, password: self.passTxt, name:"", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {

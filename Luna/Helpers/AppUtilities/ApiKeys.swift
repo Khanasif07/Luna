@@ -206,6 +206,8 @@ enum ApiKey {
     static var inbox : String {return "inbox"}
     static var senderId : String {return "senderId"}
     static var receiverId : String {return "receiverId"}
+    static var oobCode : String { return "oobCode"}
+    static var link : String { return "link"}
     
     //MARK:-RoomInfo
     //===============

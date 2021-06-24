@@ -127,54 +127,62 @@ extension SignupViewController {
         self.present(scene, animated: true, completion: nil)
     }
     
-    private func bioMetricSignin() {
-        var error: NSError?
-        if #available(iOS 8.0, macOS 10.12.1, *) {
-            biometricIDAuth.canEvaluate { (canEvaluate, _, canEvaluateError) in
-                guard canEvaluate else {
-                    // Face ID/Touch ID may not be available or configured
-                    return
-                }
-                biometricIDAuth.evaluate { [weak self] (success, error) in
-                    guard let `self` = self else { return }
-                    if success{
-                        print("Succesfully verified")
-                        //
-                        guard let email = KeychainWrapper.standard.string(forKey: ApiKey.email), let password = KeychainWrapper.standard.string(forKey: ApiKey.password) else {
-                            return
-                        }
-                        if !email.isEmpty && !password.isEmpty{
-                            if    (Auth.auth().currentUser?.uid == nil) {
-                                FirestoreController.login(userId: "", withEmail: email, with: password, success: {
-                                    CommonFunctions.hideActivityLoader()
-                                    self.goToProfileSetupVC()
-                                    //                        FirestoreController.setFirebaseData(userId: "", email: self.emailTxt, password: self.passTxt, name:"", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
-                                    //                            CommonFunctions.hideActivityLoader()
-                                    //                            self.goToBLEVC()
-                                    //                        }) { (error) -> (Void) in
-                                    //                            AppUserDefaults.removeValue(forKey: .accesstoken)
-                                    //                            CommonFunctions.hideActivityLoader()
-                                    //                            CommonFunctions.showToastWithMessage(error.localizedDescription)
-                                    //                        }
-                                }) { (message, code) in
-                                    CommonFunctions.hideActivityLoader()
-                                    CommonFunctions.showToastWithMessage(message)
-                                }
-                            }
-                        }
-                        //
-                    } else {
-                        if (error! as NSError).code != -2 {
-                            CommonFunctions.showToastWithMessage("Invalid biometric input")
-                        }
-                    }
-                }
-            }
-        }else {
-            guard let error = error else { return }
-            showAlert(title: LocalizedString.biometricAuthNotAvailable.localized, msg: error.localizedDescription)
+    private func getActionCodes()->ActionCodeSettings{
+        let actionCodeSettings =  ActionCodeSettings.init()
+        actionCodeSettings.handleCodeInApp = true
+        var components = URLComponents()
+        let queryItemEmailName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppQueryItemEmail")
+        let querySchemeName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppScheme")
+        let queryUrlPrefixName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppURLPrefix")
+        components.scheme = querySchemeName
+        components.host = queryUrlPrefixName
+        let emailUrlQueryItem = URLQueryItem(name: queryItemEmailName, value: self.emailTxt)
+        components.queryItems = [emailUrlQueryItem]
+        guard let linkUrl = components.url else { return  ActionCodeSettings.init() }
+        print("link parameter is \(linkUrl)")
+        actionCodeSettings.url = linkUrl
+        actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
+        return actionCodeSettings
+    }
+    
+    private func showAlertForBiometric(){
+        var bioMetricReason = ""
+        var biometric = ""
+        if hasTopNotch {
+            bioMetricReason = LocalizedString.allowFaceId.localized
+            biometric =  LocalizedString.faceID.localized
+        } else {
+            bioMetricReason = LocalizedString.allowTouchId.localized
+            biometric =  LocalizedString.touchID.localized
+        }
+        self.showAlertWithAction(title: bioMetricReason, msg: "Use \(biometric) to sign into Luna without entering your password.", cancelTitle: "Don’t Allow", actionTitle: "Allow") {
+            let email = AppUserDefaults.value(forKey: .defaultEmail).stringValue
+            let password = AppUserDefaults.value(forKey: .defaultPassword).stringValue
+            KeychainWrapper.standard.set(email, forKey: ApiKey.email)
+            KeychainWrapper.standard.set(password, forKey: ApiKey.password)
+            AppUserDefaults.save(value: true, forKey: .isBiometricSelected)
+            self.sendEmailVerificationLink()
+        } cancelcompletion: {
+            KeychainWrapper.standard.set("", forKey: ApiKey.email)
+            KeychainWrapper.standard.set("", forKey: ApiKey.password)
+            AppUserDefaults.save(value: false, forKey: .isBiometricSelected)
+            self.sendEmailVerificationLink()
         }
     }
+    
+    private func sendEmailVerificationLink(){
+        Auth.auth().currentUser?.sendEmailVerification(with: self.getActionCodes(), completion: { (err) in
+            if let err = err {
+                print(err.localizedDescription)
+                CommonFunctions.showToastWithMessage(err.localizedDescription)
+                return
+            }
+            DispatchQueue.main.async {
+                self.gotoEmailVerificationPopUpVC()
+            }
+        })
+    }
+    
 }
 
 // MARK: - Extension For TableView
@@ -206,30 +214,11 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
                         if Auth.auth().currentUser?.isEmailVerified ?? false{
                             self.goToProfileSetupVC()
                         }else{
-                            let actionCodeSettings =  ActionCodeSettings.init()
-                            actionCodeSettings.handleCodeInApp = true
-                            var components = URLComponents()
-                            let queryItemEmailName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppQueryItemEmail")
-                            let querySchemeName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppScheme")
-                            let queryUrlPrefixName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppURLPrefix")
-                            components.scheme = querySchemeName
-                            components.host = queryUrlPrefixName
-                            let emailUrlQueryItem = URLQueryItem(name: queryItemEmailName, value: self.emailTxt)
-                            components.queryItems = [emailUrlQueryItem]
-                            guard let linkUrl = components.url else { return }
-                            print("link parameter is \(linkUrl)")
-                            actionCodeSettings.url = linkUrl
-                            actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
-                            Auth.auth().currentUser?.sendEmailVerification(with: actionCodeSettings, completion: { (err) in
-                                if let err = err {
-                                    print(err.localizedDescription)
-                                    CommonFunctions.showToastWithMessage(err.localizedDescription)
-                                    return
-                                }
-                                DispatchQueue.main.async {
-                                    self.gotoEmailVerificationPopUpVC()
-                                }
-                            })
+                            if  AppUserDefaults.value(forKey: .isBiometricSelected).boolValue{
+                                self.sendEmailVerificationLink()
+                            }else{
+                                self.showAlertForBiometric()
+                            }
                         }
                     }) { (error) -> (Void)  in
                         print( error.localizedDescription)
