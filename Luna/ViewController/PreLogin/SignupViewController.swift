@@ -116,6 +116,10 @@ extension SignupViewController {
         scene.emailVerificationSuccess = { [weak self] in
             guard let selff = self else { return }
             selff.gotoLoginVC()
+//            let mailURL = URL(string: "message://")!
+//            if UIApplication.shared.canOpenURL(mailURL) {
+//                UIApplication.shared.open(mailURL, options: [:], completionHandler: nil)
+//            }
         }
         scene.popupType = .emailVerification
         scene.titleDesc = "Email Verification"

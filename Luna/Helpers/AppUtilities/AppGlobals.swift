@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 var isUserLoggedin: Bool {
-    let token = AppUserDefaults.value(forKey: .accesstoken).stringValue
+    let token = AppUserDefaults.value(forKey: .uid).stringValue
     if !token.isEmpty {
         return true
     } else {

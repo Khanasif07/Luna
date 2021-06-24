@@ -28,8 +28,8 @@ class LoginViewController: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var emailTxt: String = ""
-    var passTxt : String =  ""
+    var emailTxt: String = AppUserDefaults.value(forKey: .defaultEmail).stringValue
+    var passTxt : String =  AppUserDefaults.value(forKey: .defaultPassword).stringValue
     var currentNonce : String?
     private let biometricIDAuth = BiometricIDAuth()
     
@@ -73,7 +73,9 @@ extension LoginViewController {
     
     private func initialSetup() {
         self.tableViewSetUp()
-        self.bioMetricSignin()
+        if  AppUserDefaults.value(forKey: .isBiometricSelected).boolValue{
+            self.bioMetricSignin()
+        }
     }
     
     public func tableViewSetUp(){
@@ -176,6 +178,7 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
             cell.titleLbl.text = LocalizedString.login.localized
             cell.subTitleLbl.text = LocalizedString.please_login_to_get_good_sleep.localized
             cell.signUpBtn.setTitle(LocalizedString.login.localized, for: .normal)
+            cell.signUpBtn.isEnabled = signUpBtnStatus()
             cell.forgotPassBtn.isHidden = false
             [cell.emailIdTxtField,cell.passTxtField].forEach({$0?.delegate = self})
             cell.signUpBtnTapped = { [weak self]  (sender) in
@@ -206,7 +209,6 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                             }
                             CommonFunctions.showToastWithMessage("Please verify your email - A verification link has been sent to your registered email account.")
                         }
-                        print("--==RELOAD==--")
                     }
                 } else {
                     FirestoreController.login(userId: "", withEmail: self.emailTxt, with: self.passTxt, success: {

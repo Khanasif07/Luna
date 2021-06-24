@@ -38,11 +38,15 @@ enum AppRouter {
                 AppRouter.goToProfileSetupVC()
             }
         } else {
-            if AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue {
-                AppRouter.goToSignUpVC()
-            }else{
-                AppUserDefaults.removeAllValues()
-                self.goToTermsConditionVC()
+            if AppUserDefaults.value(forKey: .isSignupCompleted).boolValue {
+                AppRouter.goToLoginVC()
+            }else {
+                if AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue {
+                    AppRouter.goToSignUpVC()
+                }else{
+                    AppUserDefaults.removeAllValues()
+                    self.goToTermsConditionVC()
+                }
             }
         }
     }
@@ -62,9 +66,13 @@ enum AppRouter {
         setAsWindowRoot(termsVC)
     }
     
-    static func goToBLEVC(){
-        let bleVC = BLEIntegrationVC.instantiate(fromAppStoryboard: .PostLogin)
-        setAsWindowRoot(bleVC)
+    static func goToLoginVC(){
+        let signupVC = SignupViewController.instantiate(fromAppStoryboard: .PreLogin)
+        let navigationController = UINavigationController(rootViewController: signupVC)
+        navigationController.setNavigationBarHidden(true, animated: false)
+        defaultSetAsWindowRoot(navigationController)
+        let loginVC = LoginViewController.instantiate(fromAppStoryboard: .PreLogin)
+        navigationController.pushViewController(loginVC, animated: true)
     }
     
     static func gotoSettingVC(){
