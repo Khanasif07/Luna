@@ -96,8 +96,6 @@ extension SignupViewController {
     
     private func gotoLoginVC(){
         let loginVC = LoginViewController.instantiate(fromAppStoryboard: .PreLogin)
-        loginVC.emailTxt = AppUserDefaults.value(forKey: .defaultEmail).stringValue
-        loginVC.passTxt = AppUserDefaults.value(forKey: .defaultPassword).stringValue
         self.navigationController?.pushViewController(loginVC, animated: true)
     }
     
@@ -115,15 +113,18 @@ extension SignupViewController {
         let scene =  PassResetPopUpVC.instantiate(fromAppStoryboard: .PreLogin)
         scene.emailVerificationSuccess = { [weak self] in
             guard let selff = self else { return }
-            selff.gotoLoginVC()
+            let loginVC = LoginViewController.instantiate(fromAppStoryboard: .PreLogin)
+            loginVC.emailTxt = AppUserDefaults.value(forKey: .defaultEmail).stringValue
+            loginVC.passTxt = AppUserDefaults.value(forKey: .defaultPassword).stringValue
+            selff.navigationController?.pushViewController(loginVC, animated: true)
 //            let mailURL = URL(string: "message://")!
 //            if UIApplication.shared.canOpenURL(mailURL) {
 //                UIApplication.shared.open(mailURL, options: [:], completionHandler: nil)
 //            }
         }
         scene.popupType = .emailVerification
-        scene.titleDesc = "Email Verification"
-        scene.subTitleDesc = "Please check your email - A verification link has been sent to your registered email account."
+        scene.titleDesc = LocalizedString.email_verification.localized
+        scene.subTitleDesc = LocalizedString.please_check_your_emai_A_verification_link_has_been_sent_to_your_registered_email_account.localized
         self.present(scene, animated: true, completion: nil)
     }
     
@@ -131,9 +132,9 @@ extension SignupViewController {
         let actionCodeSettings =  ActionCodeSettings.init()
         actionCodeSettings.handleCodeInApp = true
         var components = URLComponents()
-        let queryItemEmailName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppQueryItemEmail")
-        let querySchemeName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppScheme")
-        let queryUrlPrefixName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppURLPrefix")
+        let queryItemEmailName = InfoPlistParser.getStringValue(forKey: ApiKey.firebaseOpenAppQueryItemEmail)
+        let querySchemeName = InfoPlistParser.getStringValue(forKey: ApiKey.firebaseOpenAppScheme)
+        let queryUrlPrefixName = InfoPlistParser.getStringValue(forKey: ApiKey.firebaseOpenAppURLPrefix)
         components.scheme = querySchemeName
         components.host = queryUrlPrefixName
         let emailUrlQueryItem = URLQueryItem(name: queryItemEmailName, value: self.emailTxt)
@@ -161,11 +162,13 @@ extension SignupViewController {
             KeychainWrapper.standard.set(email, forKey: ApiKey.email)
             KeychainWrapper.standard.set(password, forKey: ApiKey.password)
             AppUserDefaults.save(value: true, forKey: .isBiometricSelected)
+            AppUserDefaults.save(value: true, forKey: .isBiometricCompleted)
             self.sendEmailVerificationLink()
         } cancelcompletion: {
             KeychainWrapper.standard.set("", forKey: ApiKey.email)
             KeychainWrapper.standard.set("", forKey: ApiKey.password)
             AppUserDefaults.save(value: false, forKey: .isBiometricSelected)
+            AppUserDefaults.save(value: true, forKey: .isBiometricCompleted)
             self.sendEmailVerificationLink()
         }
     }
@@ -398,11 +401,11 @@ extension SignupViewController: ASAuthorizationControllerDelegate,ASAuthorizatio
                     print(error.localizedDescription)
                     return
                 }
-                let uid = Auth.auth().currentUser?.uid ?? ""
-                AppUserDefaults.save(value: uid, forKey: .uid)
-                AppUserDefaults.save(value: uid, forKey: .accesstoken)
-                AppUserDefaults.save(value: self.emailTxt, forKey: .defaultEmail)
-                AppUserDefaults.save(value: self.passTxt, forKey: .defaultPassword)
+                if let currentUser = Auth.auth().currentUser {
+                    AppUserDefaults.save(value: currentUser.uid, forKey: .uid)
+                    AppUserDefaults.save(value: currentUser.uid, forKey: .accesstoken)
+                    AppUserDefaults.save(value: currentUser.email ?? "", forKey: .defaultEmail)
+                }
                 CommonFunctions.hideActivityLoader()
                 DispatchQueue.main.async {
                     self.self.goToProfileSetupVC()
@@ -453,6 +456,11 @@ extension SignupViewController: GIDSignInDelegate {
             }
             print("post notification after user successfully sign in")
             CommonFunctions.hideActivityLoader()
+            if let currentUser = Auth.auth().currentUser {
+                AppUserDefaults.save(value: currentUser.uid, forKey: .uid)
+                AppUserDefaults.save(value: currentUser.uid, forKey: .accesstoken)
+                AppUserDefaults.save(value: currentUser.email ?? "", forKey: .defaultEmail)
+            }
             DispatchQueue.main.async {
                 self.self.goToProfileSetupVC()
             }

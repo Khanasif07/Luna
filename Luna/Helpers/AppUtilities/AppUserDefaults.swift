@@ -80,6 +80,7 @@ extension AppUserDefaults {
         case accesstoken
         case isTermsAndConditionSelected
         case isBiometricSelected
+        case isBiometricCompleted
         case isProfileStepCompleted
         case isSignupCompleted
         case isGuestMode

@@ -208,6 +208,10 @@ enum ApiKey {
     static var receiverId : String {return "receiverId"}
     static var oobCode : String { return "oobCode"}
     static var link : String { return "link"}
+    static var firebaseOpenAppScheme : String { return "FirebaseOpenAppScheme"}
+    static var firebaseOpenAppURLPrefix : String { return "FirebaseOpenAppURLPrefix"}
+    static var firebaseOpenAppQueryItemEmail : String { return "FirebaseOpenAppQueryItemEmail"}
+    
     
     //MARK:-RoomInfo
     //===============

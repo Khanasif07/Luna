@@ -28,8 +28,8 @@ class LoginViewController: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var emailTxt: String = AppUserDefaults.value(forKey: .defaultEmail).stringValue
-    var passTxt : String =  AppUserDefaults.value(forKey: .defaultPassword).stringValue
+    var emailTxt: String = ""
+    var passTxt : String =  ""
     var currentNonce : String?
     private let biometricIDAuth = BiometricIDAuth()
     
@@ -73,8 +73,19 @@ extension LoginViewController {
     
     private func initialSetup() {
         self.tableViewSetUp()
-        if  AppUserDefaults.value(forKey: .isBiometricSelected).boolValue && !AppUserDefaults.value(forKey: .isSignupCompleted).boolValue {
-            self.bioMetricSignin()
+        if  AppUserDefaults.value(forKey: .isBiometricCompleted).boolValue {
+            if  AppUserDefaults.value(forKey: .isBiometricSelected).boolValue{
+                self.bioMetricSignin()
+            }else {
+                print("Do Not show biometric popup")
+            }
+        }else {
+            guard let email = KeychainWrapper.standard.string(forKey: ApiKey.email), let password = KeychainWrapper.standard.string(forKey: ApiKey.password) else {
+                return
+            }
+            if !email.isEmpty && !password.isEmpty{
+                self.bioMetricSignin()
+            }
         }
     }
     
@@ -148,33 +159,21 @@ extension LoginViewController {
         if #available(iOS 8.0, macOS 10.12.1, *) {
             biometricIDAuth.canEvaluate { (canEvaluate, _, canEvaluateError) in
                 guard canEvaluate else {
-                    // Face ID/Touch ID may not be available or configured
+                    CommonFunctions.showToastWithMessage("Face ID/Touch ID may not be available or configured")
                     return
                 }
                 biometricIDAuth.evaluate { [weak self] (success, error) in
                     guard let `self` = self else { return }
                     DispatchQueue.main.async {
                     if success{
-                        //
                         guard let email = KeychainWrapper.standard.string(forKey: ApiKey.email), let password = KeychainWrapper.standard.string(forKey: ApiKey.password) else {
                             return
                         }
                         if !email.isEmpty && !password.isEmpty{
-                                FirestoreController.login(userId: "", withEmail: email, with: password, success: {
-                                    self.goToProfileSetupVC()
-                                    //                        FirestoreController.setFirebaseData(userId: "", email: self.emailTxt, password: self.passTxt, name:"", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
-                                    //                            CommonFunctions.hideActivityLoader()
-                                    //                            self.goToBLEVC()
-                                    //                        }) { (error) -> (Void) in
-                                    //                            AppUserDefaults.removeValue(forKey: .accesstoken)
-                                    //                            CommonFunctions.hideActivityLoader()
-                                    //                            CommonFunctions.showToastWithMessage(error.localizedDescription)
-                                    //                        }
-                                }) { (message, code) in
-                                    CommonFunctions.showToastWithMessage(message)
-                                }
+                            self.emailTxt = email
+                            self.passTxt = password
+                            self.loginTableView.reloadData()
                         }
-                        //
                     } else {
                         if (error! as NSError).code != -2 {
                             CommonFunctions.showToastWithMessage("Invalid biometric input")
@@ -459,12 +458,12 @@ extension LoginViewController: ASAuthorizationControllerDelegate,ASAuthorization
                     CommonFunctions.showToastWithMessage(error.localizedDescription)
                     return
                 }
-                let uid = Auth.auth().currentUser?.uid ?? ""
-                AppUserDefaults.save(value: uid, forKey: .uid)
-                AppUserDefaults.save(value: uid, forKey: .accesstoken)
-                AppUserDefaults.save(value: self.emailTxt, forKey: .defaultEmail)
-                AppUserDefaults.save(value: self.passTxt, forKey: .defaultPassword)
                 CommonFunctions.hideActivityLoader()
+                if let currentUser = Auth.auth().currentUser {
+                    AppUserDefaults.save(value: currentUser.uid, forKey: .uid)
+                    AppUserDefaults.save(value: currentUser.uid, forKey: .accesstoken)
+                    AppUserDefaults.save(value: currentUser.email ?? "", forKey: .defaultEmail)
+                }
                 DispatchQueue.main.async {
                     self.goToProfileSetupVC()
                 }
@@ -510,9 +509,15 @@ extension LoginViewController: GIDSignInDelegate {
         Auth.auth().signIn(with: credential) { (authResult, error) in
             if let error = error {
                 CommonFunctions.hideActivityLoader()
+                CommonFunctions.showToastWithMessage(error.localizedDescription)
                 print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
             }
             CommonFunctions.hideActivityLoader()
+            if let currentUser = Auth.auth().currentUser {
+                AppUserDefaults.save(value: currentUser.uid, forKey: .uid)
+                AppUserDefaults.save(value: currentUser.uid, forKey: .accesstoken)
+                AppUserDefaults.save(value: currentUser.email ?? "", forKey: .defaultEmail)
+            }
             DispatchQueue.main.async {
                 self.self.goToProfileSetupVC()
             }

@@ -76,6 +76,8 @@ enum LocalizedString : String {
     case allowTouchId
     case faceID
     case touchID
+    case email_verification
+    case please_check_your_emai_A_verification_link_has_been_sent_to_your_registered_email_account
     // MARK: - Validation Messages
     //==================================
     case pleaseEnterValidEmail = "pleaseEnterValidEmail"
