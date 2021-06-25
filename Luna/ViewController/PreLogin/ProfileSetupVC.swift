@@ -274,7 +274,7 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                         AppUserDefaults.save(value: true, forKey: .isProfileStepCompleted)
                         UserModel.main.firstName = self.senderName
                         UserModel.main.lastName = self.senderLastName
-                        UserModel.main.dob = self.self.senderDob
+                        UserModel.main.dob = self.senderDob
                         UserModel.main.diabetesType = self.diabetesType
                         AppRouter.gotoHomeVC()
                     }
@@ -312,12 +312,9 @@ extension ProfileSetupVC: UIGestureRecognizerDelegate, UIScrollViewDelegate {
         guard scrollView === containerScrollView else { return }
         let vel = scrollView.panGestureRecognizer.velocity(in: scrollView).y
         if vel < 0 {
-            
         } else if vel > 0 {
             scrollView.isScrollEnabled = false
-            
         } else {
-            
         }
     }
 }

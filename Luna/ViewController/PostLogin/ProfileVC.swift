@@ -17,7 +17,8 @@ class ProfileVC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var sections: [(String,String)] = [("First Name",""),("Last Name",""),("Date Of Birth",""),("Apple Health",""),("Email",""),("Diabetes Type","")]
+    var sections: [(String,String)] = [("First Name",""),("Last Name",""),("Date Of Birth",""),("Email",""),("Diabetes Type","")]
+    var typePickerView = WCCustomPickerView()
    
     
     // MARK: - Lifecycle
@@ -52,6 +53,8 @@ extension ProfileVC {
     }
    
     private func tableViewSetup(){
+        self.typePickerView.delegate = self
+        self.typePickerView.dataArray = ["Type 1","Type 2"]
         self.saveBtn.isEnabled = false
         self.profileTableView.delegate = self
         self.profileTableView.dataSource = self
@@ -59,7 +62,7 @@ extension ProfileVC {
     }
     
     private func setUpData(){
-        self.sections = [("First Name",UserModel.main.firstName),("Last Name",UserModel.main.lastName),("Date Of Birth",UserModel.main.dob),("Apple Health",""),("Email",UserModel.main.email),("Diabetes Type",UserModel.main.diabetesType)]
+        self.sections = [("First Name",UserModel.main.firstName),("Last Name",UserModel.main.lastName),("Date Of Birth",UserModel.main.dob),("Email",UserModel.main.email),("Diabetes Type",UserModel.main.diabetesType)]
     }
     private func signUpBtnStatus()-> Bool{
         return true
@@ -81,6 +84,17 @@ extension ProfileVC : UITableViewDelegate, UITableViewDataSource {
         cell.txtField.delegate = self
         cell.txtField.text = sections[indexPath.row].1
         cell.titleLbl.text = sections[indexPath.row].0
+        if sections[indexPath.row].0 == "Diabetes Type" {
+            let show = UIButton()
+            show.isSelected = false
+            show.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
+            cell.txtField.inputView = typePickerView
+            cell.txtField.setButtonToRightView(btn: show, selectedImage: #imageLiteral(resourceName: "dropdownMobilenumber"), normalImage: #imageLiteral(resourceName: "dropdownMobilenumber"), size: CGSize(width: 20, height: 20))
+            
+        }else {
+            cell.txtField.inputView = nil
+            cell.txtField.setButtonToRightView(btn: UIButton(), selectedImage: nil, normalImage: nil, size: CGSize(width: 0, height: 0))
+        }
         return cell
     }
     
@@ -133,5 +147,19 @@ extension ProfileVC : UITextFieldDelegate{
         default:
             return false
         }
+    }
+}
+
+// MARK:- Extension For TextField Delegate
+//====================================
+extension ProfileVC: WCCustomPickerViewDelegate {
+    
+    func userDidSelectRow(_ text : String){
+        let indexx = sections.firstIndex(where: { (tupls) -> Bool in
+            return tupls.0 == "Diabetes Type"
+        })
+        guard let selectedIndexx = indexx else {return}
+        sections[selectedIndexx].1 = text
+        self.profileTableView.reloadRows(at: [IndexPath.init(row: selectedIndexx, section: 0)], with: .fade)
     }
 }

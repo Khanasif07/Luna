@@ -46,6 +46,7 @@ class SettingsVC: UIViewController {
 extension SettingsVC {
     
     private func initialSetup() {
+        self.setUpdata()
         self.tableViewSetup()
     }
     
@@ -55,10 +56,21 @@ extension SettingsVC {
         self.settingTableView.registerCell(with: SettingTableCell.self)
     }
     
+    private func setUpdata(){
+        if !UserModel.main.canChangePassword {
+            self.sections = [(#imageLiteral(resourceName: "profile"),"Profile"),(#imageLiteral(resourceName: "faceId"),"Face ID"),(#imageLiteral(resourceName: "appleHealth"),"Apple Health"),(#imageLiteral(resourceName: "system"),"System"),(#imageLiteral(resourceName: "about"),"About"),(#imageLiteral(resourceName: "deleteAccount"),"Delete Account"),(#imageLiteral(resourceName: "logout"),"Logout")]
+            
+        }
+    }
+    
     private func performCleanUp() {
         let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
+        let isBiometricSelected  = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
+        let isBiometricCompleted  = AppUserDefaults.value(forKey: .isBiometricCompleted).boolValue
         AppUserDefaults.removeAllValues()
         UserModel.main = UserModel()
+        AppUserDefaults.save(value: isBiometricSelected, forKey: .isBiometricSelected)
+        AppUserDefaults.save(value: isBiometricCompleted, forKey: .isBiometricCompleted)
         AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
@@ -76,12 +88,12 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueCell(with: SettingTableCell.self)
         cell.titleLbl.text = sections[indexPath.row].1
         cell.logoImgView.image = sections[indexPath.row].0
-        switch indexPath.row {
-        case 2:
+        switch sections[indexPath.row].1 {
+        case "Face ID":
             cell.nextBtn.isHidden = true
             cell.switchView.isHidden = false
             cell.switchView.isOn = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
-        case 3:
+        case "Apple Health":
             cell.nextBtn.isHidden = true
             cell.switchView.isHidden = false
             cell.switchView.isOn = true
@@ -91,12 +103,12 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
         }
         cell.switchTapped = { [weak self] sender in
             guard let self = self else { return }
-            if indexPath.row == 2 {
+            if self.sections[indexPath.row].1 ==  "Face ID" {
                 let isOn = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
                 AppUserDefaults.save(value: !isOn, forKey: .isBiometricSelected)
                 self.settingTableView.reloadData()
             }
-            if indexPath.row == 3 {
+            if self.sections[indexPath.row].1 ==  "Apple Health" {
                 CommonFunctions.showToastWithMessage("Under Development")
             }
         }
@@ -109,13 +121,13 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch sections[indexPath.row].1 {
-        case sections[0].1:
+        case "Profile":
             let vc = ProfileVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)
-        case sections[1].1:
+        case "Change Password":
             let vc = ChangePasswordVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)
-        case sections[6].1:
+        case "Delete Account":
             showAlertWithAction(title: "Delete Account", msg: "Are you sure want to delete account?", cancelTitle: "No", actionTitle: "Yes") {
                 let email = AppUserDefaults.value(forKey: .defaultEmail).stringValue
                 let password = AppUserDefaults.value(forKey: .defaultPassword).stringValue
@@ -136,14 +148,14 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
                     }
                 })
             } cancelcompletion: {}
-        case sections[7].1:
+        case "Logout":
             showAlertWithAction(title: "Logout", msg: "Are you sure want to logout?", cancelTitle: "No", actionTitle: "Yes") {
                 FirestoreController.logOut { (isLogout) in
                     self.performCleanUp()
                     AppRouter.goToSignUpVC()
                 }
             } cancelcompletion: {}
-        case sections[5].1:
+        case "About":
             let vc = AboutSectionVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)
         default:

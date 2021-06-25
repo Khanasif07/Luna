@@ -72,6 +72,8 @@ struct UserModel{
         let dict: JSONDictionary = [
             ApiKey._id : id,
             ApiKey.dob: dob,
+            ApiKey.firstName : firstName,
+            ApiKey.lastName: lastName,
             ApiKey.authToken: accessToken,
             ApiKey.createdAt : createdAt,
             ApiKey.email : email,
