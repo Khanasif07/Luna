@@ -48,7 +48,12 @@ class FirestoreController:NSObject{
                 if Auth.auth().currentUser?.isEmailVerified ?? false {
                     AppUserDefaults.save(value: uid, forKey: .uid)
                     AppUserDefaults.save(value: uid, forKey: .accesstoken)
+                    UserModel.main.id = uid
+                    UserModel.main.accessToken = uid
                 }
+                UserModel.main.email = withEmail
+                UserModel.main.password = password
+                UserModel.main.canChangePassword = true
                 AppUserDefaults.save(value: withEmail, forKey: .defaultEmail)
                 AppUserDefaults.save(value: password, forKey: .defaultPassword)
                 success()

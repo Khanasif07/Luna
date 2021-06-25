@@ -463,6 +463,10 @@ extension LoginViewController: ASAuthorizationControllerDelegate,ASAuthorization
                     AppUserDefaults.save(value: currentUser.uid, forKey: .uid)
                     AppUserDefaults.save(value: currentUser.uid, forKey: .accesstoken)
                     AppUserDefaults.save(value: currentUser.email ?? "", forKey: .defaultEmail)
+                    UserModel.main.id = currentUser.uid
+                    UserModel.main.accessToken = currentUser.uid
+                    UserModel.main.email = currentUser.email ?? ""
+                    UserModel.main.canChangePassword = false
                 }
                 DispatchQueue.main.async {
                     self.goToProfileSetupVC()
@@ -517,7 +521,11 @@ extension LoginViewController: GIDSignInDelegate {
                 AppUserDefaults.save(value: currentUser.uid, forKey: .uid)
                 AppUserDefaults.save(value: currentUser.uid, forKey: .accesstoken)
                 AppUserDefaults.save(value: currentUser.email ?? "", forKey: .defaultEmail)
+                UserModel.main.id = currentUser.uid
+                UserModel.main.accessToken = currentUser.uid
             }
+            UserModel.main.email = "\(user.profile.email ?? "")"
+            UserModel.main.canChangePassword = false
             DispatchQueue.main.async {
                 self.self.goToProfileSetupVC()
             }

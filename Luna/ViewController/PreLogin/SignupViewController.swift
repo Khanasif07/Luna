@@ -405,6 +405,10 @@ extension SignupViewController: ASAuthorizationControllerDelegate,ASAuthorizatio
                     AppUserDefaults.save(value: currentUser.uid, forKey: .uid)
                     AppUserDefaults.save(value: currentUser.uid, forKey: .accesstoken)
                     AppUserDefaults.save(value: currentUser.email ?? "", forKey: .defaultEmail)
+                    UserModel.main.id = currentUser.uid
+                    UserModel.main.accessToken = currentUser.uid
+                    UserModel.main.email = currentUser.email ?? ""
+                    UserModel.main.canChangePassword = false
                 }
                 CommonFunctions.hideActivityLoader()
                 DispatchQueue.main.async {
@@ -460,6 +464,10 @@ extension SignupViewController: GIDSignInDelegate {
                 AppUserDefaults.save(value: currentUser.uid, forKey: .uid)
                 AppUserDefaults.save(value: currentUser.uid, forKey: .accesstoken)
                 AppUserDefaults.save(value: currentUser.email ?? "", forKey: .defaultEmail)
+                UserModel.main.id = currentUser.uid
+                UserModel.main.accessToken = currentUser.uid
+                UserModel.main.email = currentUser.email ?? ""
+                UserModel.main.canChangePassword = false
             }
             DispatchQueue.main.async {
                 self.self.goToProfileSetupVC()

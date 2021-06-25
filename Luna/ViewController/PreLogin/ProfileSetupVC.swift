@@ -272,7 +272,10 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                     guard let self = `self` else { return }
                     if  self.messageListing.endIndex == 12 {
                         AppUserDefaults.save(value: true, forKey: .isProfileStepCompleted)
-                        print("\(self.senderName)=\(self.senderLastName)=\(self.senderDob)=\(self.diabetesType)")
+                        UserModel.main.firstName = self.senderName
+                        UserModel.main.lastName = self.senderLastName
+                        UserModel.main.dob = self.self.senderDob
+                        UserModel.main.diabetesType = self.diabetesType
                         AppRouter.gotoHomeVC()
                     }
                     if  self.messageListing.endIndex == 10 {

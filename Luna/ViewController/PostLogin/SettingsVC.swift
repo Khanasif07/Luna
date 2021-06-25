@@ -7,6 +7,7 @@
 
 
 import UIKit
+import FirebaseAuth
 
 class SettingsVC: UIViewController {
     
@@ -57,6 +58,7 @@ extension SettingsVC {
     private func performCleanUp() {
         let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
         AppUserDefaults.removeAllValues()
+        UserModel.main = UserModel()
         AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
@@ -114,19 +116,33 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
             let vc = ChangePasswordVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)
         case sections[6].1:
-            FirestoreController.currentUser?.delete { error in
-              if let error = error {
-                CommonFunctions.showToastWithMessage(error.localizedDescription)
-              } else {
-                self.performCleanUp()
-                AppRouter.goToSignUpVC()
-              }
-            }
+            showAlertWithAction(title: "Delete Account", msg: "Are you sure want to delete account?", cancelTitle: "No", actionTitle: "Yes") {
+                let email = AppUserDefaults.value(forKey: .defaultEmail).stringValue
+                let password = AppUserDefaults.value(forKey: .defaultPassword).stringValue
+                let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+                FirestoreController.currentUser?.reauthenticate(with: credential, completion: { (result, error) in
+                    if let error = error {
+                        CommonFunctions.showToastWithMessage(error.localizedDescription)
+                    }
+                    else {
+                        FirestoreController.currentUser?.delete { error in
+                            if let error = error {
+                                CommonFunctions.showToastWithMessage(error.localizedDescription)
+                            } else {
+                                self.performCleanUp()
+                                AppRouter.goToSignUpVC()
+                            }
+                        }
+                    }
+                })
+            } cancelcompletion: {}
         case sections[7].1:
-            FirestoreController.logOut { (isLogout) in
-                self.performCleanUp()
-                AppRouter.goToSignUpVC()
-            }
+            showAlertWithAction(title: "Logout", msg: "Are you sure want to logout?", cancelTitle: "No", actionTitle: "Yes") {
+                FirestoreController.logOut { (isLogout) in
+                    self.performCleanUp()
+                    AppRouter.goToSignUpVC()
+                }
+            } cancelcompletion: {}
         case sections[5].1:
             let vc = AboutSectionVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)
