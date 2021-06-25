@@ -32,7 +32,6 @@ class ForgotPasswordVC: UIViewController {
         super.viewDidLayoutSubviews()
         backBtnView.round()
         emailTxtField.layer.cornerRadius = 8.0
-        emailTxtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         confirmBtn.round(radius: 8.0)
     }
     
@@ -44,17 +43,24 @@ class ForgotPasswordVC: UIViewController {
     
     
     @IBAction func confirmEmailAction(_ sender: AppButton) {
-        CommonFunctions.showActivityLoader()
-            FirestoreController.forgetPassword(email:  self.emailTxt, completion: {
-                CommonFunctions.hideActivityLoader()
-                self.gotoPassResetPopUpVC()
-            }) { (error) -> (Void) in
-                CommonFunctions.hideActivityLoader()
-                CommonFunctions.showToastWithMessage(error.localizedDescription)
+        if !self.isEmailValid(string: self.emailTxt).0{
+            self.emailTxtField.setError(self.isEmailValid(string: self.emailTxt).1)
+            CommonFunctions.delay(delay: 1.0) {
+                self.emailTxtField.setError("",show: false)
             }
+            return
+        }
+        CommonFunctions.showActivityLoader()
+        FirestoreController.forgetPassword(email:  self.emailTxt, completion: {
+            self.emailTxtField.text = ""
+            CommonFunctions.hideActivityLoader()
+            self.gotoPassResetPopUpVC()
+        }) { (error) -> (Void) in
+            self.emailTxtField.text = ""
+            CommonFunctions.hideActivityLoader()
+            CommonFunctions.showToastWithMessage(error.localizedDescription)
+        }
     }
-    
-    
 }
 
 // MARK: - Extension For Functions
@@ -73,7 +79,7 @@ extension ForgotPasswordVC {
         scene.popupType = .resetPassword 
         scene.resetPasswordSuccess  = { [weak self] in
             guard let selff = self else { return }
-            selff.pop()
+            print(selff)
         }
         self.present(scene, animated: true, completion: nil)
     }

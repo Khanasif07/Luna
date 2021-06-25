@@ -7,6 +7,7 @@
 
 
 import UIKit
+import SwiftKeychainWrapper
 import FirebaseAuth
 
 class SettingsVC: UIViewController {
@@ -63,15 +64,17 @@ extension SettingsVC {
         }
     }
     
-    private func performCleanUp() {
+    private func performCleanUp(for_logout: Bool = true) {
         let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
         let isBiometricSelected  = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
         let isBiometricCompleted  = AppUserDefaults.value(forKey: .isBiometricCompleted).boolValue
         AppUserDefaults.removeAllValues()
         UserModel.main = UserModel()
+        if for_logout {
         AppUserDefaults.save(value: isBiometricSelected, forKey: .isBiometricSelected)
         AppUserDefaults.save(value: isBiometricCompleted, forKey: .isBiometricCompleted)
         AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
+        }
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
 }
@@ -141,7 +144,9 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
                             if let error = error {
                                 CommonFunctions.showToastWithMessage(error.localizedDescription)
                             } else {
-                                self.performCleanUp()
+                                KeychainWrapper.standard.removeObject(forKey: ApiKey.password)
+                                KeychainWrapper.standard.removeObject(forKey: ApiKey.email)
+                                self.performCleanUp(for_logout: false)
                                 AppRouter.goToSignUpVC()
                             }
                         }
@@ -152,7 +157,7 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
             showAlertWithAction(title: "Logout", msg: "Are you sure want to logout?", cancelTitle: "No", actionTitle: "Yes") {
                 FirestoreController.logOut { (isLogout) in
                     self.performCleanUp()
-                    AppRouter.goToSignUpVC()
+                    AppRouter.goToLoginVC()
                 }
             } cancelcompletion: {}
         case "About":

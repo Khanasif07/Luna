@@ -113,14 +113,7 @@ extension SignupViewController {
         let scene =  PassResetPopUpVC.instantiate(fromAppStoryboard: .PreLogin)
         scene.emailVerificationSuccess = { [weak self] in
             guard let selff = self else { return }
-            let loginVC = LoginViewController.instantiate(fromAppStoryboard: .PreLogin)
-            loginVC.emailTxt = AppUserDefaults.value(forKey: .defaultEmail).stringValue
-            loginVC.passTxt = AppUserDefaults.value(forKey: .defaultPassword).stringValue
-            selff.navigationController?.pushViewController(loginVC, animated: true)
-//            let mailURL = URL(string: "message://")!
-//            if UIApplication.shared.canOpenURL(mailURL) {
-//                UIApplication.shared.open(mailURL, options: [:], completionHandler: nil)
-//            }
+            print(selff)
         }
         scene.popupType = .emailVerification
         scene.titleDesc = LocalizedString.email_verification.localized
@@ -208,6 +201,13 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
             [cell.emailIdTxtField,cell.passTxtField].forEach({$0?.delegate = self})
             cell.signUpBtnTapped = { [weak self]  (sender) in
                 guard let `self` = self else { return }
+                if !self.isEmailValid(string: self.emailTxt).0{
+                    cell.emailIdTxtField.setError(self.isEmailValid(string: self.emailTxt).1)
+                    CommonFunctions.delay(delay: 1.0) {
+                        cell.emailIdTxtField.setError("",show: false)
+                    }
+                    return
+                }
                 CommonFunctions.showActivityLoader()
                 FirestoreController.createUserNode(userId: "", email: self.emailTxt, password: self.passTxt, name: "", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
                         self.reloadUser { (reloadMsg) in
@@ -257,7 +257,7 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
             }
             cell.loginBtnTapped = { [weak self] in
                 guard let self = `self` else { return }
-                self.gotoLoginVC()
+                self.pop()
             }
             return cell
         }

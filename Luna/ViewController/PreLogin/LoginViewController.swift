@@ -114,6 +114,12 @@ extension LoginViewController {
         GIDSignIn.sharedInstance().signIn()
     }
     
+    
+    func goToSignUpVC() {
+        let signupVC = SignupViewController.instantiate(fromAppStoryboard: .PreLogin)
+        self.navigationController?.pushViewController(signupVC, animated: true)
+    }
+    
     private func goToForgotPassVC(){
         let forgotPassVC  = ForgotPasswordVC.instantiate(fromAppStoryboard: .PreLogin)
         self.navigationController?.pushViewController(forgotPassVC, animated: true)
@@ -212,6 +218,13 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
             [cell.emailIdTxtField,cell.passTxtField].forEach({$0?.delegate = self})
             cell.signUpBtnTapped = { [weak self]  (sender) in
                 guard let `self` = self else { return }
+                if !self.isEmailValid(string: self.emailTxt).0{
+                    cell.emailIdTxtField.setError(self.isEmailValid(string: self.emailTxt).1)
+                    CommonFunctions.delay(delay: 1.0) {
+                        cell.emailIdTxtField.setError("",show: false)
+                    }
+                    return
+                }
                 CommonFunctions.showActivityLoader()
                 if let currentUser = Auth.auth().currentUser {
                     self.reloadUser { (reloadMsg) in
@@ -311,7 +324,7 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
             }
             cell.loginBtnTapped = { [weak self] in
                 guard let self = `self` else { return }
-                self.pop()
+                self.goToSignUpVC()
             }
             return cell
         }
