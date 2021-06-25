@@ -84,12 +84,6 @@ class ProfileSetupVC: UIViewController {
     
     // MARK: - IBActions
     //===========================
-    @IBAction func logoutBtnTapped(_ sender: UIButton) {
-        FirestoreController.logOut { (isLogout) in
-            self.performCleanUp()
-            AppRouter.goToSignUpVC()
-        }
-    }
     
     @IBAction func sendBtnTapped(_ sender: AppButton) {
         self.view.endEditing(true)
@@ -97,7 +91,7 @@ class ProfileSetupVC: UIViewController {
         guard let txt = msgTxtField.text,!txt.isEmpty else { return }
         self.msgTxtField.text = ""
         switch self.messageListing.endIndex {
-        case 4:
+        case 3:
             senderName = txt
             let senderMessage = Message(txt, "Sender")
             self.messageListing.append(senderMessage)
@@ -108,7 +102,7 @@ class ProfileSetupVC: UIViewController {
                 self.messageTableView.reloadData()
                 self.scrollMsgToBottom()
             }
-        case 6:
+        case 5:
             msgTxtField.keyboardType = .numberPad
             msgTxtField.placeholder = "01/01/2000"
             self.senderLastName = txt
@@ -121,7 +115,7 @@ class ProfileSetupVC: UIViewController {
                 self.messageTableView.reloadData()
                 self.scrollMsgToBottom()
             }
-        case 8:
+        case 7:
             msgTxtField.keyboardType = .default
             msgTxtField.placeholder = ""
             self.senderDob = txt
@@ -149,15 +143,8 @@ class ProfileSetupVC: UIViewController {
 //===========================
 extension ProfileSetupVC {
     
-    private func performCleanUp() {
-        let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
-        AppUserDefaults.removeAllValues()
-        AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
-        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-    }
-    
     private func initialSetup() {
-        bottomContainerBtmConst.constant = (-68.0 - bottomSafeArea)
+        self.bottomContainerBtmConst.constant = 0.0
         sendBtn.isEnabledWithoutBackground = false
         msgTxtField.delegate = self
         containerScrollView.delegate = self
@@ -175,7 +162,7 @@ extension ProfileSetupVC {
        }
        
        private func setupTData() {
-        self.messageListing = [Message("Hello and welcome to Luna !", "Receiver"),Message("Do you have 15 minutes now to set up the system ?", "Receiver"),Message("", "Sender","Decision")]
+        self.messageListing = [Message("Hello and welcome to Luna !", "Receiver"),Message("Please provide your details to set up your profile", "Receiver"),Message("What is your first name ?", "Receiver")]
         self.messageTableView.reloadWithAnimation()
        }
     
@@ -247,12 +234,12 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                 senderDecisionCell.yesBtnTapped  = {[weak self] in
                     guard let self = `self` else { return }
                     if  self.messageListing.endIndex == 3 {
-//                    self.bottomContainerBtmConst.constant = 0.0
-//                    senderDecisionCell.yesBtn.isSelected = true
-//                    let message = Message("What is your first name?", "Receiver")
-//                    self.messageListing.append(message)
-//                    self.messageTableView.reloadData()
-//                    self.scrollMsgToBottom()
+                    self.bottomContainerBtmConst.constant = 0.0
+                    senderDecisionCell.yesBtn.isSelected = true
+                    let message = Message("What is your first name?", "Receiver")
+                    self.messageListing.append(message)
+                    self.messageTableView.reloadData()
+                    self.scrollMsgToBottom()
                     }
                 }
                 senderDecisionCell.noBtnTapped  = {[weak self] in
@@ -263,13 +250,13 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
             case "Type":
                 let typeCell = tableView.dequeueCell(with: TypeTableCell.self)
                 typeCell.configureCell()
-                if self.messageListing.endIndex - 1 == indexPath.row &&  self.messageListing.endIndex == 13  {
+                if self.messageListing.endIndex - 1 == indexPath.row &&  self.messageListing.endIndex == 12  {
                     typeCell.type1Btn.isHidden = true
                     typeCell.type2Btn.setTitle("Yes", for: .normal)
                 }
                 typeCell.type1BtnTapped = {[weak self] in
                     guard let self = `self` else { return }
-                    if  self.messageListing.endIndex == 11 {
+                    if  self.messageListing.endIndex == 10 {
                         self.bottomContainerBtmConst.constant = (-68.0 - self.bottomSafeArea)
                         typeCell.type1Btn.isSelected = true
                         self.diabetesType = typeCell.type1Btn.titleLabel?.text ?? ""
@@ -283,12 +270,12 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                 }
                 typeCell.type2BtnTapped = {[weak self] in
                     guard let self = `self` else { return }
-                    if  self.messageListing.endIndex == 13 {
+                    if  self.messageListing.endIndex == 12 {
                         AppUserDefaults.save(value: true, forKey: .isProfileStepCompleted)
                         print("\(self.senderName)=\(self.senderLastName)=\(self.senderDob)=\(self.diabetesType)")
                         AppRouter.gotoHomeVC()
                     }
-                    if  self.messageListing.endIndex == 11 {
+                    if  self.messageListing.endIndex == 10 {
                         self.bottomContainerBtmConst.constant = (-68.0 - self.bottomSafeArea)
                         typeCell.type2Btn.isSelected = true
                         self.diabetesType = typeCell.type2Btn.titleLabel?.text ?? ""
@@ -347,7 +334,7 @@ extension ProfileSetupVC: UITextFieldDelegate{
         let newString: NSString =
             currentString.replacingCharacters(in: range, with: string) as NSString
         switch self.messageListing.endIndex {
-        case 8:
+        case 7:
             switch txt.count {
             case 2:
                 msgTxtField.text = txt + "/"
