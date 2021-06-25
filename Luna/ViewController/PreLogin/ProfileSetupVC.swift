@@ -324,6 +324,13 @@ extension ProfileSetupVC: UIGestureRecognizerDelegate, UIScrollViewDelegate {
 extension ProfileSetupVC: UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         let txt = textField.text?.byRemovingLeadingTrailingWhiteSpaces ?? ""
+        switch self.messageListing.endIndex {
+        case 7:
+            sendBtn.isEnabledWithoutBackground = !(txt.count != 10)
+        default:
+            sendBtn.isEnabledWithoutBackground = !(txt.count == 0)
+        }
+        sendBtn.isEnabledWithoutBackground = !(txt.count == 0)
         print(txt)
     }
 
@@ -346,8 +353,8 @@ extension ProfileSetupVC: UITextFieldDelegate{
             sendBtn.isEnabledWithoutBackground = !(newString.length != 10)
             return (string.checkIfValidCharaters(.name) || string.isEmpty) && newString.length <= 10
         default:
-            sendBtn.isEnabledWithoutBackground = !(newString.length == 0)
-            return (string.checkIfValidCharaters(.name) || string.isEmpty) && newString.length <= 25
+            sendBtn.isEnabledWithoutBackground = !(txt.count == 0)
+            return (string.checkIfValidCharaters(.email) || string.isEmpty) && newString.length <= 25
         }
     }
 }
