@@ -225,9 +225,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
                             print(error.localizedDescription)
                         } else {
                             self.reloadUser { (reloadMsg) in
-                                print(reloadMsg?.localizedDescription ?? "")
+                                if !isUserLoggedin{
+                                    AppRouter.checkEmailVerificationFlow(email: FirestoreController.currentUser?.email ?? "")
+                                    CommonFunctions.showToastWithMessage("Email was successfully verified")
+                                }
                             }
-                            CommonFunctions.showToastWithMessage("Email was successfully verified")
                         }
                     }
                 }
@@ -253,7 +255,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
     }
     
     func reloadUser(_ callback: ((Error?) -> ())? = nil){
-        Auth.auth().currentUser?.reload(completion: { (error) in
+        FirestoreController.currentUser?.reload(completion: { (error) in
             callback?(error)
         })
     }

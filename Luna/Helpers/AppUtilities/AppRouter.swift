@@ -51,22 +51,15 @@ enum AppRouter {
         }
     }
     
-    static func checkEmailVerificationFlow() {
+    static func checkEmailVerificationFlow(email: String) {
         guard let nav: UINavigationController = AppDelegate.shared.window?.rootViewController as? UINavigationController else { return }
-        if let homeScene = nav.hasViewController(ofKind: HomeVC.self) as? HomeVC {
+        if let homeScene = nav.hasViewController(ofKind: LoginViewController.self) as? LoginViewController {
+            homeScene.emailTxt = email
             let navigationController = UINavigationController(rootViewController: homeScene)
             navigationController.setNavigationBarHidden(true, animated: true)
             defaultSetAsWindowRoot(navigationController)
-//            let chatScene = OneToOneChatVC.instantiate(fromAppStoryboard: .PreLogin)
-//            navigationController.pushViewController(chatScene, animated: true)
         } else {
-            if let vwController = (nav.hasViewController(ofKind: LoginViewController.self) as? LoginViewController) {
-                nav.popToViewController(vwController, animated: true)
-                return
-            } else {
-                let chatScene = SignupViewController.instantiate(fromAppStoryboard: .PreLogin)
-                nav.pushViewController(chatScene, animated: true)
-            }
+            AppRouter.goToLoginVC()
         }
     }
     

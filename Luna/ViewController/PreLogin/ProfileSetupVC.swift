@@ -270,7 +270,7 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                 }
                 typeCell.type2BtnTapped = {[weak self] in
                     guard let self = `self` else { return }
-                    if  self.messageListing.endIndex == 12 {
+                    if  self.messageListing.endIndex - 1 == indexPath.row && self.messageListing.endIndex == 12 {
                         AppUserDefaults.save(value: true, forKey: .isProfileStepCompleted)
                         UserModel.main.firstName = self.senderName
                         UserModel.main.lastName = self.senderLastName
@@ -330,8 +330,6 @@ extension ProfileSetupVC: UITextFieldDelegate{
         default:
             sendBtn.isEnabledWithoutBackground = !(txt.count == 0)
         }
-        sendBtn.isEnabledWithoutBackground = !(txt.count == 0)
-        print(txt)
     }
 
     

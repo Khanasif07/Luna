@@ -44,7 +44,6 @@ class LoginViewController: UIViewController {
         if #available(iOS 13.0, *) {
             return .darkContent
         } else {
-            // Fallback on earlier versions
             return .lightContent
         }
     }
@@ -73,6 +72,10 @@ extension LoginViewController {
     
     private func initialSetup() {
         self.tableViewSetUp()
+        self.showBiometricAuthentication()
+    }
+    
+    private func showBiometricAuthentication(){
         if  AppUserDefaults.value(forKey: .isBiometricCompleted).boolValue {
             if  AppUserDefaults.value(forKey: .isBiometricSelected).boolValue{
                 self.bioMetricSignin()
@@ -103,7 +106,7 @@ extension LoginViewController {
     }
     
     func reloadUser(_ callback: ((Error?) -> ())? = nil){
-        Auth.auth().currentUser?.reload(completion: { (error) in
+        FirestoreController.currentUser?.reload(completion: { (error) in
             callback?(error)
         })
     }
@@ -246,7 +249,7 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                             }
                         } else {
                             CommonFunctions.hideActivityLoader()
-                            Auth.auth().currentUser?.sendEmailVerification(with: self.getActionCodes(), completion: { (err) in
+                            FirestoreController.currentUser?.sendEmailVerification(with: self.getActionCodes(), completion: { (err) in
                                 if let err = err {
                                     print(err.localizedDescription)
                                     CommonFunctions.showToastWithMessage(err.localizedDescription)
@@ -261,11 +264,11 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                 } else {
                     FirestoreController.login(userId: "", withEmail: self.emailTxt, with: self.passTxt, success: {
                         CommonFunctions.hideActivityLoader()
-                        if Auth.auth().currentUser?.isEmailVerified ?? false {
+                        if FirestoreController.currentUser?.isEmailVerified ?? false {
                                 self.goToProfileSetupVC()
                         } else {
                             CommonFunctions.hideActivityLoader()
-                            Auth.auth().currentUser?.sendEmailVerification(with: self.getActionCodes(), completion: { (err) in
+                            FirestoreController.currentUser?.sendEmailVerification(with: self.getActionCodes(), completion: { (err) in
                                 if let err = err {
                                     print(err.localizedDescription)
                                     CommonFunctions.showToastWithMessage(err.localizedDescription)

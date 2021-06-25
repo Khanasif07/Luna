@@ -89,7 +89,7 @@ extension SignupViewController {
     }
     
     func reloadUser(_ callback: ((Error?) -> ())? = nil){
-        Auth.auth().currentUser?.reload(completion: { (error) in
+        FirestoreController.currentUser?.reload(completion: { (error) in
             callback?(error)
         })
     }
@@ -158,8 +158,8 @@ extension SignupViewController {
             AppUserDefaults.save(value: true, forKey: .isBiometricCompleted)
             self.sendEmailVerificationLink()
         } cancelcompletion: {
-            KeychainWrapper.standard.set("", forKey: ApiKey.email)
-            KeychainWrapper.standard.set("", forKey: ApiKey.password)
+            KeychainWrapper.standard.removeObject(forKey: ApiKey.password)
+            KeychainWrapper.standard.removeObject(forKey: ApiKey.email)
             AppUserDefaults.save(value: false, forKey: .isBiometricSelected)
             AppUserDefaults.save(value: true, forKey: .isBiometricCompleted)
             self.sendEmailVerificationLink()
@@ -167,9 +167,8 @@ extension SignupViewController {
     }
     
     private func sendEmailVerificationLink(){
-        Auth.auth().currentUser?.sendEmailVerification(with: self.getActionCodes(), completion: { (err) in
+        FirestoreController.currentUser?.sendEmailVerification(with: self.getActionCodes(), completion: { (err) in
             if let err = err {
-                print(err.localizedDescription)
                 CommonFunctions.showToastWithMessage(err.localizedDescription)
                 return
             }
@@ -214,7 +213,7 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
                             print(reloadMsg?.localizedDescription ?? "")
                         }
                         CommonFunctions.hideActivityLoader()
-                        if Auth.auth().currentUser?.isEmailVerified ?? false{
+                        if FirestoreController.currentUser?.isEmailVerified ?? false{
                             self.goToProfileSetupVC()
                         }else{
                             if  AppUserDefaults.value(forKey: .isBiometricSelected).boolValue{
