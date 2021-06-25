@@ -84,6 +84,13 @@ class ProfileSetupVC: UIViewController {
     
     // MARK: - IBActions
     //===========================
+    @IBAction func logoutBtnTapped(_ sender: UIButton) {
+        FirestoreController.logOut { (isLogout) in
+            self.performCleanUp()
+            AppRouter.goToSignUpVC()
+        }
+    }
+    
     @IBAction func sendBtnTapped(_ sender: AppButton) {
         self.view.endEditing(true)
         sendBtn.isEnabledWithoutBackground = false
@@ -141,6 +148,13 @@ class ProfileSetupVC: UIViewController {
 // MARK: - Extension For Functions
 //===========================
 extension ProfileSetupVC {
+    
+    private func performCleanUp() {
+        let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
+        AppUserDefaults.removeAllValues()
+        AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+    }
     
     private func initialSetup() {
         bottomContainerBtmConst.constant = (-68.0 - bottomSafeArea)
@@ -233,12 +247,12 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                 senderDecisionCell.yesBtnTapped  = {[weak self] in
                     guard let self = `self` else { return }
                     if  self.messageListing.endIndex == 3 {
-                    self.bottomContainerBtmConst.constant = 0.0
-                    senderDecisionCell.yesBtn.isSelected = true
-                    let message = Message("What is your first name?", "Receiver")
-                    self.messageListing.append(message)
-                    self.messageTableView.reloadData()
-                    self.scrollMsgToBottom()
+//                    self.bottomContainerBtmConst.constant = 0.0
+//                    senderDecisionCell.yesBtn.isSelected = true
+//                    let message = Message("What is your first name?", "Receiver")
+//                    self.messageListing.append(message)
+//                    self.messageTableView.reloadData()
+//                    self.scrollMsgToBottom()
                     }
                 }
                 senderDecisionCell.noBtnTapped  = {[weak self] in

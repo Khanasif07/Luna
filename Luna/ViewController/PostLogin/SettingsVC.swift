@@ -17,7 +17,7 @@ class SettingsVC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var sections: [(UIImage,String)] = [(#imageLiteral(resourceName: "profile"),"Profile"),(#imageLiteral(resourceName: "changePassword"),"Change Password"),(#imageLiteral(resourceName: "faceId"),"Face ID"),(#imageLiteral(resourceName: "appleHealth"),"Apple Health"),(#imageLiteral(resourceName: "system"),"System"),(#imageLiteral(resourceName: "about"),"About"),(#imageLiteral(resourceName: "deleteAccount"),"Delete Account")]
+    var sections: [(UIImage,String)] = [(#imageLiteral(resourceName: "profile"),"Profile"),(#imageLiteral(resourceName: "changePassword"),"Change Password"),(#imageLiteral(resourceName: "faceId"),"Face ID"),(#imageLiteral(resourceName: "appleHealth"),"Apple Health"),(#imageLiteral(resourceName: "system"),"System"),(#imageLiteral(resourceName: "about"),"About"),(#imageLiteral(resourceName: "deleteAccount"),"Delete Account"),(#imageLiteral(resourceName: "deleteAccount"),"Logout")]
     
     // MARK: - Lifecycle
     //===========================
@@ -74,12 +74,29 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueCell(with: SettingTableCell.self)
         cell.titleLbl.text = sections[indexPath.row].1
         cell.logoImgView.image = sections[indexPath.row].0
-        if indexPath.row == 2 || indexPath.row == 3 {
+        switch indexPath.row {
+        case 2:
             cell.nextBtn.isHidden = true
             cell.switchView.isHidden = false
-        }else {
+            cell.switchView.isOn = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
+        case 3:
+            cell.nextBtn.isHidden = true
+            cell.switchView.isHidden = false
+            cell.switchView.isOn = true
+        default:
             cell.nextBtn.isHidden = false
             cell.switchView.isHidden = true
+        }
+        cell.switchTapped = { [weak self] sender in
+            guard let self = self else { return }
+            if indexPath.row == 2 {
+                let isOn = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
+                AppUserDefaults.save(value: !isOn, forKey: .isBiometricSelected)
+                self.settingTableView.reloadData()
+            }
+            if indexPath.row == 3 {
+                CommonFunctions.showToastWithMessage("Under Development")
+            }
         }
         return cell
     }
@@ -104,6 +121,11 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
                 self.performCleanUp()
                 AppRouter.goToSignUpVC()
               }
+            }
+        case sections[7].1:
+            FirestoreController.logOut { (isLogout) in
+                self.performCleanUp()
+                AppRouter.goToSignUpVC()
             }
         case sections[5].1:
             let vc = AboutSectionVC.instantiate(fromAppStoryboard: .PostLogin)

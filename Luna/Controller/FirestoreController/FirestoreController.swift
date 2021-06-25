@@ -166,7 +166,9 @@ class FirestoreController:NSObject{
             if error == nil {
                 completion()
             }else{
-                failure(error?.localizedDescription as! Error)
+                if let error = error {
+                failure(error)
+                }
             }
         }
     }

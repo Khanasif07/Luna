@@ -9,6 +9,8 @@ import UIKit
 
 class SettingTableCell: UITableViewCell {
     
+    var switchTapped: ((UISwitch)->())?
+    
     // MARK: - IBOutlets
     //===========================
     @IBOutlet weak var nextBtn: UIButton!
@@ -32,6 +34,11 @@ class SettingTableCell: UITableViewCell {
     
     // MARK: - IBActions
     //===========================
+    @IBAction func switchBtnAction(_ sender: UISwitch) {
+        if let handle = switchTapped{
+            handle(sender)
+        }
+    }
     
     
 }

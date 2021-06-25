@@ -502,11 +502,21 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BK2-SL-eaZ">
+                                                <rect key="frame" x="341" y="6" width="53" height="32"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                <state key="normal" title="Logout"/>
+                                                <connections>
+                                                    <action selector="logoutBtnTapped:" destination="p8z-xT-HIy" eventType="touchUpInside" id="Fa2-ZI-yCN"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="I0v-YV-Xca" firstAttribute="leading" secondItem="qyg-fs-Qdz" secondAttribute="leading" constant="20" id="5wx-YC-bOK"/>
                                             <constraint firstItem="I0v-YV-Xca" firstAttribute="centerY" secondItem="qyg-fs-Qdz" secondAttribute="centerY" id="hmk-EI-b62"/>
+                                            <constraint firstAttribute="trailing" secondItem="BK2-SL-eaZ" secondAttribute="trailing" constant="20" id="lc1-yF-PTa"/>
+                                            <constraint firstItem="BK2-SL-eaZ" firstAttribute="centerY" secondItem="qyg-fs-Qdz" secondAttribute="centerY" id="maL-gm-lvh"/>
                                             <constraint firstAttribute="height" constant="44" id="xkl-Pw-RNc"/>
                                         </constraints>
                                     </view>
