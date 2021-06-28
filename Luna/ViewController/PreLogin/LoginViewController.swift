@@ -239,6 +239,8 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                         if  (currentUser.isEmailVerified) {
                             FirestoreController.login(userId: currentUser.uid, withEmail: self.emailTxt, with: self.passTxt, success: {
                                 CommonFunctions.hideActivityLoader()
+                                self.passTxt = ""
+                                self.loginTableView.reloadData()
                                 self.goToProfileSetupVC()
                                 //                        FirestoreController.setFirebaseData(userId: "", email: self.emailTxt, password: self.passTxt, name:"", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
                                 //                            CommonFunctions.hideActivityLoader()
@@ -261,6 +263,8 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                                     return
                                 }
                                 DispatchQueue.main.async {
+                                    self.passTxt = ""
+                                    self.loginTableView.reloadData()
                                     self.gotoEmailVerificationPopUpVC()
                                 }
                             })
@@ -270,16 +274,19 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                     FirestoreController.login(userId: "", withEmail: self.emailTxt, with: self.passTxt, success: {
                         CommonFunctions.hideActivityLoader()
                         if Auth.auth().currentUser?.isEmailVerified ?? false {
+                                self.passTxt = ""
+                                self.loginTableView.reloadData()
                                 self.goToProfileSetupVC()
                         } else {
                             CommonFunctions.hideActivityLoader()
                             Auth.auth().currentUser?.sendEmailVerification(with: self.getActionCodes(), completion: { (err) in
                                 if let err = err {
-                                    print(err.localizedDescription)
                                     CommonFunctions.showToastWithMessage(err.localizedDescription)
                                     return
                                 }
                                 DispatchQueue.main.async {
+                                    self.passTxt = ""
+                                    self.loginTableView.reloadData()
                                     self.gotoEmailVerificationPopUpVC()
                                 }
                             })

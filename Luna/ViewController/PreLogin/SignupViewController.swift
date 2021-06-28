@@ -214,13 +214,13 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
                         }
                         CommonFunctions.hideActivityLoader()
                     if Auth.auth().currentUser?.isEmailVerified ?? false{
+                            self.passTxt = ""
+                            self.signupTableView.reloadData()
                             self.goToProfileSetupVC()
                         }else{
-                            if  AppUserDefaults.value(forKey: .isBiometricSelected).boolValue{
-                                self.sendEmailVerificationLink()
-                            }else{
-                                self.showAlertForBiometric()
-                            }
+                            self.passTxt = ""
+                            self.signupTableView.reloadData()
+                            self.showAlertForBiometric()
                         }
                     }) { (error) -> (Void)  in
                         print( error.localizedDescription)
