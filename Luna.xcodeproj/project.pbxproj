@@ -25,6 +25,7 @@
 		8455A3C8268211770061C55F /* SettingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8455A3C6268211770061C55F /* SettingTableCell.xib */; };
 		847899732684824F00D1DF36 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847899722684824F00D1DF36 /* HomeVC.swift */; };
 		847899762684870F00D1DF36 /* AboutSectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847899752684870F00D1DF36 /* AboutSectionVC.swift */; };
+		847D1B292689A87A00220DAE /* SystemSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D1B282689A87A00220DAE /* SystemSetupVC.swift */; };
 		84861D7726848DB1004B046C /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84861D7626848DB1004B046C /* ProfileVC.swift */; };
 		84861D7F26848EDD004B046C /* ProfileTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84861D7D26848EDD004B046C /* ProfileTableCell.swift */; };
 		84861D8026848EDD004B046C /* ProfileTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84861D7E26848EDD004B046C /* ProfileTableCell.xib */; };
@@ -119,6 +120,7 @@
 		846F1A1F2678C2220034ACE0 /* GoogleService-Info-1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-1.plist"; sourceTree = "<group>"; };
 		847899722684824F00D1DF36 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		847899752684870F00D1DF36 /* AboutSectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSectionVC.swift; sourceTree = "<group>"; };
+		847D1B282689A87A00220DAE /* SystemSetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSetupVC.swift; sourceTree = "<group>"; };
 		84861D7626848DB1004B046C /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		84861D7D26848EDD004B046C /* ProfileTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableCell.swift; sourceTree = "<group>"; };
 		84861D7E26848EDD004B046C /* ProfileTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableCell.xib; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				847899752684870F00D1DF36 /* AboutSectionVC.swift */,
 				84861D7626848DB1004B046C /* ProfileVC.swift */,
 				84861D8226849FDB004B046C /* ChangePasswordVC.swift */,
+				847D1B282689A87A00220DAE /* SystemSetupVC.swift */,
 			);
 			path = PostLogin;
 			sourceTree = "<group>";
@@ -745,6 +748,7 @@
 				84861D7726848DB1004B046C /* ProfileVC.swift in Sources */,
 				84CC12D02668CFD8009316FC /* AppUserDefaults.swift in Sources */,
 				8455492D2678FFFD000CC13D /* LoginSocialTableCell.swift in Sources */,
+				847D1B292689A87A00220DAE /* SystemSetupVC.swift in Sources */,
 				84CC12F52668D10E009316FC /* UILabelExtension.swift in Sources */,
 				84CC129C2668C822009316FC /* SceneDelegate.swift in Sources */,
 				8455A3C7268211770061C55F /* SettingTableCell.swift in Sources */,

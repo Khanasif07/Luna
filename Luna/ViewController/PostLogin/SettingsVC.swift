@@ -130,6 +130,9 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
         case "Change Password":
             let vc = ChangePasswordVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)
+        case "System":
+            let vc = SystemSetupVC.instantiate(fromAppStoryboard: .PostLogin)
+            self.navigationController?.pushViewController(vc, animated: true)
         case "Delete Account":
             showAlertWithAction(title: "Delete Account", msg: "Are you sure want to delete account?", cancelTitle: "No", actionTitle: "Yes") {
                 let email = AppUserDefaults.value(forKey: .defaultEmail).stringValue

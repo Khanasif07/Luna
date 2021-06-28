@@ -174,22 +174,16 @@ extension ProfileSetupVC {
     @objc func keyboardWillShow(sender: NSNotification) {
         containerScrollView.isScrollEnabled = true
         guard let info = sender.userInfo, let _ = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height, let duration: TimeInterval = (info[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else { return }
-        if let keyboardSize = (sender.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            messageTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        CommonFunctions.delay(delay: 0.25) {
+            self.scrollMsgToBottom()
         }
-//        CommonFunctions.delay(delay: 0.25) {
-//            self.scrollMsgToBottom()
-//        }
         UIView.animate(withDuration: duration) { self.view.layoutIfNeeded() }
     }
     
     @objc func keyboardWillHide(sender: NSNotification) {
         guard let info = sender.userInfo, let duration: TimeInterval = (info[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else { return }
-//        CommonFunctions.delay(delay: 0.25) {
-//            self.scrollMsgToBottom()
-//        }
-        if let keyboardSize = (sender.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            messageTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0.0, right: 0)
+        CommonFunctions.delay(delay: 0.25) {
+            self.scrollMsgToBottom()
         }
         UIView.animate(withDuration: duration) { self.view.layoutIfNeeded() }
     }

@@ -13,6 +13,7 @@ class SettingTableCell: UITableViewCell {
     
     // MARK: - IBOutlets
     //===========================
+    @IBOutlet weak var subTitlelbl: UILabel!
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var switchView: UISwitch!
     @IBOutlet weak var titleLbl: UILabel!
