@@ -249,7 +249,7 @@ extension UITextField {
     // Add/remove error message
     func setError(_ string: String? = nil, show: Bool = true) {
         
-        var labelFontSize = 15
+        var labelFontSize = 14
         
         if let rightView = rightView, rightView.tag != 999 {
             rightViews.setObject(rightView, forKey: self)
@@ -297,7 +297,7 @@ extension UITextField {
         label.text = string
         label.textColor = .white
         label.numberOfLines = 0
-        label.font = self.font ?? AppFonts.SF_Pro_Display_Regular.withSize(.x12)//UIFont.systemFont(ofSize: CGFloat(labelFontSize))
+        label.font = self.font ?? AppFonts.SF_Pro_Display_Regular.withSize(.x12)
         label.textColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         label.backgroundColor = .clear
         label.textAlignment = .right

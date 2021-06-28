@@ -497,7 +497,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                                         <rect key="frame" x="0.0" y="44" width="414" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile Setup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0v-YV-Xca">
-                                                <rect key="frame" x="20" y="11" width="138" height="28"/>
+                                                <rect key="frame" x="20" y="10.5" width="140.5" height="29"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -607,6 +607,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                         <outlet property="messageTableView" destination="ymu-vX-DZ5" id="0PT-sQ-75Z"/>
                         <outlet property="msgTxtField" destination="Fyo-uS-ocG" id="iEA-GV-7sN"/>
                         <outlet property="sendBtn" destination="N2r-0S-DvU" id="L3i-sW-7em"/>
+                        <outlet property="tableViewTopConst" destination="z1c-gk-G4Y" id="6YR-4h-eVZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JUY-t5-1cd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
