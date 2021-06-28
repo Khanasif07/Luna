@@ -216,9 +216,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
     
     func handleVerificationLink(_ url: URL?) -> Bool {
         guard let url = url else { return false }
-        //
-        AppRouter.checkEmailVerificationFlow(email: Auth.auth().currentUser?.email ?? "")
-        //
         let deepLinkUrl = AppDelegate.queryParameters(from: url)
         if let outerLinkString = deepLinkUrl?[ApiKey.link] {
             if let deeplinkUrl = URL(string: outerLinkString) {
