@@ -31,6 +31,7 @@ class LoginViewController: UIViewController {
     var emailTxt: String = ""
     var passTxt : String =  ""
     var currentNonce : String?
+    var isComeFromMail: Bool = false
     private let biometricIDAuth = BiometricIDAuth()
     
     // MARK: - Lifecycle
@@ -54,6 +55,10 @@ class LoginViewController: UIViewController {
         setNeedsStatusBarAppearanceUpdate()
         self.tabBarController?.tabBar.isHidden = true
         self.loginTableView.reloadData()
+        if isComeFromMail{
+            self.showBiometricAuthentication()
+            self.isComeFromMail = false
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

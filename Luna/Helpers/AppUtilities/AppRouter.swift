@@ -55,11 +55,15 @@ enum AppRouter {
         guard let nav: UINavigationController = AppDelegate.shared.window?.rootViewController as? UINavigationController else { return }
         if let homeScene = nav.hasViewController(ofKind: LoginViewController.self) as? LoginViewController {
             homeScene.emailTxt = email
+            homeScene.isComeFromMail = true
             let navigationController = UINavigationController(rootViewController: homeScene)
             navigationController.setNavigationBarHidden(true, animated: true)
             defaultSetAsWindowRoot(navigationController)
         } else {
-            AppRouter.goToLoginVC()
+            let loginVC = LoginViewController.instantiate(fromAppStoryboard: .PreLogin)
+            loginVC.emailTxt = email
+            loginVC.isComeFromMail = true
+            setAsWindowRoot(loginVC)
         }
     }
     
