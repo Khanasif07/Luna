@@ -53,13 +53,16 @@ class ForgotPasswordVC: UIViewController {
         CommonFunctions.showActivityLoader()
         FirestoreController.forgetPassword(email:  self.emailTxt, completion: {
             self.emailTxtField.text = ""
+            self.confirmBtn.isEnabled = false
             CommonFunctions.hideActivityLoader()
             self.gotoPassResetPopUpVC()
         }) { (error) -> (Void) in
             self.emailTxtField.text = ""
+            self.confirmBtn.isEnabled = false
             CommonFunctions.hideActivityLoader()
             CommonFunctions.showToastWithMessage(error.localizedDescription)
         }
+        self.emailTxt =  ""
     }
 }
 
@@ -79,6 +82,7 @@ extension ForgotPasswordVC {
         scene.popupType = .resetPassword 
         scene.resetPasswordSuccess  = { [weak self] in
             guard let selff = self else { return }
+            selff.pop()
             print(selff)
         }
         self.present(scene, animated: true, completion: nil)

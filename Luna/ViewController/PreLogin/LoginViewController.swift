@@ -296,6 +296,8 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
             }
             cell.forgotPassBtnTapped = { [weak self]  (sender) in
                 guard let `self` = self else { return }
+                self.emailTxt = ""
+                self.passTxt = ""
                 self.goToForgotPassVC()
             }
             return cell
@@ -327,6 +329,8 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
             }
             cell.loginBtnTapped = { [weak self] in
                 guard let self = `self` else { return }
+                self.emailTxt = ""
+                self.passTxt = ""
                 self.goToSignUpVC()
             }
             return cell

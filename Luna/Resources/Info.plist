@@ -30,6 +30,16 @@
 				<string>com.googleusercontent.apps.164373428024-93590uoigfhlppin1tps1fgu3m1n1o7s</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Open App</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.lunadiabetes.app</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
@@ -50,10 +60,6 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-    <key>UIBackgroundModes</key>
-    <array>
-       <string>bluetooth-central</string>
-    </array>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>$(PRODUCT_NAME) uses bluetooth to find, connect and transfer data between different BLE devices.</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>

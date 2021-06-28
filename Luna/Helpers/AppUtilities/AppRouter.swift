@@ -74,7 +74,7 @@ enum AppRouter {
         navigationController.setNavigationBarHidden(true, animated: false)
         defaultSetAsWindowRoot(navigationController)
         let signupVC = SignupViewController.instantiate(fromAppStoryboard: .PreLogin)
-        setAsWindowRoot(signupVC)
+        navigationController.pushViewController(signupVC, animated: true)
     }
     
    static func goToTermsConditionVC() {

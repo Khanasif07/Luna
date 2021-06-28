@@ -174,16 +174,22 @@ extension ProfileSetupVC {
     @objc func keyboardWillShow(sender: NSNotification) {
         containerScrollView.isScrollEnabled = true
         guard let info = sender.userInfo, let _ = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height, let duration: TimeInterval = (info[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else { return }
-        CommonFunctions.delay(delay: 0.25) {
-            self.scrollMsgToBottom()
+        if let keyboardSize = (sender.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            messageTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
         }
+//        CommonFunctions.delay(delay: 0.25) {
+//            self.scrollMsgToBottom()
+//        }
         UIView.animate(withDuration: duration) { self.view.layoutIfNeeded() }
     }
     
     @objc func keyboardWillHide(sender: NSNotification) {
         guard let info = sender.userInfo, let duration: TimeInterval = (info[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else { return }
-        CommonFunctions.delay(delay: 0.25) {
-            self.scrollMsgToBottom()
+//        CommonFunctions.delay(delay: 0.25) {
+//            self.scrollMsgToBottom()
+//        }
+        if let keyboardSize = (sender.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            messageTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0.0, right: 0)
         }
         UIView.animate(withDuration: duration) { self.view.layoutIfNeeded() }
     }
@@ -341,10 +347,9 @@ extension ProfileSetupVC: UITextFieldDelegate{
         switch self.messageListing.endIndex {
         case 7:
             switch txt.count {
-            case 2:
-                msgTxtField.text = txt + "/"
-            case 5:
-                msgTxtField.text = txt + "/"
+            case 2,5:
+                if newString.length < currentString.length {msgTxtField.text = txt } else {
+                    msgTxtField.text = txt + "/" }
             default:
                 msgTxtField.text = txt
             }
@@ -356,5 +361,3 @@ extension ProfileSetupVC: UITextFieldDelegate{
         }
     }
 }
-
-
