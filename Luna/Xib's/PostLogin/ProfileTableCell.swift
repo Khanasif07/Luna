@@ -16,11 +16,19 @@ class ProfileTableCell: UITableViewCell {
     
     // MARK: - Variables
     //===========================
+    var isSetupforPasswordTxtfield: Bool = false{
+        didSet{
+            self.setupforPasswordTxtfield()
+        }
+    }
     
     // MARK: - Lifecycle
     //===========================
     override func awakeFromNib() {
         super.awakeFromNib()
+        if isSetupforPasswordTxtfield{
+            self.setupforPasswordTxtfield()
+        }
     }
     
     override func prepareForReuse() {
@@ -37,8 +45,19 @@ class ProfileTableCell: UITableViewCell {
         }
     }
     
+    func setupforPasswordTxtfield(){
+        self.txtField.isSecureTextEntry = true
+        let show = UIButton()
+        show.isSelected = false
+        show.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
+        show.addTarget(self, action: #selector(secureTextField(_:)), for: .touchUpInside)
+        self.txtField.setButtonToRightView(btn: show, selectedImage: #imageLiteral(resourceName: "eyeClosedIcon"), normalImage: #imageLiteral(resourceName: "eyeOpenIcon"), size: CGSize(width: 22, height: 22))
+    }
     // MARK: - IBActions
     //===========================
-    
+    @objc func secureTextField(_ sender: UIButton){
+        sender.isSelected.toggle()
+        self.txtField.isSecureTextEntry = !sender.isSelected
+    }
     
 }

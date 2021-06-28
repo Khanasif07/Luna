@@ -108,6 +108,7 @@ extension ChangePasswordVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(with: ProfileTableCell.self)
+        cell.isSetupforPasswordTxtfield = true
         cell.txtField.delegate = self
         cell.titleLbl.text = sections[indexPath.row]
         return cell
