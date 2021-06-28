@@ -49,6 +49,7 @@ extension SettingsVC {
     private func initialSetup() {
         self.setUpdata()
         self.tableViewSetup()
+        self.getLoginType()
     }
     
     private func tableViewSetup(){
@@ -76,6 +77,35 @@ extension SettingsVC {
         AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
         }
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+    }
+    
+    private func removeKeychain(){
+        KeychainWrapper.standard.removeObject(forKey: ApiKey.password)
+        KeychainWrapper.standard.removeObject(forKey: ApiKey.email)
+        KeychainWrapper.standard.removeObject(forKey: ApiKey.googleIdToken)
+        KeychainWrapper.standard.removeObject(forKey: ApiKey.googleAccessToken)
+        KeychainWrapper.standard.removeObject(forKey: ApiKey.appleIdToken)
+        KeychainWrapper.standard.removeObject(forKey: ApiKey.currrentNonce)
+    }
+    
+    private func getLoginType(){
+        if let providerData = Auth.auth().currentUser?.providerData {
+            for userInfo in providerData {
+                switch userInfo.providerID {
+                case "google.com":
+                    loginType = .google
+                    return
+                case "apple.com":
+                    loginType = .apple
+                    return
+                case "password":
+                    loginType = .email_password
+                    return
+                default:
+                    print("provider is \(userInfo.providerID)")
+                }
+            }
+        }
     }
 }
 
@@ -135,32 +165,101 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
             self.navigationController?.pushViewController(vc, animated: true)
         case "Delete Account":
             showAlertWithAction(title: "Delete Account", msg: "Are you sure want to delete account?", cancelTitle: "No", actionTitle: "Yes") {
-                let email = AppUserDefaults.value(forKey: .defaultEmail).stringValue
-                let password = AppUserDefaults.value(forKey: .defaultPassword).stringValue
-                let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-                FirestoreController.currentUser?.reauthenticate(with: credential, completion: { (result, error) in
-                    if let error = error {
-                        CommonFunctions.showToastWithMessage(error.localizedDescription)
+                CommonFunctions.showActivityLoader()
+                switch loginType{
+                case .apple:
+                    guard let idTokenString = KeychainWrapper.standard.string(forKey: ApiKey.appleIdToken), let nonce = KeychainWrapper.standard.string(forKey: ApiKey.currrentNonce) else {
+                        CommonFunctions.hideActivityLoader()
+                        return
                     }
-                    else {
-                        FirestoreController.currentUser?.delete { error in
-                            if let error = error {
-                                CommonFunctions.showToastWithMessage(error.localizedDescription)
-                            } else {
-                                KeychainWrapper.standard.removeObject(forKey: ApiKey.password)
-                                KeychainWrapper.standard.removeObject(forKey: ApiKey.email)
-                                self.performCleanUp(for_logout: false)
-                                AppRouter.goToSignUpVC()
+                    let appleCredential = OAuthProvider.credential(withProviderID: "apple.com",
+                                                                      idToken: idTokenString,
+                                                                      rawNonce: nonce)
+                    Auth.auth().currentUser?.reauthenticate(with: appleCredential, completion: { (result, error) in
+                        if let error = error {
+                            CommonFunctions.hideActivityLoader()
+                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                        }
+                        else {
+                            Auth.auth().currentUser?.delete { error in
+                                if let error = error {
+                                    CommonFunctions.hideActivityLoader()
+                                    CommonFunctions.showToastWithMessage(error.localizedDescription)
+                                } else {
+                                    CommonFunctions.hideActivityLoader()
+                                    self.removeKeychain()
+                                    self.performCleanUp(for_logout: false)
+                                    DispatchQueue.main.async {
+                                        AppRouter.goToSignUpVC()
+                                    }
+                                }
                             }
                         }
+                    })
+                case .google:
+                    guard let idTokenString = KeychainWrapper.standard.string(forKey: ApiKey.googleIdToken), let accessToken = KeychainWrapper.standard.string(forKey: ApiKey.googleAccessToken) else {
+                        CommonFunctions.hideActivityLoader()
+                        return
                     }
-                })
+                    let googleCredential = GoogleAuthProvider.credential(withIDToken: idTokenString,
+                                                                   accessToken: accessToken)
+                    Auth.auth().currentUser?.reauthenticate(with: googleCredential, completion: { (result, error) in
+                        if let error = error {
+                            CommonFunctions.hideActivityLoader()
+                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                        }
+                        else {
+                            Auth.auth().currentUser?.delete { error in
+                                if let error = error {
+                                    CommonFunctions.hideActivityLoader()
+                                    CommonFunctions.showToastWithMessage(error.localizedDescription)
+                                } else {
+                                    CommonFunctions.hideActivityLoader()
+                                    self.removeKeychain()
+                                    self.performCleanUp(for_logout: false)
+                                    DispatchQueue.main.async {
+                                        AppRouter.goToSignUpVC()
+                                    }
+                                }
+                            }
+                        }
+                    })
+                case .email_password:
+                    let email = AppUserDefaults.value(forKey: .defaultEmail).stringValue
+                    let password = AppUserDefaults.value(forKey: .defaultPassword).stringValue
+                    let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+                    Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (result, error) in
+                        if let error = error {
+                            CommonFunctions.hideActivityLoader()
+                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                        }
+                        else {
+                            Auth.auth().currentUser?.delete { error in
+                                if let error = error {
+                                    CommonFunctions.hideActivityLoader()
+                                    CommonFunctions.showToastWithMessage(error.localizedDescription)
+                                } else {
+                                    CommonFunctions.hideActivityLoader()
+                                    self.removeKeychain()
+                                    self.performCleanUp(for_logout: false)
+                                    DispatchQueue.main.async {
+                                        AppRouter.goToSignUpVC()
+                                    }
+                                }
+                            }
+                        }
+                    })
+                }
             } cancelcompletion: {}
         case "Logout":
             showAlertWithAction(title: "Logout", msg: "Are you sure want to logout?", cancelTitle: "No", actionTitle: "Yes") {
                 FirestoreController.logOut { (isLogout) in
-                    self.performCleanUp()
-                    AppRouter.goToLoginVC()
+                    if !isLogout {
+                        self.performCleanUp()
+                        DispatchQueue.main.async {
+                            AppRouter.goToLoginVC()
+                        }
+                    }
                 }
             } cancelcompletion: {}
         case "About":

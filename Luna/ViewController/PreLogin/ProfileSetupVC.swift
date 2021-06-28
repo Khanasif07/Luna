@@ -175,7 +175,7 @@ extension ProfileSetupVC {
     @objc func keyboardWillShow(sender: NSNotification) {
         containerScrollView.isScrollEnabled = true
         guard let info = sender.userInfo, let keyboardHeight = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height, let duration: TimeInterval = (info[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else { return }
-        CommonFunctions.delay(delay: 0.25) {
+        CommonFunctions.delay(delay: 0.2) {
             self.scrollMsgToBottom()
         }
         self.tableViewTopConst.constant = keyboardHeight
@@ -185,13 +185,13 @@ extension ProfileSetupVC {
     @objc func keyboardWillHide(sender: NSNotification) {
         guard let info = sender.userInfo, let duration: TimeInterval = (info[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else { return }
         self.tableViewTopConst.constant = 0.0
-        CommonFunctions.delay(delay: 0.25) {
+        CommonFunctions.delay(delay: 0.2) {
             self.scrollMsgToBottom()
         }
         UIView.animate(withDuration: duration) { self.view.layoutIfNeeded() }
     }
     
-    private func scrollMsgToBottom(animated: Bool = true, duration: Double = 0.0) {
+    private func scrollMsgToBottom(animated: Bool = true, duration: Double = 0.1) {
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
             guard self.messageListing.endIndex > 0 else { return }
             self.messageTableView.scrollToRow(at: IndexPath(row: self.messageListing.endIndex - 1, section: 0), at: .bottom, animated: animated)

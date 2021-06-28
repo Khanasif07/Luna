@@ -53,11 +53,11 @@ class LoginViewController: UIViewController {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
         self.tabBarController?.tabBar.isHidden = true
+        self.loginTableView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.loginTableView.reloadData()
     }
     
     // MARK: - IBActions
@@ -106,7 +106,7 @@ extension LoginViewController {
     }
     
     func reloadUser(_ callback: ((Error?) -> ())? = nil){
-        FirestoreController.currentUser?.reload(completion: { (error) in
+        Auth.auth().currentUser?.reload(completion: { (error) in
             callback?(error)
         })
     }
@@ -149,9 +149,9 @@ extension LoginViewController {
         let actionCodeSettings =  ActionCodeSettings.init()
         actionCodeSettings.handleCodeInApp = true
         var components = URLComponents()
-        let queryItemEmailName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppQueryItemEmail")
-        let querySchemeName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppScheme")
-        let queryUrlPrefixName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppURLPrefix")
+        let queryItemEmailName = InfoPlistParser.getStringValue(forKey: ApiKey.firebaseOpenAppQueryItemEmail)
+        let querySchemeName = InfoPlistParser.getStringValue(forKey: ApiKey.firebaseOpenAppScheme)
+        let queryUrlPrefixName = InfoPlistParser.getStringValue(forKey: ApiKey.firebaseOpenAppURLPrefix)
         components.scheme = querySchemeName
         components.host = queryUrlPrefixName
         let emailUrlQueryItem = URLQueryItem(name: queryItemEmailName, value: self.emailTxt)
@@ -249,7 +249,7 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                             }
                         } else {
                             CommonFunctions.hideActivityLoader()
-                            FirestoreController.currentUser?.sendEmailVerification(with: self.getActionCodes(), completion: { (err) in
+                            Auth.auth().currentUser?.sendEmailVerification(with: self.getActionCodes(), completion: { (err) in
                                 if let err = err {
                                     print(err.localizedDescription)
                                     CommonFunctions.showToastWithMessage(err.localizedDescription)
@@ -264,11 +264,11 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                 } else {
                     FirestoreController.login(userId: "", withEmail: self.emailTxt, with: self.passTxt, success: {
                         CommonFunctions.hideActivityLoader()
-                        if FirestoreController.currentUser?.isEmailVerified ?? false {
+                        if Auth.auth().currentUser?.isEmailVerified ?? false {
                                 self.goToProfileSetupVC()
                         } else {
                             CommonFunctions.hideActivityLoader()
-                            FirestoreController.currentUser?.sendEmailVerification(with: self.getActionCodes(), completion: { (err) in
+                            Auth.auth().currentUser?.sendEmailVerification(with: self.getActionCodes(), completion: { (err) in
                                 if let err = err {
                                     print(err.localizedDescription)
                                     CommonFunctions.showToastWithMessage(err.localizedDescription)
@@ -462,12 +462,12 @@ extension LoginViewController: ASAuthorizationControllerDelegate,ASAuthorization
                 print("Failed to decode identity token")
                 return
             }
-            
             // Initialize a Firebase credential using secure nonce and Apple identity token
             let firebaseCredential = OAuthProvider.credential(withProviderID: "apple.com",
                                                               idToken: idTokenString,
                                                               rawNonce: nonce)
-            
+            KeychainWrapper.standard.set(idTokenString, forKey: ApiKey.appleIdToken)
+            KeychainWrapper.standard.set(nonce, forKey: ApiKey.currrentNonce)
             // Sign in with Firebase
             CommonFunctions.showActivityLoader()
             Auth.auth().signIn(with: firebaseCredential) { (authResult, error) in
@@ -529,6 +529,8 @@ extension LoginViewController: GIDSignInDelegate {
         guard let authentication = user.authentication else { return }
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
+        KeychainWrapper.standard.set(authentication.idToken, forKey: ApiKey.googleIdToken)
+        KeychainWrapper.standard.set(authentication.accessToken, forKey: ApiKey.googleAccessToken)
         // Authenticate with Firebase using the credential object
         Auth.auth().signIn(with: credential) { (authResult, error) in
             if let error = error {

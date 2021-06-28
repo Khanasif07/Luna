@@ -85,12 +85,12 @@ extension ChangePasswordVC {
     
     func changePassword(email: String, currentPassword: String, newPassword: String, completion: @escaping (Error?) -> Void) {
         let credential = EmailAuthProvider.credential(withEmail: email, password: currentPassword)
-        FirestoreController.currentUser?.reauthenticate(with: credential, completion: { (result, error) in
+        Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (result, error) in
             if let error = error {
                 completion(error)
             }
             else {
-                FirestoreController.currentUser?.updatePassword(to: newPassword, completion: { (error) in
+                Auth.auth().currentUser?.updatePassword(to: newPassword, completion: { (error) in
                     completion(error)
                 })
             }

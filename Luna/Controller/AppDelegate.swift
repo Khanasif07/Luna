@@ -226,7 +226,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
                         } else {
                             self.reloadUser { (reloadMsg) in
                                 if !isUserLoggedin{
-                                    AppRouter.checkEmailVerificationFlow(email: FirestoreController.currentUser?.email ?? "")
+                                    AppRouter.checkEmailVerificationFlow(email: Auth.auth().currentUser?.email ?? "")
                                     CommonFunctions.showToastWithMessage("Email was successfully verified")
                                 }
                             }
@@ -255,7 +255,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
     }
     
     func reloadUser(_ callback: ((Error?) -> ())? = nil){
-        FirestoreController.currentUser?.reload(completion: { (error) in
+        Auth.auth().currentUser?.reload(completion: { (error) in
             callback?(error)
         })
     }

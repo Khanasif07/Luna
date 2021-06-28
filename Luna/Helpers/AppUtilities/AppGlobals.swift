@@ -23,3 +23,9 @@ var hasTopNotch: Bool {
      return UIApplication.shared.delegate?.window??.safeAreaInsets.top ?? 0 > 20
     }
 }
+var loginType: LoginType = .email_password
+enum LoginType {
+    case email_password
+    case google
+    case apple
+}
