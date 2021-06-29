@@ -27,7 +27,9 @@ struct UserModel{
     var dob : String
     var lastName : String
     var password : String
-    var canChangePassword : Bool
+    var isChangePassword : Bool
+    var isProfileStepCompleted : Bool
+    var isBiometricOn: Bool
     var status : String
     var userType : String
     
@@ -46,10 +48,12 @@ struct UserModel{
         self.password = json[ApiKey.password].stringValue
         self.status = json[ApiKey.status].stringValue
         self.userType = json[ApiKey.currentRole].stringValue
-        self.canChangePassword = json[ApiKey.canChangePassword].boolValue
+        self.isChangePassword = json[ApiKey.isChangePassword].boolValue
+        self.isProfileStepCompleted = json[ApiKey.isProfileStepCompleted].boolValue
         self.dob = json[ApiKey.dob].stringValue
         self.lastName = json[ApiKey.lastName].stringValue
         self.diabetesType = json[ApiKey.diabetesType].stringValue
+        self.isBiometricOn = json[ApiKey.isBiometricOn].boolValue
     }
     
      func fetchUserModel(dict: JSONDictionary) -> UserModel {
@@ -62,7 +66,8 @@ struct UserModel{
         model.image = dict[ApiKey.image] as? String ?? ""
         model.password = dict[ApiKey.password] as? String ?? ""
         model.userType = dict[ApiKey.currentRole] as? String ?? ""
-        model.canChangePassword = dict[ApiKey.canChangePassword] as? Bool ?? false
+        model.isChangePassword = dict[ApiKey.isChangePassword] as? Bool ?? false
+        model.isBiometricOn = dict[ApiKey.isBiometricOn] as? Bool ?? false
         model.dob =  dict[ApiKey.dob] as? String ?? ""
         model.diabetesType = dict[ApiKey.diabetesType] as? String ?? ""
         return model
@@ -82,8 +87,9 @@ struct UserModel{
             ApiKey.password : password,
             ApiKey.status : status,
             ApiKey.userType : userType,
-            ApiKey.canChangePassword : canChangePassword,
-            ApiKey.diabetesType: diabetesType
+            ApiKey.isChangePassword : isChangePassword,
+            ApiKey.diabetesType: diabetesType,
+            ApiKey.isBiometricOn : isBiometricOn
         ]
         AppUserDefaults.save(value: dict, forKey: .fullUserProfile)
     }

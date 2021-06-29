@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseAuth
 import Firebase
+import SwiftKeychainWrapper
 
 
 class ChangePasswordVC: UIViewController {
@@ -43,6 +44,10 @@ class ChangePasswordVC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func saveBtnAction(_ sender: AppButton) {
+        if newPass != confirmPass {
+            CommonFunctions.showToastWithMessage("New and confirm password doesn't match.")
+            return
+        }
         CommonFunctions.showActivityLoader()
         let email  = AppUserDefaults.value(forKey: .defaultEmail).stringValue
         self.changePassword(email: email , currentPassword: self.currentPass, newPassword: self.newPass) { (error) in
@@ -52,7 +57,8 @@ class ChangePasswordVC: UIViewController {
                 return
             }
             CommonFunctions.hideActivityLoader()
-            CommonFunctions.showToastWithMessage("Password is successfully updated")
+            KeychainWrapper.standard.set(self.newPass, forKey: ApiKey.password)
+            CommonFunctions.showToastWithMessage("password changed successfully ")
             self.pop()
         }
     }

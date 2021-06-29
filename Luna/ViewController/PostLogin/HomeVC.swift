@@ -48,7 +48,10 @@ class HomeVC: UIViewController {
 extension HomeVC {
     
     private func initialSetup() {
-        
+        FirestoreController.getFirebaseUserData {
+        } failure: { (error) -> (Void) in
+            CommonFunctions.showToastWithMessage(error.localizedDescription)
+        }
     }
     
      func gotoSettingVC(){

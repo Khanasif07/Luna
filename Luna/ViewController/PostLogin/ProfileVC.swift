@@ -19,7 +19,7 @@ class ProfileVC: UIViewController {
     //===========================
     var sections: [(String,String)] = [("First Name",""),("Last Name",""),("Date Of Birth",""),("Email",""),("Diabetes Type","")]
     var typePickerView = WCCustomPickerView()
-   
+    
     
     // MARK: - Lifecycle
     //===========================
@@ -55,7 +55,7 @@ extension ProfileVC {
     private func tableViewSetup(){
         self.typePickerView.delegate = self
         self.typePickerView.dataArray = ["Type 1","Type 2"]
-        self.saveBtn.isEnabled = false
+        self.saveBtn.isEnabled = (!UserModel.main.firstName.isEmpty && !UserModel.main.lastName.isEmpty && !UserModel.main.dob.isEmpty && !UserModel.main.email.isEmpty && !UserModel.main.diabetesType.isEmpty)
         self.profileTableView.delegate = self
         self.profileTableView.dataSource = self
         self.profileTableView.registerCell(with: ProfileTableCell.self)
@@ -64,9 +64,14 @@ extension ProfileVC {
     private func setUpData(){
         self.sections = [("First Name",UserModel.main.firstName),("Last Name",UserModel.main.lastName),("Date Of Birth",UserModel.main.dob),("Email",UserModel.main.email),("Diabetes Type",UserModel.main.diabetesType)]
     }
+    
     private func signUpBtnStatus()-> Bool{
         return true
     }
+    
+//    private func saveBtnStatus()-> Bool{
+//        return !self.emailTxt.isEmpty && !self.passTxt.isEmpty
+//    }
     
     
 }
@@ -126,10 +131,13 @@ extension ProfileVC : UITextFieldDelegate{
         switch cell?.titleLbl.text {
         case sections[0].0:
             cell?.txtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
+//            saveBtn.isEnabled = saveBtnStatus()
         case sections[1].0:
             cell?.txtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
+//            saveBtn.isEnabled = saveBtnStatus()
         default:
             cell?.txtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
+//            saveBtn.isEnabled = saveBtnStatus()
         }
         
     }
@@ -143,7 +151,7 @@ extension ProfileVC : UITextFieldDelegate{
         case sections[0].0:
             return (string.checkIfValidCharaters(.email) || string.isEmpty) && newString.length <= 50
         case sections[1].0:
-            return (string.checkIfValidCharaters(.password) || string.isEmpty) && newString.length <= 25
+            return (string.checkIfValidCharaters(.email) || string.isEmpty) && newString.length <= 25
         default:
             return false
         }

@@ -107,29 +107,29 @@ class HomeViewController: UIViewController, ASAuthorizationControllerPresentatio
     }
     
     @IBAction func signInBtnAction(_ sender: UIButton) {
-        if   (Auth.auth().currentUser?.isEmailVerified ?? false)  ||  (Auth.auth().currentUser?.uid == nil) {
-            FirestoreController.login(userId: "", withEmail: self.emailTxtField.text!, with: self.passTxtField.text!, success: {
-                FirestoreController.setFirebaseData(userId: "123456@654321", email: self.emailTxtField.text!, password: self.passTxtField.text!, name:"", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
-                    print("Success")
-                }) { (error) -> (Void) in
-                    AppUserDefaults.removeValue(forKey: .accesstoken)
-                    print(error.localizedDescription)
-                }
-            }) { (message, code) in
-                if code == 17011 {
-                    FirestoreController.createUserNode(userId: "", email: self.emailTxtField.text!, password: self.passTxtField.text!, name: "", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
-                        print("Success")
-                    })  { (error) -> (Void)  in
-                        print( error.localizedDescription)
-                    }
-                }
-            }
-        } else {
-            FirestoreController.sendEmailVerification { (errors) -> (Void) in
-                print(errors.localizedDescription)
-                print("sendEmailVerificationfailed=================")
-            }
-        }
+//        if   (Auth.auth().currentUser?.isEmailVerified ?? false)  ||  (Auth.auth().currentUser?.uid == nil) {
+//            FirestoreController.login(userId: "", withEmail: self.emailTxtField.text!, with: self.passTxtField.text!, success: {
+//                FirestoreController.setFirebaseData(userId: "123456@654321", email: self.emailTxtField.text!, password: self.passTxtField.text!, name:"", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
+//                    print("Success")
+//                }) { (error) -> (Void) in
+//                    AppUserDefaults.removeValue(forKey: .accesstoken)
+//                    print(error.localizedDescription)
+//                }
+//            }) { (message, code) in
+//                if code == 17011 {
+//                    FirestoreController.createUserNode(userId: "", email: self.emailTxtField.text!, password: self.passTxtField.text!, name: "", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
+//                        print("Success")
+//                    })  { (error) -> (Void)  in
+//                        print( error.localizedDescription)
+//                    }
+//                }
+//            }
+//        } else {
+//            FirestoreController.sendEmailVerification { (errors) -> (Void) in
+//                print(errors.localizedDescription)
+//                print("sendEmailVerificationfailed=================")
+//            }
+//        }
     }
     @IBAction func biometricBtnAction(_ sender: UIButton) {
         self.bioMetricSignin()
@@ -189,22 +189,22 @@ class HomeViewController: UIViewController, ASAuthorizationControllerPresentatio
     
    // Add user to Firestore
     private func addUser(user: String, message: String) {
-        FirestoreController.login(userId: "", withEmail: self.emailTxtField.text!, with: self.passTxtField.text!, success: {
-            FirestoreController.setFirebaseData(userId: "123456@654321", email: "asif@yopmail.com", password: "Asif@123", name:"Mohd Asif Khan", imageURL: "", phoneNo: "8896880327", countryCode: "+91", status: "", completion: {
-                print("Success")
-            }) { (error) -> (Void) in
-                AppUserDefaults.removeValue(forKey: .accesstoken)
-                print(error.localizedDescription)
-            }
-        }) { (message, code) in
-            if code == 17011 {
-                FirestoreController.createUserNode(userId: "", email: self.emailTxtField.text!, password: self.passTxtField.text!, name: "Asif Khan", imageURL: "", phoneNo: "8896880327", countryCode: "+91", status: "Active", completion: {
-                    print("Success")
-                }) { (error) -> (Void) in
-                    print( error.localizedDescription)
-                }
-            }
-        }
+//        FirestoreController.login(userId: "", withEmail: self.emailTxtField.text!, with: self.passTxtField.text!, success: {
+//            FirestoreController.setFirebaseData(userId: "123456@654321", email: "asif@yopmail.com", password: "Asif@123", name:"Mohd Asif Khan", imageURL: "", phoneNo: "8896880327", countryCode: "+91", status: "", completion: {
+//                print("Success")
+//            }) { (error) -> (Void) in
+//                AppUserDefaults.removeValue(forKey: .accesstoken)
+//                print(error.localizedDescription)
+//            }
+//        }) { (message, code) in
+//            if code == 17011 {
+//                FirestoreController.createUserNode(userId: "", email: self.emailTxtField.text!, password: self.passTxtField.text!, name: "Asif Khan", imageURL: "", phoneNo: "8896880327", countryCode: "+91", status: "Active", completion: {
+//                    print("Success")
+//                }) { (error) -> (Void) in
+//                    print( error.localizedDescription)
+//                }
+//            }
+//        }
     }
     
     private func randomNonceString(length: Int = 32) -> String {
@@ -352,12 +352,12 @@ extension HomeViewController: GIDSignInDelegate {
                 print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
             }
             print("post notification after user successfully sign in")
-            FirestoreController.setFirebaseData(userId: user.userID, email: user.profile.email, password: "Asif@123", name: user.profile.name, imageURL: "", phoneNo: "", countryCode: "+91", status: "", completion: {
-                print("Success")
-            }) { (error) -> (Void) in
-                AppUserDefaults.removeValue(forKey: .accesstoken)
-                print(error.localizedDescription)
-            }
+//            FirestoreController.setFirebaseData(userId: user.userID, email: user.profile.email, password: "Asif@123", name: user.profile.name, imageURL: "", phoneNo: "", countryCode: "+91", status: "", completion: {
+//                print("Success")
+//            }) { (error) -> (Void) in
+//                AppUserDefaults.removeValue(forKey: .accesstoken)
+//                print(error.localizedDescription)
+//            }
         }
     }
     
