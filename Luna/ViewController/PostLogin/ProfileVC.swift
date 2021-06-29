@@ -40,6 +40,19 @@ class ProfileVC: UIViewController {
         self.pop()
     }
     
+    @IBAction func saveBtnAction(_ sender: AppButton) {
+        CommonFunctions.showActivityLoader()
+        FirestoreController.updateUserNode(email: sections[3].1, password: AppUserDefaults.value(forKey: .defaultPassword).stringValue, firstName: sections[0].1, lastName: sections[1].1, dob: sections[2].1, diabetesType: sections[4].1, isProfileStepCompleted: UserModel.main.isProfileStepCompleted, isBiometricOn: UserModel.main.isBiometricOn) {
+            CommonFunctions.hideActivityLoader()
+            self.pop()
+            CommonFunctions.showToastWithMessage("Profile updated successfully.")
+        } failure: { (error) -> (Void) in
+            CommonFunctions.hideActivityLoader()
+            CommonFunctions.showToastWithMessage(error.localizedDescription)
+        }
+
+    }
+    
     
 }
 
@@ -69,9 +82,9 @@ extension ProfileVC {
         return true
     }
     
-//    private func saveBtnStatus()-> Bool{
-//        return !self.emailTxt.isEmpty && !self.passTxt.isEmpty
-//    }
+    private func saveBtnStatus()-> Bool{
+        return !self.sections[0].1.isEmpty && !self.sections[1].1.isEmpty && (!self.sections[2].1.isEmpty && !(self.sections[2].1.count != 10)) && !self.sections[3].1.isEmpty && !self.sections[4].1.isEmpty
+    }
     
     
 }
@@ -100,6 +113,13 @@ extension ProfileVC : UITableViewDelegate, UITableViewDataSource {
             cell.txtField.inputView = nil
             cell.txtField.setButtonToRightView(btn: UIButton(), selectedImage: nil, normalImage: nil, size: CGSize(width: 0, height: 0))
         }
+        if  sections[indexPath.row].0 == "Email"{
+            cell.isUserInteractionEnabled = false
+            cell.txtField.textColor = .lightGray
+        }else{
+            cell.isUserInteractionEnabled = true
+            cell.txtField.textColor = .black
+        }
         return cell
     }
     
@@ -120,29 +140,43 @@ extension ProfileVC : UITextFieldDelegate{
             cell?.txtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
         case sections[1].0:
             cell?.txtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
+        case sections[2].0:
+            cell?.txtField.keyboardType = .numberPad
+            cell?.txtField.placeholder = "01/01/2000"
         default:
             cell?.txtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
         }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        let _ = textField.text?.byRemovingLeadingTrailingWhiteSpaces ?? ""
+        let txt = textField.text?.byRemovingLeadingTrailingWhiteSpaces ?? ""
         let cell = profileTableView.cell(forItem: textField) as? ProfileTableCell
         switch cell?.titleLbl.text {
         case sections[0].0:
             cell?.txtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
-//            saveBtn.isEnabled = saveBtnStatus()
+            sections[0].1 = txt
+            saveBtn.isEnabled = saveBtnStatus()
         case sections[1].0:
             cell?.txtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
-//            saveBtn.isEnabled = saveBtnStatus()
+            sections[1].1 = txt
+            saveBtn.isEnabled = saveBtnStatus()
+        case sections[2].0:
+            cell?.txtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
+            sections[2].1 = txt
+            saveBtn.isEnabled = saveBtnStatus()
+        case sections[3].0:
+            cell?.txtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
+            sections[3].1 = txt
+            saveBtn.isEnabled = saveBtnStatus()
         default:
             cell?.txtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
-//            saveBtn.isEnabled = saveBtnStatus()
+            saveBtn.isEnabled = saveBtnStatus()
         }
         
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let txt = textField.text?.byRemovingLeadingTrailingWhiteSpaces ?? ""
         let cell = profileTableView.cell(forItem: textField) as? ProfileTableCell
         let currentString: NSString = textField.text! as NSString
         let newString: NSString =
@@ -152,8 +186,18 @@ extension ProfileVC : UITextFieldDelegate{
             return (string.checkIfValidCharaters(.email) || string.isEmpty) && newString.length <= 50
         case sections[1].0:
             return (string.checkIfValidCharaters(.email) || string.isEmpty) && newString.length <= 25
+        case sections[2].0:
+            switch txt.count {
+            case 2,5:
+                if newString.length < currentString.length {cell?.txtField.text = txt } else {
+                    cell?.txtField.text = txt + "/" }
+            default:
+                cell?.txtField.text = txt
+            }
+            saveBtn.isEnabled = !(newString.length != 10)
+            return (string.checkIfValidCharaters(.name) || string.isEmpty) && newString.length <= 10
         default:
-            return false
+            return true
         }
     }
 }
@@ -168,6 +212,7 @@ extension ProfileVC: WCCustomPickerViewDelegate {
         })
         guard let selectedIndexx = indexx else {return}
         sections[selectedIndexx].1 = text
+        saveBtn.isEnabled = saveBtnStatus()
         self.profileTableView.reloadRows(at: [IndexPath.init(row: selectedIndexx, section: 0)], with: .fade)
     }
 }

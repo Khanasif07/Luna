@@ -393,9 +393,9 @@ extension SignupViewController: ASAuthorizationControllerDelegate,ASAuthorizatio
             // Sign in with Firebase
             CommonFunctions.showActivityLoader()
             Auth.auth().signIn(with: firebaseCredential) { (authResult, error) in
-                
                 if let error = error {
-                    print(error.localizedDescription)
+                    CommonFunctions.hideActivityLoader()
+                    CommonFunctions.showToastWithMessage(error.localizedDescription)
                     return
                 }
                 if let currentUser = Auth.auth().currentUser {
@@ -404,19 +404,27 @@ extension SignupViewController: ASAuthorizationControllerDelegate,ASAuthorizatio
                     UserModel.main.id = currentUser.uid
                     UserModel.main.email = currentUser.email ?? ""
                     UserModel.main.isChangePassword = false
-                    FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: currentUser.displayName ?? "", lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isChangePassword: false) {
-                        print("Success")
-                    } failure: { (error) -> (Void) in
-                        AppUserDefaults.removeValue(forKey: .uid)
+                    FirestoreController.getFirebaseUserData {
+                        FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: currentUser.displayName ?? "", lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: UserModel.main.isProfileStepCompleted, isChangePassword: false) {
+                            CommonFunctions.hideActivityLoader()
+                            DispatchQueue.main.async {
+                                if UserModel.main.isProfileStepCompleted {
+                                    AppRouter.gotoHomeVC()
+                                }else {
+                                    self.goToProfileSetupVC()
+                                }
+                            }
+                        } failure: { (error) -> (Void) in
+                            CommonFunctions.hideActivityLoader()
+                            AppUserDefaults.removeValue(forKey: .uid)
+                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                        }
+                    }failure: { (error) -> (Void) in
+                        CommonFunctions.hideActivityLoader()
                         CommonFunctions.showToastWithMessage(error.localizedDescription)
                     }
                 }
-                CommonFunctions.hideActivityLoader()
-                DispatchQueue.main.async {
-                    self.self.goToProfileSetupVC()
-                }
             }
-            
         }
     }
     
@@ -449,23 +457,33 @@ extension SignupViewController: GIDSignInDelegate {
             if let error = error {
                 CommonFunctions.hideActivityLoader()
                 CommonFunctions.showToastWithMessage(error.localizedDescription)
+                return
             }
-            CommonFunctions.hideActivityLoader()
             if let currentUser = Auth.auth().currentUser {
                 AppUserDefaults.save(value: currentUser.uid, forKey: .uid)
                 AppUserDefaults.save(value: currentUser.email ?? "", forKey: .defaultEmail)
                 UserModel.main.id = currentUser.uid
                 UserModel.main.email = currentUser.email ?? ""
                 UserModel.main.isChangePassword = false
-                FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: user.profile.name, lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isChangePassword: false) {
-                    print("Success")
+                FirestoreController.getFirebaseUserData {
+                    FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: user.profile.name, lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: UserModel.main.isProfileStepCompleted, isChangePassword: false) {
+                        CommonFunctions.hideActivityLoader()
+                        DispatchQueue.main.async {
+                            if UserModel.main.isProfileStepCompleted {
+                                AppRouter.gotoHomeVC()
+                            }else {
+                                self.goToProfileSetupVC()
+                            }
+                        }
+                    } failure: { (error) -> (Void) in
+                        CommonFunctions.hideActivityLoader()
+                        AppUserDefaults.removeValue(forKey: .uid)
+                        CommonFunctions.showToastWithMessage(error.localizedDescription)
+                    }
                 } failure: { (error) -> (Void) in
-                    AppUserDefaults.removeValue(forKey: .uid)
+                    CommonFunctions.hideActivityLoader()
                     CommonFunctions.showToastWithMessage(error.localizedDescription)
                 }
-            }
-            DispatchQueue.main.async {
-                self.self.goToProfileSetupVC()
             }
         }
     }
