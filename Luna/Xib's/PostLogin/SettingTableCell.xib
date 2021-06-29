@@ -12,6 +12,9 @@
         <array key="SF-Pro-Display-Medium.otf">
             <string>SFProDisplay-Medium</string>
         </array>
+        <array key="SF-Pro-Display-Regular.otf">
+            <string>SFProDisplay-Regular</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -33,12 +36,23 @@
                                     <constraint firstAttribute="width" secondItem="bai-aN-fBh" secondAttribute="height" id="udp-qz-YP8"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMl-f0-6Nb">
-                                <rect key="frame" x="78" y="21.5" width="44" height="19.5"/>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Q2C-jS-tqf">
+                                <rect key="frame" x="78" y="21.5" width="99.5" height="19.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMl-f0-6Nb">
+                                        <rect key="frame" x="0.0" y="0.0" width="99.5" height="19.5"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Basaglar | 8 units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ho1-E5-03i">
+                                        <rect key="frame" x="0.0" y="19.5" width="99.5" height="0.0"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                                        <color key="textColor" red="0.45098039215686275" green="0.46274509803921571" blue="0.48627450980392156" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="URi-A4-1nm">
                                 <rect key="frame" x="229" y="15.5" width="89" height="31"/>
                                 <subviews>
@@ -64,8 +78,9 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="hMl-f0-6Nb" firstAttribute="centerY" secondItem="cAk-VK-6Yt" secondAttribute="centerY" id="3pH-D6-seq"/>
-                            <constraint firstItem="hMl-f0-6Nb" firstAttribute="leading" secondItem="bai-aN-fBh" secondAttribute="trailing" constant="16" id="TD8-0A-NQ9"/>
+                            <constraint firstItem="Q2C-jS-tqf" firstAttribute="centerY" secondItem="cAk-VK-6Yt" secondAttribute="centerY" id="DdB-tc-jWc"/>
+                            <constraint firstItem="Q2C-jS-tqf" firstAttribute="leading" secondItem="bai-aN-fBh" secondAttribute="trailing" constant="16" id="E96-t7-pYv"/>
+                            <constraint firstItem="URi-A4-1nm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Q2C-jS-tqf" secondAttribute="trailing" constant="16" id="Rt0-0M-8cR"/>
                             <constraint firstItem="URi-A4-1nm" firstAttribute="centerY" secondItem="cAk-VK-6Yt" secondAttribute="centerY" id="nYa-LR-GUC"/>
                             <constraint firstAttribute="trailing" secondItem="URi-A4-1nm" secondAttribute="trailing" constant="20" symbolic="YES" id="ugt-3u-Ke0"/>
                             <constraint firstItem="bai-aN-fBh" firstAttribute="leading" secondItem="cAk-VK-6Yt" secondAttribute="leading" constant="20" id="uk3-8B-Fik"/>
@@ -85,6 +100,7 @@
             <connections>
                 <outlet property="logoImgView" destination="bai-aN-fBh" id="KpX-J6-bom"/>
                 <outlet property="nextBtn" destination="ibd-bg-vdH" id="ZhQ-YD-LUq"/>
+                <outlet property="subTitlelbl" destination="Ho1-E5-03i" id="ODp-PB-vkS"/>
                 <outlet property="switchView" destination="PhW-RM-w5q" id="9Su-4i-6aw"/>
                 <outlet property="titleLbl" destination="hMl-f0-6Nb" id="Jpj-2O-XB3"/>
             </connections>

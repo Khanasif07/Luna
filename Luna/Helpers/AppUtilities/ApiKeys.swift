@@ -31,6 +31,14 @@ enum ApiKey {
     static var name : String {return "name"}
     static var users : String {return "users"}
     static var firstName : String {return "firstName"}
+    static var lastName : String {return "lastName"}
+    static var diabetesType : String {return "diabetesType"}
+    static var googleIdToken : String {return "googleIdToken"}
+    static var googleAccessToken : String {return "googleAccessToken"}
+    static var appleIdToken : String {return "appleIdToken"}
+    static var currrentNonce : String {return "currrentNonce"}
+    
+    
     static var userName : String {return "userName"}
     static var userImage : String {return "userImage"}
     static var nickName : String {return "nick_name"}

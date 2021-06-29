@@ -494,44 +494,33 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qyg-fs-Qdz">
-                                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="44" width="414" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile Setup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0v-YV-Xca">
-                                                <rect key="frame" x="20" y="7.5" width="140.5" height="29"/>
+                                                <rect key="frame" x="20" y="10.5" width="140.5" height="29"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BK2-SL-eaZ">
-                                                <rect key="frame" x="341" y="6" width="53" height="32"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                                <state key="normal" title="Logout"/>
-                                                <connections>
-                                                    <action selector="logoutBtnTapped:" destination="p8z-xT-HIy" eventType="touchUpInside" id="Fa2-ZI-yCN"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="I0v-YV-Xca" firstAttribute="leading" secondItem="qyg-fs-Qdz" secondAttribute="leading" constant="20" id="5wx-YC-bOK"/>
                                             <constraint firstItem="I0v-YV-Xca" firstAttribute="centerY" secondItem="qyg-fs-Qdz" secondAttribute="centerY" id="hmk-EI-b62"/>
-                                            <constraint firstAttribute="trailing" secondItem="BK2-SL-eaZ" secondAttribute="trailing" constant="20" id="lc1-yF-PTa"/>
-                                            <constraint firstItem="BK2-SL-eaZ" firstAttribute="centerY" secondItem="qyg-fs-Qdz" secondAttribute="centerY" id="maL-gm-lvh"/>
-                                            <constraint firstAttribute="height" constant="44" id="xkl-Pw-RNc"/>
+                                            <constraint firstAttribute="height" constant="50" id="xkl-Pw-RNc"/>
                                         </constraints>
                                     </view>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kaL-XL-3nU">
-                                        <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kaL-XL-3nU">
+                                        <rect key="frame" x="0.0" y="94" width="414" height="768"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="94c-8a-bkJ">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
                                                 <subviews>
-                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ymu-vX-DZ5">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ymu-vX-DZ5">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
                                                     </tableView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jOm-o1-tYg">
-                                                        <rect key="frame" x="0.0" y="774" width="414" height="68"/>
+                                                        <rect key="frame" x="0.0" y="700" width="414" height="68"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="BP4-NN-OyK">
                                                                 <rect key="frame" x="20" y="16" width="374" height="40"/>
@@ -575,7 +564,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                                                     <constraint firstItem="ymu-vX-DZ5" firstAttribute="leading" secondItem="94c-8a-bkJ" secondAttribute="leading" id="OhK-fe-Ymi"/>
                                                     <constraint firstItem="jOm-o1-tYg" firstAttribute="leading" secondItem="94c-8a-bkJ" secondAttribute="leading" id="U43-ab-RvP"/>
                                                     <constraint firstItem="jOm-o1-tYg" firstAttribute="top" secondItem="ymu-vX-DZ5" secondAttribute="bottom" id="ehy-f8-OJh"/>
-                                                    <constraint firstAttribute="bottom" secondItem="jOm-o1-tYg" secondAttribute="bottom" constant="-68" id="nnm-SL-xeZ"/>
+                                                    <constraint firstAttribute="bottom" secondItem="jOm-o1-tYg" secondAttribute="bottom" id="nnm-SL-xeZ"/>
                                                     <constraint firstItem="ymu-vX-DZ5" firstAttribute="top" secondItem="94c-8a-bkJ" secondAttribute="top" id="z1c-gk-G4Y"/>
                                                 </constraints>
                                             </view>
@@ -618,6 +607,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                         <outlet property="messageTableView" destination="ymu-vX-DZ5" id="0PT-sQ-75Z"/>
                         <outlet property="msgTxtField" destination="Fyo-uS-ocG" id="iEA-GV-7sN"/>
                         <outlet property="sendBtn" destination="N2r-0S-DvU" id="L3i-sW-7em"/>
+                        <outlet property="tableViewTopConst" destination="z1c-gk-G4Y" id="6YR-4h-eVZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JUY-t5-1cd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

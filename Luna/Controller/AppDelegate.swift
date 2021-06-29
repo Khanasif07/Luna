@@ -225,9 +225,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
                             print(error.localizedDescription)
                         } else {
                             self.reloadUser { (reloadMsg) in
-                                print(reloadMsg?.localizedDescription ?? "")
+                                if !isUserLoggedin{
+                                    AppRouter.checkEmailVerificationFlow(email: Auth.auth().currentUser?.email ?? "")
+                                    CommonFunctions.showToastWithMessage("Email was successfully verified")
+                                }
                             }
-                            CommonFunctions.showToastWithMessage("Email was successfully verified")
                         }
                     }
                 }

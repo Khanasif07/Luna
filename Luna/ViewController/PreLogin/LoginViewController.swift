@@ -31,6 +31,7 @@ class LoginViewController: UIViewController {
     var emailTxt: String = ""
     var passTxt : String =  ""
     var currentNonce : String?
+    var isComeFromMail: Bool = false
     private let biometricIDAuth = BiometricIDAuth()
     
     // MARK: - Lifecycle
@@ -44,7 +45,6 @@ class LoginViewController: UIViewController {
         if #available(iOS 13.0, *) {
             return .darkContent
         } else {
-            // Fallback on earlier versions
             return .lightContent
         }
     }
@@ -54,11 +54,15 @@ class LoginViewController: UIViewController {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
         self.tabBarController?.tabBar.isHidden = true
+        self.loginTableView.reloadData()
+        if isComeFromMail{
+            self.showBiometricAuthentication()
+            self.isComeFromMail = false
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.loginTableView.reloadData()
     }
     
     // MARK: - IBActions
@@ -73,6 +77,10 @@ extension LoginViewController {
     
     private func initialSetup() {
         self.tableViewSetUp()
+        self.showBiometricAuthentication()
+    }
+    
+    private func showBiometricAuthentication(){
         if  AppUserDefaults.value(forKey: .isBiometricCompleted).boolValue {
             if  AppUserDefaults.value(forKey: .isBiometricSelected).boolValue{
                 self.bioMetricSignin()
@@ -114,6 +122,12 @@ extension LoginViewController {
         GIDSignIn.sharedInstance().signIn()
     }
     
+    
+    func goToSignUpVC() {
+        let signupVC = SignupViewController.instantiate(fromAppStoryboard: .PreLogin)
+        self.navigationController?.pushViewController(signupVC, animated: true)
+    }
+    
     private func goToForgotPassVC(){
         let forgotPassVC  = ForgotPasswordVC.instantiate(fromAppStoryboard: .PreLogin)
         self.navigationController?.pushViewController(forgotPassVC, animated: true)
@@ -140,9 +154,9 @@ extension LoginViewController {
         let actionCodeSettings =  ActionCodeSettings.init()
         actionCodeSettings.handleCodeInApp = true
         var components = URLComponents()
-        let queryItemEmailName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppQueryItemEmail")
-        let querySchemeName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppScheme")
-        let queryUrlPrefixName = InfoPlistParser.getStringValue(forKey: "FirebaseOpenAppURLPrefix")
+        let queryItemEmailName = InfoPlistParser.getStringValue(forKey: ApiKey.firebaseOpenAppQueryItemEmail)
+        let querySchemeName = InfoPlistParser.getStringValue(forKey: ApiKey.firebaseOpenAppScheme)
+        let queryUrlPrefixName = InfoPlistParser.getStringValue(forKey: ApiKey.firebaseOpenAppURLPrefix)
         components.scheme = querySchemeName
         components.host = queryUrlPrefixName
         let emailUrlQueryItem = URLQueryItem(name: queryItemEmailName, value: self.emailTxt)
@@ -212,12 +226,21 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
             [cell.emailIdTxtField,cell.passTxtField].forEach({$0?.delegate = self})
             cell.signUpBtnTapped = { [weak self]  (sender) in
                 guard let `self` = self else { return }
+                if !self.isEmailValid(string: self.emailTxt).0{
+                    cell.emailIdTxtField.setError(self.isEmailValid(string: self.emailTxt).1)
+                    CommonFunctions.delay(delay: 1.0) {
+                        cell.emailIdTxtField.setError("",show: false)
+                    }
+                    return
+                }
                 CommonFunctions.showActivityLoader()
                 if let currentUser = Auth.auth().currentUser {
                     self.reloadUser { (reloadMsg) in
                         if  (currentUser.isEmailVerified) {
                             FirestoreController.login(userId: currentUser.uid, withEmail: self.emailTxt, with: self.passTxt, success: {
                                 CommonFunctions.hideActivityLoader()
+                                self.passTxt = ""
+                                self.loginTableView.reloadData()
                                 self.goToProfileSetupVC()
                                 //                        FirestoreController.setFirebaseData(userId: "", email: self.emailTxt, password: self.passTxt, name:"", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
                                 //                            CommonFunctions.hideActivityLoader()
@@ -240,6 +263,8 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                                     return
                                 }
                                 DispatchQueue.main.async {
+                                    self.passTxt = ""
+                                    self.loginTableView.reloadData()
                                     self.gotoEmailVerificationPopUpVC()
                                 }
                             })
@@ -249,16 +274,19 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                     FirestoreController.login(userId: "", withEmail: self.emailTxt, with: self.passTxt, success: {
                         CommonFunctions.hideActivityLoader()
                         if Auth.auth().currentUser?.isEmailVerified ?? false {
+                                self.passTxt = ""
+                                self.loginTableView.reloadData()
                                 self.goToProfileSetupVC()
                         } else {
                             CommonFunctions.hideActivityLoader()
                             Auth.auth().currentUser?.sendEmailVerification(with: self.getActionCodes(), completion: { (err) in
                                 if let err = err {
-                                    print(err.localizedDescription)
                                     CommonFunctions.showToastWithMessage(err.localizedDescription)
                                     return
                                 }
                                 DispatchQueue.main.async {
+                                    self.passTxt = ""
+                                    self.loginTableView.reloadData()
                                     self.gotoEmailVerificationPopUpVC()
                                 }
                             })
@@ -280,6 +308,8 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
             }
             cell.forgotPassBtnTapped = { [weak self]  (sender) in
                 guard let `self` = self else { return }
+                self.emailTxt = ""
+                self.passTxt = ""
                 self.goToForgotPassVC()
             }
             return cell
@@ -311,7 +341,9 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
             }
             cell.loginBtnTapped = { [weak self] in
                 guard let self = `self` else { return }
-                self.pop()
+                self.emailTxt = ""
+                self.passTxt = ""
+                self.goToSignUpVC()
             }
             return cell
         }
@@ -442,12 +474,12 @@ extension LoginViewController: ASAuthorizationControllerDelegate,ASAuthorization
                 print("Failed to decode identity token")
                 return
             }
-            
             // Initialize a Firebase credential using secure nonce and Apple identity token
             let firebaseCredential = OAuthProvider.credential(withProviderID: "apple.com",
                                                               idToken: idTokenString,
                                                               rawNonce: nonce)
-            
+            KeychainWrapper.standard.set(idTokenString, forKey: ApiKey.appleIdToken)
+            KeychainWrapper.standard.set(nonce, forKey: ApiKey.currrentNonce)
             // Sign in with Firebase
             CommonFunctions.showActivityLoader()
             Auth.auth().signIn(with: firebaseCredential) { (authResult, error) in
@@ -463,6 +495,10 @@ extension LoginViewController: ASAuthorizationControllerDelegate,ASAuthorization
                     AppUserDefaults.save(value: currentUser.uid, forKey: .uid)
                     AppUserDefaults.save(value: currentUser.uid, forKey: .accesstoken)
                     AppUserDefaults.save(value: currentUser.email ?? "", forKey: .defaultEmail)
+                    UserModel.main.id = currentUser.uid
+                    UserModel.main.accessToken = currentUser.uid
+                    UserModel.main.email = currentUser.email ?? ""
+                    UserModel.main.canChangePassword = false
                 }
                 DispatchQueue.main.async {
                     self.goToProfileSetupVC()
@@ -505,6 +541,8 @@ extension LoginViewController: GIDSignInDelegate {
         guard let authentication = user.authentication else { return }
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
+        KeychainWrapper.standard.set(authentication.idToken, forKey: ApiKey.googleIdToken)
+        KeychainWrapper.standard.set(authentication.accessToken, forKey: ApiKey.googleAccessToken)
         // Authenticate with Firebase using the credential object
         Auth.auth().signIn(with: credential) { (authResult, error) in
             if let error = error {
@@ -517,7 +555,11 @@ extension LoginViewController: GIDSignInDelegate {
                 AppUserDefaults.save(value: currentUser.uid, forKey: .uid)
                 AppUserDefaults.save(value: currentUser.uid, forKey: .accesstoken)
                 AppUserDefaults.save(value: currentUser.email ?? "", forKey: .defaultEmail)
+                UserModel.main.id = currentUser.uid
+                UserModel.main.accessToken = currentUser.uid
             }
+            UserModel.main.email = "\(user.profile.email ?? "")"
+            UserModel.main.canChangePassword = false
             DispatchQueue.main.async {
                 self.self.goToProfileSetupVC()
             }

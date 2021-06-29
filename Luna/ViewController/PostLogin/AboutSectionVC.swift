@@ -7,9 +7,6 @@
 
 import UIKit
 
-
-import UIKit
-
 class AboutSectionVC: UIViewController {
     
     // MARK: - IBOutlets

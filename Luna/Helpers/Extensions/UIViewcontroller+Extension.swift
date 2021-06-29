@@ -416,6 +416,20 @@ extension UIViewController {
             block?(keyboardSize)
         })
     }
+    
+    func isEmailValid(string: String?) -> (Bool,String) {
+        if let email = string, !email.isEmpty {
+            if email.count < 3 {
+                return (false, "Oops! It’s seems like a wrong email")
+            } else if email.checkIfInvalid(.email) {
+                return (false, "Oops! It’s seems like a wrong email")
+            }
+        } else {
+            return (false, "")
+        }
+        return (true,"")
+    }
+    
 }
 
 extension UIScrollView {

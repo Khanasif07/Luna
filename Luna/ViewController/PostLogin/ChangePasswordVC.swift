@@ -85,12 +85,12 @@ extension ChangePasswordVC {
     
     func changePassword(email: String, currentPassword: String, newPassword: String, completion: @escaping (Error?) -> Void) {
         let credential = EmailAuthProvider.credential(withEmail: email, password: currentPassword)
-        FirestoreController.currentUser?.reauthenticate(with: credential, completion: { (result, error) in
+        Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (result, error) in
             if let error = error {
                 completion(error)
             }
             else {
-                FirestoreController.currentUser?.updatePassword(to: newPassword, completion: { (error) in
+                Auth.auth().currentUser?.updatePassword(to: newPassword, completion: { (error) in
                     completion(error)
                 })
             }
@@ -108,6 +108,7 @@ extension ChangePasswordVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(with: ProfileTableCell.self)
+        cell.isSetupforPasswordTxtfield = true
         cell.txtField.delegate = self
         cell.titleLbl.text = sections[indexPath.row]
         return cell

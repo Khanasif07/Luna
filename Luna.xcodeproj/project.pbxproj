@@ -25,6 +25,7 @@
 		8455A3C8268211770061C55F /* SettingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8455A3C6268211770061C55F /* SettingTableCell.xib */; };
 		847899732684824F00D1DF36 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847899722684824F00D1DF36 /* HomeVC.swift */; };
 		847899762684870F00D1DF36 /* AboutSectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847899752684870F00D1DF36 /* AboutSectionVC.swift */; };
+		847D1B292689A87A00220DAE /* SystemSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D1B282689A87A00220DAE /* SystemSetupVC.swift */; };
 		84861D7726848DB1004B046C /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84861D7626848DB1004B046C /* ProfileVC.swift */; };
 		84861D7F26848EDD004B046C /* ProfileTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84861D7D26848EDD004B046C /* ProfileTableCell.swift */; };
 		84861D8026848EDD004B046C /* ProfileTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84861D7E26848EDD004B046C /* ProfileTableCell.xib */; };
@@ -86,6 +87,8 @@
 		84D1F5052679E95A00F131E0 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1F5042679E95A00F131E0 /* ForgotPasswordVC.swift */; };
 		84E5505A267E027A008C02F8 /* TypeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E55058267E027A008C02F8 /* TypeTableCell.swift */; };
 		84E5505B267E027A008C02F8 /* TypeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E55059267E027A008C02F8 /* TypeTableCell.xib */; };
+		84E78B9E2685E8C500FABDCD /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E78B9D2685E8C500FABDCD /* UserModel.swift */; };
+		84E78BC42685F9B400FABDCD /* CustomPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E78BC32685F9B400FABDCD /* CustomPickerView.swift */; };
 		84F7BC51266F11BA006C94DA /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7BC50266F11BA006C94DA /* AppleLoginManager.swift */; };
 		84F819A8267A12A500A4C758 /* PassResetPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F819A7267A12A500A4C758 /* PassResetPopUpVC.swift */; };
 		84F819CE267B6FE000A4C758 /* BLEIntegrationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F819CD267B6FE000A4C758 /* BLEIntegrationVC.swift */; };
@@ -117,6 +120,7 @@
 		846F1A1F2678C2220034ACE0 /* GoogleService-Info-1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-1.plist"; sourceTree = "<group>"; };
 		847899722684824F00D1DF36 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		847899752684870F00D1DF36 /* AboutSectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSectionVC.swift; sourceTree = "<group>"; };
+		847D1B282689A87A00220DAE /* SystemSetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSetupVC.swift; sourceTree = "<group>"; };
 		84861D7626848DB1004B046C /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		84861D7D26848EDD004B046C /* ProfileTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableCell.swift; sourceTree = "<group>"; };
 		84861D7E26848EDD004B046C /* ProfileTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableCell.xib; sourceTree = "<group>"; };
@@ -180,6 +184,8 @@
 		84D1F5042679E95A00F131E0 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
 		84E55058267E027A008C02F8 /* TypeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeTableCell.swift; sourceTree = "<group>"; };
 		84E55059267E027A008C02F8 /* TypeTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TypeTableCell.xib; sourceTree = "<group>"; };
+		84E78B9D2685E8C500FABDCD /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		84E78BC32685F9B400FABDCD /* CustomPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerView.swift; sourceTree = "<group>"; };
 		84F7BC4E266F06A1006C94DA /* Luna.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Luna.entitlements; sourceTree = "<group>"; };
 		84F7BC50266F11BA006C94DA /* AppleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManager.swift; sourceTree = "<group>"; };
 		84F819A7267A12A500A4C758 /* PassResetPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassResetPopUpVC.swift; sourceTree = "<group>"; };
@@ -247,6 +253,7 @@
 				847899752684870F00D1DF36 /* AboutSectionVC.swift */,
 				84861D7626848DB1004B046C /* ProfileVC.swift */,
 				84861D8226849FDB004B046C /* ChangePasswordVC.swift */,
+				847D1B282689A87A00220DAE /* SystemSetupVC.swift */,
 			);
 			path = PostLogin;
 			sourceTree = "<group>";
@@ -322,7 +329,7 @@
 				84F7BC4E266F06A1006C94DA /* Luna.entitlements */,
 				84CC12B82668CD87009316FC /* Controller */,
 				84CC12B72668CD35009316FC /* Services */,
-				84CC12B42668CD09009316FC /* Models */,
+				84E78B9C2685E8B800FABDCD /* Model */,
 				845549242678E07C000CC13D /* Xib's */,
 				84CC12B32668CCE8009316FC /* ViewController */,
 				84CC12B22668CCDB009316FC /* CommonController */,
@@ -369,13 +376,6 @@
 				8455491A2678DD90000CC13D /* PreLogin */,
 			);
 			path = ViewController;
-			sourceTree = "<group>";
-		};
-		84CC12B42668CD09009316FC /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		84CC12B52668CD10009316FC /* Resources */ = {
@@ -486,6 +486,7 @@
 			children = (
 				84D1F4D92679CF4C00F131E0 /* CommonFunctions.swift */,
 				8455A3BE26805AA80061C55F /* InfoPlistParser.swift */,
+				84E78BC32685F9B400FABDCD /* CustomPickerView.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -513,6 +514,14 @@
 				84D1F4EE2679D52700F131E0 /* SF-Pro-Display-BoldItalic.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		84E78B9C2685E8B800FABDCD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				84E78B9D2685E8C500FABDCD /* UserModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		F2201812782A54B48AE7EE35 /* Frameworks */ = {
@@ -718,12 +727,14 @@
 				84CC12E62668D057009316FC /* DeviceDetails.swift in Sources */,
 				84CC13192668D25B009316FC /* UIView+Extension.swift in Sources */,
 				84CC130D2668D1F3009316FC /* Dictionary+Extension.swift in Sources */,
+				84E78B9E2685E8C500FABDCD /* UserModel.swift in Sources */,
 				8455491C2678DDBA000CC13D /* SignupViewController.swift in Sources */,
 				84861D8326849FDB004B046C /* ChangePasswordVC.swift in Sources */,
 				84CC130A2668D1DB009316FC /* UIImage+Extension.swift in Sources */,
 				84CC13162668D23C009316FC /* Url+Extension.swift in Sources */,
 				84CC13102668D20A009316FC /* String+Extension.swift in Sources */,
 				84CC13072668D1BD009316FC /* UIScreen+Extension.swift in Sources */,
+				84E78BC42685F9B400FABDCD /* CustomPickerView.swift in Sources */,
 				84F819A8267A12A500A4C758 /* PassResetPopUpVC.swift in Sources */,
 				84FDA0AC267DCB5600AC8BE9 /* MessageReceiverCell.swift in Sources */,
 				84CC12FE2668D17A009316FC /* UICollectionView+Extension.swift in Sources */,
@@ -737,6 +748,7 @@
 				84861D7726848DB1004B046C /* ProfileVC.swift in Sources */,
 				84CC12D02668CFD8009316FC /* AppUserDefaults.swift in Sources */,
 				8455492D2678FFFD000CC13D /* LoginSocialTableCell.swift in Sources */,
+				847D1B292689A87A00220DAE /* SystemSetupVC.swift in Sources */,
 				84CC12F52668D10E009316FC /* UILabelExtension.swift in Sources */,
 				84CC129C2668C822009316FC /* SceneDelegate.swift in Sources */,
 				8455A3C7268211770061C55F /* SettingTableCell.swift in Sources */,
@@ -816,7 +828,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -871,7 +883,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -890,7 +902,7 @@
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 9S43J8Y2GN;
 				INFOPLIST_FILE = "$(SRCROOT)/Luna/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -915,7 +927,7 @@
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 9S43J8Y2GN;
 				INFOPLIST_FILE = "$(SRCROOT)/Luna/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

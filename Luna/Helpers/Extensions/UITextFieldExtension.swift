@@ -249,7 +249,7 @@ extension UITextField {
     // Add/remove error message
     func setError(_ string: String? = nil, show: Bool = true) {
         
-        var labelFontSize = 15
+        var labelFontSize = 14
         
         if let rightView = rightView, rightView.tag != 999 {
             rightViews.setObject(rightView, forKey: self)
@@ -297,7 +297,7 @@ extension UITextField {
         label.text = string
         label.textColor = .white
         label.numberOfLines = 0
-        label.font = self.font ?? AppFonts.SF_Pro_Display_Regular.withSize(.x12)//UIFont.systemFont(ofSize: CGFloat(labelFontSize))
+        label.font = self.font ?? AppFonts.SF_Pro_Display_Regular.withSize(.x12)
         label.textColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         label.backgroundColor = .clear
         label.textAlignment = .right
@@ -340,7 +340,7 @@ extension UITextField {
         // Set constraints for container
         container.widthAnchor.constraint(lessThanOrEqualTo: superview!.widthAnchor, multiplier: 1).isActive = true
         container.trailingAnchor.constraint(equalTo: superview!.trailingAnchor, constant: 0).isActive = true
-        container.topAnchor.constraint(equalTo: superview!.bottomAnchor, constant: 0).isActive = true
+        container.bottomAnchor.constraint(equalTo: superview!.topAnchor, constant: 0).isActive = true
         
         // Hide other error messages
         let enumerator = errorViews.objectEnumerator()
@@ -351,12 +351,12 @@ extension UITextField {
         // Add right button to textField
         let errorButton = UIButton(type: .custom)
         errorButton.tag = 999
-        errorButton.setImage(#imageLiteral(resourceName: "icShopperMyorderError"), for: .normal)
+        errorButton.setImage(nil, for: .normal)
         errorButton.frame = CGRect(x: 0, y: 0, width: frame.size.height, height: frame.size.height)
         errorButton.addTarget(self, action: #selector(errorAction), for: .touchUpInside)
         rightView = errorButton
         rightViewMode = .always
-        
+
         // Save view with error message
         errorViews.setObject(container, forKey: self)
     }
@@ -366,19 +366,19 @@ extension UITextField {
     @objc func errorAction(_ sender: Any) {
         let errorButton = sender as! UIButton
         let textField = errorButton.superview as! UITextField
-        
+
         let errorView = errorViews.object(forKey: textField)
         if let errorView = errorView {
             errorView.isHidden.toggle()
         }
-        
+
         let enumerator = errorViews.objectEnumerator()
         while let view = enumerator!.nextObject() as! UIView? {
             if view != errorView {
                 view.isHidden = true
             }
         }
-        
+
         //         Don't hide keyboard after click by icon
         //        UIViewController.isCatchTappedAround = false
         //        self.endEditing(false)
