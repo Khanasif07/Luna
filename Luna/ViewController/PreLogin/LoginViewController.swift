@@ -485,8 +485,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate,ASAuthorization
             Auth.auth().signIn(with: firebaseCredential) { (authResult, error) in
                 
                 if let error = error {
-                    print(error.localizedDescription)
                     CommonFunctions.hideActivityLoader()
+                    AppUserDefaults.removeValue(forKey: .uid)
                     CommonFunctions.showToastWithMessage(error.localizedDescription)
                     return
                 }
@@ -497,18 +497,38 @@ extension LoginViewController: ASAuthorizationControllerDelegate,ASAuthorization
                     UserModel.main.id = currentUser.uid
                     UserModel.main.email = currentUser.email ?? ""
                     UserModel.main.isChangePassword = false
-                    FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: currentUser.displayName ?? "", lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isChangePassword: false) {
-                        print("Success")
-                    } failure: { (error) -> (Void) in
-                        AppUserDefaults.removeValue(forKey: .uid)
-                        CommonFunctions.showToastWithMessage(error.localizedDescription)
+                    FirestoreController.checkUserExistInDatabase {
+                        FirestoreController.getFirebaseUserData {
+                            CommonFunctions.hideActivityLoader()
+                            DispatchQueue.main.async {
+                                if UserModel.main.isProfileStepCompleted {
+                                    AppRouter.gotoHomeVC()
+                                }else {
+                                    self.goToProfileSetupVC()
+                                }
+                            }
+                        } failure: { (error) -> (Void) in
+                            CommonFunctions.hideActivityLoader()
+                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                        }
+                    } failure: { () -> (Void) in
+                        FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: currentUser.displayName ?? "", lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isChangePassword: false) {
+                            CommonFunctions.hideActivityLoader()
+                            DispatchQueue.main.async {
+                                if UserModel.main.isProfileStepCompleted {
+                                    AppRouter.gotoHomeVC()
+                                }else {
+                                    self.goToProfileSetupVC()
+                                }
+                            }
+                        } failure: { (error) -> (Void) in
+                            CommonFunctions.hideActivityLoader()
+                            AppUserDefaults.removeValue(forKey: .uid)
+                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                        }
                     }
                 }
-                DispatchQueue.main.async {
-                    self.goToProfileSetupVC()
-                }
             }
-            
         }
     }
     
@@ -540,28 +560,47 @@ extension LoginViewController: GIDSignInDelegate {
         Auth.auth().signIn(with: credential) { (authResult, error) in
             if let error = error {
                 CommonFunctions.hideActivityLoader()
+                AppUserDefaults.removeValue(forKey: .uid)
                 CommonFunctions.showToastWithMessage(error.localizedDescription)
-                print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
+                return
             }
-            CommonFunctions.hideActivityLoader()
             if let currentUser = Auth.auth().currentUser {
                 AppUserDefaults.save(value: currentUser.uid, forKey: .uid)
                 AppUserDefaults.save(value: currentUser.email ?? "", forKey: .defaultEmail)
                 UserModel.main.id = currentUser.uid
-                UserModel.main.email = "\(currentUser.email ?? "")"
+                UserModel.main.email = currentUser.email ?? ""
                 UserModel.main.isChangePassword = false
-                FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: user.profile.name, lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: false,isChangePassword: false) {
-                    print("Success")
-                } failure: { (error) -> (Void) in
-                    AppUserDefaults.removeValue(forKey: .uid)
-                    CommonFunctions.showToastWithMessage(error.localizedDescription)
+                FirestoreController.checkUserExistInDatabase {
+                    FirestoreController.getFirebaseUserData {
+                            CommonFunctions.hideActivityLoader()
+                            DispatchQueue.main.async {
+                                if UserModel.main.isProfileStepCompleted {
+                                    AppRouter.gotoHomeVC()
+                                }else {
+                                    self.goToProfileSetupVC()
+                                }
+                        }
+                    } failure: { (error) -> (Void) in
+                        CommonFunctions.hideActivityLoader()
+                        CommonFunctions.showToastWithMessage(error.localizedDescription)
+                    }
+                } failure: { () -> (Void) in
+                    FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: user.profile.name, lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isChangePassword: false) {
+                        CommonFunctions.hideActivityLoader()
+                        DispatchQueue.main.async {
+                            if UserModel.main.isProfileStepCompleted {
+                                AppRouter.gotoHomeVC()
+                            }else {
+                                self.goToProfileSetupVC()
+                            }
+                        }
+                    } failure: { (error) -> (Void) in
+                        CommonFunctions.hideActivityLoader()
+                        AppUserDefaults.removeValue(forKey: .uid)
+                        CommonFunctions.showToastWithMessage(error.localizedDescription)
+                    }
                 }
             }
-           
-            DispatchQueue.main.async {
-                self.self.goToProfileSetupVC()
-            }
-            print("post notification after user successfully sign in")
         }
     }
     

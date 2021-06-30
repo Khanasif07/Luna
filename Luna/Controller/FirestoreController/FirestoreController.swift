@@ -71,7 +71,7 @@ class FirestoreController:NSObject{
     static func getFirebaseUserData(success: @escaping () -> Void,
                                     failure:  @escaping FailureResponse){
         db.collection(ApiKey.users)
-            .document(currentUser?.uid ?? "").getDocument { (snapshot, error) in
+            .document(Auth.auth().currentUser?.uid ?? "").getDocument { (snapshot, error) in
                 if let error = error {
                     failure(error)
                 } else{
@@ -94,6 +94,22 @@ class FirestoreController:NSObject{
                     success()
                 }
             }
+    }
+    
+    
+    //MARK:- Get info
+    //=======================
+    static func checkUserExistInDatabase(success: @escaping () -> Void,
+                                         failure:  @escaping () -> Void){
+        db.collection(ApiKey.users).document(Auth.auth().currentUser?.uid ?? "").getDocument { (snapshot, error ) in
+            if  (snapshot?.exists)! {
+                print("User Document exist")
+                success()
+            } else {
+                failure()
+                print("User Document does not exist")
+            }
+        }
     }
     
     //MARK:- logoutUser
