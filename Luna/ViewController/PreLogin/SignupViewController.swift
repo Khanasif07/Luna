@@ -113,7 +113,13 @@ extension SignupViewController {
         let scene =  PassResetPopUpVC.instantiate(fromAppStoryboard: .PreLogin)
         scene.emailVerificationSuccess = { [weak self] in
             guard let selff = self else { return }
-            print(selff)
+            let cell = selff.signupTableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? SignUpTopTableCell
+            cell?.emailIdTxtField.text = ""
+            cell?.passTxtField.text = ""
+            selff.passTxt = ""
+            selff.emailTxt = ""
+            cell?.signUpBtn.isEnabled = selff.signUpBtnStatus()
+            selff.signupTableView.reloadData()
         }
         scene.popupType = .emailVerification
         scene.titleDesc = LocalizedString.email_verification.localized
@@ -211,16 +217,11 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
                 FirestoreController.createUserNode(userId: "", email: self.emailTxt, password: self.passTxt, name: "", imageURL: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isChangePassword: true, isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue, completion: {
                         CommonFunctions.hideActivityLoader()
                     if Auth.auth().currentUser?.isEmailVerified ?? false{
-                            self.passTxt = ""
-                            self.signupTableView.reloadData()
                             self.goToProfileSetupVC()
                         }else{
-                            self.passTxt = ""
-                            self.signupTableView.reloadData()
                             self.showAlertForBiometric()
                         }
                     }) { (error) -> (Void)  in
-                        print( error.localizedDescription)
                         CommonFunctions.hideActivityLoader()
                         CommonFunctions.showToastWithMessage(error.localizedDescription)
                     }
