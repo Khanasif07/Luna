@@ -58,7 +58,7 @@ class ChangePasswordVC: UIViewController {
             }
             CommonFunctions.hideActivityLoader()
             KeychainWrapper.standard.set(self.newPass, forKey: ApiKey.password)
-            CommonFunctions.showToastWithMessage("password changed successfully ")
+            CommonFunctions.showToastWithMessage("Password changed successfully ")
             self.pop()
         }
     }

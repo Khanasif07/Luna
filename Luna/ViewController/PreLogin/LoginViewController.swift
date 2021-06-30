@@ -142,7 +142,13 @@ extension LoginViewController {
         let scene =  PassResetPopUpVC.instantiate(fromAppStoryboard: .PreLogin)
         scene.emailVerificationSuccess = { [weak self] in
             guard let selff = self else { return }
-            print(selff)
+            let cell = selff.loginTableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? SignUpTopTableCell
+            cell?.emailIdTxtField.text = ""
+            cell?.passTxtField.text = ""
+            selff.passTxt = ""
+            selff.emailTxt = ""
+            cell?.signUpBtn.isEnabled = selff.signUpBtnStatus()
+            selff.loginTableView.reloadData()
         }
         scene.popupType = .emailVerification
         scene.titleDesc = "Email Verification"
@@ -263,8 +269,6 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                                     return
                                 }
                                 DispatchQueue.main.async {
-                                    self.passTxt = ""
-                                    self.loginTableView.reloadData()
                                     self.gotoEmailVerificationPopUpVC()
                                 }
                             })
