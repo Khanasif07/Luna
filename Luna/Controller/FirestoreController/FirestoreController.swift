@@ -89,7 +89,6 @@ class FirestoreController:NSObject{
                     user.isProfileStepCompleted = data[ApiKey.isProfileStepCompleted] as? Bool ?? false
                     user.isChangePassword = data[ApiKey.isChangePassword] as? Bool ?? false
                     UserModel.main = user
-                    AppUserDefaults.save(value: user.isBiometricOn, forKey: .isBiometricSelected)
                     AppUserDefaults.save(value: user.isProfileStepCompleted, forKey: .isProfileStepCompleted)
                     success()
                 }

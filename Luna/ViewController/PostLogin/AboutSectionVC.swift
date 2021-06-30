@@ -77,8 +77,14 @@ extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch sections[indexPath.row].1 {
-        case "Delete Account":
-            CommonFunctions.showToastWithMessage("Under Development")
+        case "Privacy":
+            let vc = AboutTermsPolicyVC.instantiate(fromAppStoryboard: .PostLogin)
+            vc.titleString =  sections[indexPath.row].1
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "Terms & Conditions":
+            let vc = AboutTermsPolicyVC.instantiate(fromAppStoryboard: .PostLogin)
+            vc.titleString =  sections[indexPath.row].1
+            self.navigationController?.pushViewController(vc, animated: true)
         default:
             CommonFunctions.showToastWithMessage("Under Development")
         }
