@@ -208,7 +208,7 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
                     return
                 }
                 CommonFunctions.showActivityLoader()
-                FirestoreController.createUserNode(userId: "", email: self.emailTxt, password: self.passTxt, name: "", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
+                FirestoreController.createUserNode(userId: "", email: self.emailTxt, password: self.passTxt, name: "", imageURL: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isChangePassword: true, isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue, completion: {
                         CommonFunctions.hideActivityLoader()
                     if Auth.auth().currentUser?.isEmailVerified ?? false{
                             self.passTxt = ""
@@ -420,7 +420,7 @@ extension SignupViewController: ASAuthorizationControllerDelegate,ASAuthorizatio
                             CommonFunctions.showToastWithMessage(error.localizedDescription)
                         }
                     } failure: { () -> (Void) in
-                        FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: currentUser.displayName ?? "", lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isChangePassword: false) {
+                        FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: currentUser.displayName ?? "", lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isChangePassword: false, isBiometricOn: true) {
                             CommonFunctions.hideActivityLoader()
                             DispatchQueue.main.async {
                                 if UserModel.main.isProfileStepCompleted {
@@ -493,7 +493,7 @@ extension SignupViewController: GIDSignInDelegate {
                         CommonFunctions.showToastWithMessage(error.localizedDescription)
                     }
                 } failure: { () -> (Void) in
-                    FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: user.profile.name, lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isChangePassword: false) {
+                    FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: user.profile.name, lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isChangePassword: false, isBiometricOn: true) {
                         CommonFunctions.hideActivityLoader()
                         DispatchQueue.main.async {
                             if UserModel.main.isProfileStepCompleted {

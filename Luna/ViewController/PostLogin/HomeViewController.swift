@@ -83,15 +83,15 @@ class HomeViewController: UIViewController, ASAuthorizationControllerPresentatio
     }
     
     @IBAction func signUpBtnAction(_ sender: UIButton) {
-        if (Auth.auth().currentUser?.uid == nil) {
-            FirestoreController.createUserNode(userId: "", email: self.emailTxtField.text!, password: self.passTxtField.text!, name: "Asif Khan", imageURL: "", phoneNo: "8896880327", countryCode: "+91", status: "Active", completion: {
-                print("Success")
-            }) { (error) -> (Void)  in
-                print( error.localizedDescription)
-            }
-        }else{
-            showAlert(msg: "User is already login.")
-        }
+//        if (Auth.auth().currentUser?.uid == nil) {
+//            FirestoreController.createUserNode(userId: "", email: self.emailTxtField.text!, password: self.passTxtField.text!, name: "Asif Khan", imageURL: "", phoneNo: "8896880327", countryCode: "+91", status: "Active", completion: {
+//                print("Success")
+//            }) { (error) -> (Void)  in
+//                print( error.localizedDescription)
+//            }
+//        }else{
+//            showAlert(msg: "User is already login.")
+//        }
     }
     
     @IBAction func forgetPasswordBtnAction(_ sender: Any) {

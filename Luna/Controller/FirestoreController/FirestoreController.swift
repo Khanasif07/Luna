@@ -156,9 +156,11 @@ class FirestoreController:NSObject{
                                password: String,
                                name: String,
                                imageURL: String,
-                               phoneNo: String,
-                               countryCode: String,
-                               status: String,
+                               dob: String,
+                               diabetesType: String,
+                               isProfileStepCompleted: Bool,
+                               isChangePassword:Bool,
+                               isBiometricOn:  Bool,
                                completion: @escaping () -> Void,
                                failure: @escaping FailureResponse) {
         var emailId  = email
@@ -183,7 +185,7 @@ class FirestoreController:NSObject{
                                                                       ApiKey.deviceToken:AppUserDefaults.value(forKey: .fcmToken).stringValue,
                                                                       ApiKey.password:password,
                                                                       ApiKey.isProfileStepCompleted: false,
-                                                                      ApiKey.userId: uid,ApiKey.isChangePassword: true]){ err in
+                                                                      ApiKey.userId: uid,ApiKey.isChangePassword: true,ApiKey.isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue]){ err in
                         if let err = err {
                             print("Error writing document: \(err)")
                             CommonFunctions.showToastWithMessage(err.localizedDescription)
@@ -245,6 +247,7 @@ class FirestoreController:NSObject{
                                 diabetesType: String,
                                 isProfileStepCompleted: Bool,
                                 isChangePassword:Bool,
+                                isBiometricOn:  Bool,
                                 completion: @escaping () -> Void,
                                 failure: @escaping FailureResponse){
         AppUserDefaults.save(value: userId, forKey: .uid)
@@ -257,7 +260,7 @@ class FirestoreController:NSObject{
                                                               ApiKey.lastName: lastName,
                                                               ApiKey.isProfileStepCompleted:isProfileStepCompleted,
                                                               ApiKey.userId: userId,
-                                                              ApiKey.dob: dob,ApiKey.isChangePassword: isChangePassword]){ err in
+                                                              ApiKey.dob: dob,ApiKey.isChangePassword: isChangePassword,ApiKey.isBiometricOn: isBiometricOn]){ err in
                                                                 if let err = err {
                                                                     failure(err)
                                                                     print("Error writing document: \(err)")
