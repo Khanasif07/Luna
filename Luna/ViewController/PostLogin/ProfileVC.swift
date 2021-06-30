@@ -43,9 +43,14 @@ class ProfileVC: UIViewController {
     @IBAction func saveBtnAction(_ sender: AppButton) {
         CommonFunctions.showActivityLoader()
         FirestoreController.updateUserNode(email: sections[3].1, password: AppUserDefaults.value(forKey: .defaultPassword).stringValue, firstName: sections[0].1, lastName: sections[1].1, dob: sections[2].1, diabetesType: sections[4].1, isProfileStepCompleted: UserModel.main.isProfileStepCompleted, isBiometricOn: UserModel.main.isBiometricOn) {
-            CommonFunctions.hideActivityLoader()
-            self.pop()
-            CommonFunctions.showToastWithMessage("Profile updated successfully.")
+            FirestoreController.getFirebaseUserData {
+                CommonFunctions.hideActivityLoader()
+                self.pop()
+                CommonFunctions.showToastWithMessage("Profile updated successfully.")
+            } failure: { (error) -> (Void) in
+                CommonFunctions.hideActivityLoader()
+                CommonFunctions.showToastWithMessage(error.localizedDescription)
+            }
         } failure: { (error) -> (Void) in
             CommonFunctions.hideActivityLoader()
             CommonFunctions.showToastWithMessage(error.localizedDescription)
