@@ -48,7 +48,11 @@ class HomeVC: UIViewController {
 extension HomeVC {
     
     private func initialSetup() {
-        
+        FirestoreController.getFirebaseUserData {
+            AppUserDefaults.save(value: UserModel.main.isBiometricOn, forKey: .isBiometricSelected)
+        } failure: { (error) -> (Void) in
+            CommonFunctions.showToastWithMessage(error.localizedDescription)
+        }
     }
     
      func gotoSettingVC(){

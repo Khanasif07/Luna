@@ -133,6 +133,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
         AppUserDefaults.save(value: deviceTokenString, forKey: .token)
+        AppUserDefaults.save(value: deviceTokenString, forKey: .fcmToken)
         Messaging.messaging().apnsToken = deviceToken
         Auth.auth().setAPNSToken(deviceToken, type: .sandbox)
         print("APNs device token: \(deviceTokenString)")

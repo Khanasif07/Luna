@@ -9,6 +9,8 @@
 import UIKit
 import SwiftKeychainWrapper
 import FirebaseAuth
+import FirebaseDatabase
+import Firebase
 
 class SettingsVC: UIViewController {
     
@@ -19,6 +21,7 @@ class SettingsVC: UIViewController {
     
     // MARK: - Variables
     //===========================
+    public let db = Firestore.firestore()
     var sections: [(UIImage,String)] = [(#imageLiteral(resourceName: "profile"),"Profile"),(#imageLiteral(resourceName: "changePassword"),"Change Password"),(#imageLiteral(resourceName: "faceId"),"Face ID"),(#imageLiteral(resourceName: "appleHealth"),"Apple Health"),(#imageLiteral(resourceName: "system"),"System"),(#imageLiteral(resourceName: "about"),"About"),(#imageLiteral(resourceName: "deleteAccount"),"Delete Account"),(#imageLiteral(resourceName: "logout"),"Logout")]
     
     // MARK: - Lifecycle
@@ -59,24 +62,30 @@ extension SettingsVC {
     }
     
     private func setUpdata(){
-        if !UserModel.main.canChangePassword {
+        if !UserModel.main.isChangePassword {
             self.sections = [(#imageLiteral(resourceName: "profile"),"Profile"),(#imageLiteral(resourceName: "faceId"),"Face ID"),(#imageLiteral(resourceName: "appleHealth"),"Apple Health"),(#imageLiteral(resourceName: "system"),"System"),(#imageLiteral(resourceName: "about"),"About"),(#imageLiteral(resourceName: "deleteAccount"),"Delete Account"),(#imageLiteral(resourceName: "logout"),"Logout")]
             
         }
     }
     
     private func performCleanUp(for_logout: Bool = true) {
+        //        let userId = AppUserDefaults.value(forKey: .uid).stringValue
+        //        db.collection(ApiKey.users)
+        //            .document(userId).updateData([ApiKey.deviceToken : ""]) { (error) in
+        //                if let err = error {
+        //                    print(err.localizedDescription)
+        //                    CommonFunctions.showToastWithMessage(err.localizedDescription)
+        //                } else {
         let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
-        let isBiometricSelected  = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
-        let isBiometricCompleted  = AppUserDefaults.value(forKey: .isBiometricCompleted).boolValue
         AppUserDefaults.removeAllValues()
         UserModel.main = UserModel()
         if for_logout {
-        AppUserDefaults.save(value: isBiometricSelected, forKey: .isBiometricSelected)
-        AppUserDefaults.save(value: isBiometricCompleted, forKey: .isBiometricCompleted)
-        AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
+            AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
         }
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        DispatchQueue.main.async {
+            AppRouter.goToSignUpVC()
+        }
     }
     
     private func removeKeychain(){
@@ -138,6 +147,7 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
             guard let self = self else { return }
             if self.sections[indexPath.row].1 ==  "Face ID" {
                 let isOn = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
+                self.db.collection(ApiKey.users).document(UserModel.main.id).updateData([ApiKey.isBiometricOn: !isOn])
                 AppUserDefaults.save(value: !isOn, forKey: .isBiometricSelected)
                 self.settingTableView.reloadData()
             }
@@ -189,9 +199,6 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
                                     CommonFunctions.hideActivityLoader()
                                     self.removeKeychain()
                                     self.performCleanUp(for_logout: false)
-                                    DispatchQueue.main.async {
-                                        AppRouter.goToSignUpVC()
-                                    }
                                 }
                             }
                         }

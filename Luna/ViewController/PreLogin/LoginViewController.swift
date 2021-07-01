@@ -135,14 +135,20 @@ extension LoginViewController {
     
     func goToProfileSetupVC(){
        let bleVC = ProfileSetupVC.instantiate(fromAppStoryboard: .PreLogin)
-       self.navigationController?.pushViewController(bleVC, animated: true)
+       self.navigationController?.pushViewController(bleVC, animated: false)
    }
     
     private func gotoEmailVerificationPopUpVC(){
         let scene =  PassResetPopUpVC.instantiate(fromAppStoryboard: .PreLogin)
         scene.emailVerificationSuccess = { [weak self] in
             guard let selff = self else { return }
-            print(selff)
+            let cell = selff.loginTableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? SignUpTopTableCell
+            cell?.emailIdTxtField.text = ""
+            cell?.passTxtField.text = ""
+            selff.passTxt = ""
+            selff.emailTxt = ""
+            cell?.signUpBtn.isEnabled = selff.signUpBtnStatus()
+            selff.loginTableView.reloadData()
         }
         scene.popupType = .emailVerification
         scene.titleDesc = "Email Verification"
@@ -238,18 +244,19 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                     self.reloadUser { (reloadMsg) in
                         if  (currentUser.isEmailVerified) {
                             FirestoreController.login(userId: currentUser.uid, withEmail: self.emailTxt, with: self.passTxt, success: {
-                                CommonFunctions.hideActivityLoader()
-                                self.passTxt = ""
-                                self.loginTableView.reloadData()
-                                self.goToProfileSetupVC()
-                                //                        FirestoreController.setFirebaseData(userId: "", email: self.emailTxt, password: self.passTxt, name:"", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
-                                //                            CommonFunctions.hideActivityLoader()
-                                //                            self.goToBLEVC()
-                                //                        }) { (error) -> (Void) in
-                                //                            AppUserDefaults.removeValue(forKey: .accesstoken)
-                                //                            CommonFunctions.hideActivityLoader()
-                                //                            CommonFunctions.showToastWithMessage(error.localizedDescription)
-                                //                        }
+                                FirestoreController.getFirebaseUserData {
+                                    CommonFunctions.hideActivityLoader()
+                                    DispatchQueue.main.async {
+                                        if UserModel.main.isProfileStepCompleted {
+                                            AppRouter.gotoHomeVC()
+                                        }else {
+                                            self.goToProfileSetupVC()
+                                        }
+                                    }
+                                } failure: { (error) -> (Void) in
+                                    CommonFunctions.hideActivityLoader()
+                                    CommonFunctions.showToastWithMessage(error.localizedDescription)
+                                }
                             }) { (message, code) in
                                 CommonFunctions.hideActivityLoader()
                                 CommonFunctions.showToastWithMessage(message)
@@ -258,13 +265,10 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                             CommonFunctions.hideActivityLoader()
                             Auth.auth().currentUser?.sendEmailVerification(with: self.getActionCodes(), completion: { (err) in
                                 if let err = err {
-                                    print(err.localizedDescription)
                                     CommonFunctions.showToastWithMessage(err.localizedDescription)
                                     return
                                 }
                                 DispatchQueue.main.async {
-                                    self.passTxt = ""
-                                    self.loginTableView.reloadData()
                                     self.gotoEmailVerificationPopUpVC()
                                 }
                             })
@@ -272,11 +276,20 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                     }
                 } else {
                     FirestoreController.login(userId: "", withEmail: self.emailTxt, with: self.passTxt, success: {
-                        CommonFunctions.hideActivityLoader()
                         if Auth.auth().currentUser?.isEmailVerified ?? false {
-                                self.passTxt = ""
-                                self.loginTableView.reloadData()
-                                self.goToProfileSetupVC()
+                            FirestoreController.getFirebaseUserData {
+                                CommonFunctions.hideActivityLoader()
+                                DispatchQueue.main.async {
+                                    if UserModel.main.isProfileStepCompleted {
+                                        AppRouter.gotoHomeVC()
+                                    }else {
+                                        self.goToProfileSetupVC()
+                                    }
+                                }
+                            } failure: { (error) -> (Void) in
+                                CommonFunctions.hideActivityLoader()
+                                CommonFunctions.showToastWithMessage(error.localizedDescription)
+                            }
                         } else {
                             CommonFunctions.hideActivityLoader()
                             Auth.auth().currentUser?.sendEmailVerification(with: self.getActionCodes(), completion: { (err) in
@@ -291,15 +304,6 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                                 }
                             })
                         }
-                       
-                        //                        FirestoreController.setFirebaseData(userId: "", email: self.emailTxt, password: self.passTxt, name:"", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
-                        //                            CommonFunctions.hideActivityLoader()
-                        //                            self.goToBLEVC()
-                        //                        }) { (error) -> (Void) in
-                        //                            AppUserDefaults.removeValue(forKey: .accesstoken)
-                        //                            CommonFunctions.hideActivityLoader()
-                        //                            CommonFunctions.showToastWithMessage(error.localizedDescription)
-                        //                        }
                     }) { (message, code) in
                         CommonFunctions.hideActivityLoader()
                         CommonFunctions.showToastWithMessage(message)
@@ -485,37 +489,50 @@ extension LoginViewController: ASAuthorizationControllerDelegate,ASAuthorization
             Auth.auth().signIn(with: firebaseCredential) { (authResult, error) in
                 
                 if let error = error {
-                    print(error.localizedDescription)
                     CommonFunctions.hideActivityLoader()
+                    AppUserDefaults.removeValue(forKey: .uid)
                     CommonFunctions.showToastWithMessage(error.localizedDescription)
                     return
                 }
                 CommonFunctions.hideActivityLoader()
                 if let currentUser = Auth.auth().currentUser {
                     AppUserDefaults.save(value: currentUser.uid, forKey: .uid)
-                    AppUserDefaults.save(value: currentUser.uid, forKey: .accesstoken)
                     AppUserDefaults.save(value: currentUser.email ?? "", forKey: .defaultEmail)
                     UserModel.main.id = currentUser.uid
-                    UserModel.main.accessToken = currentUser.uid
                     UserModel.main.email = currentUser.email ?? ""
-                    UserModel.main.canChangePassword = false
+                    UserModel.main.isChangePassword = false
+                    FirestoreController.checkUserExistInDatabase {
+                        FirestoreController.getFirebaseUserData {
+                            CommonFunctions.hideActivityLoader()
+                            DispatchQueue.main.async {
+                                if UserModel.main.isProfileStepCompleted {
+                                    AppRouter.gotoHomeVC()
+                                }else {
+                                    self.goToProfileSetupVC()
+                                }
+                            }
+                        } failure: { (error) -> (Void) in
+                            CommonFunctions.hideActivityLoader()
+                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                        }
+                    } failure: { () -> (Void) in
+                        FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: currentUser.displayName ?? "", lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isChangePassword: false, isBiometricOn: true) {
+                            CommonFunctions.hideActivityLoader()
+                            DispatchQueue.main.async {
+                                if UserModel.main.isProfileStepCompleted {
+                                    AppRouter.gotoHomeVC()
+                                }else {
+                                    self.goToProfileSetupVC()
+                                }
+                            }
+                        } failure: { (error) -> (Void) in
+                            CommonFunctions.hideActivityLoader()
+                            AppUserDefaults.removeValue(forKey: .uid)
+                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                        }
+                    }
                 }
-                DispatchQueue.main.async {
-                    self.goToProfileSetupVC()
-                }
-                // Mak a request to set user's display name on Firebase
-//                let changeRequest = authResult?.user.createProfileChangeRequest()
-//                changeRequest?.displayName = appleIDCredential.fullName?.givenName
-//                changeRequest?.commitChanges(completion: { (error) in
-//
-//                    if let error = error {
-//                        print(error.localizedDescription)
-//                    } else {
-//                        print("Updated display name: \(Auth.auth().currentUser!.email!)")
-//                    }
-//                })
             }
-            
         }
     }
     
@@ -547,29 +564,47 @@ extension LoginViewController: GIDSignInDelegate {
         Auth.auth().signIn(with: credential) { (authResult, error) in
             if let error = error {
                 CommonFunctions.hideActivityLoader()
+                AppUserDefaults.removeValue(forKey: .uid)
                 CommonFunctions.showToastWithMessage(error.localizedDescription)
-                print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
+                return
             }
-            CommonFunctions.hideActivityLoader()
             if let currentUser = Auth.auth().currentUser {
                 AppUserDefaults.save(value: currentUser.uid, forKey: .uid)
-                AppUserDefaults.save(value: currentUser.uid, forKey: .accesstoken)
                 AppUserDefaults.save(value: currentUser.email ?? "", forKey: .defaultEmail)
                 UserModel.main.id = currentUser.uid
-                UserModel.main.accessToken = currentUser.uid
+                UserModel.main.email = currentUser.email ?? ""
+                UserModel.main.isChangePassword = false
+                FirestoreController.checkUserExistInDatabase {
+                    FirestoreController.getFirebaseUserData {
+                            CommonFunctions.hideActivityLoader()
+                            DispatchQueue.main.async {
+                                if UserModel.main.isProfileStepCompleted {
+                                    AppRouter.gotoHomeVC()
+                                }else {
+                                    self.goToProfileSetupVC()
+                                }
+                        }
+                    } failure: { (error) -> (Void) in
+                        CommonFunctions.hideActivityLoader()
+                        CommonFunctions.showToastWithMessage(error.localizedDescription)
+                    }
+                } failure: { () -> (Void) in
+                    FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: user.profile.name, lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isChangePassword: false, isBiometricOn: true) {
+                        CommonFunctions.hideActivityLoader()
+                        DispatchQueue.main.async {
+                            if UserModel.main.isProfileStepCompleted {
+                                AppRouter.gotoHomeVC()
+                            }else {
+                                self.goToProfileSetupVC()
+                            }
+                        }
+                    } failure: { (error) -> (Void) in
+                        CommonFunctions.hideActivityLoader()
+                        AppUserDefaults.removeValue(forKey: .uid)
+                        CommonFunctions.showToastWithMessage(error.localizedDescription)
+                    }
+                }
             }
-            UserModel.main.email = "\(user.profile.email ?? "")"
-            UserModel.main.canChangePassword = false
-            DispatchQueue.main.async {
-                self.self.goToProfileSetupVC()
-            }
-            print("post notification after user successfully sign in")
-//            FirestoreController.setFirebaseData(userId: user.userID, email: user.profile.email, password: "", name: user.profile.name, imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
-//                print("Success")
-//            }) { (error) -> (Void) in
-//                AppUserDefaults.removeValue(forKey: .accesstoken)
-//                print(error.localizedDescription)
-//            }
         }
     }
     

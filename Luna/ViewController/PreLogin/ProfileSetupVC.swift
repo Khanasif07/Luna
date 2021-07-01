@@ -279,7 +279,11 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                         UserModel.main.lastName = self.senderLastName
                         UserModel.main.dob = self.senderDob
                         UserModel.main.diabetesType = self.diabetesType
-                        AppRouter.gotoHomeVC()
+                        FirestoreController.updateUserNode(email: AppUserDefaults.value(forKey: .defaultEmail).stringValue, password: AppUserDefaults.value(forKey: .defaultPassword).stringValue, firstName:  self.senderName, lastName: self.senderLastName, dob: self.senderDob, diabetesType: self.diabetesType, isProfileStepCompleted: true,isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue) {
+                            AppRouter.gotoHomeVC()
+                        } failure: { (error) -> (Void) in
+                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                        }
                     }
                     if  self.messageListing.endIndex == 10 {
                         self.bottomContainerBtmConst.constant = (-68.0 - self.bottomSafeArea)

@@ -31,7 +31,7 @@ class SignupViewController: UIViewController {
     var passTxt = ""
     var currentNonce : String?
     private let biometricIDAuth = BiometricIDAuth()
-    
+  
     // MARK: - Lifecycle
     //===========================
     override func viewDidLoad() {
@@ -113,7 +113,13 @@ extension SignupViewController {
         let scene =  PassResetPopUpVC.instantiate(fromAppStoryboard: .PreLogin)
         scene.emailVerificationSuccess = { [weak self] in
             guard let selff = self else { return }
-            print(selff)
+            let cell = selff.signupTableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? SignUpTopTableCell
+            cell?.emailIdTxtField.text = ""
+            cell?.passTxtField.text = ""
+            selff.passTxt = ""
+            selff.emailTxt = ""
+            cell?.signUpBtn.isEnabled = selff.signUpBtnStatus()
+            selff.signupTableView.reloadData()
         }
         scene.popupType = .emailVerification
         scene.titleDesc = LocalizedString.email_verification.localized
@@ -208,22 +214,14 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
                     return
                 }
                 CommonFunctions.showActivityLoader()
-                FirestoreController.createUserNode(userId: "", email: self.emailTxt, password: self.passTxt, name: "", imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
-                        self.reloadUser { (reloadMsg) in
-                            print(reloadMsg?.localizedDescription ?? "")
-                        }
+                FirestoreController.createUserNode(userId: "", email: self.emailTxt, password: self.passTxt, name: "", imageURL: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isChangePassword: true, isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue, completion: {
                         CommonFunctions.hideActivityLoader()
                     if Auth.auth().currentUser?.isEmailVerified ?? false{
-                            self.passTxt = ""
-                            self.signupTableView.reloadData()
                             self.goToProfileSetupVC()
                         }else{
-                            self.passTxt = ""
-                            self.signupTableView.reloadData()
                             self.showAlertForBiometric()
                         }
                     }) { (error) -> (Void)  in
-                        print( error.localizedDescription)
                         CommonFunctions.hideActivityLoader()
                         CommonFunctions.showToastWithMessage(error.localizedDescription)
                     }
@@ -396,37 +394,50 @@ extension SignupViewController: ASAuthorizationControllerDelegate,ASAuthorizatio
             // Sign in with Firebase
             CommonFunctions.showActivityLoader()
             Auth.auth().signIn(with: firebaseCredential) { (authResult, error) in
-                
                 if let error = error {
-                    print(error.localizedDescription)
+                    CommonFunctions.hideActivityLoader()
+                    AppUserDefaults.removeValue(forKey: .uid)
+                    CommonFunctions.showToastWithMessage(error.localizedDescription)
                     return
                 }
                 if let currentUser = Auth.auth().currentUser {
                     AppUserDefaults.save(value: currentUser.uid, forKey: .uid)
-                    AppUserDefaults.save(value: currentUser.uid, forKey: .accesstoken)
                     AppUserDefaults.save(value: currentUser.email ?? "", forKey: .defaultEmail)
                     UserModel.main.id = currentUser.uid
-                    UserModel.main.accessToken = currentUser.uid
                     UserModel.main.email = currentUser.email ?? ""
-                    UserModel.main.canChangePassword = false
+                    UserModel.main.isChangePassword = false
+                    FirestoreController.checkUserExistInDatabase {
+                        FirestoreController.getFirebaseUserData {
+                            CommonFunctions.hideActivityLoader()
+                            DispatchQueue.main.async {
+                                if UserModel.main.isProfileStepCompleted {
+                                    AppRouter.gotoHomeVC()
+                                }else {
+                                    self.goToProfileSetupVC()
+                                }
+                            }
+                        } failure: { (error) -> (Void) in
+                            CommonFunctions.hideActivityLoader()
+                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                        }
+                    } failure: { () -> (Void) in
+                        FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: currentUser.displayName ?? "", lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isChangePassword: false, isBiometricOn: true) {
+                            CommonFunctions.hideActivityLoader()
+                            DispatchQueue.main.async {
+                                if UserModel.main.isProfileStepCompleted {
+                                    AppRouter.gotoHomeVC()
+                                }else {
+                                    self.goToProfileSetupVC()
+                                }
+                            }
+                        } failure: { (error) -> (Void) in
+                            CommonFunctions.hideActivityLoader()
+                            AppUserDefaults.removeValue(forKey: .uid)
+                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                        }
+                    }
                 }
-                CommonFunctions.hideActivityLoader()
-                DispatchQueue.main.async {
-                    self.self.goToProfileSetupVC()
-                }
-                // Mak a request to set user's display name on Firebase
-//                let changeRequest = authResult?.user.createProfileChangeRequest()
-//                changeRequest?.displayName = appleIDCredential.fullName?.givenName
-//                changeRequest?.commitChanges(completion: { (error) in
-//                    
-//                    if let error = error {
-//                        print(error.localizedDescription)
-//                    } else {
-//                        print("Updated display name: \(Auth.auth().currentUser!.email!)")
-//                    }
-//                })
             }
-            
         }
     }
     
@@ -458,28 +469,47 @@ extension SignupViewController: GIDSignInDelegate {
         Auth.auth().signIn(with: credential) { (authResult, error) in
             if let error = error {
                 CommonFunctions.hideActivityLoader()
-                print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
+                AppUserDefaults.removeValue(forKey: .uid)
+                CommonFunctions.showToastWithMessage(error.localizedDescription)
+                return
             }
-            print("post notification after user successfully sign in")
-            CommonFunctions.hideActivityLoader()
             if let currentUser = Auth.auth().currentUser {
                 AppUserDefaults.save(value: currentUser.uid, forKey: .uid)
-                AppUserDefaults.save(value: currentUser.uid, forKey: .accesstoken)
                 AppUserDefaults.save(value: currentUser.email ?? "", forKey: .defaultEmail)
                 UserModel.main.id = currentUser.uid
-                UserModel.main.accessToken = currentUser.uid
                 UserModel.main.email = currentUser.email ?? ""
-                UserModel.main.canChangePassword = false
+                UserModel.main.isChangePassword = false
+                FirestoreController.checkUserExistInDatabase {
+                    FirestoreController.getFirebaseUserData {
+                            CommonFunctions.hideActivityLoader()
+                            DispatchQueue.main.async {
+                                if UserModel.main.isProfileStepCompleted {
+                                    AppRouter.gotoHomeVC()
+                                }else {
+                                    self.goToProfileSetupVC()
+                                }
+                        }
+                    } failure: { (error) -> (Void) in
+                        CommonFunctions.hideActivityLoader()
+                        CommonFunctions.showToastWithMessage(error.localizedDescription)
+                    }
+                } failure: { () -> (Void) in
+                    FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: user.profile.name, lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isChangePassword: false, isBiometricOn: true) {
+                        CommonFunctions.hideActivityLoader()
+                        DispatchQueue.main.async {
+                            if UserModel.main.isProfileStepCompleted {
+                                AppRouter.gotoHomeVC()
+                            }else {
+                                self.goToProfileSetupVC()
+                            }
+                        }
+                    } failure: { (error) -> (Void) in
+                        CommonFunctions.hideActivityLoader()
+                        AppUserDefaults.removeValue(forKey: .uid)
+                        CommonFunctions.showToastWithMessage(error.localizedDescription)
+                    }
+                }
             }
-            DispatchQueue.main.async {
-                self.self.goToProfileSetupVC()
-            }
-//            FirestoreController.setFirebaseData(userId: user.userID, email: user.profile.email, password: "", name: user.profile.name, imageURL: "", phoneNo: "", countryCode: "", status: "", completion: {
-//                print("Success")
-//            }) { (error) -> (Void) in
-//                AppUserDefaults.removeValue(forKey: .accesstoken)
-//                print(error.localizedDescription)
-//            }
         }
     }
     

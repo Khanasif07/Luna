@@ -47,26 +47,66 @@ class FirestoreController:NSObject{
                 let uid = Auth.auth().currentUser?.uid ?? ""
                 if Auth.auth().currentUser?.isEmailVerified ?? false {
                     AppUserDefaults.save(value: uid, forKey: .uid)
-                    AppUserDefaults.save(value: uid, forKey: .accesstoken)
                     UserModel.main.id = uid
-                    UserModel.main.accessToken = uid
                 }
                 UserModel.main.email = withEmail
                 UserModel.main.password = password
-                UserModel.main.canChangePassword = true
+                UserModel.main.isChangePassword = true
                 AppUserDefaults.save(value: withEmail, forKey: .defaultEmail)
                 AppUserDefaults.save(value: password, forKey: .defaultPassword)
+                if !uid.isEmpty {
+                    db.collection(ApiKey.users).document(uid).updateData([ApiKey.email: emailId,ApiKey.password: password, ApiKey.deviceToken: AppUserDefaults.value(forKey: .fcmToken).stringValue,
+                                                                             ApiKey.deviceType: "iOS",
+                                                                             ApiKey.userId: uid])
+                    success()
+                } else {
+                    failure("documentFetchingError", 110)
+                }
+            }
+        }
+    }
+    
+    //MARK:- Get info
+    //=======================
+    static func getFirebaseUserData(success: @escaping () -> Void,
+                                    failure:  @escaping FailureResponse){
+        db.collection(ApiKey.users)
+            .document(Auth.auth().currentUser?.uid ?? "").getDocument { (snapshot, error) in
+                if let error = error {
+                    failure(error)
+                } else{
+                    print("============================")
+                    guard let data = snapshot?.data() else { return }
+                    var user = UserModel()
+                    user.isBiometricOn = data[ApiKey.isBiometricOn] as? Bool ?? false
+                    user.id = data[ApiKey.userId] as? String ?? ""
+                    user.firstName = data[ApiKey.firstName] as? String ?? ""
+                    user.lastName = data[ApiKey.lastName] as? String ?? ""
+                    user.dob = data[ApiKey.dob] as? String ?? ""
+                    user.email = data[ApiKey.email] as? String ?? ""
+                    user.password = data[ApiKey.password] as? String ?? ""
+                    user.diabetesType = data[ApiKey.diabetesType] as? String ?? ""
+                    user.isProfileStepCompleted = data[ApiKey.isProfileStepCompleted] as? Bool ?? false
+                    user.isChangePassword = data[ApiKey.isChangePassword] as? Bool ?? false
+                    UserModel.main = user
+                    AppUserDefaults.save(value: user.isProfileStepCompleted, forKey: .isProfileStepCompleted)
+                    success()
+                }
+            }
+    }
+    
+    
+    //MARK:- Get info
+    //=======================
+    static func checkUserExistInDatabase(success: @escaping () -> Void,
+                                         failure:  @escaping () -> Void){
+        db.collection(ApiKey.users).document(Auth.auth().currentUser?.uid ?? "").getDocument { (snapshot, error ) in
+            if  (snapshot?.exists)! {
+                print("User Document exist")
                 success()
-//                if !userId.isEmpty {
-//                    print("login successfull")
-//                    db.collection(ApiKey.users).document(userId).updateData([ApiKey.onlineStatus: true, ApiKey.deviceToken: AppUserDefaults.value(forKey: .fcmToken).stringValue,
-//                                                                             ApiKey.deviceId:"2",
-//                                                                             ApiKey.deviceType: "iOS"])
-//                    success()
-//                } else {
-//                    print("documentFetchingError")
-//                    failure("documentFetchingError", 110)
-//                }
+            } else {
+                failure()
+                print("User Document does not exist")
             }
         }
     }
@@ -115,9 +155,11 @@ class FirestoreController:NSObject{
                                password: String,
                                name: String,
                                imageURL: String,
-                               phoneNo: String,
-                               countryCode: String,
-                               status: String,
+                               dob: String,
+                               diabetesType: String,
+                               isProfileStepCompleted: Bool,
+                               isChangePassword:Bool,
+                               isBiometricOn:  Bool,
                                completion: @escaping () -> Void,
                                failure: @escaping FailureResponse) {
         var emailId  = email
@@ -132,27 +174,24 @@ class FirestoreController:NSObject{
                 let uid = Auth.auth().currentUser?.uid ?? ""
                 if Auth.auth().currentUser?.isEmailVerified ?? false{
                     AppUserDefaults.save(value: uid, forKey: .uid)
-                    AppUserDefaults.save(value: uid, forKey: .accesstoken)
+                    UserModel.main.id = uid
                 }
                 AppUserDefaults.save(value: true, forKey: .isSignupCompleted)
                 AppUserDefaults.save(value: email, forKey: .defaultEmail)
                 AppUserDefaults.save(value: password, forKey: .defaultPassword)
-//                db.collection(ApiKey.users).document(userId).setData([ApiKey.deviceType:"iOS",
-//                                                                      ApiKey.deviceId:"2",
-//                                                                      ApiKey.email: email,
-//                                                                      ApiKey.deviceToken:AppUserDefaults.value(forKey: .fcmToken).stringValue,
-//                                                                      ApiKey.userName:name,
-//                                                                      ApiKey.userImage: imageURL,
-//                                                                      ApiKey.onlineStatus:true,
-//                                                                      ApiKey.countryCode:countryCode,
-//                                                                      ApiKey.userId: userId,
-//                    ApiKey.phoneNo: phoneNo]){ err in
-//                        if let err = err {
-//                            print("Error writing document: \(err)")
-//                        } else {
-//                            print("Document successfully written!")
-//                        }
-//                    }
+                db.collection(ApiKey.users).document(uid).setData([ApiKey.deviceType:"iOS",
+                                                                      ApiKey.email: email,
+                                                                      ApiKey.deviceToken:AppUserDefaults.value(forKey: .fcmToken).stringValue,
+                                                                      ApiKey.password:password,
+                                                                      ApiKey.isProfileStepCompleted: false,
+                                                                      ApiKey.userId: uid,ApiKey.isChangePassword: true,ApiKey.isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue]){ err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                            CommonFunctions.showToastWithMessage(err.localizedDescription)
+                        } else {
+                            print("Document successfully written!")
+                        }
+                    }
                 completion()
             }
         }
@@ -201,26 +240,26 @@ class FirestoreController:NSObject{
     static func setFirebaseData(userId: String,
                                 email: String,
                                 password: String,
-                                name: String,
-                                imageURL: String,
-                                phoneNo: String,
-                                countryCode: String,
-                                status: String,
+                                firstName: String,
+                                lastName: String,
+                                dob: String,
+                                diabetesType: String,
+                                isProfileStepCompleted: Bool,
+                                isChangePassword:Bool,
+                                isBiometricOn:  Bool,
                                 completion: @escaping () -> Void,
                                 failure: @escaping FailureResponse){
         AppUserDefaults.save(value: userId, forKey: .uid)
         AppUserDefaults.save(value: email, forKey: .defaultEmail)
         AppUserDefaults.save(value: password, forKey: .defaultPassword)
         db.collection(ApiKey.users).document(userId).setData([ApiKey.deviceType:"iOS",
-                                                              ApiKey.deviceId:"2",
                                                               ApiKey.email: email,
                                                               ApiKey.deviceToken:AppUserDefaults.value(forKey: .fcmToken).stringValue,
-                                                              ApiKey.userName:name,
-                                                              ApiKey.userImage: imageURL,
-                                                              ApiKey.onlineStatus:true,
-                                                              ApiKey.status: status,
+                                                              ApiKey.firstName:firstName,
+                                                              ApiKey.lastName: lastName,
+                                                              ApiKey.isProfileStepCompleted:isProfileStepCompleted,
                                                               ApiKey.userId: userId,
-                                                              ApiKey.phoneNo: phoneNo,ApiKey.countryCode: countryCode]){ err in
+                                                              ApiKey.dob: dob,ApiKey.isChangePassword: isChangePassword,ApiKey.isBiometricOn: isBiometricOn]){ err in
                                                                 if let err = err {
                                                                     failure(err)
                                                                     print("Error writing document: \(err)")
@@ -233,20 +272,26 @@ class FirestoreController:NSObject{
     
     //MARK:- Update user data
     //=======================
-    static func updateUserNode(name: String,
-                               imageURL: String,
-                               countryCode:String,
-                               email:String,
-                               phoneNo: String,
+    static func updateUserNode(email: String,
+                               password: String,
+                               firstName: String,
+                               lastName: String,
+                               dob: String,
+                               diabetesType: String,
+                               isProfileStepCompleted: Bool,
+                               isBiometricOn: Bool,
                                completion: @escaping () -> Void,
                                failure: @escaping FailureResponse) {
         let uid = AppUserDefaults.value(forKey: .uid).stringValue
         db.collection(ApiKey.users).document(uid).updateData([ApiKey.deviceType:"iOS",
-                                                              ApiKey.deviceId:"2",
+                                                              ApiKey.email: email,
                                                               ApiKey.deviceToken:AppUserDefaults.value(forKey: .fcmToken).stringValue,
-                                                              ApiKey.userName:name,
-                                                              ApiKey.userImage: imageURL,
-                                                              ApiKey.phoneNo: phoneNo,ApiKey.countryCode:countryCode,ApiKey.email: email])
+                                                              ApiKey.firstName:firstName,
+                                                              ApiKey.lastName: lastName,
+                                                              ApiKey.diabetesType: diabetesType,
+                                                              ApiKey.isProfileStepCompleted:isProfileStepCompleted,
+                                                              ApiKey.isBiometricOn: isBiometricOn,
+                                                              ApiKey.dob: dob])
         { (error) in
             if let err = error {
                 failure(err)
