@@ -186,7 +186,7 @@ extension Date {
     func convertToDefaultString() -> String {
         // First, get a Date from the String
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = DateFormat.ddMMMyyyy.rawValue
+        dateFormatter.dateFormat = DateFormat.ddMMyyyy.rawValue
         let local = dateFormatter.string(from: self)
         return local
     }

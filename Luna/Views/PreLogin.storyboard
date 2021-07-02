@@ -502,10 +502,22 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPJ-VY-AsJ">
+                                                <rect key="frame" x="350" y="10.5" width="44" height="29"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="14"/>
+                                                <state key="normal" title="Logout">
+                                                    <color key="titleColor" systemColor="systemGreenColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="logoutBtnTapped:" destination="p8z-xT-HIy" eventType="touchUpInside" id="Bnh-xn-Mcg"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="I0v-YV-Xca" firstAttribute="leading" secondItem="qyg-fs-Qdz" secondAttribute="leading" constant="20" id="5wx-YC-bOK"/>
+                                            <constraint firstAttribute="trailing" secondItem="uPJ-VY-AsJ" secondAttribute="trailing" constant="20" id="Boc-px-LWt"/>
+                                            <constraint firstItem="uPJ-VY-AsJ" firstAttribute="centerY" secondItem="qyg-fs-Qdz" secondAttribute="centerY" id="K2n-EF-GL2"/>
                                             <constraint firstItem="I0v-YV-Xca" firstAttribute="centerY" secondItem="qyg-fs-Qdz" secondAttribute="centerY" id="hmk-EI-b62"/>
                                             <constraint firstAttribute="height" constant="50" id="xkl-Pw-RNc"/>
                                         </constraints>
@@ -623,6 +635,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
         <image name="signUpIllustration" width="355" height="198"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
