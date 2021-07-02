@@ -120,6 +120,7 @@ class ProfileSetupVC: UIViewController {
             msgTxtField.keyboardType = .default
             msgTxtField.placeholder = ""
             self.senderDob = txt
+            bottomContainerView.isHidden = true
             self.bottomContainerBtmConst.constant = (-68.0 - bottomSafeArea)
             let senderMessage = Message(txt, "Sender")
             self.messageListing.append(senderMessage)
@@ -145,9 +146,11 @@ class ProfileSetupVC: UIViewController {
 extension ProfileSetupVC {
     
     private func initialSetup() {
+        bottomContainerView.isHidden = false
         self.bottomContainerBtmConst.constant = 0.0
         sendBtn.isEnabledWithoutBackground = false
         msgTxtField.delegate = self
+        msgTxtField.becomeFirstResponder()
         containerScrollView.delegate = self
         setupTableView()
         registerNotification()
@@ -237,6 +240,7 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                 senderDecisionCell.yesBtnTapped  = {[weak self] in
                     guard let self = `self` else { return }
                     if  self.messageListing.endIndex == 3 {
+                        self.bottomContainerView.isHidden = false
                     self.bottomContainerBtmConst.constant = 0.0
                     senderDecisionCell.yesBtn.isSelected = true
                     let message = Message("What is your first name?", "Receiver")
@@ -260,6 +264,7 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                 typeCell.type1BtnTapped = {[weak self] in
                     guard let self = `self` else { return }
                     if  self.messageListing.endIndex == 10 {
+                        self.bottomContainerView.isHidden = true
                         self.bottomContainerBtmConst.constant = (-68.0 - self.bottomSafeArea)
                         typeCell.type1Btn.isSelected = true
                         self.diabetesType = typeCell.type1Btn.titleLabel?.text ?? ""
@@ -286,6 +291,7 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                         }
                     }
                     if  self.messageListing.endIndex == 10 {
+                        self.bottomContainerView.isHidden = true
                         self.bottomContainerBtmConst.constant = (-68.0 - self.bottomSafeArea)
                         typeCell.type2Btn.isSelected = true
                         self.diabetesType = typeCell.type2Btn.titleLabel?.text ?? ""

@@ -1,89 +1,41 @@
 //
-//  BLEIntegrationVC.swift
+//  BLEManager.swift
 //  Luna
 //
-//  Created by Admin on 17/06/21.
+//  Created by Admin on 01/07/21.
 //
 
+import Foundation
 import UIKit
 import CoreBluetooth
-import FirebaseAuth
-import Firebase
 
 let heartRateServiceCBUUID = CBUUID(string: "0x180D")
 let heartRateMeasurementCharacteristicCBUUID = CBUUID(string: "2A37")
 let bodySensorLocationCharacteristicCBUUID = CBUUID(string: "2A38")
-class BLEIntegrationVC: UIViewController {
-    
-    // MARK: - IBOutlets
-    //===========================
-    @IBOutlet weak var heartRateLabel: UILabel!
-    @IBOutlet weak var bodySensorLocationLabel: UILabel!
+
+class BLEManager: NSObject{
     
     // MARK: - Variables
     //===========================
-    var database: Database!
+    static let sharedInstance = BLEManager()
+    private override init(){}
+
     var centralManager: CBCentralManager!
     var heartRatePeripheral: CBPeripheral!
-
-
-    
-    // MARK: - Lifecycle
-    //===========================
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        initialSetup()
-    }
-    
-    // MARK: - IBActions
-    //===========================
-    @IBAction func disconnectBLETapped(_ sender: Any) {
-        centralManager.cancelPeripheralConnection(heartRatePeripheral)
-    }
-    
-    @IBAction func logoutAction(_ sender: UIButton) {
-        FirestoreController.logOut { (successMsg) in
-            print(successMsg)
-            AppUserDefaults.removeAllValues()
-            AppRouter.goToSignUpVC()
-        }
-    }
-    
 }
 
 // MARK: - Extension For Functions
 //===========================
-extension BLEIntegrationVC {
+extension BLEManager {
     
     private func initialSetup() {
-        database = Database.database()
-        centralManager = CBCentralManager(delegate: self, queue: nil)
-    }
-    
-    func onHeartRateReceived(_ heartRate: Int) {
-        heartRateLabel.text = String(heartRate)
-        print("BPM: \(heartRate)")
-    }
-    
-    private func performCleanUp() {
-        let userId = AppUserDefaults.value(forKey: .userId).stringValue
-//        database.collection(ApiKey.users)
-//            .document(userId).updateData([ApiKey.deviceToken : ""]) { (error) in
-//                if let err = error {
-//                    print(err.localizedDescription)
-//                } else {
-//                    AppUserDefaults.removeAllValues()
-//                    AppUserDefaults.save(value: DeviceDetail.deviceToken, forKey: .fcmToken)
-//                    UserModel.main = UserModel()
-//                    UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-//                }
-//            }
+        
     }
 }
 
 // MARK: - Extension For CBCentralManagerDelegate
 //===========================
-extension BLEIntegrationVC: CBCentralManagerDelegate {
+extension BLEManager: CBCentralManagerDelegate {
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
@@ -120,14 +72,11 @@ extension BLEIntegrationVC: CBCentralManagerDelegate {
     func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
         central.connect(peripheral, options: nil)
     }
-    
-
-
 }
   
 // MARK: - Extension For CBPeripheralDelegate
 //===========================
-extension BLEIntegrationVC: CBPeripheralDelegate {
+extension BLEManager: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         guard let services = peripheral.services else { return }
         
@@ -160,10 +109,8 @@ extension BLEIntegrationVC: CBPeripheralDelegate {
         switch characteristic.uuid {
         case bodySensorLocationCharacteristicCBUUID:
             let bodySensorLocation = bodyLocation(from: characteristic)
-            bodySensorLocationLabel.text = bodySensorLocation
         case heartRateMeasurementCharacteristicCBUUID:
             let bpm = heartRate(from: characteristic)
-            onHeartRateReceived(bpm)
         default:
             print("Unhandled Characteristic UUID: \(characteristic.uuid)")
         }

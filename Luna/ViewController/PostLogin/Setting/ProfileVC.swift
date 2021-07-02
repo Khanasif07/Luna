@@ -107,18 +107,18 @@ extension ProfileVC : UITableViewDelegate, UITableViewDataSource {
         cell.txtField.delegate = self
         cell.txtField.text = sections[indexPath.row].1
         cell.titleLbl.text = sections[indexPath.row].0
-        if sections[indexPath.row].0 == "Diabetes Type" {
-            let show = UIButton()
-            show.isSelected = false
-            show.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
-            cell.txtField.inputView = typePickerView
-            cell.txtField.setButtonToRightView(btn: show, selectedImage: #imageLiteral(resourceName: "dropdownMobilenumber"), normalImage: #imageLiteral(resourceName: "dropdownMobilenumber"), size: CGSize(width: 20, height: 20))
-            
-        }else {
-            cell.txtField.inputView = nil
-            cell.txtField.setButtonToRightView(btn: UIButton(), selectedImage: nil, normalImage: nil, size: CGSize(width: 0, height: 0))
-        }
-        if  sections[indexPath.row].0 == "Email"{
+//        if sections[indexPath.row].0 == "Diabetes Type" {
+//            let show = UIButton()
+//            show.isSelected = false
+//            show.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
+//            cell.txtField.inputView = typePickerView
+//            cell.txtField.setButtonToRightView(btn: show, selectedImage: #imageLiteral(resourceName: "dropdownMobilenumber"), normalImage: #imageLiteral(resourceName: "dropdownMobilenumber"), size: CGSize(width: 20, height: 20))
+//
+//        }else {
+//            cell.txtField.inputView = nil
+//            cell.txtField.setButtonToRightView(btn: UIButton(), selectedImage: nil, normalImage: nil, size: CGSize(width: 0, height: 0))
+//        }
+        if  sections[indexPath.row].0 == "Email" || sections[indexPath.row].0 == "Diabetes Type"{
             cell.isUserInteractionEnabled = false
             cell.txtField.textColor = .lightGray
         }else{
@@ -196,6 +196,9 @@ extension ProfileVC : UITextFieldDelegate{
             case 2,5:
                 if newString.length < currentString.length {cell?.txtField.text = txt } else {
                     cell?.txtField.text = txt + "/" }
+//            case 1,4:
+//                if newString.length < currentString.length {cell?.txtField.text = txt } else {
+//                    cell?.txtField.text = txt + "/" }
             default:
                 cell?.txtField.text = txt
             }

@@ -413,7 +413,7 @@ enum ValidityExression : String {
 
 enum ValidCharaters: String{
     case userName = "^[a-zA-z]{1,}+[a-zA-z0-9!@#$%&*]{0,15}"
-    case email =  "^[a-zA-Z0-9!@#$%&*._]{0,100}"
+    case email =  "^[a-zA-Z0-9!@#$%&*._-]{0,100}"
     case mobileNumber = "^[0-9]{0,16}$"
     case password = "^[a-zA-Z0-9!@#._$%&*]{0,30}"//"^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,32}$"
     case name = "^[a-zA-Z0-9!@#._$%&*\\s]{0,40}"

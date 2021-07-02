@@ -85,10 +85,6 @@ extension ChangePasswordVC {
         self.settingTableView.registerCell(with: ProfileTableCell.self)
     }
     
-    private func signUpBtnStatus()-> Bool{
-        return true
-    }
-    
     func changePassword(email: String, currentPassword: String, newPassword: String, completion: @escaping (Error?) -> Void) {
         let credential = EmailAuthProvider.credential(withEmail: email, password: currentPassword)
         Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (result, error) in
@@ -148,15 +144,15 @@ extension ChangePasswordVC : UITextFieldDelegate{
         switch cell?.titleLbl.text {
         case sections[0]:
             currentPass = txt
-            saveBtn.isEnabled =  (currentPass.count >= 6)
+            saveBtn.isEnabled =  (currentPass.count >= 6) && (newPass.count >= 6) && (confirmPass.count >= 6)
             cell?.txtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         case sections[1]:
             newPass = txt
-            saveBtn.isEnabled = (newPass == confirmPass)  && (newPass.count >= 6)
+            saveBtn.isEnabled = (currentPass.count >= 6) && (newPass.count >= 6) && (confirmPass.count >= 6)
             cell?.txtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         default:
             confirmPass = txt
-            saveBtn.isEnabled = (newPass == confirmPass) && (confirmPass.count >= 6)
+            saveBtn.isEnabled = (currentPass.count >= 6) && (newPass.count >= 6) && (confirmPass.count >= 6)
             cell?.txtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         }
         
@@ -172,10 +168,10 @@ extension ChangePasswordVC : UITextFieldDelegate{
             saveBtn.isEnabled = newString.length >= 6
             return (string.checkIfValidCharaters(.password) || string.isEmpty) && newString.length <= 25
         case sections[1]:
-            saveBtn.isEnabled = newString.length >= 6  && (newPass == confirmPass)
+            saveBtn.isEnabled = newString.length >= 6
             return (string.checkIfValidCharaters(.password) || string.isEmpty) && newString.length <= 25
         default:
-            saveBtn.isEnabled = newString.length >= 6  && (newPass == confirmPass)
+            saveBtn.isEnabled = newString.length >= 6 
             return (string.checkIfValidCharaters(.password) || string.isEmpty) && newString.length <= 25
         }
     }
