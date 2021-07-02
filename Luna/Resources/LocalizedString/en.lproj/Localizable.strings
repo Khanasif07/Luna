@@ -24,7 +24,7 @@
 "emailId" = "Email";
 "allowFaceId" = "Allow Face ID";
 "allowTouchId" = "Allow Touch ID";
-"faceID" = " Face ID ";
-"touchID" = " Touch ID ";
+"faceID" = "Face ID";
+"touchID" = "Touch ID";
 "email_verification" = "Email Verification";
 "please_check_your_emai_A_verification_link_has_been_sent_to_your_registered_email_account" = "Please check your email - A verification link has been sent to your registered email account.";

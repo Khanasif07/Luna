@@ -151,6 +151,7 @@ extension ProfileSetupVC {
         sendBtn.isEnabledWithoutBackground = false
         msgTxtField.delegate = self
         msgTxtField.becomeFirstResponder()
+        msgTxtField.autocapitalizationType = .words
         containerScrollView.delegate = self
         setupTableView()
         registerNotification()
@@ -257,9 +258,13 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
             case "Type":
                 let typeCell = tableView.dequeueCell(with: TypeTableCell.self)
                 typeCell.configureCell()
-                if self.messageListing.endIndex - 1 == indexPath.row &&  self.messageListing.endIndex == 12  {
+                if self.messageListing.endIndex - 2 == indexPath.row &&  self.messageListing.endIndex == 13  {
                     typeCell.type1Btn.isHidden = true
                     typeCell.type2Btn.setTitle("Yes", for: .normal)
+                }
+                if self.messageListing.endIndex - 1 == indexPath.row &&  self.messageListing.endIndex == 13  {
+                    typeCell.type1Btn.isHidden = true
+                    typeCell.type2Btn.isHidden = true
                 }
                 typeCell.type1BtnTapped = {[weak self] in
                     guard let self = `self` else { return }
@@ -272,13 +277,14 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                     let lastMessage = Message("Yes", "Sender","Type")
                     self.messageListing.append(message)
                     self.messageListing.append(lastMessage)
+                    self.messageListing.append(lastMessage)
                     self.messageTableView.reloadData()
                     self.scrollMsgToBottom()
                     }
                 }
                 typeCell.type2BtnTapped = {[weak self] in
                     guard let self = `self` else { return }
-                    if  self.messageListing.endIndex - 1 == indexPath.row && self.messageListing.endIndex == 12 {
+                    if  self.messageListing.endIndex - 2 == indexPath.row && self.messageListing.endIndex == 13 {
                         AppUserDefaults.save(value: true, forKey: .isProfileStepCompleted)
                         UserModel.main.firstName = self.senderName
                         UserModel.main.lastName = self.senderLastName
@@ -298,6 +304,7 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                     let message = Message("Thank you \(self.senderName) for providing this information, now let us get the rest of the Luna system setup. Are you ready?", "Receiver")
                     let lastMessage = Message("Yes", "Sender","Type")
                     self.messageListing.append(message)
+                    self.messageListing.append(lastMessage)
                     self.messageListing.append(lastMessage)
                     self.messageTableView.reloadData()
                     self.scrollMsgToBottom()
@@ -357,6 +364,9 @@ extension ProfileSetupVC: UITextFieldDelegate{
             case 2,5:
                 if newString.length < currentString.length {msgTxtField.text = txt } else {
                     msgTxtField.text = txt + "/" }
+//            case 1,4:
+//                if newString.length < currentString.length { msgTxtField.text = txt } else {
+//                    msgTxtField.text = txt + String(newString.character(at: newString.length - 1)) + "/" }
             default:
                 msgTxtField.text = txt
             }

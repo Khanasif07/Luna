@@ -46,7 +46,7 @@ extension AboutTermsPolicyVC {
     
     private func initialSetup() {
         self.titleLbl.text = self.titleString
-        self.load("https://www.apple.com")
+        self.load("https://www.UnderDevelopment.com")
     }
     
     func load(_ urlString: String) {
