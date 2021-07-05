@@ -25,6 +25,18 @@ class TermsConditionVC: UIViewController {
         initialSetup()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            if userInterfaceStyle == .dark{
+                return .lightContent
+            }else{
+                return .darkContent
+            }
+        } else {
+            return .lightContent
+        }
+    }
+    
     // MARK: - IBActions
     //===========================
     @IBAction func acceptBtnAction(_ sender: UIButton) {

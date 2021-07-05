@@ -31,7 +31,11 @@ class ProfileVC: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
-            return .lightContent
+            if userInterfaceStyle == .dark{
+                return .lightContent
+            }else{
+                return .darkContent
+            }
         } else {
             return .lightContent
         }
@@ -142,7 +146,7 @@ extension ProfileVC : UITableViewDelegate, UITableViewDataSource {
             cell.txtField.textColor = .lightGray
         }else{
             cell.isUserInteractionEnabled = true
-            cell.txtField.textColor = .black
+            cell.txtField.textColor = .label
         }
         return cell
     }
@@ -190,7 +194,7 @@ extension ProfileVC : UITextFieldDelegate{
         case sections[2].0:
             cell?.txtField.text = datePicker.selectedDate()?.convertToDefaultString()
             cell?.txtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
-            sections[2].1 = txt
+            sections[2].1 = datePicker.selectedDate()?.convertToDefaultString() ?? ""
             saveBtn.isEnabled = saveBtnStatus()
         case sections[3].0:
             cell?.txtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)

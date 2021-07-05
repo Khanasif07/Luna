@@ -33,7 +33,11 @@ class SettingsVC: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
-            return .lightContent
+            if userInterfaceStyle == .dark{
+                return .lightContent
+            }else{
+                return .darkContent
+            }
         } else {
             return .lightContent
         }
@@ -148,7 +152,7 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
             cell.switchView.isUserInteractionEnabled = false
             cell.nextBtn.isHidden = true
             cell.switchView.isHidden = false
-            cell.switchView.isOn = true
+            cell.switchView.isOn = false
         default:
             cell.nextBtn.isHidden = false
             cell.switchView.isHidden = true

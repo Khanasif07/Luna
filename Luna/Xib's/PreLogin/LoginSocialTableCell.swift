@@ -32,7 +32,7 @@ class LoginSocialTableCell: UITableViewCell {
         self.setUpAttributedString()
         self.setUpButtonInset()
         self.setUpBorder()
-        switch traitCollection.userInterfaceStyle {
+        switch userInterfaceStyle {
         case .dark:
             let imageView = UIImageView(image: UIImage(named: "apple"))
             appleBtn.setImage(imageView.image?.maskWithColor(color: UIColor.white), for: .normal)

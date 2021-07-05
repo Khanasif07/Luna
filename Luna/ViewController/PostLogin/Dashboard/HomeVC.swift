@@ -25,7 +25,11 @@ class HomeVC: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
-            return .darkContent
+            if userInterfaceStyle == .dark{
+                return .darkContent
+            }else{
+                return .darkContent
+            }
         } else {
             return .lightContent
         }
@@ -61,12 +65,6 @@ extension HomeVC {
             AppUserDefaults.save(value: UserModel.main.isBiometricOn, forKey: .isBiometricSelected)
         } failure: { (error) -> (Void) in
             CommonFunctions.showToastWithMessage(error.localizedDescription)
-        }
-        switch traitCollection.userInterfaceStyle {
-        case .dark:
-            print("dark")
-        default:
-            print("light")
         }
     }
     
