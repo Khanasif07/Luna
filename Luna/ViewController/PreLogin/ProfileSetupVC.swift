@@ -198,8 +198,8 @@ extension ProfileSetupVC {
         self.bottomContainerBtmConst.constant = 0.0
         self.sendBtn.isEnabledWithoutBackground = false
         msgTxtField.delegate = self
-        msgTxtField.becomeFirstResponder()
         msgTxtField.autocapitalizationType = .words
+        msgTxtField.becomeFirstResponder()
         self.messageListing = [Message("Hello and welcome to Luna !", "Receiver"),Message("Please provide your details to set up your profile", "Receiver"),Message("What is your first name ?", "Receiver")]
         self.messageTableView.reloadWithAnimation()
        }
@@ -311,14 +311,6 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
             case "Type":
                 let typeCell = tableView.dequeueCell(with: TypeTableCell.self)
                 typeCell.configureCell()
-                if self.messageListing.endIndex - 2 == indexPath.row &&  self.messageListing.endIndex == 13  {
-                    typeCell.type1Btn.isHidden = true
-                    typeCell.type2Btn.setTitle("Yes", for: .normal)
-                }
-                if self.messageListing.endIndex - 1 == indexPath.row &&  self.messageListing.endIndex == 13  {
-                    typeCell.type1Btn.isHidden = true
-                    typeCell.type2Btn.isHidden = true
-                }
                 typeCell.type1BtnTapped = {[weak self] in
                     guard let self = `self` else { return }
                     if  self.messageListing.endIndex == 10 {
@@ -362,6 +354,20 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                     self.messageTableView.reloadData()
                     self.scrollMsgToBottom()
                     }
+                }
+                if self.messageListing.endIndex - 2 == indexPath.row &&  self.messageListing.endIndex == 13  {
+                    typeCell.type1Btn.isHidden = true
+                    typeCell.type2Btn.isHidden = false
+                    typeCell.type2Btn.setTitle("Yes", for: .normal)
+                    return typeCell
+                } else if self.messageListing.endIndex - 1 == indexPath.row &&  self.messageListing.endIndex == 13  {
+                    typeCell.type1Btn.isHidden = true
+                    typeCell.type2Btn.isHidden = true
+                    return typeCell
+                } else {
+                    typeCell.type1Btn.isHidden = false
+                    typeCell.type2Btn.isHidden = false
+                    return typeCell
                 }
                 return typeCell
             default:
