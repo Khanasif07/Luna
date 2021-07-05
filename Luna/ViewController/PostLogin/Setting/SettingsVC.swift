@@ -31,6 +31,14 @@ class SettingsVC: UIViewController {
         initialSetup()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .lightContent
+        } else {
+            return .lightContent
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         backView.round()
@@ -132,10 +140,12 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
         cell.logoImgView.image = sections[indexPath.row].0
         switch sections[indexPath.row].1 {
         case "Face ID":
+            cell.switchView.isUserInteractionEnabled = true
             cell.nextBtn.isHidden = true
             cell.switchView.isHidden = false
             cell.switchView.isOn = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
         case "Apple Health":
+            cell.switchView.isUserInteractionEnabled = false
             cell.nextBtn.isHidden = true
             cell.switchView.isHidden = false
             cell.switchView.isOn = true

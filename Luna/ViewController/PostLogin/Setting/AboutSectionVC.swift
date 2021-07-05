@@ -26,6 +26,14 @@ class AboutSectionVC: UIViewController {
         initialSetup()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .lightContent
+        } else {
+            return .lightContent
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         backView.round()

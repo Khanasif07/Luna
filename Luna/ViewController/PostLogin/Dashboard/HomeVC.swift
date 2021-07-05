@@ -22,6 +22,15 @@ class HomeVC: UIViewController {
         initialSetup()
     }
     
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            return .lightContent
+        }
+    }
+    
     // MARK: - IBActions
     //===========================
     @IBAction func settingBtnTapped(_ sender: UIButton) {
@@ -52,6 +61,12 @@ extension HomeVC {
             AppUserDefaults.save(value: UserModel.main.isBiometricOn, forKey: .isBiometricSelected)
         } failure: { (error) -> (Void) in
             CommonFunctions.showToastWithMessage(error.localizedDescription)
+        }
+        switch traitCollection.userInterfaceStyle {
+        case .dark:
+            print("dark")
+        default:
+            print("light")
         }
     }
     

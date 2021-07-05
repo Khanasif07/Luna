@@ -41,7 +41,7 @@ class SignupViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
-            return .darkContent
+            return .lightContent
         } else {
             // Fallback on earlier versions
             return .lightContent
