@@ -324,7 +324,7 @@ extension SignupViewController : UITextFieldDelegate{
             currentString.replacingCharacters(in: range, with: string) as NSString
         switch textField {
         case cell?.emailIdTxtField:
-            return (string.checkIfValidCharaters(.email) || string.isEmpty) && newString.length <= 51
+            return (string.checkIfValidCharaters(.email) || string.isEmpty) && newString.length <= 50
         case cell?.passTxtField:
             return (string.checkIfValidCharaters(.password) || string.isEmpty) && newString.length <= 25
         default:

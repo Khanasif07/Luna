@@ -369,7 +369,6 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                     typeCell.type2Btn.isHidden = false
                     return typeCell
                 }
-                return typeCell
             default:
                 let senderCell = tableView.dequeueCell(with: MessageSenderCell.self)
                 senderCell.senderMsgLbl.text = self.messageListing[indexPath.row].messageText
@@ -406,12 +405,22 @@ extension ProfileSetupVC: UITextFieldDelegate{
         switch self.messageListing.endIndex {
         case 7:
             msgTxtField.text = datePicker.selectedDate()?.convertToDefaultString()
-            sendBtn.isEnabledWithoutBackground = !(txt.count == 0)
+            sendBtn.isEnabledWithoutBackground = !(msgTxtField.text?.count == 0)
         default:
             sendBtn.isEnabledWithoutBackground = !(txt.count == 0)
         }
     }
 
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let txt = textField.text?.byRemovingLeadingTrailingWhiteSpaces ?? ""
+        switch self.messageListing.endIndex {
+        case 7:
+            msgTxtField.text = datePicker.selectedDate()?.convertToDefaultString()
+            sendBtn.isEnabledWithoutBackground = !(msgTxtField.text?.count == 0)
+        default:
+            sendBtn.isEnabledWithoutBackground = !(txt.count == 0)
+        }
+    }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let txt = textField.text?.byRemovingLeadingTrailingWhiteSpaces ?? ""
@@ -420,17 +429,7 @@ extension ProfileSetupVC: UITextFieldDelegate{
             currentString.replacingCharacters(in: range, with: string) as NSString
         switch self.messageListing.endIndex {
         case 7:
-//            switch txt.count {
-//            case 2,5:
-//                if newString.length < currentString.length {msgTxtField.text = txt } else {
-//                    msgTxtField.text = txt + "/" }
-//            case 1,4:
-//                if newString.length < currentString.length { msgTxtField.text = txt } else {
-//                    msgTxtField.text = txt + String(newString.character(at: newString.length - 1)) + "/" }
-//            default:
-//                msgTxtField.text = txt
-//            }
-            sendBtn.isEnabledWithoutBackground = !(newString.length == 0)
+            sendBtn.isEnabledWithoutBackground = true
             return (string.checkIfValidCharaters(.name) || string.isEmpty) && newString.length <= 10
         default:
             sendBtn.isEnabledWithoutBackground = !(txt.count == 0)

@@ -33,7 +33,7 @@ enum AppRouter {
     static func checkAppInitializationFlow() {
                 AppRouter.goToTestingVC()
         return
-        
+//        
         if isUserLoggedin {
             if   AppUserDefaults.value(forKey: .isProfileStepCompleted).boolValue{
                 AppRouter.gotoHomeVC()
