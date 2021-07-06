@@ -55,7 +55,6 @@ enum AppRouter {
     }
     
     static func checkEmailVerificationFlow(email: String) {
-//        AppRouter.checkAppInitializationFlow()
         guard let nav: UINavigationController = AppDelegate.shared.window?.rootViewController as? UINavigationController else { return }
         if let homeScene = nav.hasViewController(ofKind: LoginViewController.self) as? LoginViewController {
             homeScene.emailTxt = email

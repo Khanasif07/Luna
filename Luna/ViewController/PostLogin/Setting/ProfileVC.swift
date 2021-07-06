@@ -32,7 +32,7 @@ class ProfileVC: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
             if userInterfaceStyle == .dark{
-                return .lightContent
+                return .darkContent
             }else{
                 return .darkContent
             }
@@ -79,6 +79,9 @@ class ProfileVC: UIViewController {
 extension ProfileVC {
     
     private func initialSetup() {
+        if #available(iOS 13.0, *) {
+        overrideUserInterfaceStyle = .light
+        }
         setUpData()
         tableViewSetup()
         setupDatePicker()
@@ -110,6 +113,15 @@ extension ProfileVC {
         self.datePicker.datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: 0, to: Date())
         self.datePicker.setDatePickerDate(UserModel.main.dob.convertToDate())
         self.datePicker.pickerMode = .date
+        self.datePicker.datePicker.addTarget(self, action: #selector(datePickerChanged(picker:)), for: .valueChanged)
+    }
+    
+    @objc func datePickerChanged(picker: UIDatePicker){
+        if let cell = profileTableView.cellForRow(at: IndexPath(row: 2, section: 0)) as? ProfileTableCell{
+            sections[2].1 = picker.date.convertToDefaultString()
+            saveBtn.isEnabled = saveBtnStatus()
+            cell.txtField.text = picker.date.convertToDefaultString()
+        }
     }
     
     

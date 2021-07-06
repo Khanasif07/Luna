@@ -68,7 +68,7 @@ class ProfileSetupVC: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
             if userInterfaceStyle == .dark{
-                return .lightContent
+                return .darkContent
             }else{
                 return .darkContent
             }
@@ -172,6 +172,9 @@ class ProfileSetupVC: UIViewController {
 extension ProfileSetupVC {
     
     private func initialSetup() {
+        if #available(iOS 13.0, *) {
+        overrideUserInterfaceStyle = .light
+        }
         setupDatePicker()
         containerScrollView.delegate = self
         setupTableView()
@@ -182,6 +185,11 @@ extension ProfileSetupVC {
         self.datePicker.datePicker.minimumDate = Calendar.current.date(byAdding: .year, value: -100, to: Date())
         self.datePicker.datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: 0, to: Date())
         self.datePicker.pickerMode = .date
+        self.datePicker.datePicker.addTarget(self, action: #selector(datePickerChanged(picker:)), for: .valueChanged)
+    }
+    
+    @objc func datePickerChanged(picker: UIDatePicker){
+        msgTxtField.text = picker.date.convertToDefaultString()
     }
     
     private func setupTableView() {

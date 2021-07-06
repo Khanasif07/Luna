@@ -44,7 +44,7 @@ class LoginViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
             if userInterfaceStyle == .dark{
-                return .lightContent
+                return .darkContent
             }else{
                 return .darkContent
             }
@@ -80,6 +80,9 @@ class LoginViewController: UIViewController {
 extension LoginViewController {
     
     private func initialSetup() {
+        if #available(iOS 13.0, *) {
+        overrideUserInterfaceStyle = .light
+        }
         self.tableViewSetUp()
         self.showBiometricAuthentication()
     }

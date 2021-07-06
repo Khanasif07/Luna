@@ -42,7 +42,7 @@ class SignupViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
             if userInterfaceStyle == .dark{
-                return .lightContent
+                return .darkContent
             }else{
                 return .darkContent
             }
@@ -51,6 +51,8 @@ class SignupViewController: UIViewController {
             return .lightContent
         }
     }
+    
+   
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +72,9 @@ class SignupViewController: UIViewController {
 extension SignupViewController {
     
     private func initialSetup() {
+        if #available(iOS 13.0, *) {
+        overrideUserInterfaceStyle = .light
+        }
         self.tableViewSetUp()
     }
     

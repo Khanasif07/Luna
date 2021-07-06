@@ -32,14 +32,14 @@ class LoginSocialTableCell: UITableViewCell {
         self.setUpAttributedString()
         self.setUpButtonInset()
         self.setUpBorder()
-        switch userInterfaceStyle {
-        case .dark:
-            let imageView = UIImageView(image: UIImage(named: "apple"))
-            appleBtn.setImage(imageView.image?.maskWithColor(color: UIColor.white), for: .normal)
-        default:
+//        switch userInterfaceStyle {
+//        case .dark:
+//            let imageView = UIImageView(image: UIImage(named: "apple"))
+//            appleBtn.setImage(imageView.image?.maskWithColor(color: UIColor.white), for: .normal)
+//        default:
             let imageView = UIImageView(image: UIImage(named: "apple"))
             appleBtn.setImage(imageView.image, for: .normal)
-        }
+//        }
     }
     
     override func layoutSubviews() {

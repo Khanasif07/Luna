@@ -31,7 +31,7 @@ class ForgotPasswordVC: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
             if userInterfaceStyle == .dark{
-                return .lightContent
+                return .darkContent
             }else{
                 return .darkContent
             }
@@ -83,6 +83,9 @@ class ForgotPasswordVC: UIViewController {
 extension ForgotPasswordVC {
     
     private func initialSetup() {
+        if #available(iOS 13.0, *) {
+        overrideUserInterfaceStyle = .light
+        }
         self.emailTxtField.delegate = self
         self.emailTxtField.placeholder = LocalizedString.emailID.localized
         self.emailTxtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)

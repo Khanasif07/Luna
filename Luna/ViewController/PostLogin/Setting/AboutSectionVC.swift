@@ -29,7 +29,7 @@ class AboutSectionVC: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
             if userInterfaceStyle == .dark{
-                return .lightContent
+                return .darkContent
             }else{
                 return .darkContent
             }
@@ -56,6 +56,9 @@ class AboutSectionVC: UIViewController {
 extension AboutSectionVC {
     
     private func initialSetup() {
+        if #available(iOS 13.0, *) {
+        overrideUserInterfaceStyle = .light
+        }
         self.tableViewSetup()
     }
     

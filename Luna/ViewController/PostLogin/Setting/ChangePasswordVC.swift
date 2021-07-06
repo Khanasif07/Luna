@@ -38,7 +38,7 @@ class ChangePasswordVC: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
             if userInterfaceStyle == .dark{
-                return .lightContent
+                return .darkContent
             }else{
                 return .darkContent
             }
@@ -87,6 +87,9 @@ class ChangePasswordVC: UIViewController {
 extension ChangePasswordVC {
     
     private func initialSetup() {
+        if #available(iOS 13.0, *) {
+        overrideUserInterfaceStyle = .light
+        }
         tableViewSetup()
     }
    

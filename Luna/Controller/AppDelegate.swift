@@ -228,28 +228,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
                         } else {
                             self.reloadUser { (reloadMsg) in
                                 if !isUserLoggedin{
-//                                    AppUserDefaults.save(value: Auth.auth().currentUser?.uid ?? "", forKey: .uid)
-//                                    UserModel.main.id = Auth.auth().currentUser?.uid ?? ""
-                                    //
-//                                    FirestoreController.login(userId: UserModel.main.id, withEmail: Auth.auth().currentUser?.email ?? "", with: self.passTxt, success: {
-//                                        FirestoreController.getFirebaseUserData {
-//                                            CommonFunctions.hideActivityLoader()
-//                                            DispatchQueue.main.async {
-//                                                if UserModel.main.isProfileStepCompleted {
-//                                                    AppRouter.gotoHomeVC()
-//                                                }else {
-//                                                    self.goToProfileSetupVC()
-//                                                }
-//                                            }
-//                                        } failure: { (error) -> (Void) in
-//                                            CommonFunctions.hideActivityLoader()
-//                                            CommonFunctions.showToastWithMessage(error.localizedDescription)
-//                                        }
-//                                    }) { (message, code) in
-//                                        CommonFunctions.hideActivityLoader()
-//                                        CommonFunctions.showToastWithMessage(message)
-//                                    }
-                                    //
                                     AppRouter.checkEmailVerificationFlow(email: Auth.auth().currentUser?.email ?? "")
                                     CommonFunctions.showToastWithMessage("Email was successfully verified")
                                 }
