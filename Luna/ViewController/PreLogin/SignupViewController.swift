@@ -146,7 +146,8 @@ extension SignupViewController {
         components.scheme = querySchemeName
         components.host = queryUrlPrefixName
         let emailUrlQueryItem = URLQueryItem(name: queryItemEmailName, value: self.emailTxt)
-        components.queryItems = [emailUrlQueryItem]
+        let iflUrlQueryItem = URLQueryItem(name: "ifl", value: "google.com")
+        components.queryItems = [emailUrlQueryItem,iflUrlQueryItem]
         guard let linkUrl = components.url else { return  ActionCodeSettings.init() }
         print("link parameter is \(linkUrl)")
         actionCodeSettings.url = linkUrl
