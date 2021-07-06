@@ -19,6 +19,7 @@ class ProfileVC: UIViewController {
     //===========================
     var sections: [(String,String)] = [("First Name",""),("Last Name",""),("Date Of Birth",""),("Email",""),("Diabetes Type","")]
     var typePickerView = WCCustomPickerView()
+    public var datePicker = CustomDatePicker()
     
     
     // MARK: - Lifecycle
@@ -26,6 +27,18 @@ class ProfileVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            if userInterfaceStyle == .dark{
+                return .darkContent
+            }else{
+                return .darkContent
+            }
+        } else {
+            return .lightContent
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -66,13 +79,17 @@ class ProfileVC: UIViewController {
 extension ProfileVC {
     
     private func initialSetup() {
+        if #available(iOS 13.0, *) {
+        overrideUserInterfaceStyle = .light
+        }
         setUpData()
         tableViewSetup()
+        setupDatePicker()
     }
    
     private func tableViewSetup(){
-        self.typePickerView.delegate = self
-        self.typePickerView.dataArray = ["Type 1","Type 2"]
+//        self.typePickerView.delegate = self
+//        self.typePickerView.dataArray = ["Type 1","Type 2"]
         self.saveBtn.isEnabled = (!UserModel.main.firstName.isEmpty && !UserModel.main.lastName.isEmpty && !UserModel.main.dob.isEmpty && !UserModel.main.email.isEmpty && !UserModel.main.diabetesType.isEmpty)
         self.profileTableView.delegate = self
         self.profileTableView.dataSource = self
@@ -88,8 +105,25 @@ extension ProfileVC {
     }
     
     private func saveBtnStatus()-> Bool{
-        return !self.sections[0].1.isEmpty && !self.sections[1].1.isEmpty && (!self.sections[2].1.isEmpty && !(self.sections[2].1.count != 10)) && !self.sections[3].1.isEmpty && !self.sections[4].1.isEmpty
+        return !self.sections[0].1.isEmpty && !self.sections[1].1.isEmpty && (!self.sections[2].1.isEmpty) && !self.sections[3].1.isEmpty && !self.sections[4].1.isEmpty
     }
+    
+    private func setupDatePicker(){
+        self.datePicker.datePicker.minimumDate = Calendar.current.date(byAdding: .year, value: -100, to: Date())
+        self.datePicker.datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: 0, to: Date())
+        self.datePicker.setDatePickerDate(UserModel.main.dob.convertToDate())
+        self.datePicker.pickerMode = .date
+        self.datePicker.datePicker.addTarget(self, action: #selector(datePickerChanged(picker:)), for: .valueChanged)
+    }
+    
+    @objc func datePickerChanged(picker: UIDatePicker){
+        if let cell = profileTableView.cellForRow(at: IndexPath(row: 2, section: 0)) as? ProfileTableCell{
+            sections[2].1 = picker.date.convertToDefaultString()
+            saveBtn.isEnabled = saveBtnStatus()
+            cell.txtField.text = picker.date.convertToDefaultString()
+        }
+    }
+    
     
     
 }
@@ -105,25 +139,26 @@ extension ProfileVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(with: ProfileTableCell.self)
         cell.txtField.delegate = self
+        cell.txtField.autocapitalizationType = .words
         cell.txtField.text = sections[indexPath.row].1
         cell.titleLbl.text = sections[indexPath.row].0
-        if sections[indexPath.row].0 == "Diabetes Type" {
-            let show = UIButton()
-            show.isSelected = false
-            show.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
-            cell.txtField.inputView = typePickerView
-            cell.txtField.setButtonToRightView(btn: show, selectedImage: #imageLiteral(resourceName: "dropdownMobilenumber"), normalImage: #imageLiteral(resourceName: "dropdownMobilenumber"), size: CGSize(width: 20, height: 20))
-            
+        if sections[indexPath.row].0 == "Date Of Birth" {
+//            let show = UIButton()
+//            show.isSelected = false
+//            show.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
+            cell.txtField.inputView = datePicker
+//            cell.txtField.setButtonToRightView(btn: show, selectedImage: #imageLiteral(resourceName: "dropdownMobilenumber"), normalImage: #imageLiteral(resourceName: "dropdownMobilenumber"), size: CGSize(width: 20, height: 20))
+
         }else {
             cell.txtField.inputView = nil
-            cell.txtField.setButtonToRightView(btn: UIButton(), selectedImage: nil, normalImage: nil, size: CGSize(width: 0, height: 0))
+//            cell.txtField.setButtonToRightView(btn: UIButton(), selectedImage: nil, normalImage: nil, size: CGSize(width: 0, height: 0))
         }
-        if  sections[indexPath.row].0 == "Email"{
+        if  sections[indexPath.row].0 == "Email" || sections[indexPath.row].0 == "Diabetes Type"{
             cell.isUserInteractionEnabled = false
             cell.txtField.textColor = .lightGray
         }else{
             cell.isUserInteractionEnabled = true
-            cell.txtField.textColor = .black
+            cell.txtField.textColor = .label
         }
         return cell
     }
@@ -142,13 +177,16 @@ extension ProfileVC : UITextFieldDelegate{
         let cell = profileTableView.cell(forItem: textField) as? ProfileTableCell
         switch cell?.titleLbl.text {
         case sections[0].0:
+            cell?.txtField.inputView = nil
             cell?.txtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
         case sections[1].0:
+            cell?.txtField.inputView = nil
             cell?.txtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
         case sections[2].0:
-            cell?.txtField.keyboardType = .numberPad
+            cell?.txtField.inputView = datePicker
             cell?.txtField.placeholder = "01/01/2000"
         default:
+            cell?.txtField.inputView = nil
             cell?.txtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
         }
     }
@@ -166,8 +204,9 @@ extension ProfileVC : UITextFieldDelegate{
             sections[1].1 = txt
             saveBtn.isEnabled = saveBtnStatus()
         case sections[2].0:
+            cell?.txtField.text = datePicker.selectedDate()?.convertToDefaultString()
             cell?.txtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
-            sections[2].1 = txt
+            sections[2].1 = datePicker.selectedDate()?.convertToDefaultString() ?? ""
             saveBtn.isEnabled = saveBtnStatus()
         case sections[3].0:
             cell?.txtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
@@ -196,6 +235,9 @@ extension ProfileVC : UITextFieldDelegate{
             case 2,5:
                 if newString.length < currentString.length {cell?.txtField.text = txt } else {
                     cell?.txtField.text = txt + "/" }
+//            case 1,4:
+//                if newString.length < currentString.length {cell?.txtField.text = txt } else {
+//                    cell?.txtField.text = txt + "/" }
             default:
                 cell?.txtField.text = txt
             }

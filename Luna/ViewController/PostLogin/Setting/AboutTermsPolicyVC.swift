@@ -26,6 +26,18 @@ class AboutTermsPolicyVC: UIViewController {
         initialSetup()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            if userInterfaceStyle == .dark{
+                return .darkContent
+            }else{
+                return .darkContent
+            }
+        } else {
+            return .lightContent
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         backView.round()
@@ -45,8 +57,12 @@ class AboutTermsPolicyVC: UIViewController {
 extension AboutTermsPolicyVC {
     
     private func initialSetup() {
+        if #available(iOS 13.0, *) {
+        overrideUserInterfaceStyle = .light
+        }
         self.titleLbl.text = self.titleString
-        self.load("https://www.apple.com")
+        webView.isHidden = true
+//        self.load("https://www.UnderDevelopment.com")
     }
     
     func load(_ urlString: String) {

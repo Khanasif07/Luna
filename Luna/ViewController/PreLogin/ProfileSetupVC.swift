@@ -43,6 +43,7 @@ class ProfileSetupVC: UIViewController {
     // MARK: - Variables
     //===========================
     public var messageListing = [Message]()
+    public var datePicker = CustomDatePicker()
     var senderName: String = ""
     var senderDob : String = ""
     var senderLastName : String = ""
@@ -61,6 +62,19 @@ class ProfileSetupVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupTData()
+    }
+    
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            if userInterfaceStyle == .dark{
+                return .darkContent
+            }else{
+                return .darkContent
+            }
+        } else {
+            return .lightContent
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -85,6 +99,18 @@ class ProfileSetupVC: UIViewController {
     
     // MARK: - IBActions
     //===========================
+    @IBAction func logoutBtnTapped(_ sender: UIButton) {
+        showAlertWithAction(title: "Logout", msg: "Are you sure want to logout?", cancelTitle: "No", actionTitle: "Yes") {
+            FirestoreController.logOut { (isLogout) in
+                if !isLogout {
+                    self.performCleanUp()
+                    DispatchQueue.main.async {
+                        AppRouter.goToLoginVC()
+                    }
+                }
+            }
+        } cancelcompletion: {}
+    }
     
     @IBAction func sendBtnTapped(_ sender: AppButton) {
         self.view.endEditing(true)
@@ -104,7 +130,7 @@ class ProfileSetupVC: UIViewController {
                 self.scrollMsgToBottom()
             }
         case 5:
-            msgTxtField.keyboardType = .numberPad
+            msgTxtField.inputView = datePicker
             msgTxtField.placeholder = "01/01/2000"
             self.senderLastName = txt
             let senderMessage = Message(txt, "Sender")
@@ -117,9 +143,10 @@ class ProfileSetupVC: UIViewController {
                 self.scrollMsgToBottom()
             }
         case 7:
-            msgTxtField.keyboardType = .default
+            msgTxtField.inputView = nil
             msgTxtField.placeholder = ""
             self.senderDob = txt
+            bottomContainerView.isHidden = true
             self.bottomContainerBtmConst.constant = (-68.0 - bottomSafeArea)
             let senderMessage = Message(txt, "Sender")
             self.messageListing.append(senderMessage)
@@ -145,12 +172,24 @@ class ProfileSetupVC: UIViewController {
 extension ProfileSetupVC {
     
     private func initialSetup() {
-        self.bottomContainerBtmConst.constant = 0.0
-        sendBtn.isEnabledWithoutBackground = false
-        msgTxtField.delegate = self
+        if #available(iOS 13.0, *) {
+        overrideUserInterfaceStyle = .light
+        }
+        setupDatePicker()
         containerScrollView.delegate = self
         setupTableView()
         registerNotification()
+    }
+    
+    private func setupDatePicker(){
+        self.datePicker.datePicker.minimumDate = Calendar.current.date(byAdding: .year, value: -100, to: Date())
+        self.datePicker.datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: 0, to: Date())
+        self.datePicker.pickerMode = .date
+        self.datePicker.datePicker.addTarget(self, action: #selector(datePickerChanged(picker:)), for: .valueChanged)
+    }
+    
+    @objc func datePickerChanged(picker: UIDatePicker){
+        msgTxtField.text = picker.date.convertToDefaultString()
     }
     
     private func setupTableView() {
@@ -163,6 +202,12 @@ extension ProfileSetupVC {
        }
        
        private func setupTData() {
+        self.bottomContainerView.isHidden = false
+        self.bottomContainerBtmConst.constant = 0.0
+        self.sendBtn.isEnabledWithoutBackground = false
+        msgTxtField.delegate = self
+        msgTxtField.autocapitalizationType = .words
+        msgTxtField.becomeFirstResponder()
         self.messageListing = [Message("Hello and welcome to Luna !", "Receiver"),Message("Please provide your details to set up your profile", "Receiver"),Message("What is your first name ?", "Receiver")]
         self.messageTableView.reloadWithAnimation()
        }
@@ -202,6 +247,26 @@ extension ProfileSetupVC {
         let vc = SettingsVC.instantiate(fromAppStoryboard: .PostLogin)
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    private func performCleanUp(for_logout: Bool = true) {
+        //        let userId = AppUserDefaults.value(forKey: .uid).stringValue
+        //        db.collection(ApiKey.users)
+        //            .document(userId).updateData([ApiKey.deviceToken : ""]) { (error) in
+        //                if let err = error {
+        //                    print(err.localizedDescription)
+        //                    CommonFunctions.showToastWithMessage(err.localizedDescription)
+        //                } else {
+        let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
+        AppUserDefaults.removeAllValues()
+        UserModel.main = UserModel()
+        if for_logout {
+            AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
+        }
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        DispatchQueue.main.async {
+            AppRouter.goToSignUpVC()
+        }
+    }
 }
 
 
@@ -237,6 +302,7 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                 senderDecisionCell.yesBtnTapped  = {[weak self] in
                     guard let self = `self` else { return }
                     if  self.messageListing.endIndex == 3 {
+                        self.bottomContainerView.isHidden = false
                     self.bottomContainerBtmConst.constant = 0.0
                     senderDecisionCell.yesBtn.isSelected = true
                     let message = Message("What is your first name?", "Receiver")
@@ -253,13 +319,10 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
             case "Type":
                 let typeCell = tableView.dequeueCell(with: TypeTableCell.self)
                 typeCell.configureCell()
-                if self.messageListing.endIndex - 1 == indexPath.row &&  self.messageListing.endIndex == 12  {
-                    typeCell.type1Btn.isHidden = true
-                    typeCell.type2Btn.setTitle("Yes", for: .normal)
-                }
                 typeCell.type1BtnTapped = {[weak self] in
                     guard let self = `self` else { return }
                     if  self.messageListing.endIndex == 10 {
+                        self.bottomContainerView.isHidden = true
                         self.bottomContainerBtmConst.constant = (-68.0 - self.bottomSafeArea)
                         typeCell.type1Btn.isSelected = true
                         self.diabetesType = typeCell.type1Btn.titleLabel?.text ?? ""
@@ -267,13 +330,14 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                     let lastMessage = Message("Yes", "Sender","Type")
                     self.messageListing.append(message)
                     self.messageListing.append(lastMessage)
+                    self.messageListing.append(lastMessage)
                     self.messageTableView.reloadData()
                     self.scrollMsgToBottom()
                     }
                 }
                 typeCell.type2BtnTapped = {[weak self] in
                     guard let self = `self` else { return }
-                    if  self.messageListing.endIndex - 1 == indexPath.row && self.messageListing.endIndex == 12 {
+                    if  self.messageListing.endIndex - 2 == indexPath.row && self.messageListing.endIndex == 13 {
                         AppUserDefaults.save(value: true, forKey: .isProfileStepCompleted)
                         UserModel.main.firstName = self.senderName
                         UserModel.main.lastName = self.senderLastName
@@ -286,6 +350,7 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                         }
                     }
                     if  self.messageListing.endIndex == 10 {
+                        self.bottomContainerView.isHidden = true
                         self.bottomContainerBtmConst.constant = (-68.0 - self.bottomSafeArea)
                         typeCell.type2Btn.isSelected = true
                         self.diabetesType = typeCell.type2Btn.titleLabel?.text ?? ""
@@ -293,11 +358,25 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                     let lastMessage = Message("Yes", "Sender","Type")
                     self.messageListing.append(message)
                     self.messageListing.append(lastMessage)
+                    self.messageListing.append(lastMessage)
                     self.messageTableView.reloadData()
                     self.scrollMsgToBottom()
                     }
                 }
-                return typeCell
+                if self.messageListing.endIndex - 2 == indexPath.row &&  self.messageListing.endIndex == 13  {
+                    typeCell.type1Btn.isHidden = true
+                    typeCell.type2Btn.isHidden = false
+                    typeCell.type2Btn.setTitle("Yes", for: .normal)
+                    return typeCell
+                } else if self.messageListing.endIndex - 1 == indexPath.row &&  self.messageListing.endIndex == 13  {
+                    typeCell.type1Btn.isHidden = true
+                    typeCell.type2Btn.isHidden = true
+                    return typeCell
+                } else {
+                    typeCell.type1Btn.isHidden = false
+                    typeCell.type2Btn.isHidden = false
+                    return typeCell
+                }
             default:
                 let senderCell = tableView.dequeueCell(with: MessageSenderCell.self)
                 senderCell.senderMsgLbl.text = self.messageListing[indexPath.row].messageText
@@ -333,12 +412,23 @@ extension ProfileSetupVC: UITextFieldDelegate{
         let txt = textField.text?.byRemovingLeadingTrailingWhiteSpaces ?? ""
         switch self.messageListing.endIndex {
         case 7:
-            sendBtn.isEnabledWithoutBackground = !(txt.count != 10)
+            msgTxtField.text = datePicker.selectedDate()?.convertToDefaultString()
+            sendBtn.isEnabledWithoutBackground = !(msgTxtField.text?.count == 0)
         default:
             sendBtn.isEnabledWithoutBackground = !(txt.count == 0)
         }
     }
 
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let txt = textField.text?.byRemovingLeadingTrailingWhiteSpaces ?? ""
+        switch self.messageListing.endIndex {
+        case 7:
+            msgTxtField.text = datePicker.selectedDate()?.convertToDefaultString()
+            sendBtn.isEnabledWithoutBackground = !(msgTxtField.text?.count == 0)
+        default:
+            sendBtn.isEnabledWithoutBackground = !(txt.count == 0)
+        }
+    }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let txt = textField.text?.byRemovingLeadingTrailingWhiteSpaces ?? ""
@@ -347,14 +437,7 @@ extension ProfileSetupVC: UITextFieldDelegate{
             currentString.replacingCharacters(in: range, with: string) as NSString
         switch self.messageListing.endIndex {
         case 7:
-            switch txt.count {
-            case 2,5:
-                if newString.length < currentString.length {msgTxtField.text = txt } else {
-                    msgTxtField.text = txt + "/" }
-            default:
-                msgTxtField.text = txt
-            }
-            sendBtn.isEnabledWithoutBackground = !(newString.length != 10)
+            sendBtn.isEnabledWithoutBackground = true
             return (string.checkIfValidCharaters(.name) || string.isEmpty) && newString.length <= 10
         default:
             sendBtn.isEnabledWithoutBackground = !(txt.count == 0)

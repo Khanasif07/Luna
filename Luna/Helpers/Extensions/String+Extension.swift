@@ -258,7 +258,7 @@ extension String {
     
     func convertToDate() -> Date {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = Date.DateFormat.yyyy_MM_dd.rawValue
+        dateFormatter.dateFormat = Date.DateFormat.ddMMyyyy.rawValue
         let yearDate = dateFormatter.date(from: self) ?? Date()
         return yearDate
     }
@@ -401,29 +401,29 @@ extension Optional where Wrapped == String {
 
 enum ValidityExression : String {
     
-    case userName = "^[a-zA-z]{1,}+[a-zA-z0-9!@#$%&*]{2,15}"
-    case email =  "[A-Z0-9a-z.-_]+@[A-Za-z0-9.-]+\\.[A-Za-z]{1,50}"
+    case userName = "^[a-zA-z\\u0080-\\uFFFFß]{1,}+[a-zA-z0-9!@#$%&*-]{2,15}"
+    case email =  "[A-Z0-9a-z\\u0080-\\uFFFF.-_]+@[A-Za-z\\u0080-\\uFFFF0-9.-]+\\.[A-Za-z\\u0080-\\uFFFFß]{1,50}"
     case mobileNumber = "^[0-9]{8,14}$"
     case hardPassword = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[!\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~])(?=.*\\d)[A-Za-z0-9 !\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~]{8,16}"
     case nickName = "^[a-zA-Z0-9\\s]{3,40}"
-    case name = "^[a-zA-Z0-9!@#._$%&*\\s]{3,40}"
+    case name = "^[a-zA-Z0-9!@#._$%&*\\s-]{3,40}"
     case webUrl = "((https|http)://)((\\w|-)+)(([.]|[/])((\\w|-)+))+"
     case password = "^(?=.*[A-Z])(?=.*\\d)[A-Za-z0-9 !\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~]{8,20}$"
 }
 
 enum ValidCharaters: String{
-    case userName = "^[a-zA-z]{1,}+[a-zA-z0-9!@#$%&*]{0,15}"
-    case email =  "^[a-zA-Z0-9!@#$%&*._]{0,100}"
+    case userName = "^[a-zA-z\\u0080-\\uFFFFß]{1,}+[a-zA-z0-9!@#$%&*-]{0,15}"
+    case email =  "^[a-zA-Z\\u0080-\\uFFFFß0-9!@#$%&*._-]{0,100}"
     case mobileNumber = "^[0-9]{0,16}$"
     case password = "^[a-zA-Z0-9!@#._$%&*]{0,30}"//"^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,32}$"
-    case name = "^[a-zA-Z0-9!@#._$%&*\\s]{0,40}"
+    case name = "^[a-zA-Z0-9!@#._$%&*\\s-]{0,40}"
     case nickName = "^[a-zA-Z0-9\\s]{0,40}"
     case webUrl = "((https|http)://)((\\w|-)+)(([.]|[/])((\\w|-)+))+"
     case simplePassword = "^[a-zA-Z0-9!@#._$%&*]{0,32}"
 }
 
 enum ValidLength: Int{
-    case userName = 40
+    case userName = 41
     case email = 50
     case password = 16
     case mobileNumber = 20

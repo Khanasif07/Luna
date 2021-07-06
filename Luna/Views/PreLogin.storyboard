@@ -491,7 +491,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TTw-pl-WhK">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qyg-fs-Qdz">
                                         <rect key="frame" x="0.0" y="44" width="414" height="50"/>
@@ -502,10 +502,22 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPJ-VY-AsJ">
+                                                <rect key="frame" x="350" y="10.5" width="44" height="29"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="14"/>
+                                                <state key="normal" title="Logout">
+                                                    <color key="titleColor" systemColor="systemGreenColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="logoutBtnTapped:" destination="p8z-xT-HIy" eventType="touchUpInside" id="Bnh-xn-Mcg"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="I0v-YV-Xca" firstAttribute="leading" secondItem="qyg-fs-Qdz" secondAttribute="leading" constant="20" id="5wx-YC-bOK"/>
+                                            <constraint firstAttribute="trailing" secondItem="uPJ-VY-AsJ" secondAttribute="trailing" constant="20" id="Boc-px-LWt"/>
+                                            <constraint firstItem="uPJ-VY-AsJ" firstAttribute="centerY" secondItem="qyg-fs-Qdz" secondAttribute="centerY" id="K2n-EF-GL2"/>
                                             <constraint firstItem="I0v-YV-Xca" firstAttribute="centerY" secondItem="qyg-fs-Qdz" secondAttribute="centerY" id="hmk-EI-b62"/>
                                             <constraint firstAttribute="height" constant="50" id="xkl-Pw-RNc"/>
                                         </constraints>
@@ -581,7 +593,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="kaL-XL-3nU" secondAttribute="bottom" id="Bw9-Zd-PNX"/>
                                     <constraint firstAttribute="trailing" secondItem="kaL-XL-3nU" secondAttribute="trailing" id="bAe-fa-5cu"/>
                                     <constraint firstItem="kaL-XL-3nU" firstAttribute="leading" secondItem="TTw-pl-WhK" secondAttribute="leading" id="pi4-B0-mnM"/>
                                     <constraint firstItem="kaL-XL-3nU" firstAttribute="top" secondItem="qyg-fs-Qdz" secondAttribute="bottom" id="rAm-Wm-yX7"/>
@@ -593,8 +604,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
                         <constraints>
                             <constraint firstItem="8tO-Bi-qQG" firstAttribute="trailing" secondItem="TTw-pl-WhK" secondAttribute="trailing" id="5Ht-Lc-hGC"/>
                             <constraint firstItem="TTw-pl-WhK" firstAttribute="top" secondItem="4Xs-Hf-f7p" secondAttribute="top" id="A0R-dE-VBg"/>
-                            <constraint firstItem="8tO-Bi-qQG" firstAttribute="bottom" secondItem="TTw-pl-WhK" secondAttribute="bottom" id="Udu-Vq-O5u"/>
+                            <constraint firstAttribute="bottom" secondItem="TTw-pl-WhK" secondAttribute="bottom" id="Udu-Vq-O5u"/>
                             <constraint firstItem="qyg-fs-Qdz" firstAttribute="top" secondItem="8tO-Bi-qQG" secondAttribute="top" id="Wi5-bw-hgl"/>
+                            <constraint firstItem="kaL-XL-3nU" firstAttribute="bottom" secondItem="8tO-Bi-qQG" secondAttribute="bottom" id="Xdm-Tk-G2Q"/>
                             <constraint firstItem="qyg-fs-Qdz" firstAttribute="leading" secondItem="8tO-Bi-qQG" secondAttribute="leading" id="dze-pO-Xav"/>
                             <constraint firstItem="TTw-pl-WhK" firstAttribute="leading" secondItem="8tO-Bi-qQG" secondAttribute="leading" id="o6n-4o-IdP"/>
                             <constraint firstItem="8tO-Bi-qQG" firstAttribute="trailing" secondItem="qyg-fs-Qdz" secondAttribute="trailing" id="orS-M6-mhI"/>
@@ -623,6 +635,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non urna id massa
         <image name="signUpIllustration" width="355" height="198"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

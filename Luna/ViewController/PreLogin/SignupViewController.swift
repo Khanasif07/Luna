@@ -41,12 +41,18 @@ class SignupViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
-            return .darkContent
+            if userInterfaceStyle == .dark{
+                return .darkContent
+            }else{
+                return .darkContent
+            }
         } else {
             // Fallback on earlier versions
             return .lightContent
         }
     }
+    
+   
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,6 +72,9 @@ class SignupViewController: UIViewController {
 extension SignupViewController {
     
     private func initialSetup() {
+        if #available(iOS 13.0, *) {
+        overrideUserInterfaceStyle = .light
+        }
         self.tableViewSetUp()
     }
     
@@ -137,7 +146,8 @@ extension SignupViewController {
         components.scheme = querySchemeName
         components.host = queryUrlPrefixName
         let emailUrlQueryItem = URLQueryItem(name: queryItemEmailName, value: self.emailTxt)
-        components.queryItems = [emailUrlQueryItem]
+        let iflUrlQueryItem = URLQueryItem(name: "ifl", value: "google.com")
+        components.queryItems = [emailUrlQueryItem,iflUrlQueryItem]
         guard let linkUrl = components.url else { return  ActionCodeSettings.init() }
         print("link parameter is \(linkUrl)")
         actionCodeSettings.url = linkUrl
@@ -278,6 +288,12 @@ extension SignupViewController : UITextFieldDelegate{
             cell?.emailIdTxtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
         case cell?.passTxtField:
             cell?.passTxtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
+            if !self.isEmailValid(string: self.emailTxt).0{
+                cell?.emailIdTxtField.setError(self.isEmailValid(string: self.emailTxt).1)
+                CommonFunctions.delay(delay: 1.0) {
+                    cell?.emailIdTxtField.setError("",show: false)
+                }
+            }
         default:
             cell?.signUpBtn.isEnabled = signUpBtnStatus()
         }
@@ -291,6 +307,12 @@ extension SignupViewController : UITextFieldDelegate{
             self.emailTxt = txt
             cell?.signUpBtn.isEnabled = signUpBtnStatus()
             cell?.emailIdTxtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
+            if !self.isEmailValid(string: self.emailTxt).0{
+                cell?.emailIdTxtField.setError(self.isEmailValid(string: self.emailTxt).1)
+                CommonFunctions.delay(delay: 1.0) {
+                    cell?.emailIdTxtField.setError("",show: false)
+                }
+            }
         case cell?.passTxtField:
             self.passTxt = txt
             cell?.signUpBtn.isEnabled = signUpBtnStatus()

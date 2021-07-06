@@ -223,6 +223,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
                 if let oobCode = deeplinkUrl.getQueryString(parameter: ApiKey.oobCode){
                     Auth.auth().applyActionCode(oobCode) { error in
                         if let error = error as NSError? {
+                            CommonFunctions.showToastWithMessage(error.localizedDescription)
                             print(error.localizedDescription)
                         } else {
                             self.reloadUser { (reloadMsg) in

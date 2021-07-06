@@ -29,3 +29,8 @@ enum LoginType {
     case google
     case apple
 }
+
+var userInterfaceStyle: UIUserInterfaceStyle{
+    return UIScreen.main.traitCollection.userInterfaceStyle
+}
+

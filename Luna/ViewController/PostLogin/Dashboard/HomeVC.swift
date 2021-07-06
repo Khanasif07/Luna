@@ -22,6 +22,19 @@ class HomeVC: UIViewController {
         initialSetup()
     }
     
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            if userInterfaceStyle == .dark{
+                return .darkContent
+            }else{
+                return .darkContent
+            }
+        } else {
+            return .lightContent
+        }
+    }
+    
     // MARK: - IBActions
     //===========================
     @IBAction func settingBtnTapped(_ sender: UIButton) {
@@ -48,6 +61,9 @@ class HomeVC: UIViewController {
 extension HomeVC {
     
     private func initialSetup() {
+        if #available(iOS 13.0, *) {
+        overrideUserInterfaceStyle = .light
+        }
         FirestoreController.getFirebaseUserData {
             AppUserDefaults.save(value: UserModel.main.isBiometricOn, forKey: .isBiometricSelected)
         } failure: { (error) -> (Void) in

@@ -26,11 +26,14 @@ enum AppRouter {
         AppDelegate.shared.window?.becomeKey()
         AppDelegate.shared.window?.makeKeyAndVisible()
     }
-       
+    
     
     // MARK: - Show Landing Screen
     //===========================
     static func checkAppInitializationFlow() {
+//                AppRouter.goToTestingVC()
+//        return
+////
         if isUserLoggedin {
             if   AppUserDefaults.value(forKey: .isProfileStepCompleted).boolValue{
                 AppRouter.gotoHomeVC()
@@ -67,10 +70,16 @@ enum AppRouter {
         }
     }
     
+    
+    static func goToTestingVC() {
+        let homeScene = ProfileSetupVC.instantiate(fromAppStoryboard: .PreLogin)
+        setAsWindowRoot(homeScene)
+    }
+    
     static func goToProfileSetupVC() {
-          let homeScene = ProfileSetupVC.instantiate(fromAppStoryboard: .PreLogin)
-          setAsWindowRoot(homeScene)
-      }
+        let homeScene = ProfileSetupVC.instantiate(fromAppStoryboard: .PreLogin)
+        setAsWindowRoot(homeScene)
+    }
     
     static func goToSignUpVC() {
         let loginVC = LoginViewController.instantiate(fromAppStoryboard: .PreLogin)
@@ -81,7 +90,7 @@ enum AppRouter {
         navigationController.pushViewController(signupVC, animated: true)
     }
     
-   static func goToTermsConditionVC() {
+    static func goToTermsConditionVC() {
         let termsVC = TermsConditionVC.instantiate(fromAppStoryboard: .PreLogin)
         setAsWindowRoot(termsVC)
     }

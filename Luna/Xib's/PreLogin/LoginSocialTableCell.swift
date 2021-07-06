@@ -32,6 +32,14 @@ class LoginSocialTableCell: UITableViewCell {
         self.setUpAttributedString()
         self.setUpButtonInset()
         self.setUpBorder()
+//        switch userInterfaceStyle {
+//        case .dark:
+//            let imageView = UIImageView(image: UIImage(named: "apple"))
+//            appleBtn.setImage(imageView.image?.maskWithColor(color: UIColor.white), for: .normal)
+//        default:
+            let imageView = UIImageView(image: UIImage(named: "apple"))
+            appleBtn.setImage(imageView.image, for: .normal)
+//        }
     }
     
     override func layoutSubviews() {
@@ -52,8 +60,7 @@ class LoginSocialTableCell: UITableViewCell {
     
     public func setUpAttributedString(){
         let attributedString = NSMutableAttributedString(string: signupLoginDescText , attributes: [
-            .font: AppFonts.SF_Pro_Display_Regular.withSize(.x14),
-            .foregroundColor: UIColor.black
+            .font: AppFonts.SF_Pro_Display_Regular.withSize(.x14)
         ])
         let privactAttText = (NSAttributedString(string: signupLoginText, attributes: [NSAttributedString.Key.foregroundColor: UIColor(r: 61, g: 201, b: 147, alpha: 1.0),NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Bold.withSize(.x15)]))
         attributedString.append(privactAttText)
