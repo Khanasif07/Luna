@@ -16,6 +16,7 @@
 		84467280268DB2C700EC55FD /* SystemStep1TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446727E268DB2C700EC55FD /* SystemStep1TableCell.swift */; };
 		84467281268DB2C700EC55FD /* SystemStep1TableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8446727F268DB2C700EC55FD /* SystemStep1TableCell.xib */; };
 		84467287268DBECC00EC55FD /* InsulinStep1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84467286268DBECC00EC55FD /* InsulinStep1VC.swift */; };
+		844B93BE2694427600B65BF8 /* InsulinStep2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B93BD2694427600B65BF8 /* InsulinStep2VC.swift */; };
 		845549112678D486000CC13D /* GoogleService-Info-1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 846F1A1F2678C2220034ACE0 /* GoogleService-Info-1.plist */; };
 		845549182678DCAC000CC13D /* PreLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 845549172678DCAC000CC13D /* PreLogin.storyboard */; };
 		8455491C2678DDBA000CC13D /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455491B2678DDBA000CC13D /* SignupViewController.swift */; };
@@ -117,6 +118,7 @@
 		8446727E268DB2C700EC55FD /* SystemStep1TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemStep1TableCell.swift; sourceTree = "<group>"; };
 		8446727F268DB2C700EC55FD /* SystemStep1TableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SystemStep1TableCell.xib; sourceTree = "<group>"; };
 		84467286268DBECC00EC55FD /* InsulinStep1VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep1VC.swift; sourceTree = "<group>"; };
+		844B93BD2694427600B65BF8 /* InsulinStep2VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep2VC.swift; sourceTree = "<group>"; };
 		845549172678DCAC000CC13D /* PreLogin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PreLogin.storyboard; sourceTree = "<group>"; };
 		8455491B2678DDBA000CC13D /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		8455491F2678DDE6000CC13D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 			isa = PBXGroup;
 			children = (
 				84467286268DBECC00EC55FD /* InsulinStep1VC.swift */,
+				844B93BD2694427600B65BF8 /* InsulinStep2VC.swift */,
 			);
 			path = Insulin;
 			sourceTree = "<group>";
@@ -825,6 +828,7 @@
 				84E5505A267E027A008C02F8 /* TypeTableCell.swift in Sources */,
 				84CC12D72668D005009316FC /* AppColors.swift in Sources */,
 				84CC12F82668D12D009316FC /* UIApplicationExtension.swift in Sources */,
+				844B93BE2694427600B65BF8 /* InsulinStep2VC.swift in Sources */,
 				84861D7726848DB1004B046C /* ProfileVC.swift in Sources */,
 				84CC12D02668CFD8009316FC /* AppUserDefaults.swift in Sources */,
 				8455492D2678FFFD000CC13D /* LoginSocialTableCell.swift in Sources */,

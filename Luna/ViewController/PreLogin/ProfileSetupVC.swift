@@ -113,7 +113,6 @@ class ProfileSetupVC: UIViewController {
     }
     
     @IBAction func sendBtnTapped(_ sender: AppButton) {
-        self.view.endEditing(true)
         sendBtn.isEnabledWithoutBackground = false
         guard let txt = msgTxtField.text,!txt.isEmpty else { return }
         self.msgTxtField.text = ""
@@ -130,8 +129,11 @@ class ProfileSetupVC: UIViewController {
                 self.scrollMsgToBottom()
             }
         case 5:
-            msgTxtField.inputView = datePicker
-            msgTxtField.placeholder = "01/01/2000"
+            self.msgTxtField.inputView = self.datePicker
+            self.msgTxtField.placeholder = "dd/mm/yyyy"
+            self.msgTxtField.reloadInputViews()
+            self.msgTxtField.text = datePicker.selectedDate()?.convertToDefaultString()
+            self.sendBtn.isEnabledWithoutBackground = !(msgTxtField.text?.count == 0)
             self.senderLastName = txt
             let senderMessage = Message(txt, "Sender")
             self.messageListing.append(senderMessage)
@@ -143,6 +145,7 @@ class ProfileSetupVC: UIViewController {
                 self.scrollMsgToBottom()
             }
         case 7:
+            self.view.endEditing(true)
             msgTxtField.inputView = nil
             msgTxtField.placeholder = ""
             self.senderDob = txt

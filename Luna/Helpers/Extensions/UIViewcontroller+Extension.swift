@@ -430,6 +430,19 @@ extension UIViewController {
         return (true,"")
     }
     
+    func isPassValid(string: String?) -> (Bool,String) {
+        if let pass = string, !pass.isEmpty {
+            if pass.count < 8 {
+                return (false, "Oops! It’s seems like a wrong password")
+            } else if pass.checkIfInvalid(.password) {
+                return (false, "Oops! It’s seems like a wrong password")
+            }
+        } else {
+            return (false, "")
+        }
+        return (true,"")
+    }
+    
 }
 
 extension UIScrollView {

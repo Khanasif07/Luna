@@ -38,7 +38,7 @@
                                                 <rect key="frame" x="0.0" y="44" width="414" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oq9-EA-Vas">
-                                                        <rect key="frame" x="20" y="11" width="74.5" height="28"/>
+                                                        <rect key="frame" x="20" y="10.5" width="71.5" height="29"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="24"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -332,10 +332,108 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2f6-az-I4p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="417" y="118"/>
+            <point key="canvasLocation" x="415.94202898550731" y="117.85714285714285"/>
+        </scene>
+        <!--Insulin Step2VC-->
+        <scene sceneID="sqq-OY-9Xn">
+            <objects>
+                <viewController storyboardIdentifier="InsulinStep2VC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZkC-Zm-v7c" customClass="InsulinStep2VC" customModule="Luna" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6PO-CP-1Xr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A8S-N1-JbJ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FHr-x1-wBy">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aWk-fj-vh4">
+                                                <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Long Acting Insulin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6p-xp-UJU">
+                                                        <rect key="frame" x="130" y="14.5" width="154" height="21"/>
+                                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pa9-0b-OWM">
+                                                        <rect key="frame" x="20" y="5" width="40" height="40"/>
+                                                        <state key="normal" image="back"/>
+                                                        <connections>
+                                                            <action selector="infoBtnTapped:" destination="TZO-Gp-Vjs" eventType="touchUpInside" id="rfZ-5T-pGI"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="Pa9-0b-OWM" firstAttribute="leading" secondItem="aWk-fj-vh4" secondAttribute="leading" constant="20" id="1Zj-OV-5lk"/>
+                                                    <constraint firstItem="H6p-xp-UJU" firstAttribute="centerY" secondItem="aWk-fj-vh4" secondAttribute="centerY" id="TQu-eQ-cud"/>
+                                                    <constraint firstItem="Pa9-0b-OWM" firstAttribute="centerY" secondItem="aWk-fj-vh4" secondAttribute="centerY" id="UFm-Bt-3lm"/>
+                                                    <constraint firstItem="H6p-xp-UJU" firstAttribute="centerX" secondItem="aWk-fj-vh4" secondAttribute="centerX" id="oNB-Uk-VrJ"/>
+                                                    <constraint firstAttribute="height" constant="50" id="yvK-kp-tfk"/>
+                                                </constraints>
+                                            </view>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lLg-wS-j3g">
+                                                <rect key="frame" x="0.0" y="109" width="414" height="753"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </tableView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wGx-Tv-OHj" customClass="AppButton" customModule="Luna" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="788" width="374" height="44"/>
+                                                <color key="backgroundColor" red="0.45098039220000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="GLb-7q-4va"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                                <state key="normal" title="Select">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="proceedBtnAction:" destination="BDf-5Y-uHg" eventType="touchUpInside" id="Tqh-e2-YSc"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="lLg-wS-j3g" secondAttribute="trailing" id="2Fr-js-3vg"/>
+                                            <constraint firstItem="wGx-Tv-OHj" firstAttribute="leading" secondItem="FHr-x1-wBy" secondAttribute="leading" constant="20" id="ESl-YL-NYV"/>
+                                            <constraint firstItem="lLg-wS-j3g" firstAttribute="leading" secondItem="FHr-x1-wBy" secondAttribute="leading" id="IqO-Dw-ZKi"/>
+                                            <constraint firstAttribute="trailing" secondItem="aWk-fj-vh4" secondAttribute="trailing" id="VZm-DD-xkh"/>
+                                            <constraint firstAttribute="trailing" secondItem="wGx-Tv-OHj" secondAttribute="trailing" constant="20" id="WUg-Sv-4IM"/>
+                                            <constraint firstAttribute="bottom" secondItem="lLg-wS-j3g" secondAttribute="bottom" id="gcY-LP-fLb"/>
+                                            <constraint firstItem="lLg-wS-j3g" firstAttribute="top" secondItem="aWk-fj-vh4" secondAttribute="bottom" constant="15" id="h9e-Jl-cCg"/>
+                                            <constraint firstItem="aWk-fj-vh4" firstAttribute="leading" secondItem="FHr-x1-wBy" secondAttribute="leading" id="qqm-Tu-PtM"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="FHr-x1-wBy" firstAttribute="top" secondItem="A8S-N1-JbJ" secondAttribute="top" id="9Ld-7I-h1x"/>
+                                    <constraint firstAttribute="trailing" secondItem="FHr-x1-wBy" secondAttribute="trailing" id="j0d-h6-MvV"/>
+                                    <constraint firstItem="FHr-x1-wBy" firstAttribute="leading" secondItem="A8S-N1-JbJ" secondAttribute="leading" id="oG9-pq-lvR"/>
+                                    <constraint firstAttribute="bottom" secondItem="FHr-x1-wBy" secondAttribute="bottom" id="qf8-is-gT2"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="JAQ-cn-9aL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="JAQ-cn-9aL" firstAttribute="trailing" secondItem="A8S-N1-JbJ" secondAttribute="trailing" id="8Nc-wI-nKc"/>
+                            <constraint firstItem="JAQ-cn-9aL" firstAttribute="bottom" secondItem="A8S-N1-JbJ" secondAttribute="bottom" id="9J8-Qq-236"/>
+                            <constraint firstItem="A8S-N1-JbJ" firstAttribute="top" secondItem="6PO-CP-1Xr" secondAttribute="top" id="CWS-rl-EIt"/>
+                            <constraint firstItem="JAQ-cn-9aL" firstAttribute="bottom" secondItem="wGx-Tv-OHj" secondAttribute="bottom" constant="30" id="RVa-UJ-v5f"/>
+                            <constraint firstItem="aWk-fj-vh4" firstAttribute="top" secondItem="JAQ-cn-9aL" secondAttribute="top" id="Rht-K7-18o"/>
+                            <constraint firstItem="A8S-N1-JbJ" firstAttribute="leading" secondItem="6PO-CP-1Xr" secondAttribute="leading" id="Zht-Dg-7Ed"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fig-QB-bAo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1080" y="118"/>
         </scene>
     </scenes>
     <resources>
+        <image name="back" width="40" height="40"/>
         <image name="infoIcon" width="40" height="40"/>
         <image name="manualIcon" width="40" height="40"/>
         <image name="warning" width="20" height="20"/>
