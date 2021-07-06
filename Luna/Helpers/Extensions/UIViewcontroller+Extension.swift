@@ -422,10 +422,10 @@ extension UIViewController {
             if email.count < 3 {
                 return (false, "Oops! It’s seems like a wrong email")
             } else if email.checkIfInvalid(.email) {
-                return (false, "Oops! It’s seems like a wrong email")
+                return (false, "Please enter a valid email address.")
             }
         } else {
-            return (false, "")
+            return (false, "Please enter a email address.")
         }
         return (true,"")
     }
@@ -433,12 +433,12 @@ extension UIViewController {
     func isPassValid(string: String?) -> (Bool,String) {
         if let pass = string, !pass.isEmpty {
             if pass.count < 8 {
-                return (false, "Oops! It’s seems like a wrong password")
+                return (false, "Password must contain at least 8 char.")
             } else if pass.checkIfInvalid(.password) {
-                return (false, "Oops! It’s seems like a wrong password")
+                return (false, "Please enter a valid password.")
             }
         } else {
-            return (false, "")
+            return (false, "Please enter a password.")
         }
         return (true,"")
     }

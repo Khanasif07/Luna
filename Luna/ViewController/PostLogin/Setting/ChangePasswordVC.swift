@@ -60,6 +60,14 @@ class ChangePasswordVC: UIViewController {
             CommonFunctions.showToastWithMessage("New and confirm password doesn't match.")
             return
         }
+        if newPass.count < 8 {
+            CommonFunctions.showToastWithMessage("New password must contain at least 8 char.")
+            return
+        }
+        if confirmPass.count < 8 {
+            CommonFunctions.showToastWithMessage("Confirm password must contain at least 8 char.")
+            return
+        }
         CommonFunctions.showActivityLoader()
         let email  = AppUserDefaults.value(forKey: .defaultEmail).stringValue
         self.changePassword(email: email , currentPassword: self.currentPass, newPassword: self.newPass) { (error) in
@@ -186,7 +194,7 @@ extension ChangePasswordVC : UITextFieldDelegate{
             saveBtn.isEnabled = newString.length >= 6
             return (string.checkIfValidCharaters(.password) || string.isEmpty) && newString.length <= 25
         default:
-            saveBtn.isEnabled = newString.length >= 6 
+            saveBtn.isEnabled = newString.length >= 6
             return (string.checkIfValidCharaters(.password) || string.isEmpty) && newString.length <= 25
         }
     }

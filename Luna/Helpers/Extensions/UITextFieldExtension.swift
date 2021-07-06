@@ -319,7 +319,7 @@ extension UITextField {
         
         // Set constraints for label
         label.topAnchor.constraint(equalTo: line.bottomAnchor, constant: 0).isActive = true
-        label.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: 0).isActive = true
+        label.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -7.0).isActive = true
         //        label.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 0).isActive = true
         label.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: 0).isActive = true
         label.widthAnchor.constraint(equalToConstant: self.superview!.width).isActive = true
