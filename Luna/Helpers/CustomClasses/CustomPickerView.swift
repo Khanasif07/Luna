@@ -95,6 +95,11 @@ class CustomDatePicker: UIView {
     var pickerMode: UIDatePicker.Mode = .date {
         didSet {
             datePicker.datePickerMode = self.pickerMode
+            if #available(iOS 13.4, *) {
+                datePicker.preferredDatePickerStyle = .wheels
+            } else {
+                // Fallback on earlier versions
+            }
 
         }
     }

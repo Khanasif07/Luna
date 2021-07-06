@@ -31,8 +31,8 @@ enum AppRouter {
     // MARK: - Show Landing Screen
     //===========================
     static func checkAppInitializationFlow() {
-//                AppRouter.goToTestingVC()
-//        return
+                AppRouter.goToTestingVC()
+        return
 ////
         if isUserLoggedin {
             if   AppUserDefaults.value(forKey: .isProfileStepCompleted).boolValue{
