@@ -125,7 +125,11 @@ class CustomDatePicker: UIView {
     
     func createDatePicker(){
         
-        datePicker = UIDatePicker(frame: CGRect(x: 30.0, y: 0.0, width: UIScreen.main.bounds.size.width, height: 200.0))
+        if hasTopNotch{
+            datePicker = UIDatePicker(frame: CGRect(x: 30.0, y: 0.0, width: UIScreen.main.bounds.size.width, height: 200.0))
+        }else{
+            datePicker = UIDatePicker(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.size.width, height: 200.0))
+        }
         self.addSubview(datePicker)
         //datePicker.datePickerMode = pickerMode
 //        datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: +2, to: Date())

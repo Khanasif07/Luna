@@ -35,6 +35,8 @@ class InsulinStep1VC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func proceedBtnAction(_ sender: UIButton) {
+        let vc = InsulinStep2VC.instantiate(fromAppStoryboard: .SystemSetup)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func backBtnAction(_ sender: UIButton) {

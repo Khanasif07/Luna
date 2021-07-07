@@ -189,7 +189,7 @@
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7uL-ha-XBV">
                                                         <rect key="frame" x="20" y="5" width="40" height="40"/>
-                                                        <state key="normal" image="infoIcon"/>
+                                                        <state key="normal" image="back"/>
                                                         <connections>
                                                             <action selector="backBtnAction:" destination="BDf-5Y-uHg" eventType="touchUpInside" id="lkK-5V-Bgf"/>
                                                             <action selector="infoBtnTapped:" destination="TZO-Gp-Vjs" eventType="touchUpInside" id="57L-sV-9cG"/>
@@ -352,7 +352,7 @@
                                                 <rect key="frame" x="0.0" y="44" width="414" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Long Acting Insulin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6p-xp-UJU">
-                                                        <rect key="frame" x="130" y="14.5" width="154" height="21"/>
+                                                        <rect key="frame" x="131.5" y="14.5" width="151" height="21"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -361,6 +361,7 @@
                                                         <rect key="frame" x="20" y="5" width="40" height="40"/>
                                                         <state key="normal" image="back"/>
                                                         <connections>
+                                                            <action selector="backBtnAction:" destination="ZkC-Zm-v7c" eventType="touchUpInside" id="bwv-rc-Axu"/>
                                                             <action selector="infoBtnTapped:" destination="TZO-Gp-Vjs" eventType="touchUpInside" id="rfZ-5T-pGI"/>
                                                         </connections>
                                                     </button>
@@ -426,6 +427,10 @@
                             <constraint firstItem="A8S-N1-JbJ" firstAttribute="leading" secondItem="6PO-CP-1Xr" secondAttribute="leading" id="Zht-Dg-7Ed"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mainTableView" destination="lLg-wS-j3g" id="CJb-6v-dRn"/>
+                        <outlet property="selectBtn" destination="wGx-Tv-OHj" id="adM-Zo-K31"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fig-QB-bAo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

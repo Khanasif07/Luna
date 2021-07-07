@@ -249,7 +249,7 @@ extension UITextField {
     // Add/remove error message
     func setError(_ string: String? = nil, show: Bool = true) {
         
-        var labelFontSize = 14
+        var labelFontSize = 12
         
         if let rightView = rightView, rightView.tag != 999 {
             rightViews.setObject(rightView, forKey: self)
@@ -349,13 +349,14 @@ extension UITextField {
         }
         
         // Add right button to textField
-        let errorButton = UIButton(type: .custom)
-        errorButton.tag = 999
-        errorButton.setImage(nil, for: .normal)
-        errorButton.frame = CGRect(x: 0, y: 0, width: frame.size.height, height: frame.size.height)
-        errorButton.addTarget(self, action: #selector(errorAction), for: .touchUpInside)
-        rightView = errorButton
-        rightViewMode = .always
+//        let errorButton = UIButton(type: .custom)
+//        errorButton.isHidden = true
+//        errorButton.tag = 999
+//        errorButton.setImage(nil, for: .normal)
+//        errorButton.frame = CGRect(x: 0, y: 0, width: frame.size.height, height: frame.size.height)
+//        errorButton.addTarget(self, action: #selector(errorAction), for: .touchUpInside)
+//        rightView = errorButton
+//        rightViewMode = .always
 
         // Save view with error message
         errorViews.setObject(container, forKey: self)
@@ -363,26 +364,26 @@ extension UITextField {
     
     // Show error message
     
-    @objc func errorAction(_ sender: Any) {
-        let errorButton = sender as! UIButton
-        let textField = errorButton.superview as! UITextField
-
-        let errorView = errorViews.object(forKey: textField)
-        if let errorView = errorView {
-            errorView.isHidden.toggle()
-        }
-
-        let enumerator = errorViews.objectEnumerator()
-        while let view = enumerator!.nextObject() as! UIView? {
-            if view != errorView {
-                view.isHidden = true
-            }
-        }
-
-        //         Don't hide keyboard after click by icon
-        //        UIViewController.isCatchTappedAround = false
-        //        self.endEditing(false)
-    }
+//    @objc func errorAction(_ sender: Any) {
+//        let errorButton = sender as! UIButton
+//        let textField = errorButton.superview as! UITextField
+//
+//        let errorView = errorViews.object(forKey: textField)
+//        if let errorView = errorView {
+//            errorView.isHidden.toggle()
+//        }
+//
+//        let enumerator = errorViews.objectEnumerator()
+//        while let view = enumerator!.nextObject() as! UIView? {
+//            if view != errorView {
+//                view.isHidden = true
+//            }
+//        }
+//
+//        //         Don't hide keyboard after click by icon
+//        //        UIViewController.isCatchTappedAround = false
+//        //        self.endEditing(false)
+//    }
 }
 
 class TriangleTop: UIView {
