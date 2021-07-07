@@ -432,10 +432,8 @@ extension UIViewController {
     
     func isPassValid(string: String?) -> (Bool,String) {
         if let pass = string, !pass.isEmpty {
-            if pass.count < 8 {
-                return (false, "Password must contain at least 8 char.")
-            } else if pass.checkIfInvalid(.password) {
-                return (false, "Please enter a valid password.")
+            if pass.count < 6 {
+                return (false, "Password must contain at least 6 char.")
             }
         } else {
             return (false, "Please enter a password.")

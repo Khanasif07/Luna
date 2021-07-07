@@ -41,7 +41,8 @@ class TermsConditionVC: UIViewController {
     //===========================
     @IBAction func acceptBtnAction(_ sender: UIButton) {
         AppUserDefaults.save(value: true, forKey: .isTermsAndConditionSelected)
-        self.goToLoginVC()
+//        self.goToLoginVC()
+        self.goToSignUpVC()
     }
     
     

@@ -58,7 +58,7 @@ class LoginViewController: UIViewController {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
         self.tabBarController?.tabBar.isHidden = true
-        self.loginTableView.reloadData()
+//        self.loginTableView.reloadData()
         if isComeFromMail{
             self.showBiometricAuthentication()
             self.isComeFromMail = false
@@ -246,13 +246,6 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                     }
                     return
                 }
-                if !self.isPassValid(string: self.passTxt).0{
-                    cell.passTxtField.setError(self.isPassValid(string: self.passTxt).1)
-                    CommonFunctions.delay(delay: 2.0) {
-                        cell.passTxtField.setError("",show: false)
-                    }
-                    return
-                }
                 CommonFunctions.showActivityLoader()
                 if let currentUser = Auth.auth().currentUser {
                     self.reloadUser { (reloadMsg) in
@@ -359,9 +352,10 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
             }
             cell.loginBtnTapped = { [weak self] in
                 guard let self = `self` else { return }
-                self.emailTxt = ""
-                self.passTxt = ""
-                self.goToSignUpVC()
+//                self.emailTxt = ""
+//                self.passTxt = ""
+//                self.goToSignUpVC()
+                self.pop()
             }
             return cell
         }

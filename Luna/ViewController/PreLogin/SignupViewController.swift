@@ -271,7 +271,8 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
             }
             cell.loginBtnTapped = { [weak self] in
                 guard let self = `self` else { return }
-                self.pop()
+//                self.pop()
+                self.gotoLoginVC()
             }
             return cell
         }

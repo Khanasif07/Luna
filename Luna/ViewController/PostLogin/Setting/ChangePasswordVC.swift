@@ -56,16 +56,20 @@ class ChangePasswordVC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func saveBtnAction(_ sender: AppButton) {
+        if currentPass.count < 6 {
+            CommonFunctions.showToastWithMessage("Old password must contain at least 6 char.")
+            return
+        }
+        if newPass.count < 6 {
+            CommonFunctions.showToastWithMessage("New password must contain at least 6 char.")
+            return
+        }
+        if confirmPass.count < 6 {
+            CommonFunctions.showToastWithMessage("Confirm password must contain at least 6 char.")
+            return
+        }
         if newPass != confirmPass {
             CommonFunctions.showToastWithMessage("New and confirm password doesn't match.")
-            return
-        }
-        if newPass.count < 8 {
-            CommonFunctions.showToastWithMessage("New password must contain at least 8 char.")
-            return
-        }
-        if confirmPass.count < 8 {
-            CommonFunctions.showToastWithMessage("Confirm password must contain at least 8 char.")
             return
         }
         CommonFunctions.showActivityLoader()
@@ -167,15 +171,15 @@ extension ChangePasswordVC : UITextFieldDelegate{
         switch cell?.titleLbl.text {
         case sections[0]:
             currentPass = txt
-            saveBtn.isEnabled =  (currentPass.count >= 6) && (newPass.count >= 6) && (confirmPass.count >= 6)
+            saveBtn.isEnabled =  (currentPass.count >= 1) && (newPass.count >= 1) && (confirmPass.count >= 1)
             cell?.txtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         case sections[1]:
             newPass = txt
-            saveBtn.isEnabled = (currentPass.count >= 6) && (newPass.count >= 6) && (confirmPass.count >= 6)
+            saveBtn.isEnabled = (currentPass.count >= 1) && (newPass.count >= 1) && (confirmPass.count >= 1)
             cell?.txtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         default:
             confirmPass = txt
-            saveBtn.isEnabled = (currentPass.count >= 6) && (newPass.count >= 6) && (confirmPass.count >= 6)
+            saveBtn.isEnabled = (currentPass.count >= 1) && (newPass.count >= 1) && (confirmPass.count >= 1)
             cell?.txtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         }
         
@@ -188,13 +192,10 @@ extension ChangePasswordVC : UITextFieldDelegate{
             currentString.replacingCharacters(in: range, with: string) as NSString
         switch cell?.titleLbl.text {
         case sections[0]:
-            saveBtn.isEnabled = newString.length >= 6
             return (string.checkIfValidCharaters(.password) || string.isEmpty) && newString.length <= 25
         case sections[1]:
-            saveBtn.isEnabled = newString.length >= 6
             return (string.checkIfValidCharaters(.password) || string.isEmpty) && newString.length <= 25
         default:
-            saveBtn.isEnabled = newString.length >= 6
             return (string.checkIfValidCharaters(.password) || string.isEmpty) && newString.length <= 25
         }
     }
