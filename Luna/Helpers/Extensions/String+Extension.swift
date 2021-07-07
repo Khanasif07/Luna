@@ -258,7 +258,7 @@ extension String {
     
     func convertToDate() -> Date {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = Date.DateFormat.ddMMyyyy.rawValue
+        dateFormatter.dateFormat = Date.DateFormat.mmddyyyy.rawValue
         let yearDate = dateFormatter.date(from: self) ?? Date()
         return yearDate
     }

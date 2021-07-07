@@ -142,7 +142,7 @@ class CustomDatePicker: UIView {
         
         let dateFormatterPrint = DateFormatter()
         
-        dateFormatterPrint.dateFormat = "yyyy-MM-dd"
+        dateFormatterPrint.dateFormat = "mm/dd/yyyy"
         
         for view in self.subviews{
             

@@ -22,7 +22,7 @@ extension Date {
         case yyyyMMddTHHmmsssssz = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         case yyyyMMddTHHmmssssZZZZZ = "yyyy-MM-dd'T'HH:mm:ss.ssZZZZZ"
         case yyyyMMdd = "yyyy/MM/dd"
-        case ddMMyyyy = "dd/MM/yyyy"
+        case mmddyyyy = "MM/dd/yyyy"
         case dMMMyyyy = "d MMM, yyyy"
         case ddMMMyyyy = "dd MMM yyyy"
         case MMMdyyyy = "MMM d, yyyy"
@@ -186,7 +186,7 @@ extension Date {
     func convertToDefaultString() -> String {
         // First, get a Date from the String
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = DateFormat.ddMMyyyy.rawValue
+        dateFormatter.dateFormat = DateFormat.mmddyyyy.rawValue
         let local = dateFormatter.string(from: self)
         return local
     }

@@ -191,7 +191,7 @@ extension ProfileVC : UITextFieldDelegate{
             cell?.txtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
         case sections[2].0:
             cell?.txtField.inputView = datePicker
-            cell?.txtField.placeholder = "dd/mm/yyyy"
+            cell?.txtField.placeholder = "mm/dd/yyyy"
             cell?.txtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
         case sections[4].0:
             cell?.txtField.inputView = typePickerView

@@ -130,7 +130,7 @@ class ProfileSetupVC: UIViewController {
             }
         case 5:
             self.msgTxtField.inputView = self.datePicker
-            self.msgTxtField.placeholder = "dd/mm/yyyy"
+            self.msgTxtField.placeholder = "mm/dd/yyyy"
             self.msgTxtField.reloadInputViews()
             self.msgTxtField.text = datePicker.selectedDate()?.convertToDefaultString()
             self.sendBtn.isEnabledWithoutBackground = !(msgTxtField.text?.count == 0)
