@@ -16,7 +16,7 @@ class InsulinStep2VC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var sections: [String] = ["Pair Luna","Link CGM","Insulin Information"]
+    var sections: [String] = ["Pair Luna","Link CGM","Insulin Information","Pair Luna","Link CGM","Insulin Information","Pair Luna","Link CGM","Insulin Information"]
     
     // MARK: - Lifecycle
     //===========================
@@ -25,11 +25,22 @@ class InsulinStep2VC: UIViewController {
         initialSetup()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        selectBtn.round(radius: 8.0)
+    }
+    
     // MARK: - IBActions
     //===========================
     @IBAction func backBtnAction(_ sender: UIButton) {
+        self.pop()
     }
     
+    @IBAction func selectBtnTapped(_ sender: AppButton) {
+        let vc = InsulinStep3VC.instantiate(fromAppStoryboard: .SystemSetup)
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
     
 }
 
@@ -39,6 +50,7 @@ extension InsulinStep2VC {
     
     private func initialSetup() {
         self.tableViewSetup()
+        self.selectBtn.isEnabled = true
     }
     
     private func tableViewSetup(){
@@ -72,8 +84,7 @@ extension InsulinStep2VC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 2:
-            let vc = InsulinStep1VC.instantiate(fromAppStoryboard: .SystemSetup)
-            self.navigationController?.pushViewController(vc, animated: true)
+            showAlert(msg: "Under Development")
         default:
             showAlert(msg: "Under Development")
         }
