@@ -53,13 +53,14 @@ extension SystemSetupStep1VC {
     
     private func initialSetup() {
         self.tableViewSetup()
+        self.progressView.progressTintColor = #colorLiteral(red: 0.2392156863, green: 0.7882352941, blue: 0.5764705882, alpha: 1)
         self.progressView.layer.cornerRadius = 3
         self.progressView.clipsToBounds = true
         // Set the rounded edge for the inner bar
         self.progressView.layer.sublayers![1].cornerRadius = 3
         self.progressView.subviews[1].clipsToBounds = true
         CommonFunctions.delay(delay: 2.0) {
-            self.progressView.setProgress(0.75, animated: true)
+            self.progressView.setProgress(0.25, animated: true)
         }
     }
     

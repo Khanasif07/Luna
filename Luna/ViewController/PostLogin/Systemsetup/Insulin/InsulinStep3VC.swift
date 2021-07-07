@@ -55,7 +55,7 @@ extension InsulinStep3VC {
         insulinCountTxtField.delegate = self
         insulinCountTxtField.keyboardType = .numberPad
         insulinCountTxtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
-        self.doneBtn.isEnabled = true
+        self.doneBtn.isEnabled = false
     }
 }
 
@@ -69,6 +69,7 @@ extension InsulinStep3VC : UITextFieldDelegate{
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         insulinCountTxtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
+        self.doneBtn.isEnabled = !(textField.text?.isEmpty ?? true)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -76,6 +77,9 @@ extension InsulinStep3VC : UITextFieldDelegate{
         let newString: NSString =
             currentString.replacingCharacters(in: range, with: string) as NSString
         insulinCountTxtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
-        return (string.checkIfValidCharaters(.mobileNumber) || string.isEmpty) && newString.length <= 50
+        if textField.text?.count == 0 && string == "0" {
+            return false
+        }
+        return (string.checkIfValidCharaters(.mobileNumber) || string.isEmpty) && newString.length <= 2
     }
 }
