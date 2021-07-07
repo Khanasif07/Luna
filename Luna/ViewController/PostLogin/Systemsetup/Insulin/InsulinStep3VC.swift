@@ -54,7 +54,7 @@ extension InsulinStep3VC {
     private func initialSetup() {
         insulinCountTxtField.delegate = self
         insulinCountTxtField.keyboardType = .numberPad
-        insulinCountTxtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
+        insulinCountTxtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         self.doneBtn.isEnabled = true
     }
 }

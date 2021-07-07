@@ -51,5 +51,6 @@ extension InsulinStep1VC {
     
     private func initialSetup() {
         btmContainerView.setBorder(width: 1.0, color: #colorLiteral(red: 0.9607843137, green: 0.5450980392, blue: 0.262745098, alpha: 1))
+        proceedBtn.isEnabled = true
     }
 }

@@ -380,7 +380,7 @@
                                                 </constraints>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lLg-wS-j3g">
-                                                <rect key="frame" x="0.0" y="109" width="414" height="753"/>
+                                                <rect key="frame" x="0.0" y="109" width="414" height="674"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </tableView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wGx-Tv-OHj" customClass="AppButton" customModule="Luna" customModuleProvider="target">
@@ -402,11 +402,11 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="lLg-wS-j3g" secondAttribute="trailing" id="2Fr-js-3vg"/>
+                                            <constraint firstItem="wGx-Tv-OHj" firstAttribute="top" secondItem="lLg-wS-j3g" secondAttribute="bottom" constant="5" id="Dp7-Zc-gcl"/>
                                             <constraint firstItem="wGx-Tv-OHj" firstAttribute="leading" secondItem="FHr-x1-wBy" secondAttribute="leading" constant="20" id="ESl-YL-NYV"/>
                                             <constraint firstItem="lLg-wS-j3g" firstAttribute="leading" secondItem="FHr-x1-wBy" secondAttribute="leading" id="IqO-Dw-ZKi"/>
                                             <constraint firstAttribute="trailing" secondItem="aWk-fj-vh4" secondAttribute="trailing" id="VZm-DD-xkh"/>
                                             <constraint firstAttribute="trailing" secondItem="wGx-Tv-OHj" secondAttribute="trailing" constant="20" id="WUg-Sv-4IM"/>
-                                            <constraint firstAttribute="bottom" secondItem="lLg-wS-j3g" secondAttribute="bottom" id="gcY-LP-fLb"/>
                                             <constraint firstItem="lLg-wS-j3g" firstAttribute="top" secondItem="aWk-fj-vh4" secondAttribute="bottom" constant="15" id="h9e-Jl-cCg"/>
                                             <constraint firstItem="aWk-fj-vh4" firstAttribute="leading" secondItem="FHr-x1-wBy" secondAttribute="leading" id="qqm-Tu-PtM"/>
                                         </constraints>
@@ -439,7 +439,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fig-QB-bAo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1080" y="118"/>
+            <point key="canvasLocation" x="1079.7101449275362" y="117.85714285714285"/>
         </scene>
         <!--Insulin Step3VC-->
         <scene sceneID="AaY-9x-kL5">

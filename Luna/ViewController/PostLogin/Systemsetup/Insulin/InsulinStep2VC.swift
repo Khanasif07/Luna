@@ -16,7 +16,7 @@ class InsulinStep2VC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var sections: [String] = ["Pair Luna","Link CGM","Insulin Information","Pair Luna","Link CGM","Insulin Information","Pair Luna","Link CGM","Insulin Information"]
+    var sections: [(String,Bool)] = [("Pair Luna",false),("Pair Luna",false),("Pair Luna",false),("Pair Luna",false),("Pair Luna",false),("Pair Luna",false)]
     
     // MARK: - Lifecycle
     //===========================
@@ -50,7 +50,7 @@ extension InsulinStep2VC {
     
     private func initialSetup() {
         self.tableViewSetup()
-        self.selectBtn.isEnabled = true
+        self.selectBtn.isEnabled = false
     }
     
     private func tableViewSetup(){
@@ -73,7 +73,9 @@ extension InsulinStep2VC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(with: InsulinStep2Cell.self)
-//        cell.titleLbl.text = sections[indexPath.row]
+        cell.insulinType.text = sections[indexPath.row].0
+        cell.dataContainerView.setBorder(width: 1.0, color: !sections[indexPath.row].1 ? AppColors.fontPrimaryColor : AppColors.appGreenColor)
+        cell.radioBtn.isSelected = sections[indexPath.row].1
         return cell
     }
     
@@ -82,11 +84,16 @@ extension InsulinStep2VC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 2:
-            showAlert(msg: "Under Development")
-        default:
-            showAlert(msg: "Under Development")
+        self.selectBtn.isEnabled = true
+        if let selectedIndex = sections.firstIndex(where: { (tupls) -> Bool in
+            return tupls.1 == true
+        }){
+            self.sections[selectedIndex].1 = false
+            self.sections[indexPath.row].1 = true
+            self.mainTableView.reloadData()
+        }else{
+            self.sections[indexPath.row].1 = true
+            self.mainTableView.reloadData()
         }
     }
 }
