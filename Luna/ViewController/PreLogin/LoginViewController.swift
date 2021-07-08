@@ -379,12 +379,6 @@ extension LoginViewController : UITextFieldDelegate{
             cell?.emailIdTxtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
         case cell?.passTxtField:
             cell?.passTxtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
-            if !self.isEmailValid(string: self.emailTxt).0{
-                cell?.emailIdTxtField.setError(self.isEmailValid(string: self.emailTxt).1)
-                CommonFunctions.delay(delay: 1.0) {
-                    cell?.emailIdTxtField.setError("",show: false)
-                }
-            }
         default:
             cell?.signUpBtn.isEnabled = signUpBtnStatus()
         }
@@ -400,9 +394,8 @@ extension LoginViewController : UITextFieldDelegate{
             cell?.emailIdTxtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
             if !self.isEmailValid(string: self.emailTxt).0{
                 cell?.emailIdTxtField.setError(self.isEmailValid(string: self.emailTxt).1)
-                CommonFunctions.delay(delay: 1.0) {
-                    cell?.emailIdTxtField.setError("",show: false)
-                }
+            }else{
+                cell?.emailIdTxtField.setError("",show: false)
             }
         case cell?.passTxtField:
             self.passTxt = txt

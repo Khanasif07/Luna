@@ -420,7 +420,7 @@ extension UIViewController {
     func isEmailValid(string: String?) -> (Bool,String) {
         if let email = string, !email.isEmpty {
             if email.count < 3 {
-                return (false, "Oops! It’s seems like a wrong email")
+                return (false, "Please enter a valid email address.")
             } else if email.checkIfInvalid(.email) {
                 return (false, "Please enter a valid email address.")
             }

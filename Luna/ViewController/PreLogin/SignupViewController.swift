@@ -218,16 +218,10 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
                 guard let `self` = self else { return }
                 if !self.isEmailValid(string: self.emailTxt).0{
                     cell.emailIdTxtField.setError(self.isEmailValid(string: self.emailTxt).1)
-                    CommonFunctions.delay(delay: 2.0) {
-                        cell.emailIdTxtField.setError("",show: false)
-                    }
                     return
                 }
                 if !self.isPassValid(string: self.passTxt).0{
                     cell.passTxtField.setError(self.isPassValid(string: self.passTxt).1)
-                    CommonFunctions.delay(delay: 2.0) {
-                        cell.passTxtField.setError("",show: false)
-                    }
                     return
                 }
                 CommonFunctions.showActivityLoader()
@@ -296,12 +290,6 @@ extension SignupViewController : UITextFieldDelegate{
             cell?.emailIdTxtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
         case cell?.passTxtField:
             cell?.passTxtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
-            if !self.isEmailValid(string: self.emailTxt).0{
-                cell?.emailIdTxtField.setError(self.isEmailValid(string: self.emailTxt).1)
-                CommonFunctions.delay(delay: 1.0) {
-                    cell?.emailIdTxtField.setError("",show: false)
-                }
-            }
         default:
             cell?.signUpBtn.isEnabled = signUpBtnStatus()
         }
@@ -317,14 +305,18 @@ extension SignupViewController : UITextFieldDelegate{
             cell?.emailIdTxtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
             if !self.isEmailValid(string: self.emailTxt).0{
                 cell?.emailIdTxtField.setError(self.isEmailValid(string: self.emailTxt).1)
-                CommonFunctions.delay(delay: 1.0) {
-                    cell?.emailIdTxtField.setError("",show: false)
-                }
+            }else{
+                cell?.emailIdTxtField.setError("",show: false)
             }
         case cell?.passTxtField:
             self.passTxt = txt
             cell?.signUpBtn.isEnabled = signUpBtnStatus()
             cell?.passTxtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
+            if !self.isPassValid(string: self.passTxt).0{
+                cell?.passTxtField.setError(self.isPassValid(string: self.passTxt).1)
+            }else{
+                cell?.passTxtField.setError("",show: false)
+            }
         default:
             cell?.signUpBtn.isEnabled = signUpBtnStatus()
         }
