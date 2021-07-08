@@ -57,9 +57,6 @@ class ForgotPasswordVC: UIViewController {
     @IBAction func confirmEmailAction(_ sender: AppButton) {
         if !self.isEmailValid(string: self.emailTxt).0{
             self.emailTxtField.setError(self.isEmailValid(string: self.emailTxt).1)
-            CommonFunctions.delay(delay: 1.0) {
-                self.emailTxtField.setError("",show: false)
-            }
             return
         }
         CommonFunctions.showActivityLoader()
@@ -113,6 +110,11 @@ extension ForgotPasswordVC : UITextFieldDelegate{
         self.emailTxt = txt
         self.confirmBtn.isEnabled = !self.emailTxt.isEmpty
         self.emailTxtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
+        if !self.isEmailValid(string: self.emailTxt).0{
+            emailTxtField.setError(self.isEmailValid(string: self.emailTxt).1)
+        }else{
+            emailTxtField.setError("",show: false)
+        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
