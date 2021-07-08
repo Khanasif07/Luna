@@ -58,7 +58,6 @@ class LoginViewController: UIViewController {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
         self.tabBarController?.tabBar.isHidden = true
-//        self.loginTableView.reloadData()
         if isComeFromMail{
             self.showBiometricAuthentication()
             self.isComeFromMail = false
