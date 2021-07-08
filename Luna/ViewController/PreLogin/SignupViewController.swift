@@ -129,6 +129,9 @@ extension SignupViewController {
             selff.emailTxt = ""
             cell?.signUpBtn.isEnabled = selff.signUpBtnStatus()
             selff.signupTableView.reloadData()
+            //
+            selff.gotoLoginVC()
+            //
         }
         scene.popupType = .emailVerification
         scene.titleDesc = LocalizedString.email_verification.localized
@@ -145,15 +148,13 @@ extension SignupViewController {
         let queryUrlPrefixName = InfoPlistParser.getStringValue(forKey: ApiKey.firebaseOpenAppURLPrefix)
         components.scheme = querySchemeName
         components.host = queryUrlPrefixName
+        components.path = "/open"
         let emailUrlQueryItem = URLQueryItem(name: queryItemEmailName, value: self.emailTxt)
-        let iflUrlQueryItem = URLQueryItem(name: "ifl", value: "google.com")
-        components.queryItems = [emailUrlQueryItem,iflUrlQueryItem]
+        components.queryItems = [emailUrlQueryItem]
         guard let linkUrl = components.url else { return  ActionCodeSettings.init() }
         print("link parameter is \(linkUrl)")
         actionCodeSettings.url = linkUrl
-        //
         actionCodeSettings.dynamicLinkDomain = "lunadiabetes.page.link"
-        //
         actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
         return actionCodeSettings
     }
