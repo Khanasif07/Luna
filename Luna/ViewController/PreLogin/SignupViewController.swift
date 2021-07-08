@@ -151,6 +151,9 @@ extension SignupViewController {
         guard let linkUrl = components.url else { return  ActionCodeSettings.init() }
         print("link parameter is \(linkUrl)")
         actionCodeSettings.url = linkUrl
+        //
+        actionCodeSettings.dynamicLinkDomain = "lunadiabetes.page.link"
+        //
         actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
         return actionCodeSettings
     }
