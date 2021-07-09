@@ -106,10 +106,13 @@ extension HomeBottomSheetVC {
     }
     
     private func setupTableView() {
-        self.mainTableView.isUserInteractionEnabled = false
+        self.mainTableView.isUserInteractionEnabled = true
         self.mainTableView.delegate = self
         self.mainTableView.dataSource = self
         self.mainTableView.registerCell(with: BottomSheetTopCell.self)
+        self.mainTableView.registerCell(with: BottomSheetChartCell.self)
+        self.mainTableView.registerCell(with: BottomSheetInsulinCell.self)
+        self.mainTableView.registerCell(with: BottomSheetBottomCell.self)
     }
     
     private func setupSwipeGesture() {
@@ -138,22 +141,33 @@ extension HomeBottomSheetVC {
 //========================
 extension HomeBottomSheetVC : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        switch section {
+        case 3:
+            return 10
+        default:
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.row {
+        switch indexPath.section {
         case 0:
             let cell = tableView.dequeueCell(with: BottomSheetTopCell.self, indexPath: indexPath)
             return cell
+        case 2:
+            let cell = tableView.dequeueCell(with: BottomSheetInsulinCell.self, indexPath: indexPath)
+            return cell
+        case 3:
+            let cell = tableView.dequeueCell(with: BottomSheetBottomCell.self, indexPath: indexPath)
+            return cell
         default:
-            return UITableViewCell()
+            let cell = tableView.dequeueCell(with: BottomSheetChartCell.self, indexPath: indexPath)
+            return cell
         }
-      
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 4
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
