@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-Pro-Display-Regular.otf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SessionHistoryHeader" customModule="Luna" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jAr-sa-Qt4">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bayeux" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u1v-5A-fDi">
+                            <rect key="frame" x="20" y="18" width="52.5" height="20.5"/>
+                            <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
+                            <color key="textColor" red="0.5722109675" green="0.58008843659999998" blue="0.60080367329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="u1v-5A-fDi" firstAttribute="leading" secondItem="jAr-sa-Qt4" secondAttribute="leading" constant="20" id="aTo-rh-o9U"/>
+                        <constraint firstItem="u1v-5A-fDi" firstAttribute="top" secondItem="jAr-sa-Qt4" secondAttribute="top" constant="18" id="mNl-hK-mCR"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="jAr-sa-Qt4" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="HBb-eV-wYi"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="jAr-sa-Qt4" secondAttribute="bottom" id="Nks-8n-yS2"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="jAr-sa-Qt4" secondAttribute="trailing" id="UsK-CE-awL"/>
+                <constraint firstItem="jAr-sa-Qt4" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="fGn-oq-MZN"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="haedingLbl" destination="u1v-5A-fDi" id="1M7-LU-tLA"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="-121.4392803598201"/>
+        </view>
+    </objects>
+</document>

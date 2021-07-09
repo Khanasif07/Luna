@@ -8,6 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		10BD91E0179A10717FF4BFEB /* Pods_Luna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48268DD2D5F8BF64205F2462 /* Pods_Luna.framework */; };
+		840A7DF12696E95E005AA1E6 /* CGMSelectorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7DED2696E95E005AA1E6 /* CGMSelectorVC.swift */; };
+		840A7DF22696E95E005AA1E6 /* CGMDATASHAREVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7DEE2696E95E005AA1E6 /* CGMDATASHAREVC.swift */; };
+		840A7DF32696E95E005AA1E6 /* CGMConnectedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7DEF2696E95E005AA1E6 /* CGMConnectedVC.swift */; };
+		840A7DF42696E95E005AA1E6 /* CGMLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7DF02696E95E005AA1E6 /* CGMLoginVC.swift */; };
+		840A7DFB2696E98C005AA1E6 /* LunaDevicesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7DF72696E98C005AA1E6 /* LunaDevicesVC.swift */; };
+		840A7DFC2696E98C005AA1E6 /* PairLunaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7DF82696E98C005AA1E6 /* PairLunaVC.swift */; };
+		840A7DFD2696E98C005AA1E6 /* DeviceConnectedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7DF92696E98C005AA1E6 /* DeviceConnectedVC.swift */; };
+		840A7DFE2696E98C005AA1E6 /* SearchingDeviceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7DFA2696E98C005AA1E6 /* SearchingDeviceVC.swift */; };
+		840A7E012696E9D3005AA1E6 /* CGPStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 840A7E002696E9D3005AA1E6 /* CGPStoryboard.storyboard */; };
+		840A7E062696EB62005AA1E6 /* CGMTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840A7E042696EB62005AA1E6 /* CGMTypeTableViewCell.xib */; };
+		840A7E072696EB62005AA1E6 /* CGMTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7E052696EB62005AA1E6 /* CGMTypeTableViewCell.swift */; };
+		840A7E2E2696EDBB005AA1E6 /* SessionHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7E2D2696EDBB005AA1E6 /* SessionHistoryVC.swift */; };
+		840A7E612696F0E6005AA1E6 /* SessionHistoryHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840A7E5F2696F0E6005AA1E6 /* SessionHistoryHeader.xib */; };
+		840A7E622696F0E6005AA1E6 /* SessionHistoryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7E602696F0E6005AA1E6 /* SessionHistoryHeader.swift */; };
+		840A7E662696F190005AA1E6 /* SessionHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7E642696F190005AA1E6 /* SessionHistoryTableViewCell.swift */; };
+		840A7E672696F190005AA1E6 /* SessionHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840A7E652696F190005AA1E6 /* SessionHistoryTableViewCell.xib */; };
+		840A7ED72697060E005AA1E6 /* SessionFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7ED62697060E005AA1E6 /* SessionFilterVC.swift */; };
+		840A7EDA26971A9E005AA1E6 /* SessionDescriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7ED926971A9E005AA1E6 /* SessionDescriptionVC.swift */; };
 		842E9B1726955E2400F36A3D /* InsulinStep2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842E9B1526955E2400F36A3D /* InsulinStep2Cell.swift */; };
 		842E9B1826955E2400F36A3D /* InsulinStep2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842E9B1626955E2400F36A3D /* InsulinStep2Cell.xib */; };
 		842E9B1B2695690B00F36A3D /* InsulinStep3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842E9B1A2695690B00F36A3D /* InsulinStep3VC.swift */; };
@@ -114,6 +132,24 @@
 
 /* Begin PBXFileReference section */
 		48268DD2D5F8BF64205F2462 /* Pods_Luna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Luna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		840A7DED2696E95E005AA1E6 /* CGMSelectorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMSelectorVC.swift; sourceTree = "<group>"; };
+		840A7DEE2696E95E005AA1E6 /* CGMDATASHAREVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMDATASHAREVC.swift; sourceTree = "<group>"; };
+		840A7DEF2696E95E005AA1E6 /* CGMConnectedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMConnectedVC.swift; sourceTree = "<group>"; };
+		840A7DF02696E95E005AA1E6 /* CGMLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMLoginVC.swift; sourceTree = "<group>"; };
+		840A7DF72696E98C005AA1E6 /* LunaDevicesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LunaDevicesVC.swift; sourceTree = "<group>"; };
+		840A7DF82696E98C005AA1E6 /* PairLunaVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PairLunaVC.swift; sourceTree = "<group>"; };
+		840A7DF92696E98C005AA1E6 /* DeviceConnectedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceConnectedVC.swift; sourceTree = "<group>"; };
+		840A7DFA2696E98C005AA1E6 /* SearchingDeviceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchingDeviceVC.swift; sourceTree = "<group>"; };
+		840A7E002696E9D3005AA1E6 /* CGPStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CGPStoryboard.storyboard; sourceTree = "<group>"; };
+		840A7E042696EB62005AA1E6 /* CGMTypeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CGMTypeTableViewCell.xib; sourceTree = "<group>"; };
+		840A7E052696EB62005AA1E6 /* CGMTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMTypeTableViewCell.swift; sourceTree = "<group>"; };
+		840A7E2D2696EDBB005AA1E6 /* SessionHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryVC.swift; sourceTree = "<group>"; };
+		840A7E5F2696F0E6005AA1E6 /* SessionHistoryHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionHistoryHeader.xib; sourceTree = "<group>"; };
+		840A7E602696F0E6005AA1E6 /* SessionHistoryHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionHistoryHeader.swift; sourceTree = "<group>"; };
+		840A7E642696F190005AA1E6 /* SessionHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		840A7E652696F190005AA1E6 /* SessionHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		840A7ED62697060E005AA1E6 /* SessionFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFilterVC.swift; sourceTree = "<group>"; };
+		840A7ED926971A9E005AA1E6 /* SessionDescriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDescriptionVC.swift; sourceTree = "<group>"; };
 		842E9B1526955E2400F36A3D /* InsulinStep2Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep2Cell.swift; sourceTree = "<group>"; };
 		842E9B1626955E2400F36A3D /* InsulinStep2Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InsulinStep2Cell.xib; sourceTree = "<group>"; };
 		842E9B1A2695690B00F36A3D /* InsulinStep3VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep3VC.swift; sourceTree = "<group>"; };
@@ -244,6 +280,58 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		840A7DEC2696E934005AA1E6 /* CGM */ = {
+			isa = PBXGroup;
+			children = (
+				840A7DEF2696E95E005AA1E6 /* CGMConnectedVC.swift */,
+				840A7DEE2696E95E005AA1E6 /* CGMDATASHAREVC.swift */,
+				840A7DF02696E95E005AA1E6 /* CGMLoginVC.swift */,
+				840A7DED2696E95E005AA1E6 /* CGMSelectorVC.swift */,
+			);
+			path = CGM;
+			sourceTree = "<group>";
+		};
+		840A7DF62696E968005AA1E6 /* Pair Luna */ = {
+			isa = PBXGroup;
+			children = (
+				840A7DF92696E98C005AA1E6 /* DeviceConnectedVC.swift */,
+				840A7DF72696E98C005AA1E6 /* LunaDevicesVC.swift */,
+				840A7DF82696E98C005AA1E6 /* PairLunaVC.swift */,
+				840A7DFA2696E98C005AA1E6 /* SearchingDeviceVC.swift */,
+			);
+			path = "Pair Luna";
+			sourceTree = "<group>";
+		};
+		840A7E032696EB49005AA1E6 /* CGMXib */ = {
+			isa = PBXGroup;
+			children = (
+				840A7E052696EB62005AA1E6 /* CGMTypeTableViewCell.swift */,
+				840A7E042696EB62005AA1E6 /* CGMTypeTableViewCell.xib */,
+			);
+			path = CGMXib;
+			sourceTree = "<group>";
+		};
+		840A7E2C2696ED96005AA1E6 /* SessionHistory */ = {
+			isa = PBXGroup;
+			children = (
+				840A7E2D2696EDBB005AA1E6 /* SessionHistoryVC.swift */,
+				840A7ED62697060E005AA1E6 /* SessionFilterVC.swift */,
+				840A7ED926971A9E005AA1E6 /* SessionDescriptionVC.swift */,
+			);
+			path = SessionHistory;
+			sourceTree = "<group>";
+		};
+		840A7E302696EF9B005AA1E6 /* SessionHistory Xib */ = {
+			isa = PBXGroup;
+			children = (
+				840A7E602696F0E6005AA1E6 /* SessionHistoryHeader.swift */,
+				840A7E5F2696F0E6005AA1E6 /* SessionHistoryHeader.xib */,
+				840A7E642696F190005AA1E6 /* SessionHistoryTableViewCell.swift */,
+				840A7E652696F190005AA1E6 /* SessionHistoryTableViewCell.xib */,
+			);
+			path = "SessionHistory Xib";
+			sourceTree = "<group>";
+		};
 		8432A19D2672317F00859B47 /* BiometricAuth */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,8 +351,8 @@
 		84467277268DAED100EC55FD /* Systemsetup */ = {
 			isa = PBXGroup;
 			children = (
-				84467285268DBEA700EC55FD /* CGM */,
-				84467284268DBE9E00EC55FD /* PairLuna */,
+				840A7DF62696E968005AA1E6 /* Pair Luna */,
+				840A7DEC2696E934005AA1E6 /* CGM */,
 				84467283268DBE8A00EC55FD /* Insulin */,
 				8446727B268DAF8E00EC55FD /* SystemSetupStep1VC.swift */,
 			);
@@ -304,20 +392,6 @@
 			path = Insulin;
 			sourceTree = "<group>";
 		};
-		84467284268DBE9E00EC55FD /* PairLuna */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = PairLuna;
-			sourceTree = "<group>";
-		};
-		84467285268DBEA700EC55FD /* CGM */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CGM;
-			sourceTree = "<group>";
-		};
 		8455491A2678DD90000CC13D /* PreLogin */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,6 +408,7 @@
 		845549222678DDFE000CC13D /* PostLogin */ = {
 			isa = PBXGroup;
 			children = (
+				840A7E2C2696ED96005AA1E6 /* SessionHistory */,
 				8446727A268DAF5300EC55FD /* Dashboard */,
 				84467277268DAED100EC55FD /* Systemsetup */,
 				84467278268DAEE600EC55FD /* Setting */,
@@ -344,6 +419,8 @@
 		845549242678E07C000CC13D /* Xib's */ = {
 			isa = PBXGroup;
 			children = (
+				840A7E302696EF9B005AA1E6 /* SessionHistory Xib */,
+				840A7E032696EB49005AA1E6 /* CGMXib */,
 				8455A3C426820EA30061C55F /* PostLogin */,
 				845549252678FA9E000CC13D /* PreLogin */,
 			);
@@ -441,6 +518,7 @@
 		84CC12B12668C8E7009316FC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				840A7E002696E9D3005AA1E6 /* CGPStoryboard.storyboard */,
 				84CC12A42668C823009316FC /* LaunchScreen.storyboard */,
 				845549172678DCAC000CC13D /* PreLogin.storyboard */,
 				84554931267908B9000CC13D /* PostLogin.storyboard */,
@@ -687,6 +765,7 @@
 				84467281268DB2C700EC55FD /* SystemStep1TableCell.xib in Resources */,
 				8432A1992672294200859B47 /* Localizable.strings in Resources */,
 				84D1F4F62679D52700F131E0 /* SF-Pro-Display-Heavy.otf in Resources */,
+				840A7E012696E9D3005AA1E6 /* CGPStoryboard.storyboard in Resources */,
 				84D1F4F92679D52700F131E0 /* SF-Pro-Display-HeavyItalic.otf in Resources */,
 				84D1F4F82679D52700F131E0 /* SF-Pro-Display-MediumItalic.otf in Resources */,
 				84D1F4EF2679D52700F131E0 /* SF-Pro-Display-Thin.otf in Resources */,
@@ -704,12 +783,15 @@
 				84CC12A32668C823009316FC /* Assets.xcassets in Resources */,
 				84D1F4F12679D52700F131E0 /* SF-Pro-Display-RegularItalic.otf in Resources */,
 				84FDA0A8267DCB1000AC8BE9 /* MessageSenderCell.xib in Resources */,
+				840A7E612696F0E6005AA1E6 /* SessionHistoryHeader.xib in Resources */,
 				84D1F5002679D52700F131E0 /* SF-Pro-Display-BoldItalic.otf in Resources */,
+				840A7E062696EB62005AA1E6 /* CGMTypeTableViewCell.xib in Resources */,
 				84FDA0AD267DCB5600AC8BE9 /* MessageReceiverCell.xib in Resources */,
 				8455492E2678FFFD000CC13D /* LoginSocialTableCell.xib in Resources */,
 				84D1F4F72679D52700F131E0 /* SF-Pro-Display-Semibold.otf in Resources */,
 				8455A3C8268211770061C55F /* SettingTableCell.xib in Resources */,
 				842E9B1826955E2400F36A3D /* InsulinStep2Cell.xib in Resources */,
+				840A7E672696F190005AA1E6 /* SessionHistoryTableViewCell.xib in Resources */,
 				84467275268DAE1E00EC55FD /* SystemSetup.storyboard in Resources */,
 				84D1F4F22679D52700F131E0 /* SF-Pro-Display-Light.otf in Resources */,
 				84D1F4FF2679D52700F131E0 /* SF-Pro-Display-ThinItalic.otf in Resources */,
@@ -785,21 +867,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				840A7DF32696E95E005AA1E6 /* CGMConnectedVC.swift in Sources */,
 				8446727C268DAF8E00EC55FD /* SystemSetupStep1VC.swift in Sources */,
 				845549202678DDE6000CC13D /* LoginViewController.swift in Sources */,
 				84CC12DD2668D023009316FC /* AppStoryboards.swift in Sources */,
 				84D1F4DA2679CF4C00F131E0 /* CommonFunctions.swift in Sources */,
+				840A7E072696EB62005AA1E6 /* CGMTypeTableViewCell.swift in Sources */,
 				84CC13132668D226009316FC /* DispatchQueue+Extension.swift in Sources */,
 				84CC13012668D191009316FC /* Date+Extension.swift in Sources */,
 				845549282678FAEF000CC13D /* SignUpTopTableCell.swift in Sources */,
 				84CC12D32668CFE9009316FC /* ApiKeys.swift in Sources */,
 				84FDA0B1267DE8B600AC8BE9 /* DecisionCell.swift in Sources */,
+				840A7DFB2696E98C005AA1E6 /* LunaDevicesVC.swift in Sources */,
 				84467280268DB2C700EC55FD /* SystemStep1TableCell.swift in Sources */,
+				840A7DFC2696E98C005AA1E6 /* PairLunaVC.swift in Sources */,
 				84467287268DBECC00EC55FD /* InsulinStep1VC.swift in Sources */,
 				842E9B1B2695690B00F36A3D /* InsulinStep3VC.swift in Sources */,
 				84CC12EC2668D0B8009316FC /* UIColorExtension.swift in Sources */,
 				8455A3C226820E010061C55F /* SettingsVC.swift in Sources */,
 				8432A19F2672319B00859B47 /* BiometricIDAuth.swift in Sources */,
+				840A7ED72697060E005AA1E6 /* SessionFilterVC.swift in Sources */,
+				840A7DFD2696E98C005AA1E6 /* DeviceConnectedVC.swift in Sources */,
 				84CC12E92668D083009316FC /* UITableView+ UITableViewCellExtension.swift in Sources */,
 				84FDA0A3267DC5D700AC8BE9 /* ProfileSetupVC.swift in Sources */,
 				84FDA0A7267DCB1000AC8BE9 /* MessageSenderCell.swift in Sources */,
@@ -815,7 +903,10 @@
 				84CC12DA2668D00E009316FC /* AppFonts.swift in Sources */,
 				84CC12CA2668CF8D009316FC /* AppEnums.swift in Sources */,
 				84CC12EF2668D0CE009316FC /* NotificationExtension.swift in Sources */,
+				840A7E2E2696EDBB005AA1E6 /* SessionHistoryVC.swift in Sources */,
+				840A7E622696F0E6005AA1E6 /* SessionHistoryHeader.swift in Sources */,
 				842E9B1E2695710300F36A3D /* InsulinStep4VC.swift in Sources */,
+				840A7DF42696E95E005AA1E6 /* CGMLoginVC.swift in Sources */,
 				847899762684870F00D1DF36 /* AboutSectionVC.swift in Sources */,
 				84CC12FB2668D15D009316FC /* UIViewcontroller+Extension.swift in Sources */,
 				84CC12CD2668CFBF009316FC /* AppRouter.swift in Sources */,
@@ -829,19 +920,24 @@
 				84861D8326849FDB004B046C /* ChangePasswordVC.swift in Sources */,
 				84CC130A2668D1DB009316FC /* UIImage+Extension.swift in Sources */,
 				84602903268C50F800141E0D /* AboutTermsPolicyVC.swift in Sources */,
+				840A7DF22696E95E005AA1E6 /* CGMDATASHAREVC.swift in Sources */,
 				842E9B1726955E2400F36A3D /* InsulinStep2Cell.swift in Sources */,
 				84CC13162668D23C009316FC /* Url+Extension.swift in Sources */,
 				84CC13102668D20A009316FC /* String+Extension.swift in Sources */,
 				84CC13072668D1BD009316FC /* UIScreen+Extension.swift in Sources */,
 				84E78BC42685F9B400FABDCD /* CustomPickerView.swift in Sources */,
 				84F819A8267A12A500A4C758 /* PassResetPopUpVC.swift in Sources */,
+				840A7DFE2696E98C005AA1E6 /* SearchingDeviceVC.swift in Sources */,
 				84FDA0AC267DCB5600AC8BE9 /* MessageReceiverCell.swift in Sources */,
 				84CC12FE2668D17A009316FC /* UICollectionView+Extension.swift in Sources */,
 				84F7BC51266F11BA006C94DA /* AppleLoginManager.swift in Sources */,
 				8455A3BF26805AA80061C55F /* InfoPlistParser.swift in Sources */,
 				84467271268D867600EC55FD /* BLEManager.swift in Sources */,
+				840A7EDA26971A9E005AA1E6 /* SessionDescriptionVC.swift in Sources */,
+				840A7DF12696E95E005AA1E6 /* CGMSelectorVC.swift in Sources */,
 				84861D7F26848EDD004B046C /* ProfileTableCell.swift in Sources */,
 				84E5505A267E027A008C02F8 /* TypeTableCell.swift in Sources */,
+				840A7E662696F190005AA1E6 /* SessionHistoryTableViewCell.swift in Sources */,
 				84CC12D72668D005009316FC /* AppColors.swift in Sources */,
 				84CC12F82668D12D009316FC /* UIApplicationExtension.swift in Sources */,
 				844B93BE2694427600B65BF8 /* InsulinStep2VC.swift in Sources */,
@@ -1012,7 +1108,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunadiabetes.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Pro_Cert;
+				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Pro;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1037,7 +1133,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunadiabetes.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Pro_Cert;
+				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Pro;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
