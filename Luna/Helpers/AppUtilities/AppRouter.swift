@@ -31,10 +31,9 @@ enum AppRouter {
     // MARK: - Show Landing Screen
     //===========================
     static func checkAppInitializationFlow() {
-        AppUserDefaults.removeAllValues()
-            AppRouter.gotoCGMVC()
-    return
-      /*  if isUserLoggedin {
+//                        AppRouter.goToTestingVC()
+//                return
+        if isUserLoggedin {
             if   AppUserDefaults.value(forKey: .isProfileStepCompleted).boolValue{
                 AppRouter.gotoHomeVC()
             }else{
@@ -51,7 +50,7 @@ enum AppRouter {
                     self.goToTermsConditionVC()
                 }
             }
-        }*/
+        }
     }
     
     static func checkEmailVerificationFlow(email: String) {
@@ -118,11 +117,6 @@ enum AppRouter {
     
     static func gotoHomeVC(){
         let vc = HomeVC.instantiate(fromAppStoryboard: .PostLogin)
-        setAsWindowRoot(vc)
-    }
-    
-    static func gotoCGMVC(){
-        let vc = SessionHistoryVC.instantiate(fromAppStoryboard: .CGPStoryboard)
         setAsWindowRoot(vc)
     }
 }

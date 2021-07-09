@@ -289,7 +289,7 @@ extension UITextField {
         container.addSubview(line)
         
         if UIScreen.main.bounds.height < 667 {
-            labelFontSize = 12
+            labelFontSize = 11
         }
         
         // Create message
@@ -297,7 +297,7 @@ extension UITextField {
         label.text = string
         label.textColor = .white
         label.numberOfLines = 0
-        label.font = self.font ?? AppFonts.SF_Pro_Display_Regular.withSize(.x12)
+        label.font = self.font ?? AppFonts.SF_Pro_Display_Bold.withSize(.x12)
         label.textColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         label.backgroundColor = .clear
         label.textAlignment = .right

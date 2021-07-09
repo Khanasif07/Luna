@@ -151,6 +151,7 @@ extension ProfileVC : UITableViewDelegate, UITableViewDataSource {
         if sections[indexPath.row].0 == "Diabetes Type" {
             let show = UIButton()
             show.isSelected = false
+            show.isUserInteractionEnabled = false
             show.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
             cell.txtField.inputView = typePickerView
             cell.txtField.reloadInputViews()
