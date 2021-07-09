@@ -129,6 +129,7 @@ extension SignupViewController {
             selff.emailTxt = ""
             cell?.signUpBtn.isEnabled = selff.signUpBtnStatus()
             selff.signupTableView.reloadData()
+            selff.gotoLoginVC()
         }
         scene.popupType = .emailVerification
         scene.titleDesc = LocalizedString.email_verification.localized

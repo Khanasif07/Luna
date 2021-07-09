@@ -73,7 +73,7 @@ enum AppRouter {
         defaultSetAsWindowRoot(navigationController)
         let loginVC = LoginViewController.instantiate(fromAppStoryboard: .PreLogin)
         loginVC.emailTxt = email
-        loginVC.isComeFromMail = true
+//        loginVC.isComeFromMail = true
         navigationController.pushViewController(loginVC, animated: true)
     }
     
