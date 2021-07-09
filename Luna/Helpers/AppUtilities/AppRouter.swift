@@ -44,7 +44,8 @@ enum AppRouter {
                 AppRouter.goToLoginVC()
             }else {
                 if AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue {
-                    AppRouter.goToSignUpVC()
+                   // AppRouter.goToSignUpVC()
+                    AppRouter.goToLoginVC()
                 }else{
                     AppUserDefaults.removeAllValues()
                     self.goToTermsConditionVC()

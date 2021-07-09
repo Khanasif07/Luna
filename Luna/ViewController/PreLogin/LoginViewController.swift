@@ -241,9 +241,6 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                 guard let `self` = self else { return }
                 if !self.isEmailValid(string: self.emailTxt).0{
                     cell.emailIdTxtField.setError(self.isEmailValid(string: self.emailTxt).1)
-                    CommonFunctions.delay(delay: 2.0) {
-                        cell.emailIdTxtField.setError("",show: false)
-                    }
                     return
                 }
                 CommonFunctions.showActivityLoader()

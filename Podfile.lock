@@ -409,6 +409,7 @@ PODS:
     - NVActivityIndicatorView/Base (= 5.1.1)
   - NVActivityIndicatorView/Base (5.1.1)
   - PromisesObjC (1.2.12)
+  - SwiftChart (1.0.1)
   - SwiftKeychainWrapper (4.0.1)
   - SwiftyJSON (5.0.1)
   - Toaster (2.3.0)
@@ -426,6 +427,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - MessageKit
   - NVActivityIndicatorView
+  - SwiftChart
   - SwiftKeychainWrapper
   - SwiftyJSON
   - Toaster
@@ -461,6 +463,7 @@ SPEC REPOS:
     - nanopb
     - NVActivityIndicatorView
     - PromisesObjC
+    - SwiftChart
     - SwiftKeychainWrapper
     - SwiftyJSON
     - Toaster
@@ -495,10 +498,11 @@ SPEC CHECKSUMS:
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  SwiftChart: ba767a678d568a5ee22d419e146a0582865e1aff
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: dbb48fdd08ca5dbb1fa8b63033914f6372eba140
+PODFILE CHECKSUM: 012083864a34e8324e577a3f35e57fd2aed753f5
 
 COCOAPODS: 1.10.1

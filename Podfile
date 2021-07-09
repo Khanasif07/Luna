@@ -22,5 +22,6 @@ target 'Luna' do
   pod 'Firebase/Storage'
   pod 'GoogleSignIn'
   pod 'SwiftKeychainWrapper'
+  pod "SwiftChart"
 
 end
