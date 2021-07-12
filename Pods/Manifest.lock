@@ -223,6 +223,7 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.7):
     - BoringSSL-GRPC/Interface (= 0.0.7)
   - BoringSSL-GRPC/Interface (0.0.7)
+  - DYPieChartView (0.0.4)
   - Firebase/Analytics (8.1.0):
     - Firebase/Core
   - Firebase/Auth (8.1.0):
@@ -415,6 +416,7 @@ PODS:
   - Toaster (2.3.0)
 
 DEPENDENCIES:
+  - DYPieChartView
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
@@ -437,6 +439,7 @@ SPEC REPOS:
     - abseil
     - AppAuth
     - BoringSSL-GRPC
+    - DYPieChartView
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -472,6 +475,7 @@ SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
+  DYPieChartView: fd81db820c9caff3a2fc0d2bd9559c01cf6d56c8
   Firebase: b5956acddaaa53a6c292bec00649fadd18367344
   FirebaseAnalytics: e812eaae316ba8914b1ef06bef18f11efc1f56c6
   FirebaseAuth: e069ff5736fe9d5dcf61f36244bb1b1ce1897d17
@@ -503,6 +507,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: 1cf970c75bfb4bf4719b3fb5942dfa2a3a748aa1
+PODFILE CHECKSUM: 6c5471278b4c3d25c140dcef951016905b6e7d5c
 
 COCOAPODS: 1.10.1

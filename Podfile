@@ -23,5 +23,6 @@ target 'Luna' do
   pod 'GoogleSignIn'
   pod 'SwiftKeychainWrapper'
   pod "SwiftChart"
+  pod 'DYPieChartView'
  
 end

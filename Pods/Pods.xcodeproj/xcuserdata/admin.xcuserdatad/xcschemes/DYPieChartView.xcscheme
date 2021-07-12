@@ -14,9 +14,9 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "73CDC3D182DB953135F62609681B443D"
-               BuildableName = "abseil.framework"
-               BlueprintName = "abseil"
+               BlueprintIdentifier = "A92B0A94A308A4627E8163E7CB042120"
+               BuildableName = "DYPieChartView.framework"
+               BlueprintName = "DYPieChartView"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
