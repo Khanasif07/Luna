@@ -103,6 +103,9 @@ extension SessionHistoryVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let vc = SessionDescriptionVC.instantiate(fromAppStoryboard: .CGPStoryboard)
+         navigationController?.pushViewController(vc, animated: true)
     
     }
   

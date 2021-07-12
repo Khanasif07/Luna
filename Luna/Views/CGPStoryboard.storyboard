@@ -756,13 +756,13 @@ your Phone</string>
                                         <rect key="frame" x="28" y="238" width="358" height="420"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The app will automatically connect to the closest device." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3S-OR-y2e">
-                                                <rect key="frame" x="20" y="358" width="318" height="38.5"/>
+                                                <rect key="frame" x="20" y="358" width="318" height="37.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daL-w1-XEu">
-                                                <rect key="frame" x="20" y="16" width="318" height="43"/>
+                                                <rect key="frame" x="20" y="16" width="318" height="42"/>
                                                 <string key="text">Searching for nearby
 Luna devices</string>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
@@ -1486,6 +1486,9 @@ Luna devices</string>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hyy-ji-N9y">
                                                 <rect key="frame" x="20" y="5" width="40" height="40"/>
                                                 <state key="normal" image="back"/>
+                                                <connections>
+                                                    <action selector="backBtnTapped:" destination="BYD-9P-w7k" eventType="touchUpInside" id="kG9-Qu-JnX"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2/26 - 2/27" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4u6-yT-gjs">
                                                 <rect key="frame" x="162" y="14.5" width="90" height="21.5"/>
@@ -1673,6 +1676,11 @@ Luna devices</string>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Jrd-nx-ntM"/>
+                    <connections>
+                        <outlet property="bottomStackView" destination="6oj-jj-FZr" id="icC-WX-sLD"/>
+                        <outlet property="graphTitleLbl" destination="eo5-eB-J2c" id="guP-LK-mMc"/>
+                        <outlet property="topNavView" destination="XNF-US-wqr" id="vjr-mk-37f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1TJ-hP-8vL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

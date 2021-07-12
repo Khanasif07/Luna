@@ -25,7 +25,6 @@
 		840A7E662696F190005AA1E6 /* SessionHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7E642696F190005AA1E6 /* SessionHistoryTableViewCell.swift */; };
 		840A7E672696F190005AA1E6 /* SessionHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840A7E652696F190005AA1E6 /* SessionHistoryTableViewCell.xib */; };
 		840A7ED72697060E005AA1E6 /* SessionFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7ED62697060E005AA1E6 /* SessionFilterVC.swift */; };
-		840A7EDA26971A9E005AA1E6 /* SessionDescriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7ED926971A9E005AA1E6 /* SessionDescriptionVC.swift */; };
 		842E9B1726955E2400F36A3D /* InsulinStep2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842E9B1526955E2400F36A3D /* InsulinStep2Cell.swift */; };
 		842E9B1826955E2400F36A3D /* InsulinStep2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842E9B1626955E2400F36A3D /* InsulinStep2Cell.xib */; };
 		842E9B1B2695690B00F36A3D /* InsulinStep3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842E9B1A2695690B00F36A3D /* InsulinStep3VC.swift */; };
@@ -64,6 +63,9 @@
 		849B5A4526970D39000AA5DC /* HomeBottomSheetVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849B5A4426970D39000AA5DC /* HomeBottomSheetVC.xib */; };
 		849B5A492697143B000AA5DC /* BottomSheetTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B5A472697143B000AA5DC /* BottomSheetTopCell.swift */; };
 		849B5A4A2697143B000AA5DC /* BottomSheetTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849B5A482697143B000AA5DC /* BottomSheetTopCell.xib */; };
+		84B06F09269C0BE00059B293 /* SessionDescBottomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B06F06269C0BDF0059B293 /* SessionDescBottomVC.swift */; };
+		84B06F0A269C0BE00059B293 /* SessionDescriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B06F07269C0BDF0059B293 /* SessionDescriptionVC.swift */; };
+		84B06F0B269C0BE00059B293 /* SessionDescBottomVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B06F08269C0BDF0059B293 /* SessionDescBottomVC.xib */; };
 		84CC129A2668C822009316FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC12992668C822009316FC /* AppDelegate.swift */; };
 		84CC129C2668C822009316FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC129B2668C822009316FC /* SceneDelegate.swift */; };
 		84CC12A32668C823009316FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84CC12A22668C823009316FC /* Assets.xcassets */; };
@@ -160,7 +162,6 @@
 		840A7E642696F190005AA1E6 /* SessionHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		840A7E652696F190005AA1E6 /* SessionHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		840A7ED62697060E005AA1E6 /* SessionFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFilterVC.swift; sourceTree = "<group>"; };
-		840A7ED926971A9E005AA1E6 /* SessionDescriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDescriptionVC.swift; sourceTree = "<group>"; };
 		842E9B1526955E2400F36A3D /* InsulinStep2Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep2Cell.swift; sourceTree = "<group>"; };
 		842E9B1626955E2400F36A3D /* InsulinStep2Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InsulinStep2Cell.xib; sourceTree = "<group>"; };
 		842E9B1A2695690B00F36A3D /* InsulinStep3VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep3VC.swift; sourceTree = "<group>"; };
@@ -199,6 +200,9 @@
 		849B5A4426970D39000AA5DC /* HomeBottomSheetVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeBottomSheetVC.xib; sourceTree = "<group>"; };
 		849B5A472697143B000AA5DC /* BottomSheetTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetTopCell.swift; sourceTree = "<group>"; };
 		849B5A482697143B000AA5DC /* BottomSheetTopCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetTopCell.xib; sourceTree = "<group>"; };
+		84B06F06269C0BDF0059B293 /* SessionDescBottomVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDescBottomVC.swift; sourceTree = "<group>"; };
+		84B06F07269C0BDF0059B293 /* SessionDescriptionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDescriptionVC.swift; sourceTree = "<group>"; };
+		84B06F08269C0BDF0059B293 /* SessionDescBottomVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionDescBottomVC.xib; sourceTree = "<group>"; };
 		84CC12962668C822009316FC /* Luna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Luna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84CC12992668C822009316FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84CC129B2668C822009316FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -336,9 +340,11 @@
 		840A7E2C2696ED96005AA1E6 /* SessionHistory */ = {
 			isa = PBXGroup;
 			children = (
+				84B06F06269C0BDF0059B293 /* SessionDescBottomVC.swift */,
+				84B06F08269C0BDF0059B293 /* SessionDescBottomVC.xib */,
+				84B06F07269C0BDF0059B293 /* SessionDescriptionVC.swift */,
 				840A7E2D2696EDBB005AA1E6 /* SessionHistoryVC.swift */,
 				840A7ED62697060E005AA1E6 /* SessionFilterVC.swift */,
-				840A7ED926971A9E005AA1E6 /* SessionDescriptionVC.swift */,
 			);
 			path = SessionHistory;
 			sourceTree = "<group>";
@@ -811,6 +817,7 @@
 				84D1F4F42679D52700F131E0 /* SF-Pro-Display-Bold.otf in Resources */,
 				845549112678D486000CC13D /* GoogleService-Info-1.plist in Resources */,
 				84D1F4F02679D52700F131E0 /* SF-Pro-Display-SemiboldItalic.otf in Resources */,
+				84B06F0B269C0BE00059B293 /* SessionDescBottomVC.xib in Resources */,
 				84F2A279269849ED000FDCD5 /* BottomSheetInsulinCell.xib in Resources */,
 				84554932267908B9000CC13D /* PostLogin.storyboard in Resources */,
 				84CC12A62668C823009316FC /* LaunchScreen.storyboard in Resources */,
@@ -926,6 +933,7 @@
 				84CC12EC2668D0B8009316FC /* UIColorExtension.swift in Sources */,
 				8455A3C226820E010061C55F /* SettingsVC.swift in Sources */,
 				8432A19F2672319B00859B47 /* BiometricIDAuth.swift in Sources */,
+				84B06F09269C0BE00059B293 /* SessionDescBottomVC.swift in Sources */,
 				840A7ED72697060E005AA1E6 /* SessionFilterVC.swift in Sources */,
 				840A7DFD2696E98C005AA1E6 /* DeviceConnectedVC.swift in Sources */,
 				84CC12E92668D083009316FC /* UITableView+ UITableViewCellExtension.swift in Sources */,
@@ -974,10 +982,10 @@
 				840A7DFE2696E98C005AA1E6 /* SearchingDeviceVC.swift in Sources */,
 				84FDA0AC267DCB5600AC8BE9 /* MessageReceiverCell.swift in Sources */,
 				84CC12FE2668D17A009316FC /* UICollectionView+Extension.swift in Sources */,
+				84B06F0A269C0BE00059B293 /* SessionDescriptionVC.swift in Sources */,
 				84F7BC51266F11BA006C94DA /* AppleLoginManager.swift in Sources */,
 				8455A3BF26805AA80061C55F /* InfoPlistParser.swift in Sources */,
 				84467271268D867600EC55FD /* BLEManager.swift in Sources */,
-				840A7EDA26971A9E005AA1E6 /* SessionDescriptionVC.swift in Sources */,
 				840A7DF12696E95E005AA1E6 /* CGMSelectorVC.swift in Sources */,
 				84861D7F26848EDD004B046C /* ProfileTableCell.swift in Sources */,
 				84E5505A267E027A008C02F8 /* TypeTableCell.swift in Sources */,
