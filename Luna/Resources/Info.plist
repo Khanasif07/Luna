@@ -60,6 +60,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSHealthShareUsageDescription</key>
+	<string>$(PRODUCT_NAME) uses bluetooth to find, connect and transfer data between different BLE devices.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>$(PRODUCT_NAME) uses bluetooth to find, connect and transfer data between different BLE devices.</string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>$(PRODUCT_NAME) uses bluetooth to find, connect and transfer data between different BLE devices.</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>

@@ -12,6 +12,12 @@
 	<array>
 		<string>applinks:lunadiabetes.page.link</string>
 	</array>
+	<key>com.apple.developer.healthkit</key>
+	<true/>
+	<key>com.apple.developer.healthkit.access</key>
+	<array>
+		<string>health-records</string>
+	</array>
 	<key>keychain-access-groups</key>
 	<array/>
 </dict>

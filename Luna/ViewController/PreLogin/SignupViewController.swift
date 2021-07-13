@@ -16,6 +16,7 @@ import FirebaseCore
 import LocalAuthentication
 import AuthenticationServices
 import SwiftKeychainWrapper
+import HealthKit
 
 class SignupViewController: UIViewController {
     
@@ -76,6 +77,14 @@ extension SignupViewController {
         overrideUserInterfaceStyle = .light
         }
         self.tableViewSetUp()
+        HealthKitManager.sharedInstance.authorizeHealthKit { (isEnable, error) in
+            if let error = error{
+                print(error.localizedDescription)
+            }else {
+                print(isEnable)
+                print(HKHealthStore.isHealthDataAvailable())
+            }
+        }
     }
     
     private func googleSetUp(){

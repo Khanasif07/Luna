@@ -63,6 +63,8 @@
 		849B5A4526970D39000AA5DC /* HomeBottomSheetVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849B5A4426970D39000AA5DC /* HomeBottomSheetVC.xib */; };
 		849B5A492697143B000AA5DC /* BottomSheetTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B5A472697143B000AA5DC /* BottomSheetTopCell.swift */; };
 		849B5A4A2697143B000AA5DC /* BottomSheetTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849B5A482697143B000AA5DC /* BottomSheetTopCell.xib */; };
+		849B7432269D612000C059E5 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849B7431269D612000C059E5 /* HealthKit.framework */; };
+		849B7436269D710600C059E5 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7435269D710600C059E5 /* HealthKitManager.swift */; };
 		84B06F09269C0BE00059B293 /* SessionDescBottomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B06F06269C0BDF0059B293 /* SessionDescBottomVC.swift */; };
 		84B06F0A269C0BE00059B293 /* SessionDescriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B06F07269C0BDF0059B293 /* SessionDescriptionVC.swift */; };
 		84B06F0B269C0BE00059B293 /* SessionDescBottomVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B06F08269C0BDF0059B293 /* SessionDescBottomVC.xib */; };
@@ -200,6 +202,8 @@
 		849B5A4426970D39000AA5DC /* HomeBottomSheetVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeBottomSheetVC.xib; sourceTree = "<group>"; };
 		849B5A472697143B000AA5DC /* BottomSheetTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetTopCell.swift; sourceTree = "<group>"; };
 		849B5A482697143B000AA5DC /* BottomSheetTopCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetTopCell.xib; sourceTree = "<group>"; };
+		849B7431269D612000C059E5 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		849B7435269D710600C059E5 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		84B06F06269C0BDF0059B293 /* SessionDescBottomVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDescBottomVC.swift; sourceTree = "<group>"; };
 		84B06F07269C0BDF0059B293 /* SessionDescriptionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDescriptionVC.swift; sourceTree = "<group>"; };
 		84B06F08269C0BDF0059B293 /* SessionDescBottomVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionDescBottomVC.xib; sourceTree = "<group>"; };
@@ -291,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				10BD91E0179A10717FF4BFEB /* Pods_Luna.framework in Frameworks */,
+				849B7432269D612000C059E5 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +511,14 @@
 			path = Certificates;
 			sourceTree = "<group>";
 		};
+		849B7434269D70F300C059E5 /* HealthKitManager */ = {
+			isa = PBXGroup;
+			children = (
+				849B7435269D710600C059E5 /* HealthKitManager.swift */,
+			);
+			path = HealthKitManager;
+			sourceTree = "<group>";
+		};
 		84CC128D2668C822009316FC = {
 			isa = PBXGroup;
 			children = (
@@ -604,6 +617,7 @@
 		84CC12B82668CD87009316FC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				849B7434269D70F300C059E5 /* HealthKitManager */,
 				8446726F268D865700EC55FD /* BLEManager */,
 				8432A19D2672317F00859B47 /* BiometricAuth */,
 				84CC12BA2668CDDB009316FC /* FirestoreController */,
@@ -733,6 +747,7 @@
 		F2201812782A54B48AE7EE35 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				849B7431269D612000C059E5 /* HealthKit.framework */,
 				48268DD2D5F8BF64205F2462 /* Pods_Luna.framework */,
 			);
 			name = Frameworks;
@@ -958,6 +973,7 @@
 				84F2A28126985398000FDCD5 /* LineDashedView.swift in Sources */,
 				847899762684870F00D1DF36 /* AboutSectionVC.swift in Sources */,
 				84CC12FB2668D15D009316FC /* UIViewcontroller+Extension.swift in Sources */,
+				849B7436269D710600C059E5 /* HealthKitManager.swift in Sources */,
 				84CC12CD2668CFBF009316FC /* AppRouter.swift in Sources */,
 				84F2A27026981DD8000FDCD5 /* BottomSheetChartCell.swift in Sources */,
 				84CC13042668D1A6009316FC /* Double+Extension.swift in Sources */,
@@ -1160,7 +1176,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunadiabetes.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Pro_Cert;
+				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Pro;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1185,7 +1201,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunadiabetes.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Pro_Cert;
+				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Pro;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
