@@ -77,6 +77,7 @@ extension SignupViewController {
         overrideUserInterfaceStyle = .light
         }
         self.tableViewSetUp()
+        //
         HealthKitManager.sharedInstance.authorizeHealthKit { (isEnable, error) in
             if let error = error{
                 print(error.localizedDescription)
@@ -85,6 +86,10 @@ extension SignupViewController {
                 print(HKHealthStore.isHealthDataAvailable())
             }
         }
+        getStepCount()
+        getAgeSexAndBloodType()
+        HealthKitManager.sharedInstance.addWaterAmountToHealthKit(ounces: 32.0)
+        //
     }
     
     private func googleSetUp(){
@@ -565,4 +570,28 @@ extension SignupViewController: GIDSignInDelegate {
         // myActivityIndicator.stopAnimating()
     }
 
+}
+
+//MARK:- HealthKit
+//=================
+extension SignupViewController{
+    func getStepCount(){
+        HealthKitManager.sharedInstance.yesterdaySteps { (value, error) in
+            if let err = error{
+                print(err.localizedDescription)
+            }
+            print(value)
+        }
+    }
+    
+    func getAgeSexAndBloodType(){
+        do {
+            let userInfo = try HealthKitManager.sharedInstance.getAgeSexAndBloodType()
+            print(userInfo)
+        } catch{ error
+            print(error.localizedDescription)
+        }
+    }
+    
+    
 }
