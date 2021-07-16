@@ -42,11 +42,11 @@ class BLEIntegrationVC: UIViewController {
     }
     
     @IBAction func logoutAction(_ sender: UIButton) {
-        FirestoreController.logOut { (successMsg) in
-            print(successMsg)
-            AppUserDefaults.removeAllValues()
-            AppRouter.goToSignUpVC()
-        }
+//        FirestoreController.logOut { (successMsg) in
+//            print(successMsg)
+//            AppUserDefaults.removeAllValues()
+//            AppRouter.goToSignUpVC()
+//        }
     }
     
 }
@@ -56,7 +56,7 @@ class BLEIntegrationVC: UIViewController {
 extension BLEIntegrationVC {
     
     private func initialSetup() {
-        database = Database.database()
+//        database = Database.database()
         centralManager = CBCentralManager(delegate: self, queue: nil)
     }
     
@@ -66,7 +66,7 @@ extension BLEIntegrationVC {
     }
     
     private func performCleanUp() {
-        let userId = AppUserDefaults.value(forKey: .userId).stringValue
+//        let userId = AppUserDefaults.value(forKey: .userId).stringValue
 //        database.collection(ApiKey.users)
 //            .document(userId).updateData([ApiKey.deviceToken : ""]) { (error) in
 //                if let err = error {
@@ -106,6 +106,8 @@ extension BLEIntegrationVC: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,
                         advertisementData: [String: Any], rssi RSSI: NSNumber) {
       print(peripheral)
+        print(peripheral.name)
+        print(peripheral.identifier)
         heartRatePeripheral = peripheral
         heartRatePeripheral.delegate = self
         centralManager.stopScan()

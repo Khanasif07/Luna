@@ -19,6 +19,7 @@ class SystemStep1TableCell: UITableViewCell {
     
     // MARK: - Variables
     //===========================
+    var startBtnTapped:(()->())?
     
     // MARK: - Lifecycle
     //===========================
@@ -37,7 +38,9 @@ class SystemStep1TableCell: UITableViewCell {
     // MARK: - IBActions
     //===========================
     @IBAction func startBtnAction(_ sender: AppButton) {
-        
+        if let handle = startBtnTapped{
+            handle()
+        }
     }
     
     

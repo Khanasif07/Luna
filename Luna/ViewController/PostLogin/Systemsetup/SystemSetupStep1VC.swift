@@ -82,21 +82,26 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(with: SystemStep1TableCell.self)
+        cell.startBtnTapped = { [weak self] in
+            guard let self = self else { return }
+            switch indexPath.row {
+            case 0:
+                let vc = SearchingDeviceVC.instantiate(fromAppStoryboard: .CGPStoryboard)
+                self.navigationController?.pushViewController(vc, animated: true)
+            case 1:
+                let vc = CGMSelectorVC.instantiate(fromAppStoryboard: .CGPStoryboard)
+                self.navigationController?.pushViewController(vc, animated: true)
+            default:
+                let vc = InsulinStep1VC.instantiate(fromAppStoryboard: .SystemSetup)
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+        }
         cell.titleLbl.text = sections[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 2:
-            let vc = InsulinStep1VC.instantiate(fromAppStoryboard: .SystemSetup)
-            self.navigationController?.pushViewController(vc, animated: true)
-        default:
-            showAlert(msg: "Under Development")
-        }
     }
 }
