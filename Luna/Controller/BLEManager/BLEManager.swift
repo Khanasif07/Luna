@@ -11,8 +11,10 @@ import CoreBluetooth
 let heartRateServiceCBUUID = CBUUID(string: "0x180D")
 let heartRateMeasurementCharacteristicCBUUID = CBUUID(string: "2A37")
 let bodySensorLocationCharacteristicCBUUID = CBUUID(string: "2A38")
-
-//class BLEManager: NSObject{
+let batteryCharacteristicCBUUID = CBUUID(string: "378EC9D6-075C-4BF6-89DC-9F0D6EA3B5C4")
+let ReservoirLevelCharacteristicCBUUID = CBUUID(string: "378ec9d6-075c-4bf6-89dc-0c6f73b4b761")
+let statusCBUUID = CBUUID(string: "378ec9d6-075c-4bf6-89dc-a6d767548715")
+//class BLEManager: NSObject
 //
 //    // MARK: - Variables
 //    //===========================

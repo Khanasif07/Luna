@@ -47,7 +47,7 @@ class InsulinStep4VC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func doneBtnTapped(_ sender: AppButton) {
-        
+        AppRouter.gotoHomeVC()
     }
     
     @IBAction func crossBtnAction(_ sender: UIButton) {

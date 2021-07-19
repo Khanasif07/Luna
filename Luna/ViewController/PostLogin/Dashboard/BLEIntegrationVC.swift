@@ -38,7 +38,8 @@ class BLEIntegrationVC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func disconnectBLETapped(_ sender: Any) {
-        centralManager.cancelPeripheralConnection(heartRatePeripheral)
+        centralManager.scanForPeripherals(withServices: nil,options: nil)
+//        centralManager.cancelPeripheralConnection(heartRatePeripheral)
     }
     
     @IBAction func logoutAction(_ sender: UIButton) {
@@ -146,6 +147,10 @@ extension BLEIntegrationVC: CBPeripheralDelegate {
         
         for characteristic in characteristics {
             print(characteristic)
+//            if characteristic.uuid == CBUUID(string: "378EC9D6-075C-4BF6-89DC-9F0D6EA3B5C4"){
+//                print("\(characteristic.uuid): properties contains .read Battery")
+//                peripheral.readValue(for: characteristic)
+//            }
             if characteristic.properties.contains(.read) {
                 print("\(characteristic.uuid): properties contains .read")
                 peripheral.readValue(for: characteristic)
@@ -166,8 +171,14 @@ extension BLEIntegrationVC: CBPeripheralDelegate {
         case heartRateMeasurementCharacteristicCBUUID:
             let bpm = heartRate(from: characteristic)
             onHeartRateReceived(bpm)
+        case batteryCharacteristicCBUUID:
+            print("handled Characteristic Value: \(String(describing: characteristic.value))")
+        case ReservoirLevelCharacteristicCBUUID:
+            print("handled Characteristic Value: \(String(describing: characteristic.value))")
+        case statusCBUUID:
+            print("handled Characteristic Value: \(String(describing: characteristic.value))")
         default:
-            print("Unhandled Characteristic UUID: \(characteristic.uuid)")
+            print("Unhandled Characteristic UUID: \(characteristic.value)")
         }
     }
     
