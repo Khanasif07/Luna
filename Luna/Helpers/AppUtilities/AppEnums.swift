@@ -28,8 +28,9 @@ enum DeviceStatus {
         }
     }
     
-    func getBatteryImage(value: Int)-> (String,UIImage?){
-        switch value {
+    static func getBatteryImage(value: String)-> (String,UIImage?){
+        let intValue = Int(value) ?? 0
+        switch intValue {
         case 0...20:
             return ("Low",#imageLiteral(resourceName: "batteryEmpty"))
         case 20...40:
@@ -44,16 +45,17 @@ enum DeviceStatus {
       
     }
     
-    func getReservoirImage(value: Int)-> (String,UIImage?){
-        switch value {
+   static func getReservoirImage(value: String)-> (String,UIImage?){
+        let intValue = Int(value)
+        switch intValue {
         case 0:
             return ("Fill",#imageLiteral(resourceName: "reservoir0Bars"))
         case 1:
             return ("Low",#imageLiteral(resourceName: "reservoir1Bar"))
         case 2:
-            return ("",#imageLiteral(resourceName: "reservoir2Bars"))
+            return ("Low",#imageLiteral(resourceName: "reservoir2Bars"))
         case 3:
-            return ("",#imageLiteral(resourceName: "reservoir3Bars"))
+            return ("Low",#imageLiteral(resourceName: "reservoir3Bars"))
         case 4:
             return ("",#imageLiteral(resourceName: "reservoir4Bars"))
         case 5:
@@ -74,32 +76,23 @@ enum DeviceStatus {
       
     }
     
-    func getSystemImage(value: Int)-> UIImage?{
-        switch value {
+   static func getSystemImage(value: String)-> (String,UIImage?){
+        let intValue = Int(value)
+        switch intValue {
         case 0:
-            return #imageLiteral(resourceName: "reservoir0Bars")
+            return ("Automating",#imageLiteral(resourceName: "automating"))
         case 1:
-            return #imageLiteral(resourceName: "reservoir1Bar")
+            return ("Stopped",#imageLiteral(resourceName: "stopped"))
         case 2:
-            return #imageLiteral(resourceName: "reservoir2Bars")
+            return ("Error",#imageLiteral(resourceName: "error"))
         case 3:
-            return #imageLiteral(resourceName: "reservoir3Bars")
+            return ("Ready",#imageLiteral(resourceName: "ready"))
         case 4:
-            return #imageLiteral(resourceName: "reservoir4Bars")
+            return ("Not Ready",#imageLiteral(resourceName: "notReady"))
         case 5:
-            return #imageLiteral(resourceName: "reservoir5Bars")
-        case 6:
-            return #imageLiteral(resourceName: "reservoir6Bars")
-        case 7:
-            return #imageLiteral(resourceName: "reservoir7Bars")
-        case 8:
-            return #imageLiteral(resourceName: "reservoir8Bars")
-        case 9:
-            return #imageLiteral(resourceName: "reservoir9Bars")
-        case 10:
-            return #imageLiteral(resourceName: "reservoir10Bars")
+            return ("No Signal",#imageLiteral(resourceName: "noSignal"))
         default:
-            return #imageLiteral(resourceName: "batteryFull")
+            return ("",#imageLiteral(resourceName: "batteryFull"))
         }
       
     }
