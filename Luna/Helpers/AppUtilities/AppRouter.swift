@@ -31,13 +31,18 @@ enum AppRouter {
     // MARK: - Show Landing Screen
     //===========================
     static func checkAppInitializationFlow() {
-                        AppRouter.goToTestingVC()
-                return
+//                        AppRouter.goToTestingVC()
+//                return
         if isUserLoggedin {
-            if   AppUserDefaults.value(forKey: .isProfileStepCompleted).boolValue{
+            if   AppUserDefaults.value(forKey: .isSystemSetupCompleted).boolValue{
                 AppRouter.gotoHomeVC()
-            }else{
+                return
+            }else if AppUserDefaults.value(forKey: .isProfileStepCompleted).boolValue {
+                AppRouter.gotoSystemSetupVC()
+                return
+            }else {
                 AppRouter.goToProfileSetupVC()
+                return
             }
         } else {
             if AppUserDefaults.value(forKey: .isSignupCompleted).boolValue {
@@ -113,6 +118,11 @@ enum AppRouter {
         navigationController.pushViewController(loginVC, animated: true)
         //        let loginVC = LoginViewController.instantiate(fromAppStoryboard: .PreLogin)
         //        setAsWindowRoot(loginVC)
+    }
+    
+    static func gotoSystemSetupVC(){
+        let vc = SystemSetupStep1VC.instantiate(fromAppStoryboard: .SystemSetup)
+        setAsWindowRoot(vc)
     }
     
     static func gotoHomeVC(){

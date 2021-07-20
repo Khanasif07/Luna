@@ -33,6 +33,7 @@ enum ApiKey {
     static var firstName : String {return "firstName"}
     static var isBiometricOn : String {return "isBiometricOn"}
     static var isProfileStepCompleted : String {return "isProfileStepCompleted"}
+    static var isSystemSetupCompleted  : String {return "isSystemSetupCompleted"}
     static var lastName : String {return "lastName"}
     static var diabetesType : String {return "diabetesType"}
     static var googleIdToken : String {return "googleIdToken"}

@@ -47,6 +47,8 @@ class InsulinStep4VC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func doneBtnTapped(_ sender: AppButton) {
+        AppUserDefaults.save(value: true, forKey: .isSystemSetupCompleted)
+        FirestoreController.updateUserSystemSetupStatus(isSystemSetupCompleted: true)
         AppRouter.gotoHomeVC()
     }
     

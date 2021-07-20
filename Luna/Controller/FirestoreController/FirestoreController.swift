@@ -88,9 +88,11 @@ class FirestoreController:NSObject{
                         user.password = data[ApiKey.password] as? String ?? ""
                         user.diabetesType = data[ApiKey.diabetesType] as? String ?? ""
                         user.isProfileStepCompleted = data[ApiKey.isProfileStepCompleted] as? Bool ?? false
+                        user.isSystemSetupCompleted = data[ApiKey.isSystemSetupCompleted] as? Bool ?? false
                         user.isChangePassword = data[ApiKey.isChangePassword] as? Bool ?? false
                         UserModel.main = user
                         AppUserDefaults.save(value: user.isProfileStepCompleted, forKey: .isProfileStepCompleted)
+                        AppUserDefaults.save(value: user.isSystemSetupCompleted, forKey: .isSystemSetupCompleted)
                         success()
                     }
                 }
@@ -160,6 +162,7 @@ class FirestoreController:NSObject{
                                dob: String,
                                diabetesType: String,
                                isProfileStepCompleted: Bool,
+                               isSystemSetupCompleted: Bool,
                                isChangePassword:Bool,
                                isBiometricOn:  Bool,
                                completion: @escaping () -> Void,
@@ -186,6 +189,7 @@ class FirestoreController:NSObject{
                                                                       ApiKey.deviceToken:AppUserDefaults.value(forKey: .fcmToken).stringValue,
                                                                       ApiKey.password:password,
                                                                       ApiKey.isProfileStepCompleted: false,
+                                                                      ApiKey.isSystemSetupCompleted: false,
                                                                       ApiKey.userId: uid,ApiKey.isChangePassword: true,ApiKey.isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue]){ err in
                         if let err = err {
                             print("Error writing document: \(err)")
@@ -247,6 +251,7 @@ class FirestoreController:NSObject{
                                 dob: String,
                                 diabetesType: String,
                                 isProfileStepCompleted: Bool,
+                                isSystemSetupCompleted: Bool,
                                 isChangePassword:Bool,
                                 isBiometricOn:  Bool,
                                 completion: @escaping () -> Void,
@@ -259,6 +264,7 @@ class FirestoreController:NSObject{
                                                               ApiKey.deviceToken:AppUserDefaults.value(forKey: .fcmToken).stringValue,
                                                               ApiKey.firstName:firstName,
                                                               ApiKey.lastName: lastName,
+                                                              ApiKey.isSystemSetupCompleted:isSystemSetupCompleted,
                                                               ApiKey.isProfileStepCompleted:isProfileStepCompleted,
                                                               ApiKey.userId: userId,
                                                               ApiKey.dob: dob,ApiKey.isChangePassword: isChangePassword,ApiKey.isBiometricOn: isBiometricOn]){ err in
@@ -281,6 +287,7 @@ class FirestoreController:NSObject{
                                dob: String,
                                diabetesType: String,
                                isProfileStepCompleted: Bool,
+                               isSystemSetupCompleted: Bool,
                                isBiometricOn: Bool,
                                completion: @escaping () -> Void,
                                failure: @escaping FailureResponse) {
@@ -291,6 +298,7 @@ class FirestoreController:NSObject{
                                                               ApiKey.firstName:firstName,
                                                               ApiKey.lastName: lastName,
                                                               ApiKey.diabetesType: diabetesType,
+                                                              ApiKey.isSystemSetupCompleted:isSystemSetupCompleted,
                                                               ApiKey.isProfileStepCompleted:isProfileStepCompleted,
                                                               ApiKey.isBiometricOn: isBiometricOn,
                                                               ApiKey.dob: dob])
@@ -309,6 +317,14 @@ class FirestoreController:NSObject{
         let uid = AppUserDefaults.value(forKey: .uid).stringValue
         guard !uid.isEmpty else { return }
         db.collection(ApiKey.users).document(uid).updateData([ApiKey.onlineStatus:isOnline])
+    }
+    
+    //MARK:- Update user System Setup Status
+    //================================
+    static func updateUserSystemSetupStatus(isSystemSetupCompleted: Bool) {
+        let uid = AppUserDefaults.value(forKey: .uid).stringValue
+        guard !uid.isEmpty else { return }
+        db.collection(ApiKey.users).document(uid).updateData([ApiKey.isSystemSetupCompleted:isSystemSetupCompleted])
     }
     
     //MARK:- Update user online status

@@ -29,6 +29,7 @@ struct UserModel{
     var password : String
     var isChangePassword : Bool
     var isProfileStepCompleted : Bool
+    var isSystemSetupCompleted : Bool
     var isBiometricOn: Bool
     var status : String
     var userType : String
@@ -50,6 +51,7 @@ struct UserModel{
         self.userType = json[ApiKey.currentRole].stringValue
         self.isChangePassword = json[ApiKey.isChangePassword].boolValue
         self.isProfileStepCompleted = json[ApiKey.isProfileStepCompleted].boolValue
+        self.isSystemSetupCompleted = json[ApiKey.isSystemSetupCompleted].boolValue
         self.dob = json[ApiKey.dob].stringValue
         self.lastName = json[ApiKey.lastName].stringValue
         self.diabetesType = json[ApiKey.diabetesType].stringValue
@@ -89,7 +91,9 @@ struct UserModel{
             ApiKey.userType : userType,
             ApiKey.isChangePassword : isChangePassword,
             ApiKey.diabetesType: diabetesType,
-            ApiKey.isBiometricOn : isBiometricOn
+            ApiKey.isBiometricOn : isBiometricOn,
+            ApiKey.isProfileStepCompleted: isProfileStepCompleted,
+            ApiKey.isSystemSetupCompleted : isSystemSetupCompleted
         ]
         AppUserDefaults.save(value: dict, forKey: .fullUserProfile)
     }

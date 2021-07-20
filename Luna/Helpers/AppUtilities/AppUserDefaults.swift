@@ -82,6 +82,7 @@ extension AppUserDefaults {
         case isBiometricSelected
         case isBiometricCompleted
         case isProfileStepCompleted
+        case isSystemSetupCompleted
         case isSignupCompleted
         case isGuestMode
         case tutorialDisplayed

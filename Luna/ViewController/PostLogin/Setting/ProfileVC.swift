@@ -55,7 +55,7 @@ class ProfileVC: UIViewController {
     
     @IBAction func saveBtnAction(_ sender: AppButton) {
         CommonFunctions.showActivityLoader()
-        FirestoreController.updateUserNode(email: sections[3].1, password: AppUserDefaults.value(forKey: .defaultPassword).stringValue, firstName: sections[0].1, lastName: sections[1].1, dob: sections[2].1, diabetesType: sections[4].1, isProfileStepCompleted: UserModel.main.isProfileStepCompleted, isBiometricOn: UserModel.main.isBiometricOn) {
+        FirestoreController.updateUserNode(email: sections[3].1, password: AppUserDefaults.value(forKey: .defaultPassword).stringValue, firstName: sections[0].1, lastName: sections[1].1, dob: sections[2].1, diabetesType: sections[4].1, isProfileStepCompleted: UserModel.main.isProfileStepCompleted, isSystemSetupCompleted: UserModel.main.isSystemSetupCompleted, isBiometricOn: UserModel.main.isBiometricOn) {
             FirestoreController.getFirebaseUserData {
                 CommonFunctions.hideActivityLoader()
                 self.pop()

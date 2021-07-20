@@ -346,8 +346,10 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                         UserModel.main.lastName = self.senderLastName
                         UserModel.main.dob = self.senderDob
                         UserModel.main.diabetesType = self.diabetesType
-                        FirestoreController.updateUserNode(email: AppUserDefaults.value(forKey: .defaultEmail).stringValue, password: AppUserDefaults.value(forKey: .defaultPassword).stringValue, firstName:  self.senderName, lastName: self.senderLastName, dob: self.senderDob, diabetesType: self.diabetesType, isProfileStepCompleted: true,isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue) {
-                            AppRouter.gotoHomeVC()
+                        FirestoreController.updateUserNode(email: AppUserDefaults.value(forKey: .defaultEmail).stringValue, password: AppUserDefaults.value(forKey: .defaultPassword).stringValue, firstName:  self.senderName, lastName: self.senderLastName, dob: self.senderDob, diabetesType: self.diabetesType, isProfileStepCompleted: true, isSystemSetupCompleted: false,isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue) {
+                            let vc = SystemSetupStep1VC.instantiate(fromAppStoryboard: .SystemSetup)
+                            self.navigationController?.pushViewController(vc, animated: true)
+//                            AppRouter.gotoHomeVC()
                         } failure: { (error) -> (Void) in
                             CommonFunctions.showToastWithMessage(error.localizedDescription)
                         }
