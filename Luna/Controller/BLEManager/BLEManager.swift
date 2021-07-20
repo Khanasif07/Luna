@@ -161,7 +161,6 @@ import CoreBluetooth
     @objc optional func didDisconnect()
     @objc optional func didBleReady()
     @objc optional func didReadRSSI(rssi:NSNumber)
-    
     @objc optional func log(message:String)
 }
 
@@ -176,14 +175,14 @@ public class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralManager
     
     public var delegate :BleProtocol?
     
-    let DFUUID :CBUUID = CBUUID(string: "DFB0")
+    let DFUUID :CBUUID = CBUUID(string: "DADED7B6-BAA6-CBBB-D870-D46EB7963365")
     
     public var serviceUuid = CBUUID(string: "b1905964-c600-45bb-b050-49b85d2770d0")
     public var characteristicUuid = CBUUID(string: "6cb02c07-9d51-48a7-9552-d2f09bed6e33")
     
     var centralManager :CBCentralManager!
     var peripheralManager :CBPeripheralManager!
-    var myperipheral :CBPeripheral?
+    var myperipheral :CBPeripheral!
     var mychar :CBCharacteristic!
     var myservice :CBService?
     var peripherals :[peripheralWithRssi]!
@@ -202,7 +201,7 @@ public class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralManager
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
         self.peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
         self.peripheralManager.delegate = self
-        peripherals = [peripheralWithRssi]()
+//        peripherals = [peripheralWithRssi]()
     }
     
     private convenience init (delegate: BleProtocol){
@@ -228,11 +227,12 @@ public class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralManager
         delegate?.log!(message: "leaving publishService")
     }
     
-    public func beginScan (){
+    public func beginScan(){
         if isScanning == false{
             isKeepConnect = true
-            self.centralManager.scanForPeripherals(withServices: [DFUUID], options: nil)
-            rescanTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: Selector(("updateScan")), userInfo: nil, repeats: true)
+//            self.centralManager.scanForPeripherals(withServices: [DFUUID], options: nil)
+            self.centralManager.scanForPeripherals(withServices: nil, options: nil)
+//            rescanTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: Selector(("updateScan")), userInfo: nil, repeats: true)
             isScanning = true
         }
     }
@@ -240,7 +240,7 @@ public class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralManager
     /**
      stop scan ble device
      */
-    public func breakScan (){
+    public func breakScan(){
         rescanTimer?.invalidate()
         rescanTimer = nil
         centralManager.stopScan()
@@ -267,37 +267,38 @@ public class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralManager
     /**
      rescan ble device every 2 seconds
      */
-    func updateScan (){
-        if let p = getMaxPeripheral(){
-            myperipheral = p
-            connect(peripheral: myperipheral!)
-        } else{
-            print ("rescan")
-            self.centralManager.scanForPeripherals(withServices: [DFUUID], options: nil)
-        }
-    }
+//    func updateScan (){
+//        if let p = getMaxPeripheral(){
+//            myperipheral = p
+//            connect(peripheral: myperipheral!)
+//        } else{
+//            print ("rescan")
+//            self.centralManager.scanForPeripherals(withServices: [DFUUID], options: nil)
+//            self.centralManager.scanForPeripherals(withServices: nil, options: nil)
+//        }
+//    }
     
     /**
      return the max rssi peripheral tin peripherals
      
      - returns: peripheral with best rssi or nil
      */
-    func getMaxPeripheral () -> CBPeripheral?{
-        if self.peripherals.count == 0{
-            return nil
-        }
-        
-        var max :NSNumber = self.peripherals[0].RSSI
-        var maxPeripheral :CBPeripheral = self.peripherals[0].peripheral
-        
-        for p in self.peripherals{
-            if p.RSSI.intValue > max.intValue{
-                max = p.RSSI
-                maxPeripheral = p.peripheral
-            }
-        }
-        return maxPeripheral
-    }
+//    func getMaxPeripheral () -> CBPeripheral?{
+//        if self.peripherals.count == 0{
+//            return nil
+//        }
+//
+//        var max :NSNumber = self.peripherals[0].RSSI
+//        var maxPeripheral :CBPeripheral = self.peripherals[0].peripheral
+//
+//        for p in self.peripherals{
+//            if p.RSSI.intValue > max.intValue{
+//                max = p.RSSI
+//                maxPeripheral = p.peripheral
+//            }
+//        }
+//        return maxPeripheral
+//    }
     
     /**
      connect a peripheral
@@ -340,11 +341,13 @@ public class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralManager
     
     @objc public func centralManagerDidUpdateState(_ central: CBCentralManager){
         if centralManager.state == .poweredOn {
-            print ("ble opened")
-            delegate?.log!(message: "ble poweredon")
+            print("ble opened")
+            centralManager.scanForPeripherals(withServices: nil,options: nil)
+            
+//            delegate?.log(message: "ble poweredon")
         } else {
-            print ("ble open error")
-            delegate?.log!(message: "ble power error")
+            print("ble open error")
+//            delegate?.log(message: "ble power error")
         }
     }
     
@@ -352,16 +355,21 @@ public class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralManager
         //println ("didDiscoverPeripheral ")
         print ("name=\(String(describing: peripheral.name))  RSSI=\(Int32(RSSI.intValue))")
         
-        if peripheral.name == "car_007"
-        {
-            connect(peripheral: peripheral)
-        }
-        
-        if RSSI.intValue > -50 && RSSI.intValue < -10
-        {
-            appendPeripheral(peripheral: peripheral, RSSI: RSSI)
-        }
-        
+//        if peripheral.name == "car_007"
+//        {
+//            connect(peripheral: peripheral)
+//        }
+//
+//        if RSSI.intValue > -50 && RSSI.intValue < -10
+//        {
+//            appendPeripheral(peripheral: peripheral, RSSI: RSSI)
+//        }
+        print(peripheral.name)
+        print(peripheral.identifier)
+        myperipheral = peripheral
+        myperipheral.delegate = self
+        centralManager.stopScan()
+        centralManager.connect(peripheral, options: nil)
         delegate?.didDiscover?(name: peripheral.name!, rssi: RSSI)
     }
     
@@ -383,9 +391,9 @@ public class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralManager
     }
     
     public func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?){
-        delegate?.log!(message: "in did add service")
+//        delegate?.log!(message: "in did add service")
         if(error != nil){
-            delegate?.log!(message: "error in add service")
+//            delegate?.log!(message: "error in add service")
             print("error in addservice: \(error!.localizedDescription)")
         }
         else{
@@ -394,21 +402,21 @@ public class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralManager
     }
     
     public func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?){
-        delegate?.log!(message: "in did start adv.")
+//        delegate?.log!(message: "in did start adv.")
         if(error != nil){
-            delegate?.log!(message: "advertising error")
+//            delegate?.log!(message: "advertising error")
             print("advertising error: \(error!.localizedDescription)")
         }
         else{
-            delegate?.log!(message: "advertising started")
+//            delegate?.log!(message: "advertising started")
             print("advertising started")
         }
     }
     
     public func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral){
-        //println ("didConnectPeripheral ")
-        peripheral.delegate = self
-        peripheral.discoverServices(nil)
+        print("didConnectPeripheral ")
+        myperipheral = peripheral
+        myperipheral.discoverServices(nil)
         peripheral.readRSSI()
         rescanTimer?.invalidate()
         rescanTimer = nil
@@ -416,7 +424,7 @@ public class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralManager
     }
     
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?){
-        //println ("didDisconnectPeripheral ")
+        print("didDisconnectPeripheral ")
         isConnect = false
         rssiTimer?.invalidate()
         rssiTimer = nil
@@ -428,25 +436,38 @@ public class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralManager
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?){
-        //println ("didDiscoverServices ")
-        if (peripheral.services![1] ).uuid.uuidString == "DFB0"{
-            //println ("get DFB0")
-            myservice = peripheral.services![1]// as? CBService
-            peripheral.discoverCharacteristics(nil, for: peripheral.services![1])// as! CBService)
+        print("didDiscoverServices ")
+        guard let services = peripheral.services else { return }
+        for service in services {
+            print(service)
+            peripheral.discoverCharacteristics(nil, for: service)
         }
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?){
-        //println ("didDiscoverCharacteristicsForService ")
-        let char = (service.characteristics![0]) //as! CBCharacteristic)
-        if char.uuid.uuidString == "DFB1"{
-            //println ("get DFB1")
-            mychar = char
-            myperipheral?.setNotifyValue(true, for: mychar!)
-            isConnect = true
-            rssiTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: Selector(("updateRSSI")), userInfo: nil, repeats: true)
-            delegate?.didBleReady?()
+        print("didDiscoverCharacteristicsForService ")
+        guard let characteristics = service.characteristics else { return }
+        
+        for characteristic in characteristics {
+            print(characteristic)
+            if characteristic.properties.contains(.read) {
+                print("\(characteristic.uuid): properties contains .read")
+                peripheral.readValue(for: characteristic)
+            }
+            if characteristic.properties.contains(.notify) {
+                print("\(characteristic.uuid): properties contains .notify")
+                peripheral.setNotifyValue(true, for: characteristic)
+            }
         }
+        //        let char = (service.characteristics![0]) //as! CBCharacteristic)
+        //        if char.uuid.uuidString == "DFB1"{
+        //            //println ("get DFB1")
+        //            mychar = char
+        //            myperipheral?.setNotifyValue(true, for: mychar!)
+        //            isConnect = true
+        //            rssiTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: Selector(("updateRSSI")), userInfo: nil, repeats: true)
+        //            delegate?.didBleReady?()
+        //        }
     }
     
     /**
@@ -484,3 +505,4 @@ public class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralManager
         
     }
 }
+

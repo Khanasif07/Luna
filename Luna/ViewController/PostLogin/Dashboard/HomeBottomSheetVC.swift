@@ -143,7 +143,7 @@ extension HomeBottomSheetVC : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 3:
-            return 10
+            return 20
         default:
             return 1
         }

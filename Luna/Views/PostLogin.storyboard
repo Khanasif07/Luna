@@ -242,11 +242,27 @@
                                     <action selector="logoutAction:" destination="NVG-4x-AFE" eventType="touchUpInside" id="QVV-SJ-zSG"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1I-GC-ajd">
+                                <rect key="frame" x="20" y="426" width="374" height="44"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="F4D-QR-Ws6"/>
+                                </constraints>
+                                <state key="normal" title="Connect BLE">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="connectBLETapped:" destination="NVG-4x-AFE" eventType="touchUpInside" id="wPk-4Z-l4v"/>
+                                    <action selector="disconnectBLETapped:" destination="NVG-4x-AFE" eventType="touchUpInside" id="AYC-U0-5hw"/>
+                                    <action selector="logoutAction:" destination="NVG-4x-AFE" eventType="touchUpInside" id="AAS-2U-Agq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SfA-je-MHo"/>
                         <color key="backgroundColor" red="0.52941176469999995" green="0.74509803919999995" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="wsy-WM-JAE" firstAttribute="leading" secondItem="71X-SA-gMg" secondAttribute="leading" constant="20" id="0Au-dG-qqJ"/>
+                            <constraint firstItem="f1I-GC-ajd" firstAttribute="leading" secondItem="hkd-c7-DG8" secondAttribute="leading" id="3Qe-47-0c8"/>
                             <constraint firstAttribute="trailing" secondItem="wsy-WM-JAE" secondAttribute="trailing" constant="20" id="9PC-T0-w75"/>
                             <constraint firstItem="y73-N9-LzX" firstAttribute="top" secondItem="wsy-WM-JAE" secondAttribute="bottom" constant="50" id="HHq-iy-4vU"/>
                             <constraint firstItem="hkd-c7-DG8" firstAttribute="top" secondItem="y73-N9-LzX" secondAttribute="bottom" constant="25" id="QRi-0i-3tL"/>
@@ -254,7 +270,9 @@
                             <constraint firstItem="hkd-c7-DG8" firstAttribute="trailing" secondItem="y73-N9-LzX" secondAttribute="trailing" id="dE3-HH-JY9"/>
                             <constraint firstItem="wsy-WM-JAE" firstAttribute="top" secondItem="SfA-je-MHo" secondAttribute="top" constant="50" id="dpC-4J-tQp"/>
                             <constraint firstItem="hkd-c7-DG8" firstAttribute="leading" secondItem="y73-N9-LzX" secondAttribute="leading" id="f7h-S0-Qo6"/>
+                            <constraint firstItem="f1I-GC-ajd" firstAttribute="trailing" secondItem="hkd-c7-DG8" secondAttribute="trailing" id="gCN-p5-lnP"/>
                             <constraint firstAttribute="trailing" secondItem="y73-N9-LzX" secondAttribute="trailing" constant="20" id="jUf-Ws-iYL"/>
+                            <constraint firstItem="f1I-GC-ajd" firstAttribute="top" secondItem="hkd-c7-DG8" secondAttribute="bottom" constant="59" id="zXp-Aw-uKi"/>
                         </constraints>
                     </view>
                     <connections>

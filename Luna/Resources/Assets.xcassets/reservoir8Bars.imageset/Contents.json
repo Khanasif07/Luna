@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "scale" : "1x",
+      "filename" : "reservoir8Bars.png",
+      "idiom" : "universal"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "reservoir8Bars@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "scale" : "3x",
+      "idiom" : "universal",
+      "filename" : "reservoir8Bars@3x.png"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

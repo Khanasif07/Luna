@@ -79,7 +79,7 @@ enum AppRouter {
     
     
     static func goToTestingVC() {
-        let homeScene = SystemSetupStep1VC.instantiate(fromAppStoryboard: .SystemSetup)
+        let homeScene = BLEIntegrationVC.instantiate(fromAppStoryboard: .PostLogin)
         setAsWindowRoot(homeScene)
     }
     

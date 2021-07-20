@@ -9,10 +9,8 @@ import UIKit
 import CoreBluetooth
 import FirebaseAuth
 import Firebase
+import ExternalAccessory
 
-//let heartRateServiceCBUUID = CBUUID(string: "0x180D")
-//let heartRateMeasurementCharacteristicCBUUID = CBUUID(string: "2A37")
-//let bodySensorLocationCharacteristicCBUUID = CBUUID(string: "2A38")
 class BLEIntegrationVC: UIViewController {
     
     // MARK: - IBOutlets
@@ -21,10 +19,12 @@ class BLEIntegrationVC: UIViewController {
     @IBOutlet weak var bodySensorLocationLabel: UILabel!
     
     // MARK: - Variables
-    //===========================
-    var database: Database!
+    //==========================
     var centralManager: CBCentralManager!
     var heartRatePeripheral: CBPeripheral!
+    var isMyPeripheralConected = false
+//    let manager = BleManager.sharedInstance
+   
 
 
     
@@ -38,54 +38,69 @@ class BLEIntegrationVC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func disconnectBLETapped(_ sender: Any) {
-        centralManager.scanForPeripherals(withServices: nil,options: nil)
-//        centralManager.cancelPeripheralConnection(heartRatePeripheral)
+        DispatchQueue.main.async {
+            CommonFunctions.delay(delay: 2.0) {
+                self.centralManager.cancelPeripheralConnection(self.heartRatePeripheral)
+            }
+        }
+    }
+    
+    @IBAction func connectBLETapped(_ sender: Any) {
+        let uuid = [UUID(uuidString: "DADED7B6-BAA6-CBBB-D870-D46EB7963365")!]
+        DispatchQueue.main.async {
+            if let peripheral = self.centralManager.retrievePeripherals(withIdentifiers: uuid).first {
+                CommonFunctions.delay(delay: 2.0) {
+                    self.heartRatePeripheral = peripheral // <-- super important
+                    self.centralManager.connect(peripheral, options: nil)
+                }
+            }
+        }
     }
     
     @IBAction func logoutAction(_ sender: UIButton) {
-//        FirestoreController.logOut { (successMsg) in
-//            print(successMsg)
-//            AppUserDefaults.removeAllValues()
-//            AppRouter.goToSignUpVC()
-//        }
     }
     
 }
 
 // MARK: - Extension For Functions
 //===========================
-extension BLEIntegrationVC {
+extension BLEIntegrationVC : BleProtocol{
     
     private func initialSetup() {
-//        database = Database.database()
-        centralManager = CBCentralManager(delegate: self, queue: nil)
+                centralManager = CBCentralManager(delegate: self, queue: nil)
+//        self.manager.delegate = self
+//        DispatchQueue.main.asyncAfter(wallDeadline: .now()+2) {
+//            self.manager.beginScan()
+//        }
     }
     
-    func onHeartRateReceived(_ heartRate: Int) {
-        heartRateLabel.text = String(heartRate)
-        print("BPM: \(heartRate)")
+    func didDiscover(name: String, rssi: NSNumber) {
+        print(name)
     }
     
-    private func performCleanUp() {
-//        let userId = AppUserDefaults.value(forKey: .userId).stringValue
-//        database.collection(ApiKey.users)
-//            .document(userId).updateData([ApiKey.deviceToken : ""]) { (error) in
-//                if let err = error {
-//                    print(err.localizedDescription)
-//                } else {
-//                    AppUserDefaults.removeAllValues()
-//                    AppUserDefaults.save(value: DeviceDetail.deviceToken, forKey: .fcmToken)
-//                    UserModel.main = UserModel()
-//                    UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-//                }
-//            }
+    func didConnect(name: String) {
+        print(name)
     }
-}
+    
+    func writeValue(myCharacteristic: CBCharacteristic,value: String = "85") {
+        if isMyPeripheralConected { //check if myPeripheral is connected to send data
+            let dataToSend: Data = value.data(using: String.Encoding.utf8)!
+            print(dataToSend)
+            heartRatePeripheral.writeValue(dataToSend as Data, for: myCharacteristic, type: CBCharacteristicWriteType.withResponse)    //Writing the data to the peripheral
+        } else {
+            print("Not connected")
+        }
+    }
+        //    func onHeartRateReceived(_ heartRate: Int) {
+        //        heartRateLabel.text = String(heartRate)
+        //        print("BPM: \(heartRate)")
+        //    }
+    }
 
 // MARK: - Extension For CBCentralManagerDelegate
 //===========================
 extension BLEIntegrationVC: CBCentralManagerDelegate {
-    
+
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
           case .unknown:
@@ -103,10 +118,9 @@ extension BLEIntegrationVC: CBCentralManagerDelegate {
             centralManager.scanForPeripherals(withServices: nil,options: nil)
         }
     }
-    
+
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,
                         advertisementData: [String: Any], rssi RSSI: NSNumber) {
-      print(peripheral)
         print(peripheral.name)
         print(peripheral.identifier)
         heartRatePeripheral = peripheral
@@ -114,16 +128,19 @@ extension BLEIntegrationVC: CBCentralManagerDelegate {
         centralManager.stopScan()
         centralManager.connect(heartRatePeripheral, options: nil)
     }
-    
+
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
       print("Connected!")
+      isMyPeripheralConected = true
       heartRatePeripheral.discoverServices(nil)
     }
-    
+
     func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+        print("DisConnected!")
+        isMyPeripheralConected = false
         central.connect(peripheral, options: nil)
     }
-    
+
 
 
 }
@@ -133,24 +150,19 @@ extension BLEIntegrationVC: CBCentralManagerDelegate {
 extension BLEIntegrationVC: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         guard let services = peripheral.services else { return }
-        
         for service in services {
             print(service)
             peripheral.discoverCharacteristics(nil, for: service)
         }
-        
+
     }
-    
+
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService,
                     error: Error?) {
         guard let characteristics = service.characteristics else { return }
-        
+
         for characteristic in characteristics {
             print(characteristic)
-//            if characteristic.uuid == CBUUID(string: "378EC9D6-075C-4BF6-89DC-9F0D6EA3B5C4"){
-//                print("\(characteristic.uuid): properties contains .read Battery")
-//                peripheral.readValue(for: characteristic)
-//            }
             if characteristic.properties.contains(.read) {
                 print("\(characteristic.uuid): properties contains .read")
                 peripheral.readValue(for: characteristic)
@@ -165,18 +177,18 @@ extension BLEIntegrationVC: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         print(characteristic.uuid)
         switch characteristic.uuid {
-        case bodySensorLocationCharacteristicCBUUID:
-            let bodySensorLocation = bodyLocation(from: characteristic)
-            bodySensorLocationLabel.text = bodySensorLocation
-        case heartRateMeasurementCharacteristicCBUUID:
-            let bpm = heartRate(from: characteristic)
-            onHeartRateReceived(bpm)
         case batteryCharacteristicCBUUID:
-            print("handled Characteristic Value: \(String(describing: characteristic.value))")
+            print("handled Characteristic Value for Battery: \(String(describing: characteristic.value))")
+//            writeValue(myCharacteristic: characteristic)
+            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
         case ReservoirLevelCharacteristicCBUUID:
-            print("handled Characteristic Value: \(String(describing: characteristic.value))")
+//            writeValue(myCharacteristic: characteristic,value: "100")
+            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
+            print("handled Characteristic Value for Reservoir Level: \(String(describing: characteristic.value))")
         case statusCBUUID:
-            print("handled Characteristic Value: \(String(describing: characteristic.value))")
+//            writeValue(myCharacteristic: characteristic,value: "0")
+            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
+            print("handled Characteristic Value for status : \(String(describing: characteristic.value))")
         default:
             print("Unhandled Characteristic UUID: \(characteristic.value)")
         }
@@ -185,7 +197,7 @@ extension BLEIntegrationVC: CBPeripheralDelegate {
     private func bodyLocation(from characteristic: CBCharacteristic) -> String {
         guard let characteristicData = characteristic.value,
               let byte = characteristicData.first else { return "Error" }
-        
+
         switch byte {
         case 0: return "Other"
         case 1: return "Chest"
@@ -212,7 +224,8 @@ extension BLEIntegrationVC: CBPeripheralDelegate {
           return Int(byteArray[1])
         } else {
           // Heart Rate Value Format is in the 2nd and 3rd bytes
-          return (Int(byteArray[1]) << 8) + Int(byteArray[2])
+//          return (Int(byteArray[1]) << 8) + Int(byteArray[2])
+            return  Int(byteArray[0]) +  (Int(byteArray[1]))
         }
       }
 }

@@ -70,29 +70,31 @@ class FirestoreController:NSObject{
     //=======================
     static func getFirebaseUserData(success: @escaping () -> Void,
                                     failure:  @escaping FailureResponse){
-        db.collection(ApiKey.users)
-            .document(Auth.auth().currentUser?.uid ?? "").getDocument { (snapshot, error) in
-                if let error = error {
-                    failure(error)
-                } else{
-                    print("============================")
-                    guard let data = snapshot?.data() else { return }
-                    var user = UserModel()
-                    user.isBiometricOn = data[ApiKey.isBiometricOn] as? Bool ?? false
-                    user.id = data[ApiKey.userId] as? String ?? ""
-                    user.firstName = data[ApiKey.firstName] as? String ?? ""
-                    user.lastName = data[ApiKey.lastName] as? String ?? ""
-                    user.dob = data[ApiKey.dob] as? String ?? ""
-                    user.email = data[ApiKey.email] as? String ?? ""
-                    user.password = data[ApiKey.password] as? String ?? ""
-                    user.diabetesType = data[ApiKey.diabetesType] as? String ?? ""
-                    user.isProfileStepCompleted = data[ApiKey.isProfileStepCompleted] as? Bool ?? false
-                    user.isChangePassword = data[ApiKey.isChangePassword] as? Bool ?? false
-                    UserModel.main = user
-                    AppUserDefaults.save(value: user.isProfileStepCompleted, forKey: .isProfileStepCompleted)
-                    success()
+        if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
+            db.collection(ApiKey.users)
+                .document(Auth.auth().currentUser?.uid ?? "").getDocument { (snapshot, error) in
+                    if let error = error {
+                        failure(error)
+                    } else{
+                        print("============================")
+                        guard let data = snapshot?.data() else { return }
+                        var user = UserModel()
+                        user.isBiometricOn = data[ApiKey.isBiometricOn] as? Bool ?? false
+                        user.id = data[ApiKey.userId] as? String ?? ""
+                        user.firstName = data[ApiKey.firstName] as? String ?? ""
+                        user.lastName = data[ApiKey.lastName] as? String ?? ""
+                        user.dob = data[ApiKey.dob] as? String ?? ""
+                        user.email = data[ApiKey.email] as? String ?? ""
+                        user.password = data[ApiKey.password] as? String ?? ""
+                        user.diabetesType = data[ApiKey.diabetesType] as? String ?? ""
+                        user.isProfileStepCompleted = data[ApiKey.isProfileStepCompleted] as? Bool ?? false
+                        user.isChangePassword = data[ApiKey.isChangePassword] as? Bool ?? false
+                        UserModel.main = user
+                        AppUserDefaults.save(value: user.isProfileStepCompleted, forKey: .isProfileStepCompleted)
+                        success()
+                    }
                 }
-            }
+        }
     }
     
     
