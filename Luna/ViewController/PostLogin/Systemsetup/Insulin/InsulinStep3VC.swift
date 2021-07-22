@@ -36,6 +36,7 @@ class InsulinStep3VC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func doneBtnAction(_ sender: AppButton) {
+        SystemInfoModel.shared.insulinUnit =  Int(self.insulinCountTxtField.text ?? "0") ?? 0
         let vc = InsulinStep4VC.instantiate(fromAppStoryboard: .SystemSetup)
         vc.insulinConnectedSuccess = { [weak self] (sender) in
             guard let selff = self else { return }
@@ -60,7 +61,8 @@ extension InsulinStep3VC {
         insulinCountTxtField.delegate = self
         insulinCountTxtField.keyboardType = .numberPad
         insulinCountTxtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
-        self.doneBtn.isEnabled = false
+        insulinCountTxtField.text = "\(SystemInfoModel.shared.insulinUnit)"
+        self.doneBtn.isEnabled = !(insulinCountTxtField.text?.isEmpty ?? true)
     }
 }
 

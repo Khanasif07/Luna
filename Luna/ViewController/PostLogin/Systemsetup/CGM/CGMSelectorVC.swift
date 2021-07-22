@@ -32,6 +32,7 @@ class CGMSelectorVC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func proceedBtnAction(_ sender: UIButton) {
+        SystemInfoModel.shared.cgmType =  CGMTypeArray.first ?? ""
         self.proceedBtn.isEnabled = true
         let vc = CGMLoginVC.instantiate(fromAppStoryboard: .CGPStoryboard)
         navigationController?.pushViewController(vc, animated: true)
@@ -50,7 +51,6 @@ extension CGMSelectorVC {
     
     private func initialSetup() {
        // btmContainerView.setBorder(width: 1.0, color: #colorLiteral(red: 0.9607843137, green: 0.5450980392, blue: 0.262745098, alpha: 1))
-        
         CGMTypesTV.isHidden = false
         
         self.proceedBtn.layer.cornerRadius = 10

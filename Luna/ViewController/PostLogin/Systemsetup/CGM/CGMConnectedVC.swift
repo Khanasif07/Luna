@@ -28,6 +28,7 @@ class CGMConnectedVC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func okBtnTapped(_ sender: AppButton) {
+        SystemInfoModel.shared.cgmUnit = Int(ValueLbl.text ?? "") ?? 0
         self.dismiss(animated: true) {
             if let handle = self.cgmConnectedSuccess{
                 handle(sender)

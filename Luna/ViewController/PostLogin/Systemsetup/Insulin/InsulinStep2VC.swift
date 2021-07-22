@@ -16,7 +16,7 @@ class InsulinStep2VC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var sections: [(String,Bool)] = [("Pair Luna",false),("Pair Luna",false),("Pair Luna",false),("Pair Luna",false),("Pair Luna",false),("Pair Luna",false)]
+    var sections: [(String,Bool,String)] = [("Basaglar",false,"Lilly"),("Lantus",false,"Sanofi"),("Levemir",false,"Novo Nordisk"),("Pair Luna",false,"Basaglar"),("Pair Luna",false,"Basaglar"),("Pair Luna",false,"Basaglar")]
     
     // MARK: - Lifecycle
     //===========================
@@ -50,13 +50,24 @@ extension InsulinStep2VC {
     
     private func initialSetup() {
         self.tableViewSetup()
-        self.selectBtn.isEnabled = false
+        self.setData()
     }
     
     private func tableViewSetup(){
         self.mainTableView.delegate = self
         self.mainTableView.dataSource = self
         self.mainTableView.registerCell(with: InsulinStep2Cell.self)
+        self.selectBtn.isEnabled = false
+    }
+    
+    private func setData(){
+        if let index = self.sections.firstIndex(where: { (tupls) -> Bool in
+            tupls.0 == SystemInfoModel.shared.longInsulinType
+        }){
+            self.sections[index].1 = true
+            self.selectBtn.isEnabled = true
+            self.mainTableView.reloadData()
+        }
     }
     
 
@@ -74,6 +85,7 @@ extension InsulinStep2VC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(with: InsulinStep2Cell.self)
         cell.insulinType.text = sections[indexPath.row].0
+        cell.insulinSubType.text = sections[indexPath.row].2
         cell.dataContainerView.setBorder(width: 1.0, color: !sections[indexPath.row].1 ? AppColors.fontPrimaryColor : AppColors.appGreenColor)
         cell.radioBtn.isSelected = sections[indexPath.row].1
         return cell
@@ -90,9 +102,13 @@ extension InsulinStep2VC : UITableViewDelegate, UITableViewDataSource {
         }){
             self.sections[selectedIndex].1 = false
             self.sections[indexPath.row].1 = true
+            SystemInfoModel.shared.longInsulinType =  self.sections[indexPath.row].0
+            SystemInfoModel.shared.longInsulinSubType =  self.sections[indexPath.row].2
             self.mainTableView.reloadData()
         }else{
             self.sections[indexPath.row].1 = true
+            SystemInfoModel.shared.longInsulinType =  self.sections[indexPath.row].0
+            SystemInfoModel.shared.longInsulinSubType =  self.sections[indexPath.row].2
             self.mainTableView.reloadData()
         }
     }

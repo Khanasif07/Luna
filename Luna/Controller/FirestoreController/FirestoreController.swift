@@ -99,6 +99,29 @@ class FirestoreController:NSObject{
         }
     }
     
+    //MARK:- GetUserSystemInfoData
+    //=======================
+    static func getUserSystemInfoData(success: @escaping () -> Void,
+                                      failure:  @escaping FailureResponse){
+        if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
+            db.collection(ApiKey.userSystemInfo)
+                .document(Auth.auth().currentUser?.uid ?? "").getDocument { (snapshot, error) in
+                    if let error = error {
+                        failure(error)
+                    } else{
+                        print("============================")
+                        guard let data = snapshot?.data() else { return }
+                        SystemInfoModel.shared.longInsulinType = data[ApiKey.longInsulinType] as? String ?? ""
+                        SystemInfoModel.shared.longInsulinSubType = data[ApiKey.longInsulinSubType] as? String ?? ""
+                        SystemInfoModel.shared.insulinUnit = data[ApiKey.insulinUnit] as? Int ?? 0
+                        SystemInfoModel.shared.cgmUnit = data[ApiKey.cgmUnit] as? Int ?? 0
+                        SystemInfoModel.shared.cgmType = data[ApiKey.cgmType] as? String ?? ""
+                        success()
+                    }
+                }
+        }
+    }
+    
     
     //MARK:- Get info
     //=======================
@@ -321,10 +344,44 @@ class FirestoreController:NSObject{
     
     //MARK:- Update user System Setup Status
     //================================
-    static func updateUserSystemSetupStatus(isSystemSetupCompleted: Bool) {
+    static func updateUserSystemSetupStatus(isSystemSetupCompleted: Bool, completion: @escaping () -> Void,
+                                            failure: @escaping FailureResponse) {
         let uid = AppUserDefaults.value(forKey: .uid).stringValue
         guard !uid.isEmpty else { return }
-        db.collection(ApiKey.users).document(uid).updateData([ApiKey.isSystemSetupCompleted:isSystemSetupCompleted])
+        db.collection(ApiKey.users).document(uid).updateData([ApiKey.isSystemSetupCompleted:isSystemSetupCompleted]){ (error) in
+            if let err = error {
+                failure(err)
+            } else {
+                completion()
+            }
+        }
+    }
+    
+    
+    //MARK:- setSystemInfoData
+    //=======================
+    static func setSystemInfoData(userId: String,
+                                  longInsulinType: String,
+                                  longInsulinSubType: String,
+                                  insulinUnit: Int,
+                                  cgmType: String,
+                                  cgmUnit: Int,
+                                completion: @escaping () -> Void,
+                                failure: @escaping FailureResponse){
+        db.collection(ApiKey.userSystemInfo).document(userId).setData([
+                                                                        ApiKey.longInsulinType: longInsulinType,
+                                                                        ApiKey.longInsulinSubType:longInsulinSubType,
+                                                                        ApiKey.insulinUnit:insulinUnit,
+                                                                        ApiKey.cgmType: cgmType,
+                                                                        ApiKey.cgmUnit:cgmUnit]){ err in
+            if let err = err {
+                failure(err)
+                print("Error writing document: \(err)")
+            } else {
+                completion()
+                print("Document successfully written!")
+            }
+        }
     }
     
     //MARK:- Update user online status

@@ -60,6 +60,7 @@ extension SystemSetupVC {
         if #available(iOS 13.0, *) {
         overrideUserInterfaceStyle = .light
         }
+        self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna",""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
         self.tableViewSetup()
     }
     

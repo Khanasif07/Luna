@@ -114,6 +114,12 @@ extension HomeVC {
         } failure: { (error) -> (Void) in
             CommonFunctions.showToastWithMessage(error.localizedDescription)
         }
+        FirestoreController.getUserSystemInfoData {
+            print("Successfully")
+        } failure: { (error) -> (Void) in
+            CommonFunctions.showToastWithMessage(error.localizedDescription)
+        }
+
     }
     
     func addBottomSheetView() {

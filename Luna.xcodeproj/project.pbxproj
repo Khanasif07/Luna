@@ -25,6 +25,7 @@
 		840A7E662696F190005AA1E6 /* SessionHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7E642696F190005AA1E6 /* SessionHistoryTableViewCell.swift */; };
 		840A7E672696F190005AA1E6 /* SessionHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840A7E652696F190005AA1E6 /* SessionHistoryTableViewCell.xib */; };
 		840A7ED72697060E005AA1E6 /* SessionFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7ED62697060E005AA1E6 /* SessionFilterVC.swift */; };
+		8410611C26A9DC8E00BF7953 /* SystemInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8410611B26A9DC8E00BF7953 /* SystemInfoModel.swift */; };
 		842E9B1726955E2400F36A3D /* InsulinStep2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842E9B1526955E2400F36A3D /* InsulinStep2Cell.swift */; };
 		842E9B1826955E2400F36A3D /* InsulinStep2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842E9B1626955E2400F36A3D /* InsulinStep2Cell.xib */; };
 		842E9B1B2695690B00F36A3D /* InsulinStep3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842E9B1A2695690B00F36A3D /* InsulinStep3VC.swift */; };
@@ -164,6 +165,7 @@
 		840A7E642696F190005AA1E6 /* SessionHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		840A7E652696F190005AA1E6 /* SessionHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		840A7ED62697060E005AA1E6 /* SessionFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFilterVC.swift; sourceTree = "<group>"; };
+		8410611B26A9DC8E00BF7953 /* SystemInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInfoModel.swift; sourceTree = "<group>"; };
 		842E9B1526955E2400F36A3D /* InsulinStep2Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep2Cell.swift; sourceTree = "<group>"; };
 		842E9B1626955E2400F36A3D /* InsulinStep2Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InsulinStep2Cell.xib; sourceTree = "<group>"; };
 		842E9B1A2695690B00F36A3D /* InsulinStep3VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep3VC.swift; sourceTree = "<group>"; };
@@ -740,6 +742,7 @@
 			isa = PBXGroup;
 			children = (
 				84E78B9D2685E8C500FABDCD /* UserModel.swift */,
+				8410611B26A9DC8E00BF7953 /* SystemInfoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -957,6 +960,7 @@
 				84CC12BC2668CDF4009316FC /* FirestoreController.swift in Sources */,
 				84CC12F22668D0E6009316FC /* UITextFieldExtension.swift in Sources */,
 				84D1F5052679E95A00F131E0 /* ForgotPasswordVC.swift in Sources */,
+				8410611C26A9DC8E00BF7953 /* SystemInfoModel.swift in Sources */,
 				847899732684824F00D1DF36 /* HomeVC.swift in Sources */,
 				84CC12E02668D036009316FC /* AppConstants.swift in Sources */,
 				84F819CE267B6FE000A4C758 /* BLEIntegrationVC.swift in Sources */,
