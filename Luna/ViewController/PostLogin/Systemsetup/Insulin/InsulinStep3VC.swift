@@ -37,6 +37,11 @@ class InsulinStep3VC: UIViewController {
     //===========================
     @IBAction func doneBtnAction(_ sender: AppButton) {
         let vc = InsulinStep4VC.instantiate(fromAppStoryboard: .SystemSetup)
+        vc.insulinConnectedSuccess = { [weak self] (sender) in
+            guard let selff = self else { return }
+            NotificationCenter.default.post(name: Notification.Name.insulinConnectedSuccessfully, object: nil)
+            selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupStep1VC.self)
+        }
         self.present(vc, animated: true, completion: nil)
     }
     

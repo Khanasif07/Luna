@@ -410,6 +410,7 @@ PODS:
     - NVActivityIndicatorView/Base (= 5.1.1)
   - NVActivityIndicatorView/Base (5.1.1)
   - PromisesObjC (1.2.12)
+  - Pulsator (0.6.0)
   - SwiftChart (1.0.1)
   - SwiftKeychainWrapper (4.0.1)
   - SwiftyJSON (5.0.1)
@@ -429,6 +430,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - MessageKit
   - NVActivityIndicatorView
+  - Pulsator
   - SwiftChart
   - SwiftKeychainWrapper
   - SwiftyJSON
@@ -466,6 +468,7 @@ SPEC REPOS:
     - nanopb
     - NVActivityIndicatorView
     - PromisesObjC
+    - Pulsator
     - SwiftChart
     - SwiftKeychainWrapper
     - SwiftyJSON
@@ -502,11 +505,12 @@ SPEC CHECKSUMS:
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  Pulsator: eb5a9f9be4bdcbd19903984c65deca6aabe50a17
   SwiftChart: ba767a678d568a5ee22d419e146a0582865e1aff
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: 6c5471278b4c3d25c140dcef951016905b6e7d5c
+PODFILE CHECKSUM: 97ea7fdbead76644e28e3ca77aa2f88975254fb1
 
 COCOAPODS: 1.10.1

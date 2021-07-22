@@ -18,6 +18,7 @@ class InsulinStep4VC: UIViewController {
     
     // MARK: - Variables
     //===========================
+    var insulinConnectedSuccess: ((UIButton)->())?
     
     // MARK: - Lifecycle
     //===========================
@@ -47,9 +48,11 @@ class InsulinStep4VC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func doneBtnTapped(_ sender: AppButton) {
-        AppUserDefaults.save(value: true, forKey: .isSystemSetupCompleted)
-        FirestoreController.updateUserSystemSetupStatus(isSystemSetupCompleted: true)
-        AppRouter.gotoHomeVC()
+        self.dismiss(animated: true) {
+            if let handle = self.insulinConnectedSuccess{
+                handle(sender)
+            }
+        }
     }
     
     @IBAction func crossBtnAction(_ sender: UIButton) {

@@ -24,5 +24,7 @@ target 'Luna' do
   pod 'SwiftKeychainWrapper'
   pod "SwiftChart"
   pod 'DYPieChartView'
+  pod "Pulsator"
+
  
 end

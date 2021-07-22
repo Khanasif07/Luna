@@ -998,4 +998,17 @@ class AppButton: UIButton {
             isUserInteractionEnabled = isEnabledWithoutBackground ? true : false
         }
     }
+    
+    open  var isEditable: Bool = false{
+        didSet {
+            alpha = isEditable ? 1.0 : 1.0
+            backgroundColor = isEditable ?  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) : #colorLiteral(red: 0.2392156863, green: 0.7882352941, blue: 0.5764705882, alpha: 1)
+            setTitleColor(isEditable ? #colorLiteral(red: 0.2392156863, green: 0.7882352941, blue: 0.5764705882, alpha: 1) : .white, for: .normal)
+            if isEditable{
+                borderWidth = 1.0
+                borderColor = AppColors.fontPrimaryColor
+            }
+            isUserInteractionEnabled = isEnabledWithoutBackground ? true : false
+        }
+    }
 }

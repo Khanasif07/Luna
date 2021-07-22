@@ -15,6 +15,9 @@ class CGMDATASHAREVC: UIViewController {
     @IBOutlet weak var subTitleLbl: UILabel!
     @IBOutlet weak var titleLbl: UILabel!
     
+    
+    var CGMConnectNavigation: ((UIButton)->())?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,9 +27,11 @@ class CGMDATASHAREVC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func okBtnTapped(_ sender: AppButton) {
-        let scene =  CGMConnectedVC.instantiate(fromAppStoryboard: .CGPStoryboard)
-        scene.vcObj = self
-        self.present(scene, animated: true, completion: nil)
+        self.dismiss(animated: true) {
+            if let handle = self.CGMConnectNavigation{
+                handle(sender)
+            }
+        }
     }
     
     @IBAction func crossBtnTapped(_ sender: AppButton) {

@@ -101,7 +101,7 @@
                                                 </constraints>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AiS-dd-hs4">
-                                                <rect key="frame" x="0.0" y="120" width="414" height="776"/>
+                                                <rect key="frame" x="0.0" y="120" width="414" height="656"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </tableView>
                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="UoU-Dy-H1I">
@@ -110,18 +110,35 @@
                                                     <constraint firstAttribute="height" constant="6" id="MfK-TI-idT"/>
                                                 </constraints>
                                             </progressView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXe-jB-Utk" customClass="AppButton" customModule="Luna" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="788" width="374" height="44"/>
+                                                <color key="backgroundColor" red="0.45098039220000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="SzS-21-Ayw"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                                <state key="normal" title="Done">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="doneBtnAction:" destination="TZO-Gp-Vjs" eventType="touchUpInside" id="7CF-ix-Prx"/>
+                                                    <action selector="proceedBtnAction:" destination="BDf-5Y-uHg" eventType="touchUpInside" id="IXC-yM-uct"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="eXe-jB-Utk" firstAttribute="top" secondItem="AiS-dd-hs4" secondAttribute="bottom" constant="12" id="6KO-Zf-Ioc"/>
                                             <constraint firstAttribute="trailing" secondItem="AiS-dd-hs4" secondAttribute="trailing" id="EOn-tt-ZUz"/>
+                                            <constraint firstItem="eXe-jB-Utk" firstAttribute="leading" secondItem="sst-8J-1Rf" secondAttribute="leading" constant="20" symbolic="YES" id="GAX-x4-3g9"/>
                                             <constraint firstItem="nmD-sA-B2u" firstAttribute="leading" secondItem="sst-8J-1Rf" secondAttribute="leading" id="Ht7-3W-3i2"/>
-                                            <constraint firstAttribute="bottom" secondItem="AiS-dd-hs4" secondAttribute="bottom" id="RT1-4Y-dFJ"/>
                                             <constraint firstItem="UoU-Dy-H1I" firstAttribute="top" secondItem="nmD-sA-B2u" secondAttribute="bottom" constant="5" id="TNb-MC-w7q"/>
                                             <constraint firstItem="AiS-dd-hs4" firstAttribute="leading" secondItem="sst-8J-1Rf" secondAttribute="leading" id="YVC-DS-Q1u"/>
                                             <constraint firstItem="AiS-dd-hs4" firstAttribute="top" secondItem="UoU-Dy-H1I" secondAttribute="bottom" constant="15" id="f4g-tf-daI"/>
                                             <constraint firstItem="UoU-Dy-H1I" firstAttribute="leading" secondItem="nmD-sA-B2u" secondAttribute="leading" constant="20" id="gUw-8J-YAL"/>
                                             <constraint firstItem="UoU-Dy-H1I" firstAttribute="trailing" secondItem="nmD-sA-B2u" secondAttribute="trailing" constant="-20" id="kPn-xk-4Mc"/>
                                             <constraint firstAttribute="trailing" secondItem="nmD-sA-B2u" secondAttribute="trailing" id="tkg-Yc-ezc"/>
+                                            <constraint firstAttribute="trailing" secondItem="eXe-jB-Utk" secondAttribute="trailing" constant="20" id="vdr-el-L1x"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -142,9 +159,13 @@
                             <constraint firstItem="fOK-yQ-Mlj" firstAttribute="top" secondItem="Zse-Tv-DAm" secondAttribute="top" id="bFv-Wj-CQ4"/>
                             <constraint firstAttribute="bottom" secondItem="fOK-yQ-Mlj" secondAttribute="bottom" id="m6P-Kh-LnA"/>
                             <constraint firstItem="fOK-yQ-Mlj" firstAttribute="leading" secondItem="yO6-sm-ajC" secondAttribute="leading" id="ssU-eP-Pts"/>
+                            <constraint firstItem="yO6-sm-ajC" firstAttribute="bottom" secondItem="eXe-jB-Utk" secondAttribute="bottom" constant="30" id="uYV-Oz-2gU"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="doneBtn" destination="eXe-jB-Utk" id="Gqb-bh-0o9"/>
+                        <outlet property="doneBtnBottmCost" destination="uYV-Oz-2gU" id="Srt-Ls-a4V"/>
+                        <outlet property="doneBtnHeightCost" destination="SzS-21-Ayw" id="cXS-y3-CFx"/>
                         <outlet property="infoView" destination="5Br-o2-ip0" id="J1Z-aZ-hnP"/>
                         <outlet property="mainTableView" destination="AiS-dd-hs4" id="rP1-RK-uFz"/>
                         <outlet property="manualView" destination="z9T-d0-wAt" id="NAa-ks-Adh"/>

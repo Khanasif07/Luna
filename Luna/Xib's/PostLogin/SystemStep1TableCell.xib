@@ -35,7 +35,7 @@
                         <rect key="frame" x="20" y="10" width="307" height="165"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="7.5" translatesAutoresizingMaskIntoConstraints="NO" id="QlX-Sb-rmK">
-                                <rect key="frame" x="20" y="16" width="267" height="71"/>
+                                <rect key="frame" x="20" y="16" width="202" height="71"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STEP 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baV-h5-N8h">
                                         <rect key="frame" x="0.0" y="0.0" width="42" height="17"/>
@@ -88,16 +88,26 @@
                                     <action selector="startBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="31p-5i-sTf"/>
                                 </connections>
                             </button>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="step1Devicepaired" translatesAutoresizingMaskIntoConstraints="NO" id="ZMq-f5-KWv">
+                                <rect key="frame" x="245" y="20.5" width="62" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="62" id="Crd-b6-FPw"/>
+                                    <constraint firstAttribute="width" secondItem="ZMq-f5-KWv" secondAttribute="height" id="M1W-ed-gYO"/>
+                                    <constraint firstAttribute="height" constant="62" id="tKJ-I8-rdE"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="QlX-Sb-rmK" firstAttribute="leading" secondItem="yAt-8p-QxJ" secondAttribute="leading" constant="20" id="4bo-8f-Ksl"/>
+                            <constraint firstItem="ZMq-f5-KWv" firstAttribute="centerY" secondItem="QlX-Sb-rmK" secondAttribute="centerY" id="63A-Ww-wC2"/>
+                            <constraint firstItem="ZMq-f5-KWv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QlX-Sb-rmK" secondAttribute="trailing" constant="5" id="6XM-sf-W3W"/>
                             <constraint firstItem="QlX-Sb-rmK" firstAttribute="top" secondItem="yAt-8p-QxJ" secondAttribute="top" constant="16" id="G6x-Pn-0MM"/>
+                            <constraint firstAttribute="trailing" secondItem="ZMq-f5-KWv" secondAttribute="trailing" id="gtU-q7-5DL"/>
                             <constraint firstItem="o6f-RB-1Lz" firstAttribute="leading" secondItem="yAt-8p-QxJ" secondAttribute="leading" constant="20" id="hNm-px-yvc"/>
                             <constraint firstAttribute="bottom" secondItem="o6f-RB-1Lz" secondAttribute="bottom" constant="16" id="kvs-c8-PLz"/>
                             <constraint firstItem="o6f-RB-1Lz" firstAttribute="top" secondItem="QlX-Sb-rmK" secondAttribute="bottom" constant="18" id="nGd-pU-c9w"/>
                             <constraint firstAttribute="trailing" secondItem="o6f-RB-1Lz" secondAttribute="trailing" constant="20" id="tei-ey-Q3D"/>
-                            <constraint firstAttribute="trailing" secondItem="QlX-Sb-rmK" secondAttribute="trailing" constant="20" id="ufl-Y5-eG5"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -111,6 +121,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="dataContainerView" destination="yAt-8p-QxJ" id="180-qf-ip5"/>
+                <outlet property="pairedDeviceImgView" destination="ZMq-f5-KWv" id="68X-9r-EXX"/>
                 <outlet property="startBtn" destination="o6f-RB-1Lz" id="17J-aG-1ay"/>
                 <outlet property="stepLbl" destination="baV-h5-N8h" id="rYw-ym-2uk"/>
                 <outlet property="timeDescView" destination="NKE-6P-G5k" id="mnQ-dT-xm0"/>
@@ -121,5 +132,6 @@
     </objects>
     <resources>
         <image name="clock" width="16" height="16"/>
+        <image name="step1Devicepaired" width="104" height="102"/>
     </resources>
 </document>

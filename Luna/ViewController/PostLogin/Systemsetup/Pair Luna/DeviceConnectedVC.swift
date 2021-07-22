@@ -13,21 +13,22 @@ class DeviceConnectedVC: UIViewController {
     //===========================
     @IBOutlet weak var outerView: UIView!
     @IBOutlet weak var OKBtn: UIButton!
+    
+    var lunaPairedSuccess: ((UIButton)->())?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         initialSetup()
     }
     
     // MARK: - IBActions
     //===========================
     @IBAction func proceedBtnAction(_ sender: UIButton) {
-//        self.dismiss(animated: false, completion: {
-//        })
-
-        let scene =  LunaDevicesVC.instantiate(fromAppStoryboard: .CGPStoryboard)
-        self.present(scene, animated: true, completion: nil)
+        self.dismiss(animated: true) {
+            if let handle = self.lunaPairedSuccess{
+                handle(sender)
+            }
+        }
     }
     
     @IBAction func dissmissBtnTapped(_ sender: UIButton) {
