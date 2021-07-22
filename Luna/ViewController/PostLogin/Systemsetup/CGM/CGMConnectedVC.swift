@@ -15,7 +15,9 @@ class CGMConnectedVC: UIViewController {
     @IBOutlet weak var subTitleLbl: UILabel!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var ValueImage : UIImageView!
+    
     var vcObj:UIViewController = UIViewController()
+    var cgmConnectedSuccess: ((UIButton)->())?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +28,11 @@ class CGMConnectedVC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func okBtnTapped(_ sender: AppButton) {
-        self.dismiss(animated: false, completion: {
-            let vc = CGMSelectorVC.instantiate(fromAppStoryboard: .CGPStoryboard)
-            self.vcObj.navigationController?.popViewController(animated: false)
-            
-        })
+        self.dismiss(animated: true) {
+            if let handle = self.cgmConnectedSuccess{
+                handle(sender)
+            }
+        }
 
     }
 

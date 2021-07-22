@@ -34,12 +34,15 @@ class CGMLoginVC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func proceedBtnAction(_ sender: UIButton) {
-        self.proceedBtn.isEnabled = true
         let scene =  CGMDATASHAREVC.instantiate(fromAppStoryboard: .CGPStoryboard)
         scene.CGMConnectNavigation = { [weak self] (sender) in
             guard let selff = self else { return }
             let scene =  CGMConnectedVC.instantiate(fromAppStoryboard: .CGPStoryboard)
-//            scene.vcObj = self
+            scene.cgmConnectedSuccess = { [weak self] (sender) in
+                guard let selff = self else { return }
+                NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: nil)
+                selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupStep1VC.self)
+            }
             selff.present(scene, animated: true, completion: nil)
         }
         self.present(scene, animated: true, completion: nil)

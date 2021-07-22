@@ -101,14 +101,7 @@ extension SystemSetupStep1VC {
         CommonFunctions.delay(delay: 1.0) {
             self.progressView.setProgress(Float(selectedStep) * 1/3, animated: true)
         }
-        self.doneBtn.isEnabled = true
-        self.doneBtn.isHidden = false
-        self.doneBtnBottmCost.constant = 30.0
-        self.doneBtnHeightCost.constant = 44.0
-        self.view.layoutIfNeeded()
-        self.mainTableView.beginUpdates()
-        self.mainTableView.endUpdates()
-        self.mainTableView.reloadData()
+        tableViewReload(selectedStep: selectedStep)
     }
     
     @objc func  insulinConnectedFinish(){
@@ -121,14 +114,7 @@ extension SystemSetupStep1VC {
         CommonFunctions.delay(delay: 1.0) {
             self.progressView.setProgress(Float(selectedStep) * 1/3, animated: true)
         }
-        self.doneBtn.isEnabled = true
-        self.doneBtn.isHidden = false
-        self.doneBtnBottmCost.constant = 30.0
-        self.doneBtnHeightCost.constant = 44.0
-        self.view.layoutIfNeeded()
-        self.mainTableView.beginUpdates()
-        self.mainTableView.endUpdates()
-        self.mainTableView.reloadData()
+        tableViewReload(selectedStep: selectedStep)
     }
     
     @objc func  cgmConnectedFinish(){
@@ -141,10 +127,16 @@ extension SystemSetupStep1VC {
         CommonFunctions.delay(delay: 1.0) {
             self.progressView.setProgress(Float(selectedStep) * 1/3, animated: true)
         }
-        self.doneBtn.isEnabled = true
-        self.doneBtn.isHidden = false
-        self.doneBtnBottmCost.constant = 30.0
-        self.doneBtnHeightCost.constant = 44.0
+        tableViewReload(selectedStep: selectedStep)
+    }
+    
+    private func tableViewReload(selectedStep: Int){
+        if selectedStep == 3 {
+            self.doneBtn.isEnabled = true
+            self.doneBtn.isHidden = false
+            self.doneBtnBottmCost.constant = 30.0
+            self.doneBtnHeightCost.constant = 44.0
+        }
         self.view.layoutIfNeeded()
         self.mainTableView.beginUpdates()
         self.mainTableView.endUpdates()
@@ -180,6 +172,7 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
         case 0:
             cell.stepLbl.text = "STEP" + " \(indexPath.row + 1)"
             cell.pairedDeviceImgView.isHidden = !sections[indexPath.row].1
+            cell.cgmInsulinDataView.isHidden = true
             cell.titleLbl.text =  sections[indexPath.row].1 ? "Luna Device Paired" : "Pair Luna"
             cell.startBtn.setTitle(sections[indexPath.row].1 ? "Edit" : "Start", for: .normal)
             if sections[indexPath.row].1 {
@@ -189,6 +182,10 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
         case 1:
             cell.stepLbl.text = "STEP" + " \(indexPath.row + 1)"
             cell.pairedDeviceImgView.isHidden = true
+            cell.cgmInsulinDataView.isHidden = !sections[indexPath.row].1
+            cell.unitLbl.text = "mg/dL"
+            cell.quantityLbl.text = "123"
+            cell.arrowImgView.isHidden = false
             cell.titleLbl.text =  sections[indexPath.row].1 ? "Dexcom G6" : "Link CGM"
             cell.startBtn.setTitle(sections[indexPath.row].1 ? "Edit" : "Start", for: .normal)
             cell.timeDescView.isHidden = sections[indexPath.row].1
@@ -198,6 +195,10 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
         default:
             cell.stepLbl.text = "STEP" + " \(indexPath.row + 1)"
             cell.pairedDeviceImgView.isHidden = true
+            cell.cgmInsulinDataView.isHidden = !sections[indexPath.row].1
+            cell.unitLbl.text = "per day"
+            cell.quantityLbl.text = "8 u"
+            cell.arrowImgView.isHidden = true
             cell.titleLbl.text =  sections[indexPath.row].1 ? "Lilly Basaglar" : "Insulin Information"
             cell.startBtn.setTitle(sections[indexPath.row].1 ? "Edit" : "Start", for: .normal)
             cell.timeDescView.isHidden = sections[indexPath.row].1

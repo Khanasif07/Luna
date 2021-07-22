@@ -11,6 +11,10 @@ class SystemStep1TableCell: UITableViewCell {
     
     // MARK: - IBOutlets
     //===========================
+    @IBOutlet weak var arrowImgView: UIImageView!
+    @IBOutlet weak var quantityLbl: UILabel!
+    @IBOutlet weak var unitLbl: UILabel!
+    @IBOutlet weak var cgmInsulinDataView: UIStackView!
     @IBOutlet weak var pairedDeviceImgView: UIImageView!
     @IBOutlet weak var startBtn: AppButton!
     @IBOutlet weak var timeDescView: UIStackView!
