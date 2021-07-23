@@ -384,6 +384,32 @@ class FirestoreController:NSObject{
         }
     }
     
+    //MARK:- updateSystemInfoData
+    //=======================
+    static func updateSystemInfoData(userId: String,
+                                  longInsulinType: String,
+                                  longInsulinSubType: String,
+                                  insulinUnit: Int,
+                                  cgmType: String,
+                                  cgmUnit: Int,
+                                completion: @escaping () -> Void,
+                                failure: @escaping FailureResponse){
+        db.collection(ApiKey.userSystemInfo).document(userId).updateData([
+                                                                        ApiKey.longInsulinType: longInsulinType,
+                                                                        ApiKey.longInsulinSubType:longInsulinSubType,
+                                                                        ApiKey.insulinUnit:insulinUnit,
+                                                                        ApiKey.cgmType: cgmType,
+                                                                        ApiKey.cgmUnit:cgmUnit]){ err in
+            if let err = err {
+                failure(err)
+                print("Error writing document: \(err)")
+            } else {
+                completion()
+                print("Document successfully written!")
+            }
+        }
+    }
+    
     //MARK:- Update user online status
     //================================
     static func updateDeviceToken() {

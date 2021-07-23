@@ -40,8 +40,26 @@ class CGMLoginVC: UIViewController {
             let scene =  CGMConnectedVC.instantiate(fromAppStoryboard: .CGPStoryboard)
             scene.cgmConnectedSuccess = { [weak self] (sender) in
                 guard let selff = self else { return }
-                NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: nil)
-                selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupStep1VC.self)
+                if   SystemInfoModel.shared.isFromSetting {
+                    CommonFunctions.showActivityLoader()
+                    FirestoreController.updateSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
+                        FirestoreController.getUserSystemInfoData{
+                            CommonFunctions.hideActivityLoader()
+                            NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: nil)
+                            selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
+                            CommonFunctions.showToastWithMessage("CGM info updated successfully.")
+                        } failure: { (error) -> (Void) in
+                            CommonFunctions.hideActivityLoader()
+                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                        }
+                    } failure: { (error) -> (Void) in
+                        CommonFunctions.hideActivityLoader()
+                        CommonFunctions.showToastWithMessage(error.localizedDescription)
+                    }
+                }else {
+                    NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: nil)
+                    selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupStep1VC.self)
+                }
             }
             selff.present(scene, animated: true, completion: nil)
         }

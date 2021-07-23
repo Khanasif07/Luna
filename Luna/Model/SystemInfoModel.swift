@@ -15,6 +15,7 @@ struct SystemInfoModel{
     var insulinUnit : Int
     var cgmType : String
     var cgmUnit: Int
+    var isFromSetting: Bool = false
     
     init() {
         self.init(JSON([:]))

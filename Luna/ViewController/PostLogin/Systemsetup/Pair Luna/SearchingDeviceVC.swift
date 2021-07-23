@@ -20,10 +20,10 @@ class SearchingDeviceVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        pulsator.radius = 150.0
-        pulsator.backgroundColor = UIColor.red.cgColor
-        animatedView.layer.superlayer?.insertSublayer(pulsator, above: animatedView.layer)
-//        view.layer.addSublayer(pulsator)
+        pulsator.radius = 100.0
+        pulsator.numPulse = 4
+        pulsator.backgroundColor =  UIColor.colorRGB(r: 61, g: 201, b: 147, alpha: 1.0).cgColor
+        animatedView.layer.superlayer?.insertSublayer(pulsator, below: animatedView.layer)
         pulsator.start()
         IntroLbl.textColor =  AppColors.fontPrimaryColor
         outerView.layer.cornerRadius = 10
@@ -40,15 +40,32 @@ class SearchingDeviceVC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func proceedBtnAction(_ sender: UIButton) {
-        self.dismiss(animated: true) {
-            if let handle = self.deviceConnectedNavigation{
-                handle(sender)
-            }
+//        self.dismiss(animated: true) {
+//            if let handle = self.deviceConnectedNavigation{
+//                handle(sender)
+//            }
+//        }
+        let transition:CATransition = CATransition()
+        transition.duration = 0.5
+        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.reveal
+        transition.subtype = CATransitionSubtype.fromBottom
+        self.navigationController?.view.layer.add(transition, forKey: kCATransition)
+        self.navigationController?.popViewController(animated: false)
+        if let handle = self.deviceConnectedNavigation{
+            handle(sender)
         }
     }
     
     @IBAction func dissmissBtnTapped(_ sender: UIButton) {
-        self.dismiss(animated: false, completion: nil)
+//        self.dismiss(animated: false, completion: nil)
+        let transition:CATransition = CATransition()
+        transition.duration = 0.5
+        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.reveal
+        transition.subtype = CATransitionSubtype.fromBottom
+        self.navigationController?.view.layer.add(transition, forKey: kCATransition)
+        self.navigationController?.popViewController(animated: false)
     }
 
 }

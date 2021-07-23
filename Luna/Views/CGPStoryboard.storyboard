@@ -684,7 +684,6 @@ your Phone</string>
                                 <constraints>
                                     <constraint firstItem="gax-4u-Hqt" firstAttribute="trailing" secondItem="3ye-35-2yw" secondAttribute="trailing" id="3V3-ed-mun"/>
                                     <constraint firstItem="i55-WP-I8m" firstAttribute="leading" secondItem="wLl-Vk-ytd" secondAttribute="leading" constant="20" id="3kZ-T3-Sjl"/>
-                                    <constraint firstAttribute="bottom" secondItem="mBT-XG-DQd" secondAttribute="bottom" constant="55" id="51a-mF-JEg"/>
                                     <constraint firstItem="3ye-35-2yw" firstAttribute="leading" secondItem="wLl-Vk-ytd" secondAttribute="leading" constant="20" id="541-ok-pWa"/>
                                     <constraint firstItem="mBT-XG-DQd" firstAttribute="leading" secondItem="wLl-Vk-ytd" secondAttribute="leading" constant="20" id="7up-8g-R3D"/>
                                     <constraint firstAttribute="trailing" secondItem="Ntx-ra-CMN" secondAttribute="trailing" id="BZG-Vd-hhL"/>
@@ -708,6 +707,7 @@ your Phone</string>
                         <constraints>
                             <constraint firstItem="Ntx-ra-CMN" firstAttribute="top" secondItem="yr7-hc-8Ye" secondAttribute="top" id="7BN-6C-DiK"/>
                             <constraint firstAttribute="trailing" secondItem="wLl-Vk-ytd" secondAttribute="trailing" id="EcR-6z-mS0"/>
+                            <constraint firstItem="yr7-hc-8Ye" firstAttribute="bottom" secondItem="mBT-XG-DQd" secondAttribute="bottom" constant="21" id="bgJ-0M-cvZ"/>
                             <constraint firstItem="wLl-Vk-ytd" firstAttribute="top" secondItem="vRv-Pr-mTp" secondAttribute="top" id="f12-j3-D1S"/>
                             <constraint firstItem="wLl-Vk-ytd" firstAttribute="leading" secondItem="yr7-hc-8Ye" secondAttribute="leading" id="o5I-aJ-trJ"/>
                             <constraint firstAttribute="bottom" secondItem="wLl-Vk-ytd" secondAttribute="bottom" id="uak-Jo-5kY"/>
@@ -754,18 +754,18 @@ your Phone</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rs5-PS-SEw">
-                                        <rect key="frame" x="28" y="238" width="358" height="420"/>
+                                        <rect key="frame" x="28" y="281" width="358" height="334"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Searching" translatesAutoresizingMaskIntoConstraints="NO" id="5pl-iy-ojR">
-                                                <rect key="frame" x="79" y="110" width="200" height="200"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="step1Devicepaired" translatesAutoresizingMaskIntoConstraints="NO" id="5pl-iy-ojR">
+                                                <rect key="frame" x="144" y="132" width="70" height="70"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="7vg-04-1Ck"/>
+                                                    <constraint firstAttribute="height" constant="70" id="7vg-04-1Ck"/>
                                                     <constraint firstAttribute="width" secondItem="5pl-iy-ojR" secondAttribute="height" id="yXA-Yd-NbE"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The app will automatically connect to the closest device." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3S-OR-y2e">
-                                                <rect key="frame" x="20" y="358" width="318" height="38.5"/>
+                                                <rect key="frame" x="20" y="272" width="318" height="38.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -790,7 +790,8 @@ Luna devices</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJj-D1-Lqp">
-                                                <rect key="frame" x="79" y="110" width="200" height="200"/>
+                                                <rect key="frame" x="144" y="132" width="70" height="70"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
                                                     <action selector="proceedBtnAction:" destination="ebB-xp-2wl" eventType="touchUpInside" id="zhA-OQ-PbK"/>
                                                 </connections>
@@ -805,7 +806,7 @@ Luna devices</string>
                                             <constraint firstAttribute="bottom" secondItem="h3S-OR-y2e" secondAttribute="bottom" constant="23.5" id="FB9-cv-UMi"/>
                                             <constraint firstAttribute="trailing" secondItem="h3S-OR-y2e" secondAttribute="trailing" constant="20" id="GWC-Ot-cXs"/>
                                             <constraint firstItem="h3S-OR-y2e" firstAttribute="leading" secondItem="rs5-PS-SEw" secondAttribute="leading" constant="20" id="S3i-oW-HsS"/>
-                                            <constraint firstItem="h3S-OR-y2e" firstAttribute="top" secondItem="5pl-iy-ojR" secondAttribute="bottom" constant="48" id="USM-gH-CsW"/>
+                                            <constraint firstItem="h3S-OR-y2e" firstAttribute="top" secondItem="5pl-iy-ojR" secondAttribute="bottom" constant="70" id="USM-gH-CsW"/>
                                             <constraint firstItem="QJj-D1-Lqp" firstAttribute="top" secondItem="5pl-iy-ojR" secondAttribute="top" id="VPD-zz-twq"/>
                                             <constraint firstItem="5pl-iy-ojR" firstAttribute="centerY" secondItem="rs5-PS-SEw" secondAttribute="centerY" id="XFl-Wz-cJd"/>
                                             <constraint firstItem="QJj-D1-Lqp" firstAttribute="trailing" secondItem="5pl-iy-ojR" secondAttribute="trailing" id="d3r-HQ-Wa4"/>
@@ -1329,7 +1330,6 @@ Luna devices</string>
                                     <constraint firstItem="30L-9A-Tlc" firstAttribute="leading" secondItem="EeX-xR-P3i" secondAttribute="leading" id="IUN-Zu-lci"/>
                                     <constraint firstAttribute="trailing" secondItem="30L-9A-Tlc" secondAttribute="trailing" id="OXE-Zd-LPw"/>
                                     <constraint firstAttribute="trailing" secondItem="XaB-pv-muf" secondAttribute="trailing" constant="20" id="Paf-ag-x3j"/>
-                                    <constraint firstAttribute="bottom" secondItem="XaB-pv-muf" secondAttribute="bottom" constant="55" id="Vw2-s3-uvS"/>
                                     <constraint firstItem="XaB-pv-muf" firstAttribute="leading" secondItem="EeX-xR-P3i" secondAttribute="leading" constant="20" id="rEN-jO-zhf"/>
                                 </constraints>
                             </view>
@@ -1339,6 +1339,7 @@ Luna devices</string>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="EeX-xR-P3i" secondAttribute="trailing" id="18m-1l-KIe"/>
                             <constraint firstAttribute="bottom" secondItem="EeX-xR-P3i" secondAttribute="bottom" id="WjC-5F-MLh"/>
+                            <constraint firstItem="exS-Hv-GRu" firstAttribute="bottom" secondItem="XaB-pv-muf" secondAttribute="bottom" constant="21" id="cnn-ki-ykx"/>
                             <constraint firstItem="EeX-xR-P3i" firstAttribute="top" secondItem="CtD-i9-BS2" secondAttribute="top" id="lOi-6o-31r"/>
                             <constraint firstItem="EeX-xR-P3i" firstAttribute="leading" secondItem="exS-Hv-GRu" secondAttribute="leading" id="t8Y-gT-P7x"/>
                             <constraint firstItem="Rfu-IG-eqQ" firstAttribute="top" secondItem="exS-Hv-GRu" secondAttribute="top" id="uQI-65-y3g"/>
@@ -1593,11 +1594,11 @@ Luna devices</string>
         <image name="Help" width="40" height="40"/>
         <image name="Info Icon" width="40" height="40"/>
         <image name="Pairluna_illustration" width="306.5" height="103"/>
-        <image name="Searching" width="200" height="200"/>
         <image name="Sideup_arrow_green" width="36" height="36"/>
         <image name="back" width="40" height="40"/>
         <image name="cross" width="37" height="37"/>
         <image name="eyeOpenIcon" width="24" height="24"/>
+        <image name="step1Devicepaired" width="104" height="102"/>
         <systemColor name="quaternarySystemFillColor">
             <color red="0.45490196078431372" green="0.45490196078431372" blue="0.50196078431372548" alpha="0.080000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

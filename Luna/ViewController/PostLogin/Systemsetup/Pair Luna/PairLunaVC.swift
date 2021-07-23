@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Pulsator
 class PairLunaVC: UIViewController {
     
     // MARK: - IBOutlets
@@ -15,8 +14,7 @@ class PairLunaVC: UIViewController {
     @IBOutlet weak var SubIntroLbl: UILabel!
     @IBOutlet weak var InfoIntroLbl: UILabel!
     @IBOutlet weak var proceedBtn: AppButton!
-    var vcObj:UIViewController = UIViewController()
-    let pulsator = Pulsator()
+   
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,25 +24,52 @@ class PairLunaVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         view.layer.layoutIfNeeded()
-        pulsator.position = view.layer.position
     }
     
     // MARK: - IBActions
     //===========================
     @IBAction func proceedBtnAction(_ sender: UIButton) {
-        self.proceedBtn.isEnabled = true
         let scene =  SearchingDeviceVC.instantiate(fromAppStoryboard: .CGPStoryboard)
         scene.deviceConnectedNavigation = { [weak self] (sender) in
             guard let selff = self else { return }
             let scene =  DeviceConnectedVC.instantiate(fromAppStoryboard: .CGPStoryboard)
             scene.lunaPairedSuccess = { [weak self] (sender) in
                 guard let selff = self else { return }
+                if   SystemInfoModel.shared.isFromSetting {
+//                    CommonFunctions.showActivityLoader()
+//                    FirestoreController.updateSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
+//                        FirestoreController.getUserSystemInfoData{
+//                            CommonFunctions.hideActivityLoader()
+                            NotificationCenter.default.post(name: Notification.Name.lunaPairedSuccessfully, object: nil)
+                            selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
+                            CommonFunctions.showToastWithMessage("Paired Luna successfully.")
+//                        } failure: { (error) -> (Void) in
+//                            CommonFunctions.hideActivityLoader()
+//                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+//                        }
+//                    } failure: { (error) -> (Void) in
+//                        CommonFunctions.hideActivityLoader()
+//                        CommonFunctions.showToastWithMessage(error.localizedDescription)
+//                    }
+                }else {
                 NotificationCenter.default.post(name: Notification.Name.lunaPairedSuccessfully, object: nil)
                 selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupStep1VC.self)
+                }
             }
             selff.present(scene, animated: true, completion: nil)
         }
-        self.present(scene, animated: true, completion: nil)
+//        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//           let viewController = storyBoard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+
+           let transition = CATransition()
+           transition.duration = 0.5
+           transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+           transition.type = CATransitionType.moveIn
+           transition.subtype = CATransitionSubtype.fromTop
+           self.navigationController?.view.layer.add(transition, forKey: nil)
+           self.navigationController?.pushViewController(scene, animated: false)
+//        self.navigationController?.pushViewController(scene, animated: true)
+//        self.present(scene, animated: true, completion: nil)
         
     }
     
@@ -63,15 +88,9 @@ extension PairLunaVC {
      
         SubIntroLbl.textColor = AppColors.fontPrimaryColor
         InfoIntroLbl.textColor =  AppColors.fontPrimaryColor
-        
+        self.proceedBtn.isEnabled = true
         self.proceedBtn.layer.cornerRadius = 10
         self.proceedBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
-       
-//        pulsator.radius = 50.0
-//        pulsator.backgroundColor = UIColor.red.cgColor
-////        view.layer.superlayer?.insertSublayer(pulsator, below: view.layer)
-//        view.layer.addSublayer(pulsator)
-//        pulsator.start()
     }
   
 }
