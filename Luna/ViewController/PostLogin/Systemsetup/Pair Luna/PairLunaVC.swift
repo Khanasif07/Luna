@@ -85,7 +85,6 @@ class PairLunaVC: UIViewController {
 extension PairLunaVC {
     
     private func initialSetup() {
-     
         SubIntroLbl.textColor = AppColors.fontPrimaryColor
         InfoIntroLbl.textColor =  AppColors.fontPrimaryColor
         self.proceedBtn.isEnabled = true
