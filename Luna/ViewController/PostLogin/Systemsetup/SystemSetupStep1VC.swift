@@ -205,7 +205,7 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
             cell.pairedDeviceImgView.isHidden = true
             cell.cgmInsulinDataView.isHidden = !sections[indexPath.row].1
             cell.unitLbl.text = "mg/dL"
-            cell.quantityLbl.text = "\(SystemInfoModel.shared.cgmUnit)"
+            cell.quantityLbl.text = AppUserDefaults.value(forKey: .cgmValue).stringValue
             cell.arrowImgView.isHidden = false
             cell.titleLbl.text =  sections[indexPath.row].1 ? SystemInfoModel.shared.cgmType : "Link CGM"
             cell.startBtn.setTitle(sections[indexPath.row].1 ? "Edit" : "Start", for: .normal)
