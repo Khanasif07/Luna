@@ -49,10 +49,22 @@ class SystemSetupStep1VC: UIViewController {
     }
     
     @IBAction func doneBtnAction(_ sender: AppButton) {
-        //MARK:- Need to manage all three case
-        AppUserDefaults.save(value: true, forKey: .isSystemSetupCompleted)
-        FirestoreController.updateUserSystemSetupStatus(isSystemSetupCompleted: true)
-        AppRouter.gotoHomeVC()
+        //MARK:- Need to manage all three casE
+        CommonFunctions.showActivityLoader()
+        FirestoreController.updateUserSystemSetupStatus(isSystemSetupCompleted: true) {
+            print("Successfully")
+        } failure: { (error) -> (Void) in
+            CommonFunctions.hideActivityLoader()
+            CommonFunctions.showToastWithMessage(error.localizedDescription)
+        }
+        FirestoreController.setSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
+            CommonFunctions.hideActivityLoader()
+            AppUserDefaults.save(value: true, forKey: .isSystemSetupCompleted)
+            AppRouter.gotoHomeVC()
+        } failure: { (error) -> (Void) in
+            CommonFunctions.hideActivityLoader()
+            CommonFunctions.showToastWithMessage(error.localizedDescription)
+        }
     }
     
 }
@@ -160,9 +172,18 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
                 let vc = PairLunaVC.instantiate(fromAppStoryboard: .CGPStoryboard)
                 self.navigationController?.pushViewController(vc, animated: true)
             case 1:
+                if cell.startBtn.titleLabel?.text == "Start"{
+                    SystemInfoModel.shared.cgmUnit = 0
+                    SystemInfoModel.shared.cgmType = ""
+                }
                 let vc = CGMSelectorVC.instantiate(fromAppStoryboard: .CGPStoryboard)
                 self.navigationController?.pushViewController(vc, animated: true)
             default:
+                if cell.startBtn.titleLabel?.text == "Start"{
+                    SystemInfoModel.shared.insulinUnit = 0
+                    SystemInfoModel.shared.longInsulinSubType = ""
+                    SystemInfoModel.shared.longInsulinType = ""
+                }
                 let vc = InsulinStep1VC.instantiate(fromAppStoryboard: .SystemSetup)
                 self.navigationController?.pushViewController(vc, animated: true)
             }
@@ -186,7 +207,7 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
             cell.unitLbl.text = "mg/dL"
             cell.quantityLbl.text = AppUserDefaults.value(forKey: .cgmValue).stringValue
             cell.arrowImgView.isHidden = false
-            cell.titleLbl.text =  sections[indexPath.row].1 ? "Dexcom G6" : "Link CGM"
+            cell.titleLbl.text =  sections[indexPath.row].1 ? SystemInfoModel.shared.cgmType : "Link CGM"
             cell.startBtn.setTitle(sections[indexPath.row].1 ? "Edit" : "Start", for: .normal)
             cell.timeDescView.isHidden = sections[indexPath.row].1
             if sections[indexPath.row].1 {
@@ -197,9 +218,9 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
             cell.pairedDeviceImgView.isHidden = true
             cell.cgmInsulinDataView.isHidden = !sections[indexPath.row].1
             cell.unitLbl.text = "per day"
-            cell.quantityLbl.text = "8 u"
+            cell.quantityLbl.text = "\(SystemInfoModel.shared.insulinUnit)" + " u"
             cell.arrowImgView.isHidden = true
-            cell.titleLbl.text =  sections[indexPath.row].1 ? "Lilly Basaglar" : "Insulin Information"
+            cell.titleLbl.text =  sections[indexPath.row].1 ? SystemInfoModel.shared.longInsulinType : "Insulin Information"
             cell.startBtn.setTitle(sections[indexPath.row].1 ? "Edit" : "Start", for: .normal)
             cell.timeDescView.isHidden = sections[indexPath.row].1
             if sections[indexPath.row].1 {

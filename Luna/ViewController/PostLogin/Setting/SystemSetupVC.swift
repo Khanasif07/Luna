@@ -26,6 +26,10 @@ class SystemSetupVC: UIViewController {
         initialSetup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
             if userInterfaceStyle == .dark{
@@ -57,16 +61,52 @@ class SystemSetupVC: UIViewController {
 extension SystemSetupVC {
     
     private func initialSetup() {
+        self.getSystemInfo()
         if #available(iOS 13.0, *) {
         overrideUserInterfaceStyle = .light
         }
+        self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna",""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
         self.tableViewSetup()
+        self.addObserver()
+    }
+    
+    private func addObserver(){
+        NotificationCenter.default.addObserver(self, selector: #selector(lunaPairedFinish), name: .lunaPairedSuccessfully, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(insulinConnectedFinish), name: .insulinConnectedSuccessfully, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(cgmConnectedFinish), name: .cgmConnectedSuccessfully, object: nil)
+    }
+    
+    @objc func lunaPairedFinish(){
+        self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna",""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
+        self.systemTableView.reloadData()
+    }
+    
+    @objc func  insulinConnectedFinish(){
+        self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna",""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
+        self.systemTableView.reloadData()
+    }
+    
+    @objc func  cgmConnectedFinish(){
+        self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna",""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
+        self.systemTableView.reloadData()
     }
     
     private func tableViewSetup(){
         self.systemTableView.delegate = self
         self.systemTableView.dataSource = self
         self.systemTableView.registerCell(with: SettingTableCell.self)
+    }
+    
+    private func getSystemInfo(){
+        CommonFunctions.showActivityLoader()
+        FirestoreController.getUserSystemInfoData{
+            CommonFunctions.hideActivityLoader()
+            self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna",""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
+            self.systemTableView.reloadData()
+        } failure: { (error) -> (Void) in
+            CommonFunctions.hideActivityLoader()
+            CommonFunctions.showToastWithMessage(error.localizedDescription)
+        }
     }
 }
 
@@ -94,6 +134,21 @@ extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        CommonFunctions.showToastWithMessage("Under Development")
+        switch indexPath.row {
+        case 2:
+            SystemInfoModel.shared.isFromSetting = true
+            let vc = PairLunaVC.instantiate(fromAppStoryboard: .CGPStoryboard)
+            self.navigationController?.pushViewController(vc, animated: true)
+        case 0:
+            SystemInfoModel.shared.isFromSetting = true
+            let vc = InsulinStep1VC.instantiate(fromAppStoryboard: .SystemSetup)
+            self.navigationController?.pushViewController(vc, animated: true)
+        case 1:
+            SystemInfoModel.shared.isFromSetting = true
+            let vc = CGMSelectorVC.instantiate(fromAppStoryboard: .CGPStoryboard)
+            self.navigationController?.pushViewController(vc, animated: true)
+        default:
+            CommonFunctions.showToastWithMessage("Under Development")
+        }
     }
 }

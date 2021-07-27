@@ -66,6 +66,8 @@ class InsulinStep4VC: UIViewController {
 extension InsulinStep4VC {
     
     private func initialSetup() {
+        self.insulinCountLbl.text = "\(SystemInfoModel.shared.insulinUnit)"
+        self.insulinType.text =  "\(SystemInfoModel.shared.longInsulinType)"
         self.doneBtn.isEnabled = true
     }
 }

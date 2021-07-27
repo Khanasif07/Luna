@@ -34,12 +34,14 @@
 		8418D7DF26B0230100BAB256 /* AnyConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418D7DE26B0230100BAB256 /* AnyConvertible.swift */; };
 		8418D7E226B0235300BAB256 /* ObservationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418D7E126B0235300BAB256 /* ObservationToken.swift */; };
 		8418D7E526B023A700BAB256 /* CGMAppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418D7E426B023A700BAB256 /* CGMAppConstants.swift */; };
+		8410611C26A9DC8E00BF7953 /* SystemInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8410611B26A9DC8E00BF7953 /* SystemInfoModel.swift */; };
 		842E9B1726955E2400F36A3D /* InsulinStep2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842E9B1526955E2400F36A3D /* InsulinStep2Cell.swift */; };
 		842E9B1826955E2400F36A3D /* InsulinStep2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842E9B1626955E2400F36A3D /* InsulinStep2Cell.xib */; };
 		842E9B1B2695690B00F36A3D /* InsulinStep3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842E9B1A2695690B00F36A3D /* InsulinStep3VC.swift */; };
 		842E9B1E2695710300F36A3D /* InsulinStep4VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842E9B1D2695710300F36A3D /* InsulinStep4VC.swift */; };
 		8432A1992672294200859B47 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8432A19B2672294200859B47 /* Localizable.strings */; };
 		8432A19F2672319B00859B47 /* BiometricIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8432A19E2672319B00859B47 /* BiometricIDAuth.swift */; };
+		8445788726AFE14B008B93AD /* PairLunaProblemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8445788626AFE14B008B93AD /* PairLunaProblemVC.swift */; };
 		84467271268D867600EC55FD /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84467270268D867600EC55FD /* BLEManager.swift */; };
 		84467275268DAE1E00EC55FD /* SystemSetup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84467274268DAE1E00EC55FD /* SystemSetup.storyboard */; };
 		8446727C268DAF8E00EC55FD /* SystemSetupStep1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446727B268DAF8E00EC55FD /* SystemSetupStep1VC.swift */; };
@@ -185,12 +187,14 @@
 		8418D7DE26B0230100BAB256 /* AnyConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyConvertible.swift; sourceTree = "<group>"; };
 		8418D7E126B0235300BAB256 /* ObservationToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservationToken.swift; sourceTree = "<group>"; };
 		8418D7E426B023A700BAB256 /* CGMAppConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMAppConstants.swift; sourceTree = "<group>"; };
+		8410611B26A9DC8E00BF7953 /* SystemInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInfoModel.swift; sourceTree = "<group>"; };
 		842E9B1526955E2400F36A3D /* InsulinStep2Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep2Cell.swift; sourceTree = "<group>"; };
 		842E9B1626955E2400F36A3D /* InsulinStep2Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InsulinStep2Cell.xib; sourceTree = "<group>"; };
 		842E9B1A2695690B00F36A3D /* InsulinStep3VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep3VC.swift; sourceTree = "<group>"; };
 		842E9B1D2695710300F36A3D /* InsulinStep4VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep4VC.swift; sourceTree = "<group>"; };
 		8432A19A2672294200859B47 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8432A19E2672319B00859B47 /* BiometricIDAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuth.swift; sourceTree = "<group>"; };
+		8445788626AFE14B008B93AD /* PairLunaProblemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairLunaProblemVC.swift; sourceTree = "<group>"; };
 		84467270268D867600EC55FD /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
 		84467274268DAE1E00EC55FD /* SystemSetup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SystemSetup.storyboard; sourceTree = "<group>"; };
 		8446727B268DAF8E00EC55FD /* SystemSetupStep1VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSetupStep1VC.swift; sourceTree = "<group>"; };
@@ -354,6 +358,7 @@
 				840A7DF72696E98C005AA1E6 /* LunaDevicesVC.swift */,
 				840A7DF82696E98C005AA1E6 /* PairLunaVC.swift */,
 				840A7DFA2696E98C005AA1E6 /* SearchingDeviceVC.swift */,
+				8445788626AFE14B008B93AD /* PairLunaProblemVC.swift */,
 			);
 			path = "Pair Luna";
 			sourceTree = "<group>";
@@ -810,6 +815,7 @@
 			isa = PBXGroup;
 			children = (
 				84E78B9D2685E8C500FABDCD /* UserModel.swift */,
+				8410611B26A9DC8E00BF7953 /* SystemInfoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1035,6 +1041,7 @@
 				84CC12BC2668CDF4009316FC /* FirestoreController.swift in Sources */,
 				84CC12F22668D0E6009316FC /* UITextFieldExtension.swift in Sources */,
 				84D1F5052679E95A00F131E0 /* ForgotPasswordVC.swift in Sources */,
+				8410611C26A9DC8E00BF7953 /* SystemInfoModel.swift in Sources */,
 				847899732684824F00D1DF36 /* HomeVC.swift in Sources */,
 				84CC12E02668D036009316FC /* AppConstants.swift in Sources */,
 				84F819CE267B6FE000A4C758 /* BLEIntegrationVC.swift in Sources */,
@@ -1077,6 +1084,7 @@
 				84F819A8267A12A500A4C758 /* PassResetPopUpVC.swift in Sources */,
 				840A7DFE2696E98C005AA1E6 /* SearchingDeviceVC.swift in Sources */,
 				84FDA0AC267DCB5600AC8BE9 /* MessageReceiverCell.swift in Sources */,
+				8445788726AFE14B008B93AD /* PairLunaProblemVC.swift in Sources */,
 				84CC12FE2668D17A009316FC /* UICollectionView+Extension.swift in Sources */,
 				84B06F0A269C0BE00059B293 /* SessionDescriptionVC.swift in Sources */,
 				8418D7CD26B01BC500BAB256 /* DateTime.swift in Sources */,
@@ -1258,7 +1266,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunadiabetes.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Pro;
+				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Prov;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1283,7 +1291,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunadiabetes.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Pro;
+				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Prov;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

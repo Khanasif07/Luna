@@ -1008,7 +1008,6 @@ class AppButton: UIButton {
                 borderWidth = 1.0
                 borderColor = AppColors.fontPrimaryColor
             }
-            isUserInteractionEnabled = isEnabledWithoutBackground ? true : false
         }
     }
 }

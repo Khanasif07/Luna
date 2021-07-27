@@ -625,6 +625,7 @@
                         <outlet property="backBtn" destination="c0D-P5-Yyb" id="sWh-Zv-H7z"/>
                         <outlet property="doneBtn" destination="hoY-Eh-ULO" id="1pB-cD-Crq"/>
                         <outlet property="insulinCountTxtField" destination="7f8-SR-vsM" id="P9G-n6-8SG"/>
+                        <outlet property="insulinDescLbl" destination="hSg-5E-bEx" id="3YZ-dK-V8l"/>
                         <outlet property="insulinSubType" destination="ZFC-8H-1ye" id="jkT-5t-hI4"/>
                         <outlet property="insulinType" destination="SAD-1W-FyP" id="Qbb-w6-zlw"/>
                     </connections>

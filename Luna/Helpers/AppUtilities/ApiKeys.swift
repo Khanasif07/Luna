@@ -30,6 +30,7 @@ enum ApiKey {
     
     static var name : String {return "name"}
     static var users : String {return "users"}
+    static var userSystemInfo : String {return "userSystemInfo"}
     static var firstName : String {return "firstName"}
     static var isBiometricOn : String {return "isBiometricOn"}
     static var isProfileStepCompleted : String {return "isProfileStepCompleted"}
@@ -294,10 +295,12 @@ enum ApiKey {
     static var gcm_notification_userRole : String {return "gcm.notification.userRole"}
     static var gcm_notification_userImage : String {return "gcm.notification.userImage" }
     
-    static var tyres  : String {return "Tyres" }
-    static var oil  : String {return "Oil" }
-    static var battery  : String {return "Battery" }
-   
+    static var longInsulinType  : String {return "longInsulinType" }
+    static var longInsulinSubType  : String {return "longInsulinSubType" }
+    static var insulinUnit  : String {return "insulinUnit" }
+    static var cgmType  : String {return "cgmType" }
+    static var cgmUnit  : String {return "cgmUnit" }
+    
 }
 //MARK:- Api Code
 //=======================
