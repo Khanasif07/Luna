@@ -104,6 +104,7 @@ class HomeVC: UIViewController {
 extension HomeVC {
     
     private func initialSetup() {
+        self.addObserver()
         BleManager.sharedInstance.delegate = self
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
@@ -129,6 +130,15 @@ extension HomeVC {
 //        getStepCount()
 //        getAgeSexAndBloodType()
 //        HealthKitManager.sharedInstance.addWaterAmountToHealthKit(ounces: 32.0)
+    }
+    
+    private func addObserver(){
+        NotificationCenter.default.addObserver(self, selector: #selector(BleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
+    }
+    
+    @objc func BleDidUpdateValue(){
+        print("BleDidUpdateValue")
+        self.setupSystemInfo()
     }
     
     func addBottomSheetView() {
@@ -160,7 +170,7 @@ extension HomeVC {
         let batteryData = BleManager.sharedInstance.batteryData
         let reservoirData = BleManager.sharedInstance.reservoirLevelData
         let data = BleManager.sharedInstance.systemStatusData
-        CommonFunctions.delay(delay: 0.0) {
+        if !batteryData.isEmpty && !reservoirData.isEmpty && !data.isEmpty {
             DispatchQueue.main.async {
                 self.batteryImgView.image = DeviceStatus.getBatteryImage(value:batteryData).1
                 self.batteryStatusLbl.text = DeviceStatus.getBatteryImage(value:batteryData).0
@@ -169,7 +179,7 @@ extension HomeVC {
                 self.reservoirImgView.image = DeviceStatus.getReservoirImage(value:reservoirData).1
                 self.reservoirStatusLbl.text = DeviceStatus.getReservoirImage(value:reservoirData).0
                 self.reservoirTitleLbl.text = DeviceStatus.ReservoirLevel.titleString
-
+                
                 self.systemImgView.image = DeviceStatus.getSystemImage(value:data).1
                 self.systemStatusLbl.text = DeviceStatus.getSystemImage(value:data).0
                 self.systemTitleLbl.text = DeviceStatus.System.titleString
@@ -178,118 +188,6 @@ extension HomeVC {
     }
 }
 
-
-// MARK: - Extension For CBPeripheralDelegate
-//===========================
-//extension HomeVC: CBPeripheralDelegate {
-//    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-//        guard let services = peripheral.services else { return }
-//        for service in services {
-//            print(service)
-//            peripheral.discoverCharacteristics(nil, for: service)
-//        }
-//
-//    }
-//
-//    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService,
-//                    error: Error?) {
-//        guard let characteristics = service.characteristics else { return }
-//
-//        for characteristic in characteristics {
-//            print(characteristic)
-//            if characteristic.properties.contains(.read) {
-//                print("\(characteristic.uuid): properties contains .read")
-//                peripheral.readValue(for: characteristic)
-//            }
-//            if characteristic.properties.contains(.notify) {
-//                print("\(characteristic.uuid): properties contains .notify")
-//                peripheral.setNotifyValue(true, for: characteristic)
-//            }
-//        }
-//    }
-//    
-//    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-//        print(characteristic.uuid)
-//        switch characteristic.uuid {
-//        case batteryCharacteristicCBUUID:
-//            writeValue(myCharacteristic: characteristic)
-//            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
-//            let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-//            self.batteryImgView.image = DeviceStatus.getBatteryImage(value:data).1
-//            self.batteryStatusLbl.text = DeviceStatus.getBatteryImage(value:data).0
-//            self.batteryTitleLbl.text = DeviceStatus.Battery.titleString
-//            print("handled Characteristic Value for Battery: \(String(describing: characteristic.value))")
-//        case ReservoirLevelCharacteristicCBUUID:
-//            writeValue(myCharacteristic: characteristic,value: "3")
-//            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
-//            print("handled Characteristic Value for Reservoir Level: \(String(describing: characteristic.value))")
-//            let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-//            self.reservoirImgView.image = DeviceStatus.getReservoirImage(value:data).1
-//            self.reservoirStatusLbl.text = DeviceStatus.getReservoirImage(value:data).0
-//            self.reservoirTitleLbl.text = DeviceStatus.ReservoirLevel.titleString
-//        case statusCBUUID:
-//            writeValue(myCharacteristic: characteristic,value: "0")
-//            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
-//            print("handled Characteristic Value for status : \(String(describing: characteristic.value))")
-//            let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-//            self.systemImgView.image = DeviceStatus.getSystemImage(value:data).1
-//            self.systemStatusLbl.text = DeviceStatus.getSystemImage(value:data).0
-//            self.systemTitleLbl.text = DeviceStatus.System.titleString
-//        default:
-//            print("Unhandled Characteristic UUID: \(characteristic.value)")
-//        }
-//    }
-//}
-
-
-
-// MARK: - Extension For CBCentralManagerDelegate
-//===========================
-//extension HomeVC: CBCentralManagerDelegate {
-//
-//    func centralManagerDidUpdateState(_ central: CBCentralManager) {
-//        switch central.state {
-//          case .unknown:
-//            print("central.state is .unknown")
-//          case .resetting:
-//            print("central.state is .resetting")
-//          case .unsupported:
-//            print("central.state is .unsupported")
-//          case .unauthorized:
-//            print("central.state is .unauthorized")
-//          case .poweredOff:
-//            print("central.state is .poweredOff")
-//          case .poweredOn:
-//            print("central.state is .poweredOn")
-//            centralManager.scanForPeripherals(withServices: nil,options: nil)
-//        }
-//    }
-//
-//    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,
-//                        advertisementData: [String: Any], rssi RSSI: NSNumber) {
-//        print(peripheral.name)
-//        print(peripheral.identifier)
-//        heartRatePeripheral = peripheral
-//        heartRatePeripheral.delegate = self
-//        centralManager.stopScan()
-//        centralManager.connect(heartRatePeripheral, options: nil)
-//    }
-//
-//    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-//      print("Connected!")
-//      isMyPeripheralConected = true
-//      heartRatePeripheral.discoverServices(nil)
-//    }
-//
-//    func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
-//        print("DisConnected!")
-//        isMyPeripheralConected = false
-//        central.connect(peripheral, options: nil)
-//    }
-//
-//
-//
-//}
 
 extension HomeVC: BleProtocol{
     func didBleOff() {
@@ -301,6 +199,6 @@ extension HomeVC: BleProtocol{
     }
     
     func didUpdateValue(){
-        self.setupSystemInfo()
+//        self.setupSystemInfo()
     }
 }

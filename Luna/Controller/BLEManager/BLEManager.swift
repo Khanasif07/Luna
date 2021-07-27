@@ -452,9 +452,8 @@ extension BleManager: CBPeripheralDelegate {
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.batteryData = data
-//            self.batteryImgView.image = DeviceStatus.getBatteryImage(value:data).1
-//            self.batteryStatusLbl.text = DeviceStatus.getBatteryImage(value:data).0
-//            self.batteryTitleLbl.text = DeviceStatus.Battery.titleString
+            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: nil)
+            self.delegate?.didUpdateValue?()
             print("handled Characteristic Value for Battery: \(String(describing: characteristic.value))")
         case ReservoirLevelCharacteristicCBUUID:
             if reservoirLevelData.isEmpty {
@@ -464,9 +463,8 @@ extension BleManager: CBPeripheralDelegate {
             print("handled Characteristic Value for Reservoir Level: \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.reservoirLevelData = data
-//            self.reservoirImgView.image = DeviceStatus.getReservoirImage(value:data).1
-//            self.reservoirStatusLbl.text = DeviceStatus.getReservoirImage(value:data).0
-//            self.reservoirTitleLbl.text = DeviceStatus.ReservoirLevel.titleString
+            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: nil)
+            self.delegate?.didUpdateValue?()
         case statusCBUUID:
             if systemStatusData.isEmpty{
             writeValue(myCharacteristic: characteristic,value: "0")
@@ -475,13 +473,11 @@ extension BleManager: CBPeripheralDelegate {
             print("handled Characteristic Value for status : \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.systemStatusData = data
-//            self.systemImgView.image = DeviceStatus.getSystemImage(value:data).1
-//            self.systemStatusLbl.text = DeviceStatus.getSystemImage(value:data).0
-//            self.systemTitleLbl.text = DeviceStatus.System.titleString
+            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: nil)
+            self.delegate?.didUpdateValue?()
         default:
-            print("Unhandled Characteristic UUID: \(characteristic.value)")
+            print("Unhandled Characteristic UUID: \(characteristic.value!)")
         }
-        self.delegate?.didUpdateValue?()
     }
 }
 
@@ -536,7 +532,7 @@ extension BleManager: CBCentralManagerDelegate {
         delegate?.didConnect?(name: "Bluetooth connected.")
     }
 
-    func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+    public  func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
         print("DisConnected!")
         isMyPeripheralConected = false
         central.connect(peripheral, options: nil)

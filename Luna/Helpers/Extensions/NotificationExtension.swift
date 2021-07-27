@@ -13,5 +13,6 @@ extension Notification.Name {
     static let lunaPairedSuccessfully = Notification.Name("lunaPairedSuccessfully")
     static let insulinConnectedSuccessfully = Notification.Name("insulinConnectedSuccessfully")
     static let cgmConnectedSuccessfully = Notification.Name("cgmConnectedSuccessfully")
+    static let BleDidUpdateValue = Notification.Name("BleDidUpdateValue")
     
 }
