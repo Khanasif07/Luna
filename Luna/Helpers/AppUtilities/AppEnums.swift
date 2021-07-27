@@ -92,7 +92,7 @@ enum DeviceStatus {
         case 5:
             return ("No Signal",#imageLiteral(resourceName: "noSignal"))
         default:
-            return ("",#imageLiteral(resourceName: "batteryFull"))
+            return ("No Signal",#imageLiteral(resourceName: "noSignal"))
         }
       
     }

@@ -36,40 +36,53 @@ class PairLunaVC: UIViewController {
             scene.lunaPairedSuccess = { [weak self] (sender) in
                 guard let selff = self else { return }
                 if   SystemInfoModel.shared.isFromSetting {
-//                    CommonFunctions.showActivityLoader()
-//                    FirestoreController.updateSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
-//                        FirestoreController.getUserSystemInfoData{
-//                            CommonFunctions.hideActivityLoader()
-                            NotificationCenter.default.post(name: Notification.Name.lunaPairedSuccessfully, object: nil)
-                            selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
-                            CommonFunctions.showToastWithMessage("Paired Luna successfully.")
-//                        } failure: { (error) -> (Void) in
-//                            CommonFunctions.hideActivityLoader()
-//                            CommonFunctions.showToastWithMessage(error.localizedDescription)
-//                        }
-//                    } failure: { (error) -> (Void) in
-//                        CommonFunctions.hideActivityLoader()
-//                        CommonFunctions.showToastWithMessage(error.localizedDescription)
-//                    }
+                    //                    CommonFunctions.showActivityLoader()
+                    //                    FirestoreController.updateSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
+                    //                        FirestoreController.getUserSystemInfoData{
+                    //                            CommonFunctions.hideActivityLoader()
+                    NotificationCenter.default.post(name: Notification.Name.lunaPairedSuccessfully, object: nil)
+                    selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
+                    CommonFunctions.showToastWithMessage("Paired Luna successfully.")
+                    //                        } failure: { (error) -> (Void) in
+                    //                            CommonFunctions.hideActivityLoader()
+                    //                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                    //                        }
+                    //                    } failure: { (error) -> (Void) in
+                    //                        CommonFunctions.hideActivityLoader()
+                    //                        CommonFunctions.showToastWithMessage(error.localizedDescription)
+                    //                    }
                 }else {
-                NotificationCenter.default.post(name: Notification.Name.lunaPairedSuccessfully, object: nil)
-                selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupStep1VC.self)
+                    NotificationCenter.default.post(name: Notification.Name.lunaPairedSuccessfully, object: nil)
+                    selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupStep1VC.self)
                 }
             }
             selff.present(scene, animated: true, completion: nil)
         }
-//        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//           let viewController = storyBoard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
-
-           let transition = CATransition()
-           transition.duration = 0.5
-           transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-           transition.type = CATransitionType.moveIn
-           transition.subtype = CATransitionSubtype.fromTop
-           self.navigationController?.view.layer.add(transition, forKey: nil)
-           self.navigationController?.pushViewController(scene, animated: false)
-//        self.navigationController?.pushViewController(scene, animated: true)
-//        self.present(scene, animated: true, completion: nil)
+        
+        scene.deviceNotConnectedNavigation = {  [weak self] (sender) in
+            guard let selff = self else { return }
+            let scene =  PairLunaProblemVC.instantiate(fromAppStoryboard: .CGPStoryboard)
+            scene.lunaStartPairing = { [weak self] (sender) in
+                guard let selff = self else { return }
+                let scene =  SearchingDeviceVC.instantiate(fromAppStoryboard: .CGPStoryboard)
+                let transition = CATransition()
+                transition.duration = 0.5
+                transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+                transition.type = CATransitionType.moveIn
+                transition.subtype = CATransitionSubtype.fromTop
+                selff.navigationController?.view.layer.add(transition, forKey: nil)
+                selff.navigationController?.pushViewController(scene, animated: false)
+            }
+            selff.present(scene, animated: true, completion: nil)
+            
+        }
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.moveIn
+        transition.subtype = CATransitionSubtype.fromTop
+        self.navigationController?.view.layer.add(transition, forKey: nil)
+        self.navigationController?.pushViewController(scene, animated: false)
         
     }
     

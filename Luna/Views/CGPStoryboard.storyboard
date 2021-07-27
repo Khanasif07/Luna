@@ -50,7 +50,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Link CGM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ew2-UT-Xbu">
-                                                <rect key="frame" x="168" y="14.5" width="78" height="21"/>
+                                                <rect key="frame" x="166.5" y="14.5" width="81" height="21"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -70,11 +70,11 @@
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QkA-jc-pmt">
-                                        <rect key="frame" x="0.0" y="186.5" width="414" height="600.5"/>
+                                        <rect key="frame" x="0.0" y="202" width="414" height="585"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </tableView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In this step, you will connect your CGM, so thet Luna can use the data. To make thinks easy, we are using your existing login" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJb-s4-wpO">
-                                        <rect key="frame" x="20" y="143" width="374" height="33.5"/>
+                                        <rect key="frame" x="20" y="143" width="374" height="49"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -208,7 +208,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in to CGM account to allow data sharing" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nR6-dl-vUJ">
-                                        <rect key="frame" x="20" y="110" width="294" height="38.5"/>
+                                        <rect key="frame" x="20" y="110" width="294" height="37.5"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -228,7 +228,7 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="vAx-5s-WEr">
-                                        <rect key="frame" x="0.0" y="180.5" width="414" height="200"/>
+                                        <rect key="frame" x="0.0" y="179.5" width="414" height="200"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yfX-tr-dyT">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="92"/>
@@ -299,7 +299,7 @@
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wab-U6-za3">
-                                        <rect key="frame" x="302" y="392.5" width="104" height="29"/>
+                                        <rect key="frame" x="299" y="391.5" width="107" height="29"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="14"/>
                                         <state key="normal" title="Forget Password"/>
                                     </button>
@@ -359,10 +359,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gxr-a1-Wsa">
-                                        <rect key="frame" x="28" y="326" width="358" height="244.5"/>
+                                        <rect key="frame" x="28" y="309.5" width="358" height="277.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wuO-s4-32E">
-                                                <rect key="frame" x="20" y="53" width="318" height="67"/>
+                                                <rect key="frame" x="20" y="53" width="318" height="82"/>
                                                 <string key="text">Your data will be used in this and that way.
 Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  T-bone doner beef ribs, fatback ball tip cupim pancetta salami landjaeger swine.</string>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
@@ -370,13 +370,13 @@ Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Allow CGM system to share data with Luna ?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kMg-Ue-lei">
-                                                <rect key="frame" x="20" y="132" width="318" height="19.5"/>
+                                                <rect key="frame" x="20" y="147" width="318" height="37.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5au-Nl-6Th" customClass="AppButton" customModule="Luna" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="181.5" width="318" height="44"/>
+                                                <rect key="frame" x="20" y="214.5" width="318" height="44"/>
                                                 <color key="backgroundColor" red="0.52941176469999995" green="0.74509803919999995" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="XKj-zZ-Weg"/>
@@ -469,10 +469,10 @@ Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuG-C6-TZq">
-                                        <rect key="frame" x="28" y="288" width="358" height="320"/>
+                                        <rect key="frame" x="28" y="281" width="358" height="334"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDL-A8-xRl">
-                                                <rect key="frame" x="20" y="160" width="318" height="67"/>
+                                                <rect key="frame" x="20" y="159" width="318" height="82"/>
                                                 <string key="text">Your data will be used in this and that way.
 Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  T-bone doner beef ribs, fatback ball tip cupim pancetta salami landjaeger swine.</string>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
@@ -480,7 +480,7 @@ Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="121" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEh-Uz-yUf">
-                                                <rect key="frame" x="144.5" y="94" width="69" height="46"/>
+                                                <rect key="frame" x="144.5" y="93" width="69" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="46" id="dXq-vx-lDX"/>
                                                     <constraint firstAttribute="width" constant="69" id="ibv-LT-NHN"/>
@@ -491,7 +491,7 @@ Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OXT-oO-h97" customClass="AppButton" customModule="Luna" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="257" width="318" height="44"/>
+                                                <rect key="frame" x="20" y="271" width="318" height="44"/>
                                                 <color key="backgroundColor" red="0.52941176469999995" green="0.74509803919999995" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="266-pZ-qdP"/>
@@ -505,7 +505,7 @@ Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    Your Dexcom G8 CGM is connected" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgx-DI-1yR">
-                                                <rect key="frame" x="40" y="16" width="278" height="43"/>
+                                                <rect key="frame" x="40" y="16" width="278" height="42"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -522,7 +522,7 @@ Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  
                                                 </connections>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sideup_arrow_green" translatesAutoresizingMaskIntoConstraints="NO" id="qCf-dj-NSF">
-                                                <rect key="frame" x="215.5" y="94" width="46" height="46"/>
+                                                <rect key="frame" x="215.5" y="93" width="46" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="Fqo-Fw-KFD"/>
                                                     <constraint firstAttribute="width" secondItem="qCf-dj-NSF" secondAttribute="height" multiplier="1:1" id="jNO-M6-2gj"/>
@@ -602,6 +602,11 @@ Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  
                                                     <constraint firstAttribute="width" secondItem="C43-QU-A7I" secondAttribute="height" id="3Ws-z2-Awg"/>
                                                     <constraint firstAttribute="height" constant="40" id="xNE-BF-MYW"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZB-jX-hXV">
                                                 <rect key="frame" x="20" y="5" width="40" height="40"/>
@@ -612,7 +617,7 @@ Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0qr-bV-ZLC">
                                                 <rect key="frame" x="354" y="5" width="40" height="40"/>
-                                                <state key="normal" image="Help"/>
+                                                <state key="normal" image="help"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pair Luna" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="de9-je-xcA">
                                                 <rect key="frame" x="170.5" y="14.5" width="73" height="21"/>
@@ -750,6 +755,123 @@ your Phone</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5SU-F0-Wfq">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OpV-Nh-EFT">
+                                        <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdl-Oz-f5M">
+                                                <rect key="frame" x="20" y="5" width="40" height="40"/>
+                                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="0Ad-mV-7eQ"/>
+                                                    <constraint firstAttribute="width" secondItem="xdl-Oz-f5M" secondAttribute="height" id="ZSa-x5-G9f"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uq1-vy-lO9">
+                                                <rect key="frame" x="20" y="5" width="40" height="40"/>
+                                                <state key="normal" image="back"/>
+                                                <connections>
+                                                    <action selector="backBtnTapped:" destination="vUt-f2-22G" eventType="touchUpInside" id="GCe-oC-z2d"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fdy-u0-4Tf">
+                                                <rect key="frame" x="354" y="5" width="40" height="40"/>
+                                                <state key="normal" image="help"/>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pair Luna" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HuU-Lq-bAB">
+                                                <rect key="frame" x="170.5" y="14.5" width="73" height="21"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="fdy-u0-4Tf" secondAttribute="trailing" constant="20" id="816-pB-VRs"/>
+                                            <constraint firstItem="Uq1-vy-lO9" firstAttribute="leading" secondItem="xdl-Oz-f5M" secondAttribute="leading" id="ACU-Iz-Qub"/>
+                                            <constraint firstItem="fdy-u0-4Tf" firstAttribute="top" secondItem="Uq1-vy-lO9" secondAttribute="top" id="Bgn-oZ-yZP"/>
+                                            <constraint firstItem="fdy-u0-4Tf" firstAttribute="height" secondItem="Uq1-vy-lO9" secondAttribute="height" id="LBT-Z5-pc5"/>
+                                            <constraint firstItem="HuU-Lq-bAB" firstAttribute="centerX" secondItem="OpV-Nh-EFT" secondAttribute="centerX" id="LCB-b1-Lf1"/>
+                                            <constraint firstAttribute="height" constant="50" id="NHO-bg-ebn"/>
+                                            <constraint firstItem="Uq1-vy-lO9" firstAttribute="bottom" secondItem="xdl-Oz-f5M" secondAttribute="bottom" id="V1c-6p-Efu"/>
+                                            <constraint firstItem="xdl-Oz-f5M" firstAttribute="centerY" secondItem="OpV-Nh-EFT" secondAttribute="centerY" id="YTr-v4-EtC"/>
+                                            <constraint firstItem="Uq1-vy-lO9" firstAttribute="top" secondItem="xdl-Oz-f5M" secondAttribute="top" id="aCJ-nd-uLN"/>
+                                            <constraint firstItem="Uq1-vy-lO9" firstAttribute="trailing" secondItem="xdl-Oz-f5M" secondAttribute="trailing" id="bgC-7H-JKO"/>
+                                            <constraint firstItem="HuU-Lq-bAB" firstAttribute="centerY" secondItem="OpV-Nh-EFT" secondAttribute="centerY" id="m6D-oU-spI"/>
+                                            <constraint firstItem="xdl-Oz-f5M" firstAttribute="leading" secondItem="OpV-Nh-EFT" secondAttribute="leading" constant="20" id="pRd-Yb-SKj"/>
+                                            <constraint firstItem="fdy-u0-4Tf" firstAttribute="bottom" secondItem="Uq1-vy-lO9" secondAttribute="bottom" id="rSG-Ng-lRL"/>
+                                            <constraint firstItem="fdy-u0-4Tf" firstAttribute="width" secondItem="Uq1-vy-lO9" secondAttribute="width" id="sUx-i4-ath"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ic-3b-JpR">
+                                        <rect key="frame" x="20" y="153" width="374" height="33.5"/>
+                                        <string key="text">The Luna System needs to pair the Controller to
+your Phone</string>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6m6-Dc-71T" customClass="AppButton" customModule="Luna" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="797.5" width="374" height="44"/>
+                                        <color key="backgroundColor" red="0.52941176469999995" green="0.74509803919999995" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="kM5-ud-wMg"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                        <state key="normal" title="Pair">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="proceedBtnAction:" destination="vUt-f2-22G" eventType="touchUpInside" id="pru-mw-mur"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pair Luna" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqo-yd-xc3">
+                                        <rect key="frame" x="20" y="124" width="374" height="19"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pairluna_illustration" translatesAutoresizingMaskIntoConstraints="NO" id="cIQ-3e-r3o">
+                                        <rect key="frame" x="34" y="397" width="346" height="102"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="102" id="JfY-kL-uGh"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To pair your controller bring it within 2 feet of your phone and tap “Pair”" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BrZ-hG-ofJ">
+                                        <rect key="frame" x="20" y="721" width="374" height="33.5"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="iqo-yd-xc3" firstAttribute="leading" secondItem="5SU-F0-Wfq" secondAttribute="leading" constant="20" id="6qd-E4-UrW"/>
+                                    <constraint firstItem="1ic-3b-JpR" firstAttribute="top" secondItem="iqo-yd-xc3" secondAttribute="bottom" constant="10" id="AvR-cA-mbp"/>
+                                    <constraint firstItem="BrZ-hG-ofJ" firstAttribute="trailing" secondItem="iqo-yd-xc3" secondAttribute="trailing" id="Bvz-dY-Kbt"/>
+                                    <constraint firstItem="OpV-Nh-EFT" firstAttribute="leading" secondItem="5SU-F0-Wfq" secondAttribute="leading" id="F1L-0E-q7k"/>
+                                    <constraint firstItem="6m6-Dc-71T" firstAttribute="top" secondItem="BrZ-hG-ofJ" secondAttribute="bottom" constant="43" id="L38-oV-D9V"/>
+                                    <constraint firstItem="cIQ-3e-r3o" firstAttribute="centerX" secondItem="5SU-F0-Wfq" secondAttribute="centerX" id="TS8-39-3ag"/>
+                                    <constraint firstAttribute="trailing" secondItem="cIQ-3e-r3o" secondAttribute="trailing" constant="34" id="Zzj-R3-NAp"/>
+                                    <constraint firstAttribute="trailing" secondItem="iqo-yd-xc3" secondAttribute="trailing" constant="20" id="c2k-69-rjm"/>
+                                    <constraint firstItem="cIQ-3e-r3o" firstAttribute="centerY" secondItem="5SU-F0-Wfq" secondAttribute="centerY" id="hoa-61-2aA"/>
+                                    <constraint firstItem="BrZ-hG-ofJ" firstAttribute="leading" secondItem="iqo-yd-xc3" secondAttribute="leading" id="lgt-aZ-NoP"/>
+                                    <constraint firstItem="1ic-3b-JpR" firstAttribute="leading" secondItem="5SU-F0-Wfq" secondAttribute="leading" constant="20" id="myA-Gd-Ur1"/>
+                                    <constraint firstAttribute="trailing" secondItem="OpV-Nh-EFT" secondAttribute="trailing" id="owd-Ka-AoE"/>
+                                    <constraint firstAttribute="trailing" secondItem="1ic-3b-JpR" secondAttribute="trailing" constant="20" id="tNu-xS-b66"/>
+                                    <constraint firstItem="iqo-yd-xc3" firstAttribute="top" secondItem="OpV-Nh-EFT" secondAttribute="bottom" constant="30" id="uia-JX-2sO"/>
+                                    <constraint firstItem="6m6-Dc-71T" firstAttribute="leading" secondItem="5SU-F0-Wfq" secondAttribute="leading" constant="20" id="xS6-hq-9C5"/>
+                                    <constraint firstAttribute="trailing" secondItem="6m6-Dc-71T" secondAttribute="trailing" constant="20" id="yRk-uO-cMh"/>
+                                    <constraint firstItem="cIQ-3e-r3o" firstAttribute="leading" secondItem="5SU-F0-Wfq" secondAttribute="leading" constant="34" id="ynP-xM-74B"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DKY-8j-aTp">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
@@ -792,9 +914,6 @@ Luna devices</string>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJj-D1-Lqp">
                                                 <rect key="frame" x="144" y="132" width="70" height="70"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <connections>
-                                                    <action selector="proceedBtnAction:" destination="ebB-xp-2wl" eventType="touchUpInside" id="zhA-OQ-PbK"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -829,15 +948,22 @@ Luna devices</string>
                         <viewLayoutGuide key="safeArea" id="lfk-Uu-RVa"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="5SU-F0-Wfq" firstAttribute="top" secondItem="Z2O-D1-arp" secondAttribute="top" id="C9B-OY-PO1"/>
+                            <constraint firstAttribute="bottom" secondItem="5SU-F0-Wfq" secondAttribute="bottom" id="Dtm-c6-tS2"/>
                             <constraint firstItem="DKY-8j-aTp" firstAttribute="top" secondItem="Z2O-D1-arp" secondAttribute="top" id="LAh-bt-dP7"/>
                             <constraint firstItem="DKY-8j-aTp" firstAttribute="leading" secondItem="lfk-Uu-RVa" secondAttribute="leading" id="TYV-Xw-99V"/>
+                            <constraint firstItem="lfk-Uu-RVa" firstAttribute="bottom" secondItem="6m6-Dc-71T" secondAttribute="bottom" constant="20.5" id="cJU-el-EVV"/>
                             <constraint firstItem="lfk-Uu-RVa" firstAttribute="trailing" secondItem="DKY-8j-aTp" secondAttribute="trailing" id="fyS-z2-qyO"/>
+                            <constraint firstItem="5SU-F0-Wfq" firstAttribute="leading" secondItem="Z2O-D1-arp" secondAttribute="leading" id="lDx-Mw-Alh"/>
+                            <constraint firstItem="OpV-Nh-EFT" firstAttribute="top" secondItem="lfk-Uu-RVa" secondAttribute="top" id="lty-R2-S3g"/>
+                            <constraint firstAttribute="trailing" secondItem="5SU-F0-Wfq" secondAttribute="trailing" id="pOH-Vq-U0G"/>
                             <constraint firstAttribute="bottom" secondItem="DKY-8j-aTp" secondAttribute="bottom" id="vQs-ie-YtJ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="IntroLbl" destination="h3S-OR-y2e" id="hX4-z6-3Pq"/>
                         <outlet property="animatedView" destination="5pl-iy-ojR" id="JXt-za-dcl"/>
+                        <outlet property="backgroundView" destination="5SU-F0-Wfq" id="qp6-kn-hF3"/>
                         <outlet property="outerView" destination="rs5-PS-SEw" id="3WB-lw-lUb"/>
                     </connections>
                 </viewController>
@@ -857,16 +983,16 @@ Luna devices</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9kl-K6-bjd">
-                                        <rect key="frame" x="28" y="188" width="358" height="520"/>
+                                        <rect key="frame" x="28" y="189" width="358" height="518"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The app will automatically connect to the closest device." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fxu-OG-imz">
-                                                <rect key="frame" x="20" y="376" width="318" height="38.5"/>
+                                                <rect key="frame" x="20" y="375" width="318" height="37.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We found more than one Luna device!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l7O-te-czc">
-                                                <rect key="frame" x="50" y="16" width="258" height="111"/>
+                                                <rect key="frame" x="50" y="16" width="258" height="110"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -883,13 +1009,13 @@ Luna devices</string>
                                                 </connections>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Device_morethanone" translatesAutoresizingMaskIntoConstraints="NO" id="uwj-fX-3dd">
-                                                <rect key="frame" x="68.5" y="192" width="221" height="136"/>
+                                                <rect key="frame" x="68.5" y="191" width="221" height="136"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="136" id="d9b-XG-RWk"/>
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nN5-HW-QP2" customClass="AppButton" customModule="Luna" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="450" width="318" height="44"/>
+                                                <rect key="frame" x="20" y="448" width="318" height="44"/>
                                                 <color key="backgroundColor" red="0.52941176469999995" green="0.74509803919999995" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="Ixc-Nq-WOb"/>
@@ -1090,7 +1216,7 @@ Luna devices</string>
                                                 <state key="normal" image="Info Icon"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Session History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gru-ub-IhK">
-                                                <rect key="frame" x="145" y="14.5" width="124" height="21"/>
+                                                <rect key="frame" x="144" y="14.5" width="126" height="21"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -1197,7 +1323,7 @@ Luna devices</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4QD-wC-9tc">
-                                                <rect key="frame" x="347" y="8.5" width="47" height="33"/>
+                                                <rect key="frame" x="345" y="9" width="49" height="32"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="17"/>
                                                 <state key="normal" title="Reset "/>
                                                 <connections>
@@ -1205,7 +1331,7 @@ Luna devices</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXh-fc-SCc">
-                                                <rect key="frame" x="187" y="14.5" width="40" height="21.5"/>
+                                                <rect key="frame" x="187" y="14.5" width="40" height="21"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -1584,6 +1710,200 @@ Luna devices</string>
             </objects>
             <point key="canvasLocation" x="5660.8695652173919" y="1443.75"/>
         </scene>
+        <!--Pair Luna ProblemVC-->
+        <scene sceneID="z9t-n5-pC1">
+            <objects>
+                <viewController storyboardIdentifier="PairLunaProblemVC" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5Km-WO-lZB" customClass="PairLunaProblemVC" customModule="Luna" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MbM-9r-bSH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6HL-7g-HA2">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fXC-Nf-kwg">
+                                        <rect key="frame" x="28" y="150" width="358" height="596"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follow the steps below &amp; tap “Pair” again." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5TB-zY-xze">
+                                                <rect key="frame" x="20" y="257.5" width="318" height="19.5"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connection Problem" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2r-nK-x7t">
+                                                <rect key="frame" x="50" y="51" width="258" height="21.5"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ven-fs-60B">
+                                                <rect key="frame" x="307" y="16" width="35" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="1cf-Ch-r9S"/>
+                                                    <constraint firstAttribute="width" secondItem="ven-fs-60B" secondAttribute="height" id="Aba-qR-Tmc"/>
+                                                </constraints>
+                                                <state key="normal" image="cross"/>
+                                                <connections>
+                                                    <action selector="crossBtnAction:" destination="5Km-WO-lZB" eventType="touchUpInside" id="Ujv-PC-8uC"/>
+                                                    <action selector="dissmissBtnTapped:" destination="YuT-Tx-dDE" eventType="touchUpInside" id="Pe5-jr-rh6"/>
+                                                </connections>
+                                            </button>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="deviceConnectionproblem" translatesAutoresizingMaskIntoConstraints="NO" id="j6Q-ew-nOS">
+                                                <rect key="frame" x="97.5" y="94.5" width="163" height="144"/>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lqK-Yq-pK4" customClass="AppButton" customModule="Luna" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="474" width="318" height="44"/>
+                                                <color key="backgroundColor" red="0.52941176469999995" green="0.74509803919999995" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="2cG-Kq-cZ4"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                                <state key="normal" title="Pair">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="okBtnTapped:" destination="Z3M-Ej-Kml" eventType="touchUpInside" id="ILI-pe-lld"/>
+                                                    <action selector="pairBtnAction:" destination="5Km-WO-lZB" eventType="touchUpInside" id="xzq-f9-MS9"/>
+                                                    <action selector="proceedBtnAction:" destination="YuT-Tx-dDE" eventType="touchUpInside" id="lxy-MT-R6b"/>
+                                                </connections>
+                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Dbk-fT-A05">
+                                                <rect key="frame" x="24" y="298" width="310" height="156"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="n1h-z3-jQq">
+                                                        <rect key="frame" x="0.0" y="0.0" width="310" height="42"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zZa-Re-m2H">
+                                                                <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="zZa-Re-m2H" secondAttribute="height" id="2pj-d1-mbN"/>
+                                                                    <constraint firstAttribute="height" constant="42" id="Dm1-ox-QB2"/>
+                                                                </constraints>
+                                                                <state key="normal" image="bluetooth"/>
+                                                            </button>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In iPhone settings make sure the Bluetooth switch is on" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="krz-I0-MAC">
+                                                                <rect key="frame" x="58" y="0.0" width="252" height="42"/>
+                                                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                                                                <color key="textColor" red="0.45098039215686275" green="0.46274509803921571" blue="0.48627450980392156" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="BsJ-nB-ANI">
+                                                        <rect key="frame" x="0.0" y="57" width="310" height="42"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yq0-0t-OHy">
+                                                                <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="42" id="BsX-D2-VQf"/>
+                                                                    <constraint firstAttribute="width" secondItem="yq0-0t-OHy" secondAttribute="height" id="YHi-xI-LbE"/>
+                                                                </constraints>
+                                                                <state key="normal" image="controllerwithphone"/>
+                                                            </button>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place the controller right next to your phone" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="add-NL-bVt">
+                                                                <rect key="frame" x="58" y="0.0" width="252" height="42"/>
+                                                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                                                                <color key="textColor" red="0.45098039220000002" green="0.46274509800000002" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="oj0-zq-Ybw">
+                                                        <rect key="frame" x="0.0" y="114" width="310" height="42"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u3s-C5-lEc">
+                                                                <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="u3s-C5-lEc" secondAttribute="height" id="Oqh-qc-6zV"/>
+                                                                    <constraint firstAttribute="height" constant="42" id="clA-1E-ZiB"/>
+                                                                </constraints>
+                                                                <state key="normal" image="charge"/>
+                                                            </button>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Charge the device for 60 minutes" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8l-yj-CuO">
+                                                                <rect key="frame" x="58" y="0.0" width="252" height="42"/>
+                                                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                                                                <color key="textColor" red="0.45098039220000002" green="0.46274509800000002" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="QwG-eR-jrp">
+                                                <rect key="frame" x="94" y="538" width="170" height="29"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Need help ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lNN-IV-gde">
+                                                        <rect key="frame" x="0.0" y="6" width="70" height="17"/>
+                                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QGE-zg-tcF">
+                                                        <rect key="frame" x="70" y="0.0" width="100" height="29"/>
+                                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="14"/>
+                                                        <state key="normal" title="Connect with us">
+                                                            <color key="titleColor" red="0.0" green="0.78823529411764703" blue="0.4823529411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="connectWithUsAction:" destination="5Km-WO-lZB" eventType="touchUpInside" id="a6B-en-3XV"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="j6Q-ew-nOS" firstAttribute="centerX" secondItem="fXC-Nf-kwg" secondAttribute="centerX" id="0hs-mt-rvC"/>
+                                            <constraint firstItem="Dbk-fT-A05" firstAttribute="leading" secondItem="fXC-Nf-kwg" secondAttribute="leading" constant="24" id="0mb-XV-cGy"/>
+                                            <constraint firstAttribute="trailing" secondItem="5TB-zY-xze" secondAttribute="trailing" constant="20" id="2Fq-ly-i85"/>
+                                            <constraint firstItem="QwG-eR-jrp" firstAttribute="top" secondItem="lqK-Yq-pK4" secondAttribute="bottom" constant="20" id="2vq-cz-mzV"/>
+                                            <constraint firstItem="lqK-Yq-pK4" firstAttribute="leading" secondItem="fXC-Nf-kwg" secondAttribute="leading" constant="20" id="GY5-69-4W7"/>
+                                            <constraint firstItem="QwG-eR-jrp" firstAttribute="centerX" secondItem="fXC-Nf-kwg" secondAttribute="centerX" id="IVR-eg-2cc"/>
+                                            <constraint firstAttribute="trailing" secondItem="lqK-Yq-pK4" secondAttribute="trailing" constant="20" id="KlE-Zu-7pJ"/>
+                                            <constraint firstItem="5TB-zY-xze" firstAttribute="leading" secondItem="fXC-Nf-kwg" secondAttribute="leading" constant="20" id="NRe-3b-6K9"/>
+                                            <constraint firstAttribute="trailing" secondItem="ven-fs-60B" secondAttribute="trailing" constant="16" id="PSK-Oa-6Td"/>
+                                            <constraint firstItem="j6Q-ew-nOS" firstAttribute="top" secondItem="f2r-nK-x7t" secondAttribute="bottom" constant="22" id="Pck-z8-TF9"/>
+                                            <constraint firstAttribute="trailing" secondItem="Dbk-fT-A05" secondAttribute="trailing" constant="24" id="Rzr-Es-lUM"/>
+                                            <constraint firstItem="Dbk-fT-A05" firstAttribute="top" secondItem="5TB-zY-xze" secondAttribute="bottom" constant="21" id="TwV-kx-Oi7"/>
+                                            <constraint firstAttribute="bottom" secondItem="QwG-eR-jrp" secondAttribute="bottom" constant="29" id="acb-Dw-wPu"/>
+                                            <constraint firstItem="lqK-Yq-pK4" firstAttribute="top" secondItem="Dbk-fT-A05" secondAttribute="bottom" constant="20" id="eUe-sy-1m7"/>
+                                            <constraint firstItem="ven-fs-60B" firstAttribute="top" secondItem="fXC-Nf-kwg" secondAttribute="top" constant="16" id="fQH-NY-qxm"/>
+                                            <constraint firstAttribute="trailing" secondItem="f2r-nK-x7t" secondAttribute="trailing" constant="50" id="fWg-bh-FO3"/>
+                                            <constraint firstItem="f2r-nK-x7t" firstAttribute="leading" secondItem="fXC-Nf-kwg" secondAttribute="leading" constant="50" id="j3K-83-n8h"/>
+                                            <constraint firstItem="5TB-zY-xze" firstAttribute="top" secondItem="j6Q-ew-nOS" secondAttribute="bottom" constant="19" id="sxz-ff-MVc"/>
+                                            <constraint firstItem="f2r-nK-x7t" firstAttribute="top" secondItem="ven-fs-60B" secondAttribute="bottom" id="w6k-Ap-JDO"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="fXC-Nf-kwg" firstAttribute="centerY" secondItem="6HL-7g-HA2" secondAttribute="centerY" id="Enw-uk-Tta"/>
+                                    <constraint firstItem="fXC-Nf-kwg" firstAttribute="centerX" secondItem="6HL-7g-HA2" secondAttribute="centerX" id="IfM-vw-uxP"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="fXC-Nf-kwg" secondAttribute="bottom" constant="35" id="cQr-1o-h8N"/>
+                                    <constraint firstItem="fXC-Nf-kwg" firstAttribute="leading" secondItem="6HL-7g-HA2" secondAttribute="leading" constant="28" id="lfP-zd-Dfk"/>
+                                    <constraint firstAttribute="trailing" secondItem="fXC-Nf-kwg" secondAttribute="trailing" constant="28" id="zIz-zY-VcQ"/>
+                                    <constraint firstItem="fXC-Nf-kwg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6HL-7g-HA2" secondAttribute="top" constant="35" id="zTk-Rl-TOD"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="tfN-QA-qNK"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="6HL-7g-HA2" secondAttribute="bottom" id="3De-7C-DuN"/>
+                            <constraint firstAttribute="trailing" secondItem="6HL-7g-HA2" secondAttribute="trailing" id="MXZ-BQ-4XD"/>
+                            <constraint firstItem="6HL-7g-HA2" firstAttribute="leading" secondItem="MbM-9r-bSH" secondAttribute="leading" id="p7i-P2-dxf"/>
+                            <constraint firstItem="6HL-7g-HA2" firstAttribute="top" secondItem="MbM-9r-bSH" secondAttribute="top" id="znR-rj-M5E"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="outerView" destination="fXC-Nf-kwg" id="2SU-v7-aYs"/>
+                        <outlet property="pairBtn" destination="lqK-Yq-pK4" id="hhQ-re-MIz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GQt-XM-klO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7083" y="726"/>
+        </scene>
     </scenes>
     <resources>
         <image name="BackCircle" width="40" height="40"/>
@@ -1591,13 +1911,17 @@ Luna devices</string>
         <image name="Device_connected" width="161" height="137"/>
         <image name="Device_morethanone" width="221" height="136"/>
         <image name="Filter Icon" width="40" height="40"/>
-        <image name="Help" width="40" height="40"/>
         <image name="Info Icon" width="40" height="40"/>
         <image name="Pairluna_illustration" width="306.5" height="103"/>
         <image name="Sideup_arrow_green" width="36" height="36"/>
         <image name="back" width="40" height="40"/>
+        <image name="bluetooth" width="42" height="42"/>
+        <image name="charge" width="42" height="42"/>
+        <image name="controllerwithphone" width="42" height="42"/>
         <image name="cross" width="37" height="37"/>
+        <image name="deviceConnectionproblem" width="163" height="144"/>
         <image name="eyeOpenIcon" width="24" height="24"/>
+        <image name="help" width="40" height="40"/>
         <image name="step1Devicepaired" width="104" height="102"/>
         <systemColor name="quaternarySystemFillColor">
             <color red="0.45490196078431372" green="0.45490196078431372" blue="0.50196078431372548" alpha="0.080000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
