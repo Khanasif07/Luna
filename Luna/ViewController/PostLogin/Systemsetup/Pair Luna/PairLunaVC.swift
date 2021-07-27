@@ -36,21 +36,9 @@ class PairLunaVC: UIViewController {
             scene.lunaPairedSuccess = { [weak self] (sender) in
                 guard let selff = self else { return }
                 if   SystemInfoModel.shared.isFromSetting {
-                    //                    CommonFunctions.showActivityLoader()
-                    //                    FirestoreController.updateSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
-                    //                        FirestoreController.getUserSystemInfoData{
-                    //                            CommonFunctions.hideActivityLoader()
                     NotificationCenter.default.post(name: Notification.Name.lunaPairedSuccessfully, object: nil)
                     selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
                     CommonFunctions.showToastWithMessage("Paired Luna successfully.")
-                    //                        } failure: { (error) -> (Void) in
-                    //                            CommonFunctions.hideActivityLoader()
-                    //                            CommonFunctions.showToastWithMessage(error.localizedDescription)
-                    //                        }
-                    //                    } failure: { (error) -> (Void) in
-                    //                        CommonFunctions.hideActivityLoader()
-                    //                        CommonFunctions.showToastWithMessage(error.localizedDescription)
-                    //                    }
                 }else {
                     NotificationCenter.default.post(name: Notification.Name.lunaPairedSuccessfully, object: nil)
                     selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupStep1VC.self)

@@ -95,15 +95,20 @@ public class BleManager: NSObject{
         if isScanning == false{
             isKeepConnect = true
             self.centralManager.scanForPeripherals(withServices: nil, options: nil)
-            let uuid = [UUID(uuidString: "DADED7B6-BAA6-CBBB-D870-D46EB7963365")!]
-            DispatchQueue.main.async {
-                if let peripheral = self.centralManager.retrievePeripherals(withIdentifiers: uuid).first {
-                    CommonFunctions.delay(delay: 2.0) {
-                        self.myperipheral = peripheral // <-- super important
-                        self.centralManager.connect(peripheral, options: nil)
-                    }
-                }
-            }
+            self.rescanTimer =  Timer.scheduledTimer(timeInterval: 30,
+                target: self,
+                selector: #selector(scanningFinished),
+                userInfo: nil,
+                repeats: true)
+//            let uuid = [UUID(uuidString: "DADED7B6-BAA6-CBBB-D870-D46EB7963365")!]
+//            DispatchQueue.main.async {
+//                if let peripheral = self.centralManager.retrievePeripherals(withIdentifiers: uuid).first {
+//                    CommonFunctions.delay(delay: 2.0) {
+//                        self.myperipheral = peripheral // <-- super important
+//                        self.centralManager.connect(peripheral, options: nil)
+//                    }
+//                }
+//            }
         }
     }
     
@@ -136,10 +141,18 @@ public class BleManager: NSObject{
     @objc func scanningFinished(){
         if let peripheral = myperipheral{
             if !isMyPeripheralConected && peripheral.state != .connected{
+                if(centralManager != nil && centralManager.isScanning){
+                    print("stopping scan")
+                    centralManager.stopScan()
+                }
                 self.delegate?.didNotDiscoverPeripheral?()
             }
         }else{
             if !isMyPeripheralConected {
+                if(centralManager != nil && centralManager.isScanning){
+                    print("stopping scan")
+                    centralManager.stopScan()
+                }
                 self.delegate?.didNotDiscoverPeripheral?()
             }
         }
@@ -489,12 +502,13 @@ extension BleManager: CBCentralManagerDelegate {
           case .poweredOn:
             print("central.state is .poweredOn")
             centralManager.scanForPeripherals(withServices: nil,options: nil)
-//            self.rescanTimer?.invalidate()
             self.rescanTimer =  Timer.scheduledTimer(timeInterval: 30,
                 target: self,
                 selector: #selector(scanningFinished),
                 userInfo: nil,
                 repeats: true)
+        @unknown default:
+            print("unknown defaul")
         }
     }
 

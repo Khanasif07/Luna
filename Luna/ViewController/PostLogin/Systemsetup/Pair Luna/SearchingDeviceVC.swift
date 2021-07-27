@@ -62,7 +62,6 @@ class SearchingDeviceVC: UIViewController {
     //===========================
     
     @IBAction func dissmissBtnTapped(_ sender: UIButton) {
-//        self.dismiss(animated: false, completion: nil)
         let transition:CATransition = CATransition()
         transition.duration = 0.5
         transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
