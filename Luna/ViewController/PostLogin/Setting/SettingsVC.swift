@@ -81,6 +81,9 @@ extension SettingsVC {
             self.sections = [(#imageLiteral(resourceName: "profile"),"Profile"),(#imageLiteral(resourceName: "faceId"),"Face ID"),(#imageLiteral(resourceName: "appleHealth"),"Apple Health"),(#imageLiteral(resourceName: "system"),"System"),(#imageLiteral(resourceName: "about"),"About"),(#imageLiteral(resourceName: "deleteAccount"),"Delete Account"),(#imageLiteral(resourceName: "logout"),"Logout")]
             
         }
+        if !hasTopNotch{
+            self.sections = [(#imageLiteral(resourceName: "profile"),"Profile"),(#imageLiteral(resourceName: "faceId"),"Touch ID"),(#imageLiteral(resourceName: "appleHealth"),"Apple Health"),(#imageLiteral(resourceName: "system"),"System"),(#imageLiteral(resourceName: "about"),"About"),(#imageLiteral(resourceName: "deleteAccount"),"Delete Account"),(#imageLiteral(resourceName: "logout"),"Logout")]
+        }
     }
     
     private func performCleanUp(for_logout: Bool = true) {
@@ -97,6 +100,7 @@ extension SettingsVC {
         if for_logout {
             AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
         }
+//        BleManager.sharedInstance.centralManager = nil
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         DispatchQueue.main.async {
             AppRouter.goToSignUpVC()
@@ -146,7 +150,7 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
         cell.titleLbl.text = sections[indexPath.row].1
         cell.logoImgView.image = sections[indexPath.row].0
         switch sections[indexPath.row].1 {
-        case "Face ID":
+        case "Face ID","Touch ID":
             cell.switchView.isUserInteractionEnabled = true
             cell.nextBtn.isHidden = true
             cell.switchView.isHidden = false
@@ -155,14 +159,14 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
             cell.switchView.isUserInteractionEnabled = false
             cell.nextBtn.isHidden = true
             cell.switchView.isHidden = false
-            cell.switchView.isOn = false
+            cell.switchView.isOn = HealthKitManager.sharedInstance.isEnabled
         default:
             cell.nextBtn.isHidden = false
             cell.switchView.isHidden = true
         }
         cell.switchTapped = { [weak self] sender in
             guard let self = self else { return }
-            if self.sections[indexPath.row].1 ==  "Face ID" {
+            if self.sections[indexPath.row].1 ==  "Face ID" ||  self.sections[indexPath.row].1 ==  "Touch ID" {
                 let isOn = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
                 self.db.collection(ApiKey.users).document(UserModel.main.id).updateData([ApiKey.isBiometricOn: !isOn])
                 AppUserDefaults.save(value: !isOn, forKey: .isBiometricSelected)
@@ -289,6 +293,10 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
         case "About":
             let vc = AboutSectionVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)
+        case "Face ID","Touch ID":
+            print("Do Nothing.")
+        case "Apple Health":
+            print("Do Nothing.")
         default:
             CommonFunctions.showToastWithMessage("Under Development")
         }

@@ -6,6 +6,7 @@
 //
 import CoreBluetooth
 import UIKit
+import HealthKit
 
 class HomeVC: UIViewController {
     
@@ -103,6 +104,7 @@ class HomeVC: UIViewController {
 extension HomeVC {
     
     private func initialSetup() {
+        BleManager.sharedInstance.delegate = self
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
@@ -116,7 +118,17 @@ extension HomeVC {
         } failure: { (error) -> (Void) in
             CommonFunctions.showToastWithMessage(error.localizedDescription)
         }
-        BleManager.sharedInstance.delegate = self
+        HealthKitManager.sharedInstance.authorizeHealthKit { (isEnable, error) in
+            if let error = error{
+                print(error.localizedDescription)
+            }else {
+                print(isEnable)
+                print(HKHealthStore.isHealthDataAvailable())
+            }
+        }
+//        getStepCount()
+//        getAgeSexAndBloodType()
+//        HealthKitManager.sharedInstance.addWaterAmountToHealthKit(ounces: 32.0)
     }
     
     func addBottomSheetView() {

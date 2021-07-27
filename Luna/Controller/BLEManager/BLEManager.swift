@@ -399,9 +399,9 @@ public class BleManager: NSObject{
 //        }
 //    }
 //
-//    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?){
-//        //println ("didWriteValueForCharacteristic ")
-//    }
+    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?){
+        print("didWriteValueForCharacteristic ")
+    }
 //
 //    public func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?){
 //        //      println ("didReadRSSI ")
@@ -458,7 +458,7 @@ extension BleManager: CBPeripheralDelegate {
             print("handled Characteristic Value for Battery: \(String(describing: characteristic.value))")
         case ReservoirLevelCharacteristicCBUUID:
             if reservoirLevelData.isEmpty {
-            writeValue(myCharacteristic: characteristic,value: "3")
+            writeValue(myCharacteristic: characteristic,value: "6")
             }
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             print("handled Characteristic Value for Reservoir Level: \(String(describing: characteristic.value))")

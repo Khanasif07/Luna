@@ -17,7 +17,7 @@ class HealthKitManager: NSObject {
     
     private override init() {}
     
-    var isEnabled = true
+    var isEnabled = false
     
     let healthStore = HKHealthStore()
     
