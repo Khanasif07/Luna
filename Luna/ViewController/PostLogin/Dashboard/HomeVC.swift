@@ -28,10 +28,6 @@ class HomeVC: UIViewController {
     // MARK: - Variables
     //==========================
     let bottomSheetVC = HomeBottomSheetVC()
-    //BLE
-    //    var centralManager: CBCentralManager!
-    var heartRatePeripheral: CBPeripheral!
-    var isMyPeripheralConected = false
     
     // MARK: - Lifecycle
     //===========================
@@ -64,7 +60,6 @@ class HomeVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        setupSystemInfo()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

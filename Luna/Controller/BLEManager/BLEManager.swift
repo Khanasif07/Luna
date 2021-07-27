@@ -446,7 +446,9 @@ extension BleManager: CBPeripheralDelegate {
         print(characteristic.uuid)
         switch characteristic.uuid {
         case batteryCharacteristicCBUUID:
-//            writeValue(myCharacteristic: characteristic)
+            if batteryData.isEmpty {
+            writeValue(myCharacteristic: characteristic)
+            }
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.batteryData = data
@@ -455,7 +457,9 @@ extension BleManager: CBPeripheralDelegate {
 //            self.batteryTitleLbl.text = DeviceStatus.Battery.titleString
             print("handled Characteristic Value for Battery: \(String(describing: characteristic.value))")
         case ReservoirLevelCharacteristicCBUUID:
-//            writeValue(myCharacteristic: characteristic,value: "3")
+            if reservoirLevelData.isEmpty {
+            writeValue(myCharacteristic: characteristic,value: "3")
+            }
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             print("handled Characteristic Value for Reservoir Level: \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
@@ -464,7 +468,9 @@ extension BleManager: CBPeripheralDelegate {
 //            self.reservoirStatusLbl.text = DeviceStatus.getReservoirImage(value:data).0
 //            self.reservoirTitleLbl.text = DeviceStatus.ReservoirLevel.titleString
         case statusCBUUID:
-//            writeValue(myCharacteristic: characteristic,value: "0")
+            if systemStatusData.isEmpty{
+            writeValue(myCharacteristic: characteristic,value: "0")
+            }
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             print("handled Characteristic Value for status : \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""

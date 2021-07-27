@@ -53,6 +53,27 @@ class PairLunaVC: UIViewController {
             scene.lunaStartPairing = { [weak self] (sender) in
                 guard let selff = self else { return }
                 let scene =  SearchingDeviceVC.instantiate(fromAppStoryboard: .CGPStoryboard)
+                scene.deviceConnectedNavigation = { [weak self] (sender) in
+                    guard let selff = self else { return }
+                    let scene =  DeviceConnectedVC.instantiate(fromAppStoryboard: .CGPStoryboard)
+                    scene.lunaPairedSuccess = { [weak self] (sender) in
+                        guard let selff = self else { return }
+                        if   SystemInfoModel.shared.isFromSetting {
+                            NotificationCenter.default.post(name: Notification.Name.lunaPairedSuccessfully, object: nil)
+                            selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
+                            CommonFunctions.showToastWithMessage("Paired Luna successfully.")
+                        }else {
+                            NotificationCenter.default.post(name: Notification.Name.lunaPairedSuccessfully, object: nil)
+                            selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupStep1VC.self)
+                        }
+                    }
+                    selff.present(scene, animated: true, completion: nil)
+                }
+                scene.deviceNotConnectedNavigation = {  [weak self] (sender) in
+                    guard let selff = self else { return }
+//                    selff.pop()
+                   // MARK:- Need to work=================
+                }
                 let transition = CATransition()
                 transition.duration = 0.5
                 transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
