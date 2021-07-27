@@ -231,7 +231,14 @@ extension CGMConnectedVC {
                 if globalVariables.dexVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
                     globalVariables.dexVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
                     DispatchQueue.main.async {
-                        //self.sendNotification(title: "Dexcom Share Error", body: "Please double check user name and password, internet connection, and sharing status.")
+                        self.showAlert(title: "Dexcom Share Error", msg: "Please double check user name and password, internet connection, and sharing status.") {
+                            self.activityIndicator.stopAnimating()
+                            SystemInfoModel.shared.cgmUnit = Int(self.ValueLbl.text ?? "") ?? 0
+                            self.dismiss(animated: true) {
+                                
+                            }
+                        }
+//                        self.sendNotification(title: "Dexcom Share Error", body: "Please double check user name and password, internet connection, and sharing status.")
                     }
                 }
             }
