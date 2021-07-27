@@ -15,7 +15,6 @@ class CGMDATASHAREVC: UIViewController {
     @IBOutlet weak var subTitleLbl: UILabel!
     @IBOutlet weak var titleLbl: UILabel!
     
-    
     var CGMConnectNavigation: ((UIButton)->())?
     
     override func viewDidLoad() {

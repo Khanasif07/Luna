@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -469,21 +470,24 @@ Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuG-C6-TZq">
-                                        <rect key="frame" x="28" y="288" width="358" height="320"/>
+                                        <rect key="frame" x="28" y="281" width="358" height="334"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDL-A8-xRl">
-                                                <rect key="frame" x="20" y="160" width="318" height="67"/>
+                                                <rect key="frame" x="20" y="159" width="318" height="82"/>
                                                 <string key="text">Your data will be used in this and that way.
 Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  T-bone doner beef ribs, fatback ball tip cupim pancetta salami landjaeger swine.</string>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="121" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEh-Uz-yUf">
-                                                <rect key="frame" x="144.5" y="94" width="69" height="46"/>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="yb9-oj-gLl">
+                                                <rect key="frame" x="169" y="93" width="20" height="46"/>
+                                                <color key="color" red="0.3294117647" green="0.69803921570000005" blue="0.36862745099999999" alpha="0.4038728828" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            </activityIndicatorView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEh-Uz-yUf">
+                                                <rect key="frame" x="179" y="93" width="0.0" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="46" id="dXq-vx-lDX"/>
-                                                    <constraint firstAttribute="width" constant="69" id="ibv-LT-NHN"/>
                                                     <constraint firstAttribute="height" constant="46" id="zmg-fc-4gJ"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="44"/>
@@ -491,7 +495,7 @@ Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OXT-oO-h97" customClass="AppButton" customModule="Luna" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="257" width="318" height="44"/>
+                                                <rect key="frame" x="20" y="271" width="318" height="44"/>
                                                 <color key="backgroundColor" red="0.52941176469999995" green="0.74509803919999995" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="266-pZ-qdP"/>
@@ -505,7 +509,7 @@ Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    Your Dexcom G8 CGM is connected" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgx-DI-1yR">
-                                                <rect key="frame" x="40" y="16" width="278" height="43"/>
+                                                <rect key="frame" x="40" y="16" width="278" height="42"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -521,32 +525,38 @@ Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  
                                                     <action selector="crossBtnTapped:" destination="Z3M-Ej-Kml" eventType="touchUpInside" id="o7w-H5-QFu"/>
                                                 </connections>
                                             </button>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sideup_arrow_green" translatesAutoresizingMaskIntoConstraints="NO" id="qCf-dj-NSF">
-                                                <rect key="frame" x="215.5" y="94" width="46" height="46"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pub-Jn-LpW">
+                                                <rect key="frame" x="181" y="93" width="46" height="46"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="46" id="Fqo-Fw-KFD"/>
-                                                    <constraint firstAttribute="width" secondItem="qCf-dj-NSF" secondAttribute="height" multiplier="1:1" id="jNO-M6-2gj"/>
+                                                    <constraint firstAttribute="width" secondItem="pub-Jn-LpW" secondAttribute="height" multiplier="1:1" id="yeF-ix-4ad"/>
                                                 </constraints>
-                                            </imageView>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="44"/>
+                                                <color key="textColor" name="outgoingMessageBackground"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="OXT-oO-h97" firstAttribute="leading" secondItem="zuG-C6-TZq" secondAttribute="leading" constant="20" id="1dZ-Hx-kwt"/>
+                                            <constraint firstItem="pub-Jn-LpW" firstAttribute="leading" secondItem="zEh-Uz-yUf" secondAttribute="trailing" constant="2" id="33h-as-V62"/>
                                             <constraint firstItem="OXT-oO-h97" firstAttribute="top" secondItem="eDL-A8-xRl" secondAttribute="bottom" constant="30" id="A7s-56-HJM"/>
                                             <constraint firstItem="eDL-A8-xRl" firstAttribute="leading" secondItem="zuG-C6-TZq" secondAttribute="leading" constant="20" id="ByR-c1-IBZ"/>
                                             <constraint firstAttribute="trailing" secondItem="eDL-A8-xRl" secondAttribute="trailing" constant="20" id="Gip-tm-XRv"/>
+                                            <constraint firstItem="pub-Jn-LpW" firstAttribute="bottom" secondItem="zEh-Uz-yUf" secondAttribute="bottom" id="ITk-BV-nKY"/>
+                                            <constraint firstItem="yb9-oj-gLl" firstAttribute="centerY" secondItem="zEh-Uz-yUf" secondAttribute="centerY" id="J3v-JH-9WM"/>
                                             <constraint firstAttribute="trailing" secondItem="Iro-js-TfH" secondAttribute="trailing" constant="16" id="Phe-lF-p3R"/>
                                             <constraint firstAttribute="trailing" secondItem="OXT-oO-h97" secondAttribute="trailing" constant="20" id="Q10-qU-Tfg"/>
-                                            <constraint firstItem="qCf-dj-NSF" firstAttribute="top" secondItem="zEh-Uz-yUf" secondAttribute="top" id="QeP-HA-dyE"/>
+                                            <constraint firstItem="pub-Jn-LpW" firstAttribute="top" secondItem="zEh-Uz-yUf" secondAttribute="top" id="QNW-IN-CCc"/>
                                             <constraint firstItem="pgx-DI-1yR" firstAttribute="leading" secondItem="zuG-C6-TZq" secondAttribute="leading" constant="40" id="RCh-wX-rFg"/>
-                                            <constraint firstItem="qCf-dj-NSF" firstAttribute="bottom" secondItem="zEh-Uz-yUf" secondAttribute="bottom" id="V3X-oT-9XW"/>
-                                            <constraint firstItem="qCf-dj-NSF" firstAttribute="leading" secondItem="zEh-Uz-yUf" secondAttribute="trailing" constant="2" id="bem-ax-vfY"/>
+                                            <constraint firstItem="yb9-oj-gLl" firstAttribute="bottom" secondItem="zEh-Uz-yUf" secondAttribute="bottom" id="ZFp-zu-2bN"/>
                                             <constraint firstItem="Iro-js-TfH" firstAttribute="top" secondItem="zuG-C6-TZq" secondAttribute="top" constant="16" id="f97-K4-ANY"/>
                                             <constraint firstItem="eDL-A8-xRl" firstAttribute="top" secondItem="zEh-Uz-yUf" secondAttribute="bottom" constant="20" id="hkR-aM-eG6"/>
                                             <constraint firstItem="zEh-Uz-yUf" firstAttribute="top" secondItem="pgx-DI-1yR" secondAttribute="bottom" constant="35" id="ihT-Q2-Bog"/>
                                             <constraint firstItem="pgx-DI-1yR" firstAttribute="top" secondItem="zuG-C6-TZq" secondAttribute="top" constant="16" id="mVJ-je-VFc"/>
+                                            <constraint firstItem="yb9-oj-gLl" firstAttribute="centerX" secondItem="zEh-Uz-yUf" secondAttribute="centerX" id="oAf-qx-TD5"/>
                                             <constraint firstAttribute="trailing" secondItem="pgx-DI-1yR" secondAttribute="trailing" constant="40" id="oXp-mq-b62"/>
                                             <constraint firstItem="zEh-Uz-yUf" firstAttribute="centerX" secondItem="zuG-C6-TZq" secondAttribute="centerX" id="pjB-db-OLc"/>
+                                            <constraint firstItem="yb9-oj-gLl" firstAttribute="top" secondItem="zEh-Uz-yUf" secondAttribute="top" id="tsq-T0-Z1e"/>
                                             <constraint firstAttribute="bottom" secondItem="OXT-oO-h97" secondAttribute="bottom" constant="19" id="zqm-TG-pJP"/>
                                         </constraints>
                                     </view>
@@ -570,6 +580,9 @@ Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="ValueLbl" destination="zEh-Uz-yUf" id="En7-iP-YjW"/>
+                        <outlet property="activityIndicator" destination="yb9-oj-gLl" id="W95-rG-6Jh"/>
+                        <outlet property="directionText" destination="pub-Jn-LpW" id="bbh-LY-fDB"/>
                         <outlet property="okBtn" destination="OXT-oO-h97" id="kb6-9v-VZn"/>
                         <outlet property="outerView" destination="zuG-C6-TZq" id="pXq-fr-XbR"/>
                         <outlet property="subTitleLbl" destination="eDL-A8-xRl" id="2da-eO-fe7"/>
@@ -753,10 +766,10 @@ your Phone</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rs5-PS-SEw">
-                                        <rect key="frame" x="28" y="239" width="358" height="418"/>
+                                        <rect key="frame" x="28" y="238" width="358" height="420"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Searching" translatesAutoresizingMaskIntoConstraints="NO" id="5pl-iy-ojR">
-                                                <rect key="frame" x="79" y="109" width="200" height="200"/>
+                                                <rect key="frame" x="79" y="110" width="200" height="200"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="200" id="7vg-04-1Ck"/>
@@ -764,13 +777,13 @@ your Phone</string>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The app will automatically connect to the closest device." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3S-OR-y2e">
-                                                <rect key="frame" x="20" y="357" width="318" height="37.5"/>
+                                                <rect key="frame" x="20" y="358" width="318" height="38.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daL-w1-XEu">
-                                                <rect key="frame" x="20" y="16" width="318" height="42"/>
+                                                <rect key="frame" x="20" y="16" width="318" height="43"/>
                                                 <string key="text">Searching for nearby
 Luna devices</string>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
@@ -789,7 +802,7 @@ Luna devices</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJj-D1-Lqp">
-                                                <rect key="frame" x="79" y="109" width="200" height="200"/>
+                                                <rect key="frame" x="79" y="110" width="200" height="200"/>
                                                 <connections>
                                                     <action selector="proceedBtnAction:" destination="ebB-xp-2wl" eventType="touchUpInside" id="zhA-OQ-PbK"/>
                                                 </connections>
@@ -1594,9 +1607,11 @@ Luna devices</string>
         <image name="Info Icon" width="40" height="40"/>
         <image name="Pairluna_illustration" width="306.5" height="103"/>
         <image name="Searching" width="200" height="200"/>
-        <image name="Sideup_arrow_green" width="36" height="36"/>
         <image name="back" width="40" height="40"/>
         <image name="eyeOpenIcon" width="24" height="24"/>
+        <namedColor name="outgoingMessageBackground">
+            <color red="0.20399998128414154" green="0.77999997138977051" blue="0.34899997711181641" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="quaternarySystemFillColor">
             <color red="0.45490196078431372" green="0.45490196078431372" blue="0.50196078431372548" alpha="0.080000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

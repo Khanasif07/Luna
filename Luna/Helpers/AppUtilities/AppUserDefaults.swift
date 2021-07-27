@@ -114,6 +114,7 @@ extension AppUserDefaults {
         case pushNotificationStatus
         case canChangePassword
         case unreadCount
+        case cgmValue
     }
 }
 

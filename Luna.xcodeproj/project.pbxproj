@@ -25,6 +25,15 @@
 		840A7E662696F190005AA1E6 /* SessionHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7E642696F190005AA1E6 /* SessionHistoryTableViewCell.swift */; };
 		840A7E672696F190005AA1E6 /* SessionHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840A7E652696F190005AA1E6 /* SessionHistoryTableViewCell.xib */; };
 		840A7ED72697060E005AA1E6 /* SessionFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7ED62697060E005AA1E6 /* SessionFilterVC.swift */; };
+		8418D7CD26B01BC500BAB256 /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418D7CC26B01BC500BAB256 /* DateTime.swift */; };
+		8418D7D526B01F4E00BAB256 /* UserData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8418D7D026B01F4E00BAB256 /* UserData.xcdatamodeld */; };
+		8418D7D626B01F4E00BAB256 /* UserDefaultsValueGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418D7D226B01F4E00BAB256 /* UserDefaultsValueGroups.swift */; };
+		8418D7D726B01F4E00BAB256 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418D7D326B01F4E00BAB256 /* UserDefaults.swift */; };
+		8418D7D826B01F4E00BAB256 /* UserDefaultsValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418D7D426B01F4E00BAB256 /* UserDefaultsValue.swift */; };
+		8418D7DB26B021FA00BAB256 /* BackgroundTaskAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418D7DA26B021FA00BAB256 /* BackgroundTaskAudio.swift */; };
+		8418D7DF26B0230100BAB256 /* AnyConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418D7DE26B0230100BAB256 /* AnyConvertible.swift */; };
+		8418D7E226B0235300BAB256 /* ObservationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418D7E126B0235300BAB256 /* ObservationToken.swift */; };
+		8418D7E526B023A700BAB256 /* CGMAppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418D7E426B023A700BAB256 /* CGMAppConstants.swift */; };
 		842E9B1726955E2400F36A3D /* InsulinStep2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842E9B1526955E2400F36A3D /* InsulinStep2Cell.swift */; };
 		842E9B1826955E2400F36A3D /* InsulinStep2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842E9B1626955E2400F36A3D /* InsulinStep2Cell.xib */; };
 		842E9B1B2695690B00F36A3D /* InsulinStep3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842E9B1A2695690B00F36A3D /* InsulinStep3VC.swift */; };
@@ -51,6 +60,9 @@
 		8455A3C226820E010061C55F /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455A3C126820E010061C55F /* SettingsVC.swift */; };
 		8455A3C7268211770061C55F /* SettingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455A3C5268211770061C55F /* SettingTableCell.swift */; };
 		8455A3C8268211770061C55F /* SettingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8455A3C6268211770061C55F /* SettingTableCell.xib */; };
+		845B619026AAC2D900F9BC2A /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 845B618C26AAC2D900F9BC2A /* LICENSE */; };
+		845B619126AAC2D900F9BC2A /* ShareClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B618F26AAC2D900F9BC2A /* ShareClient.swift */; };
+		845B619426AAC31800F9BC2A /* ShareClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B619326AAC31800F9BC2A /* ShareClientExtension.swift */; };
 		84602903268C50F800141E0D /* AboutTermsPolicyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84602902268C50F800141E0D /* AboutTermsPolicyVC.swift */; };
 		847899732684824F00D1DF36 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847899722684824F00D1DF36 /* HomeVC.swift */; };
 		847899762684870F00D1DF36 /* AboutSectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847899752684870F00D1DF36 /* AboutSectionVC.swift */; };
@@ -164,6 +176,15 @@
 		840A7E642696F190005AA1E6 /* SessionHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		840A7E652696F190005AA1E6 /* SessionHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		840A7ED62697060E005AA1E6 /* SessionFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFilterVC.swift; sourceTree = "<group>"; };
+		8418D7CC26B01BC500BAB256 /* DateTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTime.swift; sourceTree = "<group>"; };
+		8418D7D126B01F4E00BAB256 /* UserData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserData.xcdatamodel; sourceTree = "<group>"; };
+		8418D7D226B01F4E00BAB256 /* UserDefaultsValueGroups.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsValueGroups.swift; sourceTree = "<group>"; };
+		8418D7D326B01F4E00BAB256 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		8418D7D426B01F4E00BAB256 /* UserDefaultsValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsValue.swift; sourceTree = "<group>"; };
+		8418D7DA26B021FA00BAB256 /* BackgroundTaskAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundTaskAudio.swift; sourceTree = "<group>"; };
+		8418D7DE26B0230100BAB256 /* AnyConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyConvertible.swift; sourceTree = "<group>"; };
+		8418D7E126B0235300BAB256 /* ObservationToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservationToken.swift; sourceTree = "<group>"; };
+		8418D7E426B023A700BAB256 /* CGMAppConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMAppConstants.swift; sourceTree = "<group>"; };
 		842E9B1526955E2400F36A3D /* InsulinStep2Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep2Cell.swift; sourceTree = "<group>"; };
 		842E9B1626955E2400F36A3D /* InsulinStep2Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InsulinStep2Cell.xib; sourceTree = "<group>"; };
 		842E9B1A2695690B00F36A3D /* InsulinStep3VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep3VC.swift; sourceTree = "<group>"; };
@@ -189,6 +210,10 @@
 		8455A3C126820E010061C55F /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		8455A3C5268211770061C55F /* SettingTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableCell.swift; sourceTree = "<group>"; };
 		8455A3C6268211770061C55F /* SettingTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTableCell.xib; sourceTree = "<group>"; };
+		845B618C26AAC2D900F9BC2A /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		845B618E26AAC2D900F9BC2A /* ShareClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareClient.h; sourceTree = "<group>"; };
+		845B618F26AAC2D900F9BC2A /* ShareClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareClient.swift; sourceTree = "<group>"; };
+		845B619326AAC31800F9BC2A /* ShareClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareClientExtension.swift; sourceTree = "<group>"; };
 		84602902268C50F800141E0D /* AboutTermsPolicyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTermsPolicyVC.swift; sourceTree = "<group>"; };
 		846F1A1F2678C2220034ACE0 /* GoogleService-Info-1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-1.plist"; sourceTree = "<group>"; };
 		847899722684824F00D1DF36 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -314,10 +339,10 @@
 		840A7DEC2696E934005AA1E6 /* CGM */ = {
 			isa = PBXGroup;
 			children = (
-				840A7DEF2696E95E005AA1E6 /* CGMConnectedVC.swift */,
-				840A7DEE2696E95E005AA1E6 /* CGMDATASHAREVC.swift */,
-				840A7DF02696E95E005AA1E6 /* CGMLoginVC.swift */,
 				840A7DED2696E95E005AA1E6 /* CGMSelectorVC.swift */,
+				840A7DF02696E95E005AA1E6 /* CGMLoginVC.swift */,
+				840A7DEE2696E95E005AA1E6 /* CGMDATASHAREVC.swift */,
+				840A7DEF2696E95E005AA1E6 /* CGMConnectedVC.swift */,
 			);
 			path = CGM;
 			sourceTree = "<group>";
@@ -365,6 +390,17 @@
 			path = "SessionHistory Xib";
 			sourceTree = "<group>";
 		};
+		8418D7CF26B01F4E00BAB256 /* repository */ = {
+			isa = PBXGroup;
+			children = (
+				8418D7D026B01F4E00BAB256 /* UserData.xcdatamodeld */,
+				8418D7D226B01F4E00BAB256 /* UserDefaultsValueGroups.swift */,
+				8418D7D326B01F4E00BAB256 /* UserDefaults.swift */,
+				8418D7D426B01F4E00BAB256 /* UserDefaultsValue.swift */,
+			);
+			path = repository;
+			sourceTree = "<group>";
+		};
 		8432A19D2672317F00859B47 /* BiometricAuth */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,10 +420,10 @@
 		84467277268DAED100EC55FD /* Systemsetup */ = {
 			isa = PBXGroup;
 			children = (
+				8446727B268DAF8E00EC55FD /* SystemSetupStep1VC.swift */,
 				840A7DF62696E968005AA1E6 /* Pair Luna */,
 				840A7DEC2696E934005AA1E6 /* CGM */,
 				84467283268DBE8A00EC55FD /* Insulin */,
-				8446727B268DAF8E00EC55FD /* SystemSetupStep1VC.swift */,
 			);
 			path = Systemsetup;
 			sourceTree = "<group>";
@@ -502,6 +538,39 @@
 				84F2A27C26984F3D000FDCD5 /* BottomSheetBottomCell.xib */,
 			);
 			path = PostLogin;
+			sourceTree = "<group>";
+		};
+		845B618926AAC2B200F9BC2A /* CGM */ = {
+			isa = PBXGroup;
+			children = (
+				8418D7E426B023A700BAB256 /* CGMAppConstants.swift */,
+				8418D7E126B0235300BAB256 /* ObservationToken.swift */,
+				8418D7DE26B0230100BAB256 /* AnyConvertible.swift */,
+				8418D7CC26B01BC500BAB256 /* DateTime.swift */,
+				845B619326AAC31800F9BC2A /* ShareClientExtension.swift */,
+				8418D7DA26B021FA00BAB256 /* BackgroundTaskAudio.swift */,
+				8418D7CF26B01F4E00BAB256 /* repository */,
+				845B618B26AAC2D900F9BC2A /* ShareClient */,
+			);
+			path = CGM;
+			sourceTree = "<group>";
+		};
+		845B618B26AAC2D900F9BC2A /* ShareClient */ = {
+			isa = PBXGroup;
+			children = (
+				845B618C26AAC2D900F9BC2A /* LICENSE */,
+				845B618D26AAC2D900F9BC2A /* ShareClient */,
+			);
+			path = ShareClient;
+			sourceTree = "<group>";
+		};
+		845B618D26AAC2D900F9BC2A /* ShareClient */ = {
+			isa = PBXGroup;
+			children = (
+				845B618E26AAC2D900F9BC2A /* ShareClient.h */,
+				845B618F26AAC2D900F9BC2A /* ShareClient.swift */,
+			);
+			path = ShareClient;
 			sourceTree = "<group>";
 		};
 		846F1A1B2678BFFE0034ACE0 /* Certificates */ = {
@@ -621,6 +690,7 @@
 				8446726F268D865700EC55FD /* BLEManager */,
 				8432A19D2672317F00859B47 /* BiometricAuth */,
 				84CC12BA2668CDDB009316FC /* FirestoreController */,
+				845B618926AAC2B200F9BC2A /* CGM */,
 				84CC12992668C822009316FC /* AppDelegate.swift */,
 				84CC129B2668C822009316FC /* SceneDelegate.swift */,
 			);
@@ -849,6 +919,7 @@
 				84D1F4F72679D52700F131E0 /* SF-Pro-Display-Semibold.otf in Resources */,
 				84F2A27E26984F3D000FDCD5 /* BottomSheetBottomCell.xib in Resources */,
 				8455A3C8268211770061C55F /* SettingTableCell.xib in Resources */,
+				845B619026AAC2D900F9BC2A /* LICENSE in Resources */,
 				842E9B1826955E2400F36A3D /* InsulinStep2Cell.xib in Resources */,
 				840A7E672696F190005AA1E6 /* SessionHistoryTableViewCell.xib in Resources */,
 				84467275268DAE1E00EC55FD /* SystemSetup.storyboard in Resources */,
@@ -927,10 +998,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8418D7D626B01F4E00BAB256 /* UserDefaultsValueGroups.swift in Sources */,
 				840A7DF32696E95E005AA1E6 /* CGMConnectedVC.swift in Sources */,
 				8446727C268DAF8E00EC55FD /* SystemSetupStep1VC.swift in Sources */,
 				845549202678DDE6000CC13D /* LoginViewController.swift in Sources */,
+				845B619426AAC31800F9BC2A /* ShareClientExtension.swift in Sources */,
+				8418D7DB26B021FA00BAB256 /* BackgroundTaskAudio.swift in Sources */,
 				849B5A4226970A6C000AA5DC /* HomeBottomSheetVC.swift in Sources */,
+				8418D7D826B01F4E00BAB256 /* UserDefaultsValue.swift in Sources */,
 				84CC12DD2668D023009316FC /* AppStoryboards.swift in Sources */,
 				84D1F4DA2679CF4C00F131E0 /* CommonFunctions.swift in Sources */,
 				840A7E072696EB62005AA1E6 /* CGMTypeTableViewCell.swift in Sources */,
@@ -942,12 +1017,15 @@
 				84FDA0B1267DE8B600AC8BE9 /* DecisionCell.swift in Sources */,
 				840A7DFB2696E98C005AA1E6 /* LunaDevicesVC.swift in Sources */,
 				84467280268DB2C700EC55FD /* SystemStep1TableCell.swift in Sources */,
+				8418D7E526B023A700BAB256 /* CGMAppConstants.swift in Sources */,
 				840A7DFC2696E98C005AA1E6 /* PairLunaVC.swift in Sources */,
 				84467287268DBECC00EC55FD /* InsulinStep1VC.swift in Sources */,
 				842E9B1B2695690B00F36A3D /* InsulinStep3VC.swift in Sources */,
 				84CC12EC2668D0B8009316FC /* UIColorExtension.swift in Sources */,
 				8455A3C226820E010061C55F /* SettingsVC.swift in Sources */,
+				845B619126AAC2D900F9BC2A /* ShareClient.swift in Sources */,
 				8432A19F2672319B00859B47 /* BiometricIDAuth.swift in Sources */,
+				8418D7DF26B0230100BAB256 /* AnyConvertible.swift in Sources */,
 				84B06F09269C0BE00059B293 /* SessionDescBottomVC.swift in Sources */,
 				840A7ED72697060E005AA1E6 /* SessionFilterVC.swift in Sources */,
 				840A7DFD2696E98C005AA1E6 /* DeviceConnectedVC.swift in Sources */,
@@ -971,10 +1049,12 @@
 				842E9B1E2695710300F36A3D /* InsulinStep4VC.swift in Sources */,
 				840A7DF42696E95E005AA1E6 /* CGMLoginVC.swift in Sources */,
 				84F2A28126985398000FDCD5 /* LineDashedView.swift in Sources */,
+				8418D7E226B0235300BAB256 /* ObservationToken.swift in Sources */,
 				847899762684870F00D1DF36 /* AboutSectionVC.swift in Sources */,
 				84CC12FB2668D15D009316FC /* UIViewcontroller+Extension.swift in Sources */,
 				849B7436269D710600C059E5 /* HealthKitManager.swift in Sources */,
 				84CC12CD2668CFBF009316FC /* AppRouter.swift in Sources */,
+				8418D7D726B01F4E00BAB256 /* UserDefaults.swift in Sources */,
 				84F2A27026981DD8000FDCD5 /* BottomSheetChartCell.swift in Sources */,
 				84CC13042668D1A6009316FC /* Double+Extension.swift in Sources */,
 				84CC13212668D588009316FC /* LocalizedString.swift in Sources */,
@@ -999,6 +1079,7 @@
 				84FDA0AC267DCB5600AC8BE9 /* MessageReceiverCell.swift in Sources */,
 				84CC12FE2668D17A009316FC /* UICollectionView+Extension.swift in Sources */,
 				84B06F0A269C0BE00059B293 /* SessionDescriptionVC.swift in Sources */,
+				8418D7CD26B01BC500BAB256 /* DateTime.swift in Sources */,
 				84F7BC51266F11BA006C94DA /* AppleLoginManager.swift in Sources */,
 				8455A3BF26805AA80061C55F /* InfoPlistParser.swift in Sources */,
 				84467271268D867600EC55FD /* BLEManager.swift in Sources */,
@@ -1008,6 +1089,7 @@
 				840A7E662696F190005AA1E6 /* SessionHistoryTableViewCell.swift in Sources */,
 				84CC12D72668D005009316FC /* AppColors.swift in Sources */,
 				84CC12F82668D12D009316FC /* UIApplicationExtension.swift in Sources */,
+				8418D7D526B01F4E00BAB256 /* UserData.xcdatamodeld in Sources */,
 				844B93BE2694427600B65BF8 /* InsulinStep2VC.swift in Sources */,
 				84861D7726848DB1004B046C /* ProfileVC.swift in Sources */,
 				84CC12D02668CFD8009316FC /* AppUserDefaults.swift in Sources */,
@@ -1229,6 +1311,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8418D7D026B01F4E00BAB256 /* UserData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8418D7D126B01F4E00BAB256 /* UserData.xcdatamodel */,
+			);
+			currentVersion = 8418D7D126B01F4E00BAB256 /* UserData.xcdatamodel */;
+			path = UserData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 84CC128E2668C822009316FC /* Project object */;
 }
