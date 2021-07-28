@@ -1,13 +1,14 @@
 //
-//  AboutSectionVC.swift
+//  SettingManualVC.swift
 //  Luna
 //
-//  Created by Admin on 24/06/21.
+//  Created by Admin on 28/07/21.
 //
+
 
 import UIKit
 
-class AboutSectionVC: UIViewController {
+class SettingManualVC: UIViewController {
     
     // MARK: - IBOutlets
     //===========================
@@ -17,7 +18,7 @@ class AboutSectionVC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var sections: [(UIImage,String)] = [(#imageLiteral(resourceName: "findAnswers"),"Find Answers"),(#imageLiteral(resourceName: "customerSupport"),"Customer Support"),(#imageLiteral(resourceName: "appVersion"),"App Version"),(#imageLiteral(resourceName: "termsConditions"),"Terms & Conditions"),(#imageLiteral(resourceName: "privacy"),"Privacy")]
+    var sections: [(UIImage,String,String,Bool)] = [(#imageLiteral(resourceName: "charge"),"How to charge Luna?","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut bibendum consectetur libero, vel convallis arcu pretium a. ",false),(#imageLiteral(resourceName: "pair"),"How to pair Luna?","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut bibendum consectetur libero, vel convallis arcu pretium a. ",false),(#imageLiteral(resourceName: "reservoir"),"How to fill and apply your Reservoir?","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut bibendum consectetur libero, vel convallis arcu pretium a. ",false),(#imageLiteral(resourceName: "cgm"),"How to connect your CGM?","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut bibendum consectetur libero, vel convallis arcu pretium a. ",false)]
     
     // MARK: - Lifecycle
     //===========================
@@ -53,7 +54,7 @@ class AboutSectionVC: UIViewController {
 
 // MARK: - Extension For Functions
 //===========================
-extension AboutSectionVC {
+extension SettingManualVC {
     
     private func initialSetup() {
         if #available(iOS 13.0, *) {
@@ -65,24 +66,25 @@ extension AboutSectionVC {
     private func tableViewSetup(){
         self.aboutTableView.delegate = self
         self.aboutTableView.dataSource = self
-        self.aboutTableView.registerCell(with: SettingTableCell.self)
+        self.aboutTableView.registerCell(with: SettingManualCell.self)
     }
 }
 
 // MARK: - Extension For TableView
 //===========================
-extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
+extension SettingManualVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections.endIndex
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueCell(with: SettingTableCell.self)
-        cell.titleLbl.text = sections[indexPath.row].1
-        cell.logoImgView.image = sections[indexPath.row].0
-        cell.nextBtn.isHidden = false
-        cell.switchView.isHidden = true
+        let cell = tableView.dequeueCell(with: SettingManualCell.self)
+        cell.ansLbl.isHidden = !sections[indexPath.row].3
+        cell.queLbl.text = sections[indexPath.row].1
+        cell.ansLbl.text = sections[indexPath.row].2
+        cell.logoBtn.setImage(sections[indexPath.row].0, for: .normal)
+        cell.arrowBtn.setImage(sections[indexPath.row].3 ? #imageLiteral(resourceName: "uparrow") : #imageLiteral(resourceName: "dropdown") , for: .normal)
         return cell
     }
     
@@ -91,20 +93,7 @@ extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch sections[indexPath.row].1 {
-        case "Find Answers":
-            let vc = SettingManualVC.instantiate(fromAppStoryboard: .PostLogin)
-            self.navigationController?.pushViewController(vc, animated: true)
-        case "Privacy":
-            let vc = AboutTermsPolicyVC.instantiate(fromAppStoryboard: .PostLogin)
-            vc.titleString =  sections[indexPath.row].1
-            self.navigationController?.pushViewController(vc, animated: true)
-        case "Terms & Conditions":
-            let vc = AboutTermsPolicyVC.instantiate(fromAppStoryboard: .PostLogin)
-            vc.titleString =  sections[indexPath.row].1
-            self.navigationController?.pushViewController(vc, animated: true)
-        default:
-            CommonFunctions.showToastWithMessage("Under Development")
-        }
+        self.sections[indexPath.row].3 =   !self.sections[indexPath.row].3
+        self.aboutTableView.reloadSections(NSIndexSet(index: indexPath.section) as IndexSet, with: .fade)
     }
 }

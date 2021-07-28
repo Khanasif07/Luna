@@ -25,6 +25,7 @@
 		840A7E662696F190005AA1E6 /* SessionHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7E642696F190005AA1E6 /* SessionHistoryTableViewCell.swift */; };
 		840A7E672696F190005AA1E6 /* SessionHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840A7E652696F190005AA1E6 /* SessionHistoryTableViewCell.xib */; };
 		840A7ED72697060E005AA1E6 /* SessionFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7ED62697060E005AA1E6 /* SessionFilterVC.swift */; };
+		8410611C26A9DC8E00BF7953 /* SystemInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8410611B26A9DC8E00BF7953 /* SystemInfoModel.swift */; };
 		8418D7CD26B01BC500BAB256 /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418D7CC26B01BC500BAB256 /* DateTime.swift */; };
 		8418D7D526B01F4E00BAB256 /* UserData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8418D7D026B01F4E00BAB256 /* UserData.xcdatamodeld */; };
 		8418D7D626B01F4E00BAB256 /* UserDefaultsValueGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418D7D226B01F4E00BAB256 /* UserDefaultsValueGroups.swift */; };
@@ -34,7 +35,6 @@
 		8418D7DF26B0230100BAB256 /* AnyConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418D7DE26B0230100BAB256 /* AnyConvertible.swift */; };
 		8418D7E226B0235300BAB256 /* ObservationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418D7E126B0235300BAB256 /* ObservationToken.swift */; };
 		8418D7E526B023A700BAB256 /* CGMAppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418D7E426B023A700BAB256 /* CGMAppConstants.swift */; };
-		8410611C26A9DC8E00BF7953 /* SystemInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8410611B26A9DC8E00BF7953 /* SystemInfoModel.swift */; };
 		842E9B1726955E2400F36A3D /* InsulinStep2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842E9B1526955E2400F36A3D /* InsulinStep2Cell.swift */; };
 		842E9B1826955E2400F36A3D /* InsulinStep2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842E9B1626955E2400F36A3D /* InsulinStep2Cell.xib */; };
 		842E9B1B2695690B00F36A3D /* InsulinStep3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842E9B1A2695690B00F36A3D /* InsulinStep3VC.swift */; };
@@ -136,6 +136,9 @@
 		84D1F4FF2679D52700F131E0 /* SF-Pro-Display-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 84D1F4ED2679D52700F131E0 /* SF-Pro-Display-ThinItalic.otf */; };
 		84D1F5002679D52700F131E0 /* SF-Pro-Display-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 84D1F4EE2679D52700F131E0 /* SF-Pro-Display-BoldItalic.otf */; };
 		84D1F5052679E95A00F131E0 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1F5042679E95A00F131E0 /* ForgotPasswordVC.swift */; };
+		84E2D9B826B12C17000C0FD8 /* SettingManualVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2D9B726B12C17000C0FD8 /* SettingManualVC.swift */; };
+		84E2D9BC26B12D26000C0FD8 /* SettingManualCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2D9BA26B12D26000C0FD8 /* SettingManualCell.swift */; };
+		84E2D9BD26B12D26000C0FD8 /* SettingManualCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E2D9BB26B12D26000C0FD8 /* SettingManualCell.xib */; };
 		84E5505A267E027A008C02F8 /* TypeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E55058267E027A008C02F8 /* TypeTableCell.swift */; };
 		84E5505B267E027A008C02F8 /* TypeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E55059267E027A008C02F8 /* TypeTableCell.xib */; };
 		84E78B9E2685E8C500FABDCD /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E78B9D2685E8C500FABDCD /* UserModel.swift */; };
@@ -178,6 +181,7 @@
 		840A7E642696F190005AA1E6 /* SessionHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		840A7E652696F190005AA1E6 /* SessionHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		840A7ED62697060E005AA1E6 /* SessionFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFilterVC.swift; sourceTree = "<group>"; };
+		8410611B26A9DC8E00BF7953 /* SystemInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInfoModel.swift; sourceTree = "<group>"; };
 		8418D7CC26B01BC500BAB256 /* DateTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTime.swift; sourceTree = "<group>"; };
 		8418D7D126B01F4E00BAB256 /* UserData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserData.xcdatamodel; sourceTree = "<group>"; };
 		8418D7D226B01F4E00BAB256 /* UserDefaultsValueGroups.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsValueGroups.swift; sourceTree = "<group>"; };
@@ -187,7 +191,6 @@
 		8418D7DE26B0230100BAB256 /* AnyConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyConvertible.swift; sourceTree = "<group>"; };
 		8418D7E126B0235300BAB256 /* ObservationToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservationToken.swift; sourceTree = "<group>"; };
 		8418D7E426B023A700BAB256 /* CGMAppConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMAppConstants.swift; sourceTree = "<group>"; };
-		8410611B26A9DC8E00BF7953 /* SystemInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInfoModel.swift; sourceTree = "<group>"; };
 		842E9B1526955E2400F36A3D /* InsulinStep2Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep2Cell.swift; sourceTree = "<group>"; };
 		842E9B1626955E2400F36A3D /* InsulinStep2Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InsulinStep2Cell.xib; sourceTree = "<group>"; };
 		842E9B1A2695690B00F36A3D /* InsulinStep3VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep3VC.swift; sourceTree = "<group>"; };
@@ -292,6 +295,9 @@
 		84D1F4ED2679D52700F131E0 /* SF-Pro-Display-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-ThinItalic.otf"; sourceTree = "<group>"; };
 		84D1F4EE2679D52700F131E0 /* SF-Pro-Display-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-BoldItalic.otf"; sourceTree = "<group>"; };
 		84D1F5042679E95A00F131E0 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
+		84E2D9B726B12C17000C0FD8 /* SettingManualVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManualVC.swift; sourceTree = "<group>"; };
+		84E2D9BA26B12D26000C0FD8 /* SettingManualCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManualCell.swift; sourceTree = "<group>"; };
+		84E2D9BB26B12D26000C0FD8 /* SettingManualCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingManualCell.xib; sourceTree = "<group>"; };
 		84E55058267E027A008C02F8 /* TypeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeTableCell.swift; sourceTree = "<group>"; };
 		84E55059267E027A008C02F8 /* TypeTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TypeTableCell.xib; sourceTree = "<group>"; };
 		84E78B9D2685E8C500FABDCD /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -442,6 +448,7 @@
 				847899752684870F00D1DF36 /* AboutSectionVC.swift */,
 				84861D8226849FDB004B046C /* ChangePasswordVC.swift */,
 				84602902268C50F800141E0D /* AboutTermsPolicyVC.swift */,
+				84E2D9B726B12C17000C0FD8 /* SettingManualVC.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -541,6 +548,8 @@
 				84F2A277269849ED000FDCD5 /* BottomSheetInsulinCell.xib */,
 				84F2A27B26984F3D000FDCD5 /* BottomSheetBottomCell.swift */,
 				84F2A27C26984F3D000FDCD5 /* BottomSheetBottomCell.xib */,
+				84E2D9BA26B12D26000C0FD8 /* SettingManualCell.swift */,
+				84E2D9BB26B12D26000C0FD8 /* SettingManualCell.xib */,
 			);
 			path = PostLogin;
 			sourceTree = "<group>";
@@ -925,6 +934,7 @@
 				84D1F4F72679D52700F131E0 /* SF-Pro-Display-Semibold.otf in Resources */,
 				84F2A27E26984F3D000FDCD5 /* BottomSheetBottomCell.xib in Resources */,
 				8455A3C8268211770061C55F /* SettingTableCell.xib in Resources */,
+				84E2D9BD26B12D26000C0FD8 /* SettingManualCell.xib in Resources */,
 				845B619026AAC2D900F9BC2A /* LICENSE in Resources */,
 				842E9B1826955E2400F36A3D /* InsulinStep2Cell.xib in Resources */,
 				840A7E672696F190005AA1E6 /* SessionHistoryTableViewCell.xib in Resources */,
@@ -1033,6 +1043,7 @@
 				8432A19F2672319B00859B47 /* BiometricIDAuth.swift in Sources */,
 				8418D7DF26B0230100BAB256 /* AnyConvertible.swift in Sources */,
 				84B06F09269C0BE00059B293 /* SessionDescBottomVC.swift in Sources */,
+				84E2D9B826B12C17000C0FD8 /* SettingManualVC.swift in Sources */,
 				840A7ED72697060E005AA1E6 /* SessionFilterVC.swift in Sources */,
 				840A7DFD2696E98C005AA1E6 /* DeviceConnectedVC.swift in Sources */,
 				84CC12E92668D083009316FC /* UITableView+ UITableViewCellExtension.swift in Sources */,
@@ -1057,6 +1068,7 @@
 				840A7DF42696E95E005AA1E6 /* CGMLoginVC.swift in Sources */,
 				84F2A28126985398000FDCD5 /* LineDashedView.swift in Sources */,
 				8418D7E226B0235300BAB256 /* ObservationToken.swift in Sources */,
+				84E2D9BC26B12D26000C0FD8 /* SettingManualCell.swift in Sources */,
 				847899762684870F00D1DF36 /* AboutSectionVC.swift in Sources */,
 				84CC12FB2668D15D009316FC /* UIViewcontroller+Extension.swift in Sources */,
 				849B7436269D710600C059E5 /* HealthKitManager.swift in Sources */,
