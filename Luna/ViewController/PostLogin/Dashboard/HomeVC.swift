@@ -133,11 +133,16 @@ extension HomeVC {
     }
     
     private func addObserver(){
-        NotificationCenter.default.addObserver(self, selector: #selector(BleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .BLEOnOffState, object: nil)
     }
     
-    @objc func BleDidUpdateValue(){
+    @objc func bleDidUpdateValue(){
         print("BleDidUpdateValue")
+        self.setupSystemInfo()
+    }
+    
+    @objc func bLEOnOffStateChanged(){
         self.setupSystemInfo()
     }
     
@@ -170,20 +175,18 @@ extension HomeVC {
         let batteryData = BleManager.sharedInstance.batteryData
         let reservoirData = BleManager.sharedInstance.reservoirLevelData
         let data = BleManager.sharedInstance.systemStatusData
-        if !batteryData.isEmpty && !reservoirData.isEmpty && !data.isEmpty {
-            DispatchQueue.main.async {
-                self.batteryImgView.image = DeviceStatus.getBatteryImage(value:batteryData).1
-                self.batteryStatusLbl.text = DeviceStatus.getBatteryImage(value:batteryData).0
-                self.batteryTitleLbl.text = DeviceStatus.Battery.titleString
-                
-                self.reservoirImgView.image = DeviceStatus.getReservoirImage(value:reservoirData).1
-                self.reservoirStatusLbl.text = DeviceStatus.getReservoirImage(value:reservoirData).0
-                self.reservoirTitleLbl.text = DeviceStatus.ReservoirLevel.titleString
-                
-                self.systemImgView.image = DeviceStatus.getSystemImage(value:data).1
-                self.systemStatusLbl.text = DeviceStatus.getSystemImage(value:data).0
-                self.systemTitleLbl.text = DeviceStatus.System.titleString
-            }
+        DispatchQueue.main.async {
+            self.batteryImgView.image = DeviceStatus.getBatteryImage(value:batteryData).1
+            self.batteryStatusLbl.text = DeviceStatus.getBatteryImage(value:batteryData).0
+            self.batteryTitleLbl.text = DeviceStatus.Battery.titleString
+            
+            self.reservoirImgView.image = DeviceStatus.getReservoirImage(value:reservoirData).1
+            self.reservoirStatusLbl.text = DeviceStatus.getReservoirImage(value:reservoirData).0
+            self.reservoirTitleLbl.text = DeviceStatus.ReservoirLevel.titleString
+            
+            self.systemImgView.image = DeviceStatus.getSystemImage(value:data).1
+            self.systemStatusLbl.text = DeviceStatus.getSystemImage(value:data).0
+            self.systemTitleLbl.text = DeviceStatus.System.titleString
         }
     }
 }

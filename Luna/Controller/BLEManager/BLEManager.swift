@@ -452,8 +452,9 @@ extension BleManager: CBPeripheralDelegate {
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.batteryData = data
+            print(self.batteryData)
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: nil)
-            self.delegate?.didUpdateValue?()
+//            self.delegate?.didUpdateValue?()
             print("handled Characteristic Value for Battery: \(String(describing: characteristic.value))")
         case ReservoirLevelCharacteristicCBUUID:
             if reservoirLevelData.isEmpty {
@@ -463,8 +464,9 @@ extension BleManager: CBPeripheralDelegate {
             print("handled Characteristic Value for Reservoir Level: \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.reservoirLevelData = data
+            print(self.reservoirLevelData)
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: nil)
-            self.delegate?.didUpdateValue?()
+//            self.delegate?.didUpdateValue?()
         case statusCBUUID:
             if systemStatusData.isEmpty{
             writeValue(myCharacteristic: characteristic,value: "0")
@@ -473,8 +475,9 @@ extension BleManager: CBPeripheralDelegate {
             print("handled Characteristic Value for status : \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.systemStatusData = data
+            print(self.systemStatusData)
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: nil)
-            self.delegate?.didUpdateValue?()
+//            self.delegate?.didUpdateValue?()
         default:
             print("Unhandled Characteristic UUID: \(characteristic.value!)")
         }
@@ -500,7 +503,8 @@ extension BleManager: CBCentralManagerDelegate {
           case .poweredOff:
             print("central.state is .poweredOff")
             self.systemStatusData = ""
-            self.delegate?.didBleOff?()
+            NotificationCenter.default.post(name: Notification.Name.BLEOnOffState, object: nil)
+//            self.delegate?.didBleOff?()
           case .poweredOn:
             print("central.state is .poweredOn")
             centralManager.scanForPeripherals(withServices: nil,options: nil)
