@@ -536,12 +536,11 @@ extension BleManager: CBCentralManagerDelegate {
         delegate?.didConnect?(name: "Bluetooth connected.")
     }
 
-    public  func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+    public func centralManager (_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("DisConnected!")
         isMyPeripheralConected = false
+        systemStatusData = ""
+        NotificationCenter.default.post(name: Notification.Name.BLEDidDisConnectSuccessfully, object: nil)
         central.connect(peripheral, options: nil)
     }
-
-
-
 }

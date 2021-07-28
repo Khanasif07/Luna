@@ -135,6 +135,7 @@ extension HomeVC {
     private func addObserver(){
         NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .BLEOnOffState, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(bLEDidDisConnected), name: .BLEDidDisConnectSuccessfully, object: nil)
     }
     
     @objc func bleDidUpdateValue(){
@@ -144,6 +145,11 @@ extension HomeVC {
     
     @objc func bLEOnOffStateChanged(){
         self.setupSystemInfo()
+    }
+    
+    @objc func bLEDidDisConnected(){
+        self.setupSystemInfo()
+        CommonFunctions.showToastWithMessage("Bluetooth Disconnected.")
     }
     
     func addBottomSheetView() {
