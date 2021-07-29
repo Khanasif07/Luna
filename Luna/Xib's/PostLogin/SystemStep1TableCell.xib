@@ -36,7 +36,7 @@
                         <rect key="frame" x="20" y="10" width="307" height="165"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="7.5" translatesAutoresizingMaskIntoConstraints="NO" id="QlX-Sb-rmK">
-                                <rect key="frame" x="20" y="16" width="202" height="71"/>
+                                <rect key="frame" x="20" y="16" width="177.5" height="71"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STEP 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baV-h5-N8h">
                                         <rect key="frame" x="0.0" y="0.0" width="42" height="17"/>
@@ -45,7 +45,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="7.5" translatesAutoresizingMaskIntoConstraints="NO" id="bUb-jJ-Zkd">
-                                        <rect key="frame" x="0.0" y="24.5" width="202" height="46.5"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="177.5" height="46.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pair Luna" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FPu-p3-yZx">
                                                 <rect key="frame" x="0.0" y="0.0" width="92" height="23"/>
@@ -54,7 +54,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="NKE-6P-G5k">
-                                                <rect key="frame" x="0.0" y="30.5" width="202" height="16"/>
+                                                <rect key="frame" x="0.0" y="30.5" width="177.5" height="16"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock" translatesAutoresizingMaskIntoConstraints="NO" id="TNg-Q1-Vnr">
                                                         <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
@@ -64,7 +64,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" About 5 minutes to complete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f60-Kp-LQ0">
-                                                        <rect key="frame" x="31" y="0.0" width="171" height="16"/>
+                                                        <rect key="frame" x="31" y="0.0" width="146.5" height="16"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -90,27 +90,26 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="WSl-3p-T2Z">
-                                <rect key="frame" x="236.5" y="32.5" width="50.5" height="38.5"/>
+                                <rect key="frame" x="202.5" y="19.5" width="84.5" height="64.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GxE-4H-4hL">
-                                        <rect key="frame" x="0.0" y="0.0" width="50.5" height="24"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="84.5" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZmL-7e-Xbq">
-                                                <rect key="frame" x="0.0" y="0.0" width="34.5" height="24"/>
+                                                <rect key="frame" x="0.0" y="13" width="34.5" height="24"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="20"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sideupArrow" translatesAutoresizingMaskIntoConstraints="NO" id="7oc-P3-EFH">
-                                                <rect key="frame" x="34.5" y="4" width="16" height="16"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="16" id="OS4-gf-wUa"/>
-                                                    <constraint firstAttribute="width" secondItem="7oc-P3-EFH" secondAttribute="height" id="eWf-hv-qBX"/>
-                                                </constraints>
-                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSe-XW-rln">
+                                                <rect key="frame" x="34.5" y="0.0" width="50" height="50"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mg/dL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iiA-BM-sRo">
-                                        <rect key="frame" x="0.0" y="24" width="33.5" height="14.5"/>
+                                        <rect key="frame" x="0.0" y="50" width="33.5" height="14.5"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
                                         <color key="textColor" systemColor="systemGrayColor"/>
                                         <nil key="highlightedColor"/>
@@ -152,9 +151,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="arrowImgView" destination="7oc-P3-EFH" id="UwM-xN-jeA"/>
                 <outlet property="cgmInsulinDataView" destination="WSl-3p-T2Z" id="f8p-UJ-wFQ"/>
                 <outlet property="dataContainerView" destination="yAt-8p-QxJ" id="180-qf-ip5"/>
+                <outlet property="directionText" destination="HSe-XW-rln" id="Khc-f0-JeO"/>
                 <outlet property="pairedDeviceImgView" destination="ZMq-f5-KWv" id="68X-9r-EXX"/>
                 <outlet property="quantityLbl" destination="ZmL-7e-Xbq" id="okE-i4-d8w"/>
                 <outlet property="startBtn" destination="o6f-RB-1Lz" id="17J-aG-1ay"/>
@@ -168,7 +167,6 @@
     </objects>
     <resources>
         <image name="clock" width="16" height="16"/>
-        <image name="sideupArrow" width="16" height="16"/>
         <image name="step1Devicepaired" width="104" height="102"/>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
