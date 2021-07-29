@@ -442,15 +442,15 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stopped" translatesAutoresizingMaskIntoConstraints="NO" id="GiV-5B-PaK">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notReady" translatesAutoresizingMaskIntoConstraints="NO" id="GiV-5B-PaK">
                                                         <rect key="frame" x="27.5" y="33.5" width="42" height="42"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="42" id="liD-te-UUS"/>
                                                             <constraint firstAttribute="width" secondItem="GiV-5B-PaK" secondAttribute="height" multiplier="1:1" id="vqR-4i-h8e"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Automating" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="56b-9D-zDR">
-                                                        <rect key="frame" x="9.5" y="91.5" width="78" height="18"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Signal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="56b-9D-zDR">
+                                                        <rect key="frame" x="16.5" y="91.5" width="63.5" height="18"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -1126,9 +1126,9 @@
         <image name="historyIcon" width="40" height="40"/>
         <image name="infoIcon" width="40" height="40"/>
         <image name="manualIcon" width="40" height="40"/>
+        <image name="notReady" width="32" height="32"/>
         <image name="reservoir1Bar" width="40" height="40"/>
         <image name="settingsIcon" width="40" height="40"/>
-        <image name="stopped" width="32" height="32"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

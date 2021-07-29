@@ -95,12 +95,15 @@ extension SettingsVC {
         //                    CommonFunctions.showToastWithMessage(err.localizedDescription)
         //                } else {
         let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
+        let isBiometricEnable = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
+        let isBiometricCompleted = AppUserDefaults.value(forKey: .isBiometricCompleted).boolValue
         AppUserDefaults.removeAllValues()
         UserModel.main = UserModel()
         if for_logout {
             AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
+            AppUserDefaults.save(value: isBiometricEnable, forKey: .isBiometricSelected)
+            AppUserDefaults.save(value: isBiometricCompleted, forKey: .isBiometricCompleted)
         }
-//        BleManager.sharedInstance.centralManager = nil
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         DispatchQueue.main.async {
             AppRouter.goToSignUpVC()

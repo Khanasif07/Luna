@@ -17,7 +17,7 @@ class SystemSetupVC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var sections: [(UIImage,String,String)] = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","Basaglar | 8 units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","Dexcom G6"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna",""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
+    var sections: [(UIImage,String,String)] = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","Basaglar | 8 units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","Dexcom G6"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna Device",""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
     
     // MARK: - Lifecycle
     //===========================
@@ -65,7 +65,7 @@ extension SystemSetupVC {
         if #available(iOS 13.0, *) {
         overrideUserInterfaceStyle = .light
         }
-        self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna",""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
+        self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna Device",BleManager.sharedInstance.myperipheral?.name ?? ""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
         self.tableViewSetup()
         self.addObserver()
     }
@@ -74,20 +74,21 @@ extension SystemSetupVC {
         NotificationCenter.default.addObserver(self, selector: #selector(lunaPairedFinish), name: .lunaPairedSuccessfully, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(insulinConnectedFinish), name: .insulinConnectedSuccessfully, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(cgmConnectedFinish), name: .cgmConnectedSuccessfully, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(lunaPairedFinish), name: .BLEDidDisConnectSuccessfully, object: nil)
     }
     
     @objc func lunaPairedFinish(){
-        self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna",""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
+        self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna Device",BleManager.sharedInstance.myperipheral?.name ?? ""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
         self.systemTableView.reloadData()
     }
     
     @objc func  insulinConnectedFinish(){
-        self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna",""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
+        self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna Device",BleManager.sharedInstance.myperipheral?.name ?? ""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
         self.systemTableView.reloadData()
     }
     
     @objc func  cgmConnectedFinish(){
-        self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna",""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
+        self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna Device",BleManager.sharedInstance.myperipheral?.name ?? ""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
         self.systemTableView.reloadData()
     }
     
@@ -101,7 +102,7 @@ extension SystemSetupVC {
         CommonFunctions.showActivityLoader()
         FirestoreController.getUserSystemInfoData{
             CommonFunctions.hideActivityLoader()
-            self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna",""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
+            self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna Device",BleManager.sharedInstance.myperipheral?.name ?? ""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
             self.systemTableView.reloadData()
         } failure: { (error) -> (Void) in
             CommonFunctions.hideActivityLoader()

@@ -38,7 +38,12 @@ class SearchingDeviceVC: UIViewController {
     
     private func bluetoothSetup(){
         BleManager.sharedInstance.delegate = self
-        BleManager.sharedInstance.beginScan()
+        if BleManager.sharedInstance.myperipheral?.state == .connected {
+            BleManager.sharedInstance.disConnect()
+            BleManager.sharedInstance.beginScan()
+        }else{
+            BleManager.sharedInstance.beginScan()
+        }
     }
     
     private func addPulsator(){
