@@ -21,6 +21,7 @@ class CGMConnectedVC: UIViewController {
     var vcObj:UIViewController = UIViewController()
     var cgmConnectedSuccess: ((UIButton, String)->())?
     var cgmData : String = ""
+    var directionString : String = ""
     
     var dexShare: ShareClient?;
     var bgData: [ShareGlucoseData] = []
@@ -42,6 +43,7 @@ class CGMConnectedVC: UIViewController {
         self.dismiss(animated: true) {
             if let handle = self.cgmConnectedSuccess{
                 AppUserDefaults.save(value: self.cgmData, forKey: .cgmValue)
+                AppUserDefaults.save(value: self.directionString, forKey: .directionString)
                 handle(sender,self.cgmData)
             }
         }
@@ -379,12 +381,14 @@ extension CGMConnectedVC {
             
             if let directionBG = entries[latestEntryi].direction {
                 self.directionText.text = self.bgDirectionGraphic(directionBG)
+                self.directionString = self.bgDirectionGraphic(directionBG)
 //                snoozerDirection = self.bgDirectionGraphic(directionBG)
                 self.latestDirectionString = self.bgDirectionGraphic(directionBG)
             }
             else
             {
                 self.directionText.text = ""
+                self.directionString = ""
 //                snoozerDirection = ""
                 self.latestDirectionString = ""
             }
@@ -428,6 +432,7 @@ extension CGMConnectedVC {
             }
             
             ValueLbl.textColor = color
+            directionText.textColor = color
 //            snoozer.BGLabel.textColor = color
         }
     }

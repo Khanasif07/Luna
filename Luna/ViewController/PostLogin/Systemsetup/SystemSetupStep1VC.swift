@@ -206,7 +206,8 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
             cell.cgmInsulinDataView.isHidden = !sections[indexPath.row].1
             cell.unitLbl.text = "mg/dL"
             cell.quantityLbl.text = AppUserDefaults.value(forKey: .cgmValue).stringValue
-            cell.arrowImgView.isHidden = false
+            cell.directionText.text = AppUserDefaults.value(forKey: .directionString).stringValue
+            cell.directionText.isHidden = false
             cell.titleLbl.text =  sections[indexPath.row].1 ? SystemInfoModel.shared.cgmType : "Link CGM"
             cell.startBtn.setTitle(sections[indexPath.row].1 ? "Edit" : "Start", for: .normal)
             cell.timeDescView.isHidden = sections[indexPath.row].1
@@ -219,7 +220,7 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
             cell.cgmInsulinDataView.isHidden = !sections[indexPath.row].1
             cell.unitLbl.text = "per day"
             cell.quantityLbl.text = "\(SystemInfoModel.shared.insulinUnit)" + " u"
-            cell.arrowImgView.isHidden = true
+            cell.directionText.isHidden = true
             cell.titleLbl.text =  sections[indexPath.row].1 ? SystemInfoModel.shared.longInsulinType : "Insulin Information"
             cell.startBtn.setTitle(sections[indexPath.row].1 ? "Edit" : "Start", for: .normal)
             cell.timeDescView.isHidden = sections[indexPath.row].1

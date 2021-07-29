@@ -115,6 +115,7 @@ extension AppUserDefaults {
         case canChangePassword
         case unreadCount
         case cgmValue
+        case directionString
     }
 }
 
