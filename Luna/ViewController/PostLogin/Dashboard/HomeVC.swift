@@ -106,12 +106,17 @@ extension HomeVC {
     private func initialSetup() {
         self.addObserver()
         BleManager.sharedInstance.delegate = self
+        if BleManager.sharedInstance.myperipheral?.state == .connected{
+            self.setupSystemInfo()
+        }
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
+        CommonFunctions.showActivityLoader()
         FirestoreController.getFirebaseUserData {
-            AppUserDefaults.save(value: UserModel.main.isBiometricOn, forKey: .isBiometricSelected)
+            CommonFunctions.hideActivityLoader()
         } failure: { (error) -> (Void) in
+            CommonFunctions.hideActivityLoader()
             CommonFunctions.showToastWithMessage(error.localizedDescription)
         }
         FirestoreController.getUserSystemInfoData {
@@ -133,12 +138,26 @@ extension HomeVC {
     }
     
     private func addObserver(){
-        NotificationCenter.default.addObserver(self, selector: #selector(BleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .BLEOnOffState, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(bLEDidDisConnected), name: .BLEDidDisConnectSuccessfully, object: nil)
     }
     
-    @objc func BleDidUpdateValue(){
+    @objc func bleDidUpdateValue(notification : NSNotification){
+        if let dict = notification.object as? NSDictionary {
+                print(dict)
+        }
         print("BleDidUpdateValue")
         self.setupSystemInfo()
+    }
+    
+    @objc func bLEOnOffStateChanged(){
+        self.setupSystemInfo()
+    }
+    
+    @objc func bLEDidDisConnected(){
+        self.setupSystemInfo()
+        CommonFunctions.showToastWithMessage("Bluetooth Disconnected.")
     }
     
     func addBottomSheetView() {
@@ -170,21 +189,18 @@ extension HomeVC {
         let batteryData = BleManager.sharedInstance.batteryData
         let reservoirData = BleManager.sharedInstance.reservoirLevelData
         let data = BleManager.sharedInstance.systemStatusData
-        if !batteryData.isEmpty && !reservoirData.isEmpty && !data.isEmpty {
-            DispatchQueue.main.async {
-                self.batteryImgView.image = DeviceStatus.getBatteryImage(value:batteryData).1
-                self.batteryStatusLbl.text = DeviceStatus.getBatteryImage(value:batteryData).0
-                self.batteryTitleLbl.text = DeviceStatus.Battery.titleString
-                
-                self.reservoirImgView.image = DeviceStatus.getReservoirImage(value:reservoirData).1
-                self.reservoirStatusLbl.text = DeviceStatus.getReservoirImage(value:reservoirData).0
-                self.reservoirTitleLbl.text = DeviceStatus.ReservoirLevel.titleString
-                
-                self.systemImgView.image = DeviceStatus.getSystemImage(value:data).1
-                self.systemStatusLbl.text = DeviceStatus.getSystemImage(value:data).0
-                self.systemTitleLbl.text = DeviceStatus.System.titleString
-            }
-        }
+        
+        self.batteryImgView.image = DeviceStatus.getBatteryImage(value:batteryData).1
+        self.batteryStatusLbl.text = DeviceStatus.getBatteryImage(value:batteryData).0
+        self.batteryTitleLbl.text = DeviceStatus.Battery.titleString
+        
+        self.reservoirImgView.image = DeviceStatus.getReservoirImage(value:reservoirData).1
+        self.reservoirStatusLbl.text = DeviceStatus.getReservoirImage(value:reservoirData).0
+        self.reservoirTitleLbl.text = DeviceStatus.ReservoirLevel.titleString
+        
+        self.systemImgView.image = DeviceStatus.getSystemImage(value:data).1
+        self.systemStatusLbl.text = DeviceStatus.getSystemImage(value:data).0
+        self.systemTitleLbl.text = DeviceStatus.System.titleString
     }
 }
 

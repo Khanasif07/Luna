@@ -155,7 +155,7 @@ extension ProfileVC : UITableViewDelegate, UITableViewDataSource {
             show.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
             cell.txtField.inputView = typePickerView
             cell.txtField.reloadInputViews()
-            cell.txtField.setButtonToRightView(btn: show, selectedImage: #imageLiteral(resourceName: "dropdownMobilenumber"), normalImage: #imageLiteral(resourceName: "dropdownMobilenumber"), size: CGSize(width: 20, height: 20))
+            cell.txtField.setButtonToRightView(btn: show, selectedImage: #imageLiteral(resourceName: "dropdown"), normalImage: #imageLiteral(resourceName: "dropdown"), size: CGSize(width: 20, height: 20))
 
         }else {
             cell.txtField.inputView = nil

@@ -11,6 +11,7 @@ import CoreBluetooth
 let batteryCharacteristicCBUUID = CBUUID(string: "378EC9D6-075C-4BF6-89DC-9F0D6EA3B5C4")
 let ReservoirLevelCharacteristicCBUUID = CBUUID(string: "378ec9d6-075c-4bf6-89dc-0c6f73b4b761")
 let statusCBUUID = CBUUID(string: "378ec9d6-075c-4bf6-89dc-a6d767548715")
+let lunaCBUUID = CBUUID(string: "DE612C8C-46C0-46B6-B820-4C92A6E67D97")
 
 import Foundation
 import CoreBluetooth
@@ -44,7 +45,7 @@ public class BleManager: NSObject{
     
     var centralManager :CBCentralManager!
 //    var peripheralManager :CBPeripheralManager!
-    var myperipheral :CBPeripheral!
+    var myperipheral :CBPeripheral?
     var mychar :CBCharacteristic!
     var myservice :CBService?
 //    var peripherals :[peripheralWithRssi]!
@@ -94,8 +95,8 @@ public class BleManager: NSObject{
     public func beginScan(){
         if isScanning == false{
             isKeepConnect = true
-            self.centralManager.scanForPeripherals(withServices: nil, options: nil)
-            self.rescanTimer =  Timer.scheduledTimer(timeInterval: 30,
+            self.centralManager.scanForPeripherals(withServices: [lunaCBUUID], options: nil)
+            self.rescanTimer =  Timer.scheduledTimer(timeInterval: 15,
                 target: self,
                 selector: #selector(scanningFinished),
                 userInfo: nil,
@@ -132,7 +133,7 @@ public class BleManager: NSObject{
         if isMyPeripheralConected { //check if myPeripheral is connected to send data
             let dataToSend: Data = value.data(using: String.Encoding.utf8)!
             print(dataToSend)
-            myperipheral.writeValue(dataToSend as Data, for: myCharacteristic, type: CBCharacteristicWriteType.withResponse)    //Writing the data to the peripheral
+            myperipheral?.writeValue(dataToSend as Data, for: myCharacteristic, type: CBCharacteristicWriteType.withResponse)    //Writing the data to the peripheral
         } else {
             print("Not connected")
         }
@@ -143,20 +144,26 @@ public class BleManager: NSObject{
             if !isMyPeripheralConected && peripheral.state != .connected{
                 if(centralManager != nil && centralManager.isScanning){
                     print("stopping scan")
-                    centralManager.stopScan()
+                    self.breakScan()
+                    rescanTimer?.invalidate()
+                    rescanTimer = nil
+                    self.delegate?.didNotDiscoverPeripheral?()
                 }
-                self.delegate?.didNotDiscoverPeripheral?()
+               
             }
         }else{
             if !isMyPeripheralConected {
                 if(centralManager != nil && centralManager.isScanning){
                     print("stopping scan")
-                    centralManager.stopScan()
+                    self.breakScan()
+                    rescanTimer?.invalidate()
+                    rescanTimer = nil
+                    self.delegate?.didNotDiscoverPeripheral?()
                 }
-                self.delegate?.didNotDiscoverPeripheral?()
             }
         }
-        self.rescanTimer?.invalidate()
+        rescanTimer?.invalidate()
+        rescanTimer = nil
     }
     
 //    public func stop(){
@@ -417,6 +424,11 @@ public class BleManager: NSObject{
 //===========================
 extension BleManager: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        guard error == nil else {
+            print("Service discovery failed")
+            //TODO: Disconnect?
+            return
+        }
         guard let services = peripheral.services else { return }
         for service in services {
             print(service)
@@ -446,35 +458,44 @@ extension BleManager: CBPeripheralDelegate {
         print(characteristic.uuid)
         switch characteristic.uuid {
         case batteryCharacteristicCBUUID:
-            if batteryData.isEmpty {
-            writeValue(myCharacteristic: characteristic)
-            }
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.batteryData = data
-            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: nil)
-            self.delegate?.didUpdateValue?()
+            print(self.batteryData)
+            if batteryData.isEmpty {
+                writeValue(myCharacteristic: characteristic)
+                self.batteryData = "85"
+            }
+            let dic = ["batteryData": "0"]
+            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: dic)
+//            self.delegate?.didUpdateValue?()
             print("handled Characteristic Value for Battery: \(String(describing: characteristic.value))")
         case ReservoirLevelCharacteristicCBUUID:
-            if reservoirLevelData.isEmpty {
-            writeValue(myCharacteristic: characteristic,value: "6")
-            }
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             print("handled Characteristic Value for Reservoir Level: \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.reservoirLevelData = data
-            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: nil)
-            self.delegate?.didUpdateValue?()
-        case statusCBUUID:
-            if systemStatusData.isEmpty{
-            writeValue(myCharacteristic: characteristic,value: "0")
+            print(self.reservoirLevelData)
+            if reservoirLevelData.isEmpty {
+                writeValue(myCharacteristic: characteristic,value: "6")
+                self.reservoirLevelData = "6"
             }
+            let dic = ["reservoirLevelData": "6"]
+            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: dic)
+//            self.delegate?.didUpdateValue?()
+        case statusCBUUID:
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             print("handled Characteristic Value for status : \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.systemStatusData = data
-            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: nil)
-            self.delegate?.didUpdateValue?()
+            print(self.systemStatusData)
+            if systemStatusData.isEmpty{
+                writeValue(myCharacteristic: characteristic,value: "0")
+                self.systemStatusData = "0"
+            }
+            let dic = ["systemStatusData": "0"]
+            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: dic)
+//            self.delegate?.didUpdateValue?()
         default:
             print("Unhandled Characteristic UUID: \(characteristic.value!)")
         }
@@ -500,11 +521,11 @@ extension BleManager: CBCentralManagerDelegate {
           case .poweredOff:
             print("central.state is .poweredOff")
             self.systemStatusData = ""
-            self.delegate?.didBleOff?()
+            NotificationCenter.default.post(name: Notification.Name.BLEOnOffState, object: nil)
           case .poweredOn:
             print("central.state is .poweredOn")
-            centralManager.scanForPeripherals(withServices: nil,options: nil)
-            self.rescanTimer =  Timer.scheduledTimer(timeInterval: 30,
+            centralManager.scanForPeripherals(withServices: [lunaCBUUID],options: nil)
+            self.rescanTimer =  Timer.scheduledTimer(timeInterval: 15,
                 target: self,
                 selector: #selector(scanningFinished),
                 userInfo: nil,
@@ -519,25 +540,38 @@ extension BleManager: CBCentralManagerDelegate {
         print(peripheral.name)
         print(peripheral.identifier)
         myperipheral = peripheral
-        myperipheral.delegate = self
+        myperipheral?.delegate = self
         centralManager.stopScan()
-        centralManager.connect(myperipheral, options: nil)
+        centralManager.connect(myperipheral!, options: nil)
     }
 
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Connected!")
         isMyPeripheralConected = true
-        myperipheral.discoverServices(nil)
+        myperipheral?.discoverServices(nil)
         CommonFunctions.showToastWithMessage("Bluetooth connected.")
         delegate?.didConnect?(name: "Bluetooth connected.")
     }
 
-    public  func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+    public func centralManager (_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("DisConnected!")
         isMyPeripheralConected = false
-        central.connect(peripheral, options: nil)
+        myperipheral?.delegate = nil
+        myperipheral = nil
+        systemStatusData = ""
+        NotificationCenter.default.post(name: Notification.Name.BLEDidDisConnectSuccessfully, object: nil)
+//        central.connect(peripheral, options: nil)
     }
-
-
-
+    
+    public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        guard error == nil else {
+            print("didFailToConnect")
+            return
+        }
+        isMyPeripheralConected = false
+        delegate?.didDisconnect?()
+        myperipheral?.delegate = nil
+        myperipheral = nil
+        systemStatusData = ""
+    }
 }

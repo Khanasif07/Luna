@@ -39,8 +39,10 @@ enum DeviceStatus {
             return ("",#imageLiteral(resourceName: "batteryHalf"))
         case 60...80:
             return ("",#imageLiteral(resourceName: "battery34"))
+        case 80...100:
+            return ("",#imageLiteral(resourceName: "battery34"))
         default:
-            return ("",#imageLiteral(resourceName: "batteryFull"))
+            return ("Low",#imageLiteral(resourceName: "batteryEmpty"))
         }
       
     }
@@ -71,7 +73,7 @@ enum DeviceStatus {
         case 10:
             return ("",#imageLiteral(resourceName: "reservoir10Bars"))
         default:
-            return ("",#imageLiteral(resourceName: "reservoir10Bars"))
+            return ("Fill",#imageLiteral(resourceName: "reservoir0Bars"))
         }
       
     }

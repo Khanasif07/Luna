@@ -14,5 +14,8 @@ extension Notification.Name {
     static let insulinConnectedSuccessfully = Notification.Name("insulinConnectedSuccessfully")
     static let cgmConnectedSuccessfully = Notification.Name("cgmConnectedSuccessfully")
     static let BleDidUpdateValue = Notification.Name("BleDidUpdateValue")
+    static let BLEOnOffState = Notification.Name("BLEOnOffState")
+    static let BLEDidConnectSuccessfully = Notification.Name("BLEDidConnectSuccessfully")
+    static let BLEDidDisConnectSuccessfully = Notification.Name("BLEDidDisConnectSuccessfully")
     
 }
