@@ -48,10 +48,18 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="0aU-rH-BD3">
-                                                        <rect key="frame" x="302" y="5" width="92" height="40"/>
+                                                        <rect key="frame" x="230" y="5" width="164" height="40"/>
                                                         <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HIC-nz-rGN">
+                                                                <rect key="frame" x="0.0" y="0.0" width="60" height="40"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="60" id="Q62-Fn-yUP"/>
+                                                                    <constraint firstAttribute="height" constant="40" id="iZ0-DY-Afa"/>
+                                                                </constraints>
+                                                            </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Br-o2-ip0">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="72" y="0.0" width="40" height="40"/>
                                                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="5Br-o2-ip0" secondAttribute="height" id="6t1-q7-wD5"/>
@@ -59,7 +67,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z9T-d0-wAt">
-                                                                <rect key="frame" x="52" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="124" y="0.0" width="40" height="40"/>
                                                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="z9T-d0-wAt" secondAttribute="height" id="RgW-US-kJL"/>
@@ -82,10 +90,19 @@
                                                             <action selector="manualBtnTapped:" destination="TZO-Gp-Vjs" eventType="touchUpInside" id="eNW-JM-XZ2"/>
                                                         </connections>
                                                     </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yq2-o6-wul">
+                                                        <rect key="frame" x="230" y="5" width="60" height="40"/>
+                                                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
+                                                        <state key="normal" title="Skip"/>
+                                                        <connections>
+                                                            <action selector="skipBtnAction:" destination="TZO-Gp-Vjs" eventType="touchUpInside" id="zZR-wt-6f0"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="H5d-kf-5WF" firstAttribute="trailing" secondItem="5Br-o2-ip0" secondAttribute="trailing" id="7zG-NM-5qz"/>
+                                                    <constraint firstItem="Yq2-o6-wul" firstAttribute="bottom" secondItem="HIC-nz-rGN" secondAttribute="bottom" id="CK0-6e-vOQ"/>
                                                     <constraint firstItem="H5d-kf-5WF" firstAttribute="top" secondItem="5Br-o2-ip0" secondAttribute="top" id="G1M-Tq-90G"/>
                                                     <constraint firstItem="D4b-rB-kyN" firstAttribute="bottom" secondItem="z9T-d0-wAt" secondAttribute="bottom" id="JAF-t7-usE"/>
                                                     <constraint firstItem="0aU-rH-BD3" firstAttribute="centerY" secondItem="nmD-sA-B2u" secondAttribute="centerY" id="Jdi-mq-rL6"/>
@@ -93,6 +110,9 @@
                                                     <constraint firstItem="H5d-kf-5WF" firstAttribute="leading" secondItem="5Br-o2-ip0" secondAttribute="leading" id="QMQ-mz-zb8"/>
                                                     <constraint firstItem="D4b-rB-kyN" firstAttribute="top" secondItem="z9T-d0-wAt" secondAttribute="top" id="V5W-bY-Uac"/>
                                                     <constraint firstItem="D4b-rB-kyN" firstAttribute="trailing" secondItem="z9T-d0-wAt" secondAttribute="trailing" id="cTp-Hb-TNF"/>
+                                                    <constraint firstItem="Yq2-o6-wul" firstAttribute="top" secondItem="HIC-nz-rGN" secondAttribute="top" id="egm-XD-ikm"/>
+                                                    <constraint firstItem="Yq2-o6-wul" firstAttribute="leading" secondItem="HIC-nz-rGN" secondAttribute="leading" id="fVt-hJ-3s6"/>
+                                                    <constraint firstItem="Yq2-o6-wul" firstAttribute="trailing" secondItem="HIC-nz-rGN" secondAttribute="trailing" id="jYx-T2-v0i"/>
                                                     <constraint firstItem="Oq9-EA-Vas" firstAttribute="centerY" secondItem="nmD-sA-B2u" secondAttribute="centerY" id="oEq-Vn-U4z"/>
                                                     <constraint firstItem="D4b-rB-kyN" firstAttribute="leading" secondItem="z9T-d0-wAt" secondAttribute="leading" id="tyz-o3-nPT"/>
                                                     <constraint firstItem="H5d-kf-5WF" firstAttribute="bottom" secondItem="5Br-o2-ip0" secondAttribute="bottom" id="wIy-up-PJz"/>
@@ -170,6 +190,7 @@
                         <outlet property="mainTableView" destination="AiS-dd-hs4" id="rP1-RK-uFz"/>
                         <outlet property="manualView" destination="z9T-d0-wAt" id="NAa-ks-Adh"/>
                         <outlet property="progressView" destination="UoU-Dy-H1I" id="OZc-T7-Vvj"/>
+                        <outlet property="skipBtn" destination="Yq2-o6-wul" id="XSy-DX-uuT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mtn-nA-hIL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
