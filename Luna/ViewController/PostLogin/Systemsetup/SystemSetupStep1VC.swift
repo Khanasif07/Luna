@@ -12,6 +12,7 @@ class SystemSetupStep1VC: UIViewController {
     
     // MARK: - IBOutlets
     //===========================
+    @IBOutlet weak var skipBtn: UIButton!
     @IBOutlet weak var doneBtnHeightCost: NSLayoutConstraint!
     @IBOutlet weak var doneBtn: AppButton!
     @IBOutlet weak var manualView: UIView!
@@ -40,12 +41,16 @@ class SystemSetupStep1VC: UIViewController {
     
     // MARK: - IBActions
     //===========================
+    @IBAction func skipBtnAction(_ sender: UIButton) {
+        AppRouter.gotoHomeVC()
+    }
+    
     @IBAction func infoBtnTapped(_ sender: UIButton) {
-        
+        showAlert(msg: "UNDER DEVELOPMENT")
     }
     
     @IBAction func manualBtnTapped(_ sender: UIButton) {
-        
+        showAlert(msg: "UNDER DEVELOPMENT")
     }
     
     @IBAction func doneBtnAction(_ sender: AppButton) {
