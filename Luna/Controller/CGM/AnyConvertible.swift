@@ -6,6 +6,7 @@
 //  Copyright © 2019 private. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 /// A type that can be converted to/from Any 
@@ -134,3 +135,16 @@ extension Optional: AnyConvertible where Wrapped: AnyConvertible {
     }
 }
 
+
+
+extension UIApplication {
+    static var release: String {
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String? ?? "x.x"
+    }
+    static var build: String {
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String? ?? "x"
+    }
+    static var version: String {
+        return "\(release).\(build)"
+    }
+}

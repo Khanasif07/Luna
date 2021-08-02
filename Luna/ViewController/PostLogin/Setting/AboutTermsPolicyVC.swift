@@ -11,6 +11,7 @@ class AboutTermsPolicyVC: UIViewController {
     
     // MARK: - IBOutlets
     //===========================
+    @IBOutlet weak var descLbl: UILabel!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var webView: WKWebView!
@@ -60,7 +61,13 @@ extension AboutTermsPolicyVC {
         if #available(iOS 13.0, *) {
         overrideUserInterfaceStyle = .light
         }
-        self.titleLbl.text = self.titleString
+        switch self.titleString {
+        case "App Version":
+            self.titleLbl.text = self.titleString
+            self.descLbl.text = "Version " + UIApplication.version
+        default:
+            self.titleLbl.text = self.titleString
+        }
         webView.isHidden = true
 //        self.load("https://www.UnderDevelopment.com")
     }

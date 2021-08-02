@@ -140,6 +140,21 @@ class FirestoreController:NSObject{
         }
     }
     
+    //MARK:- Get info
+    //=======================
+    static func checkUserExistInSystemDatabase(success: @escaping () -> Void,
+                                         failure:  @escaping () -> Void){
+        db.collection(ApiKey.userSystemInfo).document(Auth.auth().currentUser?.uid ?? "").getDocument { (snapshot, error ) in
+            if  (snapshot?.exists)! {
+                print("User Document exist")
+                success()
+            } else {
+                failure()
+                print("User Document does not exist")
+            }
+        }
+    }
+    
     //MARK:- logoutUser
     //=======================
     static func logOut(completion:@escaping(_ errorOccured: Bool) -> Void)  {

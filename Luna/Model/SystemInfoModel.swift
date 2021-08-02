@@ -10,6 +10,7 @@ struct SystemInfoModel{
     
     static var shared = SystemInfoModel()
     
+    var longInsulinImage : UIImage = #imageLiteral(resourceName: "toujeoMax")
     var longInsulinType : String
     var longInsulinSubType : String
     var insulinUnit : Int
@@ -22,6 +23,7 @@ struct SystemInfoModel{
     }
     
     init(_ json : JSON = JSON()){
+        self.longInsulinImage = #imageLiteral(resourceName: "toujeoMax")
         self.longInsulinType = json[ApiKey._id].stringValue
         self.longInsulinSubType = json[ApiKey.longInsulinSubType].stringValue
         self.insulinUnit = json[ApiKey.insulinUnit].intValue

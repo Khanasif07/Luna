@@ -77,19 +77,6 @@ extension SignupViewController {
         overrideUserInterfaceStyle = .light
         }
         self.tableViewSetUp()
-        //
-//        HealthKitManager.sharedInstance.authorizeHealthKit { (isEnable, error) in
-//            if let error = error{
-//                print(error.localizedDescription)
-//            }else {
-//                print(isEnable)
-//                print(HKHealthStore.isHealthDataAvailable())
-//            }
-//        }
-//        getStepCount()
-//        getAgeSexAndBloodType()
-//        HealthKitManager.sharedInstance.addWaterAmountToHealthKit(ounces: 32.0)
-        //
     }
     
     private func googleSetUp(){

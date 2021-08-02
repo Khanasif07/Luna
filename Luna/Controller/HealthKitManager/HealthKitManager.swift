@@ -28,46 +28,19 @@ class HealthKitManager: NSObject {
     // access HealthKit API logic.
     func authorizeHealthKit(_ completion: @escaping ((_ success: Bool, _ error: Error?) -> Void)) {
         
-        guard let heartRateType: HKQuantityType = HKQuantityType.quantityType(forIdentifier: .heartRate) else {
+        guard let insulinDeliveryType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.insulinDelivery) else { return }
+
+        guard let bloodGlucoseType: HKQuantityType = HKQuantityType.quantityType(forIdentifier: .bloodGlucose) else {
             return
         }
         
-        guard let waterType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryWater) else { return }
-        
-        guard let distanceWalkingRunningType: HKQuantityType = HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning) else {
+        guard let dietaryCarbohydratesType: HKQuantityType = HKQuantityType.quantityType(forIdentifier: .dietaryCarbohydrates) else {
             return
         }
         
-        guard let flightsClimbedType: HKQuantityType = HKQuantityType.quantityType(forIdentifier: .flightsClimbed) else {
-            return
-        }
-        
-        guard let stepCountType: HKQuantityType = HKQuantityType.quantityType(forIdentifier: .stepCount) else {
-            return
-        }
-        
-        guard let restingHeartRate: HKQuantityType = HKQuantityType.quantityType(forIdentifier: .restingHeartRate) else {
-            return
-        }
-        
-        guard let bodyMass: HKQuantityType = HKQuantityType.quantityType(forIdentifier: .bodyMass) else {
-            return
-        }
-        
-        guard  let dateOfBirth = HKObjectType.characteristicType(forIdentifier: .dateOfBirth) else {
-            return
-        }
-        
-        guard  let sex = HKObjectType.characteristicType(forIdentifier: .biologicalSex) else {
-            return
-        }
-        
-        guard  let bloodType = HKObjectType.characteristicType(forIdentifier: .bloodType) else {
-            return
-        }
         // Permissions to write and read from HealthKit
-        let typesToShare = Set([HKObjectType.workoutType(), heartRateType,waterType])
-        let typesToRead = Set([HKObjectType.workoutType(), heartRateType, HKSeriesType.workoutRoute(), restingHeartRate, bodyMass, dateOfBirth ,sex, bloodType ,distanceWalkingRunningType, flightsClimbedType, stepCountType])
+        let typesToShare = Set([insulinDeliveryType])
+        let typesToRead = Set([bloodGlucoseType,dietaryCarbohydratesType,insulinDeliveryType])
         if HKHealthStore.isHealthDataAvailable() {
             healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { (success, error) in
                 print("Was authorisation successful? \(success)")

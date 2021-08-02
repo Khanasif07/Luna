@@ -25,6 +25,7 @@ class InsulinStep2Cell: UITableViewCell {
     //===========================
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.radioBtn.isUserInteractionEnabled = false
         self.radioBtn.setImage(#imageLiteral(resourceName: "radioSelected"), for: .selected)
         self.radioBtn.setImage(#imageLiteral(resourceName: "radioUnSelected"), for: .normal)
         dataContainerView.setBorder(width: 1.0, color: #colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1))

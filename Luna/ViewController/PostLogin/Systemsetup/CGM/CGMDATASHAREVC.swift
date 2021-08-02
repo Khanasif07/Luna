@@ -19,8 +19,22 @@ class CGMDATASHAREVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if #available(iOS 13.0, *) {
+        overrideUserInterfaceStyle = .light
+        }
         initialSetup()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            if userInterfaceStyle == .dark{
+                return .darkContent
+            }else{
+                return .darkContent
+            }
+        } else {
+            return .lightContent
+        }
     }
     
     // MARK: - IBActions

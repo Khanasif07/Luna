@@ -42,7 +42,7 @@
                                                 <rect key="frame" x="0.0" y="44" width="414" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oq9-EA-Vas">
-                                                        <rect key="frame" x="20" y="10.5" width="71.5" height="29"/>
+                                                        <rect key="frame" x="20" y="11" width="74.5" height="28"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="24"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -287,6 +287,7 @@
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warning" translatesAutoresizingMaskIntoConstraints="NO" id="XRN-ZH-hxq">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
+                                                                                <color key="tintColor" systemColor="systemRedColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" secondItem="XRN-ZH-hxq" secondAttribute="height" id="95k-sw-oZx"/>
                                                                                     <constraint firstAttribute="height" constant="16" id="yOW-DS-MzN"/>
@@ -295,7 +296,7 @@
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Warning" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdh-xu-r6q">
                                                                                 <rect key="frame" x="31" y="0.0" width="57.5" height="19.5"/>
                                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
-                                                                                <color key="textColor" red="0.96078431372549022" green="0.54509803921568623" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <color key="textColor" systemColor="systemRedColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                         </subviews>
@@ -338,8 +339,8 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="efN-4P-g9H"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
-                                        <state key="normal" title="Save">
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="15"/>
+                                        <state key="normal" title="Proceed">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
@@ -374,6 +375,7 @@
                         <outlet property="backView" destination="2P8-03-hzC" id="5Ws-EX-MGd"/>
                         <outlet property="btmContainerView" destination="OCH-xb-T6D" id="Mbi-YZ-xSv"/>
                         <outlet property="proceedBtn" destination="PNy-cT-tQZ" id="fAl-WK-1EY"/>
+                        <outlet property="warningImgView" destination="XRN-ZH-hxq" id="x4m-BN-f8X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2f6-az-I4p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -398,7 +400,7 @@
                                                 <rect key="frame" x="0.0" y="44" width="414" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Long Acting Insulin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6p-xp-UJU">
-                                                        <rect key="frame" x="131.5" y="14.5" width="151" height="21"/>
+                                                        <rect key="frame" x="130" y="14.5" width="154" height="21"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -570,7 +572,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tBJ-R3-WoD">
-                                                        <rect key="frame" x="0.0" y="39.5" width="182.5" height="48"/>
+                                                        <rect key="frame" x="0.0" y="39.5" width="185" height="48"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="1-99" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7f8-SR-vsM" customClass="AppTextField" customModule="Luna" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="142" height="48"/>
@@ -581,8 +583,8 @@
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bQx-3i-fVn">
-                                                                <rect key="frame" x="152" y="15" width="30.5" height="18"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bQx-3i-fVn">
+                                                                <rect key="frame" x="152" y="15" width="33" height="18"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="15"/>
                                                                 <color key="textColor" red="0.45098039215686275" green="0.46274509803921571" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -647,6 +649,7 @@
                         <outlet property="doneBtn" destination="hoY-Eh-ULO" id="1pB-cD-Crq"/>
                         <outlet property="insulinCountTxtField" destination="7f8-SR-vsM" id="P9G-n6-8SG"/>
                         <outlet property="insulinDescLbl" destination="hSg-5E-bEx" id="3YZ-dK-V8l"/>
+                        <outlet property="insulinImgView" destination="Z2b-Er-A2o" id="u6A-ri-Xxk"/>
                         <outlet property="insulinSubType" destination="ZFC-8H-1ye" id="jkT-5t-hI4"/>
                         <outlet property="insulinType" destination="SAD-1W-FyP" id="Qbb-w6-zlw"/>
                     </connections>
@@ -821,6 +824,9 @@ app.</string>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

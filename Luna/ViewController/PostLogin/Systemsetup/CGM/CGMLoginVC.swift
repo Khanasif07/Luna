@@ -22,8 +22,22 @@ class CGMLoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if #available(iOS 13.0, *) {
+        overrideUserInterfaceStyle = .light
+        }
         initialSetup()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            if userInterfaceStyle == .dark{
+                return .darkContent
+            }else{
+                return .darkContent
+            }
+        } else {
+            return .lightContent
+        }
     }
     
     private func signUpBtnStatus()-> Bool{
@@ -42,19 +56,32 @@ class CGMLoginVC: UIViewController {
                 guard let selff = self else { return }
                 if   SystemInfoModel.shared.isFromSetting {
                     CommonFunctions.showActivityLoader()
-                    FirestoreController.updateSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
-                        FirestoreController.getUserSystemInfoData{
-                            CommonFunctions.hideActivityLoader()
-                            NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: nil)
-                            selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
-                            CommonFunctions.showToastWithMessage("CGM info updated successfully.")
+                    FirestoreController.checkUserExistInSystemDatabase {
+                        FirestoreController.updateSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
+                            FirestoreController.getUserSystemInfoData{
+                                CommonFunctions.hideActivityLoader()
+                                NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: nil)
+                                selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
+                                CommonFunctions.showToastWithMessage("CGM info updated successfully.")
+                            } failure: { (error) -> (Void) in
+                                CommonFunctions.hideActivityLoader()
+                                CommonFunctions.showToastWithMessage(error.localizedDescription)
+                            }
                         } failure: { (error) -> (Void) in
                             CommonFunctions.hideActivityLoader()
                             CommonFunctions.showToastWithMessage(error.localizedDescription)
                         }
-                    } failure: { (error) -> (Void) in
-                        CommonFunctions.hideActivityLoader()
-                        CommonFunctions.showToastWithMessage(error.localizedDescription)
+                    } failure: {
+                        FirestoreController.setSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
+                            CommonFunctions.hideActivityLoader()
+                            NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: nil)
+                            selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
+                            CommonFunctions.showToastWithMessage("CGM info updated successfully.")
+                            AppUserDefaults.save(value: true, forKey: .isSystemSetupCompleted)
+                        } failure: { (error) -> (Void) in
+                            CommonFunctions.hideActivityLoader()
+                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                        }
                     }
                 }else {
                     NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: nil)
@@ -81,7 +108,8 @@ extension CGMLoginVC {
         proceedBtn.isEnabled = false
         EmailTF.delegate = self
         PasswordTF.delegate = self
-        EmailLbl.text = "Email"
+        PasswordTF.isSecureText = true
+        EmailLbl.text = "User Name"
         EmailLbl.textColor = AppColors.fontPrimaryColor
         EmailLbl.font = AppFonts.SF_Pro_Display_Semibold.withSize(.x14)
         
@@ -98,13 +126,23 @@ extension CGMLoginVC {
         PasswordTF.layer.cornerRadius = 10
         PasswordTF.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
         PasswordTF.layer.borderColor = AppColors.fontPrimaryColor.cgColor
-        
+        let show = UIButton()
+        show.isSelected = false
+        show.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
+        show.addTarget(self, action: #selector(secureTextField(_:)), for: .touchUpInside)
+        self.PasswordTF.setButtonToRightView(btn: show, selectedImage: #imageLiteral(resourceName: "eyeClosedIcon"), normalImage: #imageLiteral(resourceName: "eyeOpenIcon"), size: CGSize(width: 22, height: 22))
         ForgetPassBtn.setTitleColor(AppColors.appGreenColor, for: .normal)
-        
+        ForgetPassBtn.isHidden = true
         
         self.proceedBtn.layer.cornerRadius = 10
         self.proceedBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
     }
+    
+    @objc func secureTextField(_ sender: UIButton){
+        sender.isSelected.toggle()
+        self.PasswordTF.isSecureTextEntry = !sender.isSelected
+    }
+    
     
 }
 
