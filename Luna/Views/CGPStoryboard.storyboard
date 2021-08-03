@@ -470,22 +470,21 @@ Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuG-C6-TZq">
-                                        <rect key="frame" x="28" y="281" width="358" height="334"/>
+                                        <rect key="frame" x="28" y="300" width="358" height="296.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDL-A8-xRl">
-                                                <rect key="frame" x="20" y="159" width="318" height="82"/>
-                                                <string key="text">Your data will be used in this and that way.
-Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  T-bone doner beef ribs, fatback ball tip cupim pancetta salami landjaeger swine.</string>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDL-A8-xRl">
+                                                <rect key="frame" x="20" y="138" width="318" height="65.5"/>
+                                                <string key="text">When you see your glucose and trend information on the home screen, you can rest assured that your CGM is connected and Luna is ready to work for you</string>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="yb9-oj-gLl">
-                                                <rect key="frame" x="169" y="93" width="20" height="46"/>
+                                                <rect key="frame" x="169" y="72" width="20" height="46"/>
                                                 <color key="color" red="0.3294117647" green="0.69803921570000005" blue="0.36862745099999999" alpha="0.4038728828" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             </activityIndicatorView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEh-Uz-yUf">
-                                                <rect key="frame" x="179" y="93" width="0.0" height="46"/>
+                                                <rect key="frame" x="179" y="72" width="0.0" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="46" id="dXq-vx-lDX"/>
                                                     <constraint firstAttribute="height" constant="46" id="zmg-fc-4gJ"/>
@@ -495,7 +494,7 @@ Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OXT-oO-h97" customClass="AppButton" customModule="Luna" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="271" width="318" height="44"/>
+                                                <rect key="frame" x="20" y="233.5" width="318" height="44"/>
                                                 <color key="backgroundColor" red="0.52941176469999995" green="0.74509803919999995" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="266-pZ-qdP"/>
@@ -508,8 +507,8 @@ Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  
                                                     <action selector="okBtnTapped:" destination="Z3M-Ej-Kml" eventType="touchUpInside" id="6Yh-Gw-cvK"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    Your Dexcom G8 CGM is connected" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgx-DI-1yR">
-                                                <rect key="frame" x="40" y="16" width="278" height="42"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fetching CGM value..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgx-DI-1yR">
+                                                <rect key="frame" x="40" y="16" width="278" height="21"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -526,7 +525,7 @@ Filet mignon turkey t-bone, salami frankfurter andouille turducken short loin.  
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pub-Jn-LpW">
-                                                <rect key="frame" x="181" y="93" width="46" height="46"/>
+                                                <rect key="frame" x="181" y="72" width="46" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="pub-Jn-LpW" secondAttribute="height" multiplier="1:1" id="yeF-ix-4ad"/>
                                                 </constraints>

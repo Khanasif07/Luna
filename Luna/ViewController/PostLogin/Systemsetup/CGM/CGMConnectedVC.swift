@@ -81,7 +81,7 @@ extension CGMConnectedVC {
         
         okBtn.isEnabled = false
         activityIndicator.startAnimating()
-        
+        titleLbl.text = "Connecting..."
         // TODO: need non-us server ?
         let shareUserName = UserDefaultsRepository.shareUserName.value
         let sharePassword = UserDefaultsRepository.sharePassword.value
@@ -228,20 +228,24 @@ extension CGMConnectedVC {
                 self.ProcessNSBGData(data: data, onlyPullLastRecord: onlyPullLastRecord)
             } else {
                 // If we get an error, immediately try to pull NS BG Data
+                self.activityIndicator.stopAnimating()
+                self.titleLbl.text = "Connection failed!"
+                
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Dexcom Share Error", msg: "Please double check user name and password, internet connection, and sharing status.") {
+                        
+                        SystemInfoModel.shared.cgmUnit = Int(self.ValueLbl.text ?? "") ?? 0
+                        self.dismiss(animated: true) {
+                            
+                        }
+                    }
+//                        self.sendNotification(title: "Dexcom Share Error", body: "Please double check user name and password, internet connection, and sharing status.")
+                }
+                
                 self.webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
                 
                 if globalVariables.dexVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
                     globalVariables.dexVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
-                    DispatchQueue.main.async {
-                        self.showAlert(title: "Dexcom Share Error", msg: "Please double check user name and password, internet connection, and sharing status.") {
-                            self.activityIndicator.stopAnimating()
-                            SystemInfoModel.shared.cgmUnit = Int(self.ValueLbl.text ?? "") ?? 0
-                            self.dismiss(animated: true) {
-                                
-                            }
-                        }
-//                        self.sendNotification(title: "Dexcom Share Error", body: "Please double check user name and password, internet connection, and sharing status.")
-                    }
                 }
             }
         }
@@ -374,6 +378,7 @@ extension CGMConnectedVC {
             
             self.okBtn.isEnabled = true
             self.activityIndicator.stopAnimating()
+            self.titleLbl.text = "Your Dexcom G6 CGM is connected"
             self.ValueLbl.text = bgUnits.toDisplayUnits(String(latestBG))
             self.cgmData = bgUnits.toDisplayUnits(String(latestBG))
 //            snoozerBG = bgUnits.toDisplayUnits(String(latestBG))
