@@ -54,7 +54,16 @@ class SystemSetupStep1VC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func skipBtnAction(_ sender: UIButton) {
-        AppRouter.gotoHomeVC()
+        CommonFunctions.showActivityLoader()
+        FirestoreController.updateUserSystemSetupStatus(isSystemSetupCompleted: true) {
+            print("Successfully")
+            CommonFunctions.hideActivityLoader()
+            AppUserDefaults.save(value: true, forKey: .isSystemSetupCompleted)
+            AppRouter.gotoHomeVC()
+        } failure: { (error) -> (Void) in
+            CommonFunctions.hideActivityLoader()
+            CommonFunctions.showToastWithMessage(error.localizedDescription)
+        }
     }
     
     @IBAction func infoBtnTapped(_ sender: UIButton) {

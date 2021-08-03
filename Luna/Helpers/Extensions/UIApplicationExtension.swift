@@ -79,3 +79,31 @@ extension UIApplication {
         return rootViewController
     }
 }
+
+extension UIApplication {
+    static func openAppSettings(completion: @escaping (_ isSuccess: Bool) -> ()) {
+        guard let url = URL(string: UIApplication.openSettingsURLString) else {
+            completion(false)
+            return
+        }
+        
+        let app = UIApplication.shared
+        
+        app.open(url) { isSuccess in
+            completion(isSuccess)
+        }
+    }
+    
+    static func openPhoneSettings(completion: @escaping (_ isSuccess: Bool) -> ()) {
+        guard let url = URL(string: "App-Prefs:root=General") else {
+            completion(false)
+            return
+        }
+        
+        let app = UIApplication.shared
+        
+        app.open(url) { isSuccess in
+            completion(isSuccess)
+        }
+    }
+}

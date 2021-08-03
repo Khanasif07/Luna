@@ -38,9 +38,13 @@ class HealthKitManager: NSObject {
             return
         }
         
+        guard let sleepType:HKObjectType =  HKObjectType.categoryType(forIdentifier: HKCategoryTypeIdentifier.sleepAnalysis)  else {
+            return
+        }
+        
         // Permissions to write and read from HealthKit
         let typesToShare = Set([insulinDeliveryType])
-        let typesToRead = Set([bloodGlucoseType,dietaryCarbohydratesType,insulinDeliveryType])
+        let typesToRead = Set([bloodGlucoseType,dietaryCarbohydratesType,insulinDeliveryType,sleepType])
         if HKHealthStore.isHealthDataAvailable() {
             healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { (success, error) in
                 print("Was authorisation successful? \(success)")
