@@ -77,6 +77,7 @@ extension CGMConnectedVC {
         if #available(iOS 13.0, *) {
         overrideUserInterfaceStyle = .light
         }
+        activityIndicator.isHidden = true
         self.titleLbl.textColor = UIColor.black
         self.subTitleLbl.textColor = AppColors.fontPrimaryColor
         
@@ -94,6 +95,7 @@ extension CGMConnectedVC {
     func connectDexcomAccount(){
         
         okBtn.isEnabled = false
+        activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         titleLbl.text = "Connecting..."
         // TODO: need non-us server ?
@@ -243,6 +245,7 @@ extension CGMConnectedVC {
             } else {
                 // If we get an error, immediately try to pull NS BG Data
                 self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
                 self.titleLbl.text = "Connection failed!"
                 
                 DispatchQueue.main.async {
@@ -392,6 +395,7 @@ extension CGMConnectedVC {
             
             self.okBtn.isEnabled = true
             self.activityIndicator.stopAnimating()
+            self.activityIndicator.isHidden = true
             self.titleLbl.text = "Your Dexcom G6 CGM is connected"
             self.ValueLbl.text = bgUnits.toDisplayUnits(String(latestBG))
             self.cgmData = bgUnits.toDisplayUnits(String(latestBG))
