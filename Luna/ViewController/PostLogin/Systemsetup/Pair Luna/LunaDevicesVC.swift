@@ -22,6 +22,18 @@ class LunaDevicesVC: UIViewController {
        
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            if userInterfaceStyle == .dark{
+                return .darkContent
+            }else{
+                return .darkContent
+            }
+        } else {
+            return .lightContent
+        }
+    }
+    
     // MARK: - IBActions
     //===========================
     @IBAction func proceedBtnAction(_ sender: UIButton) {
@@ -44,7 +56,9 @@ class LunaDevicesVC: UIViewController {
 extension LunaDevicesVC {
     
     private func initialSetup() {
-        
+        if #available(iOS 13.0, *) {
+        overrideUserInterfaceStyle = .light
+        }
         self.OKBtn.isEnabled = true
         self.OKBtn.layer.cornerRadius = 10
         self.OKBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]

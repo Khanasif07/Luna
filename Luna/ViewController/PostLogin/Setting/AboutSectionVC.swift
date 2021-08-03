@@ -99,6 +99,10 @@ extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
             let vc = AboutTermsPolicyVC.instantiate(fromAppStoryboard: .PostLogin)
             vc.titleString =  sections[indexPath.row].1
             self.navigationController?.pushViewController(vc, animated: true)
+        case "App Version":
+            let vc = AboutTermsPolicyVC.instantiate(fromAppStoryboard: .PostLogin)
+            vc.titleString =  sections[indexPath.row].1
+            self.navigationController?.pushViewController(vc, animated: true)
         case "Terms & Conditions":
             let vc = AboutTermsPolicyVC.instantiate(fromAppStoryboard: .PostLogin)
             vc.titleString =  sections[indexPath.row].1

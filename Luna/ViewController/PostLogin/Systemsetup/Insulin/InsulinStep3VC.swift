@@ -11,6 +11,7 @@ class InsulinStep3VC: UIViewController {
     
     // MARK: - IBOutlets
     //===========================
+    @IBOutlet weak var insulinImgView: UIImageView!
     @IBOutlet weak var insulinDescLbl: UILabel!
     @IBOutlet weak var doneBtn: AppButton!
     @IBOutlet weak var insulinSubType: UILabel!
@@ -28,6 +29,18 @@ class InsulinStep3VC: UIViewController {
         initialSetup()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            if userInterfaceStyle == .dark{
+                return .darkContent
+            }else{
+                return .darkContent
+            }
+        } else {
+            return .lightContent
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         insulinCountTxtField?.layer.cornerRadius = 8.0
@@ -43,19 +56,32 @@ class InsulinStep3VC: UIViewController {
             guard let selff = self else { return }
             if   SystemInfoModel.shared.isFromSetting {
                 CommonFunctions.showActivityLoader()
-                FirestoreController.updateSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
-                    FirestoreController.getUserSystemInfoData{
-                        CommonFunctions.hideActivityLoader()
-                        NotificationCenter.default.post(name: Notification.Name.insulinConnectedSuccessfully, object: nil)
-                        selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
-                        CommonFunctions.showToastWithMessage("Insulin info updated successfully.")
+                FirestoreController.checkUserExistInSystemDatabase {
+                    FirestoreController.updateSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
+                        FirestoreController.getUserSystemInfoData{
+                            CommonFunctions.hideActivityLoader()
+                            NotificationCenter.default.post(name: Notification.Name.insulinConnectedSuccessfully, object: nil)
+                            selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
+                            CommonFunctions.showToastWithMessage("Insulin info updated successfully.")
+                        } failure: { (error) -> (Void) in
+                            CommonFunctions.hideActivityLoader()
+                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                        }
                     } failure: { (error) -> (Void) in
                         CommonFunctions.hideActivityLoader()
                         CommonFunctions.showToastWithMessage(error.localizedDescription)
                     }
-                } failure: { (error) -> (Void) in
-                    CommonFunctions.hideActivityLoader()
-                    CommonFunctions.showToastWithMessage(error.localizedDescription)
+                } failure: {
+                    FirestoreController.setSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
+                        CommonFunctions.hideActivityLoader()
+                        NotificationCenter.default.post(name: Notification.Name.insulinConnectedSuccessfully, object: nil)
+                        selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
+                        CommonFunctions.showToastWithMessage("Insulin info updated successfully.")
+                        AppUserDefaults.save(value: true, forKey: .isSystemSetupCompleted)
+                    } failure: { (error) -> (Void) in
+                        CommonFunctions.hideActivityLoader()
+                        CommonFunctions.showToastWithMessage(error.localizedDescription)
+                    }
                 }
             }else{
                 NotificationCenter.default.post(name: Notification.Name.insulinConnectedSuccessfully, object: nil)
@@ -77,12 +103,16 @@ class InsulinStep3VC: UIViewController {
 extension InsulinStep3VC {
     
     private func initialSetup() {
+        if #available(iOS 13.0, *) {
+        overrideUserInterfaceStyle = .light
+        }
         insulinCountTxtField.delegate = self
         insulinCountTxtField.keyboardType = .numberPad
         insulinCountTxtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         insulinCountTxtField.text = "\(SystemInfoModel.shared.insulinUnit)"
         insulinType.text = "\(SystemInfoModel.shared.longInsulinType)"
         insulinSubType.text = "\(SystemInfoModel.shared.longInsulinSubType)"
+        insulinImgView.image = SystemInfoModel.shared.longInsulinImage
         insulinDescLbl.text = "How much \(SystemInfoModel.shared.longInsulinType) did you take in the last 24 hours?"
         self.doneBtn.isEnabled = !(insulinCountTxtField.text?.isEmpty ?? true)
     }

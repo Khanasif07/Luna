@@ -6,6 +6,11 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseStorage
+import FirebaseAuth
+import FirebaseDatabase
+import FirebaseCore
 
 class SystemSetupVC: UIViewController {
     
@@ -17,7 +22,7 @@ class SystemSetupVC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var sections: [(UIImage,String,String)] = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","Basaglar | 8 units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","Dexcom G6"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna Device",""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
+    var sections: [(UIImage,String,String)] = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin",""),(#imageLiteral(resourceName: "changeCgm"),"Change CGM",""),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna Device",""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
     
     // MARK: - Lifecycle
     //===========================
@@ -100,15 +105,20 @@ extension SystemSetupVC {
     
     private func getSystemInfo(){
         CommonFunctions.showActivityLoader()
-        FirestoreController.getUserSystemInfoData{
+        FirestoreController.checkUserExistInSystemDatabase{
+            FirestoreController.getUserSystemInfoData{
+                CommonFunctions.hideActivityLoader()
+                self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna Device",BleManager.sharedInstance.myperipheral?.name ?? ""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
+                self.systemTableView.reloadData()
+            } failure: { (error) -> (Void) in
+                CommonFunctions.hideActivityLoader()
+                CommonFunctions.showToastWithMessage(error.localizedDescription)
+            }
+        }failure: { () -> (Void) in
             CommonFunctions.hideActivityLoader()
-            self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),"Change Long Acting Insulin","\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),"Change CGM","\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),"Change connected Luna Device",BleManager.sharedInstance.myperipheral?.name ?? ""),(#imageLiteral(resourceName: "alerts"),"Alerts","Explainer what they do")]
-            self.systemTableView.reloadData()
-        } failure: { (error) -> (Void) in
-            CommonFunctions.hideActivityLoader()
-            CommonFunctions.showToastWithMessage(error.localizedDescription)
         }
     }
+    
 }
 
 // MARK: - Extension For TableView

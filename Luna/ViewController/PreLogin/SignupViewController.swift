@@ -77,19 +77,6 @@ extension SignupViewController {
         overrideUserInterfaceStyle = .light
         }
         self.tableViewSetUp()
-        //
-//        HealthKitManager.sharedInstance.authorizeHealthKit { (isEnable, error) in
-//            if let error = error{
-//                print(error.localizedDescription)
-//            }else {
-//                print(isEnable)
-//                print(HKHealthStore.isHealthDataAvailable())
-//            }
-//        }
-//        getStepCount()
-//        getAgeSexAndBloodType()
-//        HealthKitManager.sharedInstance.addWaterAmountToHealthKit(ounces: 32.0)
-        //
     }
     
     private func googleSetUp(){
@@ -184,17 +171,33 @@ extension SignupViewController {
         self.showAlertWithAction(title: bioMetricReason, msg: "Use \(biometric) to sign into Luna without entering your password.", cancelTitle: "Don’t Allow", actionTitle: "Allow") {
             let email = AppUserDefaults.value(forKey: .defaultEmail).stringValue
             let password = AppUserDefaults.value(forKey: .defaultPassword).stringValue
-            KeychainWrapper.standard.set(email, forKey: ApiKey.email)
-            KeychainWrapper.standard.set(password, forKey: ApiKey.password)
-            AppUserDefaults.save(value: true, forKey: .isBiometricSelected)
-            AppUserDefaults.save(value: true, forKey: .isBiometricCompleted)
-            self.sendEmailVerificationLink()
+            CommonFunctions.showActivityLoader()
+            FirestoreController.updateUserBiometricStatus(isBiometricOn: true) {
+                KeychainWrapper.standard.set(email, forKey: ApiKey.email)
+                KeychainWrapper.standard.set(password, forKey: ApiKey.password)
+                AppUserDefaults.save(value: true, forKey: .isBiometricSelected)
+                AppUserDefaults.save(value: true, forKey: .isBiometricCompleted)
+                CommonFunctions.hideActivityLoader()
+                self.sendEmailVerificationLink()
+            } failure: { (error) -> (Void) in
+                CommonFunctions.hideActivityLoader()
+            } failures: {
+                CommonFunctions.hideActivityLoader()
+            }
         } cancelcompletion: {
-            KeychainWrapper.standard.removeObject(forKey: ApiKey.password)
-            KeychainWrapper.standard.removeObject(forKey: ApiKey.email)
-            AppUserDefaults.save(value: false, forKey: .isBiometricSelected)
-            AppUserDefaults.save(value: true, forKey: .isBiometricCompleted)
-            self.sendEmailVerificationLink()
+            CommonFunctions.showActivityLoader()
+            FirestoreController.updateUserBiometricStatus(isBiometricOn: false) {
+                KeychainWrapper.standard.removeObject(forKey: ApiKey.password)
+                KeychainWrapper.standard.removeObject(forKey: ApiKey.email)
+                AppUserDefaults.save(value: false, forKey: .isBiometricSelected)
+                AppUserDefaults.save(value: true, forKey: .isBiometricCompleted)
+                CommonFunctions.hideActivityLoader()
+                self.sendEmailVerificationLink()
+            } failure: { (error) -> (Void) in
+                CommonFunctions.hideActivityLoader()
+            } failures: {
+                CommonFunctions.hideActivityLoader()
+            }
         }
     }
     

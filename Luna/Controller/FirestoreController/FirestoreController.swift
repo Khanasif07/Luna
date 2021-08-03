@@ -140,6 +140,21 @@ class FirestoreController:NSObject{
         }
     }
     
+    //MARK:- Get info
+    //=======================
+    static func checkUserExistInSystemDatabase(success: @escaping () -> Void,
+                                         failure:  @escaping () -> Void){
+        db.collection(ApiKey.userSystemInfo).document(Auth.auth().currentUser?.uid ?? "").getDocument { (snapshot, error ) in
+            if  (snapshot?.exists)! {
+                print("User Document exist")
+                success()
+            } else {
+                failure()
+                print("User Document does not exist")
+            }
+        }
+    }
+    
     //MARK:- logoutUser
     //=======================
     static func logOut(completion:@escaping(_ errorOccured: Bool) -> Void)  {
@@ -338,10 +353,21 @@ class FirestoreController:NSObject{
     
     //MARK:- Update user online status
     //================================
-    static func updateUserOnlineStatus(isOnline: Bool) {
-        let uid = AppUserDefaults.value(forKey: .uid).stringValue
-        guard !uid.isEmpty else { return }
-        db.collection(ApiKey.users).document(uid).updateData([ApiKey.onlineStatus:isOnline])
+    static func updateUserBiometricStatus(isBiometricOn: Bool, completion: @escaping () -> Void,
+                                          failure: @escaping FailureResponse,failures: @escaping () -> Void) {
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        guard !uid.isEmpty else {
+            failures()
+            return
+        }
+        db.collection(ApiKey.users).document(uid).updateData([ApiKey.isBiometricOn:isBiometricOn]){
+            (error) in
+            if let err = error {
+                failure(err)
+            } else {
+                completion()
+            }
+        }
     }
     
     //MARK:- Update user System Setup Status

@@ -1026,6 +1026,7 @@
                     </view>
                     <connections>
                         <outlet property="backView" destination="0aL-I9-hAh" id="Q2t-mt-d9c"/>
+                        <outlet property="descLbl" destination="96Q-Y7-AcZ" id="TI8-rp-jL3"/>
                         <outlet property="titleLbl" destination="i3Y-UY-lOQ" id="hwT-bD-Ksm"/>
                         <outlet property="webView" destination="k0n-ce-8NJ" id="HVZ-70-D88"/>
                     </connections>

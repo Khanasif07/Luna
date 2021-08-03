@@ -32,6 +32,18 @@ class SystemSetupStep1VC: UIViewController {
         initialSetup()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            if userInterfaceStyle == .dark{
+                return .darkContent
+            }else{
+                return .darkContent
+            }
+        } else {
+            return .lightContent
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         manualView.round()
@@ -42,7 +54,16 @@ class SystemSetupStep1VC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func skipBtnAction(_ sender: UIButton) {
-        AppRouter.gotoHomeVC()
+        CommonFunctions.showActivityLoader()
+        FirestoreController.updateUserSystemSetupStatus(isSystemSetupCompleted: true) {
+            print("Successfully")
+            CommonFunctions.hideActivityLoader()
+            AppUserDefaults.save(value: true, forKey: .isSystemSetupCompleted)
+            AppRouter.gotoHomeVC()
+        } failure: { (error) -> (Void) in
+            CommonFunctions.hideActivityLoader()
+            CommonFunctions.showToastWithMessage(error.localizedDescription)
+        }
     }
     
     @IBAction func infoBtnTapped(_ sender: UIButton) {
@@ -56,16 +77,17 @@ class SystemSetupStep1VC: UIViewController {
     @IBAction func doneBtnAction(_ sender: AppButton) {
         //MARK:- Need to manage all three casE
         CommonFunctions.showActivityLoader()
-        FirestoreController.updateUserSystemSetupStatus(isSystemSetupCompleted: true) {
-            print("Successfully")
-        } failure: { (error) -> (Void) in
-            CommonFunctions.hideActivityLoader()
-            CommonFunctions.showToastWithMessage(error.localizedDescription)
-        }
         FirestoreController.setSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
-            CommonFunctions.hideActivityLoader()
-            AppUserDefaults.save(value: true, forKey: .isSystemSetupCompleted)
-            AppRouter.gotoHomeVC()
+            print("Successfully")
+            FirestoreController.updateUserSystemSetupStatus(isSystemSetupCompleted: true) {
+                print("Successfully")
+                CommonFunctions.hideActivityLoader()
+                AppUserDefaults.save(value: true, forKey: .isSystemSetupCompleted)
+                AppRouter.gotoHomeVC()
+            } failure: { (error) -> (Void) in
+                CommonFunctions.hideActivityLoader()
+                CommonFunctions.showToastWithMessage(error.localizedDescription)
+            }
         } failure: { (error) -> (Void) in
             CommonFunctions.hideActivityLoader()
             CommonFunctions.showToastWithMessage(error.localizedDescription)
@@ -79,6 +101,9 @@ class SystemSetupStep1VC: UIViewController {
 extension SystemSetupStep1VC {
     
     private func initialSetup() {
+        if #available(iOS 13.0, *) {
+        overrideUserInterfaceStyle = .light
+        }
         self.addObserver()
         self.tableViewSetup()
         self.doneBtn.isHidden = true

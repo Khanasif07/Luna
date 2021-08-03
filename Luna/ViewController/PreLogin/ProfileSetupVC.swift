@@ -341,16 +341,20 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                 typeCell.type2BtnTapped = {[weak self] in
                     guard let self = `self` else { return }
                     if  self.messageListing.endIndex - 2 == indexPath.row && self.messageListing.endIndex == 13 {
-                        AppUserDefaults.save(value: true, forKey: .isProfileStepCompleted)
+                        typeCell.type2Btn.isSelected = true
+                        self.messageTableView.reloadData()
                         UserModel.main.firstName = self.senderName
                         UserModel.main.lastName = self.senderLastName
                         UserModel.main.dob = self.senderDob
                         UserModel.main.diabetesType = self.diabetesType
+                        CommonFunctions.showActivityLoader()
                         FirestoreController.updateUserNode(email: AppUserDefaults.value(forKey: .defaultEmail).stringValue, password: AppUserDefaults.value(forKey: .defaultPassword).stringValue, firstName:  self.senderName, lastName: self.senderLastName, dob: self.senderDob, diabetesType: self.diabetesType, isProfileStepCompleted: true, isSystemSetupCompleted: false,isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue) {
+                            CommonFunctions.hideActivityLoader()
+                            AppUserDefaults.save(value: true, forKey: .isProfileStepCompleted)
                             let vc = SystemSetupStep1VC.instantiate(fromAppStoryboard: .SystemSetup)
                             self.navigationController?.pushViewController(vc, animated: true)
-//                            AppRouter.gotoHomeVC()
                         } failure: { (error) -> (Void) in
+                            CommonFunctions.hideActivityLoader()
                             CommonFunctions.showToastWithMessage(error.localizedDescription)
                         }
                     }

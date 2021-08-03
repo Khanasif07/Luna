@@ -66,6 +66,9 @@ class InsulinStep4VC: UIViewController {
 extension InsulinStep4VC {
     
     private func initialSetup() {
+        if #available(iOS 13.0, *) {
+        overrideUserInterfaceStyle = .light
+        }
         self.insulinCountLbl.text = "\(SystemInfoModel.shared.insulinUnit)"
         self.insulinType.text =  "\(SystemInfoModel.shared.longInsulinType)"
         self.doneBtn.isEnabled = true

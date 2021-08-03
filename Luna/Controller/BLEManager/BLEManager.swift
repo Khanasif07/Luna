@@ -518,6 +518,11 @@ extension BleManager: CBCentralManagerDelegate {
             print("central.state is .unsupported")
           case .unauthorized:
             print("central.state is .unauthorized")
+//            UIApplication.openAppSettings { isSuccess in
+//                if isSuccess == false {
+//                    //Display error
+//                }
+//            }
           case .poweredOff:
             print("central.state is .poweredOff")
             self.systemStatusData = ""
