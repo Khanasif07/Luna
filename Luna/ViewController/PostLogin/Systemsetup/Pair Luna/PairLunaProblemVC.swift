@@ -72,7 +72,7 @@ class PairLunaProblemVC: UIViewController {
 extension PairLunaProblemVC {
     
     private func initialSetup() {
-        
+        pairBtn.isEnabled = true
     }
 }
 
