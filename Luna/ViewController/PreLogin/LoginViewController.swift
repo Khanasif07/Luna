@@ -513,7 +513,6 @@ extension LoginViewController: ASAuthorizationControllerDelegate,ASAuthorization
                     CommonFunctions.showToastWithMessage(error.localizedDescription)
                     return
                 }
-                CommonFunctions.hideActivityLoader()
                 if let currentUser = Auth.auth().currentUser {
                     AppUserDefaults.save(value: currentUser.uid, forKey: .uid)
                     AppUserDefaults.save(value: currentUser.email ?? "", forKey: .defaultEmail)
@@ -561,6 +560,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate,ASAuthorization
                         }
                     }
                 }
+                CommonFunctions.hideActivityLoader()
             }
         }
     }
@@ -605,13 +605,18 @@ extension LoginViewController: GIDSignInDelegate {
                 UserModel.main.isChangePassword = false
                 FirestoreController.checkUserExistInDatabase {
                     FirestoreController.getFirebaseUserData {
-                            CommonFunctions.hideActivityLoader()
-                            DispatchQueue.main.async {
-                                if UserModel.main.isProfileStepCompleted {
-                                    AppRouter.gotoHomeVC()
-                                }else {
-                                    self.goToProfileSetupVC()
-                                }
+                        CommonFunctions.hideActivityLoader()
+                        DispatchQueue.main.async {
+                            if UserModel.main.isSystemSetupCompleted {
+                                AppRouter.gotoHomeVC()
+                                return
+                            }else if UserModel.main.isProfileStepCompleted  {
+                                AppRouter.gotoSystemSetupVC()
+                                return
+                            }else {
+                                self.goToProfileSetupVC()
+                                return
+                            }
                         }
                     } failure: { (error) -> (Void) in
                         CommonFunctions.hideActivityLoader()

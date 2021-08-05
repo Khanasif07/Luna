@@ -86,10 +86,12 @@ class SystemSetupStep1VC: UIViewController {
                 AppRouter.gotoHomeVC()
             } failure: { (error) -> (Void) in
                 CommonFunctions.hideActivityLoader()
+                AppUserDefaults.save(value: false, forKey: .isSystemSetupCompleted)
                 CommonFunctions.showToastWithMessage(error.localizedDescription)
             }
         } failure: { (error) -> (Void) in
             CommonFunctions.hideActivityLoader()
+            AppUserDefaults.save(value: false, forKey: .isSystemSetupCompleted)
             CommonFunctions.showToastWithMessage(error.localizedDescription)
         }
     }

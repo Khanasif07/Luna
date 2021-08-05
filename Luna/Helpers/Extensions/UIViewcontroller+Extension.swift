@@ -382,6 +382,7 @@ extension UIViewController {
         let view = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         view.type = .ballSpinFadeLoader
+        view.tag = 101
         view.color = AppColors.appGreenColor
         view.padding =  160
         view.startAnimating()
@@ -389,7 +390,11 @@ extension UIViewController {
     }
     
     func stopAnimating() {
-        self.view.subviews.last?.removeFromSuperview()
+        if let lastView = self.view.subviews.last {
+            if lastView.tag == 101 {
+            lastView.removeFromSuperview()
+            }
+        }
     }
     
     // Keyboard appearing notifications

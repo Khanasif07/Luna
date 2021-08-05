@@ -11,6 +11,7 @@ class InsulinStep2VC: UIViewController {
     
     // MARK: - IBOutlets
     //===========================
+    @IBOutlet var headerView: UIView!
     @IBOutlet weak var selectBtn: AppButton!
     @IBOutlet weak var mainTableView: UITableView!
     
@@ -69,6 +70,7 @@ extension InsulinStep2VC {
     }
     
     private func tableViewSetup(){
+        self.mainTableView.tableHeaderView = headerView
         self.mainTableView.delegate = self
         self.mainTableView.dataSource = self
         self.mainTableView.registerCell(with: InsulinStep2Cell.self)
