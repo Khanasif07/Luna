@@ -223,7 +223,6 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.7):
     - BoringSSL-GRPC/Interface (= 0.0.7)
   - BoringSSL-GRPC/Interface (0.0.7)
-  - DYPieChartView (0.0.4)
   - Firebase/Analytics (8.1.0):
     - Firebase/Core
   - Firebase/Auth (8.1.0):
@@ -398,6 +397,7 @@ PODS:
     - InputBarAccessoryView/Core (= 5.3.1)
   - InputBarAccessoryView/Core (5.3.1)
   - IQKeyboardManagerSwift (6.5.6)
+  - KDCircularProgress (1.5.4)
   - leveldb-library (1.22.1)
   - MessageKit (3.6.1):
     - InputBarAccessoryView (~> 5.3.1)
@@ -417,7 +417,6 @@ PODS:
   - Toaster (2.3.0)
 
 DEPENDENCIES:
-  - DYPieChartView
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
@@ -428,6 +427,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - GoogleSignIn
   - IQKeyboardManagerSwift
+  - KDCircularProgress
   - MessageKit
   - NVActivityIndicatorView
   - Pulsator
@@ -441,7 +441,6 @@ SPEC REPOS:
     - abseil
     - AppAuth
     - BoringSSL-GRPC
-    - DYPieChartView
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -463,6 +462,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - InputBarAccessoryView
     - IQKeyboardManagerSwift
+    - KDCircularProgress
     - leveldb-library
     - MessageKit
     - nanopb
@@ -478,7 +478,6 @@ SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
-  DYPieChartView: fd81db820c9caff3a2fc0d2bd9559c01cf6d56c8
   Firebase: b5956acddaaa53a6c292bec00649fadd18367344
   FirebaseAnalytics: e812eaae316ba8914b1ef06bef18f11efc1f56c6
   FirebaseAuth: e069ff5736fe9d5dcf61f36244bb1b1ce1897d17
@@ -500,6 +499,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   InputBarAccessoryView: 1f75d8c9f75e5e57f3ffac36ed58635a8005e0bc
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  KDCircularProgress: 98200c6b8e85d22bc04eb644721d3b1e12b0686b
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   MessageKit: d153fbbbcb12f3f4045a1ba8874298924dacfb62
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
@@ -511,6 +511,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: 97ea7fdbead76644e28e3ca77aa2f88975254fb1
+PODFILE CHECKSUM: 67dec72d0e9a8d85722a5008084fa22c1af6095e
 
 COCOAPODS: 1.10.1

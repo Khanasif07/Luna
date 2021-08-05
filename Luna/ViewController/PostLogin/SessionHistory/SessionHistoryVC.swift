@@ -12,26 +12,26 @@ class SessionHistoryVC: UIViewController {
     @IBOutlet weak var SessionHistoryTV: UITableView!
     
     var sectionHeader = ["July","June"]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         initialSetup()
     }
     
     // MARK: - IBActions
     //===========================
     @IBAction func filterBtnTapped(_ sender: AppButton) {
-            let vc = SessionFilterVC.instantiate(fromAppStoryboard: .CGPStoryboard)
-             navigationController?.pushViewController(vc, animated: true)
+        let vc = SessionFilterVC.instantiate(fromAppStoryboard: .CGPStoryboard)
+        navigationController?.pushViewController(vc, animated: true)
     }
-
+    
     @IBAction func crossBtnTapped(_ sender: AppButton) {
-        self.dismiss(animated: false, completion: nil)
-
+        self.pop()
+        
     }
-   
-
+    
+    
 }
 
 // MARK: - Extension For Functions
@@ -39,20 +39,15 @@ class SessionHistoryVC: UIViewController {
 extension SessionHistoryVC {
     
     private func initialSetup() {
-    
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
         SessionHistoryTV.isHidden = false
-       
-        
         SessionHistoryTV.register(UINib(nibName: "SessionHistoryTableViewCell", bundle: nil), forCellReuseIdentifier: "SessionHistoryTableViewCell")
-        
         SessionHistoryTV.delegate = self
         SessionHistoryTV.dataSource = self
-        
-     
         SessionHistoryTV.reloadData()
-        
-       // self.CGMTypesTV.registerCell(with: CGMTypeTableViewCell.self)
-        
+        // self.CGMTypesTV.registerCell(with: CGMTypeTableViewCell.self
     }
     
 }
@@ -68,13 +63,13 @@ extension SessionHistoryVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-       return 4
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell:SessionHistoryTableViewCell = SessionHistoryTV.dequeueReusableCell(withIdentifier: "SessionHistoryTableViewCell", for: indexPath) as! SessionHistoryTableViewCell
-              
+        
         return cell
     }
     
@@ -83,9 +78,9 @@ extension SessionHistoryVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    
+        
         let sectionHeaderView = Bundle.main.loadNibNamed("SessionHistoryHeader", owner: self, options: nil)?.first as! SessionHistoryHeader
-      
+        
         if section == 0{
             sectionHeaderView.haedingLbl.text = "July"
             
@@ -93,21 +88,21 @@ extension SessionHistoryVC : UITableViewDelegate, UITableViewDataSource {
         else{
             sectionHeaderView.haedingLbl.text = "June"
         }
-      
+        
         return sectionHeaderView
         
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            return 50
+        return 50
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let vc = SessionDescriptionVC.instantiate(fromAppStoryboard: .CGPStoryboard)
-         navigationController?.pushViewController(vc, animated: true)
-    
+        navigationController?.pushViewController(vc, animated: true)
+        
     }
-  
+    
     
 }

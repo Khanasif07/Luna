@@ -11,9 +11,8 @@ class SessionFilterVC: UIViewController {
     
     @IBOutlet weak var startLbl: UILabel!
     @IBOutlet weak var EndLbl: UILabel!
-    @IBOutlet weak var startlTF: UITextField!
-    @IBOutlet weak var endTF: UITextField!
-
+    @IBOutlet weak var startlTF: AppTextField!
+    @IBOutlet weak var endTF: AppTextField!
     @IBOutlet weak var proceedBtn: AppButton!
     @IBOutlet weak var ResetBtn: UIButton!
     
@@ -53,18 +52,24 @@ class SessionFilterVC: UIViewController {
    
     // MARK: - IBActions
     //===========================
+    @IBAction func resetBtnAction(_ sender: UIButton) {
+        startlTF.text = ""
+        endTF.text = ""
+    }
+    
     @IBAction func proceedBtnAction(_ sender: UIButton) {
-        self.proceedBtn.isEnabled = true
-       
         if startlTF.text == endTF.text {
-            showAlert(msg: "End date and Start date can't be same.")
+            CommonFunctions.showToastWithMessage("End date and Start date can't be same.")
+            return
         }
         
         if startlTF.text == ""{
-            showAlert(msg: "Please select Start Date.")
+            CommonFunctions.showToastWithMessage("Please select Start Date.")
+            return
         }
         else if endTF.text == ""{
-            showAlert(msg: "Please select End Date.")
+            CommonFunctions.showToastWithMessage("Please select End Date.")
+            return
         }
     }
     
@@ -81,8 +86,10 @@ extension SessionFilterVC {
     
     private func initialSetup() {
        // btmContainerView.setBorder(width: 1.0, color: #colorLiteral(red: 0.9607843137, green: 0.5450980392, blue: 0.262745098, alpha: 1))
-      
-        
+        proceedBtn.isEnabled = true
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
         startLbl.text = "Start Date"
         startLbl.textColor = AppColors.fontPrimaryColor
         startLbl.font = AppFonts.SF_Pro_Display_Semibold.withSize(.x14)
@@ -168,13 +175,14 @@ extension SessionFilterVC {
     
     @objc func DoneEndPicker(){
         let date = EndTimePicker.date
-        let today = NSDate()
+//        let today = NSDate()
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US")
         dateFormatter.dateFormat = "MM/dd/yyyy"
-        endTF.text = dateFormatter.string(from: today as Date)
-        endTF.text = dateFormatter.string(from: today as Date)
+        endTF.text = dateFormatter.string(from: date)
+//        endTF.text = dateFormatter.string(from: today as Date)
         view.endEditing(true)
+        self.proceedBtn.isEnabled = true
     }
     
     // start time action
@@ -183,14 +191,15 @@ extension SessionFilterVC {
     }
     
     @objc func DoneStatyPicker(){
-        print(StartTimePicker.timeZone)
+//        print(StartTimePicker.timeZone)
         let date = StartTimePicker.date
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US")
         dateFormatter.dateFormat = "MM/dd/yyyy"
         startlTF.text = dateFormatter.string(from: date)
-        startlTF.text = dateFormatter.string(from: date)
+//        startlTF.text = dateFormatter.string(from: date)
         view.endEditing(true)
+        self.proceedBtn.isEnabled = true
     }
   
 }

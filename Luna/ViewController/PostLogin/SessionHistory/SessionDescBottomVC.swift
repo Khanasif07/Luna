@@ -106,14 +106,20 @@ extension SessionDescBottomVC {
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(HomeBottomSheetVC.panGesture))
         view.addGestureRecognizer(gesture)
         setupSwipeGesture()
+        setupfooterView()
     }
     
     private func setupTableView() {
-        self.mainTableView.isUserInteractionEnabled = true
+        self.mainTableView.isUserInteractionEnabled = false
         self.mainTableView.delegate = self
         self.mainTableView.dataSource = self
         self.mainTableView.registerCell(with: BottomSheetChartCell.self)
         self.mainTableView.registerCell(with: BottomSheetBottomCell.self)
+    }
+    
+    private func setupfooterView(){
+        let footerView = UIView(frame: CGRect.init(origin: CGPoint.zero, size: CGSize(width: self.view.frame.width, height: 100.0)))
+        self.mainTableView.tableFooterView = footerView
     }
     
     private func setupSwipeGesture() {

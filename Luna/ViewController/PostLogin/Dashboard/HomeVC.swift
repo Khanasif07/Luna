@@ -85,7 +85,9 @@ class HomeVC: UIViewController {
     }
     
     @IBAction func historyBtnTapped(_ sender: UIButton) {
-        showAlert(msg: "Under Development")
+//        showAlert(msg: "Under Development")
+        let vc = SessionHistoryVC.instantiate(fromAppStoryboard: .CGPStoryboard)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func manualBtnTapped(_ sender: UIButton) {
@@ -93,7 +95,9 @@ class HomeVC: UIViewController {
     }
     
     @IBAction func infoBtnTapped(_ sender: Any) {
-        showAlert(msg: "Under Development")
+//        showAlert(msg: "Under Development")
+        let vc = SessionDescriptionVC.instantiate(fromAppStoryboard: .CGPStoryboard)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     
@@ -104,13 +108,13 @@ class HomeVC: UIViewController {
 extension HomeVC {
     
     private func initialSetup() {
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
         self.addObserver()
         BleManager.sharedInstance.delegate = self
         if BleManager.sharedInstance.myperipheral?.state == .connected{
             self.setupSystemInfo()
-        }
-        if #available(iOS 13.0, *) {
-            overrideUserInterfaceStyle = .light
         }
         CommonFunctions.showActivityLoader()
         FirestoreController.getFirebaseUserData {
