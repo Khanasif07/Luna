@@ -6,6 +6,7 @@
 //
 import CoreBluetooth
 import UIKit
+import FirebaseCrashlytics
 import HealthKit
 
 class HomeVC: UIViewController {
@@ -91,7 +92,12 @@ class HomeVC: UIViewController {
     }
     
     @IBAction func manualBtnTapped(_ sender: UIButton) {
-        showAlert(msg: "Under Development")
+//        showAlert(msg: "Under Development")
+        HealthKitManager.sharedInstance.write([InsulinModel(raw: 100, id: 1, date: Date())])
+        HealthKitManager.sharedInstance.read { (insulinModels) in
+            print(insulinModels)
+            print("Data Read successfully.")
+        }
     }
     
     @IBAction func infoBtnTapped(_ sender: Any) {

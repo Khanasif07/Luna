@@ -244,11 +244,10 @@ extension CGMConnectedVC {
                 self.ProcessNSBGData(data: data, onlyPullLastRecord: onlyPullLastRecord)
             } else {
                 // If we get an error, immediately try to pull NS BG Data
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.isHidden = true
-                self.titleLbl.text = "Connection failed!"
-                
                 DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
+                    self.titleLbl.text = "Connection failed!"
                     self.showAlert(title: "Dexcom Share Error", msg: "Please double check user name and password, internet connection, and sharing status.") {
                         
                         SystemInfoModel.shared.cgmUnit = Int(self.ValueLbl.text ?? "") ?? 0

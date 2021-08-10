@@ -30,7 +30,7 @@ class BottomSheetChartCell: UITableViewCell {
     
     private func setUpChartData(){
         let data = [
-            (x: 0, y: 0.0),
+            (x: 2, y: 0.0),
             (x: 3, y: 50.0),
             (x: 4, y: 75.0),
             (x: 5, y: 25.0),
@@ -45,7 +45,11 @@ class BottomSheetChartCell: UITableViewCell {
         chartView.xLabelsOrientation = .horizontal
         chartView.xLabels = [0, 3, 6, 9, 12, 15, 18]
         chartView.yLabels = [0, 50, 100, 150, 200, 250, 300]
-       
+        //
+        chartView.showYLabelsAndGrid = true
+        chartView.showXLabelsAndGrid = true
+        chartView.axesColor = .clear
+       //
         chartView.xLabelsFormatter = { String(Int(roundf(Float($1)))) + " am" }
         chartView.yLabelsFormatter = { String(Int(roundf(Float($1)))) + "" }
         chartView.add(series)

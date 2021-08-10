@@ -13,6 +13,8 @@ import IQKeyboardManagerSwift
 import UserNotifications
 import GoogleSignIn
 import FirebaseFirestore
+import FirebaseCrashlytics
+import Fabric
 
 
 @UIApplicationMain
@@ -108,7 +110,7 @@ extension AppDelegate {
         var filePath = ""
 //        #if ENV_DEV
 //        filePath = Bundle.main.path(forResource: "GoogleService-Info-Prod", ofType: "plist")!
-        filePath = Bundle.main.path(forResource: "GoogleService-Info-1", ofType: "plist")!
+        filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")!
 //        #elseif ENV_STAG
 //        filePath = Bundle.main.path(forResource: "GoogleService-Info-Prod", ofType: "plist")!
 //        #elseif ENV_QA

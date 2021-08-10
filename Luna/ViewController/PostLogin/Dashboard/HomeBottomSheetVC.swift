@@ -113,6 +113,12 @@ extension HomeBottomSheetVC {
         self.mainTableView.registerCell(with: BottomSheetChartCell.self)
         self.mainTableView.registerCell(with: BottomSheetInsulinCell.self)
         self.mainTableView.registerCell(with: BottomSheetBottomCell.self)
+        setupfooterView()
+    }
+    
+    private func setupfooterView(){
+        let view = UIView.init(frame: CGRect.init(origin: CGPoint.zero, size: CGSize.init(width: self.view.frame.width, height: 100.0)))
+        self.mainTableView.tableFooterView = view
     }
     
     private func setupSwipeGesture() {

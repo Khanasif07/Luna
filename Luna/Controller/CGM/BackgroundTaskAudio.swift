@@ -16,21 +16,23 @@ class BackgroundTask {
     // MARK: - Methods
     func startBackgroundTask() {
         NotificationCenter.default.addObserver(self, selector: #selector(interruptedAudio), name: AVAudioSession.interruptionNotification, object: AVAudioSession.sharedInstance())
-        self.playAudio()
+//        self.playAudio()
     }
     
     func stopBackgroundTask() {
         NotificationCenter.default.removeObserver(self, name: AVAudioSession.interruptionNotification, object: nil)
-        player.stop()
+//        player.stop()
     }
     
     @objc fileprivate func interruptedAudio(_ notification: Notification) {
-        if notification.name == AVAudioSession.interruptionNotification && notification.userInfo != nil {
-            var info = notification.userInfo!
-            var intValue = 0
-            (info[AVAudioSessionInterruptionTypeKey]! as AnyObject).getValue(&intValue)
-            if intValue == 1 { playAudio() }
-        }
+//        if notification.name == AVAudioSession.interruptionNotification && notification.userInfo != nil {
+//            var info = notification.userInfo!
+//            var intValue = 0
+//            (info[AVAudioSessionInterruptionTypeKey]! as AnyObject).getValue(&intValue)
+//            if intValue == 1 { //playAudio()
+//
+//            }
+//        }
     }
     
     fileprivate func playAudio() {

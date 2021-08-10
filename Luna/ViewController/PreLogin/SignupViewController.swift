@@ -53,9 +53,6 @@ class SignupViewController: UIViewController {
         }
     }
     
-   
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()

@@ -18,6 +18,7 @@ class HealthKitManager: NSObject {
     private override init() {}
     
     var isEnabled = false
+    var insulinUnit = HKUnit(from: "IU")
     
     let healthStore = HKHealthStore()
     
@@ -27,8 +28,8 @@ class HealthKitManager: NSObject {
     
     // access HealthKit API logic.
     func authorizeHealthKit(_ completion: @escaping ((_ success: Bool, _ error: Error?) -> Void)) {
-        
-        guard let insulinDeliveryType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.insulinDelivery) else { return }
+       
+        guard let insulinDeliveryType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.insulinDelivery) else { return }
 
         guard let bloodGlucoseType: HKQuantityType = HKQuantityType.quantityType(forIdentifier: .bloodGlucose) else {
             return
@@ -54,10 +55,56 @@ class HealthKitManager: NSObject {
         }else{isEnabled = false}
     }
     
+    func write(_ insulinData: [InsulinModel]){
+        guard let insulinType = HKQuantityType.quantityType(forIdentifier: .insulinDelivery) else {
+            return
+        }
+        let samples = insulinData.map {
+            HKQuantitySample(type: insulinType,
+                             quantity: HKQuantity(unit: insulinUnit, doubleValue: Double($0.value)),
+                             start: $0.date,
+                             end: $0.date,metadata: Optional(["HKInsulinDeliveryReason": 1]))
+        }
+        healthStore.save(samples) { [self] success, error in
+            if let error = error {
+                print("HealthKit: error while saving: \(error.localizedDescription)")
+            }
+            print("Successfully write data to health kit")
+        }
+    }
+    
+    func read(handler: (([InsulinModel]) -> Void)? = nil) {
+        guard let insulinType = HKQuantityType.quantityType(forIdentifier: .insulinDelivery) else {
+            return
+        }
+        
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+        let query = HKSampleQuery(sampleType: insulinType, predicate: nil, limit: 12 * 8, sortDescriptors: [sortDescriptor]) { [self] query, results, error in
+            guard let results = results as? [HKQuantitySample] else {
+                if let error = error {
+                    print("HealthKit error: \(error.localizedDescription)")
+                } else {
+                    print("HealthKit: no records")
+                }
+                return
+            }
+            
+//            self.lastDate = results.first?.endDate
+            
+            if results.count > 0 {
+                let values = results.enumerated().map { InsulinModel(Int($0.1.quantity.doubleValue(for: self.insulinUnit)), id: $0.0, date: $0.1.endDate, source: $0.1.sourceRevision.source.name + "=" + $0.1.sourceRevision.source.bundleIdentifier) }
+//                DispatchQueue.main.async {
+//                    self.main.history.storedValues = values
+                    handler?(values)
+//                }
+            }
+        }
+        healthStore.execute(query)
+    }
+    
     func yesterdaySteps(completion: @escaping (Double, NSError?) -> ()){
         // The type of data we are requesting (this is redundant and could probably be an enumeration
         guard let type = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount) else { return }
-    
         // Our search predicate which will fetch data from now until a day ago
         // (Note, 1.day comes from an extension
         // You'll want to change that to your own NSDate

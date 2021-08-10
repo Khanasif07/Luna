@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -49,7 +49,7 @@
 		84467281268DB2C700EC55FD /* SystemStep1TableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8446727F268DB2C700EC55FD /* SystemStep1TableCell.xib */; };
 		84467287268DBECC00EC55FD /* InsulinStep1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84467286268DBECC00EC55FD /* InsulinStep1VC.swift */; };
 		844B93BE2694427600B65BF8 /* InsulinStep2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B93BD2694427600B65BF8 /* InsulinStep2VC.swift */; };
-		845549112678D486000CC13D /* GoogleService-Info-1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 846F1A1F2678C2220034ACE0 /* GoogleService-Info-1.plist */; };
+		845549112678D486000CC13D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 846F1A1F2678C2220034ACE0 /* GoogleService-Info.plist */; };
 		845549182678DCAC000CC13D /* PreLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 845549172678DCAC000CC13D /* PreLogin.storyboard */; };
 		8455491C2678DDBA000CC13D /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455491B2678DDBA000CC13D /* SignupViewController.swift */; };
 		845549202678DDE6000CC13D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455491F2678DDE6000CC13D /* LoginViewController.swift */; };
@@ -82,6 +82,7 @@
 		84B06F09269C0BE00059B293 /* SessionDescBottomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B06F06269C0BDF0059B293 /* SessionDescBottomVC.swift */; };
 		84B06F0A269C0BE00059B293 /* SessionDescriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B06F07269C0BDF0059B293 /* SessionDescriptionVC.swift */; };
 		84B06F0B269C0BE00059B293 /* SessionDescBottomVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B06F08269C0BDF0059B293 /* SessionDescBottomVC.xib */; };
+		84B5A05A26C28CD20051C06A /* InsulinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B5A05926C28CD20051C06A /* InsulinModel.swift */; };
 		84CC129A2668C822009316FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC12992668C822009316FC /* AppDelegate.swift */; };
 		84CC129C2668C822009316FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC129B2668C822009316FC /* SceneDelegate.swift */; };
 		84CC12A32668C823009316FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84CC12A22668C823009316FC /* Assets.xcassets */; };
@@ -222,7 +223,7 @@
 		845B618F26AAC2D900F9BC2A /* ShareClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareClient.swift; sourceTree = "<group>"; };
 		845B619326AAC31800F9BC2A /* ShareClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareClientExtension.swift; sourceTree = "<group>"; };
 		84602902268C50F800141E0D /* AboutTermsPolicyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTermsPolicyVC.swift; sourceTree = "<group>"; };
-		846F1A1F2678C2220034ACE0 /* GoogleService-Info-1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-1.plist"; sourceTree = "<group>"; };
+		846F1A1F2678C2220034ACE0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		847899722684824F00D1DF36 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		847899752684870F00D1DF36 /* AboutSectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSectionVC.swift; sourceTree = "<group>"; };
 		847D1B282689A87A00220DAE /* SystemSetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSetupVC.swift; sourceTree = "<group>"; };
@@ -239,6 +240,7 @@
 		84B06F06269C0BDF0059B293 /* SessionDescBottomVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDescBottomVC.swift; sourceTree = "<group>"; };
 		84B06F07269C0BDF0059B293 /* SessionDescriptionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDescriptionVC.swift; sourceTree = "<group>"; };
 		84B06F08269C0BDF0059B293 /* SessionDescBottomVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionDescBottomVC.xib; sourceTree = "<group>"; };
+		84B5A05926C28CD20051C06A /* InsulinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinModel.swift; sourceTree = "<group>"; };
 		84CC12962668C822009316FC /* Luna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Luna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84CC12992668C822009316FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84CC129B2668C822009316FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -685,7 +687,7 @@
 				84D1F4DC2679D52700F131E0 /* Fonts */,
 				84CC12A22668C823009316FC /* Assets.xcassets */,
 				84CC12A72668C823009316FC /* Info.plist */,
-				846F1A1F2678C2220034ACE0 /* GoogleService-Info-1.plist */,
+				846F1A1F2678C2220034ACE0 /* GoogleService-Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -825,6 +827,7 @@
 			children = (
 				84E78B9D2685E8C500FABDCD /* UserModel.swift */,
 				8410611B26A9DC8E00BF7953 /* SystemInfoModel.swift */,
+				84B5A05926C28CD20051C06A /* InsulinModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -851,6 +854,8 @@
 				84CC12942668C822009316FC /* Resources */,
 				0FACE4C3AD5ED6C1EDD27C15 /* [CP] Embed Pods Frameworks */,
 				EDCF6F5809EDFCF36B36AF72 /* [CP] Copy Pods Resources */,
+				8485E58326C10FC500B02E9A /* ShellScript */,
+				8485E59126C14BF200B02E9A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -915,7 +920,7 @@
 				84D1F4FA2679D52700F131E0 /* SF-Pro-Display-Ultralight.otf in Resources */,
 				84D1F4FE2679D52700F131E0 /* SF-Pro-Display-Black.otf in Resources */,
 				84D1F4F42679D52700F131E0 /* SF-Pro-Display-Bold.otf in Resources */,
-				845549112678D486000CC13D /* GoogleService-Info-1.plist in Resources */,
+				845549112678D486000CC13D /* GoogleService-Info.plist in Resources */,
 				84D1F4F02679D52700F131E0 /* SF-Pro-Display-SemiboldItalic.otf in Resources */,
 				84B06F0B269C0BE00059B293 /* SessionDescBottomVC.xib in Resources */,
 				84F2A279269849ED000FDCD5 /* BottomSheetInsulinCell.xib in Resources */,
@@ -989,6 +994,43 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		8485E58326C10FC500B02E9A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		8485E59126C14BF200B02E9A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/upload-symbols\" -gsp \"${PROJECT_DIR}/Luna/Resources/GoogleService-Info.plist\" -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\n";
 		};
 		EDCF6F5809EDFCF36B36AF72 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1107,6 +1149,7 @@
 				84861D7F26848EDD004B046C /* ProfileTableCell.swift in Sources */,
 				84E5505A267E027A008C02F8 /* TypeTableCell.swift in Sources */,
 				840A7E662696F190005AA1E6 /* SessionHistoryTableViewCell.swift in Sources */,
+				84B5A05A26C28CD20051C06A /* InsulinModel.swift in Sources */,
 				84CC12D72668D005009316FC /* AppColors.swift in Sources */,
 				84CC12F82668D12D009316FC /* UIApplicationExtension.swift in Sources */,
 				8418D7D526B01F4E00BAB256 /* UserData.xcdatamodeld in Sources */,
@@ -1177,7 +1220,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1252,6 +1295,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1268,7 +1312,7 @@
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 11.0;
+				CURRENT_PROJECT_VERSION = 12.0;
 				DEVELOPMENT_TEAM = 9S43J8Y2GN;
 				INFOPLIST_FILE = "$(SRCROOT)/Luna/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1293,7 +1337,7 @@
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 11.0;
+				CURRENT_PROJECT_VERSION = 12.0;
 				DEVELOPMENT_TEAM = 9S43J8Y2GN;
 				INFOPLIST_FILE = "$(SRCROOT)/Luna/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
