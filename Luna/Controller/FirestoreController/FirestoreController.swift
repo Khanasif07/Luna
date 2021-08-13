@@ -140,6 +140,29 @@ class FirestoreController:NSObject{
         }
     }
     
+    //MARK:- Get CGM Data info
+    //=======================
+    static func getFirebaseCGMData(success: @escaping (_ cgmModelArray: [ShareGlucoseData]) -> Void,
+                                   failure:  @escaping FailureResponse){
+        if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
+            db.collection(ApiKey.userSystemInfo)
+                .document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.cgmData).getDocuments { (snapshot, error) in
+                    if let error = error {
+                        failure(error)
+                    } else{
+                        print("============================")
+                        var cgmModelArray = [ShareGlucoseData]()
+                        guard let dicts = snapshot?.documents else { return }
+                        dicts.forEach { (queryDocumentSnapshot) in
+                            let cgmModel = ShareGlucoseData(queryDocumentSnapshot.data())
+                            cgmModelArray.append(cgmModel)
+                        }
+                        success(cgmModelArray)
+                    }
+                }
+        }
+    }
+    
     //MARK:- Get info
     //=======================
     static func checkUserExistInSystemDatabase(success: @escaping () -> Void,
@@ -766,6 +789,14 @@ class FirestoreController:NSObject{
                                                                                                              ApiKey.messageDuration: messageDuration])
         /// States of the messages
         /// 0 - pending, 1 - sent, 2 - delivered, 3 - read
+        
+    }
+    
+    //MARK:-CreateCGMDataNode
+    //=======================
+    static func createCGMDataNode(direction: String,sgv: Int,date: TimeInterval){
+        let userId = Auth.auth().currentUser?.uid ?? ""
+        db.collection(ApiKey.userSystemInfo).document(userId).collection(ApiKey.cgmData).document(String(date)).setData([ApiKey.sgv: sgv,ApiKey.direction: direction,ApiKey.date: date])
         
     }
     

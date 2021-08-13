@@ -9,9 +9,21 @@
 import Foundation
 
 public struct ShareGlucoseData: Codable {
-   var sgv: Int
-   var date: TimeInterval
-   var direction: String?
+    var sgv: Int
+    var date: TimeInterval
+    var direction: String?
+    
+    init(_ dict: [String:Any]){
+        self.sgv = dict[ApiKey.sgv] as? Int ?? 0
+        date = dict[ApiKey.date] as? TimeInterval ?? 0.0
+        direction = dict[ApiKey.direction] as? String ?? ""
+    }
+    
+    init(sgv:Int,direction: String,date: TimeInterval){
+        self.sgv = sgv
+        self.date = date
+        self.direction = direction
+    }
 }
 
 private var TrendTable: [String] = [
@@ -90,8 +102,7 @@ extension ShareClient {
             
                 let newShareData = ShareGlucoseData(
                     sgv: Int(result![i].glucose),
-                    date: result![i].timestamp.timeIntervalSince1970,
-                    direction: TrendTable[trend]
+                    direction: TrendTable[trend], date: result![i].timestamp.timeIntervalSince1970
                 )
                 shareData.append(newShareData)
             }

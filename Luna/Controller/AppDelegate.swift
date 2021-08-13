@@ -14,7 +14,6 @@ import UserNotifications
 import GoogleSignIn
 import FirebaseFirestore
 import FirebaseCrashlytics
-import Fabric
 
 
 @UIApplicationMain

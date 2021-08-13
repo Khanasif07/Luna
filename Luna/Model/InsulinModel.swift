@@ -25,3 +25,19 @@ struct InsulinModel: Identifiable, Codable {
         self.source = source
     }
 }
+
+extension Double {
+    
+    public func getDateTimeFromTimeInterval()-> String{
+        //Convert to Date
+        let date = NSDate(timeIntervalSince1970: self)
+        //Date formatting
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd, MMMM yyyy HH:mm:a"
+        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+        let dateString = dateFormatter.string(from: date as Date)
+        print("formatted date is =  \(dateString)")
+        return dateString
+    }
+}
+

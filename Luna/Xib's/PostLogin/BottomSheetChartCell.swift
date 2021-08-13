@@ -16,6 +16,19 @@ class BottomSheetChartCell: UITableViewCell {
     
     // MARK: - Variables
     //===========================
+    var xRangeValue = [Double]()
+    var data : [(x: Int, y: Double)] = [] {
+        didSet{
+            let series = ChartSeries(data: data)
+            self.xRangeValue = data.map({ (tuple) -> Double in
+               return Double(tuple.x)
+            })
+//            chartView.xLabels = [20,40,60,80,100,120,140,160,180,200,220,240]
+            series.color = #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1)
+            chartView.add(series)
+            chartView.reloadInputViews()
+        }
+    }
     
     // MARK: - Lifecycle
     //===========================
@@ -29,28 +42,19 @@ class BottomSheetChartCell: UITableViewCell {
     }
     
     private func setUpChartData(){
-        let data = [
-            (x: 2, y: 0.0),
-            (x: 3, y: 50.0),
-            (x: 4, y: 75.0),
-            (x: 5, y: 25.0),
-            (x: 7, y: 100.0),
-            (x: 8, y: 200.0),
-            (x: 9, y: 250.0),(x: 12, y: 130.0),(x: 15, y: 160.0),(x: 18, y: 275.0)
-        ]
         let series = ChartSeries(data: data)
         series.area = true
         series.color = #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1)
         chartView.lineWidth = 3.0
         chartView.xLabelsOrientation = .horizontal
-        chartView.xLabels = [0, 3, 6, 9, 12, 15, 18]
-        chartView.yLabels = [0, 50, 100, 150, 200, 250, 300]
+//        chartView.xLabels =  xRangeValue
+        chartView.yLabels = [0, 50, 100, 150, 200, 250]
         //
         chartView.showYLabelsAndGrid = true
         chartView.showXLabelsAndGrid = true
         chartView.axesColor = .clear
        //
-        chartView.xLabelsFormatter = { String(Int(roundf(Float($1)))) + " am" }
+//        chartView.xLabelsFormatter = { String(Int(roundf(Float($1)))) + " am" }
         chartView.yLabelsFormatter = { String(Int(roundf(Float($1)))) + "" }
         chartView.add(series)
         chartView.reloadInputViews()

@@ -3,9 +3,10 @@
 //  Luna
 //
 //  Created by Admin on 07/07/21.
-//
+
 
 import UIKit
+import Firebase
 import AVFoundation
 
 class CGMConnectedVC: UIViewController {
@@ -191,7 +192,7 @@ extension CGMConnectedVC {
                 dateString.round(FloatingPointRoundingRule.toNearestOrEven)
             }
             if dateString >= dateTimeUtils.getTimeInterval24HoursAgo() {
-                let reading = ShareGlucoseData(sgv: data[data.count - 1 - i].sgv, date: dateString, direction: data[data.count - 1 - i].direction)
+                let reading = ShareGlucoseData(sgv: data[data.count - 1 - i].sgv, direction: data[data.count - 1 - i].direction ?? "", date: dateString)
                 bgData.append(reading)
             }
             
@@ -365,6 +366,9 @@ extension CGMConnectedVC {
             }
             let entries = self.bgData
             if entries.count < 1 { return }
+            for cgmModel in entries {
+            FirestoreController.createCGMDataNode(direction: cgmModel.direction ?? "", sgv: cgmModel.sgv, date: cgmModel.date)
+            }
             
 //            self.updateBGGraph()
 //            self.updateStats()

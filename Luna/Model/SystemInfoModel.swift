@@ -17,6 +17,7 @@ struct SystemInfoModel{
     var cgmType : String
     var cgmUnit: Int
     var isFromSetting: Bool = false
+    var cgmData : [ShareGlucoseData]?
     
     init() {
         self.init(JSON([:]))

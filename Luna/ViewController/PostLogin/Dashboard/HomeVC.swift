@@ -142,6 +142,13 @@ extension HomeVC {
                 print(HKHealthStore.isHealthDataAvailable())
             }
         }
+        FirestoreController.getFirebaseCGMData { (cgmDataArray) in
+            print(cgmDataArray)
+            SystemInfoModel.shared.cgmData = cgmDataArray
+            self.bottomSheetVC.cgmData = cgmDataArray
+        } failure: { (error) -> (Void) in
+            print(error.localizedDescription)
+        }
 //        getStepCount()
 //        getAgeSexAndBloodType()
 //        HealthKitManager.sharedInstance.addWaterAmountToHealthKit(ounces: 32.0)

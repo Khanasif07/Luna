@@ -31,6 +31,16 @@ class HomeBottomSheetVC: UIViewController {
     var partialView: CGFloat {
         return (textContainerHeight ?? 0.0) + UIApplication.shared.statusBarFrame.height + (110.5)
     }
+    var tuples : [(x:Int,y:Double)] = []
+    var cgmData : [ShareGlucoseData] = []{
+        didSet{
+            for (index,item) in cgmData.enumerated(){
+                   let tuple = (x:index,y:Double(item.sgv))
+                   tuples.append(tuple)
+            }
+            self.mainTableView.reloadData()
+        }
+    }
    
     //MARK:- VIEW LIFE CYCLE
     //======================
@@ -159,6 +169,7 @@ extension HomeBottomSheetVC : UITableViewDelegate,UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueCell(with: BottomSheetTopCell.self, indexPath: indexPath)
+            cell.cgmValueLbl.text = "\(SystemInfoModel.shared.cgmUnit)"
             return cell
         case 2:
             let cell = tableView.dequeueCell(with: BottomSheetInsulinCell.self, indexPath: indexPath)
@@ -168,6 +179,7 @@ extension HomeBottomSheetVC : UITableViewDelegate,UITableViewDataSource {
             return cell
         default:
             let cell = tableView.dequeueCell(with: BottomSheetChartCell.self, indexPath: indexPath)
+            cell.data = tuples
             return cell
         }
     }
