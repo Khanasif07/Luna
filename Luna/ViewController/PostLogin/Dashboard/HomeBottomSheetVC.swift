@@ -1,5 +1,5 @@
 //
-//  HomeBottomSheetVC.swift
+//   .swift
 //  Luna
 //
 //  Created by Admin on 08/07/21.
@@ -99,6 +99,7 @@ class HomeBottomSheetVC: UIViewController {
                 }
                 
             }) { (completion) in
+                self.mainTableView.isScrollEnabled = true
             }
         }
     }
@@ -116,7 +117,7 @@ extension HomeBottomSheetVC {
     }
     
     private func setupTableView() {
-        self.mainTableView.isUserInteractionEnabled = true
+        self.mainTableView.isScrollEnabled = true
         self.mainTableView.delegate = self
         self.mainTableView.dataSource = self
         self.mainTableView.registerCell(with: BottomSheetTopCell.self)
@@ -209,4 +210,20 @@ extension HomeBottomSheetVC : UIGestureRecognizerDelegate {
         return false
     }
 }
+
+extension HomeBottomSheetVC: UIScrollViewDelegate{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // This will be called every time the user scrolls the scroll view with their finger
+        // so each time this is called, contentOffset should be different.
+        print(self.mainTableView.contentOffset.y)
+        if self.mainTableView.contentOffset.y < 0{
+            self.mainTableView.isScrollEnabled = false
+        } else {
+            self.mainTableView.isScrollEnabled = true
+        }
+        
+        //Additional workaround here.
+    }
+}
+
 
