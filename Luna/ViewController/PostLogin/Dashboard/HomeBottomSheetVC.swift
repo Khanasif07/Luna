@@ -218,7 +218,11 @@ extension HomeBottomSheetVC: UIScrollViewDelegate{
         print(self.mainTableView.contentOffset.y)
         if self.mainTableView.contentOffset.y < 0{
             self.mainTableView.isScrollEnabled = false
-        } else {
+            print(self.mainTableView.contentOffset.y)
+        } else if self.mainTableView.contentOffset.y == 0.0 {
+            self.mainTableView.isScrollEnabled = false
+            print(self.mainTableView.contentOffset.y)
+        } else{
             self.mainTableView.isScrollEnabled = true
         }
         

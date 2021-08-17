@@ -23,6 +23,7 @@ class BottomSheetChartCell: UITableViewCell {
             self.xRangeValue = data.map({ (tuple) -> Double in
                return Double(tuple.x)
             })
+            series.area = true
 //            chartView.xLabels = [20,40,60,80,100,120,140,160,180,200,220,240]
             series.color = #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1)
             chartView.add(series)
