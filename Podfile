@@ -20,9 +20,10 @@ target 'Luna' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Core'
   pod 'Firebase/Storage'
-  pod 'GoogleSignIn'
+  pod 'GoogleSignIn', '~> 5.0.2'
   pod 'SwiftKeychainWrapper'
-  pod "SwiftChart"
+ # pod "SwiftChart"
+  pod 'Charts'
   pod 'KDCircularProgress'
   pod "Pulsator"
 

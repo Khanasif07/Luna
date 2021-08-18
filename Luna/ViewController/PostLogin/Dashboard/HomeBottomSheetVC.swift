@@ -94,12 +94,15 @@ class HomeBottomSheetVC: UIViewController {
             UIView.animate(withDuration: duration, delay: 0.0, options: [.allowUserInteraction], animations: {
                 if  velocity.y >= 0 {
                     self.view.frame = CGRect(x: 0, y: self.partialView, width: self.view.frame.width, height: self.view.frame.height)
+                    self.mainTableView.isScrollEnabled = false
                 } else {
                     self.view.frame = CGRect(x: 0, y: self.fullView, width: self.view.frame.width, height: self.view.frame.height)
+                    self.mainTableView.isScrollEnabled = true
                 }
                 
             }) { (completion) in
-                self.mainTableView.isScrollEnabled = true
+//                if
+//                self.mainTableView.isScrollEnabled = true
             }
         }
     }
@@ -180,7 +183,8 @@ extension HomeBottomSheetVC : UITableViewDelegate,UITableViewDataSource {
             return cell
         default:
             let cell = tableView.dequeueCell(with: BottomSheetChartCell.self, indexPath: indexPath)
-            cell.data = tuples
+//            cell.data = tuples
+            cell.cgmData = cgmData
             return cell
         }
     }

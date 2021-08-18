@@ -6,7 +6,6 @@
 //
 import CoreBluetooth
 import UIKit
-import FirebaseCrashlytics
 import HealthKit
 
 class HomeVC: UIViewController {

@@ -82,7 +82,12 @@
 		84B06F09269C0BE00059B293 /* SessionDescBottomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B06F06269C0BDF0059B293 /* SessionDescBottomVC.swift */; };
 		84B06F0A269C0BE00059B293 /* SessionDescriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B06F07269C0BDF0059B293 /* SessionDescriptionVC.swift */; };
 		84B06F0B269C0BE00059B293 /* SessionDescBottomVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B06F08269C0BDF0059B293 /* SessionDescBottomVC.xib */; };
+		84B34FF426CC99CC00ECF8F0 /* AxisValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B34FF326CC99CC00ECF8F0 /* AxisValueFormatter.swift */; };
+		84B34FF726CC9AB200ECF8F0 /* AxisBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B34FF626CC9AB200ECF8F0 /* AxisBase.swift */; };
+		84B34FFD26CC9C7B00ECF8F0 /* Perform+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B34FFC26CC9C7B00ECF8F0 /* Perform+Color.swift */; };
+		84B3500026CC9CC300ECF8F0 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B34FFF26CC9CC300ECF8F0 /* Platform.swift */; };
 		84B5A05A26C28CD20051C06A /* InsulinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B5A05926C28CD20051C06A /* InsulinModel.swift */; };
+		84C0A6B426CC982000AB6F2A /* DayAxisvalueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0A6B326CC982000AB6F2A /* DayAxisvalueFormatter.swift */; };
 		84CC129A2668C822009316FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC12992668C822009316FC /* AppDelegate.swift */; };
 		84CC129C2668C822009316FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC129B2668C822009316FC /* SceneDelegate.swift */; };
 		84CC12A32668C823009316FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84CC12A22668C823009316FC /* Assets.xcassets */; };
@@ -240,7 +245,12 @@
 		84B06F06269C0BDF0059B293 /* SessionDescBottomVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDescBottomVC.swift; sourceTree = "<group>"; };
 		84B06F07269C0BDF0059B293 /* SessionDescriptionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDescriptionVC.swift; sourceTree = "<group>"; };
 		84B06F08269C0BDF0059B293 /* SessionDescBottomVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionDescBottomVC.xib; sourceTree = "<group>"; };
+		84B34FF326CC99CC00ECF8F0 /* AxisValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisValueFormatter.swift; sourceTree = "<group>"; };
+		84B34FF626CC9AB200ECF8F0 /* AxisBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisBase.swift; sourceTree = "<group>"; };
+		84B34FFC26CC9C7B00ECF8F0 /* Perform+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Perform+Color.swift"; sourceTree = "<group>"; };
+		84B34FFF26CC9CC300ECF8F0 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		84B5A05926C28CD20051C06A /* InsulinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinModel.swift; sourceTree = "<group>"; };
+		84C0A6B326CC982000AB6F2A /* DayAxisvalueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAxisvalueFormatter.swift; sourceTree = "<group>"; };
 		84CC12962668C822009316FC /* Luna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Luna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84CC12992668C822009316FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84CC129B2668C822009316FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -604,6 +614,18 @@
 			path = HealthKitManager;
 			sourceTree = "<group>";
 		};
+		84C0A6B226CC980A00AB6F2A /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				84C0A6B326CC982000AB6F2A /* DayAxisvalueFormatter.swift */,
+				84B34FF326CC99CC00ECF8F0 /* AxisValueFormatter.swift */,
+				84B34FF626CC9AB200ECF8F0 /* AxisBase.swift */,
+				84B34FFC26CC9C7B00ECF8F0 /* Perform+Color.swift */,
+				84B34FFF26CC9CC300ECF8F0 /* Platform.swift */,
+			);
+			path = Charts;
+			sourceTree = "<group>";
+		};
 		84CC128D2668C822009316FC = {
 			isa = PBXGroup;
 			children = (
@@ -702,6 +724,7 @@
 		84CC12B82668CD87009316FC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				84C0A6B226CC980A00AB6F2A /* Charts */,
 				849B7434269D70F300C059E5 /* HealthKitManager */,
 				8446726F268D865700EC55FD /* BLEManager */,
 				8432A19D2672317F00859B47 /* BiometricAuth */,
@@ -853,9 +876,9 @@
 				84CC12932668C822009316FC /* Frameworks */,
 				84CC12942668C822009316FC /* Resources */,
 				0FACE4C3AD5ED6C1EDD27C15 /* [CP] Embed Pods Frameworks */,
-				EDCF6F5809EDFCF36B36AF72 /* [CP] Copy Pods Resources */,
 				8485E58326C10FC500B02E9A /* ShellScript */,
 				8485E59126C14BF200B02E9A /* ShellScript */,
+				32D9AF25EB9A28F05804B068 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -973,6 +996,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Luna/Pods-Luna-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		32D9AF25EB9A28F05804B068 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Luna/Pods-Luna-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Luna/Pods-Luna-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Luna/Pods-Luna-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7C8524774A5FCF0BEFA25AA3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1032,23 +1072,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/upload-symbols\" -gsp \"${PROJECT_DIR}/Luna/Resources/GoogleService-Info.plist\" -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\n";
 		};
-		EDCF6F5809EDFCF36B36AF72 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Luna/Pods-Luna-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Luna/Pods-Luna-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Luna/Pods-Luna-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1074,15 +1097,19 @@
 				84CC12D32668CFE9009316FC /* ApiKeys.swift in Sources */,
 				84FDA0B1267DE8B600AC8BE9 /* DecisionCell.swift in Sources */,
 				840A7DFB2696E98C005AA1E6 /* LunaDevicesVC.swift in Sources */,
+				84C0A6B426CC982000AB6F2A /* DayAxisvalueFormatter.swift in Sources */,
 				84467280268DB2C700EC55FD /* SystemStep1TableCell.swift in Sources */,
 				8418D7E526B023A700BAB256 /* CGMAppConstants.swift in Sources */,
+				84B34FF426CC99CC00ECF8F0 /* AxisValueFormatter.swift in Sources */,
 				840A7DFC2696E98C005AA1E6 /* PairLunaVC.swift in Sources */,
 				84467287268DBECC00EC55FD /* InsulinStep1VC.swift in Sources */,
 				842E9B1B2695690B00F36A3D /* InsulinStep3VC.swift in Sources */,
 				84CC12EC2668D0B8009316FC /* UIColorExtension.swift in Sources */,
 				8455A3C226820E010061C55F /* SettingsVC.swift in Sources */,
+				84B3500026CC9CC300ECF8F0 /* Platform.swift in Sources */,
 				845B619126AAC2D900F9BC2A /* ShareClient.swift in Sources */,
 				8432A19F2672319B00859B47 /* BiometricIDAuth.swift in Sources */,
+				84B34FFD26CC9C7B00ECF8F0 /* Perform+Color.swift in Sources */,
 				8418D7DF26B0230100BAB256 /* AnyConvertible.swift in Sources */,
 				84B06F09269C0BE00059B293 /* SessionDescBottomVC.swift in Sources */,
 				84E2D9B826B12C17000C0FD8 /* SettingManualVC.swift in Sources */,
@@ -1119,6 +1146,7 @@
 				84F2A27026981DD8000FDCD5 /* BottomSheetChartCell.swift in Sources */,
 				84CC13042668D1A6009316FC /* Double+Extension.swift in Sources */,
 				84CC13212668D588009316FC /* LocalizedString.swift in Sources */,
+				84B34FF726CC9AB200ECF8F0 /* AxisBase.swift in Sources */,
 				84CC12E62668D057009316FC /* DeviceDetails.swift in Sources */,
 				84CC13192668D25B009316FC /* UIView+Extension.swift in Sources */,
 				84F2A278269849ED000FDCD5 /* BottomSheetInsulinCell.swift in Sources */,
