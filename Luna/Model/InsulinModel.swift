@@ -33,11 +33,12 @@ extension Double {
         let date = NSDate(timeIntervalSince1970: self)
         //Date formatting
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd, MMMM yyyy HH:mm:a"
+//        dateFormatter.dateFormat = "dd, MMMM yyyy HH:mm:a"
+        dateFormatter.dateFormat = "HH a"
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
         let dateString = dateFormatter.string(from: date as Date)
         print("formatted date is =  \(dateString)")
-        return dateString
+        return dateString.lowercased()
     }
 }
 

@@ -21,32 +21,20 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     //===========================
     var cgmData : [ShareGlucoseData] = []{
         didSet{
-//            let values = cgmData.map { (data) -> ChartDataEntry in
-//                return ChartDataEntry(x: Double(data.date), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
-//            }
-            let values = (0..<cgmData.endIndex).map { (i) -> ChartDataEntry in
-                return ChartDataEntry(x: Double(i), y: Double(cgmData[i].sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
+            let values = cgmData.map { (data) -> ChartDataEntry in
+                return ChartDataEntry(x: Double(data.date), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
             }
-
-            let set1 = LineChartDataSet(entries: values, label: "DataSet 1")
+            let set1 = LineChartDataSet(entries: values, label: "")
             set1.drawIconsEnabled = false
             setup(set1)
-
-//            let value = ChartDataEntry(x: Double(0), y: 0)
-//            set1.addEntryOrdered(value)
             let gradientColors = [#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 0).cgColor,#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1).cgColor]
             let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
             set1.fillAlpha = 1
     //        set1.fill = LinearGradientFill.init(gradient: gradient,angle: 90.0)
             set1.drawFilledEnabled = true
-
             let data = LineChartData(dataSet: set1)
             chartView.maxVisibleCount = Int(10.0)
             chartView.data = data
-//            let values = (0..<count).map { (i) -> ChartDataEntry in
-//                let val = Double(arc4random_uniform(range) + 0)
-//                return ChartDataEntry(x: Double(i), y: val, icon: #imageLiteral(resourceName: "reservoir7Bars"))
-//            }
         }
     }
 //    var xRangeValue = [Double]()
@@ -87,80 +75,53 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         
         let xAxis = chartView.xAxis
         xAxis.labelPosition = .bottom
-        xAxis.labelFont = .systemFont(ofSize: 10)
+        xAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
+        xAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
         xAxis.granularity = 1
-        xAxis.labelCount = 7
-        xAxis.valueFormatter = DefaultAxisValueFormatter()
-//        xAxis.valueFormatter = DayAxisValueFormatter(chart: chartView)
+//        xAxis.labelCount = 7
+        xAxis.valueFormatter = XAxisNameFormater()
 
         let leftAxis = chartView.leftAxis
         leftAxis.removeAllLimitLines()
-        leftAxis.axisMaximum = 302
+        leftAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
+        leftAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
+        leftAxis.axisMaximum = 300
+        leftAxis.granularity = 0.0
+        leftAxis.drawAxisLineEnabled = false
         leftAxis.axisMinimum = -0
         leftAxis.drawLimitLinesBehindDataEnabled = false
 
         chartView.rightAxis.enabled = false
-        chartView.xAxis.granularity = 1.0
-        chartView.legend.form = .line
-       // slidersValueChanged(nil)
+        chartView.xAxis.granularity = 0.0
+        chartView.xAxis.drawGridLinesEnabled = false
+        chartView.legend.form = .none
         setDataCount(cgmData.endIndex, range: UInt32(cgmData.endIndex))
         chartView.moveViewToX(chartView.data?.yMax ?? 0.0 - 1)
-        chartView.zoom(scaleX: 5, scaleY: 0, x: 0, y: 0)
+        chartView.zoom(scaleX: 10.0, scaleY: 0, x: 0, y: 0)
         chartView.animate(xAxisDuration: 2.5)
     }
     
-//    override func updateChartData() {
-//        if self.shouldHideData {
-//            chartView.data = nil
-//            return
-//        }
-//
-//        self.setDataCount(Int(45), range: UInt32(100))
-//    }
-    
     func setDataCount(_ count: Int, range: UInt32) {
-        let values = (0..<count).map { (i) -> ChartDataEntry in
-            let val = Double(arc4random_uniform(range) + 0)
-            return ChartDataEntry(x: Double(i), y: val, icon: #imageLiteral(resourceName: "reservoir7Bars"))
+        let values = cgmData.map { (data) -> ChartDataEntry in
+            return ChartDataEntry(x: Double(data.date), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
         }
 
-        let set1 = LineChartDataSet(entries: values, label: "DataSet 1")
+        let set1 = LineChartDataSet(entries: values, label: "")
         set1.drawIconsEnabled = false
         setup(set1)
 
-//        let value = ChartDataEntry(x: Double(3), y: 3)
-//        set1.addEntryOrdered(value)
         let gradientColors = [#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 0).cgColor,#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1).cgColor]
         let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)
         set1.fillAlpha = 1
-//        set1.fill = fillColor
 //        set1.fill = LinearGradientFill(gradient: gradient!,angle: 90.0)
         set1.drawFilledEnabled = true
 
         let data = LineChartData(dataSet: set1)
         chartView.maxVisibleCount = Int(10.0)
         chartView.data = data
-//        chartView.scaleX = 100.0
-//        chartView.moveViewToX(90.0)
     }
 
     private func setup(_ dataSet: LineChartDataSet) {
-//        if dataSet.isDrawLineWithGradientEnabled {
-//            dataSet.lineDashLengths = nil
-//            dataSet.highlightLineDashLengths = nil
-//            dataSet.setColors(.black, .red, .white)
-//            dataSet.setCircleColor(.black)
-//            dataSet.gradientPositions = [0, 40, 100]
-//            dataSet.lineWidth = 1
-//            dataSet.circleRadius = 3
-//            dataSet.drawCircleHoleEnabled = false
-//            dataSet.valueFont = .systemFont(ofSize: 9)
-//            dataSet.formLineDashLengths = nil
-//            dataSet.formLineWidth = 1
-//            dataSet.formSize = 15
-//        } else {
-//            dataSet.lineDashLengths = [5, 2.5]
-//            dataSet.highlightLineDashLengths = [5, 2.5]
             dataSet.setColor(#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
             dataSet.setCircleColor(.clear)
 //            dataSet.gradientPositions = nil
@@ -168,10 +129,8 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
             dataSet.circleRadius = 0
             dataSet.drawCircleHoleEnabled = false
             dataSet.valueFont = .systemFont(ofSize: 9)
-//            dataSet.formLineDashLengths = [5, 2.5]
             dataSet.formLineWidth = 1
             dataSet.formSize = 15
-//        }
     }
 
     
