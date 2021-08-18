@@ -30,7 +30,8 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
             let gradientColors = [#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 0).cgColor,#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1).cgColor]
             let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
             set1.fillAlpha = 1
-    //        set1.fill = LinearGradientFill.init(gradient: gradient,angle: 90.0)
+            set1.mode = .linear
+            set1.fill = Fill(linearGradient: gradient, angle: 90.0)
             set1.drawFilledEnabled = true
             let data = LineChartData(dataSet: set1)
             chartView.maxVisibleCount = Int(10.0)
@@ -112,8 +113,8 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
 
         let gradientColors = [#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 0).cgColor,#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1).cgColor]
         let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)
-        set1.fillAlpha = 1
-//        set1.fill = LinearGradientFill(gradient: gradient!,angle: 90.0)
+        set1.fillAlpha = 1.0
+        set1.fill = Fill(linearGradient: gradient!, angle: 90.0)
         set1.drawFilledEnabled = true
 
         let data = LineChartData(dataSet: set1)
@@ -124,7 +125,6 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     private func setup(_ dataSet: LineChartDataSet) {
             dataSet.setColor(#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
             dataSet.setCircleColor(.clear)
-//            dataSet.gradientPositions = nil
             dataSet.lineWidth = 3
             dataSet.circleRadius = 0
             dataSet.drawCircleHoleEnabled = false
