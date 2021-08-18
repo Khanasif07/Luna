@@ -5,22 +5,17 @@
 //  Created by Admin on 18/08/21.
 //
 
-//import Foundation
-//
-///// An interface for providing custom axis Strings.
-//@objc(ChartAxisValueFormatter)
-//public protocol AxisValueFormatter: class
-//{
-//    
-//    /// Called when a value from an axis is formatted before being drawn.
-//    ///
-//    /// For performance reasons, avoid excessive calculations and memory allocations inside this method.
-//    ///
-//    /// - Parameters:
-//    ///   - value:           the value that is currently being drawn
-//    ///   - axis:            the axis that the value belongs to
-//    /// - Returns: The customized label that is drawn on the x-axis.
-//    func stringForValue(_ value: Double,
-//                        axis: AxisBase?) -> String
-//    
-//}
+import Charts
+
+final class XAxisNameFormater: NSObject, IAxisValueFormatter {
+    
+    func stringForValue( _ value: Double, axis _: AxisBase?) -> String {
+
+//        let formatter = DateFormatter()
+//        formatter.locale = Locale(identifier: "en_US_POSIX")
+//        formatter.dateFormat = "dd.MM"
+
+        return value.getDateTimeFromTimeInterval()
+    }
+
+}

@@ -237,15 +237,3 @@ extension HomeVC: BleProtocol{
 }
 
 
-final class XAxisNameFormater: NSObject, IAxisValueFormatter {
-    
-    func stringForValue( _ value: Double, axis _: AxisBase?) -> String {
-
-//        let formatter = DateFormatter()
-//        formatter.locale = Locale(identifier: "en_US_POSIX")
-//        formatter.dateFormat = "dd.MM"
-
-        return value.getDateTimeFromTimeInterval()
-    }
-
-}
