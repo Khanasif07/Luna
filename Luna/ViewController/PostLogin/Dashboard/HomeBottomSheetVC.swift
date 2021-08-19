@@ -31,13 +31,10 @@ class HomeBottomSheetVC: UIViewController {
     var partialView: CGFloat {
         return (textContainerHeight ?? 0.0) + UIApplication.shared.statusBarFrame.height + (110.5)
     }
-    var tuples : [(x:Int,y:Double)] = []
+    var cgmDataArray : [ShareGlucoseData] = []
     var cgmData : [ShareGlucoseData] = []{
         didSet{
-            for (index,item) in cgmData.enumerated(){
-                   let tuple = (x:index,y:Double(item.sgv))
-                   tuples.append(tuple)
-            }
+            self.cgmDataArray = cgmData
             self.mainTableView.reloadData()
         }
     }
@@ -183,8 +180,7 @@ extension HomeBottomSheetVC : UITableViewDelegate,UITableViewDataSource {
             return cell
         default:
             let cell = tableView.dequeueCell(with: BottomSheetChartCell.self, indexPath: indexPath)
-//            cell.data = tuples
-            cell.cgmData = cgmData
+            cell.cgmData = cgmDataArray
             return cell
         }
     }

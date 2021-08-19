@@ -39,7 +39,7 @@ extension Double {
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
         //dateFormatter.timeZone = TimeZone.current
         let dateString = dateFormatter.string(from: date as Date)
-        print("formatted date is =  \(dateString)")
+//        print("formatted date is =  \(dateString)")
         return dateString.lowercased()
        
     }
