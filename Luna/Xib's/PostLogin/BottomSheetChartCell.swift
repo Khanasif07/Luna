@@ -25,7 +25,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
                 return ChartDataEntry(x: Double(data.date), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
             }
             let set1 = LineChartDataSet(entries: values, label: "")
-            set1.drawIconsEnabled = false
+            set1.drawIconsEnabled = true
             setup(set1)
             let gradientColors = [#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 0).cgColor,#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1).cgColor]
             let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
@@ -35,6 +35,14 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
             set1.drawFilledEnabled = true
             let data = LineChartData(dataSet: set1)
             chartView.maxVisibleCount = Int(10.0)
+            //            let marker = ChartMarker()
+            let marker = BalloonMarker(color: #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1),
+                                       font: .boldSystemFont(ofSize: 15.0),
+                                       textColor: .white,
+                                       insets: UIEdgeInsets(top: 3.5, left: 5.5, bottom: 16, right: 5.5))
+            marker.chartView = chartView
+            marker.minimumSize = CGSize(width: 50.0, height: 30.0)
+            chartView.marker = marker
             chartView.data = data
         }
     }
@@ -69,7 +77,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     private func newChartSetUp(){
         chartView.delegate = self
 
-        chartView.chartDescription?.enabled = false
+        chartView.chartDescription?.enabled = true
         chartView.dragEnabled = true
         chartView.setScaleEnabled(false)
         chartView.pinchZoomEnabled = false
@@ -108,7 +116,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         }
 
         let set1 = LineChartDataSet(entries: values, label: "")
-        set1.drawIconsEnabled = false
+        set1.drawIconsEnabled = true
         setup(set1)
 
         let gradientColors = [#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 0).cgColor,#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1).cgColor]
