@@ -174,36 +174,6 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     
 }
 
-
-class XAxisRendererWithImage: XAxisRenderer {
-    
-    var cgmData : [ShareGlucoseData] = []
-    
-    override func drawLabel(context: CGContext, formattedLabel: String, x: CGFloat, y: CGFloat,
-                            attributes: [NSAttributedString.Key: Any],constrainedToSize: CGSize,
-                            anchor: CGPoint, angleRadians: CGFloat) {
-        
-        super.drawLabel(context: context,
-                        formattedLabel: formattedLabel,
-                        x: x, y: y,
-                        attributes: attributes,
-                        constrainedToSize: constrainedToSize,
-                        anchor: anchor, angleRadians: angleRadians)
-        
-        guard let xAxis = self.axis as? XAxis else { return }
-        let entries = xAxis.entries
-        print(entries)
-        
-        print(x,y)
-        print(anchor)
-        
-        context.beginPath()
-        let image = #imageLiteral(resourceName: "reservoir9Bars")
-        context.draw(image.cgImage!, in: CGRect(x: x, y: y - 20, width: 15, height: 15))
-        context.strokePath()
-    }
-}
-
 public class XAxisCustomRenderer: XAxisRenderer {
     
     var cgmData : [ShareGlucoseData] = []
@@ -284,8 +254,8 @@ public class XAxisCustomRenderer: XAxisRenderer {
                     }
                 }
                 
-                let rawIcon: UIImage = #imageLiteral(resourceName: "reservoir7Bars")
-                let icon: CGImage = rawIcon.cgImage!
+//                let rawIcon: UIImage = #imageLiteral(resourceName: "reservoir7Bars")
+//                let icon: CGImage = rawIcon.cgImage!
                 
                 
                 //Draw the time labels
@@ -302,12 +272,28 @@ public class XAxisCustomRenderer: XAxisRenderer {
                 //let indexData = cgmData[Int(i)]
                 
                 
-                //Based on Condition Display Image.....
-                if label == "08 am" ||  label == "03 pm" || label == "12 pm"{
-                    context.draw(icon, in: CGRect(x: position.x - 10 , y: position.y - 20, width: CGFloat(15), height: CGFloat(15)))
-                }else{
-                    context.draw(icon, in: CGRect(x: position.x, y: position.y - 20, width: CGFloat(0), height: CGFloat(0)))
+                var icon: CGImage?
+                if label == "08 am" || label == "01 pm"{
+                    let rawIcon = #imageLiteral(resourceName: "lineOne")
+                    icon = rawIcon.cgImage!
+                }else if label == "03 pm"{
+                    let rawIcon = #imageLiteral(resourceName: "lineTwo")
+                    icon = rawIcon.cgImage!
+                }else if label == "11 am"{
+                    let rawIcon = #imageLiteral(resourceName: "lineFour")
+                    icon = rawIcon.cgImage!
                 }
+                
+                if let myImage = icon{
+                    context.draw(myImage, in: CGRect(x: position.x - 10 , y: position.y - 30, width: CGFloat(15), height: CGFloat(30)))
+                }
+                
+                //Based on Condition Display Image.....
+//                if label == "08 am" ||  label == "03 pm" || label == "12 pm"{
+//                    context.draw(icon, in: CGRect(x: position.x - 10 , y: position.y - 20, width: CGFloat(15), height: CGFloat(15)))
+//                }else{
+//                    context.draw(icon, in: CGRect(x: position.x, y: position.y - 20, width: CGFloat(0), height: CGFloat(0)))
+//                }
             }
         }
     }
