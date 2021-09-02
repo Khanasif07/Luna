@@ -25,7 +25,6 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var signupTableView: UITableView!
     
-    
     // MARK: - Variables
     //===========================
     var emailTxt = ""
@@ -38,19 +37,6 @@ class SignupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        if #available(iOS 13.0, *) {
-            if userInterfaceStyle == .dark{
-                return .darkContent
-            }else{
-                return .darkContent
-            }
-        } else {
-            // Fallback on earlier versions
-            return .lightContent
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -281,7 +267,6 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
             }
             cell.loginBtnTapped = { [weak self] in
                 guard let self = `self` else { return }
-//                self.pop()
                 self.gotoLoginVC()
             }
             return cell

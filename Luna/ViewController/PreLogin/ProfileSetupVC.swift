@@ -64,7 +64,6 @@ class ProfileSetupVC: UIViewController {
         setupTData()
     }
     
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
             if userInterfaceStyle == .dark{

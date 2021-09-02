@@ -644,7 +644,6 @@
 			children = (
 				84F7BC4E266F06A1006C94DA /* Luna.entitlements */,
 				84CC12B82668CD87009316FC /* Controller */,
-				84CC12B72668CD35009316FC /* Services */,
 				84E78B9C2685E8B800FABDCD /* Model */,
 				845549242678E07C000CC13D /* Xib's */,
 				84CC12B32668CCE8009316FC /* ViewController */,
@@ -706,13 +705,6 @@
 				846F1A1F2678C2220034ACE0 /* GoogleService-Info.plist */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		84CC12B72668CD35009316FC /* Services */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 		84CC12B82668CD87009316FC /* Controller */ = {

@@ -98,8 +98,6 @@ class HomeBottomSheetVC: UIViewController {
                 }
                 
             }) { (completion) in
-//                if
-//                self.mainTableView.isScrollEnabled = true
             }
         }
     }

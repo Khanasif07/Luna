@@ -38,19 +38,6 @@ class HomeVC: UIViewController {
         initialSetup()
     }
     
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        if #available(iOS 13.0, *) {
-            if userInterfaceStyle == .dark{
-                return .darkContent
-            }else{
-                return .darkContent
-            }
-        } else {
-            return .lightContent
-        }
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         guard let touch = touches.first else { return }
@@ -86,13 +73,11 @@ class HomeVC: UIViewController {
     }
     
     @IBAction func historyBtnTapped(_ sender: UIButton) {
-//        showAlert(msg: "Under Development")
         let vc = SessionHistoryVC.instantiate(fromAppStoryboard: .CGPStoryboard)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func manualBtnTapped(_ sender: UIButton) {
-//        showAlert(msg: "Under Development")
         HealthKitManager.sharedInstance.write([InsulinModel(raw: 100, id: 1, date: Date())])
         HealthKitManager.sharedInstance.read { (insulinModels) in
             print(insulinModels)
@@ -101,7 +86,6 @@ class HomeVC: UIViewController {
     }
     
     @IBAction func infoBtnTapped(_ sender: Any) {
-//        showAlert(msg: "Under Development")
         let vc = SessionDescriptionVC.instantiate(fromAppStoryboard: .CGPStoryboard)
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -142,13 +126,14 @@ extension HomeVC {
                 print(HKHealthStore.isHealthDataAvailable())
             }
         }
-        FirestoreController.getFirebaseCGMData { (cgmDataArray) in
-            print(cgmDataArray)
-            SystemInfoModel.shared.cgmData = cgmDataArray
-            self.bottomSheetVC.cgmData = cgmDataArray
-        } failure: { (error) -> (Void) in
-            print(error.localizedDescription)
-        }
+//        FirestoreController.getFirebaseCGMData { (cgmDataArray) in
+//            print(cgmDataArray)
+//            SystemInfoModel.shared.cgmData = cgmDataArray
+//            self.bottomSheetVC.cgmData = cgmDataArray
+//            print(self.bottomSheetVC.cgmData.endIndex)
+//        } failure: { (error) -> (Void) in
+//            print(error.localizedDescription)
+//        }
 //        getStepCount()
 //        getAgeSexAndBloodType()
 //        HealthKitManager.sharedInstance.addWaterAmountToHealthKit(ounces: 32.0)

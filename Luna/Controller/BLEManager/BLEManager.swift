@@ -11,6 +11,10 @@ import CoreBluetooth
 let batteryCharacteristicCBUUID = CBUUID(string: "378EC9D6-075C-4BF6-89DC-9F0D6EA3B5C4")
 let ReservoirLevelCharacteristicCBUUID = CBUUID(string: "378ec9d6-075c-4bf6-89dc-0c6f73b4b761")
 let statusCBUUID = CBUUID(string: "378ec9d6-075c-4bf6-89dc-a6d767548715")
+let firmwareRevisionString = CBUUID(string: "2A26")
+let writableCharacteristicCBUUID = CBUUID(string: "aa6b9004-9da2-4f80-9001-409abcc3dcef")
+let dataInCBUUID = CBUUID(string: "aa9ec828-43ba-4281-a122-d17566d67c42")
+let dataOutCBUUID = CBUUID(string: "aa9ec828-43ba-4281-a122-48932207c8f3")
 let lunaCBUUID = CBUUID(string: "DE612C8C-46C0-46B6-B820-4C92A6E67D97")
 
 import Foundation
@@ -392,7 +396,7 @@ public class BleManager: NSObject{
 //    }
     
 //    public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?){
-//        //println ("didUpdateNotificationStateForCharacteristic ")
+//        println ("didUpdateNotificationStateForCharacteristic ")
 //    }
 //
 //    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?){
@@ -451,11 +455,29 @@ extension BleManager: CBPeripheralDelegate {
                 print("\(characteristic.uuid): properties contains .notify")
                 peripheral.setNotifyValue(true, for: characteristic)
             }
+            if characteristic.properties.contains(.write) {
+                print("\(characteristic.uuid): properties contains .write")
+                switch characteristic.uuid {
+                case dataInCBUUID:
+                    print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
+                    print("handled Characteristic Value for dataInCBUUID: \(String(describing: characteristic.value))")
+                    //                            writeValue(myCharacteristic: characteristic,value: "GET_DOSE_DATA")
+                    writeValue(myCharacteristic: characteristic,value:  "GET_ERROR_LOG")
+//                case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
+//                    writeValue(myCharacteristic: characteristic,value:  "10:1621985510;")
+//                case CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9"):
+//                    writeValue(myCharacteristic: characteristic,value:  "10:1621985510;")
+                default:
+                    print("Do Nothing")
+                }
+                //                peripheral.setNotifyValue(true, for: characteristic)
+                //                let dataToSend: Data = "GET_DOSE_DATA".data(using: String.Encoding.utf8)!
+                //                peripheral.writeValue(dataToSend as Data, for: characteristic, type: CBCharacteristicWriteType.withResponse)
+            }
         }
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        print(characteristic.uuid)
         switch characteristic.uuid {
         case batteryCharacteristicCBUUID:
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
@@ -468,8 +490,6 @@ extension BleManager: CBPeripheralDelegate {
             }
             let dic = ["batteryData": "0"]
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: dic)
-//            self.delegate?.didUpdateValue?()
-            print("handled Characteristic Value for Battery: \(String(describing: characteristic.value))")
         case ReservoirLevelCharacteristicCBUUID:
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             print("handled Characteristic Value for Reservoir Level: \(String(describing: characteristic.value))")
@@ -482,7 +502,6 @@ extension BleManager: CBPeripheralDelegate {
             }
             let dic = ["reservoirLevelData": "6"]
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: dic)
-//            self.delegate?.didUpdateValue?()
         case statusCBUUID:
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             print("handled Characteristic Value for status : \(String(describing: characteristic.value))")
@@ -495,9 +514,31 @@ extension BleManager: CBPeripheralDelegate {
             }
             let dic = ["systemStatusData": "0"]
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: dic)
-//            self.delegate?.didUpdateValue?()
+        case firmwareRevisionString:
+            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
+            let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
+            print(data)
+        case writableCharacteristicCBUUID:
+            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
+            let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
+            print(data)
+        case dataInCBUUID:
+            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
+            print("handled Characteristic Value for dataInCBUUID: \(String(describing: characteristic.value))")
+//            writeValue(myCharacteristic: characteristic,value: "GET_DOSE_DATA")
+//            writeValue(myCharacteristic: characteristic,value:  "GET_ERROR_LOG")
+        case dataOutCBUUID:
+//            writeValue(myCharacteristic: characteristic,value: "GET_DOSE_DATA")
+            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
+            print("handled Characteristic Value for dataOutCBUUID: \(String(describing: characteristic.value))")
+        case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
+            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
+            print("handled Characteristic Value for: \(String(describing: characteristic.value))")
+        case CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9"):
+            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
+            print("handled Characteristic Value for: \(String(describing: characteristic.value))")
         default:
-            print("Unhandled Characteristic UUID: \(characteristic.value!)")
+            print("Unhandled Characteristic UUID: \(characteristic.uuid)")
         }
     }
 }
@@ -518,11 +559,6 @@ extension BleManager: CBCentralManagerDelegate {
             print("central.state is .unsupported")
           case .unauthorized:
             print("central.state is .unauthorized")
-//            UIApplication.openAppSettings { isSuccess in
-//                if isSuccess == false {
-//                    //Display error
-//                }
-//            }
           case .poweredOff:
             print("central.state is .poweredOff")
             self.systemStatusData = ""

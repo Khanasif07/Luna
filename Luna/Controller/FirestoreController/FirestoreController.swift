@@ -800,6 +800,22 @@ class FirestoreController:NSObject{
         
     }
     
+    static func deleteCGMDataNode(){
+//        deleteCollection(path) {
+            // Get a new write batch
+//            var batch = db.batch()
+//        let userId = Auth.auth().currentUser?.uid ?? ""
+//        db.collection(ApiKey.userSystemInfo).document(userId).collection(ApiKey.cgmData)
+//            .then(val => {
+//                val.map((val) => {
+//                    batch.delete(val)
+//                })
+//
+//                batch.commit()
+//            })
+//        }
+    }
+//
     static func showAlert( title : String = "", msg : String,_ completion : (()->())? = nil) {
         let alertViewController = UIAlertController(title: title, message: msg, preferredStyle: UIAlertController.Style.alert)
         let okAction = UIAlertAction(title:"ok", style: UIAlertAction.Style.default) { (action : UIAlertAction) -> Void in
