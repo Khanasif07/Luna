@@ -30,6 +30,7 @@ class HomeVC: UIViewController {
     // MARK: - Variables
     //==========================
     let bottomSheetVC = HomeBottomSheetVC()
+    let coachMarksController = CoachMarksController()
     
     // MARK: - Lifecycle
     //===========================
@@ -58,6 +59,7 @@ class HomeVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.loadCoachMark()
         self.addBottomSheetView()
     }
     
@@ -137,6 +139,18 @@ extension HomeVC {
 //        getStepCount()
 //        getAgeSexAndBloodType()
 //        HealthKitManager.sharedInstance.addWaterAmountToHealthKit(ounces: 32.0)
+    }
+    
+    
+    private func loadCoachMark(){
+        DispatchQueue.main.async {
+            self.addCoachMarkObjects()
+            self.coachMarksController.overlay.overlayView.backgroundColor = .black
+            self.coachMarksController.dataSource = self
+            self.coachMarksController.delegate = self
+            self.coachMarksController.overlay.allowTap = true
+            self.coachMarksController.start(in: .window(over: self))
+        }
     }
     
     private func addObserver(){
@@ -221,4 +235,64 @@ extension HomeVC: BleProtocol{
     }
 }
 
+
+
+
+extension HomeVC{
+    
+    private func addCoachMarkObjects(){
+        
+        let button  = UIButton()
+        button.frame = CGRect(x: UIDevice.width - 120, y: 20, width: 105.0, height: 30.0)
+        button.setTitle("Skip", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(skipTutorial(_:)), for: .touchUpInside)
+        button.titleLabel?.font = AppFonts.SF_Pro_Display_Bold.withDefaultSize()
+        
+        let nextButton  = UIButton()
+        nextButton.isUserInteractionEnabled = false
+        nextButton.frame = CGRect(x: UIDevice.width - 100, y: UIDevice.height - 40, width: 105.0, height: 30.0)
+        nextButton.setTitle("Next", for: .normal)
+        nextButton.setTitleColor(.white, for: .normal)
+        nextButton.titleLabel?.font = AppFonts.SF_Pro_Display_Bold.withDefaultSize()
+        
+        DispatchQueue.main.async {
+            self.coachMarksController.overlay.overlayView.addSubview(button)
+            self.coachMarksController.overlay.overlayView.addSubview(nextButton)
+        }
+    }
+    
+    @objc func skipTutorial(_ sender: UIButton){
+        self.coachMarksController.stop(immediately: true)
+    }
+}
+
+extension HomeVC: CoachMarksControllerDataSource, CoachMarksControllerDelegate{
+    
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+        return 2
+    }
+    
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+        let coachMarkBodyView = CoachMarkViewApp()
+        switch index {
+        case 0:
+            coachMarkBodyView.hintLabel.text = "Make sure you read the user manual before you start with your Luna system.You can access it now or later from the top of your screen."
+        default:
+            coachMarkBodyView.hintLabel.text = "The battery must be fully charged prior to starting a session.It’s a good habit to plug your device into a charger whenever it’s not in use. In fact, go ahead and charge it now!"
+        }
+        
+        return (bodyView: coachMarkBodyView, arrowView: nil)
+    }
+    
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
+        
+        switch index {
+        case 0:
+            return coachMarksController.helper.makeCoachMark(for: self.view)
+        default:
+            return coachMarksController.helper.makeCoachMark(for: self.view)
+        }
+    }
+}
 
