@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Raleway-Bold.ttf">
+            <string>Raleway-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CoachMarkViewApp" customModule="sceneuno" customModuleProvider="target">
+            <connections>
+                <outlet property="hintLabel" destination="Uf6-VK-8JZ" id="7eo-eh-fEj"/>
+                <outlet property="outerView" destination="iN0-l3-epB" id="VD0-zm-1i9"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AnimatableView" customModule="IBAnimatable">
+            <rect key="frame" x="0.0" y="0.0" width="327" height="110"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uf6-VK-8JZ">
+                    <rect key="frame" x="10" y="10" width="307" height="90"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <string key="text">To create a new Virtual Property Vewing tap ‘create new’ in the Property ViewingsSection</string>
+                    <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Raleway-Bold" family="Raleway" pointSize="16"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Uf6-VK-8JZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="HeV-rF-g7A"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Uf6-VK-8JZ" secondAttribute="trailing" constant="10" id="JNz-G5-mDB"/>
+                <constraint firstItem="Uf6-VK-8JZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="cuq-So-6fm"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Uf6-VK-8JZ" secondAttribute="bottom" constant="10" id="jn2-IX-A5H"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="12"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="81.884057971014499" y="545.75892857142856"/>
+        </view>
+    </objects>
+</document>
