@@ -128,14 +128,14 @@ extension HomeVC {
                 print(HKHealthStore.isHealthDataAvailable())
             }
         }
-        FirestoreController.getFirebaseCGMData { (cgmDataArray) in
-            print(cgmDataArray)
-            SystemInfoModel.shared.cgmData = cgmDataArray
-            self.bottomSheetVC.cgmData = cgmDataArray
-            print(self.bottomSheetVC.cgmData.endIndex)
-        } failure: { (error) -> (Void) in
-            print(error.localizedDescription)
-        }
+//        FirestoreController.getFirebaseCGMData { (cgmDataArray) in
+//            print(cgmDataArray)
+//            SystemInfoModel.shared.cgmData = cgmDataArray
+//            self.bottomSheetVC.cgmData = cgmDataArray
+//            print(self.bottomSheetVC.cgmData.endIndex)
+//        } failure: { (error) -> (Void) in
+//            print(error.localizedDescription)
+//        }
 //        getStepCount()
 //        getAgeSexAndBloodType()
 //        HealthKitManager.sharedInstance.addWaterAmountToHealthKit(ounces: 32.0)

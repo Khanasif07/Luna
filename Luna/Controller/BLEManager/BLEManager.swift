@@ -5,20 +5,19 @@
 //  Created by Admin on 01/07/21.
 //
 
-import UIKit
+import Foundation
 import CoreBluetooth
+import UIKit
 
 let batteryCharacteristicCBUUID = CBUUID(string: "378EC9D6-075C-4BF6-89DC-9F0D6EA3B5C4")
 let ReservoirLevelCharacteristicCBUUID = CBUUID(string: "378ec9d6-075c-4bf6-89dc-0c6f73b4b761")
 let statusCBUUID = CBUUID(string: "378ec9d6-075c-4bf6-89dc-a6d767548715")
 let firmwareRevisionString = CBUUID(string: "2A26")
 let writableCharacteristicCBUUID = CBUUID(string: "aa6b9004-9da2-4f80-9001-409abcc3dcef")
-let dataInCBUUID = CBUUID(string: "aa9ec828-43ba-4281-a122-d17566d67c42")
-let dataOutCBUUID = CBUUID(string: "aa9ec828-43ba-4281-a122-48932207c8f3")
+let dataInCBUUID = CBUUID(string: "aa9ec828-43ba-4281-a122-48932207c8f3")
+let dataOutCBUUID = CBUUID(string: "aa9ec828-43ba-4281-a122-d17566d67c42")
 let lunaCBUUID = CBUUID(string: "DE612C8C-46C0-46B6-B820-4C92A6E67D97")
 
-import Foundation
-import CoreBluetooth
 
 @objc public protocol BleProtocol {
     @objc optional func didDiscover(name:String, rssi:NSNumber)
@@ -43,10 +42,7 @@ public class BleManager: NSObject{
     
     public var delegate :BleProtocol?
     
-//    let DFUUID :CBUUID = CBUUID(string: "DADED7B6-BAA6-CBBB-D870-D46EB7963365")
-//    public var serviceUuid = CBUUID(string: "b1905964-c600-45bb-b050-49b85d2770d0")
-//    public var characteristicUuid = CBUUID(string: "6cb02c07-9d51-48a7-9552-d2f09bed6e33")
-    
+
     var centralManager :CBCentralManager!
 //    var peripheralManager :CBPeripheralManager!
     var myperipheral :CBPeripheral?
@@ -136,7 +132,6 @@ public class BleManager: NSObject{
     public func writeValue(myCharacteristic: CBCharacteristic,value: String = "85") {
         if isMyPeripheralConected { //check if myPeripheral is connected to send data
             let dataToSend: Data = value.data(using: String.Encoding.utf8)!
-            print(dataToSend)
             myperipheral?.writeValue(dataToSend as Data, for: myCharacteristic, type: CBCharacteristicWriteType.withResponse)    //Writing the data to the peripheral
         } else {
             print("Not connected")
@@ -248,27 +243,6 @@ public class BleManager: NSObject{
      
      - parameter value: -> a string will send
      */
-//    public func sendString (value :String){
-//        if value.lengthOfBytes(using: String.Encoding.ascii) == 0 {
-//            return
-//        }
-//        let data = value.data(using: String.Encoding.ascii, allowLossyConversion: true)
-//        print ("data: \(String(describing: data))")
-//        myperipheral?.writeValue(data!, for: mychar!, type: CBCharacteristicWriteType.withoutResponse)
-//    }
-//
-//    @objc public func centralManagerDidUpdateState(_ central: CBCentralManager){
-//        if centralManager.state == .poweredOn {
-//            print("ble opened")
-//            centralManager.scanForPeripherals(withServices: nil,options: nil)
-//
-////            delegate?.log(message: "ble poweredon")
-//        } else {
-//            print("ble open error")
-////            delegate?.log(message: "ble power error")
-//        }
-//    }
-//
 //    public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber){
 //        //println ("didDiscoverPeripheral ")
 //        print ("name=\(String(describing: peripheral.name))  RSSI=\(Int32(RSSI.intValue))")
@@ -410,18 +384,23 @@ public class BleManager: NSObject{
 //        }
 //    }
 //
-    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?){
-        print("didWriteValueForCharacteristic ")
+//    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?){
+//        peripheral.readValue(for: characteristic)
+//        if error == nil {
+//               print("Message sent=======>\(String(describing: characteristic.value))")
+//           }else{
+//
+//               print("Message Not sent=======>\(String(describing: error))")
+//           }
+//    }
+//
+    public func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?){
+              print("didReadRSSI ")
     }
-//
-//    public func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?){
-//        //      println ("didReadRSSI ")
-//        delegate?.didReadRSSI?(rssi: RSSI)
-//    }
-//
-//    public func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager){
-//
-//    }
+
+    public func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager){
+
+    }
 //}
 
 // MARK: - Extension For CBPeripheralDelegate
@@ -455,24 +434,28 @@ extension BleManager: CBPeripheralDelegate {
                 print("\(characteristic.uuid): properties contains .notify")
                 peripheral.setNotifyValue(true, for: characteristic)
             }
+            if characteristic.properties.contains(.indicate){
+                print("\(characteristic.uuid): properties contains .indicate")
+                peripheral.setNotifyValue(true, for: characteristic)
+            }
             if characteristic.properties.contains(.write) {
                 print("\(characteristic.uuid): properties contains .write")
                 switch characteristic.uuid {
                 case dataInCBUUID:
-                    print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
+//                    print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
                     print("handled Characteristic Value for dataInCBUUID: \(String(describing: characteristic.value))")
-                    //                            writeValue(myCharacteristic: characteristic,value: "GET_DOSE_DATA")
-                    writeValue(myCharacteristic: characteristic,value:  "GET_ERROR_LOG")
-//                case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
-//                    writeValue(myCharacteristic: characteristic,value:  "10:1621985510;")
-//                case CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9"):
-//                    writeValue(myCharacteristic: characteristic,value:  "10:1621985510;")
+//                    writeValue(myCharacteristic: characteristic,value: "#GET_DOSE_DATA")
+                    //writeValue(myCharacteristic: characteristic,value:  "GET_ERROR_LOG")
+                case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
+                    writeValue(myCharacteristic: characteristic,value:  "10:1621985510;")
+                case CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9"):
+                    writeValue(myCharacteristic: characteristic,value:  "10:1621985510;")
+                case dataOutCBUUID:
+                    peripheral.setNotifyValue(true, for: characteristic)
                 default:
+                    peripheral.setNotifyValue(true, for: characteristic)
                     print("Do Nothing")
                 }
-                //                peripheral.setNotifyValue(true, for: characteristic)
-                //                let dataToSend: Data = "GET_DOSE_DATA".data(using: String.Encoding.utf8)!
-                //                peripheral.writeValue(dataToSend as Data, for: characteristic, type: CBCharacteristicWriteType.withResponse)
             }
         }
     }
@@ -515,30 +498,37 @@ extension BleManager: CBPeripheralDelegate {
             let dic = ["systemStatusData": "0"]
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: dic)
         case firmwareRevisionString:
-            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-            print(data)
+            print("handled Characteristic Value for firmwareRevisionString:  \(data)")
         case writableCharacteristicCBUUID:
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print(data)
         case dataInCBUUID:
-            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
-            print("handled Characteristic Value for dataInCBUUID: \(String(describing: characteristic.value))")
-//            writeValue(myCharacteristic: characteristic,value: "GET_DOSE_DATA")
+//            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
+//            print("handled Characteristic Value for dataInCBUUID: \(String(describing: characteristic.value))")
+            writeValue(myCharacteristic: characteristic,value: "GET_DOSE_DATA")
 //            writeValue(myCharacteristic: characteristic,value:  "GET_ERROR_LOG")
         case dataOutCBUUID:
 //            writeValue(myCharacteristic: characteristic,value: "GET_DOSE_DATA")
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             print("handled Characteristic Value for dataOutCBUUID: \(String(describing: characteristic.value))")
         case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
-            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
+//            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             print("handled Characteristic Value for: \(String(describing: characteristic.value))")
         case CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9"):
-            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
+//            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             print("handled Characteristic Value for: \(String(describing: characteristic.value))")
         default:
             print("Unhandled Characteristic UUID: \(characteristic.uuid)")
+        }
+    }
+    
+    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+        if error == nil {
+            print("Message sent=======>\(String(describing: characteristic.value))")
+        }else{
+            print("Message Not sent=======>\(String(describing: error))")
         }
     }
 }
@@ -578,7 +568,7 @@ extension BleManager: CBCentralManagerDelegate {
 
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,
                         advertisementData: [String: Any], rssi RSSI: NSNumber) {
-        print(peripheral.name)
+        print(peripheral.name ?? "")
         print(peripheral.identifier)
         myperipheral = peripheral
         myperipheral?.delegate = self
