@@ -35,25 +35,19 @@ let lunaCBUUID = CBUUID(string: "DE612C8C-46C0-46B6-B820-4C92A6E67D97")
 public class BleManager: NSObject{
     public static let sharedInstance = BleManager()
     
-//    struct peripheralWithRssi {
-//        var RSSI: NSNumber
-//        var peripheral :CBPeripheral
-//    }
-    
     public var delegate :BleProtocol?
-    
-
     var centralManager :CBCentralManager!
-//    var peripheralManager :CBPeripheralManager!
+    //    var peripheralManager :CBPeripheralManager!
     var myperipheral :CBPeripheral?
     var mychar :CBCharacteristic!
     var myservice :CBService?
-//    var peripherals :[peripheralWithRssi]!
+    //    var peripherals :[peripheralWithRssi]!
     var rescanTimer :Timer?
     var rssiTimer :Timer?
     var batteryData: String = ""
     var reservoirLevelData: String = ""
     var systemStatusData : String = ""
+    var insulinData : [InsulinDataModel] = []
     var isKeepConnect = true
     var isConnect :Bool = false
     var isScanning :Bool = false
@@ -64,9 +58,6 @@ public class BleManager: NSObject{
         super.init ()
         print ("shared instance")
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
-//        self.peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
-//        self.peripheralManager.delegate = self
-//        peripherals = [peripheralWithRssi]()
     }
     
     private convenience init (delegate: BleProtocol){
@@ -76,40 +67,15 @@ public class BleManager: NSObject{
     
     public func myInit (){}
     
-//    public func publishService (){
-//        delegate?.log!(message: "in publishService")
-//
-//        let myService :CBMutableService = CBMutableService(type: serviceUuid, primary: true)
-//
-//        mychar = CBMutableCharacteristic(type: characteristicUuid, properties: CBCharacteristicProperties.read, value: nil, permissions: CBAttributePermissions.readable)
-//
-//        myService.characteristics = [mychar]
-//
-//        peripheralManager?.add(myService)
-//
-//        self.myservice = myService
-//
-//        delegate?.log!(message: "leaving publishService")
-//    }
-//
     public func beginScan(){
         if isScanning == false{
             isKeepConnect = true
             self.centralManager.scanForPeripherals(withServices: [lunaCBUUID], options: nil)
             self.rescanTimer =  Timer.scheduledTimer(timeInterval: 15,
-                target: self,
-                selector: #selector(scanningFinished),
-                userInfo: nil,
-                repeats: true)
-//            let uuid = [UUID(uuidString: "DADED7B6-BAA6-CBBB-D870-D46EB7963365")!]
-//            DispatchQueue.main.async {
-//                if let peripheral = self.centralManager.retrievePeripherals(withIdentifiers: uuid).first {
-//                    CommonFunctions.delay(delay: 2.0) {
-//                        self.myperipheral = peripheral // <-- super important
-//                        self.centralManager.connect(peripheral, options: nil)
-//                    }
-//                }
-//            }
+                                                     target: self,
+                                                     selector: #selector(scanningFinished),
+                                                     userInfo: nil,
+                                                     repeats: true)
         }
     }
     
@@ -129,7 +95,7 @@ public class BleManager: NSObject{
     }
     
     
-    public func writeValue(myCharacteristic: CBCharacteristic,value: String = "85") {
+    public func writeValue(myCharacteristic: CBCharacteristic,value: String = "50") {
         if isMyPeripheralConected { //check if myPeripheral is connected to send data
             let dataToSend: Data = value.data(using: String.Encoding.utf8)!
             myperipheral?.writeValue(dataToSend as Data, for: myCharacteristic, type: CBCharacteristicWriteType.withResponse)    //Writing the data to the peripheral
@@ -148,7 +114,7 @@ public class BleManager: NSObject{
                     rescanTimer = nil
                     self.delegate?.didNotDiscoverPeripheral?()
                 }
-               
+                
             }
         }else{
             if !isMyPeripheralConected {
@@ -164,245 +130,7 @@ public class BleManager: NSObject{
         rescanTimer?.invalidate()
         rescanTimer = nil
     }
-    
-//    public func stop(){
-//        print("in stop")
-//        if(peripheralManager != nil && peripheralManager.isAdvertising){
-//            print("stoping advertising...")
-//            peripheralManager.stopAdvertising()
-//        }
-//        if(centralManager != nil && centralManager.isScanning){
-//            print("stopping scan")
-//            centralManager.stopScan()
-//        }
-//    }
-    
-    /**
-     rescan ble device every 2 seconds
-     */
-//    func updateScan (){
-//        if let p = getMaxPeripheral(){
-//            myperipheral = p
-//            connect(peripheral: myperipheral!)
-//        } else{
-//            print ("rescan")
-//            self.centralManager.scanForPeripherals(withServices: [DFUUID], options: nil)
-//            self.centralManager.scanForPeripherals(withServices: nil, options: nil)
-//        }
-//    }
-    
-    /**
-     return the max rssi peripheral tin peripherals
-     
-     - returns: peripheral with best rssi or nil
-     */
-//    func getMaxPeripheral () -> CBPeripheral?{
-//        if self.peripherals.count == 0{
-//            return nil
-//        }
-//
-//        var max :NSNumber = self.peripherals[0].RSSI
-//        var maxPeripheral :CBPeripheral = self.peripherals[0].peripheral
-//
-//        for p in self.peripherals{
-//            if p.RSSI.intValue > max.intValue{
-//                max = p.RSSI
-//                maxPeripheral = p.peripheral
-//            }
-//        }
-//        return maxPeripheral
-//    }
-    
-    /**
-     connect a peripheral
-     
-     - parameter peripheral: that rssi is best
-     */
-//    func connect (peripheral:CBPeripheral){
-//        myperipheral = peripheral
-//        centralManager.stopScan()
-//        isScanning = false
-//        self.rescanTimer?.invalidate()
-//        self.rescanTimer = nil
-//        centralManager.connect(peripheral, options: nil)
-//    }
-    
-    /**
-     send one byte to connected peripheral
-     
-     - parameter value: one byte data will send
-     */
-//    public func sendByte (value :UInt8) {
-//        var myvalue = value
-//        let data = NSData(bytes: &myvalue, length: 1)
-//        myperipheral?.writeValue(data as Data, for: mychar!, type: CBCharacteristicWriteType.withoutResponse)
-//    }
-    
-    /**
-     send String to connected peripheral
-     
-     - parameter value: -> a string will send
-     */
-//    public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber){
-//        //println ("didDiscoverPeripheral ")
-//        print ("name=\(String(describing: peripheral.name))  RSSI=\(Int32(RSSI.intValue))")
-//
-////        if peripheral.name == "car_007"
-////        {
-////            connect(peripheral: peripheral)
-////        }
-////
-////        if RSSI.intValue > -50 && RSSI.intValue < -10
-////        {
-////            appendPeripheral(peripheral: peripheral, RSSI: RSSI)
-////        }
-//        print(peripheral.name)
-//        print(peripheral.identifier)
-//        myperipheral = peripheral
-//        myperipheral.delegate = self
-//        centralManager.stopScan()
-//        centralManager.connect(peripheral, options: nil)
-//        delegate?.didDiscover?(name: peripheral.name!, rssi: RSSI)
-//    }
-    
-    /**
-     append new find peripheral to peripherals and update rssi
-     
-     - parameter peripheral:
-     - parameter RSSI:
-//     */
-//    func appendPeripheral (peripheral :CBPeripheral, RSSI :NSNumber){
-//        //for var p=1; p < self.peripherals.count; p++
-//        for p in 1...(self.peripherals.count-1){
-//            if self.peripherals[p].peripheral == peripheral {
-//                self.peripherals[p].RSSI = RSSI
-//                return
-//            }
-//        }
-//        self.peripherals.append(peripheralWithRssi(RSSI: RSSI, peripheral: peripheral))
-//    }
-    
-//    public func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?){
-////        delegate?.log!(message: "in did add service")
-//        if(error != nil){
-////            delegate?.log!(message: "error in add service")
-//            print("error in addservice: \(error!.localizedDescription)")
-//        }
-//        else{
-//            peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey : [service.uuid]])
-//        }
-//    }
-//
-//    public func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?){
-////        delegate?.log!(message: "in did start adv.")
-//        if(error != nil){
-////            delegate?.log!(message: "advertising error")
-//            print("advertising error: \(error!.localizedDescription)")
-//        }
-//        else{
-////            delegate?.log!(message: "advertising started")
-//            print("advertising started")
-//        }
-//    }
-    
-//    public func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral){
-//        print("didConnectPeripheral ")
-//        myperipheral = peripheral
-//        myperipheral.discoverServices(nil)
-//        peripheral.readRSSI()
-//        rescanTimer?.invalidate()
-//        rescanTimer = nil
-//        delegate?.didConnect?(name: peripheral.name!)
-//    }
-//
-//    public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?){
-//        print("didDisconnectPeripheral ")
-//        isConnect = false
-//        rssiTimer?.invalidate()
-//        rssiTimer = nil
-//        rescanTimer?.invalidate()
-//        if isKeepConnect == true{
-//            centralManager.connect(myperipheral!, options: nil)
-//        }
-//        delegate?.didDisconnect?()
-//    }
-//
-//    public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?){
-//        print("didDiscoverServices ")
-//        guard let services = peripheral.services else { return }
-//        for service in services {
-//            print(service)
-//            peripheral.discoverCharacteristics(nil, for: service)
-//        }
-//    }
-//
-//    public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?){
-//        print("didDiscoverCharacteristicsForService ")
-//        guard let characteristics = service.characteristics else { return }
-//
-//        for characteristic in characteristics {
-//            print(characteristic)
-//            if characteristic.properties.contains(.read) {
-//                print("\(characteristic.uuid): properties contains .read")
-//                peripheral.readValue(for: characteristic)
-//            }
-//            if characteristic.properties.contains(.notify) {
-//                print("\(characteristic.uuid): properties contains .notify")
-//                peripheral.setNotifyValue(true, for: characteristic)
-//            }
-//        }
-        //        let char = (service.characteristics![0]) //as! CBCharacteristic)
-        //        if char.uuid.uuidString == "DFB1"{
-        //            //println ("get DFB1")
-        //            mychar = char
-        //            myperipheral?.setNotifyValue(true, for: mychar!)
-        //            isConnect = true
-        //            rssiTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: Selector(("updateRSSI")), userInfo: nil, repeats: true)
-        //            delegate?.didBleReady?()
-        //        }
-    }
-    
-    /**
-     read rssi every seconds
-     */
-//    func updateRSSI (){
-//        myperipheral?.readRSSI()
-//    }
-    
-//    public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?){
-//        println ("didUpdateNotificationStateForCharacteristic ")
-//    }
-//
-//    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?){
-//        print ("didUpdateValueForCharacteristic")
-//        let str = NSString(data: characteristic.value!, encoding: String.Encoding.ascii.rawValue)
-//
-//        //var str = NSString(data: characteristic.value(), encoding: NSASCIIStringEncoding)
-//
-//        if str != nil{
-//            print ("read:(\(str!.length)) \(str!)")
-//        }
-//    }
-//
-//    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?){
-//        peripheral.readValue(for: characteristic)
-//        if error == nil {
-//               print("Message sent=======>\(String(describing: characteristic.value))")
-//           }else{
-//
-//               print("Message Not sent=======>\(String(describing: error))")
-//           }
-//    }
-//
-    public func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?){
-              print("didReadRSSI ")
-    }
-
-    public func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager){
-
-    }
-//}
-
+}
 // MARK: - Extension For CBPeripheralDelegate
 //===========================
 extension BleManager: CBPeripheralDelegate {
@@ -417,13 +145,13 @@ extension BleManager: CBPeripheralDelegate {
             print(service)
             peripheral.discoverCharacteristics(nil, for: service)
         }
-
+        
     }
-
+    
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService,
-                    error: Error?) {
+                           error: Error?) {
         guard let characteristics = service.characteristics else { return }
-
+        
         for characteristic in characteristics {
             print(characteristic)
             if characteristic.properties.contains(.read) {
@@ -442,16 +170,20 @@ extension BleManager: CBPeripheralDelegate {
                 print("\(characteristic.uuid): properties contains .write")
                 switch characteristic.uuid {
                 case dataInCBUUID:
-//                    print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
-                    print("handled Characteristic Value for dataInCBUUID: \(String(describing: characteristic.value))")
-//                    writeValue(myCharacteristic: characteristic,value: "#GET_DOSE_DATA")
-                    //writeValue(myCharacteristic: characteristic,value:  "GET_ERROR_LOG")
+                    writeValue(myCharacteristic: characteristic,value: "#GET_DOSE_DATA")
+                //writeValue(myCharacteristic: characteristic,value:  "GET_ERROR_LOG")
                 case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
                     writeValue(myCharacteristic: characteristic,value:  "10:1621985510;")
                 case CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9"):
                     writeValue(myCharacteristic: characteristic,value:  "10:1621985510;")
                 case dataOutCBUUID:
                     peripheral.setNotifyValue(true, for: characteristic)
+                case batteryCharacteristicCBUUID:
+                    writeValue(myCharacteristic: characteristic)
+                case ReservoirLevelCharacteristicCBUUID:
+                    writeValue(myCharacteristic: characteristic,value: "7")
+                case statusCBUUID:
+                    writeValue(myCharacteristic: characteristic,value: "0")
                 default:
                     peripheral.setNotifyValue(true, for: characteristic)
                     print("Do Nothing")
@@ -466,36 +198,21 @@ extension BleManager: CBPeripheralDelegate {
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.batteryData = data
-            print(self.batteryData)
-            if batteryData.isEmpty {
-                writeValue(myCharacteristic: characteristic)
-                self.batteryData = "85"
-            }
-            let dic = ["batteryData": "0"]
+            let dic = ["batteryData": self.batteryData]
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: dic)
         case ReservoirLevelCharacteristicCBUUID:
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             print("handled Characteristic Value for Reservoir Level: \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.reservoirLevelData = data
-            print(self.reservoirLevelData)
-            if reservoirLevelData.isEmpty {
-                writeValue(myCharacteristic: characteristic,value: "6")
-                self.reservoirLevelData = "6"
-            }
-            let dic = ["reservoirLevelData": "6"]
+            let dic = ["reservoirLevelData": self.reservoirLevelData]
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: dic)
         case statusCBUUID:
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             print("handled Characteristic Value for status : \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.systemStatusData = data
-            print(self.systemStatusData)
-            if systemStatusData.isEmpty{
-                writeValue(myCharacteristic: characteristic,value: "0")
-                self.systemStatusData = "0"
-            }
-            let dic = ["systemStatusData": "0"]
+            let dic = ["systemStatusData": self.systemStatusData]
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: dic)
         case firmwareRevisionString:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
@@ -504,20 +221,24 @@ extension BleManager: CBPeripheralDelegate {
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print(data)
-        case dataInCBUUID:
-//            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
-//            print("handled Characteristic Value for dataInCBUUID: \(String(describing: characteristic.value))")
-            writeValue(myCharacteristic: characteristic,value: "GET_DOSE_DATA")
-//            writeValue(myCharacteristic: characteristic,value:  "GET_ERROR_LOG")
         case dataOutCBUUID:
-//            writeValue(myCharacteristic: characteristic,value: "GET_DOSE_DATA")
-            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
+            let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
+            let dataArray = data.split{$0 == ";"}.map(String.init)
+            let properDataArray = dataArray.map { (stringValue) -> [String] in
+                return stringValue.split{$0 == ":"}.map(String.init)
+            }
+            self.insulinData = properDataArray.map({ (stringArray) -> InsulinDataModel in
+                return InsulinDataModel(insulinData: stringArray.first!, date: Double(stringArray.last!) ?? 0.0)
+            })
+            for insulinModel in self.insulinData {
+                FirestoreController.createInsulinDataNode(insulinUnit: insulinModel.insulinData ?? "", date: Double(insulinModel.date))
+            }
+            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
+            print(self.insulinData)
             print("handled Characteristic Value for dataOutCBUUID: \(String(describing: characteristic.value))")
         case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
-//            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             print("handled Characteristic Value for: \(String(describing: characteristic.value))")
         case CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9"):
-//            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             print("handled Characteristic Value for: \(String(describing: characteristic.value))")
         default:
             print("Unhandled Characteristic UUID: \(characteristic.uuid)")
@@ -538,36 +259,36 @@ extension BleManager: CBPeripheralDelegate {
 // MARK: - Extension For CBCentralManagerDelegate
 //===========================
 extension BleManager: CBCentralManagerDelegate {
-
+    
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
-          case .unknown:
+        case .unknown:
             print("central.state is .unknown")
-          case .resetting:
+        case .resetting:
             print("central.state is .resetting")
-          case .unsupported:
+        case .unsupported:
             print("central.state is .unsupported")
-          case .unauthorized:
+        case .unauthorized:
             print("central.state is .unauthorized")
-          case .poweredOff:
+        case .poweredOff:
             print("central.state is .poweredOff")
             self.systemStatusData = ""
             NotificationCenter.default.post(name: Notification.Name.BLEOnOffState, object: nil)
-          case .poweredOn:
+        case .poweredOn:
             print("central.state is .poweredOn")
             centralManager.scanForPeripherals(withServices: [lunaCBUUID],options: nil)
             self.rescanTimer =  Timer.scheduledTimer(timeInterval: 15,
-                target: self,
-                selector: #selector(scanningFinished),
-                userInfo: nil,
-                repeats: true)
+                                                     target: self,
+                                                     selector: #selector(scanningFinished),
+                                                     userInfo: nil,
+                                                     repeats: true)
         @unknown default:
             print("unknown defaul")
         }
     }
-
+    
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,
-                        advertisementData: [String: Any], rssi RSSI: NSNumber) {
+                               advertisementData: [String: Any], rssi RSSI: NSNumber) {
         print(peripheral.name ?? "")
         print(peripheral.identifier)
         myperipheral = peripheral
@@ -575,7 +296,7 @@ extension BleManager: CBCentralManagerDelegate {
         centralManager.stopScan()
         centralManager.connect(myperipheral!, options: nil)
     }
-
+    
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Connected!")
         isMyPeripheralConected = true
@@ -583,7 +304,7 @@ extension BleManager: CBCentralManagerDelegate {
         CommonFunctions.showToastWithMessage("Bluetooth connected.")
         delegate?.didConnect?(name: "Bluetooth connected.")
     }
-
+    
     public func centralManager (_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("DisConnected!")
         isMyPeripheralConected = false
@@ -591,7 +312,7 @@ extension BleManager: CBCentralManagerDelegate {
         myperipheral = nil
         systemStatusData = ""
         NotificationCenter.default.post(name: Notification.Name.BLEDidDisConnectSuccessfully, object: nil)
-//        central.connect(peripheral, options: nil)
+        //        central.connect(peripheral, options: nil)
     }
     
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {

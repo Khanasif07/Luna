@@ -1231,7 +1231,7 @@ Luna devices</string>
                                                     <action selector="filterBtnTapped:" destination="AEb-wB-L6I" eventType="touchUpInside" id="1OS-f0-d8L"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nEw-F8-L9R">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nEw-F8-L9R">
                                                 <rect key="frame" x="302" y="5" width="40" height="40"/>
                                                 <state key="normal" image="Info Icon"/>
                                             </button>
@@ -1377,20 +1377,6 @@ Luna devices</string>
                                             <constraint firstItem="heJ-43-3Du" firstAttribute="bottom" secondItem="ksv-sn-QvQ" secondAttribute="bottom" id="pZP-pC-4NY"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XaB-pv-muf" customClass="AppButton" customModule="Luna" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="797" width="374" height="44"/>
-                                        <color key="backgroundColor" red="0.52941176469999995" green="0.74509803919999995" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="jjw-9v-Xgz"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
-                                        <state key="normal" title="Apply">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="proceedBtnAction:" destination="6qS-ep-UAJ" eventType="touchUpInside" id="QZX-DZ-sMg"/>
-                                        </connections>
-                                    </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="30L-9A-Tlc">
                                         <rect key="frame" x="0.0" y="127" width="414" height="200"/>
                                         <subviews>
@@ -1472,6 +1458,20 @@ Luna devices</string>
                                             <constraint firstAttribute="height" constant="200" id="qUe-Ks-0P7"/>
                                         </constraints>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XaB-pv-muf" customClass="AppButton" customModule="Luna" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="797" width="374" height="44"/>
+                                        <color key="backgroundColor" red="0.52941176469999995" green="0.74509803919999995" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="jjw-9v-Xgz"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                        <state key="normal" title="Apply">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="proceedBtnAction:" destination="6qS-ep-UAJ" eventType="touchUpInside" id="L0E-gj-MdJ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -1574,8 +1574,8 @@ Luna devices</string>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="nlv-ag-Wy2">
                                                     <rect key="frame" x="83.5" y="156" width="48.5" height="38.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="70%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhJ-PB-M7X">
-                                                            <rect key="frame" x="5" y="0.0" width="38" height="21.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhJ-PB-M7X">
+                                                            <rect key="frame" x="2.5" y="0.0" width="43.5" height="21.5"/>
                                                             <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -1713,7 +1713,8 @@ Luna devices</string>
                         <outlet property="insulinQty" destination="Hxt-Mg-nmH" id="G7x-Uz-aq1"/>
                         <outlet property="lowestGlucoseLbl" destination="yai-eT-aoc" id="4h1-G5-iZy"/>
                         <outlet property="mainTaeView" destination="ei7-5w-O73" id="JZY-4p-8H2"/>
-                        <outlet property="progress" destination="kks-vg-SYe" id="16L-Y9-mwI"/>
+                        <outlet property="progress" destination="kks-vg-SYe" id="fI6-1L-0Vt"/>
+                        <outlet property="titleLbl" destination="4u6-yT-gjs" id="NR0-yx-Db0"/>
                         <outlet property="topNavView" destination="XNF-US-wqr" id="vjr-mk-37f"/>
                     </connections>
                 </viewController>

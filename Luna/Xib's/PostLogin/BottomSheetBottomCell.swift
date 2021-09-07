@@ -8,16 +8,15 @@
 import UIKit
 
 class BottomSheetBottomCell: UITableViewCell {
+    
+    @IBOutlet weak var topLineDashView: LineDashedView!
+    @IBOutlet weak var timeLbl: UILabel!
+    @IBOutlet weak var unitLbl: UILabel!
+    @IBOutlet weak var cgmLbl: UILabel!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }

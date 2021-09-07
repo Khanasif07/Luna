@@ -25,7 +25,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
                 return ChartDataEntry(x: Double(data.date), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
             }
             let set1 = LineChartDataSet(entries: values, label: "")
-            set1.drawIconsEnabled = true
+            set1.drawIconsEnabled = false
             setup(set1)
             let gradientColors = [#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 0).cgColor,#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1).cgColor]
             let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
@@ -52,27 +52,11 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
             chartView.data = data
         }
     }
-//    var xRangeValue = [Double]()
-//    var data : [(x: Int, y: Double)] = [] {
-//        didSet{
-//            let series = ChartSeries(data: data)
-//            self.xRangeValue = data.map({ (tuple) -> Double in
-//               return Double(tuple.x)
-//            })
-//            series.area = true
-////            chartView.xLabels = [20,40,60,80,100,120,140,160,180,200,220,240]
-//            series.color = #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1)
-//            chartView.removeAllSeries()
-//            chartView.add(series)
-//            chartView.reloadInputViews()
-//        }
-//    }
     
     // MARK: - Lifecycle
     //===========================
     override func awakeFromNib() {
         super.awakeFromNib()
-//        setUpChartData()
         newChartSetUp()
     }
     
@@ -93,7 +77,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         xAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
         xAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
         xAxis.granularity = 1
-//        xAxis.labelCount = 6
+        xAxis.labelCount = 8
         xAxis.valueFormatter = XAxisNameFormater()
 
         let leftAxis = chartView.leftAxis
@@ -112,7 +96,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         chartView.legend.form = .none
         setDataCount(cgmData.endIndex, range: UInt32(cgmData.endIndex))
         chartView.moveViewToX(chartView.data?.yMax ?? 0.0 - 1)
-        chartView.zoom(scaleX: 10.0, scaleY: 0, x: 0, y: 0)
+        chartView.zoom(scaleX: 12.5, scaleY: 0, x: 0, y: 0)
         chartView.animate(yAxisDuration: 2.5)
     }
     
@@ -122,7 +106,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         }
         
         let set1 = LineChartDataSet(entries: values, label: "")
-        set1.drawIconsEnabled = true
+        set1.drawIconsEnabled = false
         setup(set1)
 
         let gradientColors = [#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 0).cgColor,#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1).cgColor]
@@ -147,26 +131,6 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
             dataSet.formLineWidth = 1
             dataSet.formSize = 15
     }
-    
-    
-    //    public  func setUpChartData(){
-    //        let series = ChartSeries(data: data)
-    //        series.area = true
-    //        series.color = #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1)
-    //        chartView.lineWidth = 3.0
-    //        chartView.xLabelsOrientation = .horizontal
-    ////        chartView.xLabels =  xRangeValue
-    //        chartView.yLabels = [0, 50, 100, 150, 200, 250]
-    //        //
-    //        chartView.showYLabelsAndGrid = true
-    //        chartView.showXLabelsAndGrid = true
-    //        chartView.axesColor = .clear
-    //       //
-    ////        chartView.xLabelsFormatter = { String(Int(roundf(Float($1)))) + " am" }
-    //        chartView.yLabelsFormatter = { String(Int(roundf(Float($1)))) + "" }
-    //        chartView.add(series)
-    //        chartView.reloadInputViews()
-    //    }
     
     // MARK: - IBActions
     //===========================
@@ -269,31 +233,31 @@ public class XAxisCustomRenderer: XAxisRenderer {
                     anchor: anchor,
                     angleRadians: labelRotationAngleRadians)
                 
-                //let indexData = cgmData[Int(i)]
-                
-                
+//                let indexData = cgmData[Int(i)]
+//                let cgmDate = String(indexData.date)
                 var icon: CGImage?
-                if label == "08 am" || label == "01 pm"{
-                    let rawIcon = #imageLiteral(resourceName: "lineOne")
-                    icon = rawIcon.cgImage!
-                }else if label == "03 pm"{
-                    let rawIcon = #imageLiteral(resourceName: "lineTwo")
-                    icon = rawIcon.cgImage!
-                }else if label == "11 am"{
-                    let rawIcon = #imageLiteral(resourceName: "lineFour")
-                    icon = rawIcon.cgImage!
-                }
-                
+                SystemInfoModel.shared.insulinData?.forEach({ (model) in
+                    let labelData = model.date.getDateTimeFromTimeInterval()
+                    if labelData == label {
+                        let rawIcon = #imageLiteral(resourceName: "lineOne")
+                        icon = rawIcon.cgImage!
+                    }
+                })
+               
+             
+//                if label == "08 am" || label == "01 pm"{
+//                    let rawIcon = #imageLiteral(resourceName: "lineOne")
+//                    icon = rawIcon.cgImage!
+//                }else if label == "03 pm"{
+//                    let rawIcon = #imageLiteral(resourceName: "lineTwo")
+//                    icon = rawIcon.cgImage!
+//                }else if label == "11 am"{
+//                    let rawIcon = #imageLiteral(resourceName: "lineFour")
+//                    icon = rawIcon.cgImage!
+//                }
                 if let myImage = icon{
                     context.draw(myImage, in: CGRect(x: position.x - 10 , y: position.y - 30, width: CGFloat(15), height: CGFloat(30)))
                 }
-                
-                //Based on Condition Display Image.....
-//                if label == "08 am" ||  label == "03 pm" || label == "12 pm"{
-//                    context.draw(icon, in: CGRect(x: position.x - 10 , y: position.y - 20, width: CGFloat(15), height: CGFloat(15)))
-//                }else{
-//                    context.draw(icon, in: CGRect(x: position.x, y: position.y - 20, width: CGFloat(0), height: CGFloat(0)))
-//                }
             }
         }
     }

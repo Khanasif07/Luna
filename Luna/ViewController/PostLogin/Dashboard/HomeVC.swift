@@ -106,6 +106,7 @@ extension HomeVC {
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
+        self.setupHealthkit()
         self.addObserver()
         BleManager.sharedInstance.delegate = self
         if BleManager.sharedInstance.myperipheral?.state == .connected{
@@ -123,6 +124,23 @@ extension HomeVC {
         } failure: { (error) -> (Void) in
             CommonFunctions.showToastWithMessage(error.localizedDescription)
         }
+        FirestoreController.getFirebaseCGMData { (cgmDataArray) in
+            print(cgmDataArray)
+            SystemInfoModel.shared.cgmData = cgmDataArray
+            self.bottomSheetVC.cgmData = cgmDataArray
+        } failure: { (error) -> (Void) in
+            print(error.localizedDescription)
+        }
+        FirestoreController.getFirebaseInsulinData { (insulinDataArray) in
+            print(insulinDataArray)
+            SystemInfoModel.shared.insulinData = insulinDataArray
+            self.bottomSheetVC.mainTableView.reloadData()
+        } failure: { (error) -> (Void) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func setupHealthkit(){
         HealthKitManager.sharedInstance.authorizeHealthKit { (isEnable, error) in
             if let error = error{
                 print(error.localizedDescription)
@@ -131,17 +149,6 @@ extension HomeVC {
                 print(HKHealthStore.isHealthDataAvailable())
             }
         }
-//        FirestoreController.getFirebaseCGMData { (cgmDataArray) in
-//            print(cgmDataArray)
-//            SystemInfoModel.shared.cgmData = cgmDataArray
-//            self.bottomSheetVC.cgmData = cgmDataArray
-//            print(self.bottomSheetVC.cgmData.endIndex)
-//        } failure: { (error) -> (Void) in
-//            print(error.localizedDescription)
-//        }
-//        getStepCount()
-//        getAgeSexAndBloodType()
-//        HealthKitManager.sharedInstance.addWaterAmountToHealthKit(ounces: 32.0)
     }
     
     

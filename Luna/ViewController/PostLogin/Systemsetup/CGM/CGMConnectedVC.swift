@@ -369,7 +369,7 @@ extension CGMConnectedVC {
             for cgmModel in entries {
             FirestoreController.createCGMDataNode(direction: cgmModel.direction ?? "", sgv: cgmModel.sgv, date: cgmModel.date)
             }
-            
+            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
 //            self.updateBGGraph()
 //            self.updateStats()
             
