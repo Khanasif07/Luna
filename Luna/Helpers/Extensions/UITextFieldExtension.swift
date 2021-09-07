@@ -236,9 +236,9 @@ extension UITextField{
         }
     }
     
-    override open func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        return false
-    }
+//    override open func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+//        return false
+//    }
 }
 
 

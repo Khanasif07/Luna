@@ -16,6 +16,7 @@ class InsulinStep1VC: UIViewController {
     @IBOutlet weak var btmContainerView: UIView!
     @IBOutlet weak var proceedBtn: AppButton!
     
+    @IBOutlet weak var importantBox: UIView!
     // MARK: - Variables
     //===========================
     
@@ -43,6 +44,7 @@ class InsulinStep1VC: UIViewController {
         backView.round()
         proceedBtn.layer.cornerRadius = 8.0
         btmContainerView.layer.cornerRadius = 10.0
+        importantBox.cornerRadius = 10.0
     }
     
     // MARK: - IBActions
@@ -67,6 +69,7 @@ extension InsulinStep1VC {
         overrideUserInterfaceStyle = .light
         }
         btmContainerView.setBorder(width: 1.0, color: #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1))
+        importantBox.setBorder(width: 1.0, color: #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         proceedBtn.isEnabled = true
         proceedBtn.setTitle("Next", for: .normal)
         let imageView = UIImageView(image: UIImage(named: "warning"))

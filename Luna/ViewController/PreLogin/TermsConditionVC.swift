@@ -56,7 +56,8 @@ extension TermsConditionVC {
         if #available(iOS 13.0, *) {
         overrideUserInterfaceStyle = .light
         }
-        
+        textLbl.textAlignment = .justified
+        textLbl.text = LocalizedString.TnC.localized
     }
     
     func goToSignUpVC() {

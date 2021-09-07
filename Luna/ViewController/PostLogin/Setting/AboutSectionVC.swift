@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class AboutSectionVC: UIViewController {
     
@@ -95,6 +96,8 @@ extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
         case "Find Answers":
             let vc = SettingManualVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)
+        case "Customer Support":
+            openMail()
         case "Privacy":
             let vc = AboutTermsPolicyVC.instantiate(fromAppStoryboard: .PostLogin)
             vc.titleString =  sections[indexPath.row].1
@@ -110,5 +113,45 @@ extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
         default:
             CommonFunctions.showToastWithMessage("Under Development")
         }
+    }
+}
+
+extension AboutSectionVC: MFMailComposeViewControllerDelegate{
+    
+    func openMail() {
+        
+        if MFMailComposeViewController.canSendMail() {
+            
+            let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+            
+            UINavigationBar.appearance().barTintColor = UIColor.white
+            let composeVC = MFMailComposeViewController()
+            composeVC.mailComposeDelegate = self
+            composeVC.setToRecipients(["support@lunadiabetes.com"])
+            composeVC.setSubject("Luna iOS App Feedback")
+            composeVC.setMessageBody("""
+                
+                
+
+
+            ------------------------------
+            Device Information
+            ------------------------------
+            iOS Version = \(DeviceDetail.os_version)
+            Luna App Version = \(appVersion ?? "1.0")
+            Phone = \(DeviceDetail.device_model)
+
+            Thank you!
+            """, isHTML: false)
+            self.present(composeVC, animated: true, completion: nil)
+            
+        } else{
+            showAlert(msg: "Mail not configured")            
+        }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        UINavigationBar.appearance().barTintColor = UIColor.black
+        controller.dismiss(animated: true)
     }
 }

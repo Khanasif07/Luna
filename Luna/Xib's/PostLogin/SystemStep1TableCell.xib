@@ -63,7 +63,7 @@
                                                             <constraint firstAttribute="width" secondItem="TNg-Q1-Vnr" secondAttribute="height" id="VLr-iY-uVh"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" About 5 minutes to complete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f60-Kp-LQ0">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" About 3 minutes to complete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f60-Kp-LQ0">
                                                         <rect key="frame" x="31" y="0.0" width="171" height="16"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                         <nil key="textColor"/>
@@ -159,6 +159,7 @@
                 <outlet property="startBtn" destination="o6f-RB-1Lz" id="17J-aG-1ay"/>
                 <outlet property="stepLbl" destination="baV-h5-N8h" id="rYw-ym-2uk"/>
                 <outlet property="timeDescView" destination="NKE-6P-G5k" id="mnQ-dT-xm0"/>
+                <outlet property="timeToCompleteLabel" destination="f60-Kp-LQ0" id="eQP-gD-8fz"/>
                 <outlet property="titleLbl" destination="FPu-p3-yZx" id="wge-fD-nLa"/>
                 <outlet property="unitLbl" destination="iiA-BM-sRo" id="bfd-eh-ovI"/>
             </connections>

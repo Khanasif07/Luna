@@ -392,14 +392,14 @@ extension CoachMarksViewController {
 private extension CoachMarksViewController {
     /// Add touch up target to the current coach mark view.
     func addTargetToCurrentCoachView() {
-//        currentCoachMarkView?.nextControl?.addTarget(self,
-//            action: #selector(didTapCoachMark(_:)), for: .touchUpInside)
+        currentCoachMarkView?.nextControl?.addTarget(self,
+            action: #selector(didTapCoachMark(_:)), for: .touchUpInside)
     }
 
     /// Remove touch up target from the current coach mark view.
     func removeTargetFromCurrentCoachView() {
-//        currentCoachMarkView?.nextControl?.removeTarget(self,
-//            action: #selector(didTapCoachMark(_:)), for: .touchUpInside)
+        currentCoachMarkView?.nextControl?.removeTarget(self,
+            action: #selector(didTapCoachMark(_:)), for: .touchUpInside)
     }
 
     /// Will be called when the user perform an action requiring the display of the next coach mark.

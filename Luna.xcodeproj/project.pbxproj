@@ -126,6 +126,9 @@
 		849B5A4A2697143B000AA5DC /* BottomSheetTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849B5A482697143B000AA5DC /* BottomSheetTopCell.xib */; };
 		849B7432269D612000C059E5 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849B7431269D612000C059E5 /* HealthKit.framework */; };
 		849B7436269D710600C059E5 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7435269D710600C059E5 /* HealthKitManager.swift */; };
+		84B06B6626E27E9A004902E4 /* Gilroy-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84B06B6526E27E9A004902E4 /* Gilroy-Medium.ttf */; };
+		84B06BB826E29275004902E4 /* CoachMarkArrowViewApp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B06BB626E29275004902E4 /* CoachMarkArrowViewApp.xib */; };
+		84B06BB926E29275004902E4 /* CoachMarkArrowViewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B06BB726E29275004902E4 /* CoachMarkArrowViewApp.swift */; };
 		84B06F09269C0BE00059B293 /* SessionDescBottomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B06F06269C0BDF0059B293 /* SessionDescBottomVC.swift */; };
 		84B06F0A269C0BE00059B293 /* SessionDescriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B06F07269C0BDF0059B293 /* SessionDescriptionVC.swift */; };
 		84B06F0B269C0BE00059B293 /* SessionDescBottomVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B06F08269C0BDF0059B293 /* SessionDescBottomVC.xib */; };
@@ -147,7 +150,7 @@
 		84CC12DD2668D023009316FC /* AppStoryboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC12DC2668D023009316FC /* AppStoryboards.swift */; };
 		84CC12E02668D036009316FC /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC12DF2668D036009316FC /* AppConstants.swift */; };
 		84CC12E32668D042009316FC /* AppGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC12E22668D042009316FC /* AppGlobals.swift */; };
-		84CC12E62668D057009316FC /* DeviceDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC12E52668D057009316FC /* DeviceDetails.swift */; };
+		84CC12E62668D057009316FC /* DeviceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC12E52668D057009316FC /* DeviceDetail.swift */; };
 		84CC12E92668D083009316FC /* UITableView+ UITableViewCellExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC12E82668D083009316FC /* UITableView+ UITableViewCellExtension.swift */; };
 		84CC12EC2668D0B8009316FC /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC12EB2668D0B8009316FC /* UIColorExtension.swift */; };
 		84CC12EF2668D0CE009316FC /* NotificationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC12EE2668D0CE009316FC /* NotificationExtension.swift */; };
@@ -334,6 +337,9 @@
 		849B5A482697143B000AA5DC /* BottomSheetTopCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetTopCell.xib; sourceTree = "<group>"; };
 		849B7431269D612000C059E5 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		849B7435269D710600C059E5 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		84B06B6526E27E9A004902E4 /* Gilroy-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Medium.ttf"; sourceTree = "<group>"; };
+		84B06BB626E29275004902E4 /* CoachMarkArrowViewApp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoachMarkArrowViewApp.xib; sourceTree = "<group>"; };
+		84B06BB726E29275004902E4 /* CoachMarkArrowViewApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkArrowViewApp.swift; sourceTree = "<group>"; };
 		84B06F06269C0BDF0059B293 /* SessionDescBottomVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDescBottomVC.swift; sourceTree = "<group>"; };
 		84B06F07269C0BDF0059B293 /* SessionDescriptionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDescriptionVC.swift; sourceTree = "<group>"; };
 		84B06F08269C0BDF0059B293 /* SessionDescBottomVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionDescBottomVC.xib; sourceTree = "<group>"; };
@@ -357,7 +363,7 @@
 		84CC12DC2668D023009316FC /* AppStoryboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoryboards.swift; sourceTree = "<group>"; };
 		84CC12DF2668D036009316FC /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		84CC12E22668D042009316FC /* AppGlobals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGlobals.swift; sourceTree = "<group>"; };
-		84CC12E52668D057009316FC /* DeviceDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetails.swift; sourceTree = "<group>"; };
+		84CC12E52668D057009316FC /* DeviceDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetail.swift; sourceTree = "<group>"; };
 		84CC12E82668D083009316FC /* UITableView+ UITableViewCellExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+ UITableViewCellExtension.swift"; sourceTree = "<group>"; };
 		84CC12EB2668D0B8009316FC /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		84CC12EE2668D0CE009316FC /* NotificationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtension.swift; sourceTree = "<group>"; };
@@ -442,6 +448,8 @@
 		1863AF8626E23C7100902838 /* CoachMarkXibs */ = {
 			isa = PBXGroup;
 			children = (
+				84B06BB726E29275004902E4 /* CoachMarkArrowViewApp.swift */,
+				84B06BB626E29275004902E4 /* CoachMarkArrowViewApp.xib */,
 				1863AF8726E23C7100902838 /* CoachMarkViewApp.swift */,
 				1863AF8826E23C7100902838 /* CoachMarkViewApp.xib */,
 			);
@@ -906,7 +914,7 @@
 				84CC12DC2668D023009316FC /* AppStoryboards.swift */,
 				84CC12DF2668D036009316FC /* AppConstants.swift */,
 				84CC12E22668D042009316FC /* AppGlobals.swift */,
-				84CC12E52668D057009316FC /* DeviceDetails.swift */,
+				84CC12E52668D057009316FC /* DeviceDetail.swift */,
 			);
 			path = AppUtilities;
 			sourceTree = "<group>";
@@ -966,6 +974,7 @@
 		84D1F4DC2679D52700F131E0 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				84B06B6526E27E9A004902E4 /* Gilroy-Medium.ttf */,
 				84D1F4DD2679D52700F131E0 /* SF-Pro-Display-Thin.otf */,
 				84D1F4DE2679D52700F131E0 /* SF-Pro-Display-SemiboldItalic.otf */,
 				84D1F4DF2679D52700F131E0 /* SF-Pro-Display-RegularItalic.otf */,
@@ -1075,6 +1084,7 @@
 				84D1F4F32679D52700F131E0 /* SF-Pro-Display-Regular.otf in Resources */,
 				84467281268DB2C700EC55FD /* SystemStep1TableCell.xib in Resources */,
 				8432A1992672294200859B47 /* Localizable.strings in Resources */,
+				84B06BB826E29275004902E4 /* CoachMarkArrowViewApp.xib in Resources */,
 				84D1F4F62679D52700F131E0 /* SF-Pro-Display-Heavy.otf in Resources */,
 				840A7E012696E9D3005AA1E6 /* CGPStoryboard.storyboard in Resources */,
 				84D1F4F92679D52700F131E0 /* SF-Pro-Display-HeavyItalic.otf in Resources */,
@@ -1091,6 +1101,7 @@
 				84B06F0B269C0BE00059B293 /* SessionDescBottomVC.xib in Resources */,
 				84F2A279269849ED000FDCD5 /* BottomSheetInsulinCell.xib in Resources */,
 				84554932267908B9000CC13D /* PostLogin.storyboard in Resources */,
+				84B06B6626E27E9A004902E4 /* Gilroy-Medium.ttf in Resources */,
 				84CC12A62668C823009316FC /* LaunchScreen.storyboard in Resources */,
 				84D1F4F52679D52700F131E0 /* SF-Pro-Display-Medium.otf in Resources */,
 				84E5505B267E027A008C02F8 /* TypeTableCell.xib in Resources */,
@@ -1283,6 +1294,7 @@
 				847899732684824F00D1DF36 /* HomeVC.swift in Sources */,
 				84CC12E02668D036009316FC /* AppConstants.swift in Sources */,
 				84F819CE267B6FE000A4C758 /* BLEIntegrationVC.swift in Sources */,
+				84B06BB926E29275004902E4 /* CoachMarkArrowViewApp.swift in Sources */,
 				84D1F4B42679C12900F131E0 /* TermsConditionVC.swift in Sources */,
 				188DB14B26E0993600FBF042 /* CoachMarkSkipDefaultView.swift in Sources */,
 				84CC12E32668D042009316FC /* AppGlobals.swift in Sources */,
@@ -1310,7 +1322,7 @@
 				84CC13042668D1A6009316FC /* Double+Extension.swift in Sources */,
 				84CC13212668D588009316FC /* LocalizedString.swift in Sources */,
 				188DB14D26E0993600FBF042 /* CoachMarkArrowView.swift in Sources */,
-				84CC12E62668D057009316FC /* DeviceDetails.swift in Sources */,
+				84CC12E62668D057009316FC /* DeviceDetail.swift in Sources */,
 				84CC13192668D25B009316FC /* UIView+Extension.swift in Sources */,
 				84F2A278269849ED000FDCD5 /* BottomSheetInsulinCell.swift in Sources */,
 				84CC130D2668D1F3009316FC /* Dictionary+Extension.swift in Sources */,

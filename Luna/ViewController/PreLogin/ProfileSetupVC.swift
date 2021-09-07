@@ -121,7 +121,7 @@ class ProfileSetupVC: UIViewController {
             let senderMessage = Message(txt, "Sender")
             self.messageListing.append(senderMessage)
             self.messageTableView.reloadData()
-            let receiverMessage = Message("Hi \(senderName), what is your last name ?", "Receiver")
+            let receiverMessage = Message("Hi \(senderName), what is your last name?", "Receiver")
             self.messageListing.append(receiverMessage)
             CommonFunctions.delay(delay: 0.25) {
                 self.messageTableView.reloadData()
@@ -137,7 +137,7 @@ class ProfileSetupVC: UIViewController {
             let senderMessage = Message(txt, "Sender")
             self.messageListing.append(senderMessage)
             self.messageTableView.reloadData()
-            let receiverMessage = Message("What’s your date of birth, \(senderName) ?", "Receiver")
+            let receiverMessage = Message("What’s your date of birth, \(senderName)?", "Receiver")
             self.messageListing.append(receiverMessage)
             CommonFunctions.delay(delay: 0.25) {
                 self.messageTableView.reloadData()
@@ -153,7 +153,7 @@ class ProfileSetupVC: UIViewController {
             let senderMessage = Message(txt, "Sender")
             self.messageListing.append(senderMessage)
             self.messageTableView.reloadData()
-            let receiverMessage = Message("Last question : \nWhat type of diabetes do you have ?", "Receiver")
+            let receiverMessage = Message("Last question: \nWhat type of diabetes do you have?", "Receiver")
             let typeMessage = Message("", "Sender","Type")
             self.messageListing.append(receiverMessage)
             self.messageListing.append(typeMessage)
@@ -210,7 +210,7 @@ extension ProfileSetupVC {
         msgTxtField.delegate = self
         msgTxtField.autocapitalizationType = .words
         msgTxtField.becomeFirstResponder()
-        self.messageListing = [Message("Hello and welcome to Luna !", "Receiver"),Message("Please provide your details to set up your profile", "Receiver"),Message("What is your first name ?", "Receiver")]
+        self.messageListing = [Message("Hello and welcome to Luna!", "Receiver"),Message("Please provide your details to set up your profile", "Receiver"),Message("What is your first name?", "Receiver")]
         self.messageTableView.reloadWithAnimation()
        }
     

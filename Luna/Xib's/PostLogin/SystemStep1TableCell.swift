@@ -21,6 +21,7 @@ class SystemStep1TableCell: UITableViewCell {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var dataContainerView: UIView!
     @IBOutlet weak var stepLbl: UILabel!
+    @IBOutlet weak var timeToCompleteLabel: UILabel!
     
     // MARK: - Variables
     //===========================

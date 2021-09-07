@@ -211,8 +211,8 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueCell(with: SignUpTopTableCell.self, indexPath: indexPath)
-            cell.titleLbl.text = LocalizedString.signup.localized
-            cell.subTitleLbl.text = LocalizedString.please_create_account_to_get_good_sleep.localized
+            cell.titleLbl.text = LocalizedString.signup.localized.uppercased()
+            cell.subTitleLbl.text = ""
             cell.signUpBtn.setTitle(LocalizedString.signup.localized, for: .normal)
             cell.forgotPassBtn.isHidden = true
             [cell.emailIdTxtField,cell.passTxtField].forEach({$0?.delegate = self})

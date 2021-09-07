@@ -10,10 +10,18 @@ import UIKit
 
 class CoachMarkViewApp: UIView , CoachMarkBodyView {
     
+    // MARK: - Internal properties
+    var nextControl: UIControl? {
+        get {
+            return self.nextButton
+        }
+    }
+    
     var highlighted: Bool = false
     
     @IBOutlet weak var outerView : UIView!
     @IBOutlet weak var hintLabel: UITextView!
+    @IBOutlet weak var nextButton: UIButton!
     
     weak var highlightArrowDelegate: CoachMarkBodyHighlightArrowDelegate? = nil
     
@@ -44,14 +52,13 @@ class CoachMarkViewApp: UIView , CoachMarkBodyView {
         self.setViewAppearence()
         
         self.hintLabel.isScrollEnabled = false
-        self.hintLabel.textAlignment = .justified
-        self.hintLabel.layoutManager.hyphenationFactor = 1.0
+//        self.hintLabel.layoutManager.hyphenationFactor = 1.0
         self.hintLabel.isEditable = false
         
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = UIColor.clear
 
-        self.clipsToBounds = true
+        self.clipsToBounds = false
     }
     
     private func setViewAppearence() {

@@ -237,6 +237,7 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
             cell.pairedDeviceImgView.isHidden = true
             cell.cgmInsulinDataView.isHidden = !sections[indexPath.row].1
             cell.unitLbl.text = "mg/dL"
+            cell.timeToCompleteLabel.text = "About 5 minutes to complete"
             cell.quantityLbl.text = AppUserDefaults.value(forKey: .cgmValue).stringValue
             cell.directionText.text = AppUserDefaults.value(forKey: .directionString).stringValue
             cell.directionText.isHidden = false

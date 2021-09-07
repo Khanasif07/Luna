@@ -116,6 +116,7 @@ extension AppUserDefaults {
         case unreadCount
         case cgmValue
         case directionString
+        case homeCoachMarkShown
     }
 }
 

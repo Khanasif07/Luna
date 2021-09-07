@@ -42,9 +42,9 @@ class CoachMarkView: UIView {
     var arrowOffset: CGFloat = 0.0
 
     /// The control used to get to the next coach mark.
-//    var nextControl: UIControl? {
-//        return bodyView.nextControl
-//    }
+    var nextControl: UIControl? {
+        return bodyView.nextControl
+    }
 
     // MARK: - Private properties
     private var bodyUIView: UIView { return bodyView as! UIView }

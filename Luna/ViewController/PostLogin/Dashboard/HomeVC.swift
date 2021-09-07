@@ -16,6 +16,7 @@ class HomeVC: UIViewController {
     @IBOutlet weak var topNavView: UIView!
     @IBOutlet weak var bottomStackView: UIStackView!
     
+    @IBOutlet weak var topManualButton: UIButton!
     @IBOutlet weak var batteryTitleLbl: UILabel!
     @IBOutlet weak var batteryStatusLbl: UILabel!
     @IBOutlet weak var batteryImgView: UIImageView!
@@ -24,6 +25,7 @@ class HomeVC: UIViewController {
     @IBOutlet weak var reservoirImgView: UIImageView!
     @IBOutlet weak var reservoirTitleLbl: UILabel!
     
+    @IBOutlet weak var batteryStackView: UIStackView!
     @IBOutlet weak var systemStatusLbl: UILabel!
     @IBOutlet weak var systemImgView: UIImageView!
     @IBOutlet weak var systemTitleLbl: UILabel!
@@ -52,15 +54,15 @@ class HomeVC: UIViewController {
         super.viewWillAppear(animated)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        bottomSheetVC.closePullUp()
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.loadCoachMark()
         self.addBottomSheetView()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        bottomSheetVC.closePullUp()
     }
     
     override func viewDidLayoutSubviews() {
@@ -68,6 +70,7 @@ class HomeVC: UIViewController {
         bottomSheetVC.view.dropShadow(color: UIColor.black16, opacity: 0.16, offSet: CGSize(width: 0, height: -3), radius: 10, scale: true)
         self.view.layoutIfNeeded()
     }
+    
     // MARK: - IBActions
     //===========================
     @IBAction func settingBtnTapped(_ sender: UIButton) {
@@ -141,17 +144,6 @@ extension HomeVC {
 //        HealthKitManager.sharedInstance.addWaterAmountToHealthKit(ounces: 32.0)
     }
     
-    
-    private func loadCoachMark(){
-        DispatchQueue.main.async {
-            self.addCoachMarkObjects()
-            self.coachMarksController.overlay.overlayView.backgroundColor = .black
-            self.coachMarksController.dataSource = self
-            self.coachMarksController.delegate = self
-            self.coachMarksController.overlay.allowTap = true
-            self.coachMarksController.start(in: .window(over: self))
-        }
-    }
     
     private func addObserver(){
         NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
@@ -235,35 +227,22 @@ extension HomeVC: BleProtocol{
     }
 }
 
-
-
-
 extension HomeVC{
-    
-    private func addCoachMarkObjects(){
-        
-        let button  = UIButton()
-        button.frame = CGRect(x: UIDevice.width - 120, y: 20, width: 105.0, height: 30.0)
-        button.setTitle("Skip", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.addTarget(self, action: #selector(skipTutorial(_:)), for: .touchUpInside)
-        button.titleLabel?.font = AppFonts.SF_Pro_Display_Bold.withDefaultSize()
-        
-        let nextButton  = UIButton()
-        nextButton.isUserInteractionEnabled = false
-        nextButton.frame = CGRect(x: UIDevice.width - 100, y: UIDevice.height - 40, width: 105.0, height: 30.0)
-        nextButton.setTitle("Next", for: .normal)
-        nextButton.setTitleColor(.white, for: .normal)
-        nextButton.titleLabel?.font = AppFonts.SF_Pro_Display_Bold.withDefaultSize()
-        
+
+    private func loadCoachMark(){
         DispatchQueue.main.async {
-            self.coachMarksController.overlay.overlayView.addSubview(button)
-            self.coachMarksController.overlay.overlayView.addSubview(nextButton)
+            
+            self.coachMarksController.dataSource = self
+            self.coachMarksController.delegate = self
+            self.coachMarksController.overlay.allowTap = true
+            self.coachMarksController.overlay.blurEffectStyle = .light
+            
+            if AppUserDefaults.value(forKey: .homeCoachMarkShown).boolValue == false {
+                self.coachMarksController.start(in: .window(over: self))
+                AppUserDefaults.save(value: true, forKey: .homeCoachMarkShown)
+            }
+            
         }
-    }
-    
-    @objc func skipTutorial(_ sender: UIButton){
-        self.coachMarksController.stop(immediately: true)
     }
 }
 
@@ -274,25 +253,45 @@ extension HomeVC: CoachMarksControllerDataSource, CoachMarksControllerDelegate{
     }
     
     func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+        
         let coachMarkBodyView = CoachMarkViewApp()
+        var coachMarkArrowView: TransparentCoachMarkArrowView? = nil
+        
         switch index {
         case 0:
-            coachMarkBodyView.hintLabel.text = "Make sure you read the user manual before you start with your Luna system.You can access it now or later from the top of your screen."
-        default:
             coachMarkBodyView.hintLabel.text = "The battery must be fully charged prior to starting a session.It’s a good habit to plug your device into a charger whenever it’s not in use. In fact, go ahead and charge it now!"
+            coachMarkBodyView.hintLabel.textAlignment = .left
+            coachMarkBodyView.nextButton.setTitle(LocalizedString.ok.localized.capitalized, for: .normal)
+            
+        default:
+            coachMarkBodyView.hintLabel.text = "Make sure you read the user manual before you start with your Luna system.You can access it now or later from the top of your screen."
+            coachMarkBodyView.hintLabel.textAlignment = .right
+            coachMarkBodyView.nextButton.setTitle("Got it", for: .normal)
         }
         
-        return (bodyView: coachMarkBodyView, arrowView: nil)
+        if let arrowOrientation = coachMark.arrowOrientation {
+            coachMarkArrowView = TransparentCoachMarkArrowView(orientation: arrowOrientation)
+        }
+        
+        return (bodyView: coachMarkBodyView, arrowView: coachMarkArrowView)
     }
     
     func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
         
+        var coachMark: CoachMark
+        
         switch index {
         case 0:
-            return coachMarksController.helper.makeCoachMark(for: self.view)
+            coachMark = coachMarksController.helper.makeCoachMark(for: batteryStackView)
+            coachMark.arrowOrientation = .top
         default:
-            return coachMarksController.helper.makeCoachMark(for: self.view)
+            coachMark = coachMarksController.helper.makeCoachMark(for: topManualButton)
+            coachMark.arrowOrientation = .bottom
         }
+        coachMark.gapBetweenCoachMarkAndCutoutPath = 6.0
+        
+        return coachMark
     }
+    
 }
 

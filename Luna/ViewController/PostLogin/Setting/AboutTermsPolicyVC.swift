@@ -9,16 +9,24 @@ import UIKit
 import WebKit
 class AboutTermsPolicyVC: UIViewController {
     
+    enum StringType {
+        case tnc
+        case privacyPolicy
+    }
+    
     // MARK: - IBOutlets
     //===========================
     @IBOutlet weak var descLbl: UILabel!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var webView: WKWebView!
+    @IBOutlet weak var textLbl: UILabel!
+    @IBOutlet weak var textScrollView: UIScrollView!
     
     // MARK: - Variables
     //===========================
     var titleString: String = "Privacy"
+    var stringType: StringType = .tnc
     
     // MARK: - Lifecycle
     //===========================
@@ -70,6 +78,15 @@ extension AboutTermsPolicyVC {
         }
         webView.isHidden = true
 //        self.load("https://www.UnderDevelopment.com")
+
+        switch stringType {
+        case .tnc:
+            textLbl.text = LocalizedString.TnC.localized
+        case .privacyPolicy:
+            textLbl.text = LocalizedString.privacyPolicyString.localized
+        }
+        textLbl.textAlignment = .justified
+        
     }
     
     func load(_ urlString: String) {

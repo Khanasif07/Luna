@@ -1,52 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Raleway-Bold.ttf">
-            <string>Raleway-Bold</string>
+        <array key="Gilroy-Medium.ttf">
+            <string>Gilroy-Medium</string>
+        </array>
+        <array key="SF-Pro-Display-Semibold.otf">
+            <string>SFProDisplay-Semibold</string>
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CoachMarkViewApp" customModule="sceneuno" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CoachMarkViewApp" customModule="Luna" customModuleProvider="target">
             <connections>
                 <outlet property="hintLabel" destination="Uf6-VK-8JZ" id="7eo-eh-fEj"/>
+                <outlet property="nextButton" destination="iCh-qf-1wZ" id="LQq-74-cZk"/>
                 <outlet property="outerView" destination="iN0-l3-epB" id="VD0-zm-1i9"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AnimatableView" customModule="IBAnimatable">
-            <rect key="frame" x="0.0" y="0.0" width="327" height="110"/>
+            <rect key="frame" x="0.0" y="0.0" width="327" height="222"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uf6-VK-8JZ">
-                    <rect key="frame" x="10" y="10" width="307" height="90"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="Uf6-VK-8JZ">
+                    <rect key="frame" x="30" y="10" width="267" height="129"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <string key="text">To create a new Virtual Property Vewing tap ‘create new’ in the Property ViewingsSection</string>
-                    <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" name="Raleway-Bold" family="Raleway" pointSize="16"/>
+                    <string key="text">To create a new Virtual Property Vewing tap ‘create new’ in the Property Viewings
+Section</string>
+                    <color key="textColor" red="0.15686274509803921" green="0.17254901960784313" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Gilroy-Medium" family="Gilroy-Medium" pointSize="18"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iCh-qf-1wZ">
+                    <rect key="frame" x="169" y="164" width="128" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="Erh-Gd-hP0"/>
+                        <constraint firstAttribute="width" constant="128" id="erC-a7-13o"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="15"/>
+                    <state key="normal" title="Ok">
+                        <color key="titleColor" red="0.27058823529411763" green="0.78431372549019607" blue="0.58039215686274503" alpha="0.80525813829030424" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" red="0.27058823529411763" green="0.78431372549019607" blue="0.58039215686274503" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="Uf6-VK-8JZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="HeV-rF-g7A"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Uf6-VK-8JZ" secondAttribute="trailing" constant="10" id="JNz-G5-mDB"/>
+                <constraint firstItem="iCh-qf-1wZ" firstAttribute="trailing" secondItem="Uf6-VK-8JZ" secondAttribute="trailing" id="CoU-EA-Ir3"/>
+                <constraint firstItem="Uf6-VK-8JZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="HeV-rF-g7A"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Uf6-VK-8JZ" secondAttribute="trailing" constant="30" id="JNz-G5-mDB"/>
+                <constraint firstItem="iCh-qf-1wZ" firstAttribute="top" secondItem="Uf6-VK-8JZ" secondAttribute="bottom" constant="25" id="Wax-pN-xDD"/>
                 <constraint firstItem="Uf6-VK-8JZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="cuq-So-6fm"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Uf6-VK-8JZ" secondAttribute="bottom" constant="10" id="jn2-IX-A5H"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="iCh-qf-1wZ" secondAttribute="bottom" constant="10" id="oYO-xz-P5r"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                     <real key="value" value="12"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
-            <point key="canvasLocation" x="81.884057971014499" y="545.75892857142856"/>
+            <point key="canvasLocation" x="81.884057971014499" y="583.25892857142856"/>
         </view>
     </objects>
 </document>

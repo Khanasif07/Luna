@@ -269,13 +269,16 @@ class CoachMarkDisplayManager {
 
             coachMarkView.centerYAnchor.constraint(equalTo: parentView.centerYAnchor,
                                                    constant: constant).isActive = true
-        } else if coachMark.arrowOrientation! == .bottom {
-            let constant = -(parentView.frame.size.height -
-                cutoutPath.bounds.origin.y + offset)
-
-            coachMarkView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor,
-                                                  constant: constant).isActive = true
-        } else {
+        }
+        //TODO: Aanchal
+//        else if coachMark.arrowOrientation! == .bottom {
+//            let constant = -(parentView.frame.size.height -
+//                cutoutPath.bounds.origin.y + offset)
+//
+//            coachMarkView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor,
+//                                                  constant: constant).isActive = true
+//        }
+        else {
             let constant = (cutoutPath.bounds.origin.y +
                 cutoutPath.bounds.size.height) + offset
 

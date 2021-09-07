@@ -17,7 +17,12 @@ class InsulinStep2VC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var sections: [(String,Bool,String,UIImage)] = [("Basaglar",false,"Lilly",#imageLiteral(resourceName: "basaglar")),("Lantus",false,"Sanofi",#imageLiteral(resourceName: "lantus")),("Levemir",false,"Novo Nordisk",#imageLiteral(resourceName: "levemir")),("Toujeo",false,"Sanofi",#imageLiteral(resourceName: "toujeo")),("Toujeo Max",false,"Sanofi",#imageLiteral(resourceName: "toujeoMax")),("Tresiba",false,"Novo Nordisk",#imageLiteral(resourceName: "tresiba"))]
+    var sections: [(String,Bool,String,UIImage)] = [("Levemir",false,"Novo Nordisk",#imageLiteral(resourceName: "levemir")),
+                                                    ("Tresiba",false,"Novo Nordisk",#imageLiteral(resourceName: "tresiba")),
+                                                    ("Basaglar",false,"Lilly",#imageLiteral(resourceName: "basaglar")),
+                                                    ("Lantus",false,"Sanofi",#imageLiteral(resourceName: "lantus")),
+                                                    ("Toujeo",false,"Sanofi",#imageLiteral(resourceName: "toujeo")),
+                                                    ("Toujeo Max",false,"Sanofi",#imageLiteral(resourceName: "toujeoMax"))]
     
     // MARK: - Lifecycle
     //===========================

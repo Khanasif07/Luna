@@ -256,7 +256,7 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Gj2-PB-Jk6">
-                                                <rect key="frame" x="20" y="124" width="374" height="108"/>
+                                                <rect key="frame" x="20" y="124" width="374" height="89"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Long Acting Insulin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2m-8e-UsH">
                                                         <rect key="frame" x="0.0" y="0.0" width="151" height="21.5"/>
@@ -264,9 +264,8 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgr-2h-96w">
-                                                        <rect key="frame" x="0.0" y="31.5" width="364" height="76.5"/>
-                                                        <string key="text">Long - acting insulin is also called basal or background insulin. Luna determines your night time insulin needs based on the total amount of long acting insulin you typically take in one day (24 hours).</string>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Luna uses your long-acting insulin, sometimes called basal insulin, to determine how sensitive you are to insulin." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgr-2h-96w">
+                                                        <rect key="frame" x="0.0" y="31.5" width="353" height="57.5"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                                         <color key="textColor" red="0.45098039215686275" green="0.46274509803921571" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -321,6 +320,45 @@
                                                     <constraint firstAttribute="bottom" secondItem="M7u-Yw-ZrI" secondAttribute="bottom" constant="19" id="oiL-Fd-v6J"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D44-L2-bxq">
+                                                <rect key="frame" x="20" y="238" width="374" height="129"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="CwD-Bu-mgX">
+                                                        <rect key="frame" x="20" y="19" width="334" height="91"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="IUo-Fe-580">
+                                                                <rect key="frame" x="0.0" y="0.0" width="334" height="21.5"/>
+                                                                <subviews>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="jfF-Ym-cRV">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="80" height="21.5"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Important:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Key-cY-YlQ">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="80" height="21.5"/>
+                                                                                <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="18"/>
+                                                                                <color key="textColor" red="0.27058823529999998" green="0.7843137255" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                    </stackView>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Long-acting insulin is only used for the setup of the system. When you fill Luna, you will only use rapid acting insulin." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGD-BC-dIC">
+                                                                <rect key="frame" x="0.0" y="33.5" width="334" height="57.5"/>
+                                                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="CwD-Bu-mgX" firstAttribute="leading" secondItem="D44-L2-bxq" secondAttribute="leading" constant="20" id="Cf6-S2-KbW"/>
+                                                    <constraint firstAttribute="trailing" secondItem="CwD-Bu-mgX" secondAttribute="trailing" constant="20" id="cf8-g9-loB"/>
+                                                    <constraint firstItem="CwD-Bu-mgX" firstAttribute="top" secondItem="D44-L2-bxq" secondAttribute="top" constant="19" id="gun-bS-Eea"/>
+                                                    <constraint firstAttribute="bottom" secondItem="CwD-Bu-mgX" secondAttribute="bottom" constant="19" id="hS2-Al-f2o"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -328,9 +366,12 @@
                                             <constraint firstItem="d0S-CS-VgN" firstAttribute="leading" secondItem="GwP-2t-zmc" secondAttribute="leading" id="5AQ-eN-60G"/>
                                             <constraint firstAttribute="trailing" secondItem="OCH-xb-T6D" secondAttribute="trailing" constant="20" id="KhM-FM-iLn"/>
                                             <constraint firstAttribute="trailing" secondItem="d0S-CS-VgN" secondAttribute="trailing" id="O9k-h5-ec1"/>
+                                            <constraint firstAttribute="trailing" secondItem="D44-L2-bxq" secondAttribute="trailing" constant="20" symbolic="YES" id="SHl-Zs-Pc9"/>
                                             <constraint firstItem="OCH-xb-T6D" firstAttribute="leading" secondItem="GwP-2t-zmc" secondAttribute="leading" constant="20" id="YHo-PP-uuE"/>
                                             <constraint firstAttribute="trailing" secondItem="Gj2-PB-Jk6" secondAttribute="trailing" constant="20" id="YeP-P8-b2w"/>
                                             <constraint firstItem="Gj2-PB-Jk6" firstAttribute="top" secondItem="d0S-CS-VgN" secondAttribute="bottom" constant="30" id="csn-Ka-3iB"/>
+                                            <constraint firstItem="D44-L2-bxq" firstAttribute="top" secondItem="pgr-2h-96w" secondAttribute="bottom" constant="25" id="jA2-Au-QGZ"/>
+                                            <constraint firstItem="D44-L2-bxq" firstAttribute="leading" secondItem="GwP-2t-zmc" secondAttribute="leading" constant="20" symbolic="YES" id="oTK-Gx-usb"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNy-cT-tQZ" customClass="AppButton" customModule="Luna" customModuleProvider="target">
@@ -374,6 +415,7 @@
                     <connections>
                         <outlet property="backView" destination="2P8-03-hzC" id="5Ws-EX-MGd"/>
                         <outlet property="btmContainerView" destination="OCH-xb-T6D" id="Mbi-YZ-xSv"/>
+                        <outlet property="importantBox" destination="D44-L2-bxq" id="lqJ-rB-6vh"/>
                         <outlet property="proceedBtn" destination="PNy-cT-tQZ" id="fAl-WK-1EY"/>
                         <outlet property="warningImgView" destination="XRN-ZH-hxq" id="x4m-BN-f8X"/>
                     </connections>
@@ -691,19 +733,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JS2-NF-SIk">
-                                        <rect key="frame" x="28" y="263.5" width="358" height="369.5"/>
+                                        <rect key="frame" x="28" y="259" width="358" height="378.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="UJ4-ip-0t8">
-                                                <rect key="frame" x="24" y="51" width="310" height="220.5"/>
+                                                <rect key="frame" x="24" y="51" width="310" height="229.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your daily dose of long acting insulin is" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6uI-t6-6aG">
-                                                        <rect key="frame" x="33.5" y="0.0" width="243" height="42"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please confirm that you have correctly entered the number of units of long acting insulin you took in the last 24 hours" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6uI-t6-6aG">
+                                                        <rect key="frame" x="0.0" y="0.0" width="310" height="84"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hmo-iA-qe6">
-                                                        <rect key="frame" x="35" y="72" width="240" height="85.5"/>
+                                                        <rect key="frame" x="35" y="114" width="240" height="85.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="R62-K9-7Za">
                                                                 <rect key="frame" x="90.5" y="0.0" width="59.5" height="53.5"/>
@@ -752,10 +794,8 @@
                                                             <constraint firstAttribute="trailing" secondItem="eSv-tK-ViZ" secondAttribute="trailing" constant="20" id="s9m-k3-Nfm"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n80-B4-5ke">
-                                                        <rect key="frame" x="24.5" y="187.5" width="261" height="33"/>
-                                                        <string key="text">You can change these settings later in the
-app.</string>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n80-B4-5ke">
+                                                        <rect key="frame" x="155" y="229.5" width="0.0" height="0.0"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                         <color key="textColor" red="0.45098039220000002" green="0.46274509800000002" blue="0.48627450979999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -763,7 +803,7 @@ app.</string>
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xeg-Ks-nb5" customClass="AppButton" customModule="Luna" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="305.5" width="318" height="44"/>
+                                                <rect key="frame" x="20" y="314.5" width="318" height="44"/>
                                                 <color key="backgroundColor" red="0.52941176469999995" green="0.74509803919999995" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="bIR-NR-Pep"/>

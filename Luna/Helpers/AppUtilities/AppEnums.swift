@@ -15,8 +15,8 @@ enum DeviceStatus {
     var titleString: String? {
         switch self {
         case .Battery: return "Battery"
-        case .ReservoirLevel: return "Reservoir"
-        case .System: return "System"
+        case .ReservoirLevel: return "Insulin"
+        case .System: return "Luna"
         }
     }
     
