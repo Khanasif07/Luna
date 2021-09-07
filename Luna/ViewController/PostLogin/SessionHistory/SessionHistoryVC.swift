@@ -11,7 +11,7 @@ class SessionHistoryVC: UIViewController {
     
     @IBOutlet weak var SessionHistoryTV: UITableView!
     
-    var insulinSectionDataArray : [(Int,[InsulinDataModel])] = []
+    var insulinSectionDataArray : [(Int,[ShareGlucoseData])] = []
     var startdate: Date?
     var enddate: Date?
     
@@ -55,10 +55,29 @@ extension SessionHistoryVC {
     }
     
     private func getInsulinData(){
-        FirestoreController.getFirebaseInsulinData { (insulinDataArray) in
-            print(insulinDataArray)
-            SystemInfoModel.shared.insulinData = insulinDataArray
-            SystemInfoModel.shared.insulinData?.forEach({ (dataModel) in
+//        FirestoreController.getFirebaseInsulinData { (insulinDataArray) in
+//            print(insulinDataArray)
+//            SystemInfoModel.shared.insulinData = insulinDataArray
+//            SystemInfoModel.shared.insulinData?.forEach({ (dataModel) in
+//                let month = dataModel.date.getMonthInterval()
+//                if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
+//                    if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
+//                        self.insulinSectionDataArray[selectedIndex].1.append(dataModel)
+//                    }
+//                } else {
+//                    self.insulinSectionDataArray.append((month, [dataModel]))
+//                }
+//            })
+//            self.SessionHistoryTV.reloadData()
+//            CommonFunctions.hideActivityLoader()
+//        } failure: { (error) -> (Void) in
+//            CommonFunctions.showToastWithMessage(error.localizedDescription)
+//            CommonFunctions.hideActivityLoader()
+//        }
+        FirestoreController.getFirebaseCGMData { (cgmDataArray) in
+            print(cgmDataArray)
+            SystemInfoModel.shared.cgmData = cgmDataArray
+            SystemInfoModel.shared.cgmData?.forEach({ (dataModel) in
                 let month = dataModel.date.getMonthInterval()
                 if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
                     if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
@@ -128,7 +147,7 @@ extension SessionHistoryVC: SessionFilterVCDelegate{
     func filterApplied(startDate: Date?, endDate: Date?) {
         self.startdate = startDate!
         self.enddate = endDate!
-        let output = SystemInfoModel.shared.insulinData?.filter { (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) >= self.startdate! && (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) <= self.enddate! }
+        let output = SystemInfoModel.shared.cgmData?.filter { (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) >= self.startdate! && (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) <= self.enddate! }
         self.insulinSectionDataArray = []
         output?.forEach({ (dataModel) in
             let month = dataModel.date.getMonthInterval()
@@ -146,7 +165,7 @@ extension SessionHistoryVC: SessionFilterVCDelegate{
     func resetFilter() {
         self.startdate = nil
         self.enddate = nil
-        SystemInfoModel.shared.insulinData?.forEach({ (dataModel) in
+        SystemInfoModel.shared.cgmData?.forEach({ (dataModel) in
             let month = dataModel.date.getMonthInterval()
             if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
                 if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){

@@ -829,7 +829,7 @@ class FirestoreController:NSObject{
     }
     
     
-    static func delete(batchSize: Int = 100) {
+    static func delete(batchSize: Int = 288,success: @escaping ()-> ()) {
         let userId = Auth.auth().currentUser?.uid ?? ""
         // Limit query to avoid out-of-memory errors on large collections.
         // When deleting a collection guaranteed to fit in memory, batching can be avoided entirely.
@@ -842,7 +842,8 @@ class FirestoreController:NSObject{
             docset?.documents.forEach { batch.deleteDocument($0.reference) }
             
             batch.commit {_ in
-                self.delete(batchSize: batchSize)
+                success()
+//                self.delete(batchSize: batchSize)
             }
         }
     }

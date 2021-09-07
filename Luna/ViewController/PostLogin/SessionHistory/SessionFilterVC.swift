@@ -63,21 +63,12 @@ class SessionFilterVC: UIViewController {
     @IBAction func resetBtnAction(_ sender: UIButton) {
         startlTF.text = ""
         endTF.text = ""
-        self.delegate?.resetFilter()
     }
     
     @IBAction func proceedBtnAction(_ sender: UIButton) {
-        if startlTF.text == endTF.text {
-            CommonFunctions.showToastWithMessage("End date and Start date can't be same.")
-            return
-        }
-        
-        if startlTF.text == ""{
-            CommonFunctions.showToastWithMessage("Please select Start Date.")
-            return
-        }
-        else if endTF.text == ""{
-            CommonFunctions.showToastWithMessage("Please select End Date.")
+        if startlTF.text == "" && endTF.text == ""{
+            self.delegate?.resetFilter()
+            self.pop()
             return
         }
         self.delegate?.filterApplied(startDate: StartTimePicker.date, endDate: EndTimePicker.date)

@@ -23,8 +23,16 @@ class SessionDescriptionVC: UIViewController {
     // MARK: - Variables
     //==========================
     var sections = ["Glucose Graph","List View"]
-    var insulinDataModel : InsulinDataModel?
+    var insulinDataModel : ShareGlucoseData?
     var titleValue: String = ""
+    
+    var cgmDataArray : [ShareGlucoseData] = []
+    var cgmData : [ShareGlucoseData] = []{
+        didSet{
+            self.cgmDataArray = cgmData
+            self.mainTaeView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +42,14 @@ class SessionDescriptionVC: UIViewController {
         titleLbl.text = titleValue
         setupTableView()
         setupProgressBar()
+        if let selectedDate = insulinDataModel?.date{
+            let selectedLastDate = Calendar.current.date(byAdding: .minute, value: 5, to: (NSDate(timeIntervalSince1970: TimeInterval(selectedDate)) as Date))
+            let output = SystemInfoModel.shared.cgmData?.filter { (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) >= (NSDate(timeIntervalSince1970: TimeInterval(selectedDate)) as Date) && (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) <= selectedLastDate! }
+            cgmData = output ?? []
+            insulinQty.text = "7 units"
+            lowestGlucoseLbl.text = "\(cgmData.first?.sgv ?? 0)" + " mg/dl"
+            highestGlucoseLbl.text = "\(cgmData.last?.sgv ?? 0)" + " mg/dl"
+        }
     }
     
     @IBAction func backBtnTapped(_ sender: UIButton) {
@@ -70,11 +86,11 @@ class SessionDescriptionVC: UIViewController {
         progress.glowAmount = 0.9
         progress.set(colors: #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         progress.trackColor = #colorLiteral(red: 0.9137254902, green: 0.9137254902, blue: 0.9176470588, alpha: 1)
-        progress.progress = 0.7
-        progress.animate(fromAngle:  -90, toAngle: -90, duration: 2.0) { (success) in
-            print(success)
-            self.progress.pauseAnimation()
-        }
+        progress.progress = 0
+//        progress.animate(fromAngle:  -90, toAngle: -90, duration: 2.0) { (success) in
+//            print(success)
+//            self.progress.pauseAnimation()
+//        }
     }
     
     private func setupTableView(){
@@ -89,14 +105,14 @@ class SessionDescriptionVC: UIViewController {
 
 extension SessionDescriptionVC : UITableViewDelegate,UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return 1
         default:
-            return 5
+            return 0
         }
         
     }
@@ -105,6 +121,7 @@ extension SessionDescriptionVC : UITableViewDelegate,UITableViewDataSource{
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueCell(with: BottomSheetChartCell.self)
+            cell.cgmData = self.cgmDataArray
             return cell
         default:
             let cell = tableView.dequeueCell(with: BottomSheetBottomCell.self)

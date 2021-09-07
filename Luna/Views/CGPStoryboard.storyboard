@@ -1575,8 +1575,8 @@ Luna devices</string>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="nlv-ag-Wy2">
                                                     <rect key="frame" x="83.5" y="156" width="48.5" height="38.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="70%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhJ-PB-M7X">
-                                                            <rect key="frame" x="5" y="0.0" width="38" height="21.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhJ-PB-M7X">
+                                                            <rect key="frame" x="2.5" y="0.0" width="43.5" height="21.5"/>
                                                             <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -1714,7 +1714,7 @@ Luna devices</string>
                         <outlet property="insulinQty" destination="Hxt-Mg-nmH" id="G7x-Uz-aq1"/>
                         <outlet property="lowestGlucoseLbl" destination="yai-eT-aoc" id="4h1-G5-iZy"/>
                         <outlet property="mainTaeView" destination="ei7-5w-O73" id="JZY-4p-8H2"/>
-                        <outlet property="progress" destination="kks-vg-SYe" id="16L-Y9-mwI"/>
+                        <outlet property="progress" destination="kks-vg-SYe" id="fI6-1L-0Vt"/>
                         <outlet property="titleLbl" destination="4u6-yT-gjs" id="NR0-yx-Db0"/>
                         <outlet property="topNavView" destination="XNF-US-wqr" id="vjr-mk-37f"/>
                     </connections>
