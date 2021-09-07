@@ -11,8 +11,9 @@ class SessionHistoryVC: UIViewController {
     
     @IBOutlet weak var SessionHistoryTV: UITableView!
     
-    var sectionHeader = ["July","June"]
     var insulinSectionDataArray : [(Int,[InsulinDataModel])] = []
+    var startdate: Date?
+    var enddate: Date?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,9 @@ class SessionHistoryVC: UIViewController {
     //===========================
     @IBAction func filterBtnTapped(_ sender: AppButton) {
         let vc = SessionFilterVC.instantiate(fromAppStoryboard: .CGPStoryboard)
+        vc.delegate = self
+        vc.startdate = startdate
+        vc.enddate = enddate
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -45,7 +49,6 @@ extension SessionHistoryVC {
         }
         CommonFunctions.showActivityLoader()
         self.getInsulinData()
-        SessionHistoryTV.isHidden = false
         SessionHistoryTV.register(UINib(nibName: "SessionHistoryTableViewCell", bundle: nil), forCellReuseIdentifier: "SessionHistoryTableViewCell")
         SessionHistoryTV.delegate = self
         SessionHistoryTV.dataSource = self
@@ -111,9 +114,48 @@ extension SessionHistoryVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = SessionDescriptionVC.instantiate(fromAppStoryboard: .CGPStoryboard)
-        navigationController?.pushViewController(vc, animated: true)
+        if  let cell = tableView.cellForRow(at: indexPath) as? SessionHistoryTableViewCell {
+            let vc = SessionDescriptionVC.instantiate(fromAppStoryboard: .CGPStoryboard)
+            vc.titleValue = cell.dateLbl.text ?? ""
+            vc.insulinDataModel = self.insulinSectionDataArray[indexPath.section].1[indexPath.row]
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+}
+
+
+extension SessionHistoryVC: SessionFilterVCDelegate{
+    func filterApplied(startDate: Date?, endDate: Date?) {
+        self.startdate = startDate!
+        self.enddate = endDate!
+        let output = SystemInfoModel.shared.insulinData?.filter { (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) >= self.startdate! && (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) <= self.enddate! }
+        self.insulinSectionDataArray = []
+        output?.forEach({ (dataModel) in
+            let month = dataModel.date.getMonthInterval()
+            if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
+                if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
+                    self.insulinSectionDataArray[selectedIndex].1.append(dataModel)
+                }
+            } else {
+                self.insulinSectionDataArray.append((month, [dataModel]))
+            }
+        })
+        self.SessionHistoryTV.reloadData()
     }
     
-    
+    func resetFilter() {
+        self.startdate = nil
+        self.enddate = nil
+        SystemInfoModel.shared.insulinData?.forEach({ (dataModel) in
+            let month = dataModel.date.getMonthInterval()
+            if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
+                if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
+                    self.insulinSectionDataArray[selectedIndex].1.append(dataModel)
+                }
+            } else {
+                self.insulinSectionDataArray.append((month, [dataModel]))
+            }
+        })
+        self.SessionHistoryTV.reloadData()
+    }
 }

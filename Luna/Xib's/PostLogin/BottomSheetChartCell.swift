@@ -269,11 +269,18 @@ public class XAxisCustomRenderer: XAxisRenderer {
                     anchor: anchor,
                     angleRadians: labelRotationAngleRadians)
                 
-                let indexData = cgmData[Int(i)]
-                let cgmDate = String(indexData.date)
-                print(indexData.date)
-               
+//                let indexData = cgmData[Int(i)]
+//                let cgmDate = String(indexData.date)
                 var icon: CGImage?
+                SystemInfoModel.shared.insulinData?.forEach({ (model) in
+                    let labelData = model.date.getDateTimeFromTimeInterval()
+                    if labelData == label {
+                        let rawIcon = #imageLiteral(resourceName: "lineOne")
+                        icon = rawIcon.cgImage!
+                    }
+                })
+               
+             
 //                if label == "08 am" || label == "01 pm"{
 //                    let rawIcon = #imageLiteral(resourceName: "lineOne")
 //                    icon = rawIcon.cgImage!
@@ -284,15 +291,15 @@ public class XAxisCustomRenderer: XAxisRenderer {
 //                    let rawIcon = #imageLiteral(resourceName: "lineFour")
 //                    icon = rawIcon.cgImage!
 //                }
-//                if BleManager.sharedInstance.insulinData.contains(["0.5",cgmDate]){
+//                if SystemInfoModel.shared.insulinData.contains(["0.5",cgmDate]){
 //                    let rawIcon = #imageLiteral(resourceName: "lineOne")
 //                    icon = rawIcon.cgImage!
 //                }else {
 //                    let rawIcon:UIImage? = nil
 //                    icon = rawIcon?.cgImage
 //                }
-                let rawIcon = #imageLiteral(resourceName: "lineOne")
-                icon = rawIcon.cgImage!
+//                let rawIcon = #imageLiteral(resourceName: "lineOne")
+//                icon = rawIcon.cgImage!
                 if let myImage = icon{
                     context.draw(myImage, in: CGRect(x: position.x - 10 , y: position.y - 30, width: CGFloat(15), height: CGFloat(30)))
                 }

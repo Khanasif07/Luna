@@ -49,18 +49,7 @@ extension Double {
         //Convert to Date
         //let date = NSDate(timeIntervalSince1970: self / 1000.0)
         let date = NSDate(timeIntervalSince1970: TimeInterval(self))
-        //Date formatting
-        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "dd, MMMM yyyy HH:mm:a"
-//        dateFormatter.dateFormat = "hh a"
-        dateFormatter.dateFormat = dateFormat
-        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
-        //dateFormatter.timeZone = TimeZone.current
-        let dateString = dateFormatter.string(from: date as Date)
-        print("formatted date is =  \(dateString)")
         return (Calendar.current as NSCalendar).components(.month, from: date as Date).month!
-
-       
     }
 }
 

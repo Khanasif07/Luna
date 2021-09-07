@@ -12,6 +12,7 @@ class SessionDescriptionVC: UIViewController {
     
     // MARK: - IBOutlets
     //===========================
+    @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var lowestGlucoseLbl: UILabel!
     @IBOutlet weak var highestGlucoseLbl: UILabel!
     @IBOutlet weak var insulinQty: UILabel!
@@ -22,12 +23,15 @@ class SessionDescriptionVC: UIViewController {
     // MARK: - Variables
     //==========================
     var sections = ["Glucose Graph","List View"]
+    var insulinDataModel : InsulinDataModel?
+    var titleValue: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
+        titleLbl.text = titleValue
         setupTableView()
         setupProgressBar()
     }

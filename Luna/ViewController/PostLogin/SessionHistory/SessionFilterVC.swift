@@ -6,6 +6,10 @@
 //
 
 import UIKit
+protocol SessionFilterVCDelegate: class {
+    func filterApplied(startDate: Date?,endDate: Date?)
+    func resetFilter()
+}
 
 class SessionFilterVC: UIViewController {
     
@@ -16,7 +20,8 @@ class SessionFilterVC: UIViewController {
     @IBOutlet weak var proceedBtn: AppButton!
     @IBOutlet weak var ResetBtn: UIButton!
     
-    
+    var startdate: Date?
+    var enddate: Date?
     private lazy var StartTimePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.backgroundColor = .white
@@ -33,6 +38,7 @@ class SessionFilterVC: UIViewController {
     
     private lazy var EndTimePicker: UIDatePicker = {
         let picker = UIDatePicker()
+        picker.minimumDate = Calendar.current.date(byAdding: .year, value: -100, to: StartTimePicker.date)
         picker.backgroundColor = .white
         picker.datePickerMode = UIDatePicker.Mode.date
         if #available(iOS 13.4, *) {
@@ -43,6 +49,8 @@ class SessionFilterVC: UIViewController {
         }
         return picker
     }()
+    
+    weak var delegate: SessionFilterVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +63,7 @@ class SessionFilterVC: UIViewController {
     @IBAction func resetBtnAction(_ sender: UIButton) {
         startlTF.text = ""
         endTF.text = ""
+        self.delegate?.resetFilter()
     }
     
     @IBAction func proceedBtnAction(_ sender: UIButton) {
@@ -71,6 +80,8 @@ class SessionFilterVC: UIViewController {
             CommonFunctions.showToastWithMessage("Please select End Date.")
             return
         }
+        self.delegate?.filterApplied(startDate: StartTimePicker.date, endDate: EndTimePicker.date)
+        self.pop()
     }
     
     @IBAction func backBtnTapped(_ sender: UIButton) {
@@ -166,6 +177,16 @@ extension SessionFilterVC {
         toolBar3.isUserInteractionEnabled = true
         endTF.inputView = EndTimePicker
         endTF.inputAccessoryView = toolBar3
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+        //dateFormatter.timeZone = TimeZone.current
+        if let startDate = startdate {
+            startlTF.text = dateFormatter.string(from: startDate as Date)
+        }
+        if let endDate = enddate {
+            endTF.text = dateFormatter.string(from: endDate as Date)
+        }
     }
     
     // end time action

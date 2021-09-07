@@ -1378,20 +1378,6 @@ Luna devices</string>
                                             <constraint firstItem="heJ-43-3Du" firstAttribute="bottom" secondItem="ksv-sn-QvQ" secondAttribute="bottom" id="pZP-pC-4NY"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XaB-pv-muf" customClass="AppButton" customModule="Luna" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="797" width="374" height="44"/>
-                                        <color key="backgroundColor" red="0.52941176469999995" green="0.74509803919999995" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="jjw-9v-Xgz"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
-                                        <state key="normal" title="Apply">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="proceedBtnAction:" destination="6qS-ep-UAJ" eventType="touchUpInside" id="QZX-DZ-sMg"/>
-                                        </connections>
-                                    </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="30L-9A-Tlc">
                                         <rect key="frame" x="0.0" y="127" width="414" height="200"/>
                                         <subviews>
@@ -1473,6 +1459,20 @@ Luna devices</string>
                                             <constraint firstAttribute="height" constant="200" id="qUe-Ks-0P7"/>
                                         </constraints>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XaB-pv-muf" customClass="AppButton" customModule="Luna" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="797" width="374" height="44"/>
+                                        <color key="backgroundColor" red="0.52941176469999995" green="0.74509803919999995" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="jjw-9v-Xgz"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                        <state key="normal" title="Apply">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="proceedBtnAction:" destination="6qS-ep-UAJ" eventType="touchUpInside" id="L0E-gj-MdJ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -1715,6 +1715,7 @@ Luna devices</string>
                         <outlet property="lowestGlucoseLbl" destination="yai-eT-aoc" id="4h1-G5-iZy"/>
                         <outlet property="mainTaeView" destination="ei7-5w-O73" id="JZY-4p-8H2"/>
                         <outlet property="progress" destination="kks-vg-SYe" id="16L-Y9-mwI"/>
+                        <outlet property="titleLbl" destination="4u6-yT-gjs" id="NR0-yx-Db0"/>
                         <outlet property="topNavView" destination="XNF-US-wqr" id="vjr-mk-37f"/>
                     </connections>
                 </viewController>
