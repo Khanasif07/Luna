@@ -300,6 +300,7 @@ enum ApiKey {
     static var insulinUnit  : String {return "insulinUnit" }
     static var cgmType  : String {return "cgmType" }
     static var cgmData  : String {return "cgmData" }
+    static var insulinData  : String {return "insulinData" }
     static var cgmUnit  : String {return "cgmUnit" }
     static var sgv  : String {return "sgv" }
     static var direction  : String {return "direction" }

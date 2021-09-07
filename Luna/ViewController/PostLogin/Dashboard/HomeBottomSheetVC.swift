@@ -109,6 +109,7 @@ extension HomeBottomSheetVC {
     
     private func initialSetup() {
         setupTableView()
+        addObserver()
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(HomeBottomSheetVC.panGesture))
         view.addGestureRecognizer(gesture)
         setupSwipeGesture()
@@ -123,6 +124,18 @@ extension HomeBottomSheetVC {
         self.mainTableView.registerCell(with: BottomSheetInsulinCell.self)
         self.mainTableView.registerCell(with: BottomSheetBottomCell.self)
         setupfooterView()
+    }
+    
+    private func addObserver(){
+        NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
+    }
+    
+    @objc func bleDidUpdateValue(notification : NSNotification){
+        if let dict = notification.object as? NSDictionary {
+                print(dict)
+        }
+        print("BleDidUpdateValue")
+        self.mainTableView.reloadData()
     }
     
     private func setupfooterView(){
@@ -158,7 +171,7 @@ extension HomeBottomSheetVC : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 3:
-            return 20
+            return SystemInfoModel.shared.insulinData?.endIndex ?? 0
         default:
             return 1
         }
@@ -172,9 +185,15 @@ extension HomeBottomSheetVC : UITableViewDelegate,UITableViewDataSource {
             return cell
         case 2:
             let cell = tableView.dequeueCell(with: BottomSheetInsulinCell.self, indexPath: indexPath)
+            cell.insulinCountLbl.text = BleManager.sharedInstance.reservoirLevelData
             return cell
         case 3:
             let cell = tableView.dequeueCell(with: BottomSheetBottomCell.self, indexPath: indexPath)
+            cell.topLineDashView.isHidden = indexPath.row == 0
+            if let insulinData = SystemInfoModel.shared.insulinData {
+            cell.timeLbl.text = (Double(insulinData[indexPath.row].date) ).getDateTimeFromTimeInterval("h:mm a")
+            cell.unitLbl.text = (insulinData[indexPath.row].insulinData ?? "") + " Units"
+            }
             return cell
         default:
             let cell = tableView.dequeueCell(with: BottomSheetChartCell.self, indexPath: indexPath)

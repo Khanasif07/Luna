@@ -163,6 +163,29 @@ class FirestoreController:NSObject{
         }
     }
     
+    //MARK:- Get Insulin Data info
+    //=======================
+    static func getFirebaseInsulinData(success: @escaping (_ cgmModelArray: [InsulinDataModel]) -> Void,
+                                       failure:  @escaping FailureResponse){
+        if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
+            db.collection(ApiKey.userSystemInfo)
+                .document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.insulinData).getDocuments { (snapshot, error) in
+                    if let error = error {
+                        failure(error)
+                    } else{
+                        print("============================")
+                        var insulinModelArray = [InsulinDataModel]()
+                        guard let dicts = snapshot?.documents else { return }
+                        dicts.forEach { (queryDocumentSnapshot) in
+                            let cgmModel = InsulinDataModel(queryDocumentSnapshot.data())
+                            insulinModelArray.append(cgmModel)
+                        }
+                        success(insulinModelArray)
+                    }
+                }
+        }
+    }
+    
     //MARK:- Get info
     //=======================
     static func checkUserExistInSystemDatabase(success: @escaping () -> Void,
@@ -800,22 +823,30 @@ class FirestoreController:NSObject{
         
     }
     
-    static func deleteCGMDataNode(){
-//        deleteCollection(path) {
-            // Get a new write batch
-//            var batch = db.batch()
-//        let userId = Auth.auth().currentUser?.uid ?? ""
-//        db.collection(ApiKey.userSystemInfo).document(userId).collection(ApiKey.cgmData)
-//            .then(val => {
-//                val.map((val) => {
-//                    batch.delete(val)
-//                })
-//
-//                batch.commit()
-//            })
-//        }
+    static func createInsulinDataNode(insulinUnit: String,date: TimeInterval){
+        let userId = Auth.auth().currentUser?.uid ?? ""
+        db.collection(ApiKey.userSystemInfo).document(userId).collection(ApiKey.insulinData).document(String(date)).setData([ApiKey.insulinUnit: insulinUnit,ApiKey.date: date])
     }
-//
+    
+    
+    static func delete(batchSize: Int = 100) {
+        let userId = Auth.auth().currentUser?.uid ?? ""
+        // Limit query to avoid out-of-memory errors on large collections.
+        // When deleting a collection guaranteed to fit in memory, batching can be avoided entirely.
+        db.collection(ApiKey.userSystemInfo).document(userId).collection(ApiKey.cgmData).limit(to: batchSize).getDocuments { (docset, error) in
+            // An error occurred.
+            let docset = docset
+            
+//            let batch = collection.firestore.batch()
+            let batch = db.batch()
+            docset?.documents.forEach { batch.deleteDocument($0.reference) }
+            
+            batch.commit {_ in
+                self.delete(batchSize: batchSize)
+            }
+        }
+    }
+    
     static func showAlert( title : String = "", msg : String,_ completion : (()->())? = nil) {
         let alertViewController = UIAlertController(title: title, message: msg, preferredStyle: UIAlertController.Style.alert)
         let okAction = UIAlertAction(title:"ok", style: UIAlertAction.Style.default) { (action : UIAlertAction) -> Void in

@@ -12,5 +12,36 @@ import UIKit
 class SessionHistoryHeader: UITableViewHeaderFooterView {
     
     @IBOutlet weak var haedingLbl: UILabel!
+    
+    var month: Int = 0  {
+        didSet{
+            switch month {
+            case 1:
+                haedingLbl.text = "January"
+            case 2:
+                haedingLbl.text = "Feb"
+            case 3:
+                haedingLbl.text = "March"
+            case 4:
+                haedingLbl.text = "April"
+            case 5:
+                haedingLbl.text = "May"
+            case 6:
+                haedingLbl.text = "June"
+            case 7:
+                haedingLbl.text = "July"
+            case 8:
+                haedingLbl.text = "August"
+            case 9:
+                haedingLbl.text = "September"
+            case 10:
+                haedingLbl.text = "October"
+            case 11:
+                haedingLbl.text = "November"
+            default:
+                haedingLbl.text = "December"
+            }
+        }
+    }
 
 }

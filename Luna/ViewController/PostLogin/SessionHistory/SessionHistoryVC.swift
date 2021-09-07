@@ -12,6 +12,7 @@ class SessionHistoryVC: UIViewController {
     @IBOutlet weak var SessionHistoryTV: UITableView!
     
     var sectionHeader = ["July","June"]
+    var insulinSectionDataArray : [(Int,[InsulinDataModel])] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,13 +43,36 @@ extension SessionHistoryVC {
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
+        CommonFunctions.showActivityLoader()
+        self.getInsulinData()
         SessionHistoryTV.isHidden = false
         SessionHistoryTV.register(UINib(nibName: "SessionHistoryTableViewCell", bundle: nil), forCellReuseIdentifier: "SessionHistoryTableViewCell")
         SessionHistoryTV.delegate = self
         SessionHistoryTV.dataSource = self
-        SessionHistoryTV.reloadData()
-        // self.CGMTypesTV.registerCell(with: CGMTypeTableViewCell.self
     }
+    
+    private func getInsulinData(){
+        FirestoreController.getFirebaseInsulinData { (insulinDataArray) in
+            print(insulinDataArray)
+            SystemInfoModel.shared.insulinData = insulinDataArray
+            SystemInfoModel.shared.insulinData?.forEach({ (dataModel) in
+                let month = dataModel.date.getMonthInterval()
+                if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
+                    if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
+                        self.insulinSectionDataArray[selectedIndex].1.append(dataModel)
+                    }
+                } else {
+                    self.insulinSectionDataArray.append((month, [dataModel]))
+                }
+            })
+            self.SessionHistoryTV.reloadData()
+            CommonFunctions.hideActivityLoader()
+        } failure: { (error) -> (Void) in
+            CommonFunctions.showToastWithMessage(error.localizedDescription)
+            CommonFunctions.hideActivityLoader()
+        }
+    }
+    
     
 }
 
@@ -58,18 +82,17 @@ extension SessionHistoryVC {
 extension SessionHistoryVC : UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return self.insulinSectionDataArray.endIndex
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 4
+        return self.insulinSectionDataArray[section].1.endIndex
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell:SessionHistoryTableViewCell = SessionHistoryTV.dequeueReusableCell(withIdentifier: "SessionHistoryTableViewCell", for: indexPath) as! SessionHistoryTableViewCell
-        
+        cell.dateLbl.text  = self.insulinSectionDataArray[indexPath.section].1[indexPath.row].date.getDateTimeFromTimeInterval("MM/dd")
+        cell.unitLbl.text = "7 units delivered" + " | " + "0% in range"
         return cell
     }
     
@@ -78,19 +101,9 @@ extension SessionHistoryVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
         let sectionHeaderView = Bundle.main.loadNibNamed("SessionHistoryHeader", owner: self, options: nil)?.first as! SessionHistoryHeader
-        
-        if section == 0{
-            sectionHeaderView.haedingLbl.text = "July"
-            
-        }
-        else{
-            sectionHeaderView.haedingLbl.text = "June"
-        }
-        
+        sectionHeaderView.month =  self.insulinSectionDataArray[section].0
         return sectionHeaderView
-        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -98,10 +111,8 @@ extension SessionHistoryVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let vc = SessionDescriptionVC.instantiate(fromAppStoryboard: .CGPStoryboard)
         navigationController?.pushViewController(vc, animated: true)
-        
     }
     
     

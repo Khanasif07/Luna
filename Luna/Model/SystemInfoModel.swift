@@ -18,6 +18,7 @@ struct SystemInfoModel{
     var cgmUnit: Int
     var isFromSetting: Bool = false
     var cgmData : [ShareGlucoseData]?
+    var insulinData : [InsulinDataModel]?
     
     init() {
         self.init(JSON([:]))
