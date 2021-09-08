@@ -35,7 +35,6 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
             set1.drawFilledEnabled = true
             let data = LineChartData(dataSet: set1)
             chartView.maxVisibleCount = Int(10.0)
-            //            let marker = ChartMarker()
             let marker = BalloonMarker(color: #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1),
                                        font: .boldSystemFont(ofSize: 15.0),
                                        textColor: .white,

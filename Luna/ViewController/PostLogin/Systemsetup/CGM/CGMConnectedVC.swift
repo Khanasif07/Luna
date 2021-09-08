@@ -178,9 +178,9 @@ extension CGMConnectedVC {
                 speakBG(sgv: data[data.count - 1].sgv)
             }
         } else {
-            if data.count > 0 {
-                self.updateBadge(val: data[data.count - 1].sgv)
-            }
+//            if data.count > 0 {
+//                self.updateBadge(val: data[data.count - 1].sgv)
+//            }
             return
         }
         
@@ -430,7 +430,7 @@ extension CGMConnectedVC {
 //                snoozerDelta = "+" + bgUnits.toDisplayUnits(String(deltaBG))
 //                self.latestDeltaString = "+" + String(deltaBG)
 //            }
-            self.updateBadge(val: latestBG)
+           // self.updateBadge(val: latestBG)
             
             // Snoozer Display
 //            guard let snoozer = self.tabBarController!.viewControllers?[2] as? SnoozeViewController else { return }
