@@ -77,7 +77,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         xAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
         xAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
         xAxis.granularity = 1
-        xAxis.labelCount = 8
+       // xAxis.labelCount = 7
         xAxis.valueFormatter = XAxisNameFormater()
 
         let leftAxis = chartView.leftAxis
@@ -96,7 +96,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         chartView.legend.form = .none
         setDataCount(cgmData.endIndex, range: UInt32(cgmData.endIndex))
         chartView.moveViewToX(chartView.data?.yMax ?? 0.0 - 1)
-        chartView.zoom(scaleX: 12.5, scaleY: 0, x: 0, y: 0)
+        chartView.zoom(scaleX: 4.25, scaleY: 0, x: 0, y: 0)
         chartView.animate(yAxisDuration: 2.5)
     }
     
