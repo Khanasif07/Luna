@@ -83,11 +83,13 @@ class HomeVC: UIViewController {
     }
     
     @IBAction func manualBtnTapped(_ sender: UIButton) {
-        HealthKitManager.sharedInstance.write([InsulinModel(raw: 100, id: 1, date: Date())])
-        HealthKitManager.sharedInstance.read { (insulinModels) in
-            print(insulinModels)
-            print("Data Read successfully.")
-        }
+        AppUserDefaults.save(value: false, forKey: .homeCoachMarkShown)
+        self.loadCoachMark()
+//        HealthKitManager.sharedInstance.write([InsulinModel(raw: 100, id: 1, date: Date())])
+//        HealthKitManager.sharedInstance.read { (insulinModels) in
+//            print(insulinModels)
+//            print("Data Read successfully.")
+//        }
     }
     
     @IBAction func infoBtnTapped(_ sender: Any) {

@@ -72,8 +72,12 @@ extension AboutTermsPolicyVC {
         switch self.titleString {
         case "App Version":
             self.titleLbl.text = self.titleString
+            self.descLbl.isHidden = false
+            self.textLbl.isHidden = true
             self.descLbl.text = "Version " + UIApplication.version
         default:
+            self.descLbl.isHidden = true
+            self.textLbl.isHidden = false
             self.titleLbl.text = self.titleString
         }
         webView.isHidden = true
