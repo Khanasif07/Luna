@@ -294,7 +294,7 @@ extension BleManager: CBCentralManagerDelegate {
         myperipheral = peripheral
         myperipheral?.delegate = self
         centralManager.stopScan()
-        centralManager.connect(myperipheral!, options: nil)
+        centralManager.connect(myperipheral!, options: [CBConnectPeripheralOptionNotifyOnConnectionKey:true, CBConnectPeripheralOptionNotifyOnDisconnectionKey: true])
     }
     
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -327,3 +327,4 @@ extension BleManager: CBCentralManagerDelegate {
         systemStatusData = ""
     }
 }
+
