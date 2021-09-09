@@ -74,7 +74,7 @@ extension AboutTermsPolicyVC {
             self.titleLbl.text = self.titleString
             self.descLbl.isHidden = false
             self.textLbl.isHidden = true
-            self.descLbl.text = "Version " + UIApplication.version
+            self.descLbl.text = "Luna App Version " + UIApplication.version
         default:
             self.descLbl.isHidden = true
             self.textLbl.isHidden = false

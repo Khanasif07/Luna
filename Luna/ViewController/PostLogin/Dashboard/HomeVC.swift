@@ -158,6 +158,7 @@ extension HomeVC {
         NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .BLEOnOffState, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bLEDidDisConnected), name: .BLEDidDisConnectSuccessfully, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(cgmDataReceivedSuccessfully), name: .CgmDataReceivedSuccessfully, object: nil)
     }
     
     @objc func bleDidUpdateValue(notification : NSNotification){
@@ -165,6 +166,11 @@ extension HomeVC {
                 print(dict)
         }
         print("BleDidUpdateValue")
+        self.setupSystemInfo()
+    }
+    
+    @objc func cgmDataReceivedSuccessfully(notification : NSNotification){
+        self.bottomSheetVC.cgmData = SystemInfoModel.shared.cgmData ?? []
         self.setupSystemInfo()
     }
     
