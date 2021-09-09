@@ -198,6 +198,7 @@ extension HomeBottomSheetVC : UITableViewDelegate,UITableViewDataSource {
         default:
             let cell = tableView.dequeueCell(with: BottomSheetChartCell.self, indexPath: indexPath)
             cell.cgmData = cgmDataArray
+            print(cgmData.endIndex)
             return cell
         }
     }

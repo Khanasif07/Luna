@@ -34,7 +34,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
             set1.fill = Fill(linearGradient: gradient, angle: 90.0)
             set1.drawFilledEnabled = true
             let data = LineChartData(dataSet: set1)
-            chartView.maxVisibleCount = Int(10.0)
+            //chartView.maxVisibleCount = Int(10.0)
             let marker = BalloonMarker(color: #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1),
                                        font: .boldSystemFont(ofSize: 15.0),
                                        textColor: .white,
@@ -76,7 +76,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         xAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
         xAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
         xAxis.granularity = 1
-       // xAxis.labelCount = 7
+        xAxis.labelCount = 7
         xAxis.valueFormatter = XAxisNameFormater()
 
         let leftAxis = chartView.leftAxis
@@ -95,7 +95,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         chartView.legend.form = .none
         setDataCount(cgmData.endIndex, range: UInt32(cgmData.endIndex))
         chartView.moveViewToX(chartView.data?.yMax ?? 0.0 - 1)
-        chartView.zoom(scaleX: 4.25, scaleY: 0, x: 0, y: 0)
+        chartView.zoom(scaleX: 3.5, scaleY: 0, x: 0, y: 0)
         chartView.animate(yAxisDuration: 2.5)
     }
     
@@ -116,7 +116,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         set1.drawValuesEnabled = true
 
         let data = LineChartData(dataSet: set1)
-        chartView.maxVisibleCount = Int(10.0)
+        chartView.maxVisibleCount = 7
         chartView.data = data
     }
 
@@ -216,11 +216,6 @@ public class XAxisCustomRenderer: XAxisRenderer {
                         position.x += width / 2.0
                     }
                 }
-                
-//                let rawIcon: UIImage = #imageLiteral(resourceName: "reservoir7Bars")
-//                let icon: CGImage = rawIcon.cgImage!
-                
-                
                 //Draw the time labels
                 drawLabel(
                     context: context,
@@ -242,18 +237,6 @@ public class XAxisCustomRenderer: XAxisRenderer {
                         icon = rawIcon.cgImage!
                     }
                 })
-               
-             
-//                if label == "08 am" || label == "01 pm"{
-//                    let rawIcon = #imageLiteral(resourceName: "lineOne")
-//                    icon = rawIcon.cgImage!
-//                }else if label == "03 pm"{
-//                    let rawIcon = #imageLiteral(resourceName: "lineTwo")
-//                    icon = rawIcon.cgImage!
-//                }else if label == "11 am"{
-//                    let rawIcon = #imageLiteral(resourceName: "lineFour")
-//                    icon = rawIcon.cgImage!
-//                }
                 if let myImage = icon{
                     context.draw(myImage, in: CGRect(x: position.x - 10 , y: position.y - 30, width: CGFloat(15), height: CGFloat(30)))
                 }
