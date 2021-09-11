@@ -57,6 +57,7 @@ class SystemSetupStep1VC: UIViewController {
         CommonFunctions.showActivityLoader()
         FirestoreController.updateUserSystemSetupStatus(isSystemSetupCompleted: true) {
             print("Successfully")
+            SystemInfoModel.shared = SystemInfoModel()
             CommonFunctions.hideActivityLoader()
             AppUserDefaults.save(value: true, forKey: .isSystemSetupCompleted)
             AppRouter.gotoHomeVC()
@@ -201,9 +202,11 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
             guard let self = self else { return }
             switch indexPath.row {
             case 0:
+                SystemInfoModel.shared.isFromSetting = false
                 let vc = PairLunaVC.instantiate(fromAppStoryboard: .CGPStoryboard)
                 self.navigationController?.pushViewController(vc, animated: true)
             case 1:
+                SystemInfoModel.shared.isFromSetting = false
                 if cell.startBtn.titleLabel?.text == "Start"{
                     SystemInfoModel.shared.cgmUnit = 0
                     SystemInfoModel.shared.cgmType = ""
@@ -211,6 +214,7 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
                 let vc = CGMSelectorVC.instantiate(fromAppStoryboard: .CGPStoryboard)
                 self.navigationController?.pushViewController(vc, animated: true)
             default:
+                SystemInfoModel.shared.isFromSetting = false
                 if cell.startBtn.titleLabel?.text == "Start"{
                     SystemInfoModel.shared.insulinUnit = 0
                     SystemInfoModel.shared.longInsulinSubType = ""

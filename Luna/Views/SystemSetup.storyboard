@@ -48,7 +48,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="0aU-rH-BD3">
-                                                        <rect key="frame" x="230" y="5" width="164" height="40"/>
+                                                        <rect key="frame" x="282" y="5" width="112" height="40"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HIC-nz-rGN">
                                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="40"/>
@@ -58,8 +58,8 @@
                                                                     <constraint firstAttribute="height" constant="40" id="iZ0-DY-Afa"/>
                                                                 </constraints>
                                                             </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Br-o2-ip0">
-                                                                <rect key="frame" x="72" y="0.0" width="40" height="40"/>
+                                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Br-o2-ip0">
+                                                                <rect key="frame" x="66" y="0.0" width="40" height="40"/>
                                                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="5Br-o2-ip0" secondAttribute="height" id="6t1-q7-wD5"/>
@@ -67,7 +67,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z9T-d0-wAt">
-                                                                <rect key="frame" x="124" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="72" y="0.0" width="40" height="40"/>
                                                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="z9T-d0-wAt" secondAttribute="height" id="RgW-US-kJL"/>
@@ -77,7 +77,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H5d-kf-5WF">
-                                                        <rect key="frame" x="302" y="5" width="40" height="40"/>
+                                                        <rect key="frame" x="348" y="5" width="40" height="40"/>
                                                         <state key="normal" image="infoIcon"/>
                                                         <connections>
                                                             <action selector="infoBtnTapped:" destination="TZO-Gp-Vjs" eventType="touchUpInside" id="ukB-hO-MXF"/>
@@ -91,7 +91,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yq2-o6-wul">
-                                                        <rect key="frame" x="230" y="5" width="60" height="40"/>
+                                                        <rect key="frame" x="282" y="5" width="60" height="40"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
                                                         <state key="normal" title="Skip"/>
                                                         <connections>

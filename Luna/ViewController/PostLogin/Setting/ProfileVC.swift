@@ -239,9 +239,9 @@ extension ProfileVC : UITextFieldDelegate{
             currentString.replacingCharacters(in: range, with: string) as NSString
         switch cell?.titleLbl.text {
         case sections[0].0:
-            return (string.checkIfValidCharaters(.email) || string.isEmpty) && newString.length <= 50
+            return (string.checkIfValidCharaters(.nickName) || string.isEmpty) && newString.length <= 25
         case sections[1].0:
-            return (string.checkIfValidCharaters(.email) || string.isEmpty) && newString.length <= 25
+            return (string.checkIfValidCharaters(.nickName) || string.isEmpty) && newString.length <= 25
         case sections[2].0:
             switch txt.count {
             case 2,5:

@@ -367,8 +367,10 @@ extension CGMConnectedVC {
             let entries = self.bgData
             if entries.count < 1 { return }
             SystemInfoModel.shared.cgmData = self.bgData
-            for cgmModel in entries {
-            FirestoreController.createCGMDataNode(direction: cgmModel.direction ?? "", sgv: cgmModel.sgv, date: cgmModel.date)
+            if SystemInfoModel.shared.isFromSetting {
+                for cgmModel in entries {
+                    FirestoreController.createCGMDataNode(direction: cgmModel.direction ?? "", sgv: cgmModel.sgv, date: cgmModel.date)
+                }
             }
             NotificationCenter.default.post(name: Notification.Name.CgmDataReceivedSuccessfully, object: [:])
 //            self.updateBGGraph()

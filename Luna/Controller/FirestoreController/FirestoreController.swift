@@ -26,6 +26,7 @@ class FirestoreController:NSObject{
     
     static let currentUser = Auth.auth().currentUser
     static let db = Firestore.firestore()
+    static let batch = db.batch()
     static var ownUnreadCount = 0
     static var otherUnreadCount = 0
     
@@ -140,13 +141,29 @@ class FirestoreController:NSObject{
         }
     }
     
+    //MARK:- Check CGM  info Exist or Not
+    //=======================
+    static func checkCGMDataExistInDatabase(success: @escaping () -> Void,
+                                         failure:  @escaping () -> Void){
+        db.collection(ApiKey.userSystemInfo).document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.cgmData).getDocuments { (snapshot, error ) in
+            guard let dicts = snapshot?.documents else { return }
+            if  !(dicts.isEmpty) {
+                print("User Document exist")
+                success()
+            } else {
+                failure()
+                print("User Document does not exist")
+            }
+        }
+    }
+    
     //MARK:- Get CGM Data info
     //=======================
     static func getFirebaseCGMData(success: @escaping (_ cgmModelArray: [ShareGlucoseData]) -> Void,
                                    failure:  @escaping FailureResponse){
         if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
             db.collection(ApiKey.userSystemInfo)
-                .document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.cgmData).getDocuments { (snapshot, error) in
+                .document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.cgmData).limit(to: 288).getDocuments { (snapshot, error) in
                     if let error = error {
                         failure(error)
                     } else{

@@ -41,7 +41,7 @@
                                 <color key="textColor" red="0.45053231719999998" green="0.46237057450000002" blue="0.48727971320000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lfA-Y4-sqM">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lfA-Y4-sqM">
                                 <rect key="frame" x="321" y="26" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="lfA-Y4-sqM" secondAttribute="height" id="Xn7-MW-qwM"/>

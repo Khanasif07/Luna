@@ -19,7 +19,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     
     // MARK: - Variables
     //===========================
-    var cgmData : [ShareGlucoseData] = []{
+    var cgmData : [ShareGlucoseData] = SystemInfoModel.shared.cgmData ?? []{
         didSet{
             let values = cgmData.map { (data) -> ChartDataEntry in
                 return ChartDataEntry(x: Double(data.date), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
@@ -34,7 +34,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
             set1.fill = Fill(linearGradient: gradient, angle: 90.0)
             set1.drawFilledEnabled = true
             let data = LineChartData(dataSet: set1)
-            //chartView.maxVisibleCount = Int(10.0)
+            chartView.maxVisibleCount = 7
             let marker = BalloonMarker(color: #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1),
                                        font: .boldSystemFont(ofSize: 15.0),
                                        textColor: .white,
@@ -42,7 +42,10 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
             marker.chartView = chartView
             marker.minimumSize = CGSize(width: 50.0, height: 30.0)
             chartView.marker = marker
-            
+            //
+//            let scaleCount = CGFloat(cgmData.endIndex / 288) * 3.5
+//            chartView.zoom(scaleX: scaleCount, scaleY: 0, x: 0, y: 0)
+            //
             let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.chartView.viewPortHandler,
                                                         xAxis: chartView.xAxis,
                                                         transformer: self.chartView.getTransformer(forAxis: .left),

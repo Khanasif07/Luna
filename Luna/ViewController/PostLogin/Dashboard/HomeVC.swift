@@ -115,31 +115,10 @@ extension HomeVC {
             self.setupSystemInfo()
         }
         CommonFunctions.showActivityLoader()
-        FirestoreController.getFirebaseUserData {
-            CommonFunctions.hideActivityLoader()
-        } failure: { (error) -> (Void) in
-            CommonFunctions.hideActivityLoader()
-            CommonFunctions.showToastWithMessage(error.localizedDescription)
-        }
-        FirestoreController.getUserSystemInfoData {
-            print("Successfully")
-        } failure: { (error) -> (Void) in
-            CommonFunctions.showToastWithMessage(error.localizedDescription)
-        }
-        FirestoreController.getFirebaseCGMData { (cgmDataArray) in
-            print(cgmDataArray)
-            SystemInfoModel.shared.cgmData = cgmDataArray
-            self.bottomSheetVC.cgmData = cgmDataArray
-        } failure: { (error) -> (Void) in
-            print(error.localizedDescription)
-        }
-        FirestoreController.getFirebaseInsulinData { (insulinDataArray) in
-            print(insulinDataArray)
-            SystemInfoModel.shared.insulinData = insulinDataArray
-            self.bottomSheetVC.mainTableView.reloadData()
-        } failure: { (error) -> (Void) in
-            print(error.localizedDescription)
-        }
+        self.getUserInfoFromFirestore()
+        self.getUserSystemFromFirestore()
+        self.getCGMDataFromFirestore()
+        self.getInsulinFromFirestore()
     }
     
     private func setupHealthkit(){
@@ -159,6 +138,53 @@ extension HomeVC {
         NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .BLEOnOffState, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bLEDidDisConnected), name: .BLEDidDisConnectSuccessfully, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(cgmDataReceivedSuccessfully), name: .CgmDataReceivedSuccessfully, object: nil)
+    }
+    
+    private func getCGMDataFromFirestore(){
+        FirestoreController.checkCGMDataExistInDatabase {
+            FirestoreController.getFirebaseCGMData { (cgmDataArray) in
+                print(cgmDataArray)
+                SystemInfoModel.shared.cgmData = cgmDataArray
+                self.bottomSheetVC.cgmData = cgmDataArray
+            } failure: { (error) -> (Void) in
+                print(error.localizedDescription)
+            }
+        } failure: {
+            print("CGM DATA NOT Available")
+            if let cgmData = SystemInfoModel.shared.cgmData {
+                self.bottomSheetVC.cgmData = cgmData
+                for cgmModel in cgmData {
+                    FirestoreController.createCGMDataNode(direction: cgmModel.direction ?? "", sgv: cgmModel.sgv, date: cgmModel.date)
+                }
+            }
+        }
+    }
+    
+    private func getUserSystemFromFirestore(){
+        FirestoreController.getUserSystemInfoData {
+            print("Successfully")
+        } failure: { (error) -> (Void) in
+            CommonFunctions.showToastWithMessage(error.localizedDescription)
+        }
+    }
+    
+    private func getUserInfoFromFirestore(){
+        FirestoreController.getFirebaseUserData {
+            CommonFunctions.hideActivityLoader()
+        } failure: { (error) -> (Void) in
+            CommonFunctions.hideActivityLoader()
+            CommonFunctions.showToastWithMessage(error.localizedDescription)
+        }
+    }
+    
+    private func getInsulinFromFirestore(){
+        FirestoreController.getFirebaseInsulinData { (insulinDataArray) in
+            print(insulinDataArray)
+            SystemInfoModel.shared.insulinData = insulinDataArray
+            self.bottomSheetVC.mainTableView.reloadData()
+        } failure: { (error) -> (Void) in
+            print(error.localizedDescription)
+        }
     }
     
     @objc func bleDidUpdateValue(notification : NSNotification){
@@ -214,15 +240,30 @@ extension HomeVC {
         let data = BleManager.sharedInstance.systemStatusData
         
         self.batteryImgView.image = DeviceStatus.getBatteryImage(value:batteryData).1
-        self.batteryStatusLbl.text = DeviceStatus.getBatteryImage(value:batteryData).0
+        if DeviceStatus.getBatteryImage(value:batteryData).0.isEmpty{
+            self.batteryStatusLbl.alpha = 0
+        }else {
+            self.batteryStatusLbl.alpha = 100
+            self.batteryStatusLbl.text = DeviceStatus.getBatteryImage(value:batteryData).0
+        }
         self.batteryTitleLbl.text = DeviceStatus.Battery.titleString
         
         self.reservoirImgView.image = DeviceStatus.getReservoirImage(value:reservoirData).1
-        self.reservoirStatusLbl.text = DeviceStatus.getReservoirImage(value:reservoirData).0
+        if DeviceStatus.getReservoirImage(value:reservoirData).0.isEmpty{
+            self.reservoirStatusLbl.alpha = 0
+        }else {
+            self.reservoirStatusLbl.alpha = 100
+            self.reservoirStatusLbl.text = DeviceStatus.getReservoirImage(value:reservoirData).0
+        }
         self.reservoirTitleLbl.text = DeviceStatus.ReservoirLevel.titleString
         
         self.systemImgView.image = DeviceStatus.getSystemImage(value:data).1
-        self.systemStatusLbl.text = DeviceStatus.getSystemImage(value:data).0
+        if DeviceStatus.getSystemImage(value:reservoirData).0.isEmpty{
+            self.systemStatusLbl.alpha = 0
+        }else {
+            self.systemStatusLbl.alpha = 100
+            self.systemStatusLbl.text = DeviceStatus.getSystemImage(value:reservoirData).0
+        }
         self.systemTitleLbl.text = DeviceStatus.System.titleString
     }
 }

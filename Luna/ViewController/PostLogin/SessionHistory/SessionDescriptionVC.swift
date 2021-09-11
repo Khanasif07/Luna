@@ -29,7 +29,9 @@ class SessionDescriptionVC: UIViewController {
     var cgmDataArray : [ShareGlucoseData] = []
     var cgmData : [ShareGlucoseData] = []{
         didSet{
-            self.cgmDataArray = cgmData
+            self.cgmDataArray = cgmData.sorted(by: { (model1, model2) -> Bool in
+                return model1.date < model2.date
+            })
             self.mainTaeView.reloadData()
         }
     }
@@ -47,8 +49,11 @@ class SessionDescriptionVC: UIViewController {
             let output = SystemInfoModel.shared.cgmData?.filter { (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) >= (NSDate(timeIntervalSince1970: TimeInterval(selectedDate)) as Date) && (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) <= selectedLastDate! }
             cgmData = output ?? []
             insulinQty.text = "7 units"
-            lowestGlucoseLbl.text = "\(cgmData.first?.sgv ?? 0)" + " mg/dl"
-            highestGlucoseLbl.text = "\(cgmData.last?.sgv ?? 0)" + " mg/dl"
+            let sortedCgmData = cgmData.sorted(by: { (model1, model2) -> Bool in
+                return model1.sgv < model2.sgv
+            })
+            lowestGlucoseLbl.text = "\(sortedCgmData.first?.sgv ?? 0)" + " mg/dl"
+            highestGlucoseLbl.text = "\(sortedCgmData.last?.sgv ?? 0)" + " mg/dl"
         }
     }
     
