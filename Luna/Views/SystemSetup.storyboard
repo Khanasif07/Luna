@@ -710,6 +710,7 @@
                     <connections>
                         <outlet property="backBtn" destination="c0D-P5-Yyb" id="sWh-Zv-H7z"/>
                         <outlet property="doneBtn" destination="hoY-Eh-ULO" id="1pB-cD-Crq"/>
+                        <outlet property="doneBtnBtmCost" destination="Uo4-px-e9g" id="cPZ-wW-k03"/>
                         <outlet property="insulinCountTxtField" destination="7f8-SR-vsM" id="P9G-n6-8SG"/>
                         <outlet property="insulinDescLbl" destination="hSg-5E-bEx" id="3YZ-dK-V8l"/>
                         <outlet property="insulinImgView" destination="Z2b-Er-A2o" id="u6A-ri-Xxk"/>

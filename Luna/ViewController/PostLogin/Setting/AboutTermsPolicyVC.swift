@@ -25,7 +25,7 @@ class AboutTermsPolicyVC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var titleString: String = "Privacy"
+    var titleString: String = LocalizedString.privacy.localized
     var stringType: StringType = .tnc
     
     // MARK: - Lifecycle
@@ -70,7 +70,7 @@ extension AboutTermsPolicyVC {
         overrideUserInterfaceStyle = .light
         }
         switch self.titleString {
-        case "App Version":
+        case LocalizedString.app_Version.localized:
             self.titleLbl.text = self.titleString
             self.descLbl.isHidden = false
             self.textLbl.isHidden = true

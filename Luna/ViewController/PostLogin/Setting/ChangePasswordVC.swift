@@ -25,7 +25,7 @@ class ChangePasswordVC: UIViewController {
     var newPass : String = ""
     var confirmPass : String = ""
     var currentPass: String = ""
-    var sections: [String] = ["Old Password","New Password","Confirm Password"]
+    var sections: [String] = [LocalizedString.old_password.localized,LocalizedString.new_password.localized,LocalizedString.confirm_password.localized]
    
     
     // MARK: - Lifecycle

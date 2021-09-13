@@ -68,7 +68,7 @@ extension InsulinStep1VC {
         if #available(iOS 13.0, *) {
         overrideUserInterfaceStyle = .light
         }
-        btmContainerView.setBorder(width: 1.0, color: #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1))
+        btmContainerView.setBorder(width: 1.0, color: UIColor.systemRed)
         importantBox.setBorder(width: 1.0, color: #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         proceedBtn.isEnabled = true
         proceedBtn.setTitle("Next", for: .normal)

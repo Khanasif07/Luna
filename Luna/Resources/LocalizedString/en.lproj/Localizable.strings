@@ -28,3 +28,55 @@
 "touchID" = "Touch ID";
 "email_verification" = "Email Verification";
 "please_check_your_emai_A_verification_link_has_been_sent_to_your_registered_email_account" = "Please check your email - A verification link has been sent to your registered email account.";
+"pair_luna" = "Pair Luna";
+"link_cgm" = "Link CGM";
+"insulin_info" = "Insulin Information";
+ "luna_Device_Paired" = "Luna Device Paired";
+"about_5_minutes_to_complete" = "About 5 minutes to complete";
+"step" = "STEP";
+"per_day" = "per day";
+"start" = "Start";
+"edit" = "Edit";
+
+"change_Long_Acting_Insulin" = "Change Long Acting Insulin";
+"change_CGM" = "Change CGM";
+"change_connected_Luna_Device" = "Change connected Luna Device";
+"alerts" = "Alerts";
+"explainer_what_they_do" = "Explainer what they do";
+"choosePdf" = "Choose Pdf";
+
+"how_to_charge_Luna" = "How to charge Luna?";
+"how_to_pair_Luna" = "How to pair Luna?";
+"how_to_fill_and_apply_your_Insulin" = "How to fill and apply your Insulin";
+"how_to_connect_your_CGM" = "How to connect your CGM?";
+
+"profile" = "Profile";
+"change_Password" = "Change Password";
+"face_ID" = "Face ID";
+"apple_Health" = "Apple Health";
+"luna" = "Luna";
+"about" = "About";
+"delete_Account" = "Delete Account";
+"logout" = "Logout";
+"touch_ID" = "Touch ID";
+"are_you_sure_want_to_delete_account" = "Are you sure want to delete account?";
+"are_you_sure_want_to_logout" = "Are you sure want to logout?";
+
+"no" = "No";
+"yes" = "Yes";
+
+"first_Name" = "First Name";
+"last_Name" = "Last Name";
+"date_Of_Birth" = "Date Of Birth";
+"email" = "Email";
+"diabetes_Type" = "Diabetes Type";
+
+"old_password" = "Old Password";
+"new_password" = "New Password";
+"confirm_password" = "Confirm Password";
+
+"find_Answers" = "Find Answers";
+"customer_Support" = "Customer Support";
+"app_Version" = "App Version";
+"terms_Conditions" = "Terms & Conditions";
+"privacy" = "Privacy";

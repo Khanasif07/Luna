@@ -15,16 +15,16 @@ enum DeviceStatus {
     var titleString: String? {
         switch self {
         case .Battery: return "Battery"
-        case .ReservoirLevel: return "Insulin"
-        case .System: return "Luna"
+        case .ReservoirLevel: return "Reservoir"
+        case .System: return "System"
         }
     }
     
     var logoImg: UIImage? {
         switch self {
-        case .Battery: return #imageLiteral(resourceName: "battery14")
-        case .ReservoirLevel: return #imageLiteral(resourceName: "battery14")
-        case .System: return #imageLiteral(resourceName: "battery14")
+        case .Battery: return #imageLiteral(resourceName: "batteryEmpty")
+        case .ReservoirLevel: return #imageLiteral(resourceName: "reservoir0Bars")
+        case .System: return #imageLiteral(resourceName: "noSignal")
         }
     }
     
@@ -40,7 +40,7 @@ enum DeviceStatus {
         case 60...80:
             return ("",#imageLiteral(resourceName: "battery34"))
         case 80...100:
-            return ("",#imageLiteral(resourceName: "battery34"))
+            return ("",#imageLiteral(resourceName: "profile"))
         default:
             return ("Low",#imageLiteral(resourceName: "batteryEmpty"))
         }
@@ -78,23 +78,23 @@ enum DeviceStatus {
       
     }
     
-   static func getSystemImage(value: String)-> (String,UIImage?){
+    static func getSystemImage(value: String)-> (String,UIImage?,UIColor){
         let intValue = Int(value)
         switch intValue {
         case 0:
-            return ("Automating",#imageLiteral(resourceName: "automating"))
+            return ("Automating",#imageLiteral(resourceName: "automating"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         case 1:
-            return ("Stopped",#imageLiteral(resourceName: "stopped"))
+            return ("Stopped",#imageLiteral(resourceName: "stopped"),#colorLiteral(red: 0.9450980392, green: 0.2705882353, blue: 0.2392156863, alpha: 1))
         case 2:
-            return ("Error",#imageLiteral(resourceName: "error"))
+            return ("Error",#imageLiteral(resourceName: "error"),#colorLiteral(red: 0.9450980392, green: 0.2705882353, blue: 0.2392156863, alpha: 1))
         case 3:
-            return ("Ready",#imageLiteral(resourceName: "ready"))
+            return ("Ready",#imageLiteral(resourceName: "ready"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         case 4:
-            return ("Not Ready",#imageLiteral(resourceName: "notReady"))
+            return ("Not Ready",#imageLiteral(resourceName: "notReady"),#colorLiteral(red: 0.9607843137, green: 0.5450980392, blue: 0.262745098, alpha: 1))
         case 5:
-            return ("No Signal",#imageLiteral(resourceName: "noSignal"))
+            return ("No Signal",#imageLiteral(resourceName: "noSignal"),#colorLiteral(red: 0.9607843137, green: 0.5450980392, blue: 0.262745098, alpha: 1))
         default:
-            return ("No Signal",#imageLiteral(resourceName: "noSignal"))
+            return ("No Signal",#imageLiteral(resourceName: "noSignal"),#colorLiteral(red: 0.9607843137, green: 0.5450980392, blue: 0.262745098, alpha: 1))
         }
       
     }

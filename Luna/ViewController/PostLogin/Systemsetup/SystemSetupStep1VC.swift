@@ -23,7 +23,7 @@ class SystemSetupStep1VC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var sections: [(String,Bool)] = [("Pair Luna",false),("Link CGM",false),("Insulin Information",false)]
+    var sections: [(String,Bool)] = [(LocalizedString.pair_luna.localized,false),(LocalizedString.link_cgm.localized,false),(LocalizedString.insulin_info.localized,false)]
     
     // MARK: - Lifecycle
     //===========================
@@ -207,7 +207,7 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
                 self.navigationController?.pushViewController(vc, animated: true)
             case 1:
                 SystemInfoModel.shared.isFromSetting = false
-                if cell.startBtn.titleLabel?.text == "Start"{
+                if cell.startBtn.titleLabel?.text == LocalizedString.start.localized{
                     SystemInfoModel.shared.cgmUnit = 0
                     SystemInfoModel.shared.cgmType = ""
                 }
@@ -215,7 +215,7 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
                 self.navigationController?.pushViewController(vc, animated: true)
             default:
                 SystemInfoModel.shared.isFromSetting = false
-                if cell.startBtn.titleLabel?.text == "Start"{
+                if cell.startBtn.titleLabel?.text == LocalizedString.start.localized{
                     SystemInfoModel.shared.insulinUnit = 0
                     SystemInfoModel.shared.longInsulinSubType = ""
                     SystemInfoModel.shared.longInsulinType = ""
@@ -227,39 +227,39 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
         }
         switch indexPath.row {
         case 0:
-            cell.stepLbl.text = "STEP" + " \(indexPath.row + 1)"
+            cell.stepLbl.text = LocalizedString.step.localized + " \(indexPath.row + 1)"
             cell.pairedDeviceImgView.isHidden = !sections[indexPath.row].1
             cell.cgmInsulinDataView.isHidden = true
-            cell.titleLbl.text =  sections[indexPath.row].1 ? "Luna Device Paired" : "Pair Luna"
-            cell.startBtn.setTitle(sections[indexPath.row].1 ? "Edit" : "Start", for: .normal)
+            cell.titleLbl.text =  sections[indexPath.row].1 ? LocalizedString.luna_Device_Paired.localized : LocalizedString.pair_luna.localized
+            cell.startBtn.setTitle(sections[indexPath.row].1 ? LocalizedString.edit.localized : LocalizedString.start.localized, for: .normal)
             if sections[indexPath.row].1 {
                 cell.startBtn.isEditable = true
             }
             cell.timeDescView.isHidden = sections[indexPath.row].1
         case 1:
-            cell.stepLbl.text = "STEP" + " \(indexPath.row + 1)"
+            cell.stepLbl.text = LocalizedString.step.localized + " \(indexPath.row + 1)"
             cell.pairedDeviceImgView.isHidden = true
             cell.cgmInsulinDataView.isHidden = !sections[indexPath.row].1
             cell.unitLbl.text = "mg/dL"
-            cell.timeToCompleteLabel.text = "About 5 minutes to complete"
+            cell.timeToCompleteLabel.text = LocalizedString.about_5_minutes_to_complete.localized
             cell.quantityLbl.text = AppUserDefaults.value(forKey: .cgmValue).stringValue
             cell.directionText.text = AppUserDefaults.value(forKey: .directionString).stringValue
             cell.directionText.isHidden = false
-            cell.titleLbl.text =  sections[indexPath.row].1 ? SystemInfoModel.shared.cgmType : "Link CGM"
-            cell.startBtn.setTitle(sections[indexPath.row].1 ? "Edit" : "Start", for: .normal)
+            cell.titleLbl.text =  sections[indexPath.row].1 ? SystemInfoModel.shared.cgmType : LocalizedString.link_cgm.localized
+            cell.startBtn.setTitle(sections[indexPath.row].1 ? LocalizedString.edit.localized : LocalizedString.start.localized, for: .normal)
             cell.timeDescView.isHidden = sections[indexPath.row].1
             if sections[indexPath.row].1 {
                 cell.startBtn.isEditable = true
             }
         default:
-            cell.stepLbl.text = "STEP" + " \(indexPath.row + 1)"
+            cell.stepLbl.text = LocalizedString.step.localized + " \(indexPath.row + 1)"
             cell.pairedDeviceImgView.isHidden = true
             cell.cgmInsulinDataView.isHidden = !sections[indexPath.row].1
-            cell.unitLbl.text = "per day"
+            cell.unitLbl.text = LocalizedString.per_day.localized
             cell.quantityLbl.text = "\(SystemInfoModel.shared.insulinUnit)" + " u"
             cell.directionText.isHidden = true
-            cell.titleLbl.text =  sections[indexPath.row].1 ? SystemInfoModel.shared.longInsulinType : "Insulin Information"
-            cell.startBtn.setTitle(sections[indexPath.row].1 ? "Edit" : "Start", for: .normal)
+            cell.titleLbl.text =  sections[indexPath.row].1 ? SystemInfoModel.shared.longInsulinType : LocalizedString.insulin_info.localized
+            cell.startBtn.setTitle(sections[indexPath.row].1 ? LocalizedString.edit.localized : LocalizedString.start.localized, for: .normal)
             cell.timeDescView.isHidden = sections[indexPath.row].1
             if sections[indexPath.row].1 {
                 cell.startBtn.isEditable = true

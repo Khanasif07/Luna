@@ -85,11 +85,6 @@ class HomeVC: UIViewController {
     @IBAction func manualBtnTapped(_ sender: UIButton) {
         AppUserDefaults.save(value: false, forKey: .homeCoachMarkShown)
         self.loadCoachMark()
-//        HealthKitManager.sharedInstance.write([InsulinModel(raw: 100, id: 1, date: Date())])
-//        HealthKitManager.sharedInstance.read { (insulinModels) in
-//            print(insulinModels)
-//            print("Data Read successfully.")
-//        }
     }
     
     @IBAction func infoBtnTapped(_ sender: Any) {
@@ -112,6 +107,8 @@ extension HomeVC {
         self.addObserver()
         BleManager.sharedInstance.delegate = self
         if BleManager.sharedInstance.myperipheral?.state == .connected{
+            self.setupSystemInfo()
+        }else{
             self.setupSystemInfo()
         }
         CommonFunctions.showActivityLoader()
@@ -258,11 +255,12 @@ extension HomeVC {
         self.reservoirTitleLbl.text = DeviceStatus.ReservoirLevel.titleString
         
         self.systemImgView.image = DeviceStatus.getSystemImage(value:data).1
-        if DeviceStatus.getSystemImage(value:reservoirData).0.isEmpty{
+        if DeviceStatus.getSystemImage(value:data).0.isEmpty{
             self.systemStatusLbl.alpha = 0
         }else {
             self.systemStatusLbl.alpha = 100
-            self.systemStatusLbl.text = DeviceStatus.getSystemImage(value:reservoirData).0
+            self.systemStatusLbl.text = DeviceStatus.getSystemImage(value:data).0
+            self.systemStatusLbl.textColor = DeviceStatus.getSystemImage(value:data).2
         }
         self.systemTitleLbl.text = DeviceStatus.System.titleString
     }

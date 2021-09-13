@@ -22,7 +22,7 @@ class SettingsVC: UIViewController {
     // MARK: - Variables
     //===========================
     public let db = Firestore.firestore()
-    var sections: [(UIImage,String)] = [(#imageLiteral(resourceName: "profile"),"Profile"),(#imageLiteral(resourceName: "changePassword"),"Change Password"),(#imageLiteral(resourceName: "faceId"),"Face ID"),(#imageLiteral(resourceName: "appleHealth"),"Apple Health"),(#imageLiteral(resourceName: "system"),"Luna"),(#imageLiteral(resourceName: "about"),"About"),(#imageLiteral(resourceName: "deleteAccount"),"Delete Account"),(#imageLiteral(resourceName: "logout"),"Logout")]
+    var sections: [(UIImage,String)] = [(#imageLiteral(resourceName: "profile"),LocalizedString.profile.localized),(#imageLiteral(resourceName: "changePassword"),LocalizedString.change_Password.localized),(#imageLiteral(resourceName: "faceId"),LocalizedString.face_ID.localized),(#imageLiteral(resourceName: "appleHealth"),LocalizedString.apple_Health.localized),(#imageLiteral(resourceName: "system"),LocalizedString.luna.localized),(#imageLiteral(resourceName: "about"),LocalizedString.about.localized),(#imageLiteral(resourceName: "deleteAccount"),LocalizedString.delete_Account.localized),(#imageLiteral(resourceName: "logout"),LocalizedString.logout.localized)]
     
     // MARK: - Lifecycle
     //===========================
@@ -78,9 +78,9 @@ extension SettingsVC {
     
     private func setUpdata(){
         if !UserModel.main.isChangePassword {
-            self.sections = [(#imageLiteral(resourceName: "profile"),"Profile"),(#imageLiteral(resourceName: "faceId"),!hasTopNotch ? "Touch ID" : "Face ID"),(#imageLiteral(resourceName: "appleHealth"),"Apple Health"),(#imageLiteral(resourceName: "system"),"Luna"),(#imageLiteral(resourceName: "about"),"About"),(#imageLiteral(resourceName: "deleteAccount"),"Delete Account"),(#imageLiteral(resourceName: "logout"),"Logout")]
+            self.sections = [(#imageLiteral(resourceName: "profile"),LocalizedString.profile.localized),(#imageLiteral(resourceName: "faceId"),!hasTopNotch ? LocalizedString.touch_ID.localized : LocalizedString.face_ID.localized),(#imageLiteral(resourceName: "appleHealth"),LocalizedString.apple_Health.localized),(#imageLiteral(resourceName: "system"),LocalizedString.luna.localized),(#imageLiteral(resourceName: "about"),LocalizedString.about.localized),(#imageLiteral(resourceName: "deleteAccount"),LocalizedString.delete_Account.localized),(#imageLiteral(resourceName: "logout"),LocalizedString.logout.localized)]
         } else{
-            self.sections = [(#imageLiteral(resourceName: "profile"),"Profile"),(#imageLiteral(resourceName: "changePassword"),"Change Password"),(#imageLiteral(resourceName: "faceId"),!hasTopNotch ? "Touch ID" : "Face ID"),(#imageLiteral(resourceName: "appleHealth"),"Apple Health"),(#imageLiteral(resourceName: "system"),"Luna"),(#imageLiteral(resourceName: "about"),"About"),(#imageLiteral(resourceName: "deleteAccount"),"Delete Account"),(#imageLiteral(resourceName: "logout"),"Logout")]
+            self.sections = [(#imageLiteral(resourceName: "profile"),LocalizedString.profile.localized),(#imageLiteral(resourceName: "changePassword"),LocalizedString.change_Password.localized),(#imageLiteral(resourceName: "faceId"),!hasTopNotch ? LocalizedString.touch_ID.localized : LocalizedString.face_ID.localized),(#imageLiteral(resourceName: "appleHealth"),LocalizedString.apple_Health.localized),(#imageLiteral(resourceName: "system"),LocalizedString.luna.localized),(#imageLiteral(resourceName: "about"),LocalizedString.about.localized),(#imageLiteral(resourceName: "deleteAccount"),LocalizedString.delete_Account.localized),(#imageLiteral(resourceName: "logout"),LocalizedString.logout.localized)]
         }
     }
     
@@ -151,12 +151,12 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
         cell.titleLbl.text = sections[indexPath.row].1
         cell.logoImgView.image = sections[indexPath.row].0
         switch sections[indexPath.row].1 {
-        case "Face ID","Touch ID":
+        case LocalizedString.face_ID.localized,LocalizedString.touch_ID.localized:
             cell.switchView.isUserInteractionEnabled = true
             cell.nextBtn.isHidden = true
             cell.switchView.isHidden = false
             cell.switchView.isOn = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
-        case "Apple Health":
+        case LocalizedString.apple_Health.localized:
             cell.switchView.isUserInteractionEnabled = false
             cell.nextBtn.isHidden = true
             cell.switchView.isHidden = false
@@ -167,13 +167,13 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
         }
         cell.switchTapped = { [weak self] sender in
             guard let self = self else { return }
-            if self.sections[indexPath.row].1 ==  "Face ID" ||  self.sections[indexPath.row].1 ==  "Touch ID" {
+            if self.sections[indexPath.row].1 ==  LocalizedString.face_ID.localized ||  self.sections[indexPath.row].1 ==  LocalizedString.touch_ID.localized {
                 let isOn = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
                 self.db.collection(ApiKey.users).document(UserModel.main.id).updateData([ApiKey.isBiometricOn: !isOn])
                 AppUserDefaults.save(value: !isOn, forKey: .isBiometricSelected)
                 self.settingTableView.reloadData()
             }
-            if self.sections[indexPath.row].1 ==  "Apple Health" {
+            if self.sections[indexPath.row].1 ==  LocalizedString.apple_Health.localized {
                 CommonFunctions.showToastWithMessage("Under Development")
             }
         }
@@ -186,17 +186,17 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch sections[indexPath.row].1 {
-        case "Profile":
+        case LocalizedString.profile.localized:
             let vc = ProfileVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)
-        case "Change Password":
+        case LocalizedString.change_Password.localized:
             let vc = ChangePasswordVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)
-        case "Luna":
+        case LocalizedString.luna.localized:
             let vc = SystemSetupVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)
-        case "Delete Account":
-            showAlertWithAction(title: "Delete Account", msg: "Are you sure want to delete account?", cancelTitle: "No", actionTitle: "Yes") {
+        case LocalizedString.delete_Account.localized:
+            showAlertWithAction(title: LocalizedString.delete_Account.localized, msg: LocalizedString.are_you_sure_want_to_delete_account.localized, cancelTitle: LocalizedString.no.localized, actionTitle: LocalizedString.yes.localized) {
                 CommonFunctions.showActivityLoader()
                 switch loginType{
                 case .apple:
@@ -280,8 +280,8 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
                     })
                 }
             } cancelcompletion: {}
-        case "Logout":
-            showAlertWithAction(title: "Logout", msg: "Are you sure want to logout?", cancelTitle: "No", actionTitle: "Yes") {
+        case LocalizedString.logout.localized:
+            showAlertWithAction(title: LocalizedString.logout.localized, msg: LocalizedString.are_you_sure_want_to_logout.localized, cancelTitle: LocalizedString.no.localized, actionTitle: LocalizedString.yes.localized) {
                 FirestoreController.logOut { (isLogout) in
                     if !isLogout {
                         self.performCleanUp()
@@ -291,12 +291,12 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
                     }
                 }
             } cancelcompletion: {}
-        case "About":
+        case LocalizedString.about.localized:
             let vc = AboutSectionVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)
-        case "Face ID","Touch ID":
+        case LocalizedString.face_ID.localized,LocalizedString.touch_ID.localized:
             print("Do Nothing.")
-        case "Apple Health":
+        case LocalizedString.apple_Health.localized:
             print("Do Nothing.")
         default:
             CommonFunctions.showToastWithMessage("Under Development")

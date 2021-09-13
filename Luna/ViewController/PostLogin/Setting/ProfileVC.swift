@@ -17,7 +17,7 @@ class ProfileVC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var sections: [(String,String)] = [("First Name",""),("Last Name",""),("Date Of Birth",""),("Email",""),("Diabetes Type","")]
+    var sections: [(String,String)] = [(LocalizedString.first_Name.localized,""),(LocalizedString.last_Name.localized,""),(LocalizedString.date_Of_Birth.localized,""),(LocalizedString.email.localized,""),(LocalizedString.diabetes_Type.localized,"")]
     public var typePickerView = WCCustomPickerView()
     public var datePicker = CustomDatePicker()
     
@@ -95,7 +95,7 @@ extension ProfileVC {
     }
     
     private func setUpData(){
-        self.sections = [("First Name",UserModel.main.firstName),("Last Name",UserModel.main.lastName),("Date Of Birth",UserModel.main.dob),("Email",UserModel.main.email),("Diabetes Type",UserModel.main.diabetesType)]
+        self.sections = [(LocalizedString.first_Name.localized,UserModel.main.firstName),(LocalizedString.last_Name.localized,UserModel.main.lastName),(LocalizedString.date_Of_Birth.localized,UserModel.main.dob),(LocalizedString.email.localized,UserModel.main.email),(LocalizedString.diabetes_Type.localized,UserModel.main.diabetesType)]
     }
    
     private func saveBtnStatus()-> Bool{
@@ -143,12 +143,12 @@ extension ProfileVC : UITableViewDelegate, UITableViewDataSource {
         cell.txtField.autocapitalizationType = .words
         cell.txtField.text = sections[indexPath.row].1
         cell.titleLbl.text = sections[indexPath.row].0
-        if sections[indexPath.row].0 == "Date Of Birth" {
+        if sections[indexPath.row].0 == LocalizedString.date_Of_Birth.localized {
             cell.txtField.inputView = datePicker
         }else {
             cell.txtField.inputView = nil
         }
-        if sections[indexPath.row].0 == "Diabetes Type" {
+        if sections[indexPath.row].0 == LocalizedString.diabetes_Type.localized {
             let show = UIButton()
             show.isSelected = false
             show.isUserInteractionEnabled = false
@@ -161,7 +161,7 @@ extension ProfileVC : UITableViewDelegate, UITableViewDataSource {
             cell.txtField.inputView = nil
             cell.txtField.setButtonToRightView(btn: UIButton(), selectedImage: nil, normalImage: nil, size: CGSize(width: 0, height: 0))
         }
-        if  sections[indexPath.row].0 == "Email"{
+        if  sections[indexPath.row].0 == LocalizedString.email.localized{
             cell.isUserInteractionEnabled = false
             cell.txtField.textColor = .lightGray
         }else{
@@ -264,7 +264,7 @@ extension ProfileVC: WCCustomPickerViewDelegate {
     
     func userDidSelectRow(_ text : String){
         let indexx = sections.firstIndex(where: { (tupls) -> Bool in
-            return tupls.0 == "Diabetes Type"
+            return tupls.0 == LocalizedString.diabetes_Type.localized
         })
         guard let selectedIndexx = indexx else {return}
         if let cell = profileTableView.cellForRow(at: IndexPath(row: 4, section: 0)) as? ProfileTableCell{
