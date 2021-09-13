@@ -99,7 +99,7 @@ class ProfileSetupVC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func logoutBtnTapped(_ sender: UIButton) {
-        showAlertWithAction(title: "Logout", msg: "Are you sure want to logout?", cancelTitle: "No", actionTitle: "Yes") {
+        showAlertWithAction(title: LocalizedString.logout.localized, msg: LocalizedString.are_you_sure_want_to_logout.localized, cancelTitle: LocalizedString.no.localized, actionTitle: LocalizedString.yes.localized) {
             FirestoreController.logOut { (isLogout) in
                 if !isLogout {
                     self.performCleanUp()

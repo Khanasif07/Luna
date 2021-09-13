@@ -230,7 +230,7 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueCell(with: SignUpTopTableCell.self, indexPath: indexPath)
             cell.emailIdTxtField.text = emailTxt
             cell.passTxtField.text = passTxt
-            cell.titleLbl.text = "LOGIN TO LUNA"
+            cell.titleLbl.text = LocalizedString.lOGIN_TO_LUNA.localized
             cell.subTitleLbl.text = ""
             cell.signUpBtn.setTitle(LocalizedString.login.localized, for: .normal)
             cell.signUpBtn.isEnabled = signUpBtnStatus()

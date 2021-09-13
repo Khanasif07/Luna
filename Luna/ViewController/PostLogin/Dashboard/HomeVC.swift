@@ -83,6 +83,7 @@ class HomeVC: UIViewController {
     }
     
     @IBAction func manualBtnTapped(_ sender: UIButton) {
+        bottomSheetVC.closePullUp()
         AppUserDefaults.save(value: false, forKey: .homeCoachMarkShown)
         self.loadCoachMark()
     }

@@ -80,3 +80,7 @@
 "app_Version" = "App Version";
 "terms_Conditions" = "Terms & Conditions";
 "privacy" = "Privacy";
+
+"lOGIN_TO_LUNA" = "LOGIN TO LUNA";
+"password_Reset" = "Password Reset";
+"reset_password_link_sent" = "Reset password link has been shared on your registered email. Check and create new password";
