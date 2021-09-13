@@ -50,10 +50,12 @@ class InsulinStep3VC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func doneBtnAction(_ sender: AppButton) {
+        self.view.endEditing(true)
         SystemInfoModel.shared.insulinUnit =  Int(self.insulinCountTxtField.text ?? "0") ?? 0
         let vc = InsulinStep4VC.instantiate(fromAppStoryboard: .SystemSetup)
         vc.insulinConnectedSuccess = { [weak self] (sender) in
             guard let selff = self else { return }
+            selff.view.endEditing(true)
             if   SystemInfoModel.shared.isFromSetting {
                 CommonFunctions.showActivityLoader()
                 FirestoreController.checkUserExistInSystemDatabase {
