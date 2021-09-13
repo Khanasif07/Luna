@@ -157,8 +157,8 @@ extension LoginViewController {
             selff.loginTableView.reloadData()
         }
         scene.popupType = .emailVerification
-        scene.titleDesc = "Email Verification"
-        scene.subTitleDesc = "Please check your email - A verification link has been sent to your registered email account."
+        scene.titleDesc = LocalizedString.email_Verification.localized
+        scene.subTitleDesc = LocalizedString.please_check_your_email_sent.localized
         self.present(scene, animated: true, completion: nil)
     }
     

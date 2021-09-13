@@ -23,10 +23,10 @@ class BLEIntegrationVC: UIViewController {
     var centralManager: CBCentralManager!
     var heartRatePeripheral: CBPeripheral!
     var isMyPeripheralConected = false
-//    let manager = BleManager.sharedInstance
-   
-
-
+    //    let manager = BleManager.sharedInstance
+    
+    
+    
     
     // MARK: - Lifecycle
     //===========================
@@ -67,11 +67,11 @@ class BLEIntegrationVC: UIViewController {
 extension BLEIntegrationVC : BleProtocol{
     
     private func initialSetup() {
-                centralManager = CBCentralManager(delegate: self, queue: nil)
-//        self.manager.delegate = self
-//        DispatchQueue.main.asyncAfter(wallDeadline: .now()+2) {
-//            self.manager.beginScan()
-//        }
+        centralManager = CBCentralManager(delegate: self, queue: nil)
+        //        self.manager.delegate = self
+        //        DispatchQueue.main.asyncAfter(wallDeadline: .now()+2) {
+        //            self.manager.beginScan()
+        //        }
     }
     
     func didDiscover(name: String, rssi: NSNumber) {
@@ -91,34 +91,30 @@ extension BLEIntegrationVC : BleProtocol{
             print("Not connected")
         }
     }
-        //    func onHeartRateReceived(_ heartRate: Int) {
-        //        heartRateLabel.text = String(heartRate)
-        //        print("BPM: \(heartRate)")
-        //    }
-    }
+}
 
 // MARK: - Extension For CBCentralManagerDelegate
 //===========================
 extension BLEIntegrationVC: CBCentralManagerDelegate {
-
+    
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
-          case .unknown:
+        case .unknown:
             print("central.state is .unknown")
-          case .resetting:
+        case .resetting:
             print("central.state is .resetting")
-          case .unsupported:
+        case .unsupported:
             print("central.state is .unsupported")
-          case .unauthorized:
+        case .unauthorized:
             print("central.state is .unauthorized")
-          case .poweredOff:
+        case .poweredOff:
             print("central.state is .poweredOff")
-          case .poweredOn:
+        case .poweredOn:
             print("central.state is .poweredOn")
             centralManager.scanForPeripherals(withServices: nil,options: nil)
         }
     }
-
+    
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,
                         advertisementData: [String: Any], rssi RSSI: NSNumber) {
         print(peripheral.name)
@@ -128,23 +124,23 @@ extension BLEIntegrationVC: CBCentralManagerDelegate {
         centralManager.stopScan()
         centralManager.connect(heartRatePeripheral, options: nil)
     }
-
+    
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-      print("Connected!")
-      isMyPeripheralConected = true
-      heartRatePeripheral.discoverServices(nil)
+        print("Connected!")
+        isMyPeripheralConected = true
+        heartRatePeripheral.discoverServices(nil)
     }
-
+    
     func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
         print("DisConnected!")
         isMyPeripheralConected = false
         central.connect(peripheral, options: nil)
     }
-
-
-
+    
+    
+    
 }
-  
+
 // MARK: - Extension For CBPeripheralDelegate
 //===========================
 extension BLEIntegrationVC: CBPeripheralDelegate {
@@ -154,13 +150,13 @@ extension BLEIntegrationVC: CBPeripheralDelegate {
             print(service)
             peripheral.discoverCharacteristics(nil, for: service)
         }
-
+        
     }
-
+    
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService,
                     error: Error?) {
         guard let characteristics = service.characteristics else { return }
-
+        
         for characteristic in characteristics {
             print(characteristic)
             if characteristic.properties.contains(.read) {
@@ -179,14 +175,14 @@ extension BLEIntegrationVC: CBPeripheralDelegate {
         switch characteristic.uuid {
         case batteryCharacteristicCBUUID:
             print("handled Characteristic Value for Battery: \(String(describing: characteristic.value))")
-//            writeValue(myCharacteristic: characteristic)
+            //            writeValue(myCharacteristic: characteristic)
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
         case ReservoirLevelCharacteristicCBUUID:
-//            writeValue(myCharacteristic: characteristic,value: "100")
+            //            writeValue(myCharacteristic: characteristic,value: "100")
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             print("handled Characteristic Value for Reservoir Level: \(String(describing: characteristic.value))")
         case statusCBUUID:
-//            writeValue(myCharacteristic: characteristic,value: "0")
+            //            writeValue(myCharacteristic: characteristic,value: "0")
             print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             print("handled Characteristic Value for status : \(String(describing: characteristic.value))")
         default:
@@ -197,7 +193,7 @@ extension BLEIntegrationVC: CBPeripheralDelegate {
     private func bodyLocation(from characteristic: CBCharacteristic) -> String {
         guard let characteristicData = characteristic.value,
               let byte = characteristicData.first else { return "Error" }
-
+        
         switch byte {
         case 0: return "Other"
         case 1: return "Chest"
@@ -214,19 +210,19 @@ extension BLEIntegrationVC: CBPeripheralDelegate {
     private func heartRate(from characteristic: CBCharacteristic) -> Int {
         guard let characteristicData = characteristic.value else { return -1 }
         let byteArray = [UInt8](characteristicData)
-
+        
         // See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.heart_rate_measurement.xml
         // The heart rate mesurement is in the 2nd, or in the 2nd and 3rd bytes, i.e. one one or in two bytes
         // The first byte of the first bit specifies the length of the heart rate data, 0 == 1 byte, 1 == 2 bytes
         let firstBitValue = byteArray[0] & 0x01
         if firstBitValue == 0 {
-          // Heart Rate Value Format is in the 2nd byte
-          return Int(byteArray[1])
+            // Heart Rate Value Format is in the 2nd byte
+            return Int(byteArray[1])
         } else {
-          // Heart Rate Value Format is in the 2nd and 3rd bytes
-//          return (Int(byteArray[1]) << 8) + Int(byteArray[2])
+            // Heart Rate Value Format is in the 2nd and 3rd bytes
+            //          return (Int(byteArray[1]) << 8) + Int(byteArray[2])
             return  Int(byteArray[0]) +  (Int(byteArray[1]))
         }
-      }
+    }
 }
 

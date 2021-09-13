@@ -84,3 +84,10 @@
 "lOGIN_TO_LUNA" = "LOGIN TO LUNA";
 "password_Reset" = "Password Reset";
 "reset_password_link_sent" = "Reset password link has been shared on your registered email. Check and create new password";
+"email_Verification" = "Email Verification";
+"please_check_your_email_sent" = "Please check your email - A verification link has been sent to your registered email account.";
+
+"sender" = "Sender";
+"receiver" = "Receiver";
+"decision" = "Decision";
+"type" = "Type";

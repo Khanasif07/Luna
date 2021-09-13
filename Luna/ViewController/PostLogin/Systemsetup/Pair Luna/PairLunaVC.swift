@@ -86,7 +86,7 @@ class PairLunaVC: UIViewController {
                 }
                 scene.deviceNotConnectedNavigation = {  [weak self] (sender) in
                     guard let selff = self else { return }
-//                    selff.pop()
+                    print(selff)
                    // MARK:- Need to work=================
                 }
                 let transition = CATransition()

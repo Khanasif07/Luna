@@ -274,11 +274,9 @@ extension HomeVC: BleProtocol{
     }
     
     func didConnect(name: String) {
-        print(name)
     }
     
     func didUpdateValue(){
-//        self.setupSystemInfo()
     }
 }
 

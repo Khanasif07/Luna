@@ -21,37 +21,12 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     //===========================
     var cgmData : [ShareGlucoseData] = SystemInfoModel.shared.cgmData ?? []{
         didSet{
-            let values = cgmData.map { (data) -> ChartDataEntry in
-                return ChartDataEntry(x: Double(data.date), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
-            }
-            let set1 = LineChartDataSet(entries: values, label: "")
-            set1.drawIconsEnabled = false
-            setup(set1)
-            let gradientColors = [#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 0).cgColor,#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1).cgColor]
-            let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
-            set1.fillAlpha = 1
-            set1.mode = .linear
-            set1.fill = Fill(linearGradient: gradient, angle: 90.0)
-            set1.drawFilledEnabled = true
-            let data = LineChartData(dataSet: set1)
-            chartView.maxVisibleCount = 7
-            let marker = BalloonMarker(color: #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1),
-                                       font: .boldSystemFont(ofSize: 15.0),
-                                       textColor: .white,
-                                       insets: UIEdgeInsets(top: 3.5, left: 5.5, bottom: 16, right: 5.5))
-            marker.chartView = chartView
-            marker.minimumSize = CGSize(width: 50.0, height: 30.0)
-            chartView.marker = marker
-            //
-//            let scaleCount = CGFloat(cgmData.endIndex / 288) * 3.5
-//            chartView.zoom(scaleX: scaleCount, scaleY: 0, x: 0, y: 0)
-            //
+            setDataCount(cgmData.endIndex, range: UInt32(cgmData.endIndex))
             let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.chartView.viewPortHandler,
                                                         xAxis: chartView.xAxis,
                                                         transformer: self.chartView.getTransformer(forAxis: .left),
                                                         cgmData: self.cgmData)
             self.chartView.xAxisRenderer = customXAxisRender
-            chartView.data = data
         }
     }
     
@@ -91,6 +66,14 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         leftAxis.drawAxisLineEnabled = false
         leftAxis.axisMinimum = -0
         leftAxis.drawLimitLinesBehindDataEnabled = false
+        
+        let marker = BalloonMarker(color: #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1),
+                                   font: .boldSystemFont(ofSize: 15.0),
+                                   textColor: .white,
+                                   insets: UIEdgeInsets(top: 3.5, left: 5.5, bottom: 16, right: 5.5))
+        marker.chartView = chartView
+        marker.minimumSize = CGSize(width: 50.0, height: 30.0)
+        chartView.marker = marker
 
         chartView.rightAxis.enabled = false
         chartView.xAxis.granularity = 0.0
@@ -119,7 +102,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         set1.drawValuesEnabled = true
 
         let data = LineChartData(dataSet: set1)
-        chartView.maxVisibleCount = 7
+        chartView.maxVisibleCount = 10
         chartView.data = data
     }
 

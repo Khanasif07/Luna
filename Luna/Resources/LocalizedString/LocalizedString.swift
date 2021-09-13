@@ -201,6 +201,13 @@ enum LocalizedString : String {
     case lOGIN_TO_LUNA
     case password_Reset
     case reset_password_link_sent
+    case email_Verification
+    case please_check_your_email_sent
+    case sender
+    case receiver
+    
+    case decision
+    case type
     
     case signInWithFaceID = "Sign In with Face ID";
     case signInWithFingerPrint = "Sign In with Fingerprint";
