@@ -17,9 +17,7 @@ class LunaDevicesVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initialSetup()
-       
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -39,17 +37,12 @@ class LunaDevicesVC: UIViewController {
     @IBAction func proceedBtnAction(_ sender: UIButton) {
         self.dismiss(animated: false, completion: {
         })
-
-        
     }
     
     @IBAction func dissmissBtnTapped(_ sender: UIButton) {
         self.dismiss(animated: false, completion: nil)
     }
-
-
 }
-
 
 // MARK: - Extension For Functions
 //===========================
@@ -60,12 +53,10 @@ extension LunaDevicesVC {
         overrideUserInterfaceStyle = .light
         }
         self.OKBtn.isEnabled = true
-        self.OKBtn.layer.cornerRadius = 10
+        self.OKBtn.round(radius: 10.0)
         self.OKBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
-        
         IntroLbl.textColor =  AppColors.fontPrimaryColor
-        outerView.layer.cornerRadius = 10
+        outerView.round(radius: 10.0)
         outerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
-        
     }
 }

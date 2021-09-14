@@ -891,10 +891,10 @@ your Phone</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rs5-PS-SEw">
-                                        <rect key="frame" x="28" y="293" width="358" height="310"/>
+                                        <rect key="frame" x="28" y="253.5" width="358" height="389"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="step1Devicepaired" translatesAutoresizingMaskIntoConstraints="NO" id="5pl-iy-ojR">
-                                                <rect key="frame" x="144" y="120" width="70" height="70"/>
+                                                <rect key="frame" x="144" y="159.5" width="70" height="70"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="70" id="7vg-04-1Ck"/>
@@ -902,13 +902,13 @@ your Phone</string>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3S-OR-y2e">
-                                                <rect key="frame" x="20" y="265" width="318" height="21.5"/>
+                                                <rect key="frame" x="20" y="329.5" width="318" height="21.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daL-w1-XEu">
-                                                <rect key="frame" x="20" y="16" width="318" height="43"/>
+                                                <rect key="frame" x="20" y="38" width="318" height="43"/>
                                                 <string key="text">Searching for nearby
 Luna devices</string>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
@@ -927,20 +927,20 @@ Luna devices</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJj-D1-Lqp">
-                                                <rect key="frame" x="144" y="120" width="70" height="70"/>
+                                                <rect key="frame" x="144" y="159.5" width="70" height="70"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="2kB-BM-j59" firstAttribute="top" secondItem="rs5-PS-SEw" secondAttribute="top" constant="16" id="1hi-ey-NdI"/>
-                                            <constraint firstItem="daL-w1-XEu" firstAttribute="top" secondItem="rs5-PS-SEw" secondAttribute="top" constant="16" id="6Cu-en-m6L"/>
+                                            <constraint firstItem="daL-w1-XEu" firstAttribute="top" secondItem="rs5-PS-SEw" secondAttribute="top" constant="38" id="6Cu-en-m6L"/>
                                             <constraint firstItem="QJj-D1-Lqp" firstAttribute="leading" secondItem="5pl-iy-ojR" secondAttribute="leading" id="DOZ-d4-86E"/>
                                             <constraint firstItem="daL-w1-XEu" firstAttribute="leading" secondItem="rs5-PS-SEw" secondAttribute="leading" constant="20" id="Df1-kh-rTj"/>
-                                            <constraint firstAttribute="bottom" secondItem="h3S-OR-y2e" secondAttribute="bottom" constant="23.5" id="FB9-cv-UMi"/>
+                                            <constraint firstAttribute="bottom" secondItem="h3S-OR-y2e" secondAttribute="bottom" constant="38" id="FB9-cv-UMi"/>
                                             <constraint firstAttribute="trailing" secondItem="h3S-OR-y2e" secondAttribute="trailing" constant="20" id="GWC-Ot-cXs"/>
                                             <constraint firstItem="h3S-OR-y2e" firstAttribute="leading" secondItem="rs5-PS-SEw" secondAttribute="leading" constant="20" id="S3i-oW-HsS"/>
-                                            <constraint firstItem="h3S-OR-y2e" firstAttribute="top" secondItem="5pl-iy-ojR" secondAttribute="bottom" constant="75" id="USM-gH-CsW"/>
+                                            <constraint firstItem="h3S-OR-y2e" firstAttribute="top" secondItem="5pl-iy-ojR" secondAttribute="bottom" constant="100" id="USM-gH-CsW"/>
                                             <constraint firstItem="QJj-D1-Lqp" firstAttribute="top" secondItem="5pl-iy-ojR" secondAttribute="top" id="VPD-zz-twq"/>
                                             <constraint firstItem="5pl-iy-ojR" firstAttribute="centerY" secondItem="rs5-PS-SEw" secondAttribute="centerY" id="XFl-Wz-cJd"/>
                                             <constraint firstItem="QJj-D1-Lqp" firstAttribute="trailing" secondItem="5pl-iy-ojR" secondAttribute="trailing" id="d3r-HQ-Wa4"/>

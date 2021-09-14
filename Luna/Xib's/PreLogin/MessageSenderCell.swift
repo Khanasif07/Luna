@@ -19,8 +19,6 @@ class MessageSenderCell: UITableViewCell {
         super.layoutSubviews()
         dataContainerView.roundCorners([.topRight,.topLeft,.bottomLeft], radius: 15)
     }
-
-
 }
 
 

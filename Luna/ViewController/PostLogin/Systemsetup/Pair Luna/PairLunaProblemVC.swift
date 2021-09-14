@@ -13,6 +13,7 @@ class PairLunaProblemVC: UIViewController {
     //===========================
     @IBOutlet weak var outerView: UIView!
     @IBOutlet weak var pairBtn: AppButton!
+    
     // MARK: - Variables
     //===========================
     var lunaStartPairing: ((UIButton)->())?
@@ -42,7 +43,7 @@ class PairLunaProblemVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         view.layer.layoutIfNeeded()
-        outerView.layer.cornerRadius = 10
+        outerView.round(radius: 10.0)
         outerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
         pairBtn.round(radius: 4.0)
     }
@@ -70,7 +71,6 @@ class PairLunaProblemVC: UIViewController {
 // MARK: - Extension For Functions
 //===========================
 extension PairLunaProblemVC {
-    
     private func initialSetup() {
         pairBtn.isEnabled = true
     }

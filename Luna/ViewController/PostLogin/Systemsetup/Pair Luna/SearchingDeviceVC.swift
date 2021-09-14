@@ -76,11 +76,8 @@ class SearchingDeviceVC: UIViewController {
         backgroundView.addSubview(blurredView)
     }
     
-    
-    
     // MARK: - IBActions
     //===========================
-    
     @IBAction func dissmissBtnTapped(_ sender: UIButton) {
         let transition:CATransition = CATransition()
         transition.duration = 0.5
@@ -90,7 +87,6 @@ class SearchingDeviceVC: UIViewController {
         self.navigationController?.view.layer.add(transition, forKey: kCATransition)
         self.navigationController?.popViewController(animated: false)
     }
-
 }
 
 // MARK: - BleProtocol

@@ -27,16 +27,12 @@ class SignUpTopTableCell: UITableViewCell {
     
     
     public func setUpFont(){
-        //        signUpBtn.titleLabel?.font = AppFonts.SF_Pro_Display_Medium.withSize(.x15)
-        //        titleLbl.font = AppFonts.SF_Pro_Display_Bold.withSize(.x24)
-        //        subTitleLbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
     }
-    
     
     override func layoutSubviews() {
         super.layoutSubviews()
         [emailIdTxtField,passTxtField].forEach { (txtField) in
-            txtField?.layer.cornerRadius = 8.0
+            txtField?.round(radius: 8.0)
             txtField?.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         }
         signUpBtn.round(radius: 4.0)
@@ -54,7 +50,6 @@ class SignUpTopTableCell: UITableViewCell {
         show.addTarget(self, action: #selector(secureTextField(_:)), for: .touchUpInside)
         self.passTxtField.setButtonToRightView(btn: show, selectedImage: #imageLiteral(resourceName: "eyeClosedIcon"), normalImage: #imageLiteral(resourceName: "eyeOpenIcon"), size: CGSize(width: 22, height: 22))
     }
-    
     
     @objc func secureTextField(_ sender: UIButton){
         sender.isSelected.toggle()

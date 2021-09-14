@@ -31,7 +31,7 @@ class SignupViewController: UIViewController {
     var passTxt = ""
     var currentNonce : String?
     private let biometricIDAuth = BiometricIDAuth()
-  
+    
     // MARK: - Lifecycle
     //===========================
     override func viewDidLoad() {
@@ -47,8 +47,6 @@ class SignupViewController: UIViewController {
     
     // MARK: - IBActions
     //===========================
-    
-    
 }
 
 // MARK: - Extension For Functions
@@ -57,7 +55,7 @@ extension SignupViewController {
     
     private func initialSetup() {
         if #available(iOS 13.0, *) {
-        overrideUserInterfaceStyle = .light
+            overrideUserInterfaceStyle = .light
         }
         self.tableViewSetUp()
     }
@@ -81,7 +79,7 @@ extension SignupViewController {
         return !self.emailTxt.isEmpty && !self.passTxt.isEmpty
     }
     
-    func reloadUser(_ callback: ((Error?) -> ())? = nil){
+    private func reloadUser(_ callback: ((Error?) -> ())? = nil){
         Auth.auth().currentUser?.reload(completion: { (error) in
             callback?(error)
         })
@@ -92,15 +90,10 @@ extension SignupViewController {
         self.navigationController?.pushViewController(loginVC, animated: true)
     }
     
-    func goToProfileSetupVC(){
-       let bleVC = ProfileSetupVC.instantiate(fromAppStoryboard: .PreLogin)
-       self.navigationController?.pushViewController(bleVC, animated: true)
-   }
-    
-    func goToBLEVC(){
-       let bleVC = BLEIntegrationVC.instantiate(fromAppStoryboard: .PostLogin)
-       self.navigationController?.pushViewController(bleVC, animated: true)
-   }
+    private  func goToProfileSetupVC(){
+        let bleVC = ProfileSetupVC.instantiate(fromAppStoryboard: .PreLogin)
+        self.navigationController?.pushViewController(bleVC, animated: true)
+    }
     
     private func gotoEmailVerificationPopUpVC(){
         let scene =  PassResetPopUpVC.instantiate(fromAppStoryboard: .PreLogin)
@@ -151,7 +144,7 @@ extension SignupViewController {
             bioMetricReason = LocalizedString.allowTouchId.localized
             biometric =  LocalizedString.touchID.localized
         }
-        self.showAlertWithAction(title: bioMetricReason, msg: "Use \(biometric) to sign into Luna without entering your password.", cancelTitle: "Don’t Allow", actionTitle: "Allow") {
+        self.showAlertWithAction(title: bioMetricReason, msg: "Use \(biometric) to sign into Luna without entering your password.", cancelTitle: LocalizedString.do_not_Allow.localized, actionTitle: LocalizedString.allow.localized) {
             let email = AppUserDefaults.value(forKey: .defaultEmail).stringValue
             let password = AppUserDefaults.value(forKey: .defaultPassword).stringValue
             CommonFunctions.showActivityLoader()
@@ -195,7 +188,6 @@ extension SignupViewController {
             }
         })
     }
-    
 }
 
 // MARK: - Extension For TableView
@@ -228,16 +220,16 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
                 }
                 CommonFunctions.showActivityLoader()
                 FirestoreController.createUserNode(userId: "", email: self.emailTxt, password: self.passTxt, name: "", imageURL: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isSystemSetupCompleted: false, isChangePassword: true, isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue, completion: {
-                        CommonFunctions.hideActivityLoader()
+                    CommonFunctions.hideActivityLoader()
                     if Auth.auth().currentUser?.isEmailVerified ?? false{
-                            self.goToProfileSetupVC()
-                        }else{
-                            self.showAlertForBiometric()
-                        }
-                    }) { (error) -> (Void)  in
-                        CommonFunctions.hideActivityLoader()
-                        CommonFunctions.showToastWithMessage(error.localizedDescription)
+                        self.goToProfileSetupVC()
+                    }else{
+                        self.showAlertForBiometric()
                     }
+                }) { (error) -> (Void)  in
+                    CommonFunctions.hideActivityLoader()
+                    CommonFunctions.showToastWithMessage(error.localizedDescription)
+                }
             }
             return cell
         default:
@@ -514,19 +506,19 @@ extension SignupViewController: GIDSignInDelegate {
                 UserModel.main.isChangePassword = false
                 FirestoreController.checkUserExistInDatabase {
                     FirestoreController.getFirebaseUserData {
-                            CommonFunctions.hideActivityLoader()
-                            DispatchQueue.main.async {
-                                if UserModel.main.isSystemSetupCompleted {
-                                    AppRouter.gotoHomeVC()
-                                    return
-                                }else if UserModel.main.isProfileStepCompleted  {
-                                    AppRouter.gotoSystemSetupVC()
-                                    return
-                                }else {
-                                    self.goToProfileSetupVC()
-                                    return
-                                }
+                        CommonFunctions.hideActivityLoader()
+                        DispatchQueue.main.async {
+                            if UserModel.main.isSystemSetupCompleted {
+                                AppRouter.gotoHomeVC()
+                                return
+                            }else if UserModel.main.isProfileStepCompleted  {
+                                AppRouter.gotoSystemSetupVC()
+                                return
+                            }else {
+                                self.goToProfileSetupVC()
+                                return
                             }
+                        }
                     } failure: { (error) -> (Void) in
                         CommonFunctions.hideActivityLoader()
                         CommonFunctions.showToastWithMessage(error.localizedDescription)
@@ -562,19 +554,19 @@ extension SignupViewController: GIDSignInDelegate {
     }
     
     func signIn(_ signIn: GIDSignIn!,
-        presentViewController viewController: UIViewController!) {
-      self.present(viewController, animated: true, completion: nil)
+                presentViewController viewController: UIViewController!) {
+        self.present(viewController, animated: true, completion: nil)
     }
     
     func signIn(_ signIn: GIDSignIn!,
-        dismissViewController viewController: UIViewController!) {
-      self.dismiss(animated: true, completion: nil)
+                dismissViewController viewController: UIViewController!) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     func signInWillDispatch(signIn: GIDSignIn!, error: NSError!) {
         // myActivityIndicator.stopAnimating()
     }
-
+    
 }
 
 //MARK:- HealthKit
@@ -597,6 +589,4 @@ extension SignupViewController{
             print(error.localizedDescription)
         }
     }
-    
-    
 }

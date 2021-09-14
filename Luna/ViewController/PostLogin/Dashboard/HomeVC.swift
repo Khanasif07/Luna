@@ -15,20 +15,18 @@ class HomeVC: UIViewController {
     //===========================
     @IBOutlet weak var topNavView: UIView!
     @IBOutlet weak var bottomStackView: UIStackView!
-    
     @IBOutlet weak var topManualButton: UIButton!
     @IBOutlet weak var batteryTitleLbl: UILabel!
     @IBOutlet weak var batteryStatusLbl: UILabel!
     @IBOutlet weak var batteryImgView: UIImageView!
-    
     @IBOutlet weak var reservoirStatusLbl: UILabel!
     @IBOutlet weak var reservoirImgView: UIImageView!
     @IBOutlet weak var reservoirTitleLbl: UILabel!
-    
     @IBOutlet weak var batteryStackView: UIStackView!
     @IBOutlet weak var systemStatusLbl: UILabel!
     @IBOutlet weak var systemImgView: UIImageView!
     @IBOutlet weak var systemTitleLbl: UILabel!
+    
     // MARK: - Variables
     //==========================
     let bottomSheetVC = HomeBottomSheetVC()
@@ -83,25 +81,20 @@ class HomeVC: UIViewController {
     }
     
     @IBAction func manualBtnTapped(_ sender: UIButton) {
-        HealthKitManager.sharedInstance.write([InsulinModel(raw: 100, id: 1, date: Date())])
-        HealthKitManager.sharedInstance.read { (insulinModels) in
-            print(insulinModels)
-            print("Data Read successfully.")
-        }
+        bottomSheetVC.closePullUp()
+        AppUserDefaults.save(value: false, forKey: .homeCoachMarkShown)
+        self.loadCoachMark()
     }
     
     @IBAction func infoBtnTapped(_ sender: Any) {
         let vc = SessionDescriptionVC.instantiate(fromAppStoryboard: .CGPStoryboard)
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
 }
 
 // MARK: - Extension For Functions
 //===========================
 extension HomeVC {
-    
     private func initialSetup() {
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
@@ -111,33 +104,14 @@ extension HomeVC {
         BleManager.sharedInstance.delegate = self
         if BleManager.sharedInstance.myperipheral?.state == .connected{
             self.setupSystemInfo()
+        }else{
+            self.setupSystemInfo()
         }
         CommonFunctions.showActivityLoader()
-        FirestoreController.getFirebaseUserData {
-            CommonFunctions.hideActivityLoader()
-        } failure: { (error) -> (Void) in
-            CommonFunctions.hideActivityLoader()
-            CommonFunctions.showToastWithMessage(error.localizedDescription)
-        }
-        FirestoreController.getUserSystemInfoData {
-            print("Successfully")
-        } failure: { (error) -> (Void) in
-            CommonFunctions.showToastWithMessage(error.localizedDescription)
-        }
-        FirestoreController.getFirebaseCGMData { (cgmDataArray) in
-            print(cgmDataArray)
-            SystemInfoModel.shared.cgmData = cgmDataArray
-            self.bottomSheetVC.cgmData = cgmDataArray
-        } failure: { (error) -> (Void) in
-            print(error.localizedDescription)
-        }
-        FirestoreController.getFirebaseInsulinData { (insulinDataArray) in
-            print(insulinDataArray)
-            SystemInfoModel.shared.insulinData = insulinDataArray
-            self.bottomSheetVC.mainTableView.reloadData()
-        } failure: { (error) -> (Void) in
-            print(error.localizedDescription)
-        }
+        self.getUserInfoFromFirestore()
+        self.getUserSystemFromFirestore()
+        self.getCGMDataFromFirestore()
+        self.getInsulinFromFirestore()
     }
     
     private func setupHealthkit(){
@@ -151,18 +125,69 @@ extension HomeVC {
         }
     }
     
-    
     private func addObserver(){
         NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .BLEOnOffState, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bLEDidDisConnected), name: .BLEDidDisConnectSuccessfully, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(cgmDataReceivedSuccessfully), name: .CgmDataReceivedSuccessfully, object: nil)
+    }
+    
+    private func getCGMDataFromFirestore(){
+        FirestoreController.checkCGMDataExistInDatabase {
+            FirestoreController.getFirebaseCGMData { (cgmDataArray) in
+                print(cgmDataArray)
+                SystemInfoModel.shared.cgmData = cgmDataArray
+                self.bottomSheetVC.cgmData = cgmDataArray
+            } failure: { (error) -> (Void) in
+                print(error.localizedDescription)
+            }
+        } failure: {
+            print("CGM DATA NOT Available")
+            if let cgmData = SystemInfoModel.shared.cgmData {
+                self.bottomSheetVC.cgmData = cgmData
+                for cgmModel in cgmData {
+                    FirestoreController.createCGMDataNode(direction: cgmModel.direction ?? "", sgv: cgmModel.sgv, date: cgmModel.date)
+                }
+            }
+        }
+    }
+    
+    private func getUserSystemFromFirestore(){
+        FirestoreController.getUserSystemInfoData {
+            print("Successfully")
+        } failure: { (error) -> (Void) in
+            CommonFunctions.showToastWithMessage(error.localizedDescription)
+        }
+    }
+    
+    private func getUserInfoFromFirestore(){
+        FirestoreController.getFirebaseUserData {
+            CommonFunctions.hideActivityLoader()
+        } failure: { (error) -> (Void) in
+            CommonFunctions.hideActivityLoader()
+            CommonFunctions.showToastWithMessage(error.localizedDescription)
+        }
+    }
+    
+    private func getInsulinFromFirestore(){
+        FirestoreController.getFirebaseInsulinData { (insulinDataArray) in
+            print(insulinDataArray)
+            SystemInfoModel.shared.insulinData = insulinDataArray
+            self.bottomSheetVC.mainTableView.reloadData()
+        } failure: { (error) -> (Void) in
+            print(error.localizedDescription)
+        }
     }
     
     @objc func bleDidUpdateValue(notification : NSNotification){
         if let dict = notification.object as? NSDictionary {
                 print(dict)
         }
-        print("BleDidUpdateValue")
+        self.setupSystemInfo()
+    }
+    
+    @objc func cgmDataReceivedSuccessfully(notification : NSNotification){
+        self.bottomSheetVC.cgmData = SystemInfoModel.shared.cgmData ?? []
         self.setupSystemInfo()
     }
     
@@ -206,36 +231,52 @@ extension HomeVC {
         let data = BleManager.sharedInstance.systemStatusData
         
         self.batteryImgView.image = DeviceStatus.getBatteryImage(value:batteryData).1
-        self.batteryStatusLbl.text = DeviceStatus.getBatteryImage(value:batteryData).0
+        if DeviceStatus.getBatteryImage(value:batteryData).0.isEmpty{
+            self.batteryStatusLbl.alpha = 0
+        }else {
+            self.batteryStatusLbl.alpha = 100
+            self.batteryStatusLbl.text = DeviceStatus.getBatteryImage(value:batteryData).0
+        }
         self.batteryTitleLbl.text = DeviceStatus.Battery.titleString
         
         self.reservoirImgView.image = DeviceStatus.getReservoirImage(value:reservoirData).1
-        self.reservoirStatusLbl.text = DeviceStatus.getReservoirImage(value:reservoirData).0
+        if DeviceStatus.getReservoirImage(value:reservoirData).0.isEmpty{
+            self.reservoirStatusLbl.alpha = 0
+        }else {
+            self.reservoirStatusLbl.alpha = 100
+            self.reservoirStatusLbl.text = DeviceStatus.getReservoirImage(value:reservoirData).0
+        }
         self.reservoirTitleLbl.text = DeviceStatus.ReservoirLevel.titleString
         
         self.systemImgView.image = DeviceStatus.getSystemImage(value:data).1
-        self.systemStatusLbl.text = DeviceStatus.getSystemImage(value:data).0
+        if DeviceStatus.getSystemImage(value:data).0.isEmpty{
+            self.systemStatusLbl.alpha = 0
+        }else {
+            self.systemStatusLbl.alpha = 100
+            self.systemStatusLbl.text = DeviceStatus.getSystemImage(value:data).0
+            self.systemStatusLbl.textColor = DeviceStatus.getSystemImage(value:data).2
+        }
         self.systemTitleLbl.text = DeviceStatus.System.titleString
     }
 }
 
-
+// MARK: - Extension For BleProtocol
+//===========================
 extension HomeVC: BleProtocol{
     func didBleOff() {
         self.setupSystemInfo()
     }
     
     func didConnect(name: String) {
-        print(name)
     }
     
     func didUpdateValue(){
-//        self.setupSystemInfo()
     }
 }
 
+// MARK: - Extension For loadCoachMark
+//===========================
 extension HomeVC{
-
     private func loadCoachMark(){
         DispatchQueue.main.async {
             
@@ -253,6 +294,8 @@ extension HomeVC{
     }
 }
 
+// MARK: - Extension For CoachMarksControllerDelegate
+//===========================
 extension HomeVC: CoachMarksControllerDataSource, CoachMarksControllerDelegate{
     
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {

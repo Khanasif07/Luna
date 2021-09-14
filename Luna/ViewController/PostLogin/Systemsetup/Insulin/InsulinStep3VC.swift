@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 class InsulinStep3VC: UIViewController {
     
@@ -18,7 +19,7 @@ class InsulinStep3VC: UIViewController {
     @IBOutlet weak var insulinType: UILabel!
     @IBOutlet weak var insulinCountTxtField: AppTextField!
     @IBOutlet weak var backBtn: UIButton!
-    
+    @IBOutlet weak var doneBtnBtmCost: NSLayoutConstraint!
     // MARK: - Variables
     //===========================
     
@@ -43,17 +44,19 @@ class InsulinStep3VC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        insulinCountTxtField?.layer.cornerRadius = 8.0
+        insulinCountTxtField?.round(radius: 8.0)
         doneBtn.round(radius: 8.0)
     }
     
     // MARK: - IBActions
     //===========================
     @IBAction func doneBtnAction(_ sender: AppButton) {
+        self.view.endEditing(true)
         SystemInfoModel.shared.insulinUnit =  Int(self.insulinCountTxtField.text ?? "0") ?? 0
         let vc = InsulinStep4VC.instantiate(fromAppStoryboard: .SystemSetup)
         vc.insulinConnectedSuccess = { [weak self] (sender) in
             guard let selff = self else { return }
+            selff.view.endEditing(true)
             if   SystemInfoModel.shared.isFromSetting {
                 CommonFunctions.showActivityLoader()
                 FirestoreController.checkUserExistInSystemDatabase {
@@ -94,8 +97,6 @@ class InsulinStep3VC: UIViewController {
     @IBAction func bckBtnTapped(_ sender: UIButton) {
         self.pop()
     }
-    
-    
 }
 
 // MARK: - Extension For Functions
@@ -104,8 +105,9 @@ extension InsulinStep3VC {
     
     private func initialSetup() {
         if #available(iOS 13.0, *) {
-        overrideUserInterfaceStyle = .light
+            overrideUserInterfaceStyle = .light
         }
+        registerNotification()
         insulinCountTxtField.delegate = self
         insulinCountTxtField.keyboardType = .numberPad
         insulinCountTxtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
@@ -113,8 +115,25 @@ extension InsulinStep3VC {
         insulinType.text = "\(SystemInfoModel.shared.longInsulinType)"
         insulinSubType.text = "\(SystemInfoModel.shared.longInsulinSubType)"
         insulinImgView.image = SystemInfoModel.shared.longInsulinImage
-        insulinDescLbl.text = "How much units of \(SystemInfoModel.shared.longInsulinType) did you take in the last 24 hours? This should be what your doctor has prescribed for you to take regularly."
+        insulinDescLbl.text = "How many units of \(SystemInfoModel.shared.longInsulinType) did you take in the last 24 hours? This should be what your doctor has prescribed for you to take regularly."
         self.doneBtn.isEnabled = !(insulinCountTxtField.text?.isEmpty ?? true)
+    }
+    
+    private func registerNotification(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name: UIApplication.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(sender:)), name: UIApplication.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(sender: NSNotification) {
+        guard let info = sender.userInfo, let keyboardHeight = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height, let duration: TimeInterval = (info[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else { return }
+        self.doneBtnBtmCost.constant = keyboardHeight
+        UIView.animate(withDuration: duration) { self.view.layoutIfNeeded() }
+    }
+    
+    @objc func keyboardWillHide(sender: NSNotification) {
+        guard let info = sender.userInfo, let duration: TimeInterval = (info[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else { return }
+        self.doneBtnBtmCost.constant = 30.0
+        UIView.animate(withDuration: duration) { self.view.layoutIfNeeded() }
     }
 }
 
@@ -135,7 +154,8 @@ extension InsulinStep3VC : UITextFieldDelegate{
         let currentString: NSString = textField.text! as NSString
         let newString: NSString =
             currentString.replacingCharacters(in: range, with: string) as NSString
-        insulinCountTxtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
+        self.insulinCountTxtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
+        self.doneBtn.isEnabled = !(newString.isEqual(to: ""))
         if textField.text?.count == 0 && string == "0" {
             return false
         }

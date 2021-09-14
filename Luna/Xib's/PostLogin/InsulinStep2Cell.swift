@@ -33,7 +33,7 @@ class InsulinStep2Cell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        dataContainerView.layer.cornerRadius = 10.0
+        dataContainerView.round(radius: 10.0)
     }
     
     // MARK: - IBActions

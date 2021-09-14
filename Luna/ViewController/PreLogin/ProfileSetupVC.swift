@@ -99,7 +99,7 @@ class ProfileSetupVC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func logoutBtnTapped(_ sender: UIButton) {
-        showAlertWithAction(title: "Logout", msg: "Are you sure want to logout?", cancelTitle: "No", actionTitle: "Yes") {
+        showAlertWithAction(title: LocalizedString.logout.localized, msg: LocalizedString.are_you_sure_want_to_logout.localized, cancelTitle: LocalizedString.no.localized, actionTitle: LocalizedString.yes.localized) {
             FirestoreController.logOut { (isLogout) in
                 if !isLogout {
                     self.performCleanUp()
@@ -118,10 +118,10 @@ class ProfileSetupVC: UIViewController {
         switch self.messageListing.endIndex {
         case 3:
             senderName = txt
-            let senderMessage = Message(txt, "Sender")
+            let senderMessage = Message(txt, LocalizedString.sender.localized)
             self.messageListing.append(senderMessage)
             self.messageTableView.reloadData()
-            let receiverMessage = Message("Hi \(senderName), what is your last name?", "Receiver")
+            let receiverMessage = Message("Hi \(senderName), what is your last name?", LocalizedString.receiver.localized)
             self.messageListing.append(receiverMessage)
             CommonFunctions.delay(delay: 0.25) {
                 self.messageTableView.reloadData()
@@ -134,10 +134,10 @@ class ProfileSetupVC: UIViewController {
             self.msgTxtField.text = datePicker.selectedDate()?.convertToDefaultString()
             self.sendBtn.isEnabledWithoutBackground = !(msgTxtField.text?.count == 0)
             self.senderLastName = txt
-            let senderMessage = Message(txt, "Sender")
+            let senderMessage = Message(txt, LocalizedString.sender.localized)
             self.messageListing.append(senderMessage)
             self.messageTableView.reloadData()
-            let receiverMessage = Message("What’s your date of birth, \(senderName)?", "Receiver")
+            let receiverMessage = Message(LocalizedString.what_your_date_of_birth.localized + ", \(senderName)?", LocalizedString.receiver.localized)
             self.messageListing.append(receiverMessage)
             CommonFunctions.delay(delay: 0.25) {
                 self.messageTableView.reloadData()
@@ -150,11 +150,11 @@ class ProfileSetupVC: UIViewController {
             self.senderDob = txt
             bottomContainerView.isHidden = true
             self.bottomContainerBtmConst.constant = (-68.0 - bottomSafeArea)
-            let senderMessage = Message(txt, "Sender")
+            let senderMessage = Message(txt, LocalizedString.sender.localized)
             self.messageListing.append(senderMessage)
             self.messageTableView.reloadData()
-            let receiverMessage = Message("Last question: \nWhat type of diabetes do you have?", "Receiver")
-            let typeMessage = Message("", "Sender","Type")
+            let receiverMessage = Message("Last question: \nWhat type of diabetes do you have?", LocalizedString.receiver.localized)
+            let typeMessage = Message("", LocalizedString.sender.localized,LocalizedString.type.localized)
             self.messageListing.append(receiverMessage)
             self.messageListing.append(typeMessage)
             CommonFunctions.delay(delay: 0.25) {
@@ -210,7 +210,7 @@ extension ProfileSetupVC {
         msgTxtField.delegate = self
         msgTxtField.autocapitalizationType = .words
         msgTxtField.becomeFirstResponder()
-        self.messageListing = [Message("Hello and welcome to Luna!", "Receiver"),Message("Please provide your details to set up your profile", "Receiver"),Message("What is your first name?", "Receiver")]
+        self.messageListing = [Message(LocalizedString.hello_and_welcome_to_Luna.localized, LocalizedString.receiver.localized),Message(LocalizedString.please_provide_your_details_to_set_up_your_profile.localized, LocalizedString.receiver.localized),Message(LocalizedString.what_is_your_first_name.localized, LocalizedString.receiver.localized)]
         self.messageTableView.reloadWithAnimation()
        }
     
@@ -251,13 +251,6 @@ extension ProfileSetupVC {
     }
     
     private func performCleanUp(for_logout: Bool = true) {
-        //        let userId = AppUserDefaults.value(forKey: .uid).stringValue
-        //        db.collection(ApiKey.users)
-        //            .document(userId).updateData([ApiKey.deviceToken : ""]) { (error) in
-        //                if let err = error {
-        //                    print(err.localizedDescription)
-        //                    CommonFunctions.showToastWithMessage(err.localizedDescription)
-        //                } else {
         let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
         AppUserDefaults.removeAllValues()
         UserModel.main = UserModel()
@@ -282,12 +275,12 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch self.messageListing[indexPath.row].senderType {
-        case "Receiver":
+        case LocalizedString.receiver.localized:
             switch self.messageListing[indexPath.row].cellType {
-            case "Decision":
+            case LocalizedString.decision.localized:
                 let receiverDecisionCell = tableView.dequeueCell(with: DecisionCell.self)
                 return receiverDecisionCell
-            case "Type":
+            case LocalizedString.type.localized:
                 let typeCell = tableView.dequeueCell(with: TypeTableCell.self)
                 return typeCell
             default:
@@ -297,7 +290,7 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
             }
         default:
             switch self.messageListing[indexPath.row].cellType {
-            case "Decision":
+            case LocalizedString.decision.localized:
                 let senderDecisionCell = tableView.dequeueCell(with: DecisionCell.self)
                 senderDecisionCell.yesBtn.setImage(#imageLiteral(resourceName: "thumbsUpNotSelected"), for: .normal)
                 senderDecisionCell.yesBtn.setImage(#imageLiteral(resourceName: "thumbsupSelected"), for: .selected)
@@ -307,7 +300,7 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                         self.bottomContainerView.isHidden = false
                     self.bottomContainerBtmConst.constant = 0.0
                     senderDecisionCell.yesBtn.isSelected = true
-                    let message = Message("What is your first name?", "Receiver")
+                        let message = Message(LocalizedString.what_is_your_first_name.localized, LocalizedString.receiver.localized)
                     self.messageListing.append(message)
                     self.messageTableView.reloadData()
                     self.scrollMsgToBottom()
@@ -318,7 +311,7 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                     print(self)
                 }
                 return senderDecisionCell
-            case "Type":
+            case LocalizedString.type.localized:
                 let typeCell = tableView.dequeueCell(with: TypeTableCell.self)
                 typeCell.configureCell()
                 typeCell.type1BtnTapped = {[weak self] in
@@ -328,8 +321,8 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                         self.bottomContainerBtmConst.constant = (-68.0 - self.bottomSafeArea)
                         typeCell.type1Btn.isSelected = true
                         self.diabetesType = typeCell.type1Btn.titleLabel?.text ?? ""
-                        let message = Message("Thank you \(self.senderName) for providing this information, now let us get the rest of the Luna system setup. Are you ready?", "Receiver")
-                    let lastMessage = Message("Yes", "Sender","Type")
+                        let message = Message("Thank you \(self.senderName) for providing this information, now let us get the rest of the Luna system setup. Are you ready?", LocalizedString.receiver.localized)
+                        let lastMessage = Message(LocalizedString.yes.localized, LocalizedString.sender.localized,LocalizedString.type.localized)
                     self.messageListing.append(message)
                     self.messageListing.append(lastMessage)
                     self.messageListing.append(lastMessage)
@@ -362,8 +355,8 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                         self.bottomContainerBtmConst.constant = (-68.0 - self.bottomSafeArea)
                         typeCell.type2Btn.isSelected = true
                         self.diabetesType = typeCell.type2Btn.titleLabel?.text ?? ""
-                    let message = Message("Thank you \(self.senderName) for providing this information, now let us get the rest of the Luna system setup. Are you ready?", "Receiver")
-                    let lastMessage = Message("Yes", "Sender","Type")
+                    let message = Message("Thank you \(self.senderName) for providing this information, now let us get the rest of the Luna system setup. Are you ready?", LocalizedString.receiver.localized)
+                    let lastMessage = Message(LocalizedString.yes.localized, LocalizedString.sender.localized,LocalizedString.type.localized)
                     self.messageListing.append(message)
                     self.messageListing.append(lastMessage)
                     self.messageListing.append(lastMessage)
@@ -374,7 +367,7 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                 if self.messageListing.endIndex - 2 == indexPath.row &&  self.messageListing.endIndex == 13  {
                     typeCell.type1Btn.isHidden = true
                     typeCell.type2Btn.isHidden = false
-                    typeCell.type2Btn.setTitle("Yes", for: .normal)
+                    typeCell.type2Btn.setTitle(LocalizedString.yes.localized, for: .normal)
                     return typeCell
                 } else if self.messageListing.endIndex - 1 == indexPath.row &&  self.messageListing.endIndex == 13  {
                     typeCell.type1Btn.isHidden = true

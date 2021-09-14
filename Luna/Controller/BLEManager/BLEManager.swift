@@ -17,6 +17,7 @@ let writableCharacteristicCBUUID = CBUUID(string: "aa6b9004-9da2-4f80-9001-409ab
 let dataInCBUUID = CBUUID(string: "aa9ec828-43ba-4281-a122-48932207c8f3")
 let dataOutCBUUID = CBUUID(string: "aa9ec828-43ba-4281-a122-d17566d67c42")
 let lunaCBUUID = CBUUID(string: "DE612C8C-46C0-46B6-B820-4C92A6E67D97")
+let IOBout = CBUUID(string: "378EC9D6-075C-4BF6-89DC-0A8267F7B7B7")
 
 
 @objc public protocol BleProtocol {
@@ -240,6 +241,9 @@ extension BleManager: CBPeripheralDelegate {
             print("handled Characteristic Value for: \(String(describing: characteristic.value))")
         case CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9"):
             print("handled Characteristic Value for: \(String(describing: characteristic.value))")
+        case IOBout:
+            let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
+            print("handled Characteristic Value for IOBout:  \(data)")
         default:
             print("Unhandled Characteristic UUID: \(characteristic.uuid)")
         }
@@ -294,7 +298,7 @@ extension BleManager: CBCentralManagerDelegate {
         myperipheral = peripheral
         myperipheral?.delegate = self
         centralManager.stopScan()
-        centralManager.connect(myperipheral!, options: nil)
+        centralManager.connect(myperipheral!, options: [CBConnectPeripheralOptionNotifyOnConnectionKey:true, CBConnectPeripheralOptionNotifyOnDisconnectionKey: true])
     }
     
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -327,3 +331,4 @@ extension BleManager: CBCentralManagerDelegate {
         systemStatusData = ""
     }
 }
+

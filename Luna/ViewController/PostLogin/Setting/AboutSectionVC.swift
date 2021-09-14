@@ -12,13 +12,13 @@ class AboutSectionVC: UIViewController {
     
     // MARK: - IBOutlets
     //===========================
-    
     @IBOutlet weak var aboutTableView: UITableView!
     @IBOutlet weak var backView: UIView!
     
     // MARK: - Variables
     //===========================
-    var sections: [(UIImage,String)] = [(#imageLiteral(resourceName: "findAnswers"),"Find Answers"),(#imageLiteral(resourceName: "customerSupport"),"Customer Support"),(#imageLiteral(resourceName: "appVersion"),"App Version"),(#imageLiteral(resourceName: "termsConditions"),"Terms & Conditions"),(#imageLiteral(resourceName: "privacy"),"Privacy Policy")]
+
+    var sections: [(UIImage,String)] = [(#imageLiteral(resourceName: "findAnswers"),LocalizedString.find_Answers.localized),(#imageLiteral(resourceName: "customerSupport"),LocalizedString.customer_Support.localized),(#imageLiteral(resourceName: "appVersion"),LocalizedString.app_Version.localized),(#imageLiteral(resourceName: "termsConditions"),LocalizedString.terms_Conditions.localized),(#imageLiteral(resourceName: "privacy"),LocalizedString.privacy.localized)]
     
     // MARK: - Lifecycle
     //===========================
@@ -93,21 +93,21 @@ extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch sections[indexPath.row].1 {
-        case "Find Answers":
+        case LocalizedString.find_Answers.localized:
             let vc = SettingManualVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)
-        case "Customer Support":
+        case LocalizedString.customer_Support.localized:
             openMail()
-        case "Privacy Policy":
+        case LocalizedString.privacy.localized:
             let vc = AboutTermsPolicyVC.instantiate(fromAppStoryboard: .PostLogin)
             vc.titleString =  sections[indexPath.row].1
             vc.stringType = .privacyPolicy
             self.navigationController?.pushViewController(vc, animated: true)
-        case "App Version":
+        case LocalizedString.app_Version.localized:
             let vc = AboutTermsPolicyVC.instantiate(fromAppStoryboard: .PostLogin)
             vc.titleString =  sections[indexPath.row].1
             self.navigationController?.pushViewController(vc, animated: true)
-        case "Terms & Conditions":
+        case LocalizedString.terms_Conditions.localized:
             let vc = AboutTermsPolicyVC.instantiate(fromAppStoryboard: .PostLogin)
             vc.titleString =  sections[indexPath.row].1
             vc.stringType = .tnc
@@ -118,35 +118,28 @@ extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+// MARK: - Extension For MFMailComposeViewControllerDelegate
+//==========================================================
 extension AboutSectionVC: MFMailComposeViewControllerDelegate{
     
     func openMail() {
-        
         if MFMailComposeViewController.canSendMail() {
-            
             let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-            
             UINavigationBar.appearance().barTintColor = UIColor.white
             let composeVC = MFMailComposeViewController()
             composeVC.mailComposeDelegate = self
             composeVC.setToRecipients(["support@lunadiabetes.com"])
             composeVC.setSubject("Luna iOS App Feedback")
             composeVC.setMessageBody("""
-                
-                
-
-
             ------------------------------
             Device Information
             ------------------------------
             iOS Version = \(DeviceDetail.os_version)
             Luna App Version = \(appVersion ?? "1.0")
             Phone = \(DeviceDetail.device_model)
-
             Thank you!
             """, isHTML: false)
             self.present(composeVC, animated: true, completion: nil)
-            
         } else{
             showAlert(msg: "Mail not configured")            
         }

@@ -15,13 +15,9 @@ class CGMTypeTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.subTitlelbl.font = AppFonts.SF_Pro_Display_Medium.withSize(.x16)
+        self.outerView.layer.borderWidth = 1
+        self.outerView.round(radius: 10.0)
+        self.outerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }

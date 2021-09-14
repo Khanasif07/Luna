@@ -13,7 +13,6 @@ class MessageReceiverCell: UITableViewCell {
     
     //    MARK: OUTLETS
     //    =============
-    
     @IBOutlet weak var msgContainerView: UIView!
     @IBOutlet weak var msgLabel: UILabel!
     
@@ -22,7 +21,6 @@ class MessageReceiverCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         initialSetup()
-        // Initialization code
     }
     
     override func prepareForReuse() {

@@ -18,8 +18,7 @@ class CGMSelectorVC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    
-    var CGMTypeArray = ["Dexcom G6","Dexcom G7","Freestyle Libre 2","Freestyle Libre 3"]
+    var CGMTypeArray = [LocalizedString.dexcomG6.localized,LocalizedString.dexcomG7.localized,LocalizedString.freestyle_Libre2.localized,LocalizedString.freestyle_Libre3.localized]
 
     // MARK: - Lifecycle
     //===========================
@@ -67,22 +66,13 @@ extension CGMSelectorVC {
     private func initialSetup() {
        // btmContainerView.setBorder(width: 1.0, color: #colorLiteral(red: 0.9607843137, green: 0.5450980392, blue: 0.262745098, alpha: 1))
         CGMTypesTV.isHidden = false
-        
-        self.proceedBtn.layer.cornerRadius = 10
+        self.proceedBtn.round(radius: 10.0)
         self.proceedBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
-     
         self.IntroLbl.textColor = AppColors.fontPrimaryColor
-        
-        
         CGMTypesTV.register(UINib(nibName: "CGMTypeTableViewCell", bundle: nil), forCellReuseIdentifier: "CGMTypeTableViewCell")
         CGMTypesTV.delegate = self
         CGMTypesTV.dataSource = self
-        
-     
         CGMTypesTV.reloadData()
-        
-       // self.CGMTypesTV.registerCell(with: CGMTypeTableViewCell.self)
-        
     }
     
 }
@@ -92,7 +82,6 @@ extension CGMSelectorVC {
 //===========================
 extension CGMSelectorVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         print(CGMTypeArray.count)
         return CGMTypeArray.count
     }
@@ -100,8 +89,6 @@ extension CGMSelectorVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell:CGMTypeTableViewCell = CGMTypesTV.dequeueReusableCell(withIdentifier: "CGMTypeTableViewCell", for: indexPath) as! CGMTypeTableViewCell
-        
-   
         cell.subTitlelbl.text = CGMTypeArray[indexPath.row]
         if indexPath.row == 0{
             cell.nextBtn.setImage(UIImage(named: "Radio_selected"), for: .normal)
@@ -113,18 +100,10 @@ extension CGMSelectorVC : UITableViewDelegate, UITableViewDataSource {
             cell.subTitlelbl.textColor = AppColors.fontPrimaryColor
             cell.outerView.layer.borderColor = AppColors.fontPrimaryColor.cgColor
         }
-        
-        cell.subTitlelbl.font = AppFonts.SF_Pro_Display_Medium.withSize(.x16)
-        
-        cell.outerView.layer.borderWidth = 1
-        cell.outerView.layer.cornerRadius = 10
-        cell.outerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
-      
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
-    
 }

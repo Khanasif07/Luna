@@ -43,7 +43,7 @@ class ForgotPasswordVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         backBtnView.round()
-        emailTxtField.layer.cornerRadius = 8.0
+        emailTxtField.round(radius: 8.0)
         confirmBtn.round(radius: 8.0)
     }
     
@@ -52,7 +52,6 @@ class ForgotPasswordVC: UIViewController {
     @IBAction func backBtnAction(_ sender: UIButton) {
         self.pop()
     }
-    
     
     @IBAction func confirmEmailAction(_ sender: AppButton) {
         if !self.isEmailValid(string: self.emailTxt).0{

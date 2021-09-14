@@ -81,15 +81,11 @@ extension CGMConnectedVC {
         activityIndicator.isHidden = true
         self.titleLbl.textColor = UIColor.black
         self.subTitleLbl.textColor = AppColors.fontPrimaryColor
-        
-        outerView.layer.cornerRadius = 10
+        outerView.round(radius: 10.0)
         outerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
-
         self.okBtn.isEnabled = true
-        
-        self.okBtn.layer.cornerRadius = 10
+        self.okBtn.round(radius: 10.0)
         self.okBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
-        
         connectDexcomAccount()
     }
     
@@ -178,9 +174,9 @@ extension CGMConnectedVC {
                 speakBG(sgv: data[data.count - 1].sgv)
             }
         } else {
-            if data.count > 0 {
-                self.updateBadge(val: data[data.count - 1].sgv)
-            }
+//            if data.count > 0 {
+//                self.updateBadge(val: data[data.count - 1].sgv)
+//            }
             return
         }
         
@@ -366,10 +362,13 @@ extension CGMConnectedVC {
             }
             let entries = self.bgData
             if entries.count < 1 { return }
-            for cgmModel in entries {
-            FirestoreController.createCGMDataNode(direction: cgmModel.direction ?? "", sgv: cgmModel.sgv, date: cgmModel.date)
+            SystemInfoModel.shared.cgmData = self.bgData
+            if SystemInfoModel.shared.isFromSetting {
+                for cgmModel in entries {
+                    FirestoreController.createCGMDataNode(direction: cgmModel.direction ?? "", sgv: cgmModel.sgv, date: cgmModel.date)
+                }
             }
-            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
+            NotificationCenter.default.post(name: Notification.Name.CgmDataReceivedSuccessfully, object: [:])
 //            self.updateBGGraph()
 //            self.updateStats()
             
@@ -430,7 +429,7 @@ extension CGMConnectedVC {
 //                snoozerDelta = "+" + bgUnits.toDisplayUnits(String(deltaBG))
 //                self.latestDeltaString = "+" + String(deltaBG)
 //            }
-            self.updateBadge(val: latestBG)
+           // self.updateBadge(val: latestBG)
             
             // Snoozer Display
 //            guard let snoozer = self.tabBarController!.viewControllers?[2] as? SnoozeViewController else { return }

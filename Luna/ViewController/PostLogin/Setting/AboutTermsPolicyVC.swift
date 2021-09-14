@@ -7,6 +7,7 @@
 
 import UIKit
 import WebKit
+
 class AboutTermsPolicyVC: UIViewController {
     
     enum StringType {
@@ -25,7 +26,7 @@ class AboutTermsPolicyVC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var titleString: String = "Privacy"
+    var titleString: String = LocalizedString.privacy.localized
     var stringType: StringType = .tnc
     
     // MARK: - Lifecycle
@@ -57,8 +58,6 @@ class AboutTermsPolicyVC: UIViewController {
     @IBAction func backBtnAction(_ sender: UIButton) {
         self.pop()
     }
-    
-    
 }
 
 // MARK: - Extension For Functions
@@ -69,24 +68,7 @@ extension AboutTermsPolicyVC {
         if #available(iOS 13.0, *) {
         overrideUserInterfaceStyle = .light
         }
-        switch self.titleString {
-        case "App Version":
-            self.titleLbl.text = self.titleString
-            self.descLbl.text = "Version " + UIApplication.version
-        default:
-            self.titleLbl.text = self.titleString
-        }
-        webView.isHidden = true
-//        self.load("https://www.UnderDevelopment.com")
-
-        switch stringType {
-        case .tnc:
-            textLbl.text = LocalizedString.TnC.localized
-        case .privacyPolicy:
-            textLbl.text = LocalizedString.privacyPolicyString.localized
-        }
-        textLbl.textAlignment = .justified
-        
+        self.manageWkWebView()
     }
     
     func load(_ urlString: String) {
@@ -94,5 +76,27 @@ extension AboutTermsPolicyVC {
             let request = URLRequest(url: url)
             webView.load(request)
         }
+    }
+    
+    private func manageWkWebView(){
+        switch self.titleString {
+        case LocalizedString.app_Version.localized:
+            self.titleLbl.text = self.titleString
+            self.descLbl.isHidden = false
+            self.textLbl.isHidden = true
+            self.descLbl.text = "Luna App Version " + UIApplication.version
+        default:
+            self.descLbl.isHidden = true
+            self.textLbl.isHidden = false
+            self.titleLbl.text = self.titleString
+        }
+        webView.isHidden = true
+        switch stringType {
+        case .tnc:
+            textLbl.text = LocalizedString.TnC.localized
+        case .privacyPolicy:
+            textLbl.text = LocalizedString.privacyPolicyString.localized
+        }
+        textLbl.textAlignment = .justified
     }
 }

@@ -40,7 +40,7 @@ class ProfileTableCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         [txtField].forEach { (txtFld) in
-            txtFld?.layer.cornerRadius = 8.0
+            txtFld?.round(radius: 8.0)
             txtFld?.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         }
     }

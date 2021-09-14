@@ -25,7 +25,7 @@ class TypeTableCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         [type1Btn,type2Btn].forEach { (btn) in
-            btn?.layer.cornerRadius = 12.0
+            btn?.round(radius: 12.0)
         }
     }
     

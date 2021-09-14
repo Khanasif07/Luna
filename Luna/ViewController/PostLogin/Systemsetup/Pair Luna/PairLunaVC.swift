@@ -86,7 +86,7 @@ class PairLunaVC: UIViewController {
                 }
                 scene.deviceNotConnectedNavigation = {  [weak self] (sender) in
                     guard let selff = self else { return }
-//                    selff.pop()
+                    print(selff)
                    // MARK:- Need to work=================
                 }
                 let transition = CATransition()
@@ -113,20 +113,17 @@ class PairLunaVC: UIViewController {
     @IBAction func backBtnTapped(_ sender: UIButton) {
         self.pop()
     }
-
 }
 
 
 // MARK: - Extension For Functions
 //===========================
 extension PairLunaVC {
-    
     private func initialSetup() {
         SubIntroLbl.textColor = AppColors.fontPrimaryColor
         InfoIntroLbl.textColor =  AppColors.fontPrimaryColor
         self.proceedBtn.isEnabled = true
-        self.proceedBtn.layer.cornerRadius = 10
+        self.proceedBtn.round(radius: 10.0)
         self.proceedBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
     }
-  
 }

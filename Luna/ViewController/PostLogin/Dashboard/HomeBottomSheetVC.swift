@@ -18,20 +18,19 @@ class HomeBottomSheetVC: UIViewController {
     //================
     var topSafeArea: CGFloat = 0.0
     var bottomSafeArea: CGFloat = 0.0
+    var cgmDataArray : [ShareGlucoseData] = []
     lazy var swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(closePullUp))
     var fullView: CGFloat {
-        return (UIApplication.shared.statusBarFrame.height +
-            (51.0))
+        return UIApplication.shared.statusBarHeight + 51.0
+    }
+    var partialView: CGFloat {
+        return (textContainerHeight ?? 0.0) + UIApplication.shared.statusBarHeight + (110.5)
     }
     var textContainerHeight : CGFloat? {
         didSet{
             self.mainTableView.reloadData()
         }
     }
-    var partialView: CGFloat {
-        return (textContainerHeight ?? 0.0) + UIApplication.shared.statusBarFrame.height + (110.5)
-    }
-    var cgmDataArray : [ShareGlucoseData] = []
     var cgmData : [ShareGlucoseData] = []{
         didSet{
             self.cgmDataArray = cgmData
@@ -74,7 +73,6 @@ class HomeBottomSheetVC: UIViewController {
     }
     
     @objc func panGesture(_ recognizer: UIPanGestureRecognizer) {
-        
         let translation = recognizer.translation(in: self.view)
         let velocity = recognizer.velocity(in: self.view)
         let y = self.view.frame.minY
@@ -198,6 +196,7 @@ extension HomeBottomSheetVC : UITableViewDelegate,UITableViewDataSource {
         default:
             let cell = tableView.dequeueCell(with: BottomSheetChartCell.self, indexPath: indexPath)
             cell.cgmData = cgmDataArray
+            print(cgmData.endIndex)
             return cell
         }
     }
@@ -242,7 +241,6 @@ extension HomeBottomSheetVC: UIScrollViewDelegate{
         } else{
             self.mainTableView.isScrollEnabled = true
         }
-        
         //Additional workaround here.
     }
 }

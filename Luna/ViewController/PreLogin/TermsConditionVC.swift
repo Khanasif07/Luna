@@ -41,11 +41,8 @@ class TermsConditionVC: UIViewController {
     //===========================
     @IBAction func acceptBtnAction(_ sender: UIButton) {
         AppUserDefaults.save(value: true, forKey: .isTermsAndConditionSelected)
-//        self.goToLoginVC()
         self.goToSignUpVC()
     }
-    
-    
 }
 
 // MARK: - Extension For Functions
@@ -60,15 +57,13 @@ extension TermsConditionVC {
         textLbl.text = LocalizedString.TnC.localized
     }
     
-    func goToSignUpVC() {
+    private func goToSignUpVC() {
         let signupVC = SignupViewController.instantiate(fromAppStoryboard: .PreLogin)
         self.navigationController?.pushViewController(signupVC, animated: true)
     }
     
-     func goToLoginVC(){
+     private func goToLoginVC(){
         let vc = LoginViewController.instantiate(fromAppStoryboard: .PreLogin)
         self.navigationController?.pushViewController(vc, animated: true)
     }
-  
-      
 }
