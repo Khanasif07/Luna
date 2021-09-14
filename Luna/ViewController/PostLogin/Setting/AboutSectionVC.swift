@@ -18,7 +18,7 @@ class AboutSectionVC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var sections: [(UIImage,String)] = [(#imageLiteral(resourceName: "findAnswers"),"Find Answers"),(#imageLiteral(resourceName: "customerSupport"),"Customer Support"),(#imageLiteral(resourceName: "appVersion"),"App Version"),(#imageLiteral(resourceName: "termsConditions"),"Terms & Conditions"),(#imageLiteral(resourceName: "privacy"),"Privacy")]
+    var sections: [(UIImage,String)] = [(#imageLiteral(resourceName: "findAnswers"),"Find Answers"),(#imageLiteral(resourceName: "customerSupport"),"Customer Support"),(#imageLiteral(resourceName: "appVersion"),"App Version"),(#imageLiteral(resourceName: "termsConditions"),"Terms & Conditions"),(#imageLiteral(resourceName: "privacy"),"Privacy Policy")]
     
     // MARK: - Lifecycle
     //===========================
@@ -98,9 +98,10 @@ extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
             self.navigationController?.pushViewController(vc, animated: true)
         case "Customer Support":
             openMail()
-        case "Privacy":
+        case "Privacy Policy":
             let vc = AboutTermsPolicyVC.instantiate(fromAppStoryboard: .PostLogin)
             vc.titleString =  sections[indexPath.row].1
+            vc.stringType = .privacyPolicy
             self.navigationController?.pushViewController(vc, animated: true)
         case "App Version":
             let vc = AboutTermsPolicyVC.instantiate(fromAppStoryboard: .PostLogin)
@@ -109,6 +110,7 @@ extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
         case "Terms & Conditions":
             let vc = AboutTermsPolicyVC.instantiate(fromAppStoryboard: .PostLogin)
             vc.titleString =  sections[indexPath.row].1
+            vc.stringType = .tnc
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             CommonFunctions.showToastWithMessage("Under Development")

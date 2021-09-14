@@ -810,7 +810,7 @@ enum LocalizedString : String {
     """
     
     case privacyPolicyString = """
-    Privacy Policy
+
     PLEASE READ THIS PRIVACY STATEMENT CAREFULLY. LUNA HEALTH, INC. PRIVACY STATEMENT INTRODUCTION
     Privacy is very important to us. We also understand that privacy is very important to you. This Privacy Statement tells you how Luna Health and our affiliates, protect and use information that we gather through this Luna Health website (the “website”) as well as our Luna Health medical product and the software or mobile application (the “application”) that support it (“Luna Health Services,” and, together with the website, our “Services”). This Privacy Statement does not apply to Luna Health websites that do not expressly link to it. You should review the privacy statement posted on other Luna Health websites when you visit them. This website, the application and this Privacy Statement are intended for a U.S. audience.
     By using the Services, you agree to the terms of the most recent version of this Privacy Statement. Please also read our Terms of Use to understand the general rules about your use of our Services. Except as written in any other disclaimers, policies, terms of use, or other notices on this website or application, this Privacy Statement and the Terms of Use are the complete agreement between you and Luna Health with respect to your use of the Services.
