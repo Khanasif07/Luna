@@ -54,10 +54,10 @@ class SessionFilterVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         initialSetup()
     }
-   
+    
     // MARK: - IBActions
     //===========================
     @IBAction func resetBtnAction(_ sender: UIButton) {
@@ -78,7 +78,7 @@ class SessionFilterVC: UIViewController {
     @IBAction func backBtnTapped(_ sender: UIButton) {
         self.pop()
     }
-
+    
 }
 
 
@@ -87,39 +87,37 @@ class SessionFilterVC: UIViewController {
 extension SessionFilterVC {
     
     private func initialSetup() {
-       // btmContainerView.setBorder(width: 1.0, color: #colorLiteral(red: 0.9607843137, green: 0.5450980392, blue: 0.262745098, alpha: 1))
         proceedBtn.isEnabled = true
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
+        self.setupFontsAndColor()
+    }
+    
+    // end time action
+    @objc func cancelEndPicker(){
+        view.endEditing(true)
+    }
+    
+    private func setupFontsAndColor(){
         startLbl.text = "Start Date"
         startLbl.textColor = AppColors.fontPrimaryColor
         startLbl.font = AppFonts.SF_Pro_Display_Semibold.withSize(.x14)
-        
         EndLbl.text = "End Date"
         EndLbl.textColor = AppColors.fontPrimaryColor
         EndLbl.font = AppFonts.SF_Pro_Display_Semibold.withSize(.x14)
-        
-        
         startlTF.layer.borderWidth = 1
-        startlTF.layer.cornerRadius = 10
+        startlTF.round(radius: 10.0)
         startlTF.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
         startlTF.layer.borderColor = AppColors.fontPrimaryColor.cgColor
-
-        
-        
         endTF.layer.borderWidth = 1
-        endTF.layer.cornerRadius = 10
+        endTF.round(radius: 10.0)
         endTF.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
         endTF.layer.borderColor = AppColors.fontPrimaryColor.cgColor
         
         ResetBtn.setTitleColor(AppColors.appGreenColor, for: .normal)
-        
-        
-        self.proceedBtn.layer.cornerRadius = 10
+        self.proceedBtn.round(radius: 10.0)
         self.proceedBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
-        
-        
         //....for start time
         let toolBar2 = UIToolbar()
         toolBar2.barStyle = UIBarStyle.default
@@ -135,7 +133,7 @@ extension SessionFilterVC {
         
         let selectButton = UIBarButtonItem(title: "Select", style: UIBarButtonItem.Style.done, target: self, action:nil)
         selectButton.tintColor = .black
-
+        
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(cancelStartPicker))
         cancelButton.tintColor = .red
@@ -171,7 +169,6 @@ extension SessionFilterVC {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
-        //dateFormatter.timeZone = TimeZone.current
         if let startDate = startdate {
             startlTF.text = dateFormatter.string(from: startDate as Date)
         }
@@ -180,19 +177,12 @@ extension SessionFilterVC {
         }
     }
     
-    // end time action
-    @objc func cancelEndPicker(){
-        view.endEditing(true)
-    }
-    
     @objc func DoneEndPicker(){
         let date = EndTimePicker.date
-//        let today = NSDate()
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US")
         dateFormatter.dateFormat = "MM/dd/yyyy"
         endTF.text = dateFormatter.string(from: date)
-//        endTF.text = dateFormatter.string(from: today as Date)
         view.endEditing(true)
         self.proceedBtn.isEnabled = true
     }
@@ -203,15 +193,13 @@ extension SessionFilterVC {
     }
     
     @objc func DoneStatyPicker(){
-//        print(StartTimePicker.timeZone)
         let date = StartTimePicker.date
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US")
         dateFormatter.dateFormat = "MM/dd/yyyy"
         startlTF.text = dateFormatter.string(from: date)
-//        startlTF.text = dateFormatter.string(from: date)
         view.endEditing(true)
         self.proceedBtn.isEnabled = true
     }
-  
+    
 }
