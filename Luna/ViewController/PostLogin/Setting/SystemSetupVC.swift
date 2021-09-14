@@ -16,7 +16,6 @@ class SystemSetupVC: UIViewController {
     
     // MARK: - IBOutlets
     //===========================
-    
     @IBOutlet weak var systemTableView: UITableView!
     @IBOutlet weak var backView: UIView!
     
@@ -54,7 +53,6 @@ class SystemSetupVC: UIViewController {
     
     // MARK: - IBActions
     //===========================
-    
     @IBAction func backBtnAction(_ sender: Any) {
         self.pop()
     }

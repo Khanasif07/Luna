@@ -7,6 +7,7 @@
 
 import UIKit
 import WebKit
+
 class AboutTermsPolicyVC: UIViewController {
     
     enum StringType {
@@ -57,8 +58,6 @@ class AboutTermsPolicyVC: UIViewController {
     @IBAction func backBtnAction(_ sender: UIButton) {
         self.pop()
     }
-    
-    
 }
 
 // MARK: - Extension For Functions
@@ -69,6 +68,17 @@ extension AboutTermsPolicyVC {
         if #available(iOS 13.0, *) {
         overrideUserInterfaceStyle = .light
         }
+        self.manageWkWebView()
+    }
+    
+    func load(_ urlString: String) {
+        if let url = URL(string: urlString) {
+            let request = URLRequest(url: url)
+            webView.load(request)
+        }
+    }
+    
+    private func manageWkWebView(){
         switch self.titleString {
         case LocalizedString.app_Version.localized:
             self.titleLbl.text = self.titleString
@@ -81,8 +91,6 @@ extension AboutTermsPolicyVC {
             self.titleLbl.text = self.titleString
         }
         webView.isHidden = true
-//        self.load("https://www.UnderDevelopment.com")
-
         switch stringType {
         case .tnc:
             textLbl.text = LocalizedString.TnC.localized
@@ -90,13 +98,5 @@ extension AboutTermsPolicyVC {
             textLbl.text = LocalizedString.privacyPolicyString.localized
         }
         textLbl.textAlignment = .justified
-        
-    }
-    
-    func load(_ urlString: String) {
-        if let url = URL(string: urlString) {
-            let request = URLRequest(url: url)
-            webView.load(request)
-        }
     }
 }

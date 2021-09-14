@@ -174,6 +174,28 @@ enum LocalizedString : String {
     case terms_Conditions
     case privacy
     
+    case do_not_Allow
+    case allow
+    case faceID_Touch_ID_may_not_be_available_or_configured
+    case what_is_your_first_name
+    case hello_and_welcome_to_Luna
+    case please_provide_your_details_to_set_up_your_profile
+    case what_your_date_of_birth
+    
+    case type1
+    case type2
+    
+    case dexcomG6
+    case dexcomG7
+    case freestyle_Libre2
+    case freestyle_Libre3
+    
+    case battery
+    case reservoir
+    case system
+
+
+    
     //Updated Localized String
     case type_your_message_here
     case view_All_Offer

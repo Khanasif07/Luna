@@ -9,13 +9,16 @@ import UIKit
 
 class DeviceConnectedVC: UIViewController {
     
+    // MARK: - Variables
+    //===========================
+    var lunaPairedSuccess: ((UIButton)->())?
+
+    
     // MARK: - IBOutlets
     //===========================
     @IBOutlet weak var outerView: UIView!
     @IBOutlet weak var OKBtn: UIButton!
     
-    var lunaPairedSuccess: ((UIButton)->())?
-
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
@@ -46,9 +49,6 @@ class DeviceConnectedVC: UIViewController {
     @IBAction func dissmissBtnTapped(_ sender: UIButton) {
         self.dismiss(animated: false, completion: nil)
     }
-
-  
-
 }
 
 
@@ -61,10 +61,10 @@ extension DeviceConnectedVC {
         overrideUserInterfaceStyle = .light
         }
         self.OKBtn.isEnabled = true
-        self.OKBtn.layer.cornerRadius = 10
+        self.OKBtn.round(radius: 10.0)
         self.OKBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
    
-        outerView.layer.cornerRadius = 10
+        outerView.round(radius: 10.0)
         outerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
         
     }

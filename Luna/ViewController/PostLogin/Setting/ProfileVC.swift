@@ -68,10 +68,7 @@ class ProfileVC: UIViewController {
             CommonFunctions.hideActivityLoader()
             CommonFunctions.showToastWithMessage(error.localizedDescription)
         }
-
     }
-    
-    
 }
 
 // MARK: - Extension For Functions
@@ -104,7 +101,7 @@ extension ProfileVC {
     
     private func setupDatePicker(){
         self.typePickerView.delegate = self
-        self.typePickerView.dataArray = ["Type 1","Type 2"]
+        self.typePickerView.dataArray = [LocalizedString.type1.localized,LocalizedString.type2.localized]
         let indexx = self.typePickerView.dataArray.firstIndex(where: { (tupls) -> Bool in
             return tupls == UserModel.main.diabetesType
         })

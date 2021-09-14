@@ -14,9 +14,9 @@ enum DeviceStatus {
     
     var titleString: String? {
         switch self {
-        case .Battery: return "Battery"
-        case .ReservoirLevel: return "Reservoir"
-        case .System: return "System"
+        case .Battery: return LocalizedString.battery.localized
+        case .ReservoirLevel: return LocalizedString.reservoir.localized
+        case .System: return LocalizedString.system.localized
         }
     }
     
@@ -75,7 +75,6 @@ enum DeviceStatus {
         default:
             return ("Fill",#imageLiteral(resourceName: "reservoir0Bars"))
         }
-      
     }
     
     static func getSystemImage(value: String)-> (String,UIImage?,UIColor){
@@ -96,8 +95,5 @@ enum DeviceStatus {
         default:
             return ("No Signal",#imageLiteral(resourceName: "noSignal"),#colorLiteral(red: 0.9607843137, green: 0.5450980392, blue: 0.262745098, alpha: 1))
         }
-      
     }
-    
-    
 }

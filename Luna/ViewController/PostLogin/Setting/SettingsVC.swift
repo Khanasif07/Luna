@@ -50,11 +50,9 @@ class SettingsVC: UIViewController {
     
     // MARK: - IBActions
     //===========================
-    
     @IBAction func backBtnAction(_ sender: Any) {
         self.pop()
     }
-    
 }
 
 // MARK: - Extension For Functions

@@ -49,16 +49,13 @@ class CGMDATASHAREVC: UIViewController {
     
     @IBAction func crossBtnTapped(_ sender: AppButton) {
         self.dismiss(animated: false, completion: nil)
-
     }
-
 }
 
 
 // MARK: - Extension For Functions
 //===========================
 extension CGMDATASHAREVC {
-    
     private func initialSetup() {
         if #available(iOS 13.0, *) {
         overrideUserInterfaceStyle = .light
@@ -66,13 +63,10 @@ extension CGMDATASHAREVC {
         self.titleLbl.textColor = UIColor.black
         self.subTitleLbl.textColor = AppColors.fontPrimaryColor
         self.conformLbl.textColor = UIColor.black
-        
-        outerView.layer.cornerRadius = 10
+        outerView.round(radius: 10.0)
         outerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
-
         self.okBtn.isEnabled = true
-        
-        self.okBtn.layer.cornerRadius = 10
+        self.okBtn.round(radius: 10.0)
         self.okBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
     }
 }

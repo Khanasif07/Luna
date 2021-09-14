@@ -15,7 +15,6 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     // MARK: - IBOutlets
     //===========================
     @IBOutlet weak var chartView: LineChartView!
-    //    @IBOutlet weak var chartView: Chart!
     
     // MARK: - Variables
     //===========================

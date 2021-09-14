@@ -109,11 +109,16 @@ extension SystemSetupStep1VC {
         }
         self.addObserver()
         self.tableViewSetup()
+        self.setupProgressView()
+       
+    }
+    
+    private func setupProgressView(){
         self.doneBtn.isHidden = true
         self.doneBtnBottmCost.constant = 0.0
         self.doneBtnHeightCost.constant = 0.0
         self.progressView.progressTintColor = #colorLiteral(red: 0.2392156863, green: 0.7882352941, blue: 0.5764705882, alpha: 1)
-        self.progressView.layer.cornerRadius = 3
+        self.progressView.round(radius: 3.0)
         self.progressView.clipsToBounds = true
         // Set the rounded edge for the inner bar
         self.progressView.layer.sublayers![1].cornerRadius = 3

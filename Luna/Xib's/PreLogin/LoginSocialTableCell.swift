@@ -26,29 +26,20 @@ class LoginSocialTableCell: UITableViewCell {
     var googleBtnTapped: (()->())?
     var loginBtnTapped: (()->())?
 
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setUpAttributedString()
         self.setUpButtonInset()
         self.setUpBorder()
-//        switch userInterfaceStyle {
-//        case .dark:
-//            let imageView = UIImageView(image: UIImage(named: "apple"))
-//            appleBtn.setImage(imageView.image?.maskWithColor(color: UIColor.white), for: .normal)
-//        default:
-            let imageView = UIImageView(image: UIImage(named: "apple"))
-            appleBtn.setImage(imageView.image, for: .normal)
-//        }
+        let imageView = UIImageView(image: UIImage(named: "apple"))
+        appleBtn.setImage(imageView.image, for: .normal)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         [self.googleBtnView,self.appleBtnView].forEach { (btnView) in
-            btnView?.layer.cornerRadius = 8.0
+            btnView?.round(radius: 8.0)
         }
-//        self.googleBtnView.addShadow(cornerRadius: 4, color: UIColor.black16, offset: CGSize(width: 0.5, height: 0.5), opacity: 1, shadowRadius: 4)
-//        self.appleBtnView.addShadow(cornerRadius: 4, color: UIColor.black16, offset: CGSize(width: 0.5, height: 0.5), opacity: 1, shadowRadius: 4)
     }
     
     private func setUpBorder(){
@@ -97,35 +88,3 @@ class LoginSocialTableCell: UITableViewCell {
     
 }
  
-
-extension UITapGestureRecognizer {
-    func didTapAttributedTextsInLabel(label: UILabel, inRange targetRange: NSRange) -> Bool {
-        // Create instances of NSLayoutManager, NSTextContainer and NSTextStorage
-        let layoutManager = NSLayoutManager()
-        let textContainer = NSTextContainer(size: CGSize.zero)
-        let textStorage = NSTextStorage(attributedString: label.attributedText!)
-        
-        // Configure layoutManager and textStorage
-        layoutManager.addTextContainer(textContainer)
-        textStorage.addLayoutManager(layoutManager)
-        
-        // Configure textContainer
-        textContainer.lineFragmentPadding = 0.0
-        textContainer.lineBreakMode = label.lineBreakMode
-        textContainer.maximumNumberOfLines = label.numberOfLines
-        let labelSize = label.bounds.size
-        textContainer.size = labelSize
-        
-        // Find the tapped character location and compare it to the specified range
-        let locationOfTouchInLabel = self.location(in: label)
-        let textBoundingBox = layoutManager.usedRect(for: textContainer)
-        let textContainerOffset = CGPoint(x: (labelSize.width - textBoundingBox.size.width) * CGFloat(0.5) - textBoundingBox.origin.x,
-                                          y: (labelSize.height - textBoundingBox.size.height) * CGFloat(0.5) - textBoundingBox.origin.y)
-        
-        let locationOfTouchInTextContainer = CGPoint(x: locationOfTouchInLabel.x - textContainerOffset.x,
-                                                     y: locationOfTouchInLabel.y - textContainerOffset.y)
-        let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInTextContainer, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
-        
-        return NSLocationInRange(indexOfCharacter, targetRange)
-    }
-}

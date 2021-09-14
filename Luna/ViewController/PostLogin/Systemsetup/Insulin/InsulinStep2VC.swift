@@ -62,7 +62,6 @@ class InsulinStep2VC: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
-    
 }
 
 // MARK: - Extension For Functions
@@ -91,8 +90,6 @@ extension InsulinStep2VC {
             self.mainTableView.reloadData()
         }
     }
-    
-
 }
 
 // MARK: - Extension For TableView

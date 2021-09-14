@@ -17,7 +17,6 @@ class DecisionCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
     @IBAction func noBtnAction(_ sender: UIButton) {

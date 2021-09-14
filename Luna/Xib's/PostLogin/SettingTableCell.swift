@@ -26,7 +26,6 @@ class SettingTableCell: UITableViewCell {
     //===========================
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
     override func layoutSubviews() {
@@ -40,6 +39,4 @@ class SettingTableCell: UITableViewCell {
             handle(sender)
         }
     }
-    
-    
 }

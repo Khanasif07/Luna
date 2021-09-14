@@ -91,3 +91,23 @@
 "receiver" = "Receiver";
 "decision" = "Decision";
 "type" = "Type";
+"do_not_Allow" = "Don’t Allow";
+"allow" = "Allow";
+
+"faceID_Touch_ID_may_not_be_available_or_configured" = "Face ID/Touch ID may not be available or configured";
+"what_is_your_first_name" = "What is your first name?";
+"hello_and_welcome_to_Luna" = "Hello and welcome to Luna!";
+"please_provide_your_details_to_set_up_your_profile" = "Please provide your details to set up your profile";
+"what_your_date_of_birth" = "What’s your date of birth";
+
+"type1" = "Type 1";
+"type2" = "Type 2";
+
+"dexcomG6" =  "Dexcom G6";
+"dexcomG7" = "Dexcom G7";
+"freestyle_Libre2" = "Freestyle Libre 2";
+"freestyle_Libre3" = "Freestyle Libre 3";
+
+"battery" = "Battery";
+"reservoir" = "Reservoir";
+"system" = "System";

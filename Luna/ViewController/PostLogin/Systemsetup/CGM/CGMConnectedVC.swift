@@ -81,15 +81,11 @@ extension CGMConnectedVC {
         activityIndicator.isHidden = true
         self.titleLbl.textColor = UIColor.black
         self.subTitleLbl.textColor = AppColors.fontPrimaryColor
-        
-        outerView.layer.cornerRadius = 10
+        outerView.round(radius: 10.0)
         outerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
-
         self.okBtn.isEnabled = true
-        
-        self.okBtn.layer.cornerRadius = 10
+        self.okBtn.round(radius: 10.0)
         self.okBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
-        
         connectDexcomAccount()
     }
     

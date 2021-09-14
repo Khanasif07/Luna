@@ -12,7 +12,6 @@ class SettingManualVC: UIViewController {
     
     // MARK: - IBOutlets
     //===========================
-    
     @IBOutlet weak var aboutTableView: UITableView!
     @IBOutlet weak var backView: UIView!
     
@@ -49,7 +48,6 @@ class SettingManualVC: UIViewController {
     @IBAction func backBtnAction(_ sender: Any) {
         self.pop()
     }
-    
 }
 
 // MARK: - Extension For Functions

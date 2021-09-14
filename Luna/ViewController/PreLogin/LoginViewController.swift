@@ -25,7 +25,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var loginTableView: UITableView!
     
-    
     // MARK: - Variables
     //===========================
     var emailTxt: String = ""
@@ -52,8 +51,7 @@ class LoginViewController: UIViewController {
             return .lightContent
         }
     }
-    
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
@@ -70,8 +68,6 @@ class LoginViewController: UIViewController {
     
     // MARK: - IBActions
     //===========================
-    
-    
 }
 
 // MARK: - Extension For Functions
@@ -129,7 +125,7 @@ extension LoginViewController {
     }
     
     
-    func goToSignUpVC() {
+    private func goToSignUpVC() {
         let signupVC = SignupViewController.instantiate(fromAppStoryboard: .PreLogin)
         self.navigationController?.pushViewController(signupVC, animated: true)
     }
@@ -139,7 +135,7 @@ extension LoginViewController {
         self.navigationController?.pushViewController(forgotPassVC, animated: true)
     }
     
-    func goToProfileSetupVC(){
+    private func goToProfileSetupVC(){
        let bleVC = ProfileSetupVC.instantiate(fromAppStoryboard: .PreLogin)
        self.navigationController?.pushViewController(bleVC, animated: false)
    }
@@ -185,7 +181,7 @@ extension LoginViewController {
         if #available(iOS 8.0, macOS 10.12.1, *) {
             biometricIDAuth.canEvaluate { (canEvaluate, _, canEvaluateError) in
                 guard canEvaluate else {
-                    CommonFunctions.showToastWithMessage("Face ID/Touch ID may not be available or configured")
+                    CommonFunctions.showToastWithMessage(LocalizedString.faceID_Touch_ID_may_not_be_available_or_configured.localized)
                     return
                 }
                 biometricIDAuth.evaluate { [weak self] (success, error) in
@@ -358,9 +354,6 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
             }
             cell.loginBtnTapped = { [weak self] in
                 guard let self = `self` else { return }
-//                self.emailTxt = ""
-//                self.passTxt = ""
-//                self.goToSignUpVC()
                 self.pop()
             }
             return cell

@@ -137,7 +137,7 @@ class ProfileSetupVC: UIViewController {
             let senderMessage = Message(txt, LocalizedString.sender.localized)
             self.messageListing.append(senderMessage)
             self.messageTableView.reloadData()
-            let receiverMessage = Message("What’s your date of birth, \(senderName)?", LocalizedString.receiver.localized)
+            let receiverMessage = Message(LocalizedString.what_your_date_of_birth.localized + ", \(senderName)?", LocalizedString.receiver.localized)
             self.messageListing.append(receiverMessage)
             CommonFunctions.delay(delay: 0.25) {
                 self.messageTableView.reloadData()
@@ -210,7 +210,7 @@ extension ProfileSetupVC {
         msgTxtField.delegate = self
         msgTxtField.autocapitalizationType = .words
         msgTxtField.becomeFirstResponder()
-        self.messageListing = [Message("Hello and welcome to Luna!", LocalizedString.receiver.localized),Message("Please provide your details to set up your profile", LocalizedString.receiver.localized),Message("What is your first name?", LocalizedString.receiver.localized)]
+        self.messageListing = [Message(LocalizedString.hello_and_welcome_to_Luna.localized, LocalizedString.receiver.localized),Message(LocalizedString.please_provide_your_details_to_set_up_your_profile.localized, LocalizedString.receiver.localized),Message(LocalizedString.what_is_your_first_name.localized, LocalizedString.receiver.localized)]
         self.messageTableView.reloadWithAnimation()
        }
     
@@ -251,13 +251,6 @@ extension ProfileSetupVC {
     }
     
     private func performCleanUp(for_logout: Bool = true) {
-        //        let userId = AppUserDefaults.value(forKey: .uid).stringValue
-        //        db.collection(ApiKey.users)
-        //            .document(userId).updateData([ApiKey.deviceToken : ""]) { (error) in
-        //                if let err = error {
-        //                    print(err.localizedDescription)
-        //                    CommonFunctions.showToastWithMessage(err.localizedDescription)
-        //                } else {
         let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
         AppUserDefaults.removeAllValues()
         UserModel.main = UserModel()
@@ -307,7 +300,7 @@ extension ProfileSetupVC : UITableViewDelegate, UITableViewDataSource {
                         self.bottomContainerView.isHidden = false
                     self.bottomContainerBtmConst.constant = 0.0
                     senderDecisionCell.yesBtn.isSelected = true
-                    let message = Message("What is your first name?", LocalizedString.receiver.localized)
+                        let message = Message(LocalizedString.what_is_your_first_name.localized, LocalizedString.receiver.localized)
                     self.messageListing.append(message)
                     self.messageTableView.reloadData()
                     self.scrollMsgToBottom()

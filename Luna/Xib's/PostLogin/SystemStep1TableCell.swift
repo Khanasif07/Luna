@@ -37,8 +37,8 @@ class SystemStep1TableCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        startBtn.layer.cornerRadius = 8.0
-        dataContainerView.layer.cornerRadius = 10.0
+        startBtn.round(radius: 8.0)
+        dataContainerView.round(radius: 10.0)
     }
     
     // MARK: - IBActions

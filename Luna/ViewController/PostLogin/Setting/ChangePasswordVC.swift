@@ -15,7 +15,6 @@ class ChangePasswordVC: UIViewController {
     
     // MARK: - IBOutlets
     //===========================
-    
     @IBOutlet weak var saveBtn: AppButton!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var settingTableView: UITableView!
@@ -27,7 +26,6 @@ class ChangePasswordVC: UIViewController {
     var currentPass: String = ""
     var sections: [String] = [LocalizedString.old_password.localized,LocalizedString.new_password.localized,LocalizedString.confirm_password.localized]
    
-    
     // MARK: - Lifecycle
     //===========================
     override func viewDidLoad() {

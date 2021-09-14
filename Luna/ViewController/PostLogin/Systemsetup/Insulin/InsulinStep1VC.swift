@@ -42,8 +42,8 @@ class InsulinStep1VC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         backView.round()
-        proceedBtn.layer.cornerRadius = 8.0
-        btmContainerView.layer.cornerRadius = 10.0
+        proceedBtn.round(radius: 8.0)
+        btmContainerView.round(radius: 10.0)
         importantBox.cornerRadius = 10.0
     }
     
@@ -57,7 +57,6 @@ class InsulinStep1VC: UIViewController {
     @IBAction func backBtnAction(_ sender: UIButton) {
         self.pop()
     }
-    
 }
 
 // MARK: - Extension For Functions

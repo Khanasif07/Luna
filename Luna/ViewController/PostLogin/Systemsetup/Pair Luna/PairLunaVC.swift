@@ -113,20 +113,17 @@ class PairLunaVC: UIViewController {
     @IBAction func backBtnTapped(_ sender: UIButton) {
         self.pop()
     }
-
 }
 
 
 // MARK: - Extension For Functions
 //===========================
 extension PairLunaVC {
-    
     private func initialSetup() {
         SubIntroLbl.textColor = AppColors.fontPrimaryColor
         InfoIntroLbl.textColor =  AppColors.fontPrimaryColor
         self.proceedBtn.isEnabled = true
-        self.proceedBtn.layer.cornerRadius = 10
+        self.proceedBtn.round(radius: 10.0)
         self.proceedBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
     }
-  
 }

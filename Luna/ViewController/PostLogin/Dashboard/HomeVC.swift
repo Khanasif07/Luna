@@ -15,20 +15,18 @@ class HomeVC: UIViewController {
     //===========================
     @IBOutlet weak var topNavView: UIView!
     @IBOutlet weak var bottomStackView: UIStackView!
-    
     @IBOutlet weak var topManualButton: UIButton!
     @IBOutlet weak var batteryTitleLbl: UILabel!
     @IBOutlet weak var batteryStatusLbl: UILabel!
     @IBOutlet weak var batteryImgView: UIImageView!
-    
     @IBOutlet weak var reservoirStatusLbl: UILabel!
     @IBOutlet weak var reservoirImgView: UIImageView!
     @IBOutlet weak var reservoirTitleLbl: UILabel!
-    
     @IBOutlet weak var batteryStackView: UIStackView!
     @IBOutlet weak var systemStatusLbl: UILabel!
     @IBOutlet weak var systemImgView: UIImageView!
     @IBOutlet weak var systemTitleLbl: UILabel!
+    
     // MARK: - Variables
     //==========================
     let bottomSheetVC = HomeBottomSheetVC()
@@ -92,14 +90,11 @@ class HomeVC: UIViewController {
         let vc = SessionDescriptionVC.instantiate(fromAppStoryboard: .CGPStoryboard)
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
 }
 
 // MARK: - Extension For Functions
 //===========================
 extension HomeVC {
-    
     private func initialSetup() {
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
@@ -129,7 +124,6 @@ extension HomeVC {
             }
         }
     }
-    
     
     private func addObserver(){
         NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
@@ -189,7 +183,6 @@ extension HomeVC {
         if let dict = notification.object as? NSDictionary {
                 print(dict)
         }
-        print("BleDidUpdateValue")
         self.setupSystemInfo()
     }
     
@@ -267,7 +260,8 @@ extension HomeVC {
     }
 }
 
-
+// MARK: - Extension For BleProtocol
+//===========================
 extension HomeVC: BleProtocol{
     func didBleOff() {
         self.setupSystemInfo()
@@ -280,8 +274,9 @@ extension HomeVC: BleProtocol{
     }
 }
 
+// MARK: - Extension For loadCoachMark
+//===========================
 extension HomeVC{
-
     private func loadCoachMark(){
         DispatchQueue.main.async {
             
@@ -299,6 +294,8 @@ extension HomeVC{
     }
 }
 
+// MARK: - Extension For CoachMarksControllerDelegate
+//===========================
 extension HomeVC: CoachMarksControllerDataSource, CoachMarksControllerDelegate{
     
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {

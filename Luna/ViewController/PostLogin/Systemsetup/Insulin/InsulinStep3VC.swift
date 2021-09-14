@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 class InsulinStep3VC: UIViewController {
     
@@ -43,7 +44,7 @@ class InsulinStep3VC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        insulinCountTxtField?.layer.cornerRadius = 8.0
+        insulinCountTxtField?.round(radius: 8.0)
         doneBtn.round(radius: 8.0)
     }
     
@@ -96,8 +97,6 @@ class InsulinStep3VC: UIViewController {
     @IBAction func bckBtnTapped(_ sender: UIButton) {
         self.pop()
     }
-    
-    
 }
 
 // MARK: - Extension For Functions
@@ -126,7 +125,6 @@ extension InsulinStep3VC {
     }
     
     @objc func keyboardWillShow(sender: NSNotification) {
-        //        containerScrollView.isScrollEnabled = true
         guard let info = sender.userInfo, let keyboardHeight = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height, let duration: TimeInterval = (info[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else { return }
         self.doneBtnBtmCost.constant = keyboardHeight
         UIView.animate(withDuration: duration) { self.view.layoutIfNeeded() }
