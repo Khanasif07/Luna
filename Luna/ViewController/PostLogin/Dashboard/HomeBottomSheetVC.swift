@@ -179,11 +179,11 @@ extension HomeBottomSheetVC : UITableViewDelegate,UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueCell(with: BottomSheetTopCell.self, indexPath: indexPath)
-            cell.cgmValueLbl.text = "\(SystemInfoModel.shared.cgmUnit)"
+            cell.cgmValueLbl.text =  "\(SystemInfoModel.shared.cgmUnit)".isEmpty ? "--" :  "\(SystemInfoModel.shared.cgmUnit)"
             return cell
         case 2:
             let cell = tableView.dequeueCell(with: BottomSheetInsulinCell.self, indexPath: indexPath)
-            cell.insulinCountLbl.text = BleManager.sharedInstance.reservoirLevelData
+            cell.insulinCountLbl.text =  "\(BleManager.sharedInstance.reservoirLevelData)".isEmpty ? "--" :  "\(BleManager.sharedInstance.reservoirLevelData)"
             return cell
         case 3:
             let cell = tableView.dequeueCell(with: BottomSheetBottomCell.self, indexPath: indexPath)

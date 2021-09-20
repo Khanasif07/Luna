@@ -26,6 +26,8 @@ class HomeVC: UIViewController {
     @IBOutlet weak var systemStatusLbl: UILabel!
     @IBOutlet weak var systemImgView: UIImageView!
     @IBOutlet weak var systemTitleLbl: UILabel!
+    @IBOutlet weak var batteryEmptyLbl: UILabel!
+    @IBOutlet weak var reservoirEmptyLbl: UILabel!
     
     // MARK: - Variables
     //==========================
@@ -233,8 +235,12 @@ extension HomeVC {
         self.batteryImgView.image = DeviceStatus.getBatteryImage(value:batteryData).1
         if DeviceStatus.getBatteryImage(value:batteryData).0.isEmpty{
             self.batteryStatusLbl.alpha = 0
+            self.batteryImgView.alpha = 0
+            self.batteryEmptyLbl.isHidden = false
         }else {
+            self.batteryEmptyLbl.isHidden = true
             self.batteryStatusLbl.alpha = 100
+            self.batteryImgView.alpha = 100
             self.batteryStatusLbl.text = DeviceStatus.getBatteryImage(value:batteryData).0
         }
         self.batteryTitleLbl.text = DeviceStatus.Battery.titleString
@@ -242,7 +248,11 @@ extension HomeVC {
         self.reservoirImgView.image = DeviceStatus.getReservoirImage(value:reservoirData).1
         if DeviceStatus.getReservoirImage(value:reservoirData).0.isEmpty{
             self.reservoirStatusLbl.alpha = 0
+            self.reservoirImgView.alpha = 0
+            self.reservoirEmptyLbl.isHidden = false
         }else {
+            self.reservoirImgView.alpha = 100
+            self.reservoirEmptyLbl.isHidden = true
             self.reservoirStatusLbl.alpha = 100
             self.reservoirStatusLbl.text = DeviceStatus.getReservoirImage(value:reservoirData).0
         }

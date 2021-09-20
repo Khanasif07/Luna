@@ -17,8 +17,9 @@ let writableCharacteristicCBUUID = CBUUID(string: "aa6b9004-9da2-4f80-9001-409ab
 let dataInCBUUID = CBUUID(string: "aa9ec828-43ba-4281-a122-48932207c8f3")
 let dataOutCBUUID = CBUUID(string: "aa9ec828-43ba-4281-a122-d17566d67c42")
 let lunaCBUUID = CBUUID(string: "DE612C8C-46C0-46B6-B820-4C92A6E67D97")
-let IOBout = CBUUID(string: "378EC9D6-075C-4BF6-89DC-0A8267F7B7B7")
-
+let IOBout = CBUUID(string: "378ec9d6-075c-4bf6-89dc-0a8267f7b7b7")
+let TDBD = CBUUID(string: "5927a433-a277-40b7-b2d4-e005330c5d99")
+let WriteAcknowledgement = CBUUID(string: "5927a433-a277-40b7-b2d4-0242ac130003")
 
 @objc public protocol BleProtocol {
     @objc optional func didDiscover(name:String, rssi:NSNumber)
@@ -171,12 +172,13 @@ extension BleManager: CBPeripheralDelegate {
                 print("\(characteristic.uuid): properties contains .write")
                 switch characteristic.uuid {
                 case dataInCBUUID:
+//                    writeValue(myCharacteristic: characteristic,value: "#CLEAR_DOSE_DATA")
                     writeValue(myCharacteristic: characteristic,value: "#GET_DOSE_DATA")
                 //writeValue(myCharacteristic: characteristic,value:  "GET_ERROR_LOG")
                 case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
-                    writeValue(myCharacteristic: characteristic,value:  "10:1621985510;")
+                    writeValue(myCharacteristic: characteristic,value:  "600:1631566277;")
                 case CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9"):
-                    writeValue(myCharacteristic: characteristic,value:  "10:1621985510;")
+                    writeValue(myCharacteristic: characteristic,value:  "600:1631566277;")
                 case dataOutCBUUID:
                     peripheral.setNotifyValue(true, for: characteristic)
                 case batteryCharacteristicCBUUID:
@@ -185,6 +187,8 @@ extension BleManager: CBPeripheralDelegate {
                     writeValue(myCharacteristic: characteristic,value: "7")
                 case statusCBUUID:
                     writeValue(myCharacteristic: characteristic,value: "0")
+                case TDBD:
+                    writeValue(myCharacteristic: characteristic,value: "5")
                 default:
                     peripheral.setNotifyValue(true, for: characteristic)
                     print("Do Nothing")
@@ -196,20 +200,17 @@ extension BleManager: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         switch characteristic.uuid {
         case batteryCharacteristicCBUUID:
-            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.batteryData = data
             let dic = ["batteryData": self.batteryData]
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: dic)
         case ReservoirLevelCharacteristicCBUUID:
-            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             print("handled Characteristic Value for Reservoir Level: \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.reservoirLevelData = data
             let dic = ["reservoirLevelData": self.reservoirLevelData]
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: dic)
         case statusCBUUID:
-            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             print("handled Characteristic Value for status : \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.systemStatusData = data
@@ -235,7 +236,6 @@ extension BleManager: CBPeripheralDelegate {
                 FirestoreController.createInsulinDataNode(insulinUnit: insulinModel.insulinData ?? "", date: Double(insulinModel.date))
             }
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
-            print(self.insulinData)
             print("handled Characteristic Value for dataOutCBUUID: \(String(describing: characteristic.value))")
         case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
             print("handled Characteristic Value for: \(String(describing: characteristic.value))")
@@ -244,6 +244,9 @@ extension BleManager: CBPeripheralDelegate {
         case IOBout:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for IOBout:  \(data)")
+        case WriteAcknowledgement:
+            let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
+            print("handled Characteristic Value for WriteAcknowledgement:  \(data)")
         default:
             print("Unhandled Characteristic UUID: \(characteristic.uuid)")
         }

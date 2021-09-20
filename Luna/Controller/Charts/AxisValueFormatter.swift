@@ -16,10 +16,13 @@ final class XAxisNameFormater: NSObject, IAxisValueFormatter {
 //        let formatter = DateFormatter()
 //        formatter.locale = Locale(identifier: "en_US_POSIX")
 //        formatter.dateFormat = "dd.MM"
-
+        let index = Int(value)
+        if let lastIndex = SystemInfoModel.shared.cgmData?.endIndex{
+            let value =  SystemInfoModel.shared.cgmData?[(lastIndex - index - 1)].date ?? 0.0
+            return value.getDateTimeFromTimeInterval()
+        }
         return value.getDateTimeFromTimeInterval()
     }
-
 }
 
 
@@ -193,7 +196,7 @@ open class BalloonMarker: MarkerImage{
     
     open override func refreshContent(entry: ChartDataEntry, highlight: Highlight)
     {
-        setLabel(String(entry.y))
+        setLabel(String(Int((entry.y))))
     }
     
     @objc open func setLabel(_ newLabel: String)

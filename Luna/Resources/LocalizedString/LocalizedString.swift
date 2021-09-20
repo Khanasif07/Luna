@@ -541,8 +541,6 @@ enum LocalizedString : String {
 
 extension LocalizedString {
     var localized : String {
-        
-        let language = AppUserDefaults.value(forKey: .language).intValue
         return self.rawValue.localizedString(lang: "en")
     }
     

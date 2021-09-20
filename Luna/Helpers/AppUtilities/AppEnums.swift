@@ -29,7 +29,7 @@ enum DeviceStatus {
     }
     
     static func getBatteryImage(value: String)-> (String,UIImage?){
-        let intValue = Int(value) ?? 0
+        let intValue = Int(value) ?? -1
         switch intValue {
         case 0...20:
             return ("Low",#imageLiteral(resourceName: "batteryEmpty"))
@@ -40,15 +40,15 @@ enum DeviceStatus {
         case 60...80:
             return ("",#imageLiteral(resourceName: "battery34"))
         case 80...100:
-            return ("",#imageLiteral(resourceName: "profile"))
+            return ("",#imageLiteral(resourceName: "batteryFull"))
         default:
-            return ("Low",#imageLiteral(resourceName: "batteryEmpty"))
+            return ("",#imageLiteral(resourceName: "batteryEmpty"))
         }
       
     }
     
    static func getReservoirImage(value: String)-> (String,UIImage?){
-        let intValue = Int(value)
+        let intValue = Int(value) ?? -1
         switch intValue {
         case 0:
             return ("Fill",#imageLiteral(resourceName: "reservoir0Bars"))
@@ -73,7 +73,7 @@ enum DeviceStatus {
         case 10:
             return ("",#imageLiteral(resourceName: "reservoir10Bars"))
         default:
-            return ("Fill",#imageLiteral(resourceName: "reservoir0Bars"))
+            return ("",#imageLiteral(resourceName: "reservoir0Bars"))
         }
     }
     

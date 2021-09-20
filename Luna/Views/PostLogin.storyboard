@@ -9,6 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="SF-Pro-Display-Bold.otf">
+            <string>SFProDisplay-Bold</string>
+        </array>
         <array key="SF-Pro-Display-Regular.otf">
             <string>SFProDisplay-Regular</string>
         </array>
@@ -247,6 +250,18 @@
                                             <constraint firstAttribute="width" constant="2" id="Iq0-01-NJy"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XBl-JY-zHm">
+                                        <rect key="frame" x="312.5" y="149" width="42" height="29"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
+                                        <color key="textColor" red="0.27058823529999998" green="0.7843137255" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e0B-BO-Igh">
+                                        <rect key="frame" x="186" y="149" width="42" height="29"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
+                                        <color key="textColor" red="0.27058823529411763" green="0.78431372549019607" blue="0.58039215686274503" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ge-dN-cdF">
                                         <rect key="frame" x="277.5" y="109" width="2" height="109.5"/>
                                         <color key="backgroundColor" red="0.91372549020000005" green="0.91372549020000005" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -264,10 +279,16 @@
                                     <constraint firstAttribute="trailing" secondItem="H7M-77-cDu" secondAttribute="trailing" id="KlQ-Jr-Lgv"/>
                                     <constraint firstItem="7Ge-dN-cdF" firstAttribute="centerX" secondItem="GfE-wD-EaN" secondAttribute="centerX" multiplier="1.5" constant="-32" id="MQW-zJ-CSq"/>
                                     <constraint firstAttribute="trailing" secondItem="GfE-wD-EaN" secondAttribute="trailing" constant="32" id="RLI-oK-SvA"/>
+                                    <constraint firstItem="e0B-BO-Igh" firstAttribute="centerY" secondItem="oOT-b1-0kf" secondAttribute="centerY" id="SNm-ZP-HdF"/>
                                     <constraint firstItem="H7M-77-cDu" firstAttribute="leading" secondItem="4dV-e8-3y2" secondAttribute="leading" id="VV5-Bp-EGp"/>
+                                    <constraint firstItem="e0B-BO-Igh" firstAttribute="leading" secondItem="oOT-b1-0kf" secondAttribute="leading" id="X85-mv-QPV"/>
                                     <constraint firstItem="7Ge-dN-cdF" firstAttribute="height" secondItem="GfE-wD-EaN" secondAttribute="height" id="YTb-4D-cCD"/>
                                     <constraint firstItem="UhC-ox-HuD" firstAttribute="centerY" secondItem="GfE-wD-EaN" secondAttribute="centerY" id="erJ-is-7K8"/>
+                                    <constraint firstItem="XBl-JY-zHm" firstAttribute="leading" secondItem="T6e-Ep-PB6" secondAttribute="leading" id="mDj-te-d07"/>
                                     <constraint firstItem="GfE-wD-EaN" firstAttribute="leading" secondItem="4dV-e8-3y2" secondAttribute="leading" constant="32" id="vWq-eo-a8L"/>
+                                    <constraint firstItem="XBl-JY-zHm" firstAttribute="centerY" secondItem="T6e-Ep-PB6" secondAttribute="centerY" id="xDM-9Z-Se6"/>
+                                    <constraint firstItem="XBl-JY-zHm" firstAttribute="trailing" secondItem="T6e-Ep-PB6" secondAttribute="trailing" id="xb5-zH-oAA"/>
+                                    <constraint firstItem="e0B-BO-Igh" firstAttribute="trailing" secondItem="oOT-b1-0kf" secondAttribute="trailing" id="yPT-jr-wkU"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -282,11 +303,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="batteryEmptyLbl" destination="XBl-JY-zHm" id="mHQ-xJ-MOa"/>
                         <outlet property="batteryImgView" destination="T6e-Ep-PB6" id="vdY-Fa-ov8"/>
                         <outlet property="batteryStackView" destination="Dew-rk-rAb" id="b4H-ZN-5od"/>
                         <outlet property="batteryStatusLbl" destination="I6x-sW-fc6" id="y7E-jM-cFI"/>
                         <outlet property="batteryTitleLbl" destination="uiW-Za-Zy8" id="luY-aW-hOL"/>
                         <outlet property="bottomStackView" destination="GfE-wD-EaN" id="BcB-z1-RSr"/>
+                        <outlet property="reservoirEmptyLbl" destination="e0B-BO-Igh" id="5t2-st-dhS"/>
                         <outlet property="reservoirImgView" destination="oOT-b1-0kf" id="jUB-Mm-sSY"/>
                         <outlet property="reservoirStatusLbl" destination="xPj-Yb-WBH" id="jVc-6P-Drh"/>
                         <outlet property="reservoirTitleLbl" destination="drR-tl-uam" id="iXy-Ah-4h5"/>

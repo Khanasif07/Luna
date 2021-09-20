@@ -20,6 +20,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     //===========================
     var cgmData : [ShareGlucoseData] = SystemInfoModel.shared.cgmData ?? []{
         didSet{
+            self.cgmData = self.cgmData.reversed()
             setDataCount(cgmData.endIndex, range: UInt32(cgmData.endIndex))
             let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.chartView.viewPortHandler,
                                                         xAxis: chartView.xAxis,
@@ -85,10 +86,14 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     }
     
     func setDataCount(_ count: Int, range: UInt32) {
-        let values = cgmData.map { (data) -> ChartDataEntry in
-            return ChartDataEntry(x: Double(data.date), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
+//        let values = cgmData.map { (data) -> ChartDataEntry in
+//            return ChartDataEntry(x: Double(data.date), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
+//        }
+        var values = [ChartDataEntry]()
+        for (index, data) in cgmData.enumerated() {
+            let value = BarChartDataEntry(x: Double(index), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
+            values.append(value)
         }
-        
         let set1 = LineChartDataSet(entries: values, label: "")
         set1.drawIconsEnabled = false
         setup(set1)
@@ -214,17 +219,17 @@ public class XAxisCustomRenderer: XAxisRenderer {
                 
 //                let indexData = cgmData[Int(i)]
 //                let cgmDate = String(indexData.date)
-                var icon: CGImage?
-                SystemInfoModel.shared.insulinData?.forEach({ (model) in
-                    let labelData = model.date.getDateTimeFromTimeInterval()
-                    if labelData == label {
-                        let rawIcon = #imageLiteral(resourceName: "lineOne")
-                        icon = rawIcon.cgImage!
-                    }
-                })
-                if let myImage = icon{
-                    context.draw(myImage, in: CGRect(x: position.x - 10 , y: position.y - 30, width: CGFloat(15), height: CGFloat(30)))
-                }
+//                var icon: CGImage?
+//                SystemInfoModel.shared.insulinData?.forEach({ (model) in
+//                    let labelData = model.date.getDateTimeFromTimeInterval()
+//                    if labelData == label {
+//                        let rawIcon = #imageLiteral(resourceName: "lineOne")
+//                        icon = rawIcon.cgImage!
+//                    }
+//                })
+//                if let myImage = icon{
+//                    context.draw(myImage, in: CGRect(x: position.x - 10 , y: position.y - 30, width: CGFloat(15), height: CGFloat(30)))
+//                }
             }
         }
     }
