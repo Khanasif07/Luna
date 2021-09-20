@@ -36,11 +36,11 @@ enum DeviceStatus {
         case 20...40:
             return ("Low",#imageLiteral(resourceName: "battery14"))
         case 40...60:
-            return ("",#imageLiteral(resourceName: "batteryHalf"))
+            return ("Medium",#imageLiteral(resourceName: "batteryHalf"))
         case 60...80:
-            return ("",#imageLiteral(resourceName: "battery34"))
+            return ("Medium",#imageLiteral(resourceName: "battery34"))
         case 80...100:
-            return ("",#imageLiteral(resourceName: "batteryFull"))
+            return ("Full",#imageLiteral(resourceName: "batteryFull"))
         default:
             return ("",#imageLiteral(resourceName: "batteryEmpty"))
         }
@@ -59,19 +59,19 @@ enum DeviceStatus {
         case 3:
             return ("Low",#imageLiteral(resourceName: "reservoir3Bars"))
         case 4:
-            return ("",#imageLiteral(resourceName: "reservoir4Bars"))
+            return ("Medium",#imageLiteral(resourceName: "reservoir4Bars"))
         case 5:
-            return ("",#imageLiteral(resourceName: "reservoir5Bars"))
+            return ("Medium",#imageLiteral(resourceName: "reservoir5Bars"))
         case 6:
-            return ("",#imageLiteral(resourceName: "reservoir6Bars"))
+            return ("Medium",#imageLiteral(resourceName: "reservoir6Bars"))
         case 7:
-            return ("",#imageLiteral(resourceName: "reservoir7Bars"))
+            return ("Medium",#imageLiteral(resourceName: "reservoir7Bars"))
         case 8:
-            return ("",#imageLiteral(resourceName: "reservoir8Bars"))
+            return ("Medium",#imageLiteral(resourceName: "reservoir8Bars"))
         case 9:
             return ("",#imageLiteral(resourceName: "reservoir9Bars"))
         case 10:
-            return ("",#imageLiteral(resourceName: "reservoir10Bars"))
+            return ("Full",#imageLiteral(resourceName: "reservoir10Bars"))
         default:
             return ("",#imageLiteral(resourceName: "reservoir0Bars"))
         }

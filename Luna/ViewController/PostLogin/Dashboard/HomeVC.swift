@@ -239,7 +239,7 @@ extension HomeVC {
             self.batteryEmptyLbl.isHidden = false
         }else {
             self.batteryEmptyLbl.isHidden = true
-            self.batteryStatusLbl.alpha = 100
+            self.batteryStatusLbl.alpha = 0
             self.batteryImgView.alpha = 100
             self.batteryStatusLbl.text = DeviceStatus.getBatteryImage(value:batteryData).0
         }
@@ -253,7 +253,7 @@ extension HomeVC {
         }else {
             self.reservoirImgView.alpha = 100
             self.reservoirEmptyLbl.isHidden = true
-            self.reservoirStatusLbl.alpha = 100
+            self.reservoirStatusLbl.alpha = 0
             self.reservoirStatusLbl.text = DeviceStatus.getReservoirImage(value:reservoirData).0
         }
         self.reservoirTitleLbl.text = DeviceStatus.ReservoirLevel.titleString
@@ -278,6 +278,7 @@ extension HomeVC: BleProtocol{
     }
     
     func didConnect(name: String) {
+        self.setupSystemInfo()
     }
     
     func didUpdateValue(){

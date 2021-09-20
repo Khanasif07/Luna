@@ -23,4 +23,7 @@ class BottomSheetInsulinCell: UITableViewCell {
         dataContainerView.round(radius: 10.0)
     }
     
+    func populateCell(){
+        self.insulinCountLbl.text =  "\(BleManager.sharedInstance.reservoirLevelData)".isEmpty ? "--" :  "\(BleManager.sharedInstance.reservoirLevelData)"
+    }
 }

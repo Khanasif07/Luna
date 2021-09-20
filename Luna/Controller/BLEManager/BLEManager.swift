@@ -191,7 +191,6 @@ extension BleManager: CBPeripheralDelegate {
                     writeValue(myCharacteristic: characteristic,value: "5")
                 default:
                     peripheral.setNotifyValue(true, for: characteristic)
-                    print("Do Nothing")
                 }
             }
         }
@@ -306,6 +305,7 @@ extension BleManager: CBCentralManagerDelegate {
     
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Connected!")
+        //MARK:- STATIC DATA USING
         isMyPeripheralConected = true
         myperipheral?.discoverServices(nil)
         CommonFunctions.showToastWithMessage("Bluetooth connected.")
@@ -314,12 +314,12 @@ extension BleManager: CBCentralManagerDelegate {
     
     public func centralManager (_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("DisConnected!")
+        central.connect(peripheral, options: nil)
         isMyPeripheralConected = false
-        myperipheral?.delegate = nil
-        myperipheral = nil
+//        myperipheral?.delegate = self
+//        myperipheral = nil
         systemStatusData = ""
         NotificationCenter.default.post(name: Notification.Name.BLEDidDisConnectSuccessfully, object: nil)
-        //        central.connect(peripheral, options: nil)
     }
     
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {

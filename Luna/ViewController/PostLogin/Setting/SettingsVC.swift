@@ -82,30 +82,6 @@ extension SettingsVC {
         }
     }
     
-    private func performCleanUp(for_logout: Bool = true) {
-        //        let userId = AppUserDefaults.value(forKey: .uid).stringValue
-        //        db.collection(ApiKey.users)
-        //            .document(userId).updateData([ApiKey.deviceToken : ""]) { (error) in
-        //                if let err = error {
-        //                    print(err.localizedDescription)
-        //                    CommonFunctions.showToastWithMessage(err.localizedDescription)
-        //                } else {
-        let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
-        let isBiometricEnable = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
-        let isBiometricCompleted = AppUserDefaults.value(forKey: .isBiometricCompleted).boolValue
-        AppUserDefaults.removeAllValues()
-        UserModel.main = UserModel()
-        if for_logout {
-            AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
-            AppUserDefaults.save(value: isBiometricEnable, forKey: .isBiometricSelected)
-            AppUserDefaults.save(value: isBiometricCompleted, forKey: .isBiometricCompleted)
-        }
-        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-        DispatchQueue.main.async {
-            AppRouter.goToSignUpVC()
-        }
-    }
-    
     private func removeKeychain(){
         KeychainWrapper.standard.removeObject(forKey: ApiKey.password)
         KeychainWrapper.standard.removeObject(forKey: ApiKey.email)
@@ -218,7 +194,7 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
                                 } else {
                                     CommonFunctions.hideActivityLoader()
                                     self.removeKeychain()
-                                    self.performCleanUp(for_logout: false)
+                                    FirestoreController.performCleanUp(for_logout: false)
                                 }
                             }
                         }
@@ -243,10 +219,7 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
                                 } else {
                                     CommonFunctions.hideActivityLoader()
                                     self.removeKeychain()
-                                    self.performCleanUp(for_logout: false)
-                                    DispatchQueue.main.async {
-                                        AppRouter.goToSignUpVC()
-                                    }
+                                    FirestoreController.performCleanUp(for_logout: false)
                                 }
                             }
                         }
@@ -268,10 +241,7 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
                                 } else {
                                     CommonFunctions.hideActivityLoader()
                                     self.removeKeychain()
-                                    self.performCleanUp(for_logout: false)
-                                    DispatchQueue.main.async {
-                                        AppRouter.goToSignUpVC()
-                                    }
+                                    FirestoreController.performCleanUp(for_logout: false)
                                 }
                             }
                         }
@@ -280,14 +250,7 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
             } cancelcompletion: {}
         case LocalizedString.logout.localized:
             showAlertWithAction(title: LocalizedString.logout.localized, msg: LocalizedString.are_you_sure_want_to_logout.localized, cancelTitle: LocalizedString.no.localized, actionTitle: LocalizedString.yes.localized) {
-                FirestoreController.logOut { (isLogout) in
-                    if !isLogout {
-                        self.performCleanUp()
-                        DispatchQueue.main.async {
-                            AppRouter.goToLoginVC()
-                        }
-                    }
-                }
+                FirestoreController.performCleanUp(for_logout: true)
             } cancelcompletion: {}
         case LocalizedString.about.localized:
             let vc = AboutSectionVC.instantiate(fromAppStoryboard: .PostLogin)

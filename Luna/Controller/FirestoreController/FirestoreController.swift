@@ -91,6 +91,7 @@ class FirestoreController:NSObject{
                         user.isProfileStepCompleted = data[ApiKey.isProfileStepCompleted] as? Bool ?? false
                         user.isSystemSetupCompleted = data[ApiKey.isSystemSetupCompleted] as? Bool ?? false
                         user.isChangePassword = data[ApiKey.isChangePassword] as? Bool ?? false
+                        user.isSignin = data[ApiKey.isSignin] as? Bool ?? false
                         UserModel.main = user
                         AppUserDefaults.save(value: user.isProfileStepCompleted, forKey: .isProfileStepCompleted)
                         AppUserDefaults.save(value: true, forKey: .isBiometricCompleted)
@@ -116,8 +117,8 @@ class FirestoreController:NSObject{
                         guard let data = snapshot?.data() else { return }
                         SystemInfoModel.shared.longInsulinType = data[ApiKey.longInsulinType] as? String ?? ""
                         SystemInfoModel.shared.longInsulinSubType = data[ApiKey.longInsulinSubType] as? String ?? ""
-                        SystemInfoModel.shared.insulinUnit = data[ApiKey.insulinUnit] as? Int ?? 0
-                        SystemInfoModel.shared.cgmUnit = data[ApiKey.cgmUnit] as? Int ?? 0
+                        SystemInfoModel.shared.insulinUnit = data[ApiKey.insulinUnit] as? Int ?? -1
+                        SystemInfoModel.shared.cgmUnit = data[ApiKey.cgmUnit] as? Int ?? -1
                         SystemInfoModel.shared.cgmType = data[ApiKey.cgmType] as? String ?? ""
                         success()
                     }
@@ -137,6 +138,28 @@ class FirestoreController:NSObject{
             } else {
                 failure()
                 print("User Document does not exist")
+            }
+        }
+    }
+    
+    static func alreadySignedIn(success: @escaping () -> Void,
+                                failure:  @escaping () -> Void) {
+        db.collection(ApiKey.users).document(Auth.auth().currentUser?.uid ?? "").getDocument { (snapshot, error ) in
+            if  (snapshot?.exists)! {
+                guard let dicts = snapshot?.data() else { return }
+                    if let signedIn = dicts["signIn"] as? Bool {
+                        if signedIn {
+                            success()
+                        }else {
+                            print("First Session of user")
+                            failure()
+                        }
+                    }else{
+                        failure()
+                    }
+                success()
+            } else {
+                failure()
             }
         }
     }
@@ -231,6 +254,41 @@ class FirestoreController:NSObject{
         completion(false)
     }
     
+    static func performCleanUp(for_logout: Bool = true) {
+        let userId = AppUserDefaults.value(forKey: .uid).stringValue
+        db.collection(ApiKey.users)
+            .document(userId).updateData([ApiKey.isSignin : false]) { (error) in
+                if let err = error {
+                    print(err.localizedDescription)
+                    CommonFunctions.showToastWithMessage(err.localizedDescription)
+                } else {
+                    let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
+                    let isBiometricEnable = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
+                    let isBiometricCompleted = AppUserDefaults.value(forKey: .isBiometricCompleted).boolValue
+                    AppUserDefaults.removeAllValues()
+                    UserModel.main = UserModel()
+                    if for_logout {
+                        AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
+                        AppUserDefaults.save(value: isBiometricEnable, forKey: .isBiometricSelected)
+                        AppUserDefaults.save(value: isBiometricCompleted, forKey: .isBiometricCompleted)
+                    }
+                    UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                    DispatchQueue.main.async {
+                        AppRouter.goToSignUpVC()
+                    }
+                    if  for_logout {
+                        FirestoreController.logOut { (isLogout) in
+                            if !isLogout {
+                                DispatchQueue.main.async {
+                                    AppRouter.goToLoginVC()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+    }
+    
     //MARK:- IsEMailVerified
     //=======================
     static func IsEmailVerified(completion:@escaping(_ success: Bool) -> Void)  {
@@ -268,6 +326,7 @@ class FirestoreController:NSObject{
                                isSystemSetupCompleted: Bool,
                                isChangePassword:Bool,
                                isBiometricOn:  Bool,
+                               isSignin: Bool,
                                completion: @escaping () -> Void,
                                failure: @escaping FailureResponse) {
         var emailId  = email
@@ -293,7 +352,8 @@ class FirestoreController:NSObject{
                                                                       ApiKey.password:password,
                                                                       ApiKey.isProfileStepCompleted: false,
                                                                       ApiKey.isSystemSetupCompleted: false,
-                                                                      ApiKey.userId: uid,ApiKey.isChangePassword: true,ApiKey.isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue]){ err in
+                                                                      ApiKey.userId: uid,ApiKey.isChangePassword: true,ApiKey.isSignin:false,
+                                                                      ApiKey.isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue]){ err in
                         if let err = err {
                             print("Error writing document: \(err)")
                             CommonFunctions.showToastWithMessage(err.localizedDescription)
@@ -414,7 +474,7 @@ class FirestoreController:NSObject{
         }
     }
     
-    //MARK:- Update user online status
+    //MARK:- Update user Biometric status
     //================================
     static func updateUserBiometricStatus(isBiometricOn: Bool, completion: @escaping () -> Void,
                                           failure: @escaping FailureResponse,failures: @escaping () -> Void) {
@@ -424,6 +484,25 @@ class FirestoreController:NSObject{
             return
         }
         db.collection(ApiKey.users).document(uid).updateData([ApiKey.isBiometricOn:isBiometricOn]){
+            (error) in
+            if let err = error {
+                failure(err)
+            } else {
+                completion()
+            }
+        }
+    }
+    
+    //MARK:- Update user Signin status
+    //================================
+    static func updateUserSigninStatus(isSignin: Bool, completion: @escaping () -> Void,
+                                          failure: @escaping FailureResponse,failures: @escaping () -> Void) {
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        guard !uid.isEmpty else {
+            failures()
+            return
+        }
+        db.collection(ApiKey.users).document(uid).updateData([ApiKey.isSignin:isSignin]){
             (error) in
             if let err = error {
                 failure(err)
