@@ -83,6 +83,10 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         chartView.moveViewToX(chartView.data?.yMax ?? 0.0 - 1)
         chartView.zoom(scaleX: 3.5, scaleY: 0, x: 0, y: 0)
         chartView.animate(yAxisDuration: 2.5)
+        chartView.noDataText = "No glucose data available."
+        chartView.noDataTextColor = #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1)
+        chartView.noDataFont = AppFonts.SF_Pro_Display_Bold.withSize(.x15)
+        chartView.clear()
     }
     
     func setDataCount(_ count: Int, range: UInt32) {
