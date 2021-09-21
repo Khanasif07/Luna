@@ -58,7 +58,6 @@ public class BleManager: NSObject{
     
     private override init (){
         super.init ()
-        print ("shared instance")
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
     }
     
@@ -199,27 +198,24 @@ extension BleManager: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         switch characteristic.uuid {
         case batteryCharacteristicCBUUID:
+            print("handled Characteristic Value for Battery Level: \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-            self.batteryData = data
-            let dic = ["batteryData": self.batteryData]
-            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: dic)
+            self.batteryData = data.isEmpty ? "50" : data
+            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: nil)
         case ReservoirLevelCharacteristicCBUUID:
             print("handled Characteristic Value for Reservoir Level: \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-            self.reservoirLevelData = data
-            let dic = ["reservoirLevelData": self.reservoirLevelData]
-            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: dic)
+            self.reservoirLevelData = data.isEmpty ? "7" : data
+            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: nil)
         case statusCBUUID:
             print("handled Characteristic Value for status : \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-            self.systemStatusData = data
-            let dic = ["systemStatusData": self.systemStatusData]
-            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: dic)
+            self.systemStatusData = data.isEmpty ? "0" : data
+            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: nil)
         case firmwareRevisionString:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for firmwareRevisionString:  \(data)")
         case writableCharacteristicCBUUID:
-            print(String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? "")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print(data)
         case dataOutCBUUID:

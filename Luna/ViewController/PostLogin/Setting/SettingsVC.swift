@@ -110,6 +110,16 @@ extension SettingsVC {
             }
         }
     }
+    
+    func openUrl(urlString: String) {
+       guard let url = URL(string: urlString) else {
+           return
+       }
+
+       if UIApplication.shared.canOpenURL(url) {
+           UIApplication.shared.open(url, options: [:])
+       }
+   }
 }
 
 // MARK: - Extension For TableView
@@ -131,10 +141,11 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
             cell.switchView.isHidden = false
             cell.switchView.isOn = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
         case LocalizedString.apple_Health.localized:
-            cell.switchView.isUserInteractionEnabled = false
+//            cell.switchView.isUserInteractionEnabled = false
             cell.nextBtn.isHidden = true
-            cell.switchView.isHidden = false
+//            cell.switchView.isHidden = false
             cell.switchView.isOn = HealthKitManager.sharedInstance.isEnabled
+            cell.switchView.isHidden = true
         default:
             cell.nextBtn.isHidden = false
             cell.switchView.isHidden = true
@@ -258,7 +269,9 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
         case LocalizedString.face_ID.localized,LocalizedString.touch_ID.localized:
             print("Do Nothing.")
         case LocalizedString.apple_Health.localized:
-            print("Do Nothing.")
+            if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
+               UIApplication.shared.open(settingsUrl)
+             }
         default:
             CommonFunctions.showToastWithMessage("Under Development")
         }

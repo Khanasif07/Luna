@@ -81,6 +81,7 @@ extension AppUserDefaults {
         case isTermsAndConditionSelected
         case isBiometricSelected
         case isBiometricCompleted
+        case isSignin
         case isProfileStepCompleted
         case isSystemSetupCompleted
         case isSignupCompleted

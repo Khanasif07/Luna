@@ -108,8 +108,6 @@ extension HomeBottomSheetVC {
     private func initialSetup() {
         setupTableView()
         addObserver()
-        let gesture = UIPanGestureRecognizer(target: self, action: #selector(HomeBottomSheetVC.panGesture))
-        view.addGestureRecognizer(gesture)
         setupSwipeGesture()
     }
     
@@ -141,6 +139,8 @@ extension HomeBottomSheetVC {
     }
     
     private func setupSwipeGesture() {
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(HomeBottomSheetVC.panGesture))
+        view.addGestureRecognizer(gesture)
         swipeDown.direction = .down
         swipeDown.delegate = self
         mainTableView.addGestureRecognizer(swipeDown)

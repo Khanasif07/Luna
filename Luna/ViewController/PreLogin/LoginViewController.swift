@@ -249,7 +249,7 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                                         if UserModel.main.isSystemSetupCompleted {
                                             if UserModel.main.isSignin {
                                                 CommonFunctions.showToastWithMessage("User is already sign in other device.")
-                                                FirestoreController.performCleanUp(for_logout: true)
+                                                FirestoreController.performCleanUp(for_logout: true,isSignin: true)
                                                 return
                                             }else {
                                                 FirestoreController.updateUserSigninStatus(isSignin: true) {
@@ -299,8 +299,7 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                                     if UserModel.main.isSystemSetupCompleted {
                                         if UserModel.main.isSignin {
                                             CommonFunctions.showToastWithMessage("User is already sign in other device.")
-                                            FirestoreController.performCleanUp(for_logout: true)
-                                            return
+                                            FirestoreController.performCleanUp(for_logout: true,isSignin: true)
                                         }else {
                                             FirestoreController.updateUserSigninStatus(isSignin: true) {
                                                 AppRouter.gotoHomeVC()
@@ -544,7 +543,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate,ASAuthorization
                                     //MARK:- USED TO UPDATE USER SIGNIN STATUS
                                     if UserModel.main.isSignin {
                                         CommonFunctions.showToastWithMessage("User is already sign in other device.")
-                                        FirestoreController.performCleanUp(for_logout: true)
+                                        FirestoreController.performCleanUp(for_logout: true,isSignin: true)
                                         return
                                     }else {
                                         FirestoreController.updateUserSigninStatus(isSignin: true) {
@@ -576,7 +575,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate,ASAuthorization
                                     //MARK:- USED TO UPDATE USER SIGNIN STATUS
                                     if UserModel.main.isSignin {
                                         CommonFunctions.showToastWithMessage("User is already sign in other device.")
-                                        FirestoreController.performCleanUp(for_logout: true)
+                                        FirestoreController.performCleanUp(for_logout: true,isSignin: true)
                                         return
                                     }else {
                                         FirestoreController.updateUserSigninStatus(isSignin: true) {
@@ -654,8 +653,7 @@ extension LoginViewController: GIDSignInDelegate {
                                 //MARK:- USED TO UPDATE USER SIGNIN STATUS
                                 if UserModel.main.isSignin {
                                     CommonFunctions.showToastWithMessage("User is already sign in other device.")
-                                    FirestoreController.performCleanUp(for_logout: true)
-                                    return
+                                    FirestoreController.performCleanUp(for_logout: true,isSignin: true)
                                 }else {
                                     FirestoreController.updateUserSigninStatus(isSignin: true) {
                                         AppRouter.gotoHomeVC()
@@ -686,7 +684,7 @@ extension LoginViewController: GIDSignInDelegate {
                                 //MARK:- USED TO UPDATE USER SIGNIN STATUS
                                 if UserModel.main.isSignin {
                                     CommonFunctions.showToastWithMessage("User is already sign in other device.")
-                                    FirestoreController.performCleanUp(for_logout: true)
+                                    FirestoreController.performCleanUp(for_logout: true,isSignin: true)
                                     return
                                 }else {
                                     FirestoreController.updateUserSigninStatus(isSignin: true) {

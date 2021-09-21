@@ -95,6 +95,7 @@ class FirestoreController:NSObject{
                         UserModel.main = user
                         AppUserDefaults.save(value: user.isProfileStepCompleted, forKey: .isProfileStepCompleted)
                         AppUserDefaults.save(value: true, forKey: .isBiometricCompleted)
+                        AppUserDefaults.save(value: user.isSignin, forKey: .isSignin)
                         AppUserDefaults.save(value: user.isBiometricOn, forKey: .isBiometricSelected)
                         AppUserDefaults.save(value: user.isSystemSetupCompleted, forKey: .isSystemSetupCompleted)
                         success()
@@ -133,30 +134,6 @@ class FirestoreController:NSObject{
                                          failure:  @escaping () -> Void){
         db.collection(ApiKey.users).document(Auth.auth().currentUser?.uid ?? "").getDocument { (snapshot, error ) in
             if  (snapshot?.exists)! {
-                print("User Document exist")
-                success()
-            } else {
-                failure()
-                print("User Document does not exist")
-            }
-        }
-    }
-    
-    static func alreadySignedIn(success: @escaping () -> Void,
-                                failure:  @escaping () -> Void) {
-        db.collection(ApiKey.users).document(Auth.auth().currentUser?.uid ?? "").getDocument { (snapshot, error ) in
-            if  (snapshot?.exists)! {
-                guard let dicts = snapshot?.data() else { return }
-                    if let signedIn = dicts["signIn"] as? Bool {
-                        if signedIn {
-                            success()
-                        }else {
-                            print("First Session of user")
-                            failure()
-                        }
-                    }else{
-                        failure()
-                    }
                 success()
             } else {
                 failure()
@@ -171,11 +148,9 @@ class FirestoreController:NSObject{
         db.collection(ApiKey.userSystemInfo).document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.cgmData).getDocuments { (snapshot, error ) in
             guard let dicts = snapshot?.documents else { return }
             if  !(dicts.isEmpty) {
-                print("User Document exist")
                 success()
             } else {
                 failure()
-                print("User Document does not exist")
             }
         }
     }
@@ -254,10 +229,10 @@ class FirestoreController:NSObject{
         completion(false)
     }
     
-    static func performCleanUp(for_logout: Bool = true) {
+    static func performCleanUp(for_logout: Bool = true,isSignin: Bool = false) {
         let userId = AppUserDefaults.value(forKey: .uid).stringValue
         db.collection(ApiKey.users)
-            .document(userId).updateData([ApiKey.isSignin : false]) { (error) in
+            .document(userId).updateData([ApiKey.isSignin : isSignin]) { (error) in
                 if let err = error {
                     print(err.localizedDescription)
                     CommonFunctions.showToastWithMessage(err.localizedDescription)
