@@ -31,7 +31,8 @@ class HomeVC: UIViewController {
     
     // MARK: - Variables
     //==========================
-    let bottomSheetVC = HomeBottomSheetVC()
+//    let bottomSheetVC = HomeBottomSheetVC()
+    let bottomSheetVC = BottomSheetVC.instantiate(fromAppStoryboard: .PostLogin)
     let coachMarksController = CoachMarksController()
     
     // MARK: - Lifecycle
@@ -112,8 +113,8 @@ extension HomeVC {
         CommonFunctions.showActivityLoader()
         self.getUserInfoFromFirestore()
         self.getUserSystemFromFirestore()
-        self.getCGMDataFromFirestore()
-        self.getInsulinFromFirestore()
+//        self.getCGMDataFromFirestore()
+//        self.getInsulinFromFirestore()
     }
     
     private func setupHealthkit(){
@@ -145,12 +146,12 @@ extension HomeVC {
             }
         } failure: {
             print("CGM DATA NOT Available")
-            if let cgmData = SystemInfoModel.shared.cgmData {
-                self.bottomSheetVC.cgmData = cgmData
-                for cgmModel in cgmData {
-                    FirestoreController.createCGMDataNode(direction: cgmModel.direction ?? "", sgv: cgmModel.sgv, date: cgmModel.date)
-                }
-            }
+//            if let cgmData = SystemInfoModel.shared.cgmData {
+//                self.bottomSheetVC.cgmData = cgmData
+//                for cgmModel in cgmData {
+//                    FirestoreController.createCGMDataNode(direction: cgmModel.direction ?? "", sgv: cgmModel.sgv, date: cgmModel.date)
+//                }
+//            }
         }
     }
     

@@ -202,7 +202,7 @@ extension CGMConnectedVC {
         UIApplication.shared.isIdleTimerDisabled = false;
         
         // We want to always come back to the home screen
-        tabBarController?.selectedIndex = 0
+//        tabBarController?.selectedIndex = 0
         
         // Cancel the current timer and start a fresh background timer using the settings value only if background task is enabled
         
@@ -363,11 +363,11 @@ extension CGMConnectedVC {
             let entries = self.bgData
             if entries.count < 1 { return }
             SystemInfoModel.shared.cgmData = self.bgData
-            if SystemInfoModel.shared.isFromSetting {
-                for cgmModel in entries {
-                    FirestoreController.createCGMDataNode(direction: cgmModel.direction ?? "", sgv: cgmModel.sgv, date: cgmModel.date)
-                }
-            }
+//            if SystemInfoModel.shared.isFromSetting {
+//                for cgmModel in entries {
+//                    FirestoreController.createCGMDataNode(direction: cgmModel.direction ?? "", sgv: cgmModel.sgv, date: cgmModel.date)
+//                }
+//            }
             NotificationCenter.default.post(name: Notification.Name.CgmDataReceivedSuccessfully, object: [:])
 //            self.updateBGGraph()
 //            self.updateStats()

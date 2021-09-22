@@ -47,7 +47,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="chartView" destination="PqS-PC-gbP" id="WpJ-a1-CcO"/>
+                <outlet property="cgmChartView" destination="PqS-PC-gbP" id="U3E-Jk-c0M"/>
             </connections>
             <point key="canvasLocation" x="120.28985507246378" y="113.16964285714285"/>
         </tableViewCell>

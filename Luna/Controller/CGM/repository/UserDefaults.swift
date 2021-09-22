@@ -33,8 +33,8 @@ class UserDefaultsRepository {
     static let units = UserDefaultsValue<String>(key: "units", default: "mg/dL")
     
     // Dexcom Share Settings
-    static let shareUserName = UserDefaultsValue<String>(key: "shareUserName", default: "")
-    static let sharePassword = UserDefaultsValue<String>(key: "sharePassword", default: "")
+    static let shareUserName = UserDefaultsValue<String>(key: "shareUserName", default: "sjolundjohn1")
+    static let sharePassword = UserDefaultsValue<String>(key: "sharePassword", default: "@F%K4rI^d50#")
     static let shareServer = UserDefaultsValue<String>(key: "shareServer", default: "US")
     
     // Graph Settings
@@ -65,7 +65,7 @@ class UserDefaultsRepository {
     static let appBadge = UserDefaultsValue<Bool>(key: "appBadge", default: true)
     static let dimScreenWhenIdle = UserDefaultsValue<Int>(key: "dimScreenWhenIdle", default: 0)
     static let forceDarkMode = UserDefaultsValue<Bool>(key: "forceDarkMode", default: true)
-    static let persistentNotification = UserDefaultsValue<Bool>(key: "persistentNotification", default: false)
+    static let persistentNotification = UserDefaultsValue<Bool>(key: "persistentNotification", default: true)
     static let persistentNotificationLastBGTime = UserDefaultsValue<TimeInterval>(key: "persistentNotificationLastBGTime", default: 0)
     static let screenlockSwitchState = UserDefaultsValue<Bool>(
         key: "screenlockSwitchState",
@@ -115,7 +115,7 @@ class UserDefaultsRepository {
     static let alertSageInsertTime = UserDefaultsValue<TimeInterval>(key: "alertSageInsertTime", default: 0)
     
     static let alertSnoozeAllTime = UserDefaultsValue<Date?>(key: "alertSnoozeAllTime", default: nil)
-    static let alertSnoozeAllIsSnoozed = UserDefaultsValue<Bool>(key: "alertSnoozeAllIsSnoozed", default: false)
+    static let alertSnoozeAllIsSnoozed = UserDefaultsValue<Bool>(key: "alertSnoozeAllIsSnoozed", default: true)
     
     static let alertUrgentLowActive = UserDefaultsValue<Bool>(key: "alertUrgentLowActive", default: false)
     static let alertUrgentLowBG = UserDefaultsValue<Float>(key: "alertUrgentLowBG", default: 55.0)

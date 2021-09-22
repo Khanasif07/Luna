@@ -55,6 +55,13 @@
 		188DB14F26E0993600FBF042 /* CoachMarksControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188DB12226E0993600FBF042 /* CoachMarksControllerDelegate.swift */; };
 		188DB15026E0993600FBF042 /* CoachMarkAnimationManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188DB12326E0993600FBF042 /* CoachMarkAnimationManagement.swift */; };
 		188DB15126E0993600FBF042 /* BlurringOverlayStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188DB12426E0993600FBF042 /* BlurringOverlayStyleManager.swift */; };
+		8403F3B726F9C9F6004BFE8E /* HomeBottomSheetVC+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3B626F9C9F6004BFE8E /* HomeBottomSheetVC+Extension.swift */; };
+		8403F3BA26F9CF49004BFE8E /* HomeBottomSheetVC+Extension1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3B926F9CF49004BFE8E /* HomeBottomSheetVC+Extension1.swift */; };
+		8403F3BD26F9D016004BFE8E /* Graphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3BC26F9D016004BFE8E /* Graphs.swift */; };
+		8403F3C026F9D2F8004BFE8E /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3BF26F9D2F8004BFE8E /* Chart.swift */; };
+		8403F3C326F9D792004BFE8E /* DataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3C226F9D792004BFE8E /* DataStructs.swift */; };
+		8403F3C626F9DABC004BFE8E /* NightScout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3C526F9DABB004BFE8E /* NightScout.swift */; };
+		8403F3C926F9E185004BFE8E /* CarbBolusArrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3C826F9E185004BFE8E /* CarbBolusArrays.swift */; };
 		840A7DF12696E95E005AA1E6 /* CGMSelectorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7DED2696E95E005AA1E6 /* CGMSelectorVC.swift */; };
 		840A7DF22696E95E005AA1E6 /* CGMDATASHAREVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7DEE2696E95E005AA1E6 /* CGMDATASHAREVC.swift */; };
 		840A7DF32696E95E005AA1E6 /* CGMConnectedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7DEF2696E95E005AA1E6 /* CGMConnectedVC.swift */; };
@@ -126,6 +133,8 @@
 		849B5A4A2697143B000AA5DC /* BottomSheetTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849B5A482697143B000AA5DC /* BottomSheetTopCell.xib */; };
 		849B7432269D612000C059E5 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849B7431269D612000C059E5 /* HealthKit.framework */; };
 		849B7436269D710600C059E5 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7435269D710600C059E5 /* HealthKitManager.swift */; };
+		84AA878D26FAD1120047D86E /* Alarms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA878C26FAD1120047D86E /* Alarms.swift */; };
+		84AA879026FAE8900047D86E /* BottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA878F26FAE8900047D86E /* BottomSheetVC.swift */; };
 		84B06B6626E27E9A004902E4 /* Gilroy-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84B06B6526E27E9A004902E4 /* Gilroy-Medium.ttf */; };
 		84B06BB826E29275004902E4 /* CoachMarkArrowViewApp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B06BB626E29275004902E4 /* CoachMarkArrowViewApp.xib */; };
 		84B06BB926E29275004902E4 /* CoachMarkArrowViewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B06BB726E29275004902E4 /* CoachMarkArrowViewApp.swift */; };
@@ -264,6 +273,13 @@
 		188DB12326E0993600FBF042 /* CoachMarkAnimationManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkAnimationManagement.swift; sourceTree = "<group>"; };
 		188DB12426E0993600FBF042 /* BlurringOverlayStyleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurringOverlayStyleManager.swift; sourceTree = "<group>"; };
 		48268DD2D5F8BF64205F2462 /* Pods_Luna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Luna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8403F3B626F9C9F6004BFE8E /* HomeBottomSheetVC+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeBottomSheetVC+Extension.swift"; sourceTree = "<group>"; };
+		8403F3B926F9CF49004BFE8E /* HomeBottomSheetVC+Extension1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeBottomSheetVC+Extension1.swift"; sourceTree = "<group>"; };
+		8403F3BC26F9D016004BFE8E /* Graphs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphs.swift; sourceTree = "<group>"; };
+		8403F3BF26F9D2F8004BFE8E /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
+		8403F3C226F9D792004BFE8E /* DataStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructs.swift; sourceTree = "<group>"; };
+		8403F3C526F9DABB004BFE8E /* NightScout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightScout.swift; sourceTree = "<group>"; };
+		8403F3C826F9E185004BFE8E /* CarbBolusArrays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarbBolusArrays.swift; sourceTree = "<group>"; };
 		840A7DED2696E95E005AA1E6 /* CGMSelectorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMSelectorVC.swift; sourceTree = "<group>"; };
 		840A7DEE2696E95E005AA1E6 /* CGMDATASHAREVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMDATASHAREVC.swift; sourceTree = "<group>"; };
 		840A7DEF2696E95E005AA1E6 /* CGMConnectedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMConnectedVC.swift; sourceTree = "<group>"; };
@@ -336,6 +352,8 @@
 		849B5A482697143B000AA5DC /* BottomSheetTopCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetTopCell.xib; sourceTree = "<group>"; };
 		849B7431269D612000C059E5 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		849B7435269D710600C059E5 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		84AA878C26FAD1120047D86E /* Alarms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarms.swift; sourceTree = "<group>"; };
+		84AA878F26FAE8900047D86E /* BottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetVC.swift; sourceTree = "<group>"; };
 		84B06B6526E27E9A004902E4 /* Gilroy-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Medium.ttf"; sourceTree = "<group>"; };
 		84B06BB626E29275004902E4 /* CoachMarkArrowViewApp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoachMarkArrowViewApp.xib; sourceTree = "<group>"; };
 		84B06BB726E29275004902E4 /* CoachMarkArrowViewApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkArrowViewApp.swift; sourceTree = "<group>"; };
@@ -629,6 +647,15 @@
 				847899722684824F00D1DF36 /* HomeVC.swift */,
 				849B5A4126970A6B000AA5DC /* HomeBottomSheetVC.swift */,
 				849B5A4426970D39000AA5DC /* HomeBottomSheetVC.xib */,
+				8403F3B626F9C9F6004BFE8E /* HomeBottomSheetVC+Extension.swift */,
+				8403F3B926F9CF49004BFE8E /* HomeBottomSheetVC+Extension1.swift */,
+				8403F3BC26F9D016004BFE8E /* Graphs.swift */,
+				8403F3BF26F9D2F8004BFE8E /* Chart.swift */,
+				8403F3C226F9D792004BFE8E /* DataStructs.swift */,
+				8403F3C526F9DABB004BFE8E /* NightScout.swift */,
+				8403F3C826F9E185004BFE8E /* CarbBolusArrays.swift */,
+				84AA878C26FAD1120047D86E /* Alarms.swift */,
+				84AA878F26FAE8900047D86E /* BottomSheetVC.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -1233,6 +1260,7 @@
 			files = (
 				8418D7D626B01F4E00BAB256 /* UserDefaultsValueGroups.swift in Sources */,
 				188DB13026E0993600FBF042 /* OverlaySnapshotView.swift in Sources */,
+				8403F3C026F9D2F8004BFE8E /* Chart.swift in Sources */,
 				840A7DF32696E95E005AA1E6 /* CGMConnectedVC.swift in Sources */,
 				188DB13926E0993600FBF042 /* CoachMarkArrowOrientation.swift in Sources */,
 				8446727C268DAF8E00EC55FD /* SystemSetupStep1VC.swift in Sources */,
@@ -1278,6 +1306,7 @@
 				84B06F09269C0BE00059B293 /* SessionDescBottomVC.swift in Sources */,
 				84E2D9B826B12C17000C0FD8 /* SettingManualVC.swift in Sources */,
 				840A7ED72697060E005AA1E6 /* SessionFilterVC.swift in Sources */,
+				8403F3BD26F9D016004BFE8E /* Graphs.swift in Sources */,
 				840A7DFD2696E98C005AA1E6 /* DeviceConnectedVC.swift in Sources */,
 				84CC12E92668D083009316FC /* UITableView+ UITableViewCellExtension.swift in Sources */,
 				84FDA0A3267DC5D700AC8BE9 /* ProfileSetupVC.swift in Sources */,
@@ -1292,8 +1321,10 @@
 				84CC12E02668D036009316FC /* AppConstants.swift in Sources */,
 				84B06BB926E29275004902E4 /* CoachMarkArrowViewApp.swift in Sources */,
 				84D1F4B42679C12900F131E0 /* TermsConditionVC.swift in Sources */,
+				84AA879026FAE8900047D86E /* BottomSheetVC.swift in Sources */,
 				188DB14B26E0993600FBF042 /* CoachMarkSkipDefaultView.swift in Sources */,
 				84CC12E32668D042009316FC /* AppGlobals.swift in Sources */,
+				84AA878D26FAD1120047D86E /* Alarms.swift in Sources */,
 				188DB12D26E0993600FBF042 /* CoachMarkBodyDefaultView.swift in Sources */,
 				188DB13E26E0993600FBF042 /* CoachMarkSkipView.swift in Sources */,
 				84CC129A2668C822009316FC /* AppDelegate.swift in Sources */,
@@ -1311,6 +1342,7 @@
 				84E2D9BC26B12D26000C0FD8 /* SettingManualCell.swift in Sources */,
 				847899762684870F00D1DF36 /* AboutSectionVC.swift in Sources */,
 				84CC12FB2668D15D009316FC /* UIViewcontroller+Extension.swift in Sources */,
+				8403F3C926F9E185004BFE8E /* CarbBolusArrays.swift in Sources */,
 				849B7436269D710600C059E5 /* HealthKitManager.swift in Sources */,
 				84CC12CD2668CFBF009316FC /* AppRouter.swift in Sources */,
 				8418D7D726B01F4E00BAB256 /* UserDefaults.swift in Sources */,
@@ -1325,6 +1357,7 @@
 				84E78B9E2685E8C500FABDCD /* UserModel.swift in Sources */,
 				8455491C2678DDBA000CC13D /* SignupViewController.swift in Sources */,
 				84861D8326849FDB004B046C /* ChangePasswordVC.swift in Sources */,
+				8403F3BA26F9CF49004BFE8E /* HomeBottomSheetVC+Extension1.swift in Sources */,
 				188DB12926E0993600FBF042 /* CoachMarkBodyView.swift in Sources */,
 				84F2A27D26984F3D000FDCD5 /* BottomSheetBottomCell.swift in Sources */,
 				188DB14E26E0993600FBF042 /* SkipViewDisplayManager.swift in Sources */,
@@ -1359,10 +1392,12 @@
 				840A7DF12696E95E005AA1E6 /* CGMSelectorVC.swift in Sources */,
 				84861D7F26848EDD004B046C /* ProfileTableCell.swift in Sources */,
 				188DB14226E0993600FBF042 /* ConfigurationChange.swift in Sources */,
+				8403F3B726F9C9F6004BFE8E /* HomeBottomSheetVC+Extension.swift in Sources */,
 				84E5505A267E027A008C02F8 /* TypeTableCell.swift in Sources */,
 				188DB13B26E0993600FBF042 /* CoachMarksControllerAnimationDelegate.swift in Sources */,
 				188DB12A26E0993600FBF042 /* OverlayView.swift in Sources */,
 				188DB14026E0993600FBF042 /* CoachMarkInnerLayoutHelper.swift in Sources */,
+				8403F3C326F9D792004BFE8E /* DataStructs.swift in Sources */,
 				188DB12826E0993600FBF042 /* Instructions.swift in Sources */,
 				188DB13426E0993600FBF042 /* UIImage+Bundle.swift in Sources */,
 				840A7E662696F190005AA1E6 /* SessionHistoryTableViewCell.swift in Sources */,
@@ -1373,6 +1408,7 @@
 				8418D7D526B01F4E00BAB256 /* UserData.xcdatamodeld in Sources */,
 				844B93BE2694427600B65BF8 /* InsulinStep2VC.swift in Sources */,
 				84861D7726848DB1004B046C /* ProfileVC.swift in Sources */,
+				8403F3C626F9DABC004BFE8E /* NightScout.swift in Sources */,
 				188DB13A26E0993600FBF042 /* CoachMarkAnimationManager.swift in Sources */,
 				84CC12D02668CFD8009316FC /* AppUserDefaults.swift in Sources */,
 				188DB14426E0993600FBF042 /* CoachMarkViewControllerDelegate.swift in Sources */,

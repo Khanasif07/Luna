@@ -126,7 +126,7 @@ extension SessionDescriptionVC : UITableViewDelegate,UITableViewDataSource{
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueCell(with: BottomSheetChartCell.self)
-            cell.cgmData = self.cgmDataArray
+//            cell.cgmData = self.cgmDataArray
             return cell
         default:
             let cell = tableView.dequeueCell(with: BottomSheetBottomCell.self)

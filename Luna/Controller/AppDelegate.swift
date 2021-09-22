@@ -36,8 +36,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,GIDSignInDelegate{
         GIDSignIn.sharedInstance().delegate = self
         registerPushNotification()
         Messaging.messaging().delegate = self
-        removeAllNotifications()
+//        removeAllNotifications()
         AppRouter.checkAppInitializationFlow()
+        return true
+    }
+    
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+
+        // This application should be called in background every X Minutes
+        UIApplication.shared.setMinimumBackgroundFetchInterval(
+            TimeInterval(UserDefaultsRepository.backgroundRefreshFrequency.value * 60)
+        )
+        
+        // set "prevent screen lock" to ON when the app is started for the first time
+        if !UserDefaultsRepository.screenlockSwitchState.exists {
+            UserDefaultsRepository.screenlockSwitchState.value = true
+        }
+        
+        // set the "prevent screen lock" option when the app is started
+        // This method doesn't seem to be working anymore. Added to view controllers as solution offered on SO
+        UIApplication.shared.isIdleTimerDisabled = UserDefaultsRepository.screenlockSwitchState.value
+        
         return true
     }
     
@@ -167,10 +187,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping () -> Void) {
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         guard let userInfo = response.notification.request.content.userInfo as? [String: Any] else { return }
         print("tap on on forground app", userInfo)
-        completionHandler()
+        completionHandler(.alert)
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
