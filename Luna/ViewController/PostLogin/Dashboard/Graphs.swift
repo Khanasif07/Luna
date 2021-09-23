@@ -32,6 +32,29 @@ extension BottomSheetVC : UNUserNotificationCenterDelegate, ChartViewDelegate {
         UserDefaultsRepository.chartScaleX.value = Float(scale)
     }
     
+    func updateBGCheckGraph() {
+        var dataIndex = 7
+        cgmChartView.lineData?.dataSets[dataIndex].clear()
+        
+        for i in 0..<bgCheckData.count{
+            let formatter = NumberFormatter()
+            formatter.minimumFractionDigits = 0
+            formatter.maximumFractionDigits = 2
+            formatter.minimumIntegerDigits = 1
+            
+            // skip if > 24 hours old
+            if bgCheckData[i].date < dateTimeUtils.getTimeInterval24HoursAgo() { continue }
+            
+            let value = ChartDataEntry(x: Double(bgCheckData[i].date), y: Double(bgCheckData[i].sgv), data: formatPillText(line1: bgUnits.toDisplayUnits(String(bgCheckData[i].sgv)), time: bgCheckData[i].date))
+            cgmChartView.data?.dataSets[dataIndex].addEntry(value)
+
+        }
+        
+        cgmChartView.data?.dataSets[dataIndex].notifyDataSetChanged()
+        cgmChartView.data?.notifyDataChanged()
+        cgmChartView.notifyDataSetChanged()
+    }
+    
     func createGraph(){
         self.cgmChartView.clear()
         
@@ -220,9 +243,11 @@ extension BottomSheetVC : UNUserNotificationCenterDelegate, ChartViewDelegate {
     public func newChartSetUp(){
         cgmChartView.delegate = self
         cgmChartView.chartDescription?.enabled = true
-        cgmChartView.dragEnabled = true
-        cgmChartView.setScaleEnabled(false)
-        cgmChartView.pinchZoomEnabled = false
+     
+        //MARK: - Important
+//        cgmChartView.dragEnabled = true
+//        cgmChartView.setScaleEnabled(false)
+//        cgmChartView.pinchZoomEnabled = false
         
         let xAxis = cgmChartView.xAxis
         xAxis.labelPosition = .bottom

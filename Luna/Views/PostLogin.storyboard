@@ -939,10 +939,10 @@
                                                     <rect key="frame" x="0.0" y="10" width="414" height="126"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="OTy-aq-8qC">
-                                                            <rect key="frame" x="169.5" y="0.0" width="75" height="70"/>
+                                                            <rect key="frame" x="162.5" y="0.0" width="89" height="70"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="laF-aN-FQ0">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="75" height="53"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="89" height="53"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DTG-S8-rOi">
                                                                             <rect key="frame" x="0.0" y="0.0" width="39" height="53"/>
@@ -950,17 +950,16 @@
                                                                             <color key="textColor" red="0.27058823529999998" green="0.7843137255" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sideupArrowGreen" translatesAutoresizingMaskIntoConstraints="NO" id="WqP-PD-rcv">
-                                                                            <rect key="frame" x="39" y="8.5" width="36" height="36"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" constant="36" id="RgY-Tp-QfB"/>
-                                                                                <constraint firstAttribute="width" secondItem="WqP-PD-rcv" secondAttribute="height" id="kU1-zd-nuI"/>
-                                                                            </constraints>
-                                                                        </imageView>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iUG-9r-yow">
+                                                                            <rect key="frame" x="39" y="1.5" width="50" height="50"/>
+                                                                            <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="44"/>
+                                                                            <color key="textColor" red="0.27058823529999998" green="0.7843137255" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
                                                                     </subviews>
                                                                 </stackView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mg/dl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pfq-We-6pr">
-                                                                    <rect key="frame" x="20.5" y="53" width="34.5" height="17"/>
+                                                                    <rect key="frame" x="27.5" y="53" width="34.5" height="17"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.69803921568627447" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -1018,8 +1017,8 @@
                     </view>
                     <connections>
                         <outlet property="bottomLayoutConstraint" destination="uNl-v1-1KF" id="PqD-Ek-xLb"/>
-                        <outlet property="cgmArrowIcon" destination="WqP-PD-rcv" id="R6v-j5-qoQ"/>
                         <outlet property="cgmChartView" destination="F28-RG-VHm" id="Tyg-oV-9jx"/>
+                        <outlet property="cgmDirectionlbl" destination="iUG-9r-yow" id="zqa-lo-HBq"/>
                         <outlet property="cgmValueLbl" destination="DTG-S8-rOi" id="FYP-3b-d2i"/>
                         <outlet property="mainCotainerView" destination="AZ1-q5-zKw" id="TQh-LE-tCa"/>
                         <outlet property="mainTableView" destination="oc7-JN-5x6" id="bl3-xd-1Yb"/>
@@ -1040,7 +1039,6 @@
         <image name="notReady" width="32" height="32"/>
         <image name="reservoir1Bar" width="40" height="40"/>
         <image name="settingsIcon" width="40" height="40"/>
-        <image name="sideupArrowGreen" width="36" height="36"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

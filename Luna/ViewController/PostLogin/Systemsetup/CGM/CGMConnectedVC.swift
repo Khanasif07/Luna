@@ -362,7 +362,7 @@ extension CGMConnectedVC {
             }
             let entries = self.bgData
             if entries.count < 1 { return }
-            SystemInfoModel.shared.cgmData = self.bgData
+//            SystemInfoModel.shared.cgmData = self.bgData
 //            if SystemInfoModel.shared.isFromSetting {
 //                for cgmModel in entries {
 //                    FirestoreController.createCGMDataNode(direction: cgmModel.direction ?? "", sgv: cgmModel.sgv, date: cgmModel.date)

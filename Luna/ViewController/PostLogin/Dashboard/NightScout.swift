@@ -275,10 +275,8 @@ extension  BottomSheetVC{
             }
             let entries = self.bgData
             if entries.count < 1 { return }
-//            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
             self.updateBGGraph()
-//            cell.updateStats()
-//            }
+//            self.updateStats()
             
             let latestEntryi = entries.count - 1
             let latestBG = entries[latestEntryi].sgv
@@ -307,13 +305,13 @@ extension  BottomSheetVC{
             self.setBGTextColor()
             
             if let directionBG = entries[latestEntryi].direction {
-//                self.DirectionText.text = self.bgDirectionGraphic(directionBG)
+                self.cgmDirectionlbl.text = self.bgDirectionGraphic(directionBG)
                 snoozerDirection = self.bgDirectionGraphic(directionBG)
                 self.latestDirectionString = self.bgDirectionGraphic(directionBG)
             }
             else
             {
-//                self.DirectionText.text = ""
+                self.cgmDirectionlbl.text = ""
                 snoozerDirection = ""
                 self.latestDirectionString = ""
             }
@@ -329,7 +327,7 @@ extension  BottomSheetVC{
                 snoozerDelta = "+" + bgUnits.toDisplayUnits(String(deltaBG))
                 self.latestDeltaString = "+" + String(deltaBG)
             }
-            self.updateBadge(val: latestBG)
+//            self.updateBadge(val: latestBG)
             
             // Snoozer Display
 //            guard let snoozer = self.tabBarController!.viewControllers?[2] as? SnoozeViewController else { return }
@@ -512,14 +510,14 @@ extension  BottomSheetVC{
 //                        PredictionLabel.text = bgUnits.toDisplayUnits(String(Int(prediction.last!)))
 //                        PredictionLabel.textColor = UIColor.systemPurple
                         if UserDefaultsRepository.downloadPrediction.value && latestLoopTime < lastLoopTime {
-                            predictionData.removeAll()
+//                            predictionData.removeAll()
                             var predictionTime = lastLoopTime
                             let toLoad = Int(UserDefaultsRepository.predictionToLoad.value * 12)
                             var i = 0
                             while i <= toLoad {
                                 if i < prediction.count {
                                     let prediction = ShareGlucoseData(sgv: prediction[i], direction: "flat", date: predictionTime)
-                                    predictionData.append(prediction)
+//                                    predictionData.append(prediction)
                                     predictionTime += 300
                                 }
                                 i += 1
@@ -1039,27 +1037,27 @@ extension  BottomSheetVC{
         }
         // end of for loop
         
-        if tempBasal.count > 0 {
-                   processNSBasals(entries: tempBasal)
-               } else {
-                   if basalData.count < 0 {
-                       clearOldTempBasal()
-                   }
-               }
-               if bolus.count > 0 {
-                   processNSBolus(entries: bolus)
-               } else {
-                   if bolusData.count > 0 {
-                       clearOldBolus()
-                   }
-               }
-               if carbs.count > 0 {
-                   processNSCarbs(entries: carbs)
-               } else {
-                   if carbData.count > 0 {
-                       clearOldCarb()
-                   }
-               }
+//        if tempBasal.count > 0 {
+//                   processNSBasals(entries: tempBasal)
+//               } else {
+//                   if basalData.count < 0 {
+//                       clearOldTempBasal()
+//                   }
+//               }
+//               if bolus.count > 0 {
+//                   processNSBolus(entries: bolus)
+//               } else {
+//                   if bolusData.count > 0 {
+//                       clearOldBolus()
+//                   }
+//               }
+//               if carbs.count > 0 {
+//                   processNSCarbs(entries: carbs)
+//               } else {
+//                   if carbData.count > 0 {
+//                       clearOldCarb()
+//                   }
+//               }
                if bgCheck.count > 0 {
                    processNSBGCheck(entries: bgCheck)
                } else {
@@ -1067,47 +1065,47 @@ extension  BottomSheetVC{
                        clearOldBGCheck()
                    }
                }
-               if temporaryOverride.count > 0 {
-                   processNSOverrides(entries: temporaryOverride)
-               } else {
-                   if overrideGraphData.count > 0 {
-                       clearOldOverride()
-                   }
-               }
-               if suspendPump.count > 0 {
-                   processSuspendPump(entries: suspendPump)
-               } else {
-                   if suspendGraphData.count > 0 {
-                       clearOldSuspend()
-                   }
-               }
-               if resumePump.count > 0 {
-                   processResumePump(entries: resumePump)
-               } else {
-                   if resumeGraphData.count > 0 {
-                       clearOldResume()
-                   }
-               }
-               if cgmSensorStart.count > 0 {
-                   processSensorStart(entries: cgmSensorStart)
-               } else {
-                   if sensorStartGraphData.count > 0 {
-                       clearOldSensor()
-                   }
-               }
-               if note.count > 0 {
-                   processNotes(entries: note)
-               } else {
-                   if noteGraphData.count > 0 {
-                       clearOldNotes()
-                   }
-               }
+//               if temporaryOverride.count > 0 {
+//                   processNSOverrides(entries: temporaryOverride)
+//               } else {
+//                   if overrideGraphData.count > 0 {
+//                       clearOldOverride()
+//                   }
+//               }
+//               if suspendPump.count > 0 {
+//                   processSuspendPump(entries: suspendPump)
+//               } else {
+//                   if suspendGraphData.count > 0 {
+//                       clearOldSuspend()
+//                   }
+//               }
+//               if resumePump.count > 0 {
+//                   processResumePump(entries: resumePump)
+//               } else {
+//                   if resumeGraphData.count > 0 {
+//                       clearOldResume()
+//                   }
+//               }
+//               if cgmSensorStart.count > 0 {
+//                   processSensorStart(entries: cgmSensorStart)
+//               } else {
+//                   if sensorStartGraphData.count > 0 {
+//                       clearOldSensor()
+//                   }
+//               }
+//               if note.count > 0 {
+//                   processNotes(entries: note)
+//               } else {
+//                   if noteGraphData.count > 0 {
+//                       clearOldNotes()
+//                   }
+//               }
     }
     
     func clearOldTempBasal()
         {
 //        if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
-            self.basalData.removeAll()
+//            self.basalData.removeAll()
 //            self.updateBasalGraph()
 //        }
         }
@@ -1115,7 +1113,7 @@ extension  BottomSheetVC{
         func clearOldBolus()
         {
 //            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
-                self.basalData.removeAll()
+//                self.basalData.removeAll()
 //                self.updateBasalGraph()
 //            }
         }
@@ -1130,16 +1128,14 @@ extension  BottomSheetVC{
         
         func clearOldBGCheck()
         {
-//            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
-//                self.bgCheckData.removeAll()
-//                self.updateBGCheckGraph()
-//            }
+                self.bgCheckData.removeAll()
+                self.updateBGCheckGraph()
         }
         
         func clearOldOverride()
         {
 //            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
-                self.overrideGraphData.removeAll()
+//                self.overrideGraphData.removeAll()
 //                self.updateOverrideGraph()
 //            }
         }
@@ -1147,7 +1143,7 @@ extension  BottomSheetVC{
         func clearOldSuspend()
         {
 //            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
-                self.suspendGraphData.removeAll()
+//                self.suspendGraphData.removeAll()
 //                self.updateSuspendGraph()
 //            }
         }
@@ -1155,7 +1151,7 @@ extension  BottomSheetVC{
         func clearOldResume()
         {
 //            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
-                self.resumeGraphData.removeAll()
+//                self.resumeGraphData.removeAll()
 //                self.updateResumeGraph()
 //            }
         }
@@ -1163,7 +1159,7 @@ extension  BottomSheetVC{
         func clearOldSensor()
         {
 //            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
-                self.sensorStartGraphData.removeAll()
+//                self.sensorStartGraphData.removeAll()
 //                self.updateSensorStart()
 //            }
         }
@@ -1171,530 +1167,530 @@ extension  BottomSheetVC{
         func clearOldNotes()
         {
 //            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
-                self.noteGraphData.removeAll()
+//                self.noteGraphData.removeAll()
 //                self.updateNotes()
 //            }
         }
     
     // NS Temp Basal Response Processor
-    func processNSBasals(entries: [[String:AnyObject]]) {
-        self.clearLastInfoData(index: 2)
-        if UserDefaultsRepository.debugLog.value {
-            //self.writeDebugLog(value: "Process: Basal")
-            
-        }
-        // due to temp basal durations, we're going to destroy the array and load everything each cycle for the time being.
-        basalData.removeAll()
-        
-        var lastEndDot = 0.0
-        
-        var tempArray = entries
-        tempArray.reverse()
-        for i in 0..<tempArray.count {
-            let currentEntry = tempArray[i] as [String : AnyObject]?
-            var basalDate: String
-            if currentEntry?["timestamp"] != nil {
-                basalDate = currentEntry?["timestamp"] as! String
-            } else if currentEntry?["created_at"] != nil {
-                basalDate = currentEntry?["created_at"] as! String
-            } else {
-                continue
-            }
-            var strippedZone = String(basalDate.dropLast())
-            strippedZone = strippedZone.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-            dateFormatter.locale = Locale(identifier: "en_US")
-            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-            guard let dateString = dateFormatter.date(from: strippedZone) else { continue }
-            let dateTimeStamp = dateString.timeIntervalSince1970
-            guard let basalRate = currentEntry?["absolute"] as? Double else {
-                if UserDefaultsRepository.debugLog.value {
-                    //self.writeDebugLog(value: "ERROR: Null Basal entry")
-                    
-                }
-                continue
-            }
-            
-            let midnightTime = dateTimeUtils.getTimeIntervalMidnightToday()
-            // Setting end dots
-            var duration = 0.0
-            do {
-                duration = try currentEntry?["duration"] as! Double
-            } catch {
-                print("No Duration Found")
-            }
-            
-            // This adds scheduled basal wherever there is a break between temps. can't check the prior ending on the first item. it is 24 hours old, so it isn't important for display anyway
-            if i > 0 {
-                let priorEntry = tempArray[i - 1] as [String : AnyObject]?
-                var priorBasalDate: String
-                if priorEntry?["timestamp"] != nil {
-                    priorBasalDate = priorEntry?["timestamp"] as! String
-                } else if currentEntry?["created_at"] != nil {
-                    priorBasalDate = priorEntry?["created_at"] as! String
-                } else {
-                    continue
-                }
-                var priorStrippedZone = String(priorBasalDate.dropLast())
-                priorStrippedZone = priorStrippedZone.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
-                let priorDateFormatter = DateFormatter()
-                priorDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-                priorDateFormatter.locale = Locale(identifier: "en_US")
-                priorDateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-                guard let priorDateString = dateFormatter.date(from: priorStrippedZone) else { continue }
-                let priorDateTimeStamp = priorDateString.timeIntervalSince1970
-                let priorDuration = priorEntry?["duration"] as! Double
-                // if difference between time stamps is greater than the duration of the last entry, there is a gap. Give a 15 second leeway on the timestamp
-                if Double( dateTimeStamp - priorDateTimeStamp ) > Double( (priorDuration * 60) + 15 ) {
-                    
-                    var scheduled = 0.0
-                    var midGap = false
-                    var midGapTime: TimeInterval = 0
-                    var midGapValue: Double = 0
-                    // cycle through basal profiles.
-                    // TODO figure out how to deal with profile changes that happen mid-gap
-                    for b in 0..<self.basalScheduleData.count {
-                        
-                        if (priorDateTimeStamp + (priorDuration * 60)) >= basalScheduleData[b].date {
-                            scheduled = basalScheduleData[b].basalRate
-                            
-                            // deal with mid-gap scheduled basal change
-                            // don't do it on the last scheudled basal entry
-                            if b < self.basalScheduleData.count - 1 {
-                                if dateTimeStamp > self.basalScheduleData[b + 1].date {
-                                   // midGap = true
-                                    // TODO: finish this to handle mid-gap items without crashing from overlapping entries
-                                    midGapTime = self.basalScheduleData[b + 1].date
-                                    midGapValue = self.basalScheduleData[b + 1].basalRate
-                                }
-                            }
-                            
-                        }
-                        
-                    }
-                    
-                    // Make the starting dot at the last ending dot
-                    let startDot = basalGraphStruct(basalRate: scheduled, date: Double(priorDateTimeStamp + (priorDuration * 60)))
-                    basalData.append(startDot)
-                        
-                       
-                    if midGap {
-                        // Make the ending dot at the new scheduled basal
-                        let endDot1 = basalGraphStruct(basalRate: scheduled, date: Double(midGapTime))
-                        basalData.append(endDot1)
-                        // Make the starting dot at the scheduled Time
-                        let startDot2 = basalGraphStruct(basalRate: midGapValue, date: Double(midGapTime))
-                        basalData.append(startDot2)
-                        // Make the ending dot at the new basal value
-                        let endDot2 = basalGraphStruct(basalRate: midGapValue, date: Double(dateTimeStamp))
-                        basalData.append(endDot2)
-                        
-                    } else {
-                        // Make the ending dot at the new starting dot
-                        let endDot = basalGraphStruct(basalRate: scheduled, date: Double(dateTimeStamp))
-                        basalData.append(endDot)
-                    }
-                        
-
-                }
-            }
-            
-            // Make the starting dot
-            let startDot = basalGraphStruct(basalRate: basalRate, date: Double(dateTimeStamp))
-            basalData.append(startDot)
-            
-            // Make the ending dot
-            // If it's the last one and has no duration, extend it for 30 minutes past the start. Otherwise set ending at duration
-            // duration is already set to 0 if there is no duration set on it.
-            //if i == tempArray.count - 1 && dateTimeStamp + duration <= dateTimeUtils.getNowTimeIntervalUTC() {
-            if i == tempArray.count - 1 && duration == 0.0 {
-                lastEndDot = dateTimeStamp + (30 * 60)
-                latestBasal = String(format:"%.2f", basalRate)
-            } else {
-                lastEndDot = dateTimeStamp + (duration * 60)
-                latestBasal = String(format:"%.2f", basalRate)
-            }
-            
-            // Double check for overlaps of incorrectly ended TBRs and sent it to end when the next one starts if it finds a discrepancy
-            if i < tempArray.count - 1 {
-                let nextEntry = tempArray[i + 1] as [String : AnyObject]?
-                var nextBasalDate: String
-                if nextEntry?["timestamp"] != nil {
-                    nextBasalDate = nextEntry?["timestamp"] as! String
-                } else if currentEntry?["created_at"] != nil {
-                    nextBasalDate = nextEntry?["created_at"] as! String
-                } else {
-                    continue
-                }
-                var nextStrippedZone = String(nextBasalDate.dropLast())
-                nextStrippedZone = nextStrippedZone.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
-                let nextDateFormatter = DateFormatter()
-                nextDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-                nextDateFormatter.locale = Locale(identifier: "en_US")
-                nextDateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-                guard let nextDateString = dateFormatter.date(from: nextStrippedZone) else { continue }
-                let nextDateTimeStamp = nextDateString.timeIntervalSince1970
-                if nextDateTimeStamp < (dateTimeStamp + (duration * 60)) {
-                    lastEndDot = nextDateTimeStamp
-                }
-            }
-            
-            let endDot = basalGraphStruct(basalRate: basalRate, date: Double(lastEndDot))
-            basalData.append(endDot)
-            
-            
-        }
-        
-        // If last  basal was prior to right now, we need to create one last scheduled entry
-        if lastEndDot <= dateTimeUtils.getNowTimeIntervalUTC() {
-            var scheduled = 0.0
-            // cycle through basal profiles.
-            // TODO figure out how to deal with profile changes that happen mid-gap
-            for b in 0..<self.basalProfile.count {
-                let scheduleTimeYesterday = self.basalProfile[b].timeAsSeconds + dateTimeUtils.getTimeIntervalMidnightYesterday()
-                let scheduleTimeToday = self.basalProfile[b].timeAsSeconds + dateTimeUtils.getTimeIntervalMidnightToday()
-                // check the prior temp ending to the profile seconds from midnight
-                print("yesterday " + String(scheduleTimeYesterday))
-                print("today " + String(scheduleTimeToday))
-                if lastEndDot >= scheduleTimeToday {
-                    scheduled = basalProfile[b].value
-                }
-            }
-            
-            latestBasal = String(format:"%.2f", scheduled)
-            // Make the starting dot at the last ending dot
-            let startDot = basalGraphStruct(basalRate: scheduled, date: Double(lastEndDot))
-            basalData.append(startDot)
-            
-            // Make the ending dot 10 minutes after now
-            let endDot = basalGraphStruct(basalRate: scheduled, date: Double(Date().timeIntervalSince1970 + (60 * 10)))
-            basalData.append(endDot)
-            
-        }
-//        tableData[2].value = latestBasal
-        mainTableView.reloadData()
-        if UserDefaultsRepository.graphBasal.value {
-//            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
-//                self.updateBasalGraph()
+//    func processNSBasals(entries: [[String:AnyObject]]) {
+//        self.clearLastInfoData(index: 2)
+//        if UserDefaultsRepository.debugLog.value {
+//            //self.writeDebugLog(value: "Process: Basal")
+//
+//        }
+//        // due to temp basal durations, we're going to destroy the array and load everything each cycle for the time being.
+////        basalData.removeAll()
+//
+//        var lastEndDot = 0.0
+//
+//        var tempArray = entries
+//        tempArray.reverse()
+//        for i in 0..<tempArray.count {
+//            let currentEntry = tempArray[i] as [String : AnyObject]?
+//            var basalDate: String
+//            if currentEntry?["timestamp"] != nil {
+//                basalDate = currentEntry?["timestamp"] as! String
+//            } else if currentEntry?["created_at"] != nil {
+//                basalDate = currentEntry?["created_at"] as! String
+//            } else {
+//                continue
 //            }
-        }
-        mainTableView.reloadData()
-    }
+//            var strippedZone = String(basalDate.dropLast())
+//            strippedZone = strippedZone.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+//            dateFormatter.locale = Locale(identifier: "en_US")
+//            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+//            guard let dateString = dateFormatter.date(from: strippedZone) else { continue }
+//            let dateTimeStamp = dateString.timeIntervalSince1970
+//            guard let basalRate = currentEntry?["absolute"] as? Double else {
+//                if UserDefaultsRepository.debugLog.value {
+//                    //self.writeDebugLog(value: "ERROR: Null Basal entry")
+//
+//                }
+//                continue
+//            }
+//
+//            let midnightTime = dateTimeUtils.getTimeIntervalMidnightToday()
+//            // Setting end dots
+//            var duration = 0.0
+//            do {
+//                duration = try currentEntry?["duration"] as! Double
+//            } catch {
+//                print("No Duration Found")
+//            }
+//
+//            // This adds scheduled basal wherever there is a break between temps. can't check the prior ending on the first item. it is 24 hours old, so it isn't important for display anyway
+//            if i > 0 {
+//                let priorEntry = tempArray[i - 1] as [String : AnyObject]?
+//                var priorBasalDate: String
+//                if priorEntry?["timestamp"] != nil {
+//                    priorBasalDate = priorEntry?["timestamp"] as! String
+//                } else if currentEntry?["created_at"] != nil {
+//                    priorBasalDate = priorEntry?["created_at"] as! String
+//                } else {
+//                    continue
+//                }
+//                var priorStrippedZone = String(priorBasalDate.dropLast())
+//                priorStrippedZone = priorStrippedZone.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
+//                let priorDateFormatter = DateFormatter()
+//                priorDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+//                priorDateFormatter.locale = Locale(identifier: "en_US")
+//                priorDateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+//                guard let priorDateString = dateFormatter.date(from: priorStrippedZone) else { continue }
+//                let priorDateTimeStamp = priorDateString.timeIntervalSince1970
+//                let priorDuration = priorEntry?["duration"] as! Double
+//                // if difference between time stamps is greater than the duration of the last entry, there is a gap. Give a 15 second leeway on the timestamp
+//                if Double( dateTimeStamp - priorDateTimeStamp ) > Double( (priorDuration * 60) + 15 ) {
+//
+//                    var scheduled = 0.0
+//                    var midGap = false
+//                    var midGapTime: TimeInterval = 0
+//                    var midGapValue: Double = 0
+//                    // cycle through basal profiles.
+//                    // TODO figure out how to deal with profile changes that happen mid-gap
+//                    for b in 0..<self.basalScheduleData.count {
+//
+//                        if (priorDateTimeStamp + (priorDuration * 60)) >= basalScheduleData[b].date {
+//                            scheduled = basalScheduleData[b].basalRate
+//
+//                            // deal with mid-gap scheduled basal change
+//                            // don't do it on the last scheudled basal entry
+//                            if b < self.basalScheduleData.count - 1 {
+//                                if dateTimeStamp > self.basalScheduleData[b + 1].date {
+//                                   // midGap = true
+//                                    // TODO: finish this to handle mid-gap items without crashing from overlapping entries
+//                                    midGapTime = self.basalScheduleData[b + 1].date
+//                                    midGapValue = self.basalScheduleData[b + 1].basalRate
+//                                }
+//                            }
+//
+//                        }
+//
+//                    }
+//
+//                    // Make the starting dot at the last ending dot
+//                    let startDot = basalGraphStruct(basalRate: scheduled, date: Double(priorDateTimeStamp + (priorDuration * 60)))
+//                    basalData.append(startDot)
+//
+//
+//                    if midGap {
+//                        // Make the ending dot at the new scheduled basal
+//                        let endDot1 = basalGraphStruct(basalRate: scheduled, date: Double(midGapTime))
+//                        basalData.append(endDot1)
+//                        // Make the starting dot at the scheduled Time
+//                        let startDot2 = basalGraphStruct(basalRate: midGapValue, date: Double(midGapTime))
+//                        basalData.append(startDot2)
+//                        // Make the ending dot at the new basal value
+//                        let endDot2 = basalGraphStruct(basalRate: midGapValue, date: Double(dateTimeStamp))
+//                        basalData.append(endDot2)
+//
+//                    } else {
+//                        // Make the ending dot at the new starting dot
+//                        let endDot = basalGraphStruct(basalRate: scheduled, date: Double(dateTimeStamp))
+//                        basalData.append(endDot)
+//                    }
+//
+//
+//                }
+//            }
+//
+//            // Make the starting dot
+//            let startDot = basalGraphStruct(basalRate: basalRate, date: Double(dateTimeStamp))
+//            basalData.append(startDot)
+//
+//            // Make the ending dot
+//            // If it's the last one and has no duration, extend it for 30 minutes past the start. Otherwise set ending at duration
+//            // duration is already set to 0 if there is no duration set on it.
+//            //if i == tempArray.count - 1 && dateTimeStamp + duration <= dateTimeUtils.getNowTimeIntervalUTC() {
+//            if i == tempArray.count - 1 && duration == 0.0 {
+//                lastEndDot = dateTimeStamp + (30 * 60)
+//                latestBasal = String(format:"%.2f", basalRate)
+//            } else {
+//                lastEndDot = dateTimeStamp + (duration * 60)
+//                latestBasal = String(format:"%.2f", basalRate)
+//            }
+//
+//            // Double check for overlaps of incorrectly ended TBRs and sent it to end when the next one starts if it finds a discrepancy
+//            if i < tempArray.count - 1 {
+//                let nextEntry = tempArray[i + 1] as [String : AnyObject]?
+//                var nextBasalDate: String
+//                if nextEntry?["timestamp"] != nil {
+//                    nextBasalDate = nextEntry?["timestamp"] as! String
+//                } else if currentEntry?["created_at"] != nil {
+//                    nextBasalDate = nextEntry?["created_at"] as! String
+//                } else {
+//                    continue
+//                }
+//                var nextStrippedZone = String(nextBasalDate.dropLast())
+//                nextStrippedZone = nextStrippedZone.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
+//                let nextDateFormatter = DateFormatter()
+//                nextDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+//                nextDateFormatter.locale = Locale(identifier: "en_US")
+//                nextDateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+//                guard let nextDateString = dateFormatter.date(from: nextStrippedZone) else { continue }
+//                let nextDateTimeStamp = nextDateString.timeIntervalSince1970
+//                if nextDateTimeStamp < (dateTimeStamp + (duration * 60)) {
+//                    lastEndDot = nextDateTimeStamp
+//                }
+//            }
+//
+//            let endDot = basalGraphStruct(basalRate: basalRate, date: Double(lastEndDot))
+//            basalData.append(endDot)
+//
+//
+//        }
+//
+//        // If last  basal was prior to right now, we need to create one last scheduled entry
+//        if lastEndDot <= dateTimeUtils.getNowTimeIntervalUTC() {
+//            var scheduled = 0.0
+//            // cycle through basal profiles.
+//            // TODO figure out how to deal with profile changes that happen mid-gap
+//            for b in 0..<self.basalProfile.count {
+//                let scheduleTimeYesterday = self.basalProfile[b].timeAsSeconds + dateTimeUtils.getTimeIntervalMidnightYesterday()
+//                let scheduleTimeToday = self.basalProfile[b].timeAsSeconds + dateTimeUtils.getTimeIntervalMidnightToday()
+//                // check the prior temp ending to the profile seconds from midnight
+//                print("yesterday " + String(scheduleTimeYesterday))
+//                print("today " + String(scheduleTimeToday))
+//                if lastEndDot >= scheduleTimeToday {
+//                    scheduled = basalProfile[b].value
+//                }
+//            }
+//
+//            latestBasal = String(format:"%.2f", scheduled)
+//            // Make the starting dot at the last ending dot
+//            let startDot = basalGraphStruct(basalRate: scheduled, date: Double(lastEndDot))
+//            basalData.append(startDot)
+//
+//            // Make the ending dot 10 minutes after now
+//            let endDot = basalGraphStruct(basalRate: scheduled, date: Double(Date().timeIntervalSince1970 + (60 * 10)))
+//            basalData.append(endDot)
+//
+//        }
+////        tableData[2].value = latestBasal
+//        mainTableView.reloadData()
+//        if UserDefaultsRepository.graphBasal.value {
+////            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
+////                self.updateBasalGraph()
+////            }
+//        }
+//        mainTableView.reloadData()
+//    }
 
     // NS Meal Bolus Response Processor
-    func processNSBolus(entries: [[String:AnyObject]]) {
-        if UserDefaultsRepository.debugLog.value {
-            //self.writeDebugLog(value: "Process: Bolus")
-            
-        }
-        // because it's a small array, we're going to destroy and reload every time.
-        bolusData.removeAll()
-        var lastFoundIndex = 0
-        for i in 0..<entries.count {
-            let currentEntry = entries[entries.count - 1 - i] as [String : AnyObject]?
-            var bolusDate: String
-            if currentEntry?["timestamp"] != nil {
-                bolusDate = currentEntry?["timestamp"] as! String
-            } else if currentEntry?["created_at"] != nil {
-                bolusDate = currentEntry?["created_at"] as! String
-            } else {
-                continue
-            }
-            
-            // fix to remove millisecond (after period in timestamp) for FreeAPS users
-            var strippedZone = String(bolusDate.dropLast())
-            strippedZone = strippedZone.components(separatedBy: ".")[0]
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-            dateFormatter.locale = Locale(identifier: "en_US")
-            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-            guard let dateString = dateFormatter.date(from: strippedZone) else { continue }
-            let dateTimeStamp = dateString.timeIntervalSince1970
-
-                guard let bolus = currentEntry?["insulin"] as? Double else { continue }
-                let sgv = findNearestBGbyTime(needle: dateTimeStamp, haystack: bgData, startingIndex: lastFoundIndex)
-                lastFoundIndex = sgv.foundIndex
-                
-                if dateTimeStamp < (dateTimeUtils.getNowTimeIntervalUTC() + (60 * 60)) {
-                    // Make the dot
-                    let dot = bolusGraphStruct(value: bolus, date: Double(dateTimeStamp), sgv: Int(sgv.sgv + 20))
-                    bolusData.append(dot)
-                }
-            
-        }
-        
-        if UserDefaultsRepository.graphBolus.value {
-//            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
-//                self.updateBolusGraph()
+//    func processNSBolus(entries: [[String:AnyObject]]) {
+//        if UserDefaultsRepository.debugLog.value {
+//            //self.writeDebugLog(value: "Process: Bolus")
+//
+//        }
+//        // because it's a small array, we're going to destroy and reload every time.
+//        bolusData.removeAll()
+//        var lastFoundIndex = 0
+//        for i in 0..<entries.count {
+//            let currentEntry = entries[entries.count - 1 - i] as [String : AnyObject]?
+//            var bolusDate: String
+//            if currentEntry?["timestamp"] != nil {
+//                bolusDate = currentEntry?["timestamp"] as! String
+//            } else if currentEntry?["created_at"] != nil {
+//                bolusDate = currentEntry?["created_at"] as! String
+//            } else {
+//                continue
 //            }
-        }
-        
-    }
+//
+//            // fix to remove millisecond (after period in timestamp) for FreeAPS users
+//            var strippedZone = String(bolusDate.dropLast())
+//            strippedZone = strippedZone.components(separatedBy: ".")[0]
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+//            dateFormatter.locale = Locale(identifier: "en_US")
+//            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+//            guard let dateString = dateFormatter.date(from: strippedZone) else { continue }
+//            let dateTimeStamp = dateString.timeIntervalSince1970
+//
+//                guard let bolus = currentEntry?["insulin"] as? Double else { continue }
+//                let sgv = findNearestBGbyTime(needle: dateTimeStamp, haystack: bgData, startingIndex: lastFoundIndex)
+//                lastFoundIndex = sgv.foundIndex
+//
+//                if dateTimeStamp < (dateTimeUtils.getNowTimeIntervalUTC() + (60 * 60)) {
+//                    // Make the dot
+//                    let dot = bolusGraphStruct(value: bolus, date: Double(dateTimeStamp), sgv: Int(sgv.sgv + 20))
+//                    bolusData.append(dot)
+//                }
+//
+//        }
+//
+//        if UserDefaultsRepository.graphBolus.value {
+////            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
+////                self.updateBolusGraph()
+////            }
+//        }
+//
+//    }
    
     // NS Carb Bolus Response Processor
-    func processNSCarbs(entries: [[String:AnyObject]]) {
-//        if UserDefaultsRepository.debugLog.value { self.writeDebugLog(value: "Process: Carbs") }
-        // because it's a small array, we're going to destroy and reload every time.
-        carbData.removeAll()
-        var lastFoundIndex = 0
-        var lastFoundBolus = 0
-        for i in 0..<entries.count {
-            let currentEntry = entries[entries.count - 1 - i] as [String : AnyObject]?
-            var carbDate: String
-            if currentEntry?["timestamp"] != nil {
-                carbDate = currentEntry?["timestamp"] as! String
-            } else if currentEntry?["created_at"] != nil {
-                carbDate = currentEntry?["created_at"] as! String
-            } else {
-                continue
-            }
-            
-            
-            let absorptionTime = currentEntry?["absorptionTime"] as? Int ?? 0
-            
-            // Fix for FreeAPS milliseconds in timestamp
-            var strippedZone = String(carbDate.dropLast())
-            strippedZone = strippedZone.components(separatedBy: ".")[0]
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-            dateFormatter.locale = Locale(identifier: "en_US")
-            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-            guard let dateString = dateFormatter.date(from: strippedZone) else { continue }
-            var dateTimeStamp = dateString.timeIntervalSince1970
-            
-            guard let carbs = currentEntry?["carbs"] as? Double else {
-//                if UserDefaultsRepository.debugLog.value { self.writeDebugLog(value: "ERROR: Null Carb entry")}
-                continue
-            }
-            let sgv = findNearestBGbyTime(needle: dateTimeStamp, haystack: bgData, startingIndex: lastFoundIndex)
-            lastFoundIndex = sgv.foundIndex
-            
-            var offset = -50
-            if sgv.sgv < Double(topBG - 100) {
-                let bolusTime = findNearestBolusbyTime(timeWithin: 300, needle: dateTimeStamp, haystack: bolusData, startingIndex: lastFoundBolus)
-                lastFoundBolus = bolusTime.foundIndex
-                
-                if bolusTime.offset {
-                    offset = 70
-                } else {
-                    offset = 20
-                }
-            }
-            
-            if dateTimeStamp < (dateTimeUtils.getNowTimeIntervalUTC() + (60 * 60)) {
-                // Make the dot
-                let dot = carbGraphStruct(value: Double(carbs), date: Double(dateTimeStamp), sgv: Int(sgv.sgv + Double(offset)), absorptionTime: absorptionTime)
-                carbData.append(dot)
-            }
-            
-            
-            
-        }
-        
-        if UserDefaultsRepository.graphCarbs.value {
-//            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
-//                self.updateCarbGraph()
+//    func processNSCarbs(entries: [[String:AnyObject]]) {
+////        if UserDefaultsRepository.debugLog.value { self.writeDebugLog(value: "Process: Carbs") }
+//        // because it's a small array, we're going to destroy and reload every time.
+//        carbData.removeAll()
+//        var lastFoundIndex = 0
+//        var lastFoundBolus = 0
+//        for i in 0..<entries.count {
+//            let currentEntry = entries[entries.count - 1 - i] as [String : AnyObject]?
+//            var carbDate: String
+//            if currentEntry?["timestamp"] != nil {
+//                carbDate = currentEntry?["timestamp"] as! String
+//            } else if currentEntry?["created_at"] != nil {
+//                carbDate = currentEntry?["created_at"] as! String
+//            } else {
+//                continue
 //            }
-         
-        }
-        
-        
-    }
+//
+//
+//            let absorptionTime = currentEntry?["absorptionTime"] as? Int ?? 0
+//
+//            // Fix for FreeAPS milliseconds in timestamp
+//            var strippedZone = String(carbDate.dropLast())
+//            strippedZone = strippedZone.components(separatedBy: ".")[0]
+//
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+//            dateFormatter.locale = Locale(identifier: "en_US")
+//            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+//            guard let dateString = dateFormatter.date(from: strippedZone) else { continue }
+//            var dateTimeStamp = dateString.timeIntervalSince1970
+//
+//            guard let carbs = currentEntry?["carbs"] as? Double else {
+////                if UserDefaultsRepository.debugLog.value { self.writeDebugLog(value: "ERROR: Null Carb entry")}
+//                continue
+//            }
+//            let sgv = findNearestBGbyTime(needle: dateTimeStamp, haystack: bgData, startingIndex: lastFoundIndex)
+//            lastFoundIndex = sgv.foundIndex
+//
+//            var offset = -50
+//            if sgv.sgv < Double(topBG - 100) {
+//                let bolusTime = findNearestBolusbyTime(timeWithin: 300, needle: dateTimeStamp, haystack: bolusData, startingIndex: lastFoundBolus)
+//                lastFoundBolus = bolusTime.foundIndex
+//
+//                if bolusTime.offset {
+//                    offset = 70
+//                } else {
+//                    offset = 20
+//                }
+//            }
+//
+//            if dateTimeStamp < (dateTimeUtils.getNowTimeIntervalUTC() + (60 * 60)) {
+//                // Make the dot
+//                let dot = carbGraphStruct(value: Double(carbs), date: Double(dateTimeStamp), sgv: Int(sgv.sgv + Double(offset)), absorptionTime: absorptionTime)
+//                carbData.append(dot)
+//            }
+//
+//
+//
+//        }
+//
+//        if UserDefaultsRepository.graphCarbs.value {
+////            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
+////                self.updateCarbGraph()
+////            }
+//
+//        }
+//
+//
+//    }
     
     // NS Suspend Pump Response Processor
-    func processSuspendPump(entries: [[String:AnyObject]]) {
-//        if UserDefaultsRepository.debugLog.value { self.writeDebugLog(value: "Process: Suspend Pump") }
-        // because it's a small array, we're going to destroy and reload every time.
-        suspendGraphData.removeAll()
-        var lastFoundIndex = 0
-        for i in 0..<entries.count {
-            let currentEntry = entries[entries.count - 1 - i] as [String : AnyObject]?
-            var date: String
-            if currentEntry?["timestamp"] != nil {
-                date = currentEntry?["timestamp"] as! String
-            } else if currentEntry?["created_at"] != nil {
-                date = currentEntry?["created_at"] as! String
-            } else {
-                return
-            }
-            // Fix for FreeAPS milliseconds in timestamp
-            var strippedZone = String(date.dropLast())
-            strippedZone = strippedZone.components(separatedBy: ".")[0]
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-            dateFormatter.locale = Locale(identifier: "en_US")
-            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-            let dateString = dateFormatter.date(from: strippedZone)
-            let dateTimeStamp = dateString!.timeIntervalSince1970
-
-            let sgv = findNearestBGbyTime(needle: dateTimeStamp, haystack: bgData, startingIndex: lastFoundIndex)
-            lastFoundIndex = sgv.foundIndex
-            
-            if dateTimeStamp < (dateTimeUtils.getNowTimeIntervalUTC() + (60 * 60)) {
-                // Make the dot
-                let dot = DataStructs.timestampOnlyStruct(date: Double(dateTimeStamp), sgv: Int(sgv.sgv))
-                suspendGraphData.append(dot)
-            }
-        }
-        if UserDefaultsRepository.graphOtherTreatments.value {
-//            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
-//                self.updateSuspendGraph()
+//    func processSuspendPump(entries: [[String:AnyObject]]) {
+////        if UserDefaultsRepository.debugLog.value { self.writeDebugLog(value: "Process: Suspend Pump") }
+//        // because it's a small array, we're going to destroy and reload every time.
+//        suspendGraphData.removeAll()
+//        var lastFoundIndex = 0
+//        for i in 0..<entries.count {
+//            let currentEntry = entries[entries.count - 1 - i] as [String : AnyObject]?
+//            var date: String
+//            if currentEntry?["timestamp"] != nil {
+//                date = currentEntry?["timestamp"] as! String
+//            } else if currentEntry?["created_at"] != nil {
+//                date = currentEntry?["created_at"] as! String
+//            } else {
+//                return
 //            }
-        }
-        
-    }
+//            // Fix for FreeAPS milliseconds in timestamp
+//            var strippedZone = String(date.dropLast())
+//            strippedZone = strippedZone.components(separatedBy: ".")[0]
+//
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+//            dateFormatter.locale = Locale(identifier: "en_US")
+//            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+//            let dateString = dateFormatter.date(from: strippedZone)
+//            let dateTimeStamp = dateString!.timeIntervalSince1970
+//
+//            let sgv = findNearestBGbyTime(needle: dateTimeStamp, haystack: bgData, startingIndex: lastFoundIndex)
+//            lastFoundIndex = sgv.foundIndex
+//
+//            if dateTimeStamp < (dateTimeUtils.getNowTimeIntervalUTC() + (60 * 60)) {
+//                // Make the dot
+//                let dot = DataStructs.timestampOnlyStruct(date: Double(dateTimeStamp), sgv: Int(sgv.sgv))
+//                suspendGraphData.append(dot)
+//            }
+//        }
+//        if UserDefaultsRepository.graphOtherTreatments.value {
+////            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
+////                self.updateSuspendGraph()
+////            }
+//        }
+//
+//    }
     
     // NS Resume Pump Response Processor
-    func processResumePump(entries: [[String:AnyObject]]) {
-        if UserDefaultsRepository.debugLog.value {
-            //self.writeDebugLog(value: "Process: Resume Pump")
-            
-        }
-        // because it's a small array, we're going to destroy and reload every time.
-        resumeGraphData.removeAll()
-        var lastFoundIndex = 0
-        for i in 0..<entries.count {
-            let currentEntry = entries[entries.count - 1 - i] as [String : AnyObject]?
-            var date: String
-            if currentEntry?["timestamp"] != nil {
-                date = currentEntry?["timestamp"] as! String
-            } else if currentEntry?["created_at"] != nil {
-                date = currentEntry?["created_at"] as! String
-            } else {
-                return
-            }
-            // Fix for FreeAPS milliseconds in timestamp
-            var strippedZone = String(date.dropLast())
-            strippedZone = strippedZone.components(separatedBy: ".")[0]
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-            dateFormatter.locale = Locale(identifier: "en_US")
-            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-            let dateString = dateFormatter.date(from: strippedZone)
-            let dateTimeStamp = dateString!.timeIntervalSince1970
-
-            let sgv = findNearestBGbyTime(needle: dateTimeStamp, haystack: bgData, startingIndex: lastFoundIndex)
-            lastFoundIndex = sgv.foundIndex
-            
-            if dateTimeStamp < (dateTimeUtils.getNowTimeIntervalUTC() + (60 * 60)) {
-                // Make the dot
-                let dot = DataStructs.timestampOnlyStruct(date: Double(dateTimeStamp), sgv: Int(sgv.sgv))
-                resumeGraphData.append(dot)
-            }
-        }
-        if UserDefaultsRepository.graphOtherTreatments.value {
-//            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
-//                self.updateResumeGraph()
+//    func processResumePump(entries: [[String:AnyObject]]) {
+//        if UserDefaultsRepository.debugLog.value {
+//            //self.writeDebugLog(value: "Process: Resume Pump")
+//
+//        }
+//        // because it's a small array, we're going to destroy and reload every time.
+//        resumeGraphData.removeAll()
+//        var lastFoundIndex = 0
+//        for i in 0..<entries.count {
+//            let currentEntry = entries[entries.count - 1 - i] as [String : AnyObject]?
+//            var date: String
+//            if currentEntry?["timestamp"] != nil {
+//                date = currentEntry?["timestamp"] as! String
+//            } else if currentEntry?["created_at"] != nil {
+//                date = currentEntry?["created_at"] as! String
+//            } else {
+//                return
 //            }
-        }
-        
-    }
+//            // Fix for FreeAPS milliseconds in timestamp
+//            var strippedZone = String(date.dropLast())
+//            strippedZone = strippedZone.components(separatedBy: ".")[0]
+//
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+//            dateFormatter.locale = Locale(identifier: "en_US")
+//            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+//            let dateString = dateFormatter.date(from: strippedZone)
+//            let dateTimeStamp = dateString!.timeIntervalSince1970
+//
+//            let sgv = findNearestBGbyTime(needle: dateTimeStamp, haystack: bgData, startingIndex: lastFoundIndex)
+//            lastFoundIndex = sgv.foundIndex
+//
+//            if dateTimeStamp < (dateTimeUtils.getNowTimeIntervalUTC() + (60 * 60)) {
+//                // Make the dot
+//                let dot = DataStructs.timestampOnlyStruct(date: Double(dateTimeStamp), sgv: Int(sgv.sgv))
+//                resumeGraphData.append(dot)
+//            }
+//        }
+//        if UserDefaultsRepository.graphOtherTreatments.value {
+////            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
+////                self.updateResumeGraph()
+////            }
+//        }
+//
+//    }
     
     // NS Sensor Start Response Processor
-    func processSensorStart(entries: [[String:AnyObject]]) {
-        if UserDefaultsRepository.debugLog.value {
-            //self.writeDebugLog(value: "Process: Sensor Start")
-            
-        }
-        // because it's a small array, we're going to destroy and reload every time.
-        sensorStartGraphData.removeAll()
-        var lastFoundIndex = 0
-        for i in 0..<entries.count {
-            let currentEntry = entries[entries.count - 1 - i] as [String : AnyObject]?
-            var date: String
-            if currentEntry?["timestamp"] != nil {
-                date = currentEntry?["timestamp"] as! String
-            } else if currentEntry?["created_at"] != nil {
-                date = currentEntry?["created_at"] as! String
-            } else {
-                return
-            }
-            // Fix for FreeAPS milliseconds in timestamp
-            var strippedZone = String(date.dropLast())
-            strippedZone = strippedZone.components(separatedBy: ".")[0]
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-            dateFormatter.locale = Locale(identifier: "en_US")
-            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-            let dateString = dateFormatter.date(from: strippedZone)
-            let dateTimeStamp = dateString!.timeIntervalSince1970
-
-            let sgv = findNearestBGbyTime(needle: dateTimeStamp, haystack: bgData, startingIndex: lastFoundIndex)
-            lastFoundIndex = sgv.foundIndex
-            
-            if dateTimeStamp < (dateTimeUtils.getNowTimeIntervalUTC() + (60 * 60)) {
-                // Make the dot
-                let dot = DataStructs.timestampOnlyStruct(date: Double(dateTimeStamp), sgv: Int(sgv.sgv))
-                sensorStartGraphData.append(dot)
-            }
-        }
-        if UserDefaultsRepository.graphOtherTreatments.value {
-//            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
-//                self.updateSensorStart()
+//    func processSensorStart(entries: [[String:AnyObject]]) {
+//        if UserDefaultsRepository.debugLog.value {
+//            //self.writeDebugLog(value: "Process: Sensor Start")
+//
+//        }
+//        // because it's a small array, we're going to destroy and reload every time.
+//        sensorStartGraphData.removeAll()
+//        var lastFoundIndex = 0
+//        for i in 0..<entries.count {
+//            let currentEntry = entries[entries.count - 1 - i] as [String : AnyObject]?
+//            var date: String
+//            if currentEntry?["timestamp"] != nil {
+//                date = currentEntry?["timestamp"] as! String
+//            } else if currentEntry?["created_at"] != nil {
+//                date = currentEntry?["created_at"] as! String
+//            } else {
+//                return
 //            }
-        }
-        
-    }
+//            // Fix for FreeAPS milliseconds in timestamp
+//            var strippedZone = String(date.dropLast())
+//            strippedZone = strippedZone.components(separatedBy: ".")[0]
+//
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+//            dateFormatter.locale = Locale(identifier: "en_US")
+//            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+//            let dateString = dateFormatter.date(from: strippedZone)
+//            let dateTimeStamp = dateString!.timeIntervalSince1970
+//
+//            let sgv = findNearestBGbyTime(needle: dateTimeStamp, haystack: bgData, startingIndex: lastFoundIndex)
+//            lastFoundIndex = sgv.foundIndex
+//
+//            if dateTimeStamp < (dateTimeUtils.getNowTimeIntervalUTC() + (60 * 60)) {
+//                // Make the dot
+//                let dot = DataStructs.timestampOnlyStruct(date: Double(dateTimeStamp), sgv: Int(sgv.sgv))
+//                sensorStartGraphData.append(dot)
+//            }
+//        }
+//        if UserDefaultsRepository.graphOtherTreatments.value {
+////            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
+////                self.updateSensorStart()
+////            }
+//        }
+//
+//    }
     
     // NS Note Response Processor
-    func processNotes(entries: [[String:AnyObject]]) {
-        if UserDefaultsRepository.debugLog.value {
-            //self.writeDebugLog(value: "Process: Notes")
-            
-        }
-        // because it's a small array, we're going to destroy and reload every time.
-        noteGraphData.removeAll()
-        var lastFoundIndex = 0
-        for i in 0..<entries.count {
-            let currentEntry = entries[entries.count - 1 - i] as [String : AnyObject]?
-            var date: String
-            if currentEntry?["timestamp"] != nil {
-                date = currentEntry?["timestamp"] as! String
-            } else if currentEntry?["created_at"] != nil {
-                date = currentEntry?["created_at"] as! String
-            } else {
-                return
-            }
-            // Fix for FreeAPS milliseconds in timestamp
-            var strippedZone = String(date.dropLast())
-            strippedZone = strippedZone.components(separatedBy: ".")[0]
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-            dateFormatter.locale = Locale(identifier: "en_US")
-            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-            let dateString = dateFormatter.date(from: strippedZone)
-            let dateTimeStamp = dateString!.timeIntervalSince1970
-
-            let sgv = findNearestBGbyTime(needle: dateTimeStamp, haystack: bgData, startingIndex: lastFoundIndex)
-            lastFoundIndex = sgv.foundIndex
-            
-            guard let thisNote = currentEntry?["notes"] as? String else { continue }
-            
-            if dateTimeStamp < (dateTimeUtils.getNowTimeIntervalUTC() + (60 * 60)) {
-                // Make the dot
-                let dot = DataStructs.noteStruct(date: Double(dateTimeStamp), sgv: Int(sgv.sgv), note: thisNote)
-                noteGraphData.append(dot)
-            }
-        }
-        if UserDefaultsRepository.graphOtherTreatments.value {
-//            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
-//                self.updateNotes()
+//    func processNotes(entries: [[String:AnyObject]]) {
+//        if UserDefaultsRepository.debugLog.value {
+//            //self.writeDebugLog(value: "Process: Notes")
+//
+//        }
+//        // because it's a small array, we're going to destroy and reload every time.
+//        noteGraphData.removeAll()
+//        var lastFoundIndex = 0
+//        for i in 0..<entries.count {
+//            let currentEntry = entries[entries.count - 1 - i] as [String : AnyObject]?
+//            var date: String
+//            if currentEntry?["timestamp"] != nil {
+//                date = currentEntry?["timestamp"] as! String
+//            } else if currentEntry?["created_at"] != nil {
+//                date = currentEntry?["created_at"] as! String
+//            } else {
+//                return
 //            }
-        }
-        
-    }
+//            // Fix for FreeAPS milliseconds in timestamp
+//            var strippedZone = String(date.dropLast())
+//            strippedZone = strippedZone.components(separatedBy: ".")[0]
+//
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+//            dateFormatter.locale = Locale(identifier: "en_US")
+//            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+//            let dateString = dateFormatter.date(from: strippedZone)
+//            let dateTimeStamp = dateString!.timeIntervalSince1970
+//
+//            let sgv = findNearestBGbyTime(needle: dateTimeStamp, haystack: bgData, startingIndex: lastFoundIndex)
+//            lastFoundIndex = sgv.foundIndex
+//
+//            guard let thisNote = currentEntry?["notes"] as? String else { continue }
+//
+//            if dateTimeStamp < (dateTimeUtils.getNowTimeIntervalUTC() + (60 * 60)) {
+//                // Make the dot
+//                let dot = DataStructs.noteStruct(date: Double(dateTimeStamp), sgv: Int(sgv.sgv), note: thisNote)
+//                noteGraphData.append(dot)
+//            }
+//        }
+//        if UserDefaultsRepository.graphOtherTreatments.value {
+////            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
+////                self.updateNotes()
+////            }
+//        }
+//
+//    }
     
     // NS BG Check Response Processor
     func processNSBGCheck(entries: [[String:AnyObject]]) {
         if UserDefaultsRepository.debugLog.value {
             //self.writeDebugLog(value: "Process: BG Check")
-            
+
         }
         // because it's a small array, we're going to destroy and reload every time.
         bgCheckData.removeAll()
@@ -1711,111 +1707,108 @@ extension  BottomSheetVC{
             // Fix for FreeAPS milliseconds in timestamp
             var strippedZone = String(date.dropLast())
             strippedZone = strippedZone.components(separatedBy: ".")[0]
-            
+
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
             dateFormatter.locale = Locale(identifier: "en_US")
             dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
             let dateString = dateFormatter.date(from: strippedZone)
             let dateTimeStamp = dateString!.timeIntervalSince1970
-            
+
             guard let sgv = currentEntry?["glucose"] as? Int else {
                 if UserDefaultsRepository.debugLog.value {
                     //self.writeDebugLog(value: "ERROR: Non-Int Glucose entry")
-                    
+
                 }
                 continue
             }
-            
+
             if dateTimeStamp < (dateTimeUtils.getNowTimeIntervalUTC() + (60 * 60)) {
                 // Make the dot
                 //let dot = ShareGlucoseData(value: Double(carbs), date: Double(dateTimeStamp), sgv: Int(sgv.sgv))
                 let dot = ShareGlucoseData(sgv: sgv, direction: "", date: Double(dateTimeStamp))
                 bgCheckData.append(dot)
             }
-            
-            
-            
         }
-        
+
     }
     
     // NS Override Response Processor
-    func processNSOverrides(entries: [[String:AnyObject]]) {
-        if UserDefaultsRepository.debugLog.value {
-            //self.writeDebugLog(value: "Process: Overrides")
-            
-        }
-        // because it's a small array, we're going to destroy and reload every time.
-        overrideGraphData.removeAll()
-        for i in 0..<entries.count {
-            let currentEntry = entries[entries.count - 1 - i] as [String : AnyObject]?
-            var date: String
-            if currentEntry?["timestamp"] != nil {
-                date = currentEntry?["timestamp"] as! String
-            } else if currentEntry?["created_at"] != nil {
-                date = currentEntry?["created_at"] as! String
-            } else {
-                return
-            }
-            // Fix for FreeAPS milliseconds in timestamp
-            var strippedZone = String(date.dropLast())
-            strippedZone = strippedZone.components(separatedBy: ".")[0]
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-            dateFormatter.locale = Locale(identifier: "en_US")
-            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-            let dateString = dateFormatter.date(from: strippedZone)
-            var dateTimeStamp = dateString!.timeIntervalSince1970
-            if dateTimeStamp < dateTimeUtils.getTimeInterval24HoursAgo() {
-                dateTimeStamp = dateTimeUtils.getTimeInterval24HoursAgo()
-            }
-            
-            var multiplier: Double = 1.0
-            if currentEntry?["insulinNeedsScaleFactor"] != nil {
-                multiplier = currentEntry?["insulinNeedsScaleFactor"] as! Double
-            }
-            var duration: Double = 5.0
-            if let durationType = currentEntry?["durationType"] as? String {
-                duration = dateTimeUtils.getNowTimeIntervalUTC() - dateTimeStamp + (60 * 60)
-            } else {
-                duration = (currentEntry?["duration"] as? Double)!
-                duration = duration * 60
-            }
-            
-            // Skip overrides that aren't 5 minutes long. This prevents overlapping that causes bars to not display.
-            if duration < 300 { continue }
-            
-            guard let enteredBy = currentEntry?["enteredBy"] as? String else { continue }
-            guard let reason = currentEntry?["reason"] as? String else { continue }
-            
-            var range: [Int] = []
-            if let ranges = currentEntry?["correctionRange"] as? [Int] {
-                if ranges.count == 2 {
-                    guard let low = ranges[0] as? Int else { continue }
-                    guard let high = ranges[1] as? Int else { continue }
-                    range.append(low)
-                    range.append(high)
-                }
-                
-            }
-                        
-            let endDate = dateTimeStamp + (duration)
-
-            let dot = DataStructs.overrideStruct(insulNeedsScaleFactor: multiplier, date: dateTimeStamp, endDate: endDate, duration: duration, correctionRange: range, enteredBy: enteredBy, reason: reason, sgv: -20)
-            overrideGraphData.append(dot)
-            
-            
-        }
-        if UserDefaultsRepository.graphOtherTreatments.value {
-        
-//            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
-//            self.updateOverrideGraph()
+//    func processNSOverrides(entries: [[String:AnyObject]]) {
+//        if UserDefaultsRepository.debugLog.value {
+//            //self.writeDebugLog(value: "Process: Overrides")
+//
+//        }
+//        // because it's a small array, we're going to destroy and reload every time.
+//        overrideGraphData.removeAll()
+//        for i in 0..<entries.count {
+//            let currentEntry = entries[entries.count - 1 - i] as [String : AnyObject]?
+//            var date: String
+//            if currentEntry?["timestamp"] != nil {
+//                date = currentEntry?["timestamp"] as! String
+//            } else if currentEntry?["created_at"] != nil {
+//                date = currentEntry?["created_at"] as! String
+//            } else {
+//                return
 //            }
-        }
-        
-    }
+//            // Fix for FreeAPS milliseconds in timestamp
+//            var strippedZone = String(date.dropLast())
+//            strippedZone = strippedZone.components(separatedBy: ".")[0]
+//
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+//            dateFormatter.locale = Locale(identifier: "en_US")
+//            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+//            let dateString = dateFormatter.date(from: strippedZone)
+//            var dateTimeStamp = dateString!.timeIntervalSince1970
+//            if dateTimeStamp < dateTimeUtils.getTimeInterval24HoursAgo() {
+//                dateTimeStamp = dateTimeUtils.getTimeInterval24HoursAgo()
+//            }
+//
+//            var multiplier: Double = 1.0
+//            if currentEntry?["insulinNeedsScaleFactor"] != nil {
+//                multiplier = currentEntry?["insulinNeedsScaleFactor"] as! Double
+//            }
+//            var duration: Double = 5.0
+//            if let durationType = currentEntry?["durationType"] as? String {
+//                duration = dateTimeUtils.getNowTimeIntervalUTC() - dateTimeStamp + (60 * 60)
+//            } else {
+//                duration = (currentEntry?["duration"] as? Double)!
+//                duration = duration * 60
+//            }
+//
+//            // Skip overrides that aren't 5 minutes long. This prevents overlapping that causes bars to not display.
+//            if duration < 300 { continue }
+//
+//            guard let enteredBy = currentEntry?["enteredBy"] as? String else { continue }
+//            guard let reason = currentEntry?["reason"] as? String else { continue }
+//
+//            var range: [Int] = []
+//            if let ranges = currentEntry?["correctionRange"] as? [Int] {
+//                if ranges.count == 2 {
+//                    guard let low = ranges[0] as? Int else { continue }
+//                    guard let high = ranges[1] as? Int else { continue }
+//                    range.append(low)
+//                    range.append(high)
+//                }
+//
+//            }
+//
+//            let endDate = dateTimeStamp + (duration)
+//
+//            let dot = DataStructs.overrideStruct(insulNeedsScaleFactor: multiplier, date: dateTimeStamp, endDate: endDate, duration: duration, correctionRange: range, enteredBy: enteredBy, reason: reason, sgv: -20)
+//            overrideGraphData.append(dot)
+//
+//
+//        }
+//        if UserDefaultsRepository.graphOtherTreatments.value {
+//
+////            if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
+////            self.updateOverrideGraph()
+////            }
+//        }
+//
+//    }
     
     func speakBG(sgv: Int) {
         let speechSynthesizer = AVSpeechSynthesizer()

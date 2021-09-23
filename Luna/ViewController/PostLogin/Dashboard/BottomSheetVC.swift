@@ -22,7 +22,7 @@ class BottomSheetVC:  UIViewController {
     @IBOutlet weak var bottomLayoutConstraint : NSLayoutConstraint!
     @IBOutlet weak var mainTableView: UITableView!
     @IBOutlet weak var timeAgoLbl: UILabel!
-    @IBOutlet weak var cgmArrowIcon: UIImageView!
+    @IBOutlet weak var cgmDirectionlbl: UILabel!
     @IBOutlet weak var cgmValueLbl: UILabel!
     
     //MARK:- VARIABLE
@@ -75,20 +75,8 @@ class BottomSheetVC:  UIViewController {
     var graphNowTimer = Timer()
     
     // Info Table Setup
-    var bgData: [ShareGlucoseData] = []
-    var basalProfile: [basalProfileStruct] = []
-    var basalData: [basalGraphStruct] = []
-    var basalScheduleData: [basalGraphStruct] = []
-    var bolusData: [bolusGraphStruct] = []
-    var carbData: [carbGraphStruct] = []
-    var overrideGraphData: [DataStructs.overrideStruct] = []
-    var predictionData: [ShareGlucoseData] = []
     var bgCheckData: [ShareGlucoseData] = []
-    var suspendGraphData: [DataStructs.timestampOnlyStruct] = []
-    var resumeGraphData: [DataStructs.timestampOnlyStruct] = []
-    var sensorStartGraphData: [DataStructs.timestampOnlyStruct] = []
-    var noteGraphData: [DataStructs.noteStruct] = []
-//    var chartData = LineChartData()
+    var bgData: [ShareGlucoseData] = []
     var newBGPulled = false
     var lastCalDate: Double = 0
     var latestDirectionString = ""
@@ -112,8 +100,6 @@ class BottomSheetVC:  UIViewController {
     
     // calendar setup
     let store = EKEventStore()
-    
-    var snoozeTabItem: UITabBarItem = UITabBarItem()
     //
     var topSafeArea: CGFloat = 0.0
     var bottomSafeArea: CGFloat = 0.0
@@ -157,7 +143,6 @@ class BottomSheetVC:  UIViewController {
             let yComponent = self?.partialView
             self?.view.frame = CGRect(x: 0, y: yComponent!, width: frame!.width, height: frame!.height)
         })
-        showHideNSDetails()
     }
     
     override func viewDidLayoutSubviews() {
@@ -197,18 +182,12 @@ class BottomSheetVC:  UIViewController {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(appCameToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-        
         // Setup the Graph
         if firstGraphLoad {
             self.createGraph()
         }
-        
-        // setup display for NS vs Dex
-        showHideNSDetails()
-        
         // Load Startup Data
         restartAllTimers()
-        
     }
     
     private func willAppearSetup(){

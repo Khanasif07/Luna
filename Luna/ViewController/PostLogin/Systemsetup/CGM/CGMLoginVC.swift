@@ -55,6 +55,8 @@ class CGMLoginVC: UIViewController {
         let scene =  CGMConnectedVC.instantiate(fromAppStoryboard: .CGPStoryboard)
         scene.cgmConnectedSuccess = { [weak self] (sender,cgmData) in
             guard let selff = self else { return }
+            UserDefaultsRepository.shareUserName.value =  selff.emailTxt
+            UserDefaultsRepository.sharePassword.value = selff.passTxt
             if   SystemInfoModel.shared.isFromSetting {
                 CommonFunctions.showActivityLoader()
                 FirestoreController.checkUserExistInSystemDatabase {

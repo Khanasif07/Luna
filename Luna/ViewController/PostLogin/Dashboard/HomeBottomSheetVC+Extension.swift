@@ -69,22 +69,6 @@ extension BottomSheetVC {
         let hours = (interval / 3600)
         return String(format: "%02d:%02d", hours, minutes)
     }
-
-    func showHideNSDetails() {
-        var isHidden = false
-        var isEnabled = true
-        if UserDefaultsRepository.url.value == "" {
-            isHidden = true
-            isEnabled = false
-        }
-        
-//        LoopStatusLabel.isHidden = isHidden
-//        PredictionLabel.isHidden = isHidden
-//        infoTable.isHidden = isHidden
-//        guard let nightscoutTab = self.tabBarController?.tabBar.items![3] else { return }
-//        nightscoutTab.isEnabled = isEnabled
-        
-    }
     
     func updateBadge(val: Int) {
         DispatchQueue.main.async {
@@ -110,10 +94,11 @@ extension BottomSheetVC {
                 } else if Float(latestBG) <= UserDefaultsRepository.lowLine.value {
                     color = NSUIColor.systemRed
                 } else {
-                    color = NSUIColor.systemGreen
+                    color = AppColors.appGreenColor
                 }
             }
                 self.cgmValueLbl.textColor = color
+                self.cgmDirectionlbl.textColor = color
         }
     }
     
