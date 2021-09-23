@@ -31,7 +31,6 @@ class HomeVC: UIViewController {
     
     // MARK: - Variables
     //==========================
-//    let bottomSheetVC = HomeBottomSheetVC()
     let bottomSheetVC = BottomSheetVC.instantiate(fromAppStoryboard: .PostLogin)
     let coachMarksController = CoachMarksController()
     
@@ -113,8 +112,8 @@ extension HomeVC {
         CommonFunctions.showActivityLoader()
         self.getUserInfoFromFirestore()
         self.getUserSystemFromFirestore()
-//        self.getCGMDataFromFirestore()
-//        self.getInsulinFromFirestore()
+        self.getInsulinFromFirestore()
+        self.addUserSessionListener()
     }
     
     private func setupHealthkit(){
@@ -133,6 +132,18 @@ extension HomeVC {
         NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .BLEOnOffState, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bLEDidDisConnected), name: .BLEDidDisConnectSuccessfully, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(cgmDataReceivedSuccessfully), name: .CgmDataReceivedSuccessfully, object: nil)
+    }
+    
+    private func addUserSessionListener(){
+        FirestoreController.addDeviceIdListener(){ (deviceId) in
+            if let uuid = UIDevice.current.identifierForVendor?.uuidString {
+                if deviceId != uuid{
+                    FirestoreController.performCleanUp(for_logout: true)
+                }
+            }
+        } failure: { (error) -> (Void) in
+            print("failure")
+        }
     }
     
     private func getCGMDataFromFirestore(){

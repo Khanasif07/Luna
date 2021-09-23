@@ -57,8 +57,8 @@ class FirestoreController:NSObject{
                 AppUserDefaults.save(value: password, forKey: .defaultPassword)
                 if !uid.isEmpty {
                     db.collection(ApiKey.users).document(uid).updateData([ApiKey.email: emailId,ApiKey.password: password, ApiKey.deviceToken: AppUserDefaults.value(forKey: .fcmToken).stringValue,
-                                                                             ApiKey.deviceType: "iOS",
-                                                                             ApiKey.userId: uid])
+                                                                          ApiKey.deviceType: "iOS",
+                                                                          ApiKey.userId: uid])
                     success()
                 } else {
                     failure("documentFetchingError", 110)
@@ -91,11 +91,11 @@ class FirestoreController:NSObject{
                         user.isProfileStepCompleted = data[ApiKey.isProfileStepCompleted] as? Bool ?? false
                         user.isSystemSetupCompleted = data[ApiKey.isSystemSetupCompleted] as? Bool ?? false
                         user.isChangePassword = data[ApiKey.isChangePassword] as? Bool ?? false
-                        user.isSignin = data[ApiKey.isSignin] as? Bool ?? false
+                        user.deviceId = data[ApiKey.deviceId] as? String ?? ""
                         UserModel.main = user
                         AppUserDefaults.save(value: user.isProfileStepCompleted, forKey: .isProfileStepCompleted)
                         AppUserDefaults.save(value: true, forKey: .isBiometricCompleted)
-                        AppUserDefaults.save(value: user.isSignin, forKey: .isSignin)
+                        AppUserDefaults.save(value: user.deviceId, forKey: .deviceId)
                         AppUserDefaults.save(value: user.isBiometricOn, forKey: .isBiometricSelected)
                         AppUserDefaults.save(value: user.isSystemSetupCompleted, forKey: .isSystemSetupCompleted)
                         success()
@@ -144,7 +144,7 @@ class FirestoreController:NSObject{
     //MARK:- Check CGM  info Exist or Not
     //=======================
     static func checkCGMDataExistInDatabase(success: @escaping () -> Void,
-                                         failure:  @escaping () -> Void){
+                                            failure:  @escaping () -> Void){
         db.collection(ApiKey.userSystemInfo).document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.cgmData).getDocuments { (snapshot, error ) in
             guard let dicts = snapshot?.documents else { return }
             if  !(dicts.isEmpty) {
@@ -204,7 +204,7 @@ class FirestoreController:NSObject{
     //MARK:- Get info
     //=======================
     static func checkUserExistInSystemDatabase(success: @escaping () -> Void,
-                                         failure:  @escaping () -> Void){
+                                               failure:  @escaping () -> Void){
         db.collection(ApiKey.userSystemInfo).document(Auth.auth().currentUser?.uid ?? "").getDocument { (snapshot, error ) in
             if  (snapshot?.exists)! {
                 print("User Document exist")
@@ -222,46 +222,37 @@ class FirestoreController:NSObject{
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
-
+            
         } catch _ as NSError {
             completion(true)
         }
         completion(false)
     }
     
-    static func performCleanUp(for_logout: Bool = true,isSignin: Bool = false) {
-        let userId = AppUserDefaults.value(forKey: .uid).stringValue
-        db.collection(ApiKey.users)
-            .document(userId).updateData([ApiKey.isSignin : isSignin]) { (error) in
-                if let err = error {
-                    print(err.localizedDescription)
-                    CommonFunctions.showToastWithMessage(err.localizedDescription)
-                } else {
-                    let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
-                    let isBiometricEnable = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
-                    let isBiometricCompleted = AppUserDefaults.value(forKey: .isBiometricCompleted).boolValue
-                    AppUserDefaults.removeAllValues()
-                    UserModel.main = UserModel()
-                    if for_logout {
-                        AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
-                        AppUserDefaults.save(value: isBiometricEnable, forKey: .isBiometricSelected)
-                        AppUserDefaults.save(value: isBiometricCompleted, forKey: .isBiometricCompleted)
-                    }
-                    UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+    static func performCleanUp(for_logout: Bool = true) {
+        let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
+        let isBiometricEnable = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
+        let isBiometricCompleted = AppUserDefaults.value(forKey: .isBiometricCompleted).boolValue
+        AppUserDefaults.removeAllValues()
+        UserModel.main = UserModel()
+        if for_logout {
+            AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
+            AppUserDefaults.save(value: isBiometricEnable, forKey: .isBiometricSelected)
+            AppUserDefaults.save(value: isBiometricCompleted, forKey: .isBiometricCompleted)
+        }
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        DispatchQueue.main.async {
+            AppRouter.goToSignUpVC()
+        }
+        if  for_logout {
+            FirestoreController.logOut { (isLogout) in
+                if !isLogout {
                     DispatchQueue.main.async {
-                        AppRouter.goToSignUpVC()
-                    }
-                    if  for_logout {
-                        FirestoreController.logOut { (isLogout) in
-                            if !isLogout {
-                                DispatchQueue.main.async {
-                                    AppRouter.goToLoginVC()
-                                }
-                            }
-                        }
+                        AppRouter.goToLoginVC()
                     }
                 }
             }
+        }
     }
     
     //MARK:- IsEMailVerified
@@ -270,7 +261,7 @@ class FirestoreController:NSObject{
         let isEmailVerification  = Auth.auth().currentUser?.isEmailVerified ??  false
         completion(isEmailVerification)
     }
-
+    
     
     //MARK:- CREATE ROOM NODE
     //=======================
@@ -301,7 +292,7 @@ class FirestoreController:NSObject{
                                isSystemSetupCompleted: Bool,
                                isChangePassword:Bool,
                                isBiometricOn:  Bool,
-                               isSignin: Bool,
+                               deviceId: String,
                                completion: @escaping () -> Void,
                                failure: @escaping FailureResponse) {
         var emailId  = email
@@ -322,20 +313,20 @@ class FirestoreController:NSObject{
                 AppUserDefaults.save(value: email, forKey: .defaultEmail)
                 AppUserDefaults.save(value: password, forKey: .defaultPassword)
                 db.collection(ApiKey.users).document(uid).setData([ApiKey.deviceType:"iOS",
-                                                                      ApiKey.email: email,
-                                                                      ApiKey.deviceToken:AppUserDefaults.value(forKey: .fcmToken).stringValue,
-                                                                      ApiKey.password:password,
-                                                                      ApiKey.isProfileStepCompleted: false,
-                                                                      ApiKey.isSystemSetupCompleted: false,
-                                                                      ApiKey.userId: uid,ApiKey.isChangePassword: true,ApiKey.isSignin:false,
-                                                                      ApiKey.isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue]){ err in
-                        if let err = err {
-                            print("Error writing document: \(err)")
-                            CommonFunctions.showToastWithMessage(err.localizedDescription)
-                        } else {
-                            print("Document successfully written!")
-                        }
+                                                                   ApiKey.email: email,
+                                                                   ApiKey.deviceToken:AppUserDefaults.value(forKey: .fcmToken).stringValue,
+                                                                   ApiKey.password:password,
+                                                                   ApiKey.isProfileStepCompleted: false,
+                                                                   ApiKey.isSystemSetupCompleted: false,
+                                                                   ApiKey.userId: uid,ApiKey.isChangePassword: true,ApiKey.deviceId:deviceId,
+                                                                   ApiKey.isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue]){ err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                        CommonFunctions.showToastWithMessage(err.localizedDescription)
+                    } else {
+                        print("Document successfully written!")
                     }
+                }
                 completion()
             }
         }
@@ -355,28 +346,28 @@ class FirestoreController:NSObject{
                 completion()
             }else{
                 if let error = error {
-                failure(error)
+                    failure(error)
                 }
             }
         }
     }
     
     //MARK:- SEND VERIFICATION MAIL
-       //=======================
+    //=======================
     static func sendEmailVerification( completion:  @escaping FailureResponse){
         Auth.auth().currentUser?.sendEmailVerification(completion: { (error) in
             if let err = error {
-            completion(err)
+                completion(err)
             }
         })
     }
     
     //MARK:- SEND VERIFICATION MAIL WitH ACTIONCODE
-       //=======================
+    //=======================
     static func sendEmailVerificationWithActionCode(actionCodeSettings: ActionCodeSettings, completion:  @escaping FailureResponse){
-//        Auth.auth().currentUser?.sendEmailVerification(with: actionCodeSettings, completion: { (error) in
-//            completion(error)
-//        })
+        //        Auth.auth().currentUser?.sendEmailVerification(with: actionCodeSettings, completion: { (error) in
+        //            completion(error)
+        //        })
     }
     
     //MARK:- setFirebaseData
@@ -406,13 +397,13 @@ class FirestoreController:NSObject{
                                                               ApiKey.isProfileStepCompleted:isProfileStepCompleted,
                                                               ApiKey.userId: userId,
                                                               ApiKey.dob: dob,ApiKey.isChangePassword: isChangePassword,ApiKey.isBiometricOn: isBiometricOn]){ err in
-                                                                if let err = err {
-                                                                    failure(err)
-                                                                    print("Error writing document: \(err)")
-                                                                } else {
-                                                                    completion()
-                                                                    print("Document successfully written!")
-                                                                }
+            if let err = err {
+                failure(err)
+                print("Error writing document: \(err)")
+            } else {
+                completion()
+                print("Document successfully written!")
+            }
         }
     }
     
@@ -470,21 +461,13 @@ class FirestoreController:NSObject{
     
     //MARK:- Update user Signin status
     //================================
-    static func updateUserSigninStatus(isSignin: Bool, completion: @escaping () -> Void,
-                                          failure: @escaping FailureResponse,failures: @escaping () -> Void) {
+    static func updateDeviceID(deviceId: String) {
+        print(deviceId)
         let uid = Auth.auth().currentUser?.uid ?? ""
         guard !uid.isEmpty else {
-            failures()
             return
         }
-        db.collection(ApiKey.users).document(uid).updateData([ApiKey.isSignin:isSignin]){
-            (error) in
-            if let err = error {
-                failure(err)
-            } else {
-                completion()
-            }
-        }
+        db.collection(ApiKey.users).document(uid).updateData([ApiKey.deviceId:deviceId])
     }
     
     //MARK:- Update user System Setup Status
@@ -502,6 +485,28 @@ class FirestoreController:NSObject{
         }
     }
     
+    //MARK:- Add  Listener System Setup Status
+    //================================
+    static func addDeviceIdListener(_ completion: @escaping (String) -> Void,
+                                    failure: @escaping FailureResponse){
+        let uid = AppUserDefaults.value(forKey: .uid).stringValue
+        guard !uid.isEmpty else { return }
+        db.collection(ApiKey.users).document(uid)
+            .addSnapshotListener { documentSnapshot, error in
+                guard let document = documentSnapshot else {
+                    print("Error fetching document: \(error!)")
+                    return
+                }
+                guard let data = document.data() else {
+                    print("Document data was empty.")
+                    completion("")
+                    return
+                }
+                completion(data[ApiKey.deviceId] as? String ?? "")
+                print("Current data: \(data)")
+            }
+    }
+    
     
     //MARK:- setSystemInfoData
     //=======================
@@ -511,8 +516,8 @@ class FirestoreController:NSObject{
                                   insulinUnit: Int,
                                   cgmType: String,
                                   cgmUnit: Int,
-                                completion: @escaping () -> Void,
-                                failure: @escaping FailureResponse){
+                                  completion: @escaping () -> Void,
+                                  failure: @escaping FailureResponse){
         db.collection(ApiKey.userSystemInfo).document(userId).setData([
                                                                         ApiKey.longInsulinType: longInsulinType,
                                                                         ApiKey.longInsulinSubType:longInsulinSubType,
@@ -532,19 +537,19 @@ class FirestoreController:NSObject{
     //MARK:- updateSystemInfoData
     //=======================
     static func updateSystemInfoData(userId: String,
-                                  longInsulinType: String,
-                                  longInsulinSubType: String,
-                                  insulinUnit: Int,
-                                  cgmType: String,
-                                  cgmUnit: Int,
-                                completion: @escaping () -> Void,
-                                failure: @escaping FailureResponse){
+                                     longInsulinType: String,
+                                     longInsulinSubType: String,
+                                     insulinUnit: Int,
+                                     cgmType: String,
+                                     cgmUnit: Int,
+                                     completion: @escaping () -> Void,
+                                     failure: @escaping FailureResponse){
         db.collection(ApiKey.userSystemInfo).document(userId).updateData([
-                                                                        ApiKey.longInsulinType: longInsulinType,
-                                                                        ApiKey.longInsulinSubType:longInsulinSubType,
-                                                                        ApiKey.insulinUnit:insulinUnit,
-                                                                        ApiKey.cgmType: cgmType,
-                                                                        ApiKey.cgmUnit:cgmUnit]){ err in
+                                                                            ApiKey.longInsulinType: longInsulinType,
+                                                                            ApiKey.longInsulinSubType:longInsulinSubType,
+                                                                            ApiKey.insulinUnit:insulinUnit,
+                                                                            ApiKey.cgmType: cgmType,
+                                                                            ApiKey.cgmUnit:cgmUnit]){ err in
             if let err = err {
                 failure(err)
                 print("Error writing document: \(err)")
@@ -676,7 +681,7 @@ class FirestoreController:NSObject{
                     return }
                 guard let data = document.data() else { return }
                 FirestoreController.otherUnreadCount =   data[ApiKey.unreadCount] as? Int ?? 0
-        }
+            }
     }
     
     static func updateUnreadMessages(senderId: String, receiverId: String, unread: Int) {
@@ -687,13 +692,13 @@ class FirestoreController:NSObject{
             .updateData([ApiKey.unreadCount : unread + 1])
         
         db.collection(ApiKey.batchCount).document(receiverId).getDocument { (document, error) in
-                if let doc = document {
-                    if doc.exists {
-                        guard let count = doc.data()?[ApiKey.unreadCount] as? Int else { return }
-                        db.collection(ApiKey.batchCount).document(receiverId).setData([ApiKey.unreadCount : count + 1])
-                    } else {
-                        db.collection(ApiKey.batchCount).document(receiverId).setData([ApiKey.unreadCount: 1])
-                    }
+            if let doc = document {
+                if doc.exists {
+                    guard let count = doc.data()?[ApiKey.unreadCount] as? Int else { return }
+                    db.collection(ApiKey.batchCount).document(receiverId).setData([ApiKey.unreadCount : count + 1])
+                } else {
+                    db.collection(ApiKey.batchCount).document(receiverId).setData([ApiKey.unreadCount: 1])
+                }
             }
         }
     }
@@ -706,13 +711,13 @@ class FirestoreController:NSObject{
             .updateData([ApiKey.unreadCount : unread - 1])
         
         db.collection(ApiKey.batchCount).document(receiverId).getDocument { (document, error) in
-                if let doc = document {
-                    if doc.exists {
-                        guard let count = doc.data()?[ApiKey.unreadCount] as? Int else { return }
-                        db.collection(ApiKey.batchCount).document(receiverId).setData([ApiKey.unreadCount : count - 1])
-                    } else {
-                        db.collection(ApiKey.batchCount).document(receiverId).setData([ApiKey.unreadCount: 0])
-                    }
+            if let doc = document {
+                if doc.exists {
+                    guard let count = doc.data()?[ApiKey.unreadCount] as? Int else { return }
+                    db.collection(ApiKey.batchCount).document(receiverId).setData([ApiKey.unreadCount : count - 1])
+                } else {
+                    db.collection(ApiKey.batchCount).document(receiverId).setData([ApiKey.unreadCount: 0])
+                }
             }
         }
     }
@@ -749,14 +754,14 @@ class FirestoreController:NSObject{
     }
     
     static func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
-
+        
         let scale = newWidth / image.size.width
         let newHeight = image.size.height * scale
         UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
         image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-
+        
         return newImage ?? UIImage()
     }
     
@@ -862,7 +867,7 @@ class FirestoreController:NSObject{
                 } else {
                     print("Success")
                 }
-        }
+            }
     }
     
     //MARK:-CreateMessageNode
@@ -908,13 +913,13 @@ class FirestoreController:NSObject{
             // An error occurred.
             let docset = docset
             
-//            let batch = collection.firestore.batch()
+            //            let batch = collection.firestore.batch()
             let batch = db.batch()
             docset?.documents.forEach { batch.deleteDocument($0.reference) }
             
             batch.commit {_ in
                 success()
-//                self.delete(batchSize: batchSize)
+                //                self.delete(batchSize: batchSize)
             }
         }
     }

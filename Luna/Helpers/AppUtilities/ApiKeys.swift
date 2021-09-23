@@ -33,7 +33,7 @@ enum ApiKey {
     static var userSystemInfo : String {return "userSystemInfo"}
     static var firstName : String {return "firstName"}
     static var isBiometricOn : String {return "isBiometricOn"}
-    static var isSignin : String { return "isSignin"}
+    static var deviceId : String { return "deviceId"}
     static var isProfileStepCompleted : String {return "isProfileStepCompleted"}
     static var isSystemSetupCompleted  : String {return "isSystemSetupCompleted"}
     static var lastName : String {return "lastName"}
@@ -250,7 +250,7 @@ enum ApiKey {
     static var groupName : String {return "groupName"}
     static var groupImage : String {return "groupImage"}
     
-    static var deviceId    : String {return "deviceId"}
+//    static var deviceId    : String {return "deviceId"}
     static var deviceToken : String {return "deviceToken"}
     static var onlineStatus : String {return "onlineStatus"}
     static var messageText : String {return "messageText"}

@@ -99,6 +99,7 @@ extension AppUserDefaults {
         case appInstalled
         case latitude
         case uid
+        case deviceId
         case roomId
         case defaultEmail
         case defaultPassword

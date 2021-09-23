@@ -29,17 +29,19 @@ final class ChartXValueFormatter: IAxisValueFormatter {
         let dateFormatter = DateFormatter()
         //let timezoneOffset = TimeZone.current.secondsFromGMT()
         //let epochTimezoneOffset = value + Double(timezoneOffset)
-        if dateTimeUtils.is24Hour() {
-            dateFormatter.setLocalizedDateFormatFromTemplate("HH:mm")
-        } else {
-            dateFormatter.setLocalizedDateFormatFromTemplate("hh:mm")
-        }
+//        if dateTimeUtils.is24Hour() {
+//            dateFormatter.setLocalizedDateFormatFromTemplate("HH:mm")
+//        } else {
+//            dateFormatter.setLocalizedDateFormatFromTemplate("hh:mm")
+//        }
+        dateFormatter.setLocalizedDateFormatFromTemplate("hh a")
+        
         
         //let date = Date(timeIntervalSince1970: epochTimezoneOffset)
         let date = Date(timeIntervalSince1970: value)
         let formattedDate = dateFormatter.string(from: date)
 
-        return formattedDate
+        return formattedDate.lowercased()
     }
 }
 

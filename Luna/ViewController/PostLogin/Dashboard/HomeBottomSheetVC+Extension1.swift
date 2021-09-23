@@ -309,7 +309,7 @@ extension BottomSheetVC {
     
     @objc func calendarTimerDidEnd(_ timer:Timer) {
         if UserDefaultsRepository.writeCalendarEvent.value && UserDefaultsRepository.calendarIdentifier.value != "" {
-            self.writeCalendar()
+//            self.writeCalendar()
         }
     }
     

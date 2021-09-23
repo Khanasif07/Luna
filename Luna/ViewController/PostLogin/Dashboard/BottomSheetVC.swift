@@ -160,17 +160,7 @@ class BottomSheetVC:  UIViewController {
     
     private func cgmSetUp(){
         UserDefaultsRepository.infoNames.value.removeAll()
-        UserDefaultsRepository.infoNames.value.append("IOB")
-        UserDefaultsRepository.infoNames.value.append("COB")
-        UserDefaultsRepository.infoNames.value.append("Basal")
-        UserDefaultsRepository.infoNames.value.append("Override")
         UserDefaultsRepository.infoNames.value.append("Battery")
-        UserDefaultsRepository.infoNames.value.append("Pump")
-        UserDefaultsRepository.infoNames.value.append("SAGE")
-        UserDefaultsRepository.infoNames.value.append("CAGE")
-        UserDefaultsRepository.infoNames.value.append("Rec. Bolus")
-        UserDefaultsRepository.infoNames.value.append("Pred.")
-        
         // TODO: need non-us server ?
         let shareUserName = UserDefaultsRepository.shareUserName.value
         let sharePassword = UserDefaultsRepository.sharePassword.value

@@ -10,7 +10,7 @@ import UIKit
 import Charts
 
 let ScaleXMax:Float = 150.0
-extension BottomSheetVC : UNUserNotificationCenterDelegate, ChartViewDelegate {
+extension BottomSheetVC :  ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         if chartView != cgmChartView {
             cgmChartView.moveViewToX(entry.x)
@@ -22,14 +22,15 @@ extension BottomSheetVC : UNUserNotificationCenterDelegate, ChartViewDelegate {
     }
     
     func chartScaled(_ chartView: ChartViewBase, scaleX: CGFloat, scaleY: CGFloat) {
-        print("Chart Scaled: \(cgmChartView.scaleX), \(cgmChartView.scaleY)")
+//        print("Chart Scaled: \(cgmChartView.scaleX), \(cgmChartView.scaleY)")
         
         // dont store huge values
         var scale: Float = Float(cgmChartView.scaleX)
         if(scale > ScaleXMax ) {
             scale = ScaleXMax
         }
-        UserDefaultsRepository.chartScaleX.value = Float(scale)
+        //MARK:- IMPORTANT
+//        UserDefaultsRepository.chartScaleX.value = Float(scale)
     }
     
     func updateBGCheckGraph() {
@@ -59,10 +60,10 @@ extension BottomSheetVC : UNUserNotificationCenterDelegate, ChartViewDelegate {
         self.cgmChartView.clear()
         
         // Create the BG Graph Data
-        let entries = bgData
-        var bgChartEntry = [ChartDataEntry]()
-        var colors = [NSUIColor]()
-        var maxBG: Float = UserDefaultsRepository.minBGScale.value
+        _ = bgData
+        let bgChartEntry = [ChartDataEntry]()
+        _ = [NSUIColor]()
+        let maxBG: Float = UserDefaultsRepository.minBGScale.value
         
         // Setup BG line details
         let lineBG = LineChartDataSet(entries:bgChartEntry, label: "")
@@ -243,7 +244,6 @@ extension BottomSheetVC : UNUserNotificationCenterDelegate, ChartViewDelegate {
     public func newChartSetUp(){
         cgmChartView.delegate = self
         cgmChartView.chartDescription?.enabled = true
-     
         //MARK: - Important
 //        cgmChartView.dragEnabled = true
 //        cgmChartView.setScaleEnabled(false)
@@ -253,7 +253,7 @@ extension BottomSheetVC : UNUserNotificationCenterDelegate, ChartViewDelegate {
         xAxis.labelPosition = .bottom
         xAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
         xAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
-        xAxis.labelCount = 4
+        xAxis.labelCount = 7
         
         let leftAxis = cgmChartView.leftAxis
         leftAxis.removeAllLimitLines()

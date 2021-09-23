@@ -33,7 +33,7 @@ struct UserModel{
     var isBiometricOn: Bool
     var status : String
     var userType : String
-    var isSignin: Bool
+    var deviceId: String
     
     init() {
         self.init(JSON([:]))
@@ -57,7 +57,7 @@ struct UserModel{
         self.lastName = json[ApiKey.lastName].stringValue
         self.diabetesType = json[ApiKey.diabetesType].stringValue
         self.isBiometricOn = json[ApiKey.isBiometricOn].boolValue
-        self.isSignin = json[ApiKey.isSignin].boolValue
+        self.deviceId = json[ApiKey.deviceId].stringValue
     }
     
      func fetchUserModel(dict: JSONDictionary) -> UserModel {
@@ -96,7 +96,7 @@ struct UserModel{
             ApiKey.isBiometricOn : isBiometricOn,
             ApiKey.isProfileStepCompleted: isProfileStepCompleted,
             ApiKey.isSystemSetupCompleted : isSystemSetupCompleted,
-            ApiKey.isSignin : isSignin
+            ApiKey.deviceId : deviceId
         ]
         AppUserDefaults.save(value: dict, forKey: .fullUserProfile)
     }
