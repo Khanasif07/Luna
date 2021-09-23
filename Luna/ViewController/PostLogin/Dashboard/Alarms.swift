@@ -309,7 +309,7 @@ extension BottomSheetVC{
         
         
         // still send persistent notification if no alarms trigger and persistent notification is on
-        persistentNotification(bgTime: currentBGTime)
+        self.persistentNotification(bgTime: currentBGTime)
         
     }
     

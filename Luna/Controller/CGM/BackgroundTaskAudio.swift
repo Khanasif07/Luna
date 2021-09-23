@@ -35,21 +35,21 @@ class BackgroundTask {
 //        }
     }
     
-    fileprivate func playAudio() {
-        do {
-            let bundle = Bundle.main.path(forResource: "blank", ofType: "wav")
-            let alertSound = URL(fileURLWithPath: bundle!)
-           // try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: .mixWithOthers)
-            try AVAudioSession.sharedInstance().setActive(true)
-            try self.player = AVAudioPlayer(contentsOf: alertSound)
-            // Play audio forever by setting num of loops to -1
-            self.player.numberOfLoops = -1
-            self.player.volume = 0.01
-            self.player.prepareToPlay()
-            self.player.play()
-            print("silent audio playing")
-        } catch { print(error)
-        }
-    }
+//    fileprivate func playAudio() {
+//        do {
+//            let bundle = Bundle.main.path(forResource: "blank", ofType: "wav")
+//            let alertSound = URL(fileURLWithPath: bundle!)
+//           // try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+//            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: .mixWithOthers)
+//            try AVAudioSession.sharedInstance().setActive(true)
+//            try self.player = AVAudioPlayer(contentsOf: alertSound)
+//            // Play audio forever by setting num of loops to -1
+//            self.player.numberOfLoops = -1
+//            self.player.volume = 0.01
+//            self.player.prepareToPlay()
+//            self.player.play()
+//            print("silent audio playing")
+//        } catch { print(error)
+//        }
+//    }
 }

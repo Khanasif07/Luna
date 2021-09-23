@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,GIDSignInDelegate{
         GIDSignIn.sharedInstance().delegate = self
         registerPushNotification()
         Messaging.messaging().delegate = self
-//        removeAllNotifications()
+        removeAllNotifications()
         AppRouter.checkAppInitializationFlow()
         return true
     }

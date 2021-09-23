@@ -55,8 +55,8 @@
 		188DB14F26E0993600FBF042 /* CoachMarksControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188DB12226E0993600FBF042 /* CoachMarksControllerDelegate.swift */; };
 		188DB15026E0993600FBF042 /* CoachMarkAnimationManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188DB12326E0993600FBF042 /* CoachMarkAnimationManagement.swift */; };
 		188DB15126E0993600FBF042 /* BlurringOverlayStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188DB12426E0993600FBF042 /* BlurringOverlayStyleManager.swift */; };
-		8403F3B726F9C9F6004BFE8E /* HomeBottomSheetVC+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3B626F9C9F6004BFE8E /* HomeBottomSheetVC+Extension.swift */; };
-		8403F3BA26F9CF49004BFE8E /* HomeBottomSheetVC+Extension1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3B926F9CF49004BFE8E /* HomeBottomSheetVC+Extension1.swift */; };
+		8403F3B726F9C9F6004BFE8E /* BottomSheetVC+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3B626F9C9F6004BFE8E /* BottomSheetVC+Extension.swift */; };
+		8403F3BA26F9CF49004BFE8E /* Timers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3B926F9CF49004BFE8E /* Timers.swift */; };
 		8403F3BD26F9D016004BFE8E /* Graphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3BC26F9D016004BFE8E /* Graphs.swift */; };
 		8403F3C026F9D2F8004BFE8E /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3BF26F9D2F8004BFE8E /* Chart.swift */; };
 		8403F3C326F9D792004BFE8E /* DataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3C226F9D792004BFE8E /* DataStructs.swift */; };
@@ -271,8 +271,8 @@
 		188DB12326E0993600FBF042 /* CoachMarkAnimationManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkAnimationManagement.swift; sourceTree = "<group>"; };
 		188DB12426E0993600FBF042 /* BlurringOverlayStyleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurringOverlayStyleManager.swift; sourceTree = "<group>"; };
 		48268DD2D5F8BF64205F2462 /* Pods_Luna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Luna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8403F3B626F9C9F6004BFE8E /* HomeBottomSheetVC+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeBottomSheetVC+Extension.swift"; sourceTree = "<group>"; };
-		8403F3B926F9CF49004BFE8E /* HomeBottomSheetVC+Extension1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeBottomSheetVC+Extension1.swift"; sourceTree = "<group>"; };
+		8403F3B626F9C9F6004BFE8E /* BottomSheetVC+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BottomSheetVC+Extension.swift"; sourceTree = "<group>"; };
+		8403F3B926F9CF49004BFE8E /* Timers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timers.swift; sourceTree = "<group>"; };
 		8403F3BC26F9D016004BFE8E /* Graphs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphs.swift; sourceTree = "<group>"; };
 		8403F3BF26F9D2F8004BFE8E /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
 		8403F3C226F9D792004BFE8E /* DataStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructs.swift; sourceTree = "<group>"; };
@@ -641,15 +641,15 @@
 			isa = PBXGroup;
 			children = (
 				847899722684824F00D1DF36 /* HomeVC.swift */,
-				8403F3B626F9C9F6004BFE8E /* HomeBottomSheetVC+Extension.swift */,
-				8403F3B926F9CF49004BFE8E /* HomeBottomSheetVC+Extension1.swift */,
+				84AA878F26FAE8900047D86E /* BottomSheetVC.swift */,
+				8403F3B626F9C9F6004BFE8E /* BottomSheetVC+Extension.swift */,
+				8403F3B926F9CF49004BFE8E /* Timers.swift */,
 				8403F3BC26F9D016004BFE8E /* Graphs.swift */,
 				8403F3BF26F9D2F8004BFE8E /* Chart.swift */,
 				8403F3C226F9D792004BFE8E /* DataStructs.swift */,
 				8403F3C526F9DABB004BFE8E /* NightScout.swift */,
 				8403F3C826F9E185004BFE8E /* CarbBolusArrays.swift */,
 				84AA878C26FAD1120047D86E /* Alarms.swift */,
-				84AA878F26FAE8900047D86E /* BottomSheetVC.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -844,7 +844,6 @@
 				84D1F4D82679CF2D00F131E0 /* CustomClasses */,
 				84CC12C02668CE8B009316FC /* Extensions */,
 				84CC12BF2668CE7C009316FC /* AppUtilities */,
-				84CC12BE2668CE67009316FC /* ThirdParty */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -911,13 +910,6 @@
 				84CC12BB2668CDF4009316FC /* FirestoreController.swift */,
 			);
 			path = FirestoreController;
-			sourceTree = "<group>";
-		};
-		84CC12BE2668CE67009316FC /* ThirdParty */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ThirdParty;
 			sourceTree = "<group>";
 		};
 		84CC12BF2668CE7C009316FC /* AppUtilities */ = {
@@ -1349,7 +1341,7 @@
 				84E78B9E2685E8C500FABDCD /* UserModel.swift in Sources */,
 				8455491C2678DDBA000CC13D /* SignupViewController.swift in Sources */,
 				84861D8326849FDB004B046C /* ChangePasswordVC.swift in Sources */,
-				8403F3BA26F9CF49004BFE8E /* HomeBottomSheetVC+Extension1.swift in Sources */,
+				8403F3BA26F9CF49004BFE8E /* Timers.swift in Sources */,
 				188DB12926E0993600FBF042 /* CoachMarkBodyView.swift in Sources */,
 				84F2A27D26984F3D000FDCD5 /* BottomSheetBottomCell.swift in Sources */,
 				188DB14E26E0993600FBF042 /* SkipViewDisplayManager.swift in Sources */,
@@ -1384,7 +1376,7 @@
 				840A7DF12696E95E005AA1E6 /* CGMSelectorVC.swift in Sources */,
 				84861D7F26848EDD004B046C /* ProfileTableCell.swift in Sources */,
 				188DB14226E0993600FBF042 /* ConfigurationChange.swift in Sources */,
-				8403F3B726F9C9F6004BFE8E /* HomeBottomSheetVC+Extension.swift in Sources */,
+				8403F3B726F9C9F6004BFE8E /* BottomSheetVC+Extension.swift in Sources */,
 				84E5505A267E027A008C02F8 /* TypeTableCell.swift in Sources */,
 				188DB13B26E0993600FBF042 /* CoachMarksControllerAnimationDelegate.swift in Sources */,
 				188DB12A26E0993600FBF042 /* OverlayView.swift in Sources */,
