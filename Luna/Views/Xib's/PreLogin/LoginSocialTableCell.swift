@@ -22,9 +22,9 @@ class LoginSocialTableCell: UITableViewCell {
     //MARK:-Variables
     var signupLoginDescText = LocalizedString.alreadyHaveAnAccount.localized
     var signupLoginText = LocalizedString.login.localized
-    var appleBtnTapped: (()->())?
-    var googleBtnTapped: (()->())?
-    var loginBtnTapped: (()->())?
+    var appleBtnTapped: TapAction = nil
+    var googleBtnTapped: TapAction = nil
+    var loginBtnTapped: TapAction = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()

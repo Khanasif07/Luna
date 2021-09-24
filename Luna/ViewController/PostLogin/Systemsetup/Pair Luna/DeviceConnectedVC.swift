@@ -11,9 +11,8 @@ class DeviceConnectedVC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var lunaPairedSuccess: ((UIButton)->())?
-
-    
+    var lunaPairedSuccess: BtnTapAction
+        = nil
     // MARK: - IBOutlets
     //===========================
     @IBOutlet weak var outerView: UIView!

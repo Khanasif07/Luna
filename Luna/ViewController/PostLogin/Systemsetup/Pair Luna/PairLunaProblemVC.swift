@@ -16,7 +16,7 @@ class PairLunaProblemVC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var lunaStartPairing: ((UIButton)->())?
+    var lunaStartPairing: BtnTapAction = nil
     
     // MARK: - Lifecycle
     //===========================

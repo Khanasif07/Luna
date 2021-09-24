@@ -26,8 +26,8 @@ class PassResetPopUpVC: UIViewController {
     var popupType: PopupType = .resetPassword
     var titleDesc: String = LocalizedString.password_Reset.localized
     var subTitleDesc : String = LocalizedString.reset_password_link_sent.localized
-    var emailVerificationSuccess: (()->())?
-    var resetPasswordSuccess: (()->())?
+    var emailVerificationSuccess: TapAction = nil
+    var resetPasswordSuccess: TapAction = nil
     
     // MARK: - Lifecycle
     //===========================

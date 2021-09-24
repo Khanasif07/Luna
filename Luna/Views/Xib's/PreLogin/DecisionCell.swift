@@ -9,8 +9,8 @@ import UIKit
 
 class DecisionCell: UITableViewCell {
     
-    var yesBtnTapped: (()->())?
-    var noBtnTapped: (()->())?
+    var yesBtnTapped: TapAction = nil
+    var noBtnTapped: TapAction = nil
     
     @IBOutlet weak var noBtn: UIButton!
     @IBOutlet weak var yesBtn: UIButton!

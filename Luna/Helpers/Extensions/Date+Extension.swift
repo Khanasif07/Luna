@@ -35,6 +35,8 @@ extension Date {
         case mmmmyyy = "MMMM yyy"
         case hour12 = "h:mm a"
         case hour24 = "HH:mm"
+        case cgmDate12 = "hh a"
+        case mmdd = "MM/dd"
     }
 
     var daySuffix : String {

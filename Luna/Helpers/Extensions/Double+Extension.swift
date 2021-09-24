@@ -25,7 +25,7 @@ extension Double {
         return self - abs(self.remainder(dividingBy: num))
     }
     
-    public func getDateTimeFromTimeInterval(_ dateFormat: String = "hh a")-> String{
+    public func getDateTimeFromTimeInterval(_ dateFormat: String)-> String{
         //Convert to Date
         //let date = NSDate(timeIntervalSince1970: self / 1000.0)
         let date = NSDate(timeIntervalSince1970: TimeInterval(self))

@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+typealias BtnTapAction = ((UIButton)->())?
+typealias TapAction = (()->())?
 
 var isUserLoggedin: Bool {
     let token = AppUserDefaults.value(forKey: .uid).stringValue

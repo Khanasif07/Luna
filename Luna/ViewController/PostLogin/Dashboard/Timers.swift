@@ -13,12 +13,12 @@ extension BottomSheetVC {
     
     func restartAllTimers() {
         if !bgTimer.isValid { startBGTimer(time: 2) }
-        if !profileTimer.isValid { startProfileTimer(time: 3) }
+//        if !profileTimer.isValid { startProfileTimer(time: 3) }
         if !deviceStatusTimer.isValid { startDeviceStatusTimer(time: 4) }
-        if !treatmentsTimer.isValid { startTreatmentsTimer(time: 5) }
-        if !cageSageTimer.isValid { startCageSageTimer(time: 6) }
+//        if !treatmentsTimer.isValid { startTreatmentsTimer(time: 5) }
+//        if !cageSageTimer.isValid { startCageSageTimer(time: 6) }
         if !minAgoTimer.isValid { startMinAgoTimer(time: minAgoTimeInterval) }
-        if !calendarTimer.isValid { startCalendarTimer(time: 15) }
+//        if !calendarTimer.isValid { startCalendarTimer(time: 15) }
         if !alarmTimer.isValid { startAlarmTimer(time: 30) }
     }
     
@@ -236,28 +236,28 @@ extension BottomSheetVC {
     // Cage and Sage Timer
     // Runs on 10 minute intervals
     // Pauses with stale BG data
-    func startCageSageTimer(time: TimeInterval =  60 * 10) {
-        cageSageTimer = Timer.scheduledTimer(timeInterval: time,
-                                               target: self,
-                                               selector: #selector(self.cageSageTimerDidEnd(_:)),
-                                               userInfo: nil,
-                                               repeats: false)
-    }
-    
-    @objc func cageSageTimerDidEnd(_ timer:Timer) {
-        
-        // reset timer to 1 minute if settings aren't entered
-        if UserDefaultsRepository.url.value == "" || UserDefaultsRepository.onlyDownloadBG.value {
-            startCageSageTimer(time: 60)
-            return
-        }
-        
-        if !isStaleData() && UserDefaultsRepository.url.value != "" {
-            webLoadNSCage()
-            webLoadNSSage()
-            startCageSageTimer()
-        }
-    }
+//    func startCageSageTimer(time: TimeInterval =  60 * 10) {
+//        cageSageTimer = Timer.scheduledTimer(timeInterval: time,
+//                                               target: self,
+//                                               selector: #selector(self.cageSageTimerDidEnd(_:)),
+//                                               userInfo: nil,
+//                                               repeats: false)
+//    }
+//    
+//    @objc func cageSageTimerDidEnd(_ timer:Timer) {
+//        
+//        // reset timer to 1 minute if settings aren't entered
+//        if UserDefaultsRepository.url.value == "" || UserDefaultsRepository.onlyDownloadBG.value {
+//            startCageSageTimer(time: 60)
+//            return
+//        }
+//        
+//        if !isStaleData() && UserDefaultsRepository.url.value != "" {
+//            webLoadNSCage()
+//            webLoadNSSage()
+//            startCageSageTimer()
+//        }
+//    }
     
     // Cancel and reset the playing alarm if it has not been snoozed after 4 min 50 seconds.
     // This allows the next BG reading to either start the timer going or not fire if the situation has been resolved

@@ -19,9 +19,9 @@ final class XAxisNameFormater: NSObject, IAxisValueFormatter {
         let index = Int(value)
         if let lastIndex = SystemInfoModel.shared.cgmData?.endIndex{
             let value =  SystemInfoModel.shared.cgmData?[(lastIndex - index - 1)].date ?? 0.0
-            return value.getDateTimeFromTimeInterval()
+            return value.getDateTimeFromTimeInterval(Date.DateFormat.cgmDate12.rawValue)
         }
-        return value.getDateTimeFromTimeInterval()
+        return value.getDateTimeFromTimeInterval(Date.DateFormat.cgmDate12.rawValue)
     }
 }
 

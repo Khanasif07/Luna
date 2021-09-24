@@ -17,8 +17,8 @@ class SearchingDeviceVC: UIViewController {
     @IBOutlet weak var outerView: UIView!
     
     let pulsator = Pulsator()
-    var deviceConnectedNavigation: ((UIButton)->())?
-    var deviceNotConnectedNavigation: ((UIButton)->())?
+    var deviceConnectedNavigation: BtnTapAction = nil
+    var deviceNotConnectedNavigation: BtnTapAction = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()

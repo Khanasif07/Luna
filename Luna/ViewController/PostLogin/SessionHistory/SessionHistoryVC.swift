@@ -112,7 +112,7 @@ extension SessionHistoryVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueCell(with: SessionHistoryTableViewCell.self)
-        cell.dateLbl.text  = self.insulinSectionDataArray[indexPath.section].1[indexPath.row].date.getDateTimeFromTimeInterval("MM/dd")
+        cell.dateLbl.text  = self.insulinSectionDataArray[indexPath.section].1[indexPath.row].date.getDateTimeFromTimeInterval(Date.DateFormat.mmdd.rawValue)
         cell.unitLbl.text = "7 units delivered" + " | " + "0% in range"
         return cell
     }

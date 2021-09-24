@@ -9,8 +9,8 @@ import UIKit
 
 class TypeTableCell: UITableViewCell {
     
-    var type1BtnTapped: (()->())?
-    var type2BtnTapped: (()->())?
+    var type1BtnTapped: TapAction = nil
+    var type2BtnTapped: TapAction = nil
     
     @IBOutlet weak var type2Btn: UIButton!
     @IBOutlet weak var type1Btn: UIButton!

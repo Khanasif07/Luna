@@ -25,7 +25,7 @@ class SystemStep1TableCell: UITableViewCell {
     
     // MARK: - Variables
     //===========================
-    var startBtnTapped:(()->())?
+    var startBtnTapped: TapAction = nil
     
     // MARK: - Lifecycle
     //===========================

@@ -6,11 +6,10 @@
 //
 
 import UIKit
-
 class SignUpTopTableCell: UITableViewCell {
     
-    var signUpBtnTapped: ((UIButton)->())?
-    var forgotPassBtnTapped: ((UIButton)->())?
+    var signUpBtnTapped: BtnTapAction = nil
+    var forgotPassBtnTapped: BtnTapAction = nil
     
     @IBOutlet weak var forgotPassBtn: UIButton!
     @IBOutlet weak var subTitleLbl: UILabel!
@@ -22,13 +21,8 @@ class SignUpTopTableCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setUpTextField()
-        self.setUpFont()
     }
-    
-    
-    public func setUpFont(){
-    }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         [emailIdTxtField,passTxtField].forEach { (txtField) in

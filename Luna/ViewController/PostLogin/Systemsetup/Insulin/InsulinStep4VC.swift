@@ -18,7 +18,7 @@ class InsulinStep4VC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var insulinConnectedSuccess: ((UIButton)->())?
+    var insulinConnectedSuccess: BtnTapAction = nil
     
     // MARK: - Lifecycle
     //===========================
