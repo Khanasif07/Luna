@@ -15,11 +15,11 @@ class BottomSheetInsulinCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        dataContainerView.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        dataContainerView.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         dataContainerView.round(radius: 10.0)
     }
     

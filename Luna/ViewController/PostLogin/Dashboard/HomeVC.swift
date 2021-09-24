@@ -292,29 +292,6 @@ extension HomeVC: BleProtocol{
     func didConnect(name: String) {
         self.setupSystemInfo()
     }
-    
-    func didUpdateValue(){
-    }
-}
-
-// MARK: - Extension For loadCoachMark
-//===========================
-extension HomeVC{
-    private func loadCoachMark(){
-        DispatchQueue.main.async {
-            
-            self.coachMarksController.dataSource = self
-            self.coachMarksController.delegate = self
-            self.coachMarksController.overlay.allowTap = true
-            self.coachMarksController.overlay.blurEffectStyle = .light
-            
-            if AppUserDefaults.value(forKey: .homeCoachMarkShown).boolValue == false {
-                self.coachMarksController.start(in: .window(over: self))
-                AppUserDefaults.save(value: true, forKey: .homeCoachMarkShown)
-            }
-            
-        }
-    }
 }
 
 // MARK: - Extension For CoachMarksControllerDelegate
@@ -366,5 +343,18 @@ extension HomeVC: CoachMarksControllerDataSource, CoachMarksControllerDelegate{
         return coachMark
     }
     
+    private func loadCoachMark(){
+        DispatchQueue.main.async {
+            self.coachMarksController.dataSource = self
+            self.coachMarksController.delegate = self
+            self.coachMarksController.overlay.allowTap = true
+            self.coachMarksController.overlay.blurEffectStyle = .light
+            
+            if AppUserDefaults.value(forKey: .homeCoachMarkShown).boolValue == false {
+                self.coachMarksController.start(in: .window(over: self))
+                AppUserDefaults.save(value: true, forKey: .homeCoachMarkShown)
+            }
+        }
+    }
 }
 

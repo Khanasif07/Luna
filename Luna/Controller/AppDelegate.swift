@@ -16,7 +16,7 @@ import FirebaseFirestore
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate ,GIDSignInDelegate{
+class AppDelegate: UIResponder, UIApplicationDelegate ,GIDSignInDelegate,UNUserNotificationCenterDelegate{
    
     
     public var window: UIWindow?
@@ -34,9 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,GIDSignInDelegate{
         getGoogleInfoPlist()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
+        removeAllNotifications()
         registerPushNotification()
         Messaging.messaging().delegate = self
-        removeAllNotifications()
         AppRouter.checkAppInitializationFlow()
         return true
     }
@@ -148,7 +148,7 @@ extension AppDelegate {
 
 //MARK:- Push Notification
 //=========================
-extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
+extension AppDelegate:MessagingDelegate{
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
@@ -189,7 +189,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         guard let userInfo = response.notification.request.content.userInfo as? [String: Any] else { return }
-        print("tap on on forground app", userInfo)
+        print(userInfo)
         completionHandler(.alert)
     }
     
@@ -281,9 +281,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate,MessagingDelegate{
             callback?(error)
         })
     }
-    
-    
-    
 }
 
 //MARK:- Deep Linking
@@ -295,14 +292,3 @@ extension AppDelegate {
     }
 }
 
-//MARK:- URL Extension
-//=========================
-extension URL {
-    func getQueryString(parameter: String) -> String? {
-        if let urlComponents = URLComponents(string: self.absoluteString) {
-            return urlComponents.queryItems?.filter({ item in item.name == parameter }).first?.value
-        }
-        return nil
-    }
-    
-}

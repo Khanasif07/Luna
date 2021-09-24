@@ -9,7 +9,7 @@ import UIKit
 
 class SessionHistoryVC: UIViewController {
     
-    @IBOutlet weak var SessionHistoryTV: UITableView!
+    @IBOutlet weak var sessionHistoryTV: UITableView!
     
     var insulinSectionDataArray : [(Int,[ShareGlucoseData])] = []
     var startdate: Date?
@@ -17,7 +17,6 @@ class SessionHistoryVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initialSetup()
     }
     
@@ -49,9 +48,9 @@ extension SessionHistoryVC {
         }
         CommonFunctions.showActivityLoader()
         self.getInsulinData()
-        SessionHistoryTV.register(UINib(nibName: "SessionHistoryTableViewCell", bundle: nil), forCellReuseIdentifier: "SessionHistoryTableViewCell")
-        SessionHistoryTV.delegate = self
-        SessionHistoryTV.dataSource = self
+        sessionHistoryTV.registerCell(with: SessionHistoryTableViewCell.self)
+        sessionHistoryTV.delegate = self
+        sessionHistoryTV.dataSource = self
     }
     
     private func getInsulinData(){
@@ -87,7 +86,7 @@ extension SessionHistoryVC {
                     self.insulinSectionDataArray.append((month, [dataModel]))
                 }
             })
-            self.SessionHistoryTV.reloadData()
+            self.sessionHistoryTV.reloadData()
             CommonFunctions.hideActivityLoader()
         } failure: { (error) -> (Void) in
             CommonFunctions.showToastWithMessage(error.localizedDescription)
@@ -111,8 +110,8 @@ extension SessionHistoryVC : UITableViewDelegate, UITableViewDataSource {
         return self.insulinSectionDataArray[section].1.endIndex
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:SessionHistoryTableViewCell = SessionHistoryTV.dequeueReusableCell(withIdentifier: "SessionHistoryTableViewCell", for: indexPath) as! SessionHistoryTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+        let cell = tableView.dequeueCell(with: SessionHistoryTableViewCell.self)
         cell.dateLbl.text  = self.insulinSectionDataArray[indexPath.section].1[indexPath.row].date.getDateTimeFromTimeInterval("MM/dd")
         cell.unitLbl.text = "7 units delivered" + " | " + "0% in range"
         return cell
@@ -159,7 +158,7 @@ extension SessionHistoryVC: SessionFilterVCDelegate{
                 self.insulinSectionDataArray.append((month, [dataModel]))
             }
         })
-        self.SessionHistoryTV.reloadData()
+        self.sessionHistoryTV.reloadData()
     }
     
     func resetFilter() {
@@ -175,6 +174,6 @@ extension SessionHistoryVC: SessionFilterVCDelegate{
                 self.insulinSectionDataArray.append((month, [dataModel]))
             }
         })
-        self.SessionHistoryTV.reloadData()
+        self.sessionHistoryTV.reloadData()
     }
 }

@@ -24,10 +24,22 @@ var hasTopNotch: Bool {
     }
 }
 var loginType: LoginType = .email_password
+
 enum LoginType {
     case email_password
     case google
     case apple
+    
+    var title : String {
+        switch self {
+        case .google:
+            return "google.com"
+        case .apple:
+            return "apple.com"
+        default:
+            return "password"
+        }
+    }
 }
 
 var userInterfaceStyle: UIUserInterfaceStyle{

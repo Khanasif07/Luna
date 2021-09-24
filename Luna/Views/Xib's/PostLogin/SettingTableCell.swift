@@ -19,17 +19,10 @@ class SettingTableCell: UITableViewCell {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var logoImgView: UIImageView!
     
-    // MARK: - Variables
-    //===========================
-    
     // MARK: - Lifecycle
     //===========================
     override func awakeFromNib() {
         super.awakeFromNib()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
     }
     
     // MARK: - IBActions

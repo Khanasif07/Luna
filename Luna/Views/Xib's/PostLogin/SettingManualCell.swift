@@ -16,9 +16,6 @@ class SettingManualCell: UITableViewCell {
     @IBOutlet weak var queLbl: UILabel!
     @IBOutlet weak var logoBtn: UIButton!
     
-    // MARK: - Variables
-    //===========================
-    
     // MARK: - Lifecycle
     //===========================
     override func awakeFromNib() {
@@ -28,9 +25,4 @@ class SettingManualCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
     }
-    
-    // MARK: - IBActions
-    //===========================
-    
-    
 }

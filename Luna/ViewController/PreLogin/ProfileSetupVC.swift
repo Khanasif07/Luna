@@ -102,10 +102,7 @@ class ProfileSetupVC: UIViewController {
         showAlertWithAction(title: LocalizedString.logout.localized, msg: LocalizedString.are_you_sure_want_to_logout.localized, cancelTitle: LocalizedString.no.localized, actionTitle: LocalizedString.yes.localized) {
             FirestoreController.logOut { (isLogout) in
                 if !isLogout {
-                    self.performCleanUp()
-                    DispatchQueue.main.async {
-                        AppRouter.goToLoginVC()
-                    }
+                    FirestoreController.performCleanUp(for_logout: true)
                 }
             }
         } cancelcompletion: {}
@@ -145,8 +142,8 @@ class ProfileSetupVC: UIViewController {
             }
         case 7:
             self.view.endEditing(true)
-            msgTxtField.inputView = nil
-            msgTxtField.placeholder = ""
+            self.msgTxtField.inputView = nil
+            self.msgTxtField.placeholder = ""
             self.senderDob = txt
             bottomContainerView.isHidden = true
             self.bottomContainerBtmConst.constant = (-68.0 - bottomSafeArea)
@@ -207,9 +204,9 @@ extension ProfileSetupVC {
         self.bottomContainerView.isHidden = false
         self.bottomContainerBtmConst.constant = 0.0
         self.sendBtn.isEnabledWithoutBackground = false
-        msgTxtField.delegate = self
-        msgTxtField.autocapitalizationType = .words
-        msgTxtField.becomeFirstResponder()
+        self.msgTxtField.delegate = self
+        self.msgTxtField.autocapitalizationType = .words
+        self.msgTxtField.becomeFirstResponder()
         self.messageListing = [Message(LocalizedString.hello_and_welcome_to_Luna.localized, LocalizedString.receiver.localized),Message(LocalizedString.please_provide_your_details_to_set_up_your_profile.localized, LocalizedString.receiver.localized),Message(LocalizedString.what_is_your_first_name.localized, LocalizedString.receiver.localized)]
         self.messageTableView.reloadWithAnimation()
        }
@@ -248,19 +245,6 @@ extension ProfileSetupVC {
     private func gotoSettingVC(){
         let vc = SettingsVC.instantiate(fromAppStoryboard: .PostLogin)
         self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    private func performCleanUp(for_logout: Bool = true) {
-        let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
-        AppUserDefaults.removeAllValues()
-        UserModel.main = UserModel()
-        if for_logout {
-            AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
-        }
-        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-        DispatchQueue.main.async {
-            AppRouter.goToSignUpVC()
-        }
     }
 }
 
@@ -413,10 +397,10 @@ extension ProfileSetupVC: UITextFieldDelegate{
         let txt = textField.text?.byRemovingLeadingTrailingWhiteSpaces ?? ""
         switch self.messageListing.endIndex {
         case 7:
-            msgTxtField.text = datePicker.selectedDate()?.convertToDefaultString()
-            sendBtn.isEnabledWithoutBackground = !(msgTxtField.text?.count == 0)
+            self.msgTxtField.text = datePicker.selectedDate()?.convertToDefaultString()
+            self.sendBtn.isEnabledWithoutBackground = !(msgTxtField.text?.count == 0)
         default:
-            sendBtn.isEnabledWithoutBackground = !(txt.count == 0)
+            self.sendBtn.isEnabledWithoutBackground = !(txt.count == 0)
         }
     }
 
@@ -424,10 +408,10 @@ extension ProfileSetupVC: UITextFieldDelegate{
         let txt = textField.text?.byRemovingLeadingTrailingWhiteSpaces ?? ""
         switch self.messageListing.endIndex {
         case 7:
-            msgTxtField.text = datePicker.selectedDate()?.convertToDefaultString()
-            sendBtn.isEnabledWithoutBackground = !(msgTxtField.text?.count == 0)
+            self.msgTxtField.text = datePicker.selectedDate()?.convertToDefaultString()
+            self.sendBtn.isEnabledWithoutBackground = !(msgTxtField.text?.count == 0)
         default:
-            sendBtn.isEnabledWithoutBackground = !(txt.count == 0)
+            self.sendBtn.isEnabledWithoutBackground = !(txt.count == 0)
         }
     }
     
@@ -438,10 +422,10 @@ extension ProfileSetupVC: UITextFieldDelegate{
             currentString.replacingCharacters(in: range, with: string) as NSString
         switch self.messageListing.endIndex {
         case 7:
-            sendBtn.isEnabledWithoutBackground = true
+            self.sendBtn.isEnabledWithoutBackground = true
             return (string.checkIfValidCharaters(.name) || string.isEmpty) && newString.length <= 10
         default:
-            sendBtn.isEnabledWithoutBackground = !(txt.count == 0)
+            self.sendBtn.isEnabledWithoutBackground = !(txt.count == 0)
             return (string.checkIfValidCharaters(.email) || string.isEmpty) && newString.length <= 25
         }
     }

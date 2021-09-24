@@ -71,7 +71,7 @@ extension UILabel {
         let gradientText = self.text ?? ""
         
         let name:String = NSAttributedString.Key.font.rawValue
-        let textSize: CGSize = gradientText.size(withAttributes: [NSAttributedString.Key(rawValue: name):self.font])
+        let textSize: CGSize = gradientText.size(withAttributes: [NSAttributedString.Key(rawValue: name):self.font ?? 12.0])
         let width:CGFloat = textSize.width
         let height:CGFloat = textSize.height
         

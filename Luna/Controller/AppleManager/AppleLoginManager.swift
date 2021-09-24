@@ -93,7 +93,7 @@ extension AppleLoginController : ASAuthorizationControllerDelegate {
             let loginData =  AppleLoginModel(data: appleIDCredential)
             self.delegate?.getAppleLoginData(loginData: loginData.param)
             
-        }else if let passwordCredential = authorization.credential as? ASPasswordCredential {
+        }else if authorization.credential is ASPasswordCredential {
             
             guard let appleIdCredentials = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
             let loginData =  AppleLoginModel(data: appleIdCredentials)

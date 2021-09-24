@@ -92,9 +92,9 @@ extension ForgotPasswordVC {
         let scene =  PassResetPopUpVC.instantiate(fromAppStoryboard: .PreLogin)
         scene.popupType = .resetPassword 
         scene.resetPasswordSuccess  = { [weak self] in
-            guard let selff = self else { return }
-            selff.pop()
-            print(selff)
+            guard let self = self else { return }
+            self.pop()
+            print(self)
         }
         self.present(scene, animated: true, completion: nil)
     }

@@ -339,12 +339,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="n4g-uQ-cx5"/>
                     <connections>
-                        <outlet property="EmailLbl" destination="3Qr-l2-lDb" id="DIX-dO-0ub"/>
-                        <outlet property="EmailTF" destination="o7d-rZ-7Bt" id="0GF-02-Bpn"/>
-                        <outlet property="ForgetPassBtn" destination="wab-U6-za3" id="vrB-gi-h4f"/>
-                        <outlet property="IntroLbl" destination="nR6-dl-vUJ" id="VCf-hi-ioS"/>
-                        <outlet property="PasswordLbl" destination="hAd-FW-IqI" id="jLZ-K4-BeV"/>
-                        <outlet property="PasswordTF" destination="hxa-LC-wPo" id="Sec-xx-qMI"/>
+                        <outlet property="emailLbl" destination="3Qr-l2-lDb" id="Eh6-o0-FPw"/>
+                        <outlet property="emailTF" destination="o7d-rZ-7Bt" id="2P3-cc-O1d"/>
+                        <outlet property="forgetPassBtn" destination="wab-U6-za3" id="2Zc-b7-n0X"/>
+                        <outlet property="introLbl" destination="nR6-dl-vUJ" id="OBL-rT-tF3"/>
+                        <outlet property="passwordLbl" destination="hAd-FW-IqI" id="XFA-Vt-p7u"/>
+                        <outlet property="passwordTF" destination="hxa-LC-wPo" id="2wI-AO-kmZ"/>
                         <outlet property="proceedBtn" destination="Whz-CV-ncW" id="PfV-d1-pPI"/>
                     </connections>
                 </viewController>
@@ -1289,7 +1289,7 @@ Luna devices</string>
                     </view>
                     <navigationItem key="navigationItem" id="7qW-lO-T3s"/>
                     <connections>
-                        <outlet property="SessionHistoryTV" destination="XLz-nF-QEc" id="Zpa-25-OLt"/>
+                        <outlet property="sessionHistoryTV" destination="XLz-nF-QEc" id="rfe-vS-cnB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cx5-t7-eyj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

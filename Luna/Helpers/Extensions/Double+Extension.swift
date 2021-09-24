@@ -24,6 +24,30 @@ extension Double {
     func previousMultiple(of num: Double)-> Double {
         return self - abs(self.remainder(dividingBy: num))
     }
+    
+    public func getDateTimeFromTimeInterval(_ dateFormat: String = "hh a")-> String{
+        //Convert to Date
+        //let date = NSDate(timeIntervalSince1970: self / 1000.0)
+        let date = NSDate(timeIntervalSince1970: TimeInterval(self))
+        //Date formatting
+        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "dd, MMMM yyyy HH:mm:a"
+//        dateFormatter.dateFormat = "hh a"
+        dateFormatter.dateFormat = dateFormat
+        dateFormatter.timeZone = TimeZone.current
+        //dateFormatter.timeZone = TimeZone.current
+        let dateString = dateFormatter.string(from: date as Date)
+//        print("formatted date is =  \(dateString)")
+        return dateString.lowercased()
+       
+    }
+    
+    public func getMonthInterval(_ dateFormat: String = "hh a")-> Int{
+        //Convert to Date
+        //let date = NSDate(timeIntervalSince1970: self / 1000.0)
+        let date = NSDate(timeIntervalSince1970: TimeInterval(self))
+        return (Calendar.current as NSCalendar).components(.month, from: date as Date).month!
+    }
 }
 
 extension Int {

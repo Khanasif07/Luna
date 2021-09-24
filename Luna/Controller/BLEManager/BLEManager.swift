@@ -33,6 +33,18 @@ let WriteAcknowledgement = CBUUID(string: "5927a433-a277-40b7-b2d4-0242ac130003"
     @objc optional func didNotDiscoverPeripheral()
 }
 
+//extension BleProtocol{
+//    @objc optional func didDiscover(name:String, rssi:NSNumber){}
+//    @objc optional func didConnect(name:String){}
+//    @objc optional func didDisconnect(){}
+//    @objc optional func didBleReady(){}
+//    @objc optional func didBleOff(){}
+//    @objc optional func didUpdateValue(){}
+//    @objc optional func didReadRSSI(rssi:NSNumber){}
+//    @objc optional func log(message:String){}
+//    @objc optional func didNotDiscoverPeripheral(){}
+//}
+
 
 public class BleManager: NSObject{
     public static let sharedInstance = BleManager()

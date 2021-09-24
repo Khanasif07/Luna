@@ -65,7 +65,9 @@ class HealthKitManager: NSObject {
                              start: $0.date,
                              end: $0.date,metadata: Optional(["HKInsulinDeliveryReason": 1]))
         }
-        healthStore.save(samples) { [self] success, error in
+        healthStore.save(samples) { [weak self] success, error in
+            guard let self = self else { return }
+            print(self)
             if let error = error {
                 print("HealthKit: error while saving: \(error.localizedDescription)")
             }
@@ -178,10 +180,10 @@ class HealthKitManager: NSObject {
       // Send water intake data to healthStore…aka ‘Health’ app
       // 5
         healthStore.save(waterCorrelationForWaterAmount, withCompletion: { (success, error) in
-        if (error != nil) {
-            print(error?.localizedDescription)
-        }
-      })
+            if let err = error{
+                print(err.localizedDescription)
+            }
+        })
     }
 
 

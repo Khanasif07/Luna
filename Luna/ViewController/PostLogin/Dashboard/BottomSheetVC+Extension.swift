@@ -10,7 +10,7 @@ import Charts
 import EventKit
 import UserNotifications
 
-extension BottomSheetVC : UNUserNotificationCenterDelegate{
+extension BottomSheetVC {
     
     @objc func appMovedToBackground() {
         // Allow screen to turn off
@@ -397,22 +397,8 @@ extension BottomSheetVC : UNUserNotificationCenterDelegate{
         let action = UNNotificationAction(identifier: "snooze", title: "Snooze", options: [])
         let category = UNNotificationCategory(identifier: "category", actions: [action], intentIdentifiers: [], options: [])
         UNUserNotificationCenter.current().setNotificationCategories([category])
-    }
-    
-    func writeDebugLog(value: String) {
-        DispatchQueue.main.async {
-            var logText = "\n" + dateTimeUtils.printNow() + " - " + value
-            print(logText)
-//            guard let debug = self.tabBarController!.viewControllers?[2] as? SnoozeViewController else { return }
-//            if debug.debugTextView.text.lengthOfBytes(using: .utf8) > 20000 {
-//                debug.debugTextView.text = ""
-//                    }
-//            debug.debugTextView.text += logText
-        }
-
-        
-        
-    }
+//    }
+}
     
     
     // General Notifications
@@ -436,9 +422,7 @@ extension BottomSheetVC : UNUserNotificationCenterDelegate{
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        
+
     }
-    
-    
 }
 

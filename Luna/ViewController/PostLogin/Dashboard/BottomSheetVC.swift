@@ -13,7 +13,7 @@ import EventKit
 import UserNotifications
 import Photos
 
-class BottomSheetVC:  UIViewController {
+class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     
     //MARK:- OUTLETS
     //==============
@@ -339,12 +339,7 @@ extension BottomSheetVC {
 //========================
 extension BottomSheetVC : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 1:
-            return SystemInfoModel.shared.insulinData?.endIndex ?? 0
-        default:
-            return 1
-        }
+        return section == 1 ? (SystemInfoModel.shared.insulinData?.endIndex ?? 0) : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

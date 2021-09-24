@@ -36,10 +36,6 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
 //        newChartSetUp()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-    
 //    private func newChartSetUp(){
 //        cgmChartView.delegate = self
 //

@@ -181,7 +181,8 @@ extension UIViewController {
             
         case .denied:
             alertPromptToAllowCameraAccessViaSetting("Change Privacy Setting And Allow Access To Library")
-            
+        case .limited:
+            break
         case .authorized:
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = controller

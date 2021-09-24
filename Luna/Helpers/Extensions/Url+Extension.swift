@@ -49,4 +49,11 @@ extension URL{
         }
         return nil
     }
+    
+    func getQueryString(parameter: String) -> String? {
+        if let urlComponents = URLComponents(string: self.absoluteString) {
+            return urlComponents.queryItems?.filter({ item in item.name == parameter }).first?.value
+        }
+        return nil
+    }
 }

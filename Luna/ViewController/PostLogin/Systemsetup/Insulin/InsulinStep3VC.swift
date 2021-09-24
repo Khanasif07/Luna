@@ -55,8 +55,8 @@ class InsulinStep3VC: UIViewController {
         SystemInfoModel.shared.insulinUnit =  Int(self.insulinCountTxtField.text ?? "0") ?? 0
         let vc = InsulinStep4VC.instantiate(fromAppStoryboard: .SystemSetup)
         vc.insulinConnectedSuccess = { [weak self] (sender) in
-            guard let selff = self else { return }
-            selff.view.endEditing(true)
+            guard let self = self else { return }
+            self.view.endEditing(true)
             if   SystemInfoModel.shared.isFromSetting {
                 CommonFunctions.showActivityLoader()
                 FirestoreController.checkUserExistInSystemDatabase {
@@ -64,7 +64,7 @@ class InsulinStep3VC: UIViewController {
                         FirestoreController.getUserSystemInfoData{
                             CommonFunctions.hideActivityLoader()
                             NotificationCenter.default.post(name: Notification.Name.insulinConnectedSuccessfully, object: nil)
-                            selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
+                            self.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
                             CommonFunctions.showToastWithMessage("Insulin info updated successfully.")
                         } failure: { (error) -> (Void) in
                             CommonFunctions.hideActivityLoader()
@@ -78,7 +78,7 @@ class InsulinStep3VC: UIViewController {
                     FirestoreController.setSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
                         CommonFunctions.hideActivityLoader()
                         NotificationCenter.default.post(name: Notification.Name.insulinConnectedSuccessfully, object: nil)
-                        selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
+                        self.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
                         CommonFunctions.showToastWithMessage("Insulin info updated successfully.")
                         AppUserDefaults.save(value: true, forKey: .isSystemSetupCompleted)
                     } failure: { (error) -> (Void) in
@@ -88,7 +88,7 @@ class InsulinStep3VC: UIViewController {
                 }
             }else{
                 NotificationCenter.default.post(name: Notification.Name.insulinConnectedSuccessfully, object: nil)
-                selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupStep1VC.self)
+                self.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupStep1VC.self)
             }
         }
         self.present(vc, animated: true, completion: nil)

@@ -209,7 +209,7 @@ extension UITextField{
         //            didSelectDate(datePicker.date)
         //        }
         
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+//        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         //        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain) { (_) in
         //            self.resignFirstResponder()
         //        }

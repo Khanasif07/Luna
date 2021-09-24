@@ -58,15 +58,10 @@ class SessionDescBottomVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         mainCotainerView.backgroundColor = UIColor.clear
-//        mainCotainerView.roundCorners([.layerMinXMinYCorner, .layerMaxXMinYCorner], radius: 15)
-//        mainCotainerView.addShadowToTopOrBottom(location: .top, color: UIColor.black.withAlphaComponent(0.15))
-        if #available(iOS 11.0, *) {
-            topSafeArea = view.safeAreaInsets.top
-            bottomSafeArea = view.safeAreaInsets.bottom
-        } else {
-            topSafeArea = topLayoutGuide.length
-            bottomSafeArea = bottomLayoutGuide.length
-        }
+        //        mainCotainerView.roundCorners([.layerMinXMinYCorner, .layerMaxXMinYCorner], radius: 15)
+        //        mainCotainerView.addShadowToTopOrBottom(location: .top, color: UIColor.black.withAlphaComponent(0.15))
+        topSafeArea = topLayoutGuide.length
+        bottomSafeArea = bottomLayoutGuide.length
     }
     
     @objc func panGesture(_ recognizer: UIPanGestureRecognizer) {

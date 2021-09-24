@@ -98,15 +98,15 @@ extension SignupViewController {
     private func gotoEmailVerificationPopUpVC(){
         let scene =  PassResetPopUpVC.instantiate(fromAppStoryboard: .PreLogin)
         scene.emailVerificationSuccess = { [weak self] in
-            guard let selff = self else { return }
-            let cell = selff.signupTableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? SignUpTopTableCell
+            guard let self = self else { return }
+            let cell = self.signupTableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? SignUpTopTableCell
             cell?.emailIdTxtField.text = ""
             cell?.passTxtField.text = ""
-            selff.passTxt = ""
-            selff.emailTxt = ""
-            cell?.signUpBtn.isEnabled = selff.signUpBtnStatus()
-            selff.signupTableView.reloadData()
-            selff.gotoLoginVC()
+            self.passTxt = ""
+            self.emailTxt = ""
+            cell?.signUpBtn.isEnabled = self.signUpBtnStatus()
+            self.signupTableView.reloadData()
+            self.gotoLoginVC()
         }
         scene.popupType = .emailVerification
         scene.titleDesc = LocalizedString.email_verification.localized
@@ -595,12 +595,12 @@ extension SignupViewController{
         }
     }
     
-    func getAgeSexAndBloodType(){
-        do {
-            let userInfo = try HealthKitManager.sharedInstance.getAgeSexAndBloodType()
-            print(userInfo)
-        } catch{ error
-            print(error.localizedDescription)
-        }
-    }
+//    func getAgeSexAndBloodType(){
+//        do {
+//            let userInfo = try HealthKitManager.sharedInstance.getAgeSexAndBloodType()
+//            print(userInfo)
+//        } catch{ error
+//            print(error.localizedDescription)
+//        }
+//    }
 }

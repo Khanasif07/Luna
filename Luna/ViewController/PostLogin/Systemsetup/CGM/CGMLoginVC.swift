@@ -9,12 +9,12 @@ import UIKit
 
 class CGMLoginVC: UIViewController {
     
-    @IBOutlet weak var IntroLbl: UILabel!
-    @IBOutlet weak var EmailLbl: UILabel!
-    @IBOutlet weak var PasswordLbl: UILabel!
-    @IBOutlet weak var EmailTF: AppTextField!
-    @IBOutlet weak var PasswordTF: AppTextField!
-    @IBOutlet weak var ForgetPassBtn: UIButton!
+    @IBOutlet weak var introLbl: UILabel!
+    @IBOutlet weak var emailLbl: UILabel!
+    @IBOutlet weak var passwordLbl: UILabel!
+    @IBOutlet weak var emailTF: AppTextField!
+    @IBOutlet weak var passwordTF: AppTextField!
+    @IBOutlet weak var forgetPassBtn: UIButton!
     @IBOutlet weak var proceedBtn: AppButton!
     
     var emailTxt = ""
@@ -54,9 +54,9 @@ class CGMLoginVC: UIViewController {
         //        self.present(scene, animated: true, completion: nil)
         let scene =  CGMConnectedVC.instantiate(fromAppStoryboard: .CGPStoryboard)
         scene.cgmConnectedSuccess = { [weak self] (sender,cgmData) in
-            guard let selff = self else { return }
-            UserDefaultsRepository.shareUserName.value =  selff.emailTxt
-            UserDefaultsRepository.sharePassword.value = selff.passTxt
+            guard let self = self else { return }
+            UserDefaultsRepository.shareUserName.value =  self.emailTxt
+            UserDefaultsRepository.sharePassword.value = self.passTxt
             if   SystemInfoModel.shared.isFromSetting {
                 CommonFunctions.showActivityLoader()
                 FirestoreController.checkUserExistInSystemDatabase {
@@ -64,7 +64,7 @@ class CGMLoginVC: UIViewController {
                         FirestoreController.getUserSystemInfoData{
                             CommonFunctions.hideActivityLoader()
                             NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: nil)
-                            selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
+                            self.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
                             CommonFunctions.showToastWithMessage("CGM info updated successfully.")
                         } failure: { (error) -> (Void) in
                             CommonFunctions.hideActivityLoader()
@@ -78,7 +78,7 @@ class CGMLoginVC: UIViewController {
                     FirestoreController.setSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
                         CommonFunctions.hideActivityLoader()
                         NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: nil)
-                        selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
+                        self.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
                         CommonFunctions.showToastWithMessage("CGM info updated successfully.")
                         AppUserDefaults.save(value: true, forKey: .isSystemSetupCompleted)
                     } failure: { (error) -> (Void) in
@@ -88,7 +88,7 @@ class CGMLoginVC: UIViewController {
                 }
             }else {
                 NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: nil)
-                selff.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupStep1VC.self)
+                self.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupStep1VC.self)
             }
         }
         self.present(scene, animated: true, completion: nil)
@@ -109,35 +109,35 @@ extension CGMLoginVC {
     
     @objc func secureTextField(_ sender: UIButton){
         sender.isSelected.toggle()
-        self.PasswordTF.isSecureTextEntry = !sender.isSelected
+        self.passwordTF.isSecureTextEntry = !sender.isSelected
     }
     
     private func setUpTextFont(){
         proceedBtn.isEnabled = false
-        EmailTF.delegate = self
-        PasswordTF.delegate = self
-        PasswordTF.isSecureText = true
-        EmailLbl.text = "User Name"
-        EmailLbl.textColor = AppColors.fontPrimaryColor
-        EmailLbl.font = AppFonts.SF_Pro_Display_Semibold.withSize(.x14)
-        PasswordLbl.text = "Password"
-        PasswordLbl.textColor = AppColors.fontPrimaryColor
-        PasswordLbl.font = AppFonts.SF_Pro_Display_Semibold.withSize(.x14)
-        EmailTF.layer.borderWidth = 1
-        EmailTF.round(radius: 10.0)
-        EmailTF.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
-        EmailTF.layer.borderColor = AppColors.fontPrimaryColor.cgColor
-        PasswordTF.layer.borderWidth = 1
-        PasswordTF.round(radius: 10.0)
-        PasswordTF.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
-        PasswordTF.layer.borderColor = AppColors.fontPrimaryColor.cgColor
+        emailTF.delegate = self
+        passwordTF.delegate = self
+        passwordTF.isSecureText = true
+        emailLbl.text = "User Name"
+        emailLbl.textColor = AppColors.fontPrimaryColor
+        emailLbl.font = AppFonts.SF_Pro_Display_Semibold.withSize(.x14)
+        passwordLbl.text = "Password"
+        passwordLbl.textColor = AppColors.fontPrimaryColor
+        passwordLbl.font = AppFonts.SF_Pro_Display_Semibold.withSize(.x14)
+        emailTF.layer.borderWidth = 1
+        emailTF.round(radius: 10.0)
+        emailTF.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
+        emailTF.layer.borderColor = AppColors.fontPrimaryColor.cgColor
+        passwordTF.layer.borderWidth = 1
+        passwordTF.round(radius: 10.0)
+        passwordTF.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
+        passwordTF.layer.borderColor = AppColors.fontPrimaryColor.cgColor
         let show = UIButton()
         show.isSelected = false
         show.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
         show.addTarget(self, action: #selector(secureTextField(_:)), for: .touchUpInside)
-        self.PasswordTF.setButtonToRightView(btn: show, selectedImage: #imageLiteral(resourceName: "eyeClosedIcon"), normalImage: #imageLiteral(resourceName: "eyeOpenIcon"), size: CGSize(width: 22, height: 22))
-        ForgetPassBtn.setTitleColor(AppColors.appGreenColor, for: .normal)
-        ForgetPassBtn.isHidden = true
+        self.passwordTF.setButtonToRightView(btn: show, selectedImage: #imageLiteral(resourceName: "eyeClosedIcon"), normalImage: #imageLiteral(resourceName: "eyeOpenIcon"), size: CGSize(width: 22, height: 22))
+        forgetPassBtn.setTitleColor(AppColors.appGreenColor, for: .normal)
+        forgetPassBtn.isHidden = true
         self.proceedBtn.round(radius: 10.0)
         self.proceedBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
     }
@@ -150,10 +150,10 @@ extension CGMLoginVC : UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField {
-        case EmailTF:
-            EmailTF.setBorder(width: 1.0, color: AppColors.appGreenColor)
-        case PasswordTF:
-            PasswordTF.setBorder(width: 1.0, color: AppColors.appGreenColor)
+        case emailTF:
+            emailTF.setBorder(width: 1.0, color: AppColors.appGreenColor)
+        case passwordTF:
+            passwordTF.setBorder(width: 1.0, color: AppColors.appGreenColor)
         default:
             print("")
         }
@@ -162,17 +162,17 @@ extension CGMLoginVC : UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         let txt = textField.text?.byRemovingLeadingTrailingWhiteSpaces ?? ""
         switch textField {
-        case EmailTF:
+        case emailTF:
             self.emailTxt = txt
             UserDefaultsRepository.shareUserName.value = emailTxt
             proceedBtn.isEnabled = signUpBtnStatus()
-            EmailTF.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
-        case PasswordTF:
+            emailTF.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
+        case passwordTF:
             self.passTxt = txt
             UserDefaultsRepository.sharePassword.value = passTxt
             UserDefaultsRepository.shareServer.value = "US"
             proceedBtn.isEnabled = signUpBtnStatus()
-            PasswordTF.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
+            passwordTF.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         default:
             proceedBtn.isEnabled = signUpBtnStatus()
         }

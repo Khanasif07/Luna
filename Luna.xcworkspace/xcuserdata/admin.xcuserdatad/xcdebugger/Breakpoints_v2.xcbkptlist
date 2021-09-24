@@ -26,8 +26,8 @@
             filePath = "Luna/Controller/BLEManager/BLEManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "327"
-            endingLineNumber = "327"
+            startingLineNumber = "339"
+            endingLineNumber = "339"
             landmarkName = "centralManager(_:didFailToConnect:error:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,8 +42,8 @@
             filePath = "Luna/Controller/BLEManager/BLEManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "326"
-            endingLineNumber = "326"
+            startingLineNumber = "338"
+            endingLineNumber = "338"
             landmarkName = "centralManager(_:didFailToConnect:error:)"
             landmarkType = "7">
          </BreakpointContent>

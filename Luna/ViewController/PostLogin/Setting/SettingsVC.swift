@@ -95,13 +95,13 @@ extension SettingsVC {
         if let providerData = Auth.auth().currentUser?.providerData {
             for userInfo in providerData {
                 switch userInfo.providerID {
-                case "google.com":
+                case LoginType.google.title:
                     loginType = .google
                     return
-                case "apple.com":
+                case LoginType.apple.title:
                     loginType = .apple
                     return
-                case "password":
+                case LoginType.email_password.title:
                     loginType = .email_password
                     return
                 default:

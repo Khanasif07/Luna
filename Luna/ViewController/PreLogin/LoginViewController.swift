@@ -143,14 +143,14 @@ extension LoginViewController {
     private func gotoEmailVerificationPopUpVC(){
         let scene =  PassResetPopUpVC.instantiate(fromAppStoryboard: .PreLogin)
         scene.emailVerificationSuccess = { [weak self] in
-            guard let selff = self else { return }
-            let cell = selff.loginTableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? SignUpTopTableCell
+            guard let self = self else { return }
+            let cell = self.loginTableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? SignUpTopTableCell
             cell?.emailIdTxtField.text = ""
             cell?.passTxtField.text = ""
-            selff.passTxt = ""
-            selff.emailTxt = ""
-            cell?.signUpBtn.isEnabled = selff.signUpBtnStatus()
-            selff.loginTableView.reloadData()
+            self.passTxt = ""
+            self.emailTxt = ""
+            cell?.signUpBtn.isEnabled = self.signUpBtnStatus()
+            self.loginTableView.reloadData()
         }
         scene.popupType = .emailVerification
         scene.titleDesc = LocalizedString.email_Verification.localized
@@ -206,6 +206,7 @@ extension LoginViewController {
             }
         }else {
             guard let error = error else { return }
+            print(error.localizedDescription)
             showAlert(title: LocalizedString.biometricAuthNotAvailable.localized, msg: error.localizedDescription)
         }
     }
