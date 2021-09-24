@@ -56,7 +56,6 @@ class SystemSetupStep1VC: UIViewController {
     @IBAction func skipBtnAction(_ sender: UIButton) {
         CommonFunctions.showActivityLoader()
         FirestoreController.updateUserSystemSetupStatus(isSystemSetupCompleted: true) {
-            print("Successfully")
             SystemInfoModel.shared = SystemInfoModel()
             CommonFunctions.hideActivityLoader()
             AppUserDefaults.save(value: true, forKey: .isSystemSetupCompleted)
@@ -192,44 +191,8 @@ extension SystemSetupStep1VC {
         self.mainTableView.endUpdates()
         self.mainTableView.reloadData()
     }
-}
-
-// MARK: - Extension For TableView
-//===========================
-extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections.endIndex
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueCell(with: SystemStep1TableCell.self)
-        cell.startBtnTapped = { [weak self] in
-            guard let self = self else { return }
-            switch indexPath.row {
-            case 0:
-                SystemInfoModel.shared.isFromSetting = false
-                let vc = PairLunaVC.instantiate(fromAppStoryboard: .CGPStoryboard)
-                self.navigationController?.pushViewController(vc, animated: true)
-            case 1:
-                SystemInfoModel.shared.isFromSetting = false
-                if cell.startBtn.titleLabel?.text == LocalizedString.start.localized{
-                    SystemInfoModel.shared.cgmUnit = 0
-                    SystemInfoModel.shared.cgmType = ""
-                }
-                let vc = CGMSelectorVC.instantiate(fromAppStoryboard: .CGPStoryboard)
-                self.navigationController?.pushViewController(vc, animated: true)
-            default:
-                SystemInfoModel.shared.isFromSetting = false
-                if cell.startBtn.titleLabel?.text == LocalizedString.start.localized{
-                    SystemInfoModel.shared.insulinUnit = 0
-                    SystemInfoModel.shared.longInsulinSubType = ""
-                    SystemInfoModel.shared.longInsulinType = ""
-                }
-                let vc = InsulinStep1VC.instantiate(fromAppStoryboard: .SystemSetup)
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            
-        }
+    private func cellForRowSetUp(indexPath: IndexPath,cell: SystemStep1TableCell){
         switch indexPath.row {
         case 0:
             cell.stepLbl.text = LocalizedString.step.localized + " \(indexPath.row + 1)"
@@ -270,6 +233,47 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
                 cell.startBtn.isEditable = true
             }
         }
+    }
+}
+
+// MARK: - Extension For TableView
+//===========================
+extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sections.endIndex
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueCell(with: SystemStep1TableCell.self)
+        //MARK:- Start Button Action
+        cell.startBtnTapped = { [weak self] in
+            guard let self = self else { return }
+            switch indexPath.row {
+            case 0:
+                SystemInfoModel.shared.isFromSetting = false
+                let vc = PairLunaVC.instantiate(fromAppStoryboard: .CGPStoryboard)
+                self.navigationController?.pushViewController(vc, animated: true)
+            case 1:
+                SystemInfoModel.shared.isFromSetting = false
+                if cell.startBtn.titleLabel?.text == LocalizedString.start.localized{
+                    SystemInfoModel.shared.cgmUnit = 0
+                    SystemInfoModel.shared.cgmType = ""
+                }
+                let vc = CGMSelectorVC.instantiate(fromAppStoryboard: .CGPStoryboard)
+                self.navigationController?.pushViewController(vc, animated: true)
+            default:
+                SystemInfoModel.shared.isFromSetting = false
+                if cell.startBtn.titleLabel?.text == LocalizedString.start.localized{
+                    SystemInfoModel.shared.insulinUnit = 0
+                    SystemInfoModel.shared.longInsulinSubType = ""
+                    SystemInfoModel.shared.longInsulinType = ""
+                }
+                let vc = InsulinStep1VC.instantiate(fromAppStoryboard: .SystemSetup)
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+        }
+        self.cellForRowSetUp(indexPath: indexPath,cell:cell)
         return cell
     }
     

@@ -249,7 +249,7 @@ extension UITextField {
     // Add/remove error message
     func setError(_ string: String? = nil, show: Bool = true) {
         
-        var labelFontSize = 12
+//        var labelFontSize = 12
         
         if let rightView = rightView, rightView.tag != 999 {
             rightViews.setObject(rightView, forKey: self)
@@ -287,10 +287,10 @@ extension UITextField {
         line.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         line.translatesAutoresizingMaskIntoConstraints = false
         container.addSubview(line)
-        
-        if UIScreen.main.bounds.height < 667 {
-            labelFontSize = 11
-        }
+//
+//        if UIScreen.main.bounds.height < 667 {
+//            labelFontSize = 11
+//        }
         
         // Create message
         let label = UILabel()

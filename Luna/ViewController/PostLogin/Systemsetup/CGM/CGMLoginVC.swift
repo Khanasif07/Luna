@@ -47,23 +47,18 @@ class CGMLoginVC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func proceedBtnAction(_ sender: UIButton) {
-        //        let scene =  CGMDATASHAREVC.instantiate(fromAppStoryboard: .CGPStoryboard)
-        //        scene.CGMConnectNavigation = { [weak self] (sender) in
-        //
-        //        }
-        //        self.present(scene, animated: true, completion: nil)
+        AppUserDefaults.save(value: emailTxt, forKey: .shareUserName)
+        AppUserDefaults.save(value: passTxt, forKey: .sharePassword)
         let scene =  CGMConnectedVC.instantiate(fromAppStoryboard: .CGPStoryboard)
         scene.cgmConnectedSuccess = { [weak self] (sender,cgmData) in
             guard let self = self else { return }
-            UserDefaultsRepository.shareUserName.value =  self.emailTxt
-            UserDefaultsRepository.sharePassword.value = self.passTxt
             if   SystemInfoModel.shared.isFromSetting {
                 CommonFunctions.showActivityLoader()
                 FirestoreController.checkUserExistInSystemDatabase {
                     FirestoreController.updateSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
                         FirestoreController.getUserSystemInfoData{
                             CommonFunctions.hideActivityLoader()
-                            NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: nil)
+                            NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: [ApiKey.cgmData: cgmData])
                             self.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
                             CommonFunctions.showToastWithMessage("CGM info updated successfully.")
                         } failure: { (error) -> (Void) in
@@ -77,7 +72,7 @@ class CGMLoginVC: UIViewController {
                 } failure: {
                     FirestoreController.setSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
                         CommonFunctions.hideActivityLoader()
-                        NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: nil)
+                        NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: [ApiKey.cgmData: cgmData])
                         self.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
                         CommonFunctions.showToastWithMessage("CGM info updated successfully.")
                         AppUserDefaults.save(value: true, forKey: .isSystemSetupCompleted)
@@ -164,13 +159,10 @@ extension CGMLoginVC : UITextFieldDelegate{
         switch textField {
         case emailTF:
             self.emailTxt = txt
-            UserDefaultsRepository.shareUserName.value = emailTxt
             proceedBtn.isEnabled = signUpBtnStatus()
             emailTF.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         case passwordTF:
             self.passTxt = txt
-            UserDefaultsRepository.sharePassword.value = passTxt
-            UserDefaultsRepository.shareServer.value = "US"
             proceedBtn.isEnabled = signUpBtnStatus()
             passwordTF.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         default:

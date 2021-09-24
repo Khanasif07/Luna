@@ -182,6 +182,10 @@ enum LocalizedString : String {
     case please_provide_your_details_to_set_up_your_profile
     case what_your_date_of_birth
     
+    case old_password_must_contain_at_least_char
+    case new_password_must_contain_at_least_char
+    case confirm_password_must_contain_at_least_char
+    case new_and_confirm_password_doesnt_match
     case type1
     case type2
     

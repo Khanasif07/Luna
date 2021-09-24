@@ -34,7 +34,7 @@ extension BottomSheetVC :  ChartViewDelegate {
     }
     
     func updateBGCheckGraph() {
-        var dataIndex = 7
+        let dataIndex = 7
         cgmChartView.lineData?.dataSets[dataIndex].clear()
         
         for i in 0..<bgCheckData.count{

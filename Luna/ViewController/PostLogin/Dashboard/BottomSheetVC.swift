@@ -63,16 +63,10 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     var checkAlarmTimer = Timer()
     var checkAlarmInterval: TimeInterval = 60.0
     
-    var calTimer = Timer()
-    
     var bgTimer = Timer()
-    var cageSageTimer = Timer()
-    var profileTimer = Timer()
     var deviceStatusTimer = Timer()
-    var treatmentsTimer = Timer()
     var alarmTimer = Timer()
-    var calendarTimer = Timer()
-    var graphNowTimer = Timer()
+    var profileTimer = Timer()
     
     // Info Table Setup
     var bgCheckData: [ShareGlucoseData] = []
@@ -84,12 +78,6 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     var latestDeltaString = ""
     var latestLoopStatusString = ""
     var latestLoopTime: Double = 0
-    var latestCOB = ""
-    var latestBasal = ""
-    var latestPumpVolume: Double = 50.0
-    var latestIOB = ""
-    var lastOverrideStartTime: TimeInterval = 0
-    var lastOverrideEndTime: TimeInterval = 0
     var topBG: Float = UserDefaultsRepository.minBGScale.value
     var lastOverrideAlarm: TimeInterval = 0
     
@@ -98,12 +86,9 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     var dexShare: ShareClient?;
     var dexVerifiedAlerted = false
     
-    // calendar setup
-    let store = EKEventStore()
     //
     var topSafeArea: CGFloat = 0.0
     var bottomSafeArea: CGFloat = 0.0
-    var cgmDataArray : [ShareGlucoseData] = []
     lazy var swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(closePullUp))
     var fullView: CGFloat {
         return UIApplication.shared.statusBarHeight + 51.0
@@ -113,12 +98,6 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     }
     var textContainerHeight : CGFloat? {
         didSet{
-            self.mainTableView.reloadData()
-        }
-    }
-    var cgmData : [ShareGlucoseData] = []{
-        didSet{
-            self.cgmDataArray = cgmData
             self.mainTableView.reloadData()
         }
     }
@@ -152,22 +131,17 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
         if #available(iOS 11.0, *) {
             topSafeArea = view.safeAreaInsets.top
             bottomSafeArea = view.safeAreaInsets.bottom
-        } else {
-            topSafeArea = topLayoutGuide.length
-            bottomSafeArea = bottomLayoutGuide.length
         }
     }
     
     private func cgmSetUp(){
         UserDefaultsRepository.infoNames.value.removeAll()
-        UserDefaultsRepository.infoNames.value.append("Battery")
         // TODO: need non-us server ?
         let shareUserName = UserDefaultsRepository.shareUserName.value
         let sharePassword = UserDefaultsRepository.sharePassword.value
         let shareServer = UserDefaultsRepository.shareServer.value == "US" ?KnownShareServers.US.rawValue : KnownShareServers.NON_US.rawValue
         dexShare = ShareClient(username: shareUserName, password: sharePassword, shareServer: shareServer )
         self.newChartSetUp()
-        
         // Trigger foreground and background functions
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
@@ -181,69 +155,7 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     }
     
     private func willAppearSetup(){
-        // set screen lock
-        UIApplication.shared.isIdleTimerDisabled = UserDefaultsRepository.screenlockSwitchState.value;
-        
-        // check the app state
-        // TODO: move to a function ?
-        if let appState = self.appStateController {
 
-            if appState.chartSettingsChanged {
-
-                // can look at settings flags to be more fine tuned
-//                if let cell = self.mainTableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? BottomSheetChartCell{
-//                self.updateBGGraphSettings()
-//                }
-//                self.updateBGGraphSettings()
-
-//                if ChartSettingsChangeEnum.smallGraphHeight.rawValue != 0 {
-//                    smallGraphHeightConstraint.constant = CGFloat(UserDefaultsRepository.smallGraphHeight.value)
-//                    self.view.layoutIfNeeded()
-//                }
-
-                // reset the app state
-                appState.chartSettingsChanged = false
-                appState.chartSettingsChanges = 0
-            }
-            if appState.generalSettingsChanged {
-
-                // settings for appBadge changed
-                if appState.generalSettingsChanges & GeneralSettingsChangeEnum.appBadgeChange.rawValue != 0 {
-
-                }
-
-                // settings for textcolor changed
-                if appState.generalSettingsChanges & GeneralSettingsChangeEnum.colorBGTextChange.rawValue != 0 {
-                    self.setBGTextColor()
-                }
-
-                // settings for showStats changed
-                if appState.generalSettingsChanges & GeneralSettingsChangeEnum.showStatsChange.rawValue != 0 {
-//                    statsView.isHidden = !UserDefaultsRepository.showStats.value
-                }
-
-                // settings for useIFCC changed
-                if appState.generalSettingsChanges & GeneralSettingsChangeEnum.useIFCCChange.rawValue != 0 {
-//                    updateStats()
-                }
-
-                // settings for showSmallGraph changed
-                if appState.generalSettingsChanges & GeneralSettingsChangeEnum.showSmallGraphChange.rawValue != 0 {
-//                    BGChartFull.isHidden = !UserDefaultsRepository.showSmallGraph.value
-                }
-
-                // reset the app state
-                appState.generalSettingsChanged = false
-                appState.generalSettingsChanges = 0
-            }
-            if appState.infoDataSettingsChanged {
-                self.mainTableView.reloadData()
-                // reset
-                appState.infoDataSettingsChanged = false
-            }
-
-            // add more processing of the app state
-        }
     }
     
     @objc func panGesture(_ recognizer: UIPanGestureRecognizer) {
@@ -273,6 +185,10 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
             }
         }
     }
+    
+    @objc func cgmDataReceivedSuccessfully(notification : NSNotification){
+        self.cgmSetUp()
+    }
 }
 
 //MARK:- Private functions
@@ -297,6 +213,7 @@ extension BottomSheetVC {
     
     private func addObserver(){
         NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(cgmDataReceivedSuccessfully), name: .cgmConnectedSuccessfully, object: nil)
     }
     
     @objc func bleDidUpdateValue(notification : NSNotification){
@@ -357,8 +274,7 @@ extension BottomSheetVC : UITableViewDelegate,UITableViewDataSource {
             }
             return cell
         default:
-            let cell = tableView.dequeueCell(with: BottomSheetChartCell.self, indexPath: indexPath)
-            return cell
+            return UITableViewCell()
         }
     }
     

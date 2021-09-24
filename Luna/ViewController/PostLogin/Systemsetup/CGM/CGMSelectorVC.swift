@@ -11,8 +11,8 @@ class CGMSelectorVC: UIViewController {
     
     // MARK: - IBOutlets
     //===========================
-    @IBOutlet weak var IntroLbl: UILabel!
-    @IBOutlet weak var CGMTypesTV: UITableView!
+    @IBOutlet weak var introLbl: UILabel!
+    @IBOutlet weak var cgmTypesTV: UITableView!
     @IBOutlet weak var proceedBtn: AppButton!
     var vcObj:UIViewController = UIViewController()
     
@@ -64,15 +64,14 @@ class CGMSelectorVC: UIViewController {
 extension CGMSelectorVC {
     
     private func initialSetup() {
-       // btmContainerView.setBorder(width: 1.0, color: #colorLiteral(red: 0.9607843137, green: 0.5450980392, blue: 0.262745098, alpha: 1))
-        CGMTypesTV.isHidden = false
+        cgmTypesTV.isHidden = false
         self.proceedBtn.round(radius: 10.0)
         self.proceedBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
-        self.IntroLbl.textColor = AppColors.fontPrimaryColor
-        CGMTypesTV.register(UINib(nibName: "CGMTypeTableViewCell", bundle: nil), forCellReuseIdentifier: "CGMTypeTableViewCell")
-        CGMTypesTV.delegate = self
-        CGMTypesTV.dataSource = self
-        CGMTypesTV.reloadData()
+        self.introLbl.textColor = AppColors.fontPrimaryColor
+        cgmTypesTV.registerCell(with: CGMTypeTableViewCell.self)
+        cgmTypesTV.delegate = self
+        cgmTypesTV.dataSource = self
+        cgmTypesTV.reloadData()
     }
     
 }
@@ -87,8 +86,7 @@ extension CGMSelectorVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell:CGMTypeTableViewCell = CGMTypesTV.dequeueReusableCell(withIdentifier: "CGMTypeTableViewCell", for: indexPath) as! CGMTypeTableViewCell
+        let cell = tableView.dequeueCell(with: CGMTypeTableViewCell.self)
         cell.subTitlelbl.text = CGMTypeArray[indexPath.row]
         if indexPath.row == 0{
             cell.nextBtn.setImage(UIImage(named: "Radio_selected"), for: .normal)

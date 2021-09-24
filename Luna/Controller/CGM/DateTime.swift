@@ -16,7 +16,7 @@ public class dateTimeUtils {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let dayString = formatter.string(from: now)
-        var midnight = dayString + " 00:00:00"
+        let midnight = dayString + " 00:00:00"
         let newFormatter = DateFormatter()
         newFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         newFormatter.locale = Locale(identifier: "en_US")
@@ -30,7 +30,7 @@ public class dateTimeUtils {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let dayString = formatter.string(from: now)
-        var midnight = dayString + " 00:00:00"
+        let midnight = dayString + " 00:00:00"
         let newFormatter = DateFormatter()
         newFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         newFormatter.locale = Locale(identifier: "en_US")

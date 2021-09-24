@@ -131,7 +131,7 @@ extension HomeVC {
         NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .BLEOnOffState, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bLEDidDisConnected), name: .BLEDidDisConnectSuccessfully, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(cgmDataReceivedSuccessfully), name: .CgmDataReceivedSuccessfully, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(cgmDataReceivedSuccessfully), name: .cgmConnectedSuccessfully, object: nil)
     }
     
     private func addUserSessionListener(){
@@ -146,25 +146,25 @@ extension HomeVC {
         }
     }
     
-    private func getCGMDataFromFirestore(){
-        FirestoreController.checkCGMDataExistInDatabase {
-            FirestoreController.getFirebaseCGMData { (cgmDataArray) in
-                print(cgmDataArray)
-                SystemInfoModel.shared.cgmData = cgmDataArray
-                self.bottomSheetVC.cgmData = cgmDataArray
-            } failure: { (error) -> (Void) in
-                print(error.localizedDescription)
-            }
-        } failure: {
-            print("CGM DATA NOT Available")
+//    private func getCGMDataFromFirestore(){
+//        FirestoreController.checkCGMDataExistInDatabase {
+//            FirestoreController.getFirebaseCGMData { (cgmDataArray) in
+//                print(cgmDataArray)
+//                SystemInfoModel.shared.cgmData = cgmDataArray
+//                self.bottomSheetVC.cgmData = cgmDataArray
+//            } failure: { (error) -> (Void) in
+//                print(error.localizedDescription)
+//            }
+//        } failure: {
+//            print("CGM DATA NOT Available")
 //            if let cgmData = SystemInfoModel.shared.cgmData {
 //                self.bottomSheetVC.cgmData = cgmData
 //                for cgmModel in cgmData {
 //                    FirestoreController.createCGMDataNode(direction: cgmModel.direction ?? "", sgv: cgmModel.sgv, date: cgmModel.date)
 //                }
 //            }
-        }
-    }
+//        }
+//    }
     
     private func getUserSystemFromFirestore(){
         FirestoreController.getUserSystemInfoData {
@@ -201,7 +201,6 @@ extension HomeVC {
     }
     
     @objc func cgmDataReceivedSuccessfully(notification : NSNotification){
-        self.bottomSheetVC.cgmData = SystemInfoModel.shared.cgmData ?? []
         self.setupSystemInfo()
     }
     
@@ -243,7 +242,7 @@ extension HomeVC {
         let batteryData = BleManager.sharedInstance.batteryData
         let reservoirData = BleManager.sharedInstance.reservoirLevelData
         let data = BleManager.sharedInstance.systemStatusData
-        
+        //MARK:- Battery Data Set Up
         self.batteryImgView.image = DeviceStatus.getBatteryImage(value:batteryData).1
         if DeviceStatus.getBatteryImage(value:batteryData).0.isEmpty{
             self.batteryStatusLbl.alpha = 0
@@ -256,7 +255,7 @@ extension HomeVC {
             self.batteryStatusLbl.text = DeviceStatus.getBatteryImage(value:batteryData).0
         }
         self.batteryTitleLbl.text = DeviceStatus.Battery.titleString
-        
+        //MARK:- Reservoir Data Set Up
         self.reservoirImgView.image = DeviceStatus.getReservoirImage(value:reservoirData).1
         if DeviceStatus.getReservoirImage(value:reservoirData).0.isEmpty{
             self.reservoirStatusLbl.alpha = 0
@@ -269,7 +268,7 @@ extension HomeVC {
             self.reservoirStatusLbl.text = DeviceStatus.getReservoirImage(value:reservoirData).0
         }
         self.reservoirTitleLbl.text = DeviceStatus.ReservoirLevel.titleString
-        
+        //MARK:- System Status Data Set Up
         self.systemImgView.image = DeviceStatus.getSystemImage(value:data).1
         if DeviceStatus.getSystemImage(value:data).0.isEmpty{
             self.systemStatusLbl.alpha = 0

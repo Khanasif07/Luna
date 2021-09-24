@@ -206,7 +206,6 @@ extension LoginViewController {
             }
         }else {
             guard let error = error else { return }
-            print(error.localizedDescription)
             showAlert(title: LocalizedString.biometricAuthNotAvailable.localized, msg: error.localizedDescription)
         }
     }
@@ -225,14 +224,10 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueCell(with: SignUpTopTableCell.self, indexPath: indexPath)
-            cell.emailIdTxtField.text = emailTxt
-            cell.passTxtField.text = passTxt
-            cell.titleLbl.text = LocalizedString.lOGIN_TO_LUNA.localized
-            cell.subTitleLbl.text = ""
-            cell.signUpBtn.setTitle(LocalizedString.login.localized, for: .normal)
+            cell.configureCellSignInScreen(emailTxt:emailTxt,passTxt:passTxt)
             cell.signUpBtn.isEnabled = signUpBtnStatus()
-            cell.forgotPassBtn.isHidden = false
             [cell.emailIdTxtField,cell.passTxtField].forEach({$0?.delegate = self})
+            //MARK: - Login Button Action
             cell.signUpBtnTapped = { [weak self]  (sender) in
                 guard let `self` = self else { return }
                 if !self.isEmailValid(string: self.emailTxt).0{
@@ -326,6 +321,7 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                     }
                 }
             }
+            //MARK: - Forgot Button Action
             cell.forgotPassBtnTapped = { [weak self]  (sender) in
                 guard let `self` = self else { return }
                 self.emailTxt = ""
@@ -335,13 +331,13 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
             return cell
         default:
             let cell = tableView.dequeueCell(with: LoginSocialTableCell.self, indexPath: indexPath)
-            cell.signupLoginDescText = LocalizedString.dont_have_an_account.localized
-            cell.signupLoginText = LocalizedString.signup.localized
-            cell.setUpAttributedString()
+            cell.configureCellSigninScreen()
+            //MARK: - Google Button Action
             cell.googleBtnTapped = {[weak self] in
                 guard let self = `self` else { return }
                 self.googleSetUp()
             }
+            //MARK: - Apple Button Action
             cell.appleBtnTapped = { [weak self] in
                 guard let self = `self` else { return }
                 let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -359,6 +355,7 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                 authorizationController.presentationContextProvider = self
                 authorizationController.performRequests()
             }
+            //MARK: - Login Button Action
             cell.loginBtnTapped = { [weak self] in
                 guard let self = `self` else { return }
                 self.pop()

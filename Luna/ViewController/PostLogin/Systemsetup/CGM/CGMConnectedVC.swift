@@ -54,6 +54,8 @@ class CGMConnectedVC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func okBtnTapped(_ sender: AppButton) {
+        UserDefaultsRepository.shareUserName.value = AppUserDefaults.value(forKey: .shareUserName).stringValue
+        UserDefaultsRepository.sharePassword.value = AppUserDefaults.value(forKey: .sharePassword).stringValue
         SystemInfoModel.shared.cgmUnit = Int(ValueLbl.text ?? "") ?? 0
         self.dismiss(animated: true) {
             if let handle = self.cgmConnectedSuccess{
@@ -96,18 +98,25 @@ extension CGMConnectedVC {
         activityIndicator.startAnimating()
         titleLbl.text = "Connecting..."
         // TODO: need non-us server ?
-        let shareUserName = UserDefaultsRepository.shareUserName.value
-        let sharePassword = UserDefaultsRepository.sharePassword.value
+        let shareUserName = AppUserDefaults.value(forKey: .shareUserName).stringValue
+        let sharePassword = AppUserDefaults.value(forKey: .sharePassword).stringValue
         let shareServer = KnownShareServers.US.rawValue
         dexShare = ShareClient(username: shareUserName, password: sharePassword, shareServer: shareServer )
         
         // Trigger foreground and background functions
-        let notificationCenter = NotificationCenter.default
-            notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
-            notificationCenter.addObserver(self, selector: #selector(appCameToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+//        let notificationCenter = NotificationCenter.default
+//            notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+//            notificationCenter.addObserver(self, selector: #selector(appCameToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         
         // Load Startup Data
-        restartAllTimers()
+//        restartAllTimers()
+        var onlyPullLastRecord = false
+        if UserDefaultsRepository.alwaysDownloadAllBG.value { onlyPullLastRecord = false }
+        if !shareUserName.isEmpty && !sharePassword.isEmpty {
+            webLoadDexShare(onlyPullLastRecord: onlyPullLastRecord)
+        } else {
+            webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
+        }
     }
     
     // NS BG Data Response processor
@@ -134,36 +143,36 @@ extension CGMConnectedVC {
         }
         
         // Start the BG timer based on the reading
-        let secondsAgo = now - latestDate
+//        let secondsAgo = now - latestDate
         
-        DispatchQueue.main.async {
-            // if reading is overdue over: 20:00, re-attempt every 5 minutes
-            if secondsAgo >= (20 * 60) {
-                self.startBGTimer(time: (5 * 60))
-                print("##### started 5 minute bg timer")
-                
-            // if the reading is overdue: 10:00-19:59, re-attempt every minute
-            } else if secondsAgo >= (10 * 60) {
-                self.startBGTimer(time: 60)
-                print("##### started 1 minute bg timer")
-                
-            // if the reading is overdue: 7:00-9:59, re-attempt every 30 seconds
-            } else if secondsAgo >= (7 * 60) {
-                self.startBGTimer(time: 30)
-                print("##### started 30 second bg timer")
-                
-            // if the reading is overdue: 5:00-6:59 re-attempt every 10 seconds
-            } else if secondsAgo >= (5 * 60) {
-                self.startBGTimer(time: 10)
-                print("##### started 10 second bg timer")
-            
-            // We have a current reading. Set timer to 5:10 from last reading
-            } else {
-                self.startBGTimer(time: 300 - secondsAgo + Double(UserDefaultsRepository.bgUpdateDelay.value))
-                let timerVal = 310 - secondsAgo
-                print("##### started 5:10 bg timer: \(timerVal)")
-            }
-        }
+//        DispatchQueue.main.async {
+//            // if reading is overdue over: 20:00, re-attempt every 5 minutes
+//            if secondsAgo >= (20 * 60) {
+//                self.startBGTimer(time: (5 * 60))
+//                print("##### started 5 minute bg timer")
+//
+//            // if the reading is overdue: 10:00-19:59, re-attempt every minute
+//            } else if secondsAgo >= (10 * 60) {
+//                self.startBGTimer(time: 60)
+//                print("##### started 1 minute bg timer")
+//
+//            // if the reading is overdue: 7:00-9:59, re-attempt every 30 seconds
+//            } else if secondsAgo >= (7 * 60) {
+//                self.startBGTimer(time: 30)
+//                print("##### started 30 second bg timer")
+//
+//            // if the reading is overdue: 5:00-6:59 re-attempt every 10 seconds
+//            } else if secondsAgo >= (5 * 60) {
+//                self.startBGTimer(time: 10)
+//                print("##### started 10 second bg timer")
+//
+//            // We have a current reading. Set timer to 5:10 from last reading
+//            } else {
+//                self.startBGTimer(time: 300 - secondsAgo + Double(UserDefaultsRepository.bgUpdateDelay.value))
+//                let timerVal = 310 - secondsAgo
+//                print("##### started 5:10 bg timer: \(timerVal)")
+//            }
+//        }
         
         // If we already have data, we're going to pop it to the end and remove the first. If we have old or no data, we'll destroy the whole array and start over. This is simpler than determining how far back we need to get new data from in case Dex back-filled readings
         if !onlyPullLastRecord {
@@ -197,37 +206,37 @@ extension CGMConnectedVC {
         viewUpdateNSBG(isNS: isNS)
     }
     
-    @objc func appMovedToBackground() {
-        // Allow screen to turn off
-        UIApplication.shared.isIdleTimerDisabled = false;
-        
-        // We want to always come back to the home screen
-//        tabBarController?.selectedIndex = 0
-        
-        // Cancel the current timer and start a fresh background timer using the settings value only if background task is enabled
-        
-        if UserDefaultsRepository.backgroundRefresh.value {
-            backgroundTask.startBackgroundTask()
-        }
-        
-    }
+//    @objc func appMovedToBackground() {
+//        // Allow screen to turn off
+//        UIApplication.shared.isIdleTimerDisabled = false;
+//
+//        // We want to always come back to the home screen
+////        tabBarController?.selectedIndex = 0
+//
+//        // Cancel the current timer and start a fresh background timer using the settings value only if background task is enabled
+//
+//        if UserDefaultsRepository.backgroundRefresh.value {
+//            backgroundTask.startBackgroundTask()
+//        }
+//
+//    }
 
-    @objc func appCameToForeground() {
-        // reset screenlock state if needed
-        UIApplication.shared.isIdleTimerDisabled = UserDefaultsRepository.screenlockSwitchState.value;
-        
-        // Cancel the background tasks, start a fresh timer
-        if UserDefaultsRepository.backgroundRefresh.value {
-            backgroundTask.stopBackgroundTask()
-        }
-        
-        restartAllTimers()
-
-    }
-    
-    func restartAllTimers(){
-        if !bgTimer.isValid { startBGTimer(time: 2) }
-    }
+//    @objc func appCameToForeground() {
+//        // reset screenlock state if needed
+//        UIApplication.shared.isIdleTimerDisabled = UserDefaultsRepository.screenlockSwitchState.value;
+//
+//        // Cancel the background tasks, start a fresh timer
+//        if UserDefaultsRepository.backgroundRefresh.value {
+//            backgroundTask.stopBackgroundTask()
+//        }
+//
+//        restartAllTimers()
+//
+//    }
+//
+//    func restartAllTimers(){
+//        if !bgTimer.isValid { startBGTimer(time: 2) }
+//    }
     
     // Dex Share Web Call
     func webLoadDexShare(onlyPullLastRecord: Bool = false) {
@@ -285,12 +294,12 @@ extension CGMConnectedVC {
                 globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
                 //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
             }
-            DispatchQueue.main.async {
-                if self.bgTimer.isValid {
-                    self.bgTimer.invalidate()
-                }
-                self.startBGTimer(time: 10)
-            }
+//            DispatchQueue.main.async {
+//                if self.bgTimer.isValid {
+//                    self.bgTimer.invalidate()
+//                }
+//                self.startBGTimer(time: 10)
+//            }
             return
         }
         var request = URLRequest(url: urlBGData)
@@ -303,12 +312,12 @@ extension CGMConnectedVC {
                     globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
                     //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
                 }
-                DispatchQueue.main.async {
-                    if self.bgTimer.isValid {
-                        self.bgTimer.invalidate()
-                    }
-                    self.startBGTimer(time: 10)
-                }
+//                DispatchQueue.main.async {
+//                    if self.bgTimer.isValid {
+//                        self.bgTimer.invalidate()
+//                    }
+//                    self.startBGTimer(time: 10)
+//                }
                 return
                 
             }
@@ -317,12 +326,12 @@ extension CGMConnectedVC {
                     globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
                     //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
                 }
-                DispatchQueue.main.async {
-                    if self.bgTimer.isValid {
-                        self.bgTimer.invalidate()
-                    }
-                    self.startBGTimer(time: 10)
-                }
+//                DispatchQueue.main.async {
+//                    if self.bgTimer.isValid {
+//                        self.bgTimer.invalidate()
+//                    }
+//                    self.startBGTimer(time: 10)
+//                }
                 return
                 
             }
@@ -340,12 +349,12 @@ extension CGMConnectedVC {
                     globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
                     //self.sendNotification(title: "Nightscout Failure", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
                 }
-                DispatchQueue.main.async {
-                    if self.bgTimer.isValid {
-                        self.bgTimer.invalidate()
-                    }
-                    self.startBGTimer(time: 10)
-                }
+//                DispatchQueue.main.async {
+//                    if self.bgTimer.isValid {
+//                        self.bgTimer.invalidate()
+//                    }
+//                    self.startBGTimer(time: 10)
+//                }
                 return
                 
             }
@@ -356,10 +365,6 @@ extension CGMConnectedVC {
     // NS BG Data Front end updater
     func viewUpdateNSBG (isNS: Bool) {
         DispatchQueue.main.async {
-            if UserDefaultsRepository.debugLog.value {
-//                self.writeDebugLog(value: "Display: BG")
-//                self.writeDebugLog(value: "Num BG: " + self.bgData.count.description)
-            }
             let entries = self.bgData
             if entries.count < 1 { return }
 //            SystemInfoModel.shared.cgmData = self.bgData
@@ -368,32 +373,12 @@ extension CGMConnectedVC {
 //                    FirestoreController.createCGMDataNode(direction: cgmModel.direction ?? "", sgv: cgmModel.sgv, date: cgmModel.date)
 //                }
 //            }
-            NotificationCenter.default.post(name: Notification.Name.CgmDataReceivedSuccessfully, object: [:])
+//            NotificationCenter.default.post(name: Notification.Name.CgmDataReceivedSuccessfully, object: [:])
 //            self.updateBGGraph()
 //            self.updateStats()
             
             let latestEntryi = entries.count - 1
             let latestBG = entries[latestEntryi].sgv
-            
-//            let priorBG = entries[latestEntryi - 1].sgv
-//            let deltaBG = latestBG - priorBG as Int
-//            let lastBGTime = entries[latestEntryi].date
-            
-//            let deltaTime = (TimeInterval(Date().timeIntervalSince1970)-lastBGTime) / 60
-//            var userUnit = " mg/dL"
-//            if self.mmol {
-//                userUnit = " mmol/L"
-//            }
-            
-//            if isNS {
-//                self.serverText.text = "Nightscout"
-//            } else {
-//                self.serverText.text = "Dexcom"
-//            }
-            
-//            var snoozerBG = ""
-//            var snoozerDirection = ""
-//            let snoozerDelta = ""
             
             self.okBtn.isEnabled = true
             self.activityIndicator.stopAnimating()
@@ -430,20 +415,12 @@ extension CGMConnectedVC {
 //                self.latestDeltaString = "+" + String(deltaBG)
 //            }
            // self.updateBadge(val: latestBG)
-            
-            // Snoozer Display
-//            guard let snoozer = self.tabBarController!.viewControllers?[2] as? SnoozeViewController else { return }
-//            snoozer.BGLabel.text = snoozerBG
-//            snoozer.DirectionLabel.text = snoozerDirection
-//            snoozer.DeltaLabel.text = snoozerDelta
-            
         }
         
     }
     
     func setBGTextColor() {
         if bgData.count > 0 {
-//            guard let snoozer = self.tabBarController!.viewControllers?[2] as? SnoozeViewController else { return }
             let latestBG = bgData[bgData.count - 1].sgv
             var color: UIColor = UIColor.label
             if UserDefaultsRepository.colorBGText.value {
@@ -458,7 +435,6 @@ extension CGMConnectedVC {
             
             ValueLbl.textColor = color
             directionText.textColor = color
-//            snoozer.BGLabel.textColor = color
         }
     }
     
@@ -468,56 +444,7 @@ extension CGMConnectedVC {
     // Changes to 30 second increments after 7:00
     // Changes to 1 minute increments after 10:00
     // Changes to 5 minute increments after 20:00 stale data
-    func startBGTimer(time: TimeInterval =  60 * 5) {
-        bgTimer = Timer.scheduledTimer(timeInterval: time,
-                                               target: self,
-                                               selector: #selector(CGMConnectedVC.bgTimerDidEnd(_:)),
-                                               userInfo: nil,
-                                               repeats: false)
-    }
-    
-    @objc func bgTimerDidEnd(_ timer:Timer) {
-        
-        // reset timer to 1 minute if settings aren't entered
-        if UserDefaultsRepository.shareUserName.value == "" && UserDefaultsRepository.sharePassword.value == "" && UserDefaultsRepository.url.value == "" {
-            startBGTimer(time: 60)
-            return
-        }
-        
-        var onlyPullLastRecord = false
-        
-        // Check if the last reading is less than 10 minutes ago
-        // to only pull 1 reading if that's all we need
-        if bgData.count > 0 {
-            let now = dateTimeUtils.getNowTimeIntervalUTC()
-            let lastReadingTime = bgData.last!.date
-            let secondsAgo = now - lastReadingTime
-            if secondsAgo < 10*60 {
-                onlyPullLastRecord = true
-            }
-        }
-        
-        if UserDefaultsRepository.alwaysDownloadAllBG.value { onlyPullLastRecord = false }
-        
-        if UserDefaultsRepository.shareUserName.value != "" && UserDefaultsRepository.sharePassword.value != "" {
-            webLoadDexShare(onlyPullLastRecord: onlyPullLastRecord)
-        } else {
-            webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
-        }
-        
-    }
-    
-    func updateBadge(val: Int) {
-        DispatchQueue.main.async {
-        if UserDefaultsRepository.appBadge.value {
-            let latestBG = String(val)
-            UIApplication.shared.applicationIconBadgeNumber = Int(bgUnits.removePeriodForBadge(bgUnits.toDisplayUnits(latestBG))) ?? val
-        } else {
-            UIApplication.shared.applicationIconBadgeNumber = 0
-        }
-//        if UserDefaultsRepository.debugLog.value { self.writeDebugLog(value: "updated badge") }
-        }
-    }
+
     
     func bgDirectionGraphic(_ value:String)->String
     {

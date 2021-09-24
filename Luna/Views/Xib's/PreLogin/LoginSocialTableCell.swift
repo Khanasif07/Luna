@@ -61,6 +61,17 @@ class LoginSocialTableCell: UITableViewCell {
         
     }
     
+    func configureCellSigninScreen(){
+        self.signupLoginDescText = LocalizedString.dont_have_an_account.localized
+        self.signupLoginText = LocalizedString.signup.localized
+        self.setUpAttributedString()
+    }
+    
+    func configureCellSignupScreen(){
+        self.signupLoginDescText = LocalizedString.alreadyHaveAnAccount.localized
+        self.signupLoginText = LocalizedString.login.localized
+    }
+    
     @objc func tapLabel(_ gesture: UITapGestureRecognizer) {
         let string = "\(self.loginSocialLbl.text ?? "")"
         let termsAndCondition = signupLoginText

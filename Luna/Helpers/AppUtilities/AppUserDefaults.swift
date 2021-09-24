@@ -119,6 +119,8 @@ extension AppUserDefaults {
         case cgmValue
         case directionString
         case homeCoachMarkShown
+        case shareUserName
+        case sharePassword
     }
 }
 

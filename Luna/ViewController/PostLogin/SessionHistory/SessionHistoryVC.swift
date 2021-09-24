@@ -141,7 +141,8 @@ extension SessionHistoryVC : UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-
+// MARK: - SessionFilterVCDelegate
+//=====================================
 extension SessionHistoryVC: SessionFilterVCDelegate{
     func filterApplied(startDate: Date?, endDate: Date?) {
         self.startdate = startDate!

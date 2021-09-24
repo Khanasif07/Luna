@@ -45,6 +45,22 @@ class SignUpTopTableCell: UITableViewCell {
         self.passTxtField.setButtonToRightView(btn: show, selectedImage: #imageLiteral(resourceName: "eyeClosedIcon"), normalImage: #imageLiteral(resourceName: "eyeOpenIcon"), size: CGSize(width: 22, height: 22))
     }
     
+    public func configureCellSignInScreen(emailTxt:String,passTxt:String){
+        self.emailIdTxtField.text = emailTxt
+        self.passTxtField.text = passTxt
+        self.titleLbl.text = LocalizedString.lOGIN_TO_LUNA.localized
+        self.subTitleLbl.text = ""
+        self.signUpBtn.setTitle(LocalizedString.login.localized, for: .normal)
+        self.forgotPassBtn.isHidden = false
+    }
+    
+    public func configureCellSignupScreen(){
+        self.titleLbl.text = LocalizedString.signup.localized.uppercased()
+        self.subTitleLbl.text = ""
+        self.signUpBtn.setTitle(LocalizedString.signup.localized, for: .normal)
+        self.forgotPassBtn.isHidden = true
+    }
+
     @objc func secureTextField(_ sender: UIButton){
         sender.isSelected.toggle()
         self.passTxtField.isSecureTextEntry = !sender.isSelected

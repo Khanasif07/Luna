@@ -51,23 +51,23 @@ class ChangePasswordVC: UIViewController {
         saveBtn.round(radius: 8.0)
     }
     
-    // MARK: - IBActions
+    // MARK: - IBActions 
     //===========================
     @IBAction func saveBtnAction(_ sender: AppButton) {
         if currentPass.count < 6 {
-            CommonFunctions.showToastWithMessage("Old password must contain at least 6 char.")
+            CommonFunctions.showToastWithMessage(LocalizedString.old_password_must_contain_at_least_char.localized)
             return
         }
         if newPass.count < 6 {
-            CommonFunctions.showToastWithMessage("New password must contain at least 6 char.")
+            CommonFunctions.showToastWithMessage(LocalizedString.new_password_must_contain_at_least_char.localized)
             return
         }
         if confirmPass.count < 6 {
-            CommonFunctions.showToastWithMessage("Confirm password must contain at least 6 char.")
+            CommonFunctions.showToastWithMessage(LocalizedString.confirm_password_must_contain_at_least_char.localized)
             return
         }
         if newPass != confirmPass {
-            CommonFunctions.showToastWithMessage("New and confirm password doesn't match.")
+            CommonFunctions.showToastWithMessage(LocalizedString.new_and_confirm_password_doesnt_match.localized)
             return
         }
         CommonFunctions.showActivityLoader()

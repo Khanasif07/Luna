@@ -203,11 +203,9 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueCell(with: SignUpTopTableCell.self, indexPath: indexPath)
-            cell.titleLbl.text = LocalizedString.signup.localized.uppercased()
-            cell.subTitleLbl.text = ""
-            cell.signUpBtn.setTitle(LocalizedString.signup.localized, for: .normal)
-            cell.forgotPassBtn.isHidden = true
+            cell.configureCellSignupScreen()
             [cell.emailIdTxtField,cell.passTxtField].forEach({$0?.delegate = self})
+            //MARK: - Signup Button Action
             cell.signUpBtnTapped = { [weak self]  (sender) in
                 guard let `self` = self else { return }
                 if !self.isEmailValid(string: self.emailTxt).0{
@@ -234,12 +232,13 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
             return cell
         default:
             let cell = tableView.dequeueCell(with: LoginSocialTableCell.self, indexPath: indexPath)
-            cell.signupLoginDescText = LocalizedString.alreadyHaveAnAccount.localized
-            cell.signupLoginText = LocalizedString.login.localized
+            cell.configureCellSignupScreen()
+            //MARK: - Google Button Action
             cell.googleBtnTapped = {[weak self] in
                 guard let self = `self` else { return }
                 self.googleSetUp()
             }
+            //MARK: - Apple Button Action
             cell.appleBtnTapped = { [weak self] in
                 guard let self = `self` else { return }
                 let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -257,6 +256,7 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
                 authorizationController.presentationContextProvider = self
                 authorizationController.performRequests()
             }
+            //MARK: - Login Button Action
             cell.loginBtnTapped = { [weak self] in
                 guard let self = `self` else { return }
                 self.gotoLoginVC()

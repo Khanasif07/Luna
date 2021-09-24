@@ -82,10 +82,7 @@ class ProfileSetupVC: UIViewController {
         if #available(iOS 11.0, *) {
             topSafeArea = view.safeAreaInsets.top
             bottomSafeArea = view.safeAreaInsets.bottom
-        } else {
-            topSafeArea = topLayoutGuide.length
-            bottomSafeArea = bottomLayoutGuide.length
-        }
+        } 
     }
     
     //MARK: ACTIONS
