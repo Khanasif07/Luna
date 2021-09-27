@@ -187,7 +187,12 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     }
     
     @objc func cgmDataReceivedSuccessfully(notification : NSNotification){
-        self.cgmSetUp()
+        if let dict = notification.object as? NSDictionary {
+            if let bgData = dict[ApiKey.cgmData] as? [ShareGlucoseData]{
+                self.bgData = bgData
+            }
+        }
+//        self.restartAllTimers()
     }
 }
 

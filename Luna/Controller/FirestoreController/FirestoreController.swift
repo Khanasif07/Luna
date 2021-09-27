@@ -240,8 +240,8 @@ class FirestoreController:NSObject{
             AppUserDefaults.save(value: isBiometricEnable, forKey: .isBiometricSelected)
             AppUserDefaults.save(value: isBiometricCompleted, forKey: .isBiometricCompleted)
         }
-        UserDefaultsRepository.shareUserName.value = ""
-        UserDefaultsRepository.sharePassword.value = ""
+//        UserDefaultsRepository.shareUsUserdeerName.value = ""
+//        UserDefaultsRepository.sharePassword.value = ""
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         DispatchQueue.main.async {
             AppRouter.goToSignUpVC()

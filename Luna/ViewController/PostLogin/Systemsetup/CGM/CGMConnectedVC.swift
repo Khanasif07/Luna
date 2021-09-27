@@ -103,13 +103,6 @@ extension CGMConnectedVC {
         let shareServer = KnownShareServers.US.rawValue
         dexShare = ShareClient(username: shareUserName, password: sharePassword, shareServer: shareServer )
         
-        // Trigger foreground and background functions
-//        let notificationCenter = NotificationCenter.default
-//            notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
-//            notificationCenter.addObserver(self, selector: #selector(appCameToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-        
-        // Load Startup Data
-//        restartAllTimers()
         var onlyPullLastRecord = false
         if UserDefaultsRepository.alwaysDownloadAllBG.value { onlyPullLastRecord = false }
         if !shareUserName.isEmpty && !sharePassword.isEmpty {
@@ -206,38 +199,6 @@ extension CGMConnectedVC {
         viewUpdateNSBG(isNS: isNS)
     }
     
-//    @objc func appMovedToBackground() {
-//        // Allow screen to turn off
-//        UIApplication.shared.isIdleTimerDisabled = false;
-//
-//        // We want to always come back to the home screen
-////        tabBarController?.selectedIndex = 0
-//
-//        // Cancel the current timer and start a fresh background timer using the settings value only if background task is enabled
-//
-//        if UserDefaultsRepository.backgroundRefresh.value {
-//            backgroundTask.startBackgroundTask()
-//        }
-//
-//    }
-
-//    @objc func appCameToForeground() {
-//        // reset screenlock state if needed
-//        UIApplication.shared.isIdleTimerDisabled = UserDefaultsRepository.screenlockSwitchState.value;
-//
-//        // Cancel the background tasks, start a fresh timer
-//        if UserDefaultsRepository.backgroundRefresh.value {
-//            backgroundTask.stopBackgroundTask()
-//        }
-//
-//        restartAllTimers()
-//
-//    }
-//
-//    func restartAllTimers(){
-//        if !bgTimer.isValid { startBGTimer(time: 2) }
-//    }
-    
     // Dex Share Web Call
     func webLoadDexShare(onlyPullLastRecord: Bool = false) {
         var count = 288
@@ -261,7 +222,6 @@ extension CGMConnectedVC {
                             
                         }
                     }
-//                        self.sendNotification(title: "Dexcom Share Error", body: "Please double check user name and password, internet connection, and sharing status.")
                 }
                 
                 self.webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
@@ -294,12 +254,6 @@ extension CGMConnectedVC {
                 globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
                 //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
             }
-//            DispatchQueue.main.async {
-//                if self.bgTimer.isValid {
-//                    self.bgTimer.invalidate()
-//                }
-//                self.startBGTimer(time: 10)
-//            }
             return
         }
         var request = URLRequest(url: urlBGData)
@@ -312,12 +266,6 @@ extension CGMConnectedVC {
                     globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
                     //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
                 }
-//                DispatchQueue.main.async {
-//                    if self.bgTimer.isValid {
-//                        self.bgTimer.invalidate()
-//                    }
-//                    self.startBGTimer(time: 10)
-//                }
                 return
                 
             }
@@ -326,12 +274,6 @@ extension CGMConnectedVC {
                     globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
                     //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
                 }
-//                DispatchQueue.main.async {
-//                    if self.bgTimer.isValid {
-//                        self.bgTimer.invalidate()
-//                    }
-//                    self.startBGTimer(time: 10)
-//                }
                 return
                 
             }
@@ -349,12 +291,6 @@ extension CGMConnectedVC {
                     globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
                     //self.sendNotification(title: "Nightscout Failure", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
                 }
-//                DispatchQueue.main.async {
-//                    if self.bgTimer.isValid {
-//                        self.bgTimer.invalidate()
-//                    }
-//                    self.startBGTimer(time: 10)
-//                }
                 return
                 
             }
@@ -367,6 +303,7 @@ extension CGMConnectedVC {
         DispatchQueue.main.async {
             let entries = self.bgData
             if entries.count < 1 { return }
+            NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: [ApiKey.cgmData:entries])
 //            SystemInfoModel.shared.cgmData = self.bgData
 //            if SystemInfoModel.shared.isFromSetting {
 //                for cgmModel in entries {
@@ -437,14 +374,6 @@ extension CGMConnectedVC {
             directionText.textColor = color
         }
     }
-    
-    // BG Timer
-    // Runs to 5:10 after last reading timestamp
-    // Failed or no reading re-attempts after 10 second delay
-    // Changes to 30 second increments after 7:00
-    // Changes to 1 minute increments after 10:00
-    // Changes to 5 minute increments after 20:00 stale data
-
     
     func bgDirectionGraphic(_ value:String)->String
     {
