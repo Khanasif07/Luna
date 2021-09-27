@@ -205,7 +205,7 @@ extension  BottomSheetVC{
             }
         } else {
             if data.count > 0 {
-                self.updateBadge(val: data[data.count - 1].sgv)
+//                self.updateBadge(val: data[data.count - 1].sgv)
             }
             return
         }
@@ -242,49 +242,20 @@ extension  BottomSheetVC{
             let latestEntryi = entries.count - 1
             let latestBG = entries[latestEntryi].sgv
             let priorBG = entries[latestEntryi - 1].sgv
-            let deltaBG = latestBG - priorBG as Int
-            let lastBGTime = entries[latestEntryi].date
-            
-            let deltaTime = (TimeInterval(Date().timeIntervalSince1970)-lastBGTime) / 60
-            var userUnit = " mg/dL"
-            if self.mmol {
-                userUnit = " mmol/L"
-            }
-            if isNS {
-                //                self.serverText.text = "Nightscout"
-            } else {
-                //                self.serverText.text = "Dexcom"
-            }
-            var snoozerBG = ""
-            var snoozerDirection = ""
-            var snoozerDelta = ""
+            _ = latestBG - priorBG as Int
+            _ = entries[latestEntryi].date
             //MARK: - Important
             self.cgmValueLbl.text = bgUnits.toDisplayUnits(String(latestBG))
-            snoozerBG = bgUnits.toDisplayUnits(String(latestBG))
             self.setBGTextColor()
             
             if let directionBG = entries[latestEntryi].direction {
                 self.cgmDirectionlbl.text = self.bgDirectionGraphic(directionBG)
-                snoozerDirection = self.bgDirectionGraphic(directionBG)
                 self.latestDirectionString = self.bgDirectionGraphic(directionBG)
             }
             else
             {
                 self.cgmDirectionlbl.text = ""
-                snoozerDirection = ""
                 self.latestDirectionString = ""
-            }
-            
-            if deltaBG < 0 {
-                //                self.DeltaText.text = bgUnits.toDisplayUnits(String(deltaBG))
-                snoozerDelta = bgUnits.toDisplayUnits(String(deltaBG))
-                self.latestDeltaString = String(deltaBG)
-            }
-            else
-            {
-                //                self.DeltaText.text = "+" + bgUnits.toDisplayUnits(String(deltaBG))
-                snoozerDelta = "+" + bgUnits.toDisplayUnits(String(deltaBG))
-                self.latestDeltaString = "+" + String(deltaBG)
             }
             //            self.updateBadge(val: latestBG)
         }
@@ -627,7 +598,7 @@ extension  BottomSheetVC{
             }
             
             
-            let json = try? JSONSerialization.jsonObject(with: data) as! Dictionary<String, Any>
+            let json = try? JSONSerialization.jsonObject(with: data) as? Dictionary<String, Any>
             
             if let json = json {
                 DispatchQueue.main.async {

@@ -102,6 +102,7 @@
 		84467280268DB2C700EC55FD /* SystemStep1TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446727E268DB2C700EC55FD /* SystemStep1TableCell.swift */; };
 		84467281268DB2C700EC55FD /* SystemStep1TableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8446727F268DB2C700EC55FD /* SystemStep1TableCell.xib */; };
 		84467287268DBECC00EC55FD /* InsulinStep1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84467286268DBECC00EC55FD /* InsulinStep1VC.swift */; };
+		8448DBDF2701A9570040137F /* Pulsator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8448DBDE2701A9570040137F /* Pulsator.swift */; };
 		844B93BE2694427600B65BF8 /* InsulinStep2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B93BD2694427600B65BF8 /* InsulinStep2VC.swift */; };
 		845549112678D486000CC13D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 846F1A1F2678C2220034ACE0 /* GoogleService-Info.plist */; };
 		845549182678DCAC000CC13D /* PreLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 845549172678DCAC000CC13D /* PreLogin.storyboard */; };
@@ -316,6 +317,7 @@
 		8446727E268DB2C700EC55FD /* SystemStep1TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemStep1TableCell.swift; sourceTree = "<group>"; };
 		8446727F268DB2C700EC55FD /* SystemStep1TableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SystemStep1TableCell.xib; sourceTree = "<group>"; };
 		84467286268DBECC00EC55FD /* InsulinStep1VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep1VC.swift; sourceTree = "<group>"; };
+		8448DBDE2701A9570040137F /* Pulsator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pulsator.swift; sourceTree = "<group>"; };
 		844B93BD2694427600B65BF8 /* InsulinStep2VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep2VC.swift; sourceTree = "<group>"; };
 		845549172678DCAC000CC13D /* PreLogin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PreLogin.storyboard; sourceTree = "<group>"; };
 		8455491B2678DDBA000CC13D /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
@@ -659,6 +661,14 @@
 			path = Insulin;
 			sourceTree = "<group>";
 		};
+		8448DBDD2701A9400040137F /* Pulsator */ = {
+			isa = PBXGroup;
+			children = (
+				8448DBDE2701A9570040137F /* Pulsator.swift */,
+			);
+			path = Pulsator;
+			sourceTree = "<group>";
+		};
 		8455491A2678DD90000CC13D /* PreLogin */ = {
 			isa = PBXGroup;
 			children = (
@@ -675,8 +685,8 @@
 		845549222678DDFE000CC13D /* PostLogin */ = {
 			isa = PBXGroup;
 			children = (
-				840A7E2C2696ED96005AA1E6 /* SessionHistory */,
 				8446727A268DAF5300EC55FD /* Dashboard */,
+				840A7E2C2696ED96005AA1E6 /* SessionHistory */,
 				84467277268DAED100EC55FD /* Systemsetup */,
 				84467278268DAEE600EC55FD /* Setting */,
 			);
@@ -885,15 +895,16 @@
 		84CC12B82668CD87009316FC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				84CC12992668C822009316FC /* AppDelegate.swift */,
+				84CC129B2668C822009316FC /* SceneDelegate.swift */,
+				84CC12BA2668CDDB009316FC /* FirestoreController */,
 				84CC12C32668CECC009316FC /* AppleManager */,
 				84C0A6B226CC980A00AB6F2A /* Charts */,
 				849B7434269D70F300C059E5 /* HealthKitManager */,
 				8446726F268D865700EC55FD /* BLEManager */,
 				8432A19D2672317F00859B47 /* BiometricAuth */,
-				84CC12BA2668CDDB009316FC /* FirestoreController */,
 				845B618926AAC2B200F9BC2A /* CGM */,
-				84CC12992668C822009316FC /* AppDelegate.swift */,
-				84CC129B2668C822009316FC /* SceneDelegate.swift */,
+				8448DBDD2701A9400040137F /* Pulsator */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1287,6 +1298,7 @@
 				84CC12E92668D083009316FC /* UITableView+ UITableViewCellExtension.swift in Sources */,
 				84FDA0A3267DC5D700AC8BE9 /* ProfileSetupVC.swift in Sources */,
 				188DB14626E0993600FBF042 /* MaskView.swift in Sources */,
+				8448DBDF2701A9570040137F /* Pulsator.swift in Sources */,
 				84FDA0A7267DCB1000AC8BE9 /* MessageSenderCell.swift in Sources */,
 				84CC12BC2668CDF4009316FC /* FirestoreController.swift in Sources */,
 				84CC12F22668D0E6009316FC /* UITextFieldExtension.swift in Sources */,

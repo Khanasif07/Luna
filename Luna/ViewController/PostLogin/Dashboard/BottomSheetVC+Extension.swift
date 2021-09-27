@@ -68,20 +68,6 @@ extension BottomSheetVC {
         return String(format: "%02d:%02d", hours, minutes)
     }
     
-    func updateBadge(val: Int) {
-        DispatchQueue.main.async {
-        if UserDefaultsRepository.appBadge.value {
-            let latestBG = String(val)
-            UIApplication.shared.applicationIconBadgeNumber = Int(bgUnits.removePeriodForBadge(bgUnits.toDisplayUnits(latestBG))) ?? val
-        } else {
-            UIApplication.shared.applicationIconBadgeNumber = 0
-        }
-//        if UserDefaultsRepository.debugLog.value { self.writeDebugLog(value: "updated badge") }
-        }
-    }
-    
-    
-
     func setBGTextColor() {
         if bgData.count > 0 {
             let latestBG = bgData[bgData.count - 1].sgv

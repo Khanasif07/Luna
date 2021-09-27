@@ -22,7 +22,6 @@ target 'Luna' do
   pod 'Firebase/Storage'
   pod 'GoogleSignIn', '~> 5.0.2'
   pod 'SwiftKeychainWrapper'
- # pod "SwiftChart"
   pod 'Charts'
   pod 'KDCircularProgress'
   pod "Pulsator"

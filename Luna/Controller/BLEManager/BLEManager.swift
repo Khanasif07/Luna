@@ -33,19 +33,6 @@ let WriteAcknowledgement = CBUUID(string: "5927a433-a277-40b7-b2d4-0242ac130003"
     @objc optional func didNotDiscoverPeripheral()
 }
 
-//extension BleProtocol{
-//    @objc optional func didDiscover(name:String, rssi:NSNumber){}
-//    @objc optional func didConnect(name:String){}
-//    @objc optional func didDisconnect(){}
-//    @objc optional func didBleReady(){}
-//    @objc optional func didBleOff(){}
-//    @objc optional func didUpdateValue(){}
-//    @objc optional func didReadRSSI(rssi:NSNumber){}
-//    @objc optional func log(message:String){}
-//    @objc optional func didNotDiscoverPeripheral(){}
-//}
-
-
 public class BleManager: NSObject{
     public static let sharedInstance = BleManager()
     
@@ -212,17 +199,17 @@ extension BleManager: CBPeripheralDelegate {
         case batteryCharacteristicCBUUID:
             print("handled Characteristic Value for Battery Level: \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-            self.batteryData = data.isEmpty ? "50" : data
+            self.batteryData = data
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: nil)
         case ReservoirLevelCharacteristicCBUUID:
             print("handled Characteristic Value for Reservoir Level: \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-            self.reservoirLevelData = data.isEmpty ? "7" : data
+            self.reservoirLevelData = data
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: nil)
         case statusCBUUID:
             print("handled Characteristic Value for status : \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-            self.systemStatusData = data.isEmpty ? "0" : data
+            self.systemStatusData = data
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: nil)
         case firmwareRevisionString:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""

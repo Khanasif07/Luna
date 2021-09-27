@@ -28,8 +28,8 @@ enum DeviceStatus {
         }
     }
     
-    static func getBatteryImage(value: String)-> (String,UIImage?){
-        let intValue = Int(value) ?? -1
+    static func getBatteryImage(batteryInfo: String)-> (String,UIImage?){
+        let intValue = Int(batteryInfo) ?? -1
         switch intValue {
         case 0...20:
             return ("Low",#imageLiteral(resourceName: "batteryEmpty"))
@@ -47,8 +47,8 @@ enum DeviceStatus {
       
     }
     
-   static func getReservoirImage(value: String)-> (String,UIImage?){
-        let intValue = Int(value) ?? -1
+   static func getReservoirImage(reservoirInfo: String)-> (String,UIImage?){
+        let intValue = Int(reservoirInfo) ?? -1
         switch intValue {
         case 0:
             return ("Fill",#imageLiteral(resourceName: "reservoir0Bars"))
@@ -69,16 +69,20 @@ enum DeviceStatus {
         case 8:
             return ("Medium",#imageLiteral(resourceName: "reservoir8Bars"))
         case 9:
-            return ("",#imageLiteral(resourceName: "reservoir9Bars"))
+            return ("Medium",#imageLiteral(resourceName: "reservoir9Bars"))
         case 10:
+            return ("Full",#imageLiteral(resourceName: "reservoir10Bars"))
+        case 11:
+            return ("Full",#imageLiteral(resourceName: "reservoir10Bars"))
+        case 12:
             return ("Full",#imageLiteral(resourceName: "reservoir10Bars"))
         default:
             return ("",#imageLiteral(resourceName: "reservoir0Bars"))
         }
     }
     
-    static func getSystemImage(value: String)-> (String,UIImage?,UIColor){
-        let intValue = Int(value)
+    static func getSystemImage(systemInfo: String)-> (String,UIImage?,UIColor){
+        let intValue = Int(systemInfo)
         switch intValue {
         case 0:
             return ("Automating",#imageLiteral(resourceName: "automating"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))

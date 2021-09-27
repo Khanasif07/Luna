@@ -935,5 +935,16 @@ class FirestoreController:NSObject{
         alertViewController.addAction(okAction)
         AppDelegate.shared.window?.rootViewController?.present(alertViewController, animated: true, completion: nil)
     }
+    
+   static func updateBadge(val: Int) {
+        DispatchQueue.main.async {
+        if UserDefaultsRepository.appBadge.value {
+            let latestBG = String(val)
+            UIApplication.shared.applicationIconBadgeNumber = Int(bgUnits.removePeriodForBadge(bgUnits.toDisplayUnits(latestBG))) ?? val
+        } else {
+            UIApplication.shared.applicationIconBadgeNumber = 0
+        }
+        }
+    }
 }
 

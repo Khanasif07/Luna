@@ -243,8 +243,8 @@ extension HomeVC {
         let reservoirData = BleManager.sharedInstance.reservoirLevelData
         let data = BleManager.sharedInstance.systemStatusData
         //MARK:- Battery Data Set Up
-        self.batteryImgView.image = DeviceStatus.getBatteryImage(value:batteryData).1
-        if DeviceStatus.getBatteryImage(value:batteryData).0.isEmpty{
+        self.batteryImgView.image = DeviceStatus.getBatteryImage(batteryInfo:batteryData).1
+        if DeviceStatus.getBatteryImage(batteryInfo:batteryData).0.isEmpty{
             self.batteryStatusLbl.alpha = 0
             self.batteryImgView.alpha = 0
             self.batteryEmptyLbl.isHidden = false
@@ -252,12 +252,12 @@ extension HomeVC {
             self.batteryEmptyLbl.isHidden = true
             self.batteryStatusLbl.alpha = 0
             self.batteryImgView.alpha = 100
-            self.batteryStatusLbl.text = DeviceStatus.getBatteryImage(value:batteryData).0
+            self.batteryStatusLbl.text = DeviceStatus.getBatteryImage(batteryInfo:batteryData).0
         }
         self.batteryTitleLbl.text = DeviceStatus.Battery.titleString
         //MARK:- Reservoir Data Set Up
-        self.reservoirImgView.image = DeviceStatus.getReservoirImage(value:reservoirData).1
-        if DeviceStatus.getReservoirImage(value:reservoirData).0.isEmpty{
+        self.reservoirImgView.image = DeviceStatus.getReservoirImage(reservoirInfo:reservoirData).1
+        if DeviceStatus.getReservoirImage(reservoirInfo:reservoirData).0.isEmpty{
             self.reservoirStatusLbl.alpha = 0
             self.reservoirImgView.alpha = 0
             self.reservoirEmptyLbl.isHidden = false
@@ -265,17 +265,17 @@ extension HomeVC {
             self.reservoirImgView.alpha = 100
             self.reservoirEmptyLbl.isHidden = true
             self.reservoirStatusLbl.alpha = 0
-            self.reservoirStatusLbl.text = DeviceStatus.getReservoirImage(value:reservoirData).0
+            self.reservoirStatusLbl.text = DeviceStatus.getReservoirImage(reservoirInfo:reservoirData).0
         }
         self.reservoirTitleLbl.text = DeviceStatus.ReservoirLevel.titleString
         //MARK:- System Status Data Set Up
-        self.systemImgView.image = DeviceStatus.getSystemImage(value:data).1
-        if DeviceStatus.getSystemImage(value:data).0.isEmpty{
+        self.systemImgView.image = DeviceStatus.getSystemImage(systemInfo:data).1
+        if DeviceStatus.getSystemImage(systemInfo:data).0.isEmpty{
             self.systemStatusLbl.alpha = 0
         }else {
             self.systemStatusLbl.alpha = 100
-            self.systemStatusLbl.text = DeviceStatus.getSystemImage(value:data).0
-            self.systemStatusLbl.textColor = DeviceStatus.getSystemImage(value:data).2
+            self.systemStatusLbl.text = DeviceStatus.getSystemImage(systemInfo:data).0
+            self.systemStatusLbl.textColor = DeviceStatus.getSystemImage(systemInfo:data).2
         }
         self.systemTitleLbl.text = DeviceStatus.System.titleString
     }
