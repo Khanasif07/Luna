@@ -101,6 +101,7 @@ extension HomeVC {
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
+        self.setUpFont()
         self.setupHealthkit()
         self.addObserver()
         BleManager.sharedInstance.delegate = self
@@ -114,6 +115,18 @@ extension HomeVC {
         self.getUserSystemFromFirestore()
         self.getInsulinFromFirestore()
         self.addUserSessionListener()
+    }
+    
+    private func setUpFont(){
+        [systemTitleLbl,reservoirTitleLbl,batteryTitleLbl].forEach { (lbl) in
+            lbl?.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
+        }
+        [systemStatusLbl,reservoirStatusLbl,batteryStatusLbl].forEach { (lbl) in
+            lbl?.font = AppFonts.SF_Pro_Display_Semibold.withSize(.x15)
+        }
+        [batteryEmptyLbl,reservoirEmptyLbl].forEach { (lbl) in
+            lbl?.font = AppFonts.SF_Pro_Display_Bold.withSize(.x34)
+        }
     }
     
     private func setupHealthkit(){

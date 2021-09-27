@@ -41,6 +41,7 @@ enum FontSize: CGFloat {
     case x30 = 30.0
     case x31 = 31.0
     case x32 = 32.0
+    case x34 = 34.0
     case x44 = 44.0
     
 }
