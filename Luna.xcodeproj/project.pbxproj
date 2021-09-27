@@ -61,7 +61,6 @@
 		8403F3C026F9D2F8004BFE8E /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3BF26F9D2F8004BFE8E /* Chart.swift */; };
 		8403F3C326F9D792004BFE8E /* DataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3C226F9D792004BFE8E /* DataStructs.swift */; };
 		8403F3C626F9DABC004BFE8E /* NightScout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3C526F9DABB004BFE8E /* NightScout.swift */; };
-		8403F3C926F9E185004BFE8E /* CarbBolusArrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3C826F9E185004BFE8E /* CarbBolusArrays.swift */; };
 		840A7DF12696E95E005AA1E6 /* CGMSelectorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7DED2696E95E005AA1E6 /* CGMSelectorVC.swift */; };
 		840A7DF22696E95E005AA1E6 /* CGMDATASHAREVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7DEE2696E95E005AA1E6 /* CGMDATASHAREVC.swift */; };
 		840A7DF32696E95E005AA1E6 /* CGMConnectedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7DEF2696E95E005AA1E6 /* CGMConnectedVC.swift */; };
@@ -104,6 +103,7 @@
 		84467287268DBECC00EC55FD /* InsulinStep1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84467286268DBECC00EC55FD /* InsulinStep1VC.swift */; };
 		8448DBDF2701A9570040137F /* Pulsator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8448DBDE2701A9570040137F /* Pulsator.swift */; };
 		844B93BE2694427600B65BF8 /* InsulinStep2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B93BD2694427600B65BF8 /* InsulinStep2VC.swift */; };
+		844BD1CB2701BBAE00ED224E /* Extension+LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BD1CA2701BBAE00ED224E /* Extension+LoginViewController.swift */; };
 		845549112678D486000CC13D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 846F1A1F2678C2220034ACE0 /* GoogleService-Info.plist */; };
 		845549182678DCAC000CC13D /* PreLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 845549172678DCAC000CC13D /* PreLogin.storyboard */; };
 		8455491C2678DDBA000CC13D /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455491B2678DDBA000CC13D /* SignupViewController.swift */; };
@@ -276,7 +276,6 @@
 		8403F3BF26F9D2F8004BFE8E /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
 		8403F3C226F9D792004BFE8E /* DataStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructs.swift; sourceTree = "<group>"; };
 		8403F3C526F9DABB004BFE8E /* NightScout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightScout.swift; sourceTree = "<group>"; };
-		8403F3C826F9E185004BFE8E /* CarbBolusArrays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarbBolusArrays.swift; sourceTree = "<group>"; };
 		840A7DED2696E95E005AA1E6 /* CGMSelectorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMSelectorVC.swift; sourceTree = "<group>"; };
 		840A7DEE2696E95E005AA1E6 /* CGMDATASHAREVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMDATASHAREVC.swift; sourceTree = "<group>"; };
 		840A7DEF2696E95E005AA1E6 /* CGMConnectedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMConnectedVC.swift; sourceTree = "<group>"; };
@@ -319,6 +318,7 @@
 		84467286268DBECC00EC55FD /* InsulinStep1VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep1VC.swift; sourceTree = "<group>"; };
 		8448DBDE2701A9570040137F /* Pulsator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pulsator.swift; sourceTree = "<group>"; };
 		844B93BD2694427600B65BF8 /* InsulinStep2VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep2VC.swift; sourceTree = "<group>"; };
+		844BD1CA2701BBAE00ED224E /* Extension+LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+LoginViewController.swift"; sourceTree = "<group>"; };
 		845549172678DCAC000CC13D /* PreLogin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PreLogin.storyboard; sourceTree = "<group>"; };
 		8455491B2678DDBA000CC13D /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		8455491F2678DDE6000CC13D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -644,7 +644,6 @@
 				8403F3BF26F9D2F8004BFE8E /* Chart.swift */,
 				8403F3C226F9D792004BFE8E /* DataStructs.swift */,
 				8403F3C526F9DABB004BFE8E /* NightScout.swift */,
-				8403F3C826F9E185004BFE8E /* CarbBolusArrays.swift */,
 				84AA878C26FAD1120047D86E /* Alarms.swift */,
 			);
 			path = Dashboard;
@@ -678,6 +677,7 @@
 				84D1F5042679E95A00F131E0 /* ForgotPasswordVC.swift */,
 				84F819A7267A12A500A4C758 /* PassResetPopUpVC.swift */,
 				84FDA0A2267DC5D700AC8BE9 /* ProfileSetupVC.swift */,
+				844BD1CA2701BBAE00ED224E /* Extension+LoginViewController.swift */,
 			);
 			path = PreLogin;
 			sourceTree = "<group>";
@@ -1291,6 +1291,7 @@
 				84B34FFD26CC9C7B00ECF8F0 /* Perform+Color.swift in Sources */,
 				188DB13526E0993600FBF042 /* FlowManager.swift in Sources */,
 				8418D7DF26B0230100BAB256 /* AnyConvertible.swift in Sources */,
+				844BD1CB2701BBAE00ED224E /* Extension+LoginViewController.swift in Sources */,
 				84E2D9B826B12C17000C0FD8 /* SettingManualVC.swift in Sources */,
 				840A7ED72697060E005AA1E6 /* SessionFilterVC.swift in Sources */,
 				8403F3BD26F9D016004BFE8E /* Graphs.swift in Sources */,
@@ -1330,7 +1331,6 @@
 				84E2D9BC26B12D26000C0FD8 /* SettingManualCell.swift in Sources */,
 				847899762684870F00D1DF36 /* AboutSectionVC.swift in Sources */,
 				84CC12FB2668D15D009316FC /* UIViewcontroller+Extension.swift in Sources */,
-				8403F3C926F9E185004BFE8E /* CarbBolusArrays.swift in Sources */,
 				849B7436269D710600C059E5 /* HealthKitManager.swift in Sources */,
 				84CC12CD2668CFBF009316FC /* AppRouter.swift in Sources */,
 				8418D7D726B01F4E00BAB256 /* UserDefaults.swift in Sources */,

@@ -44,9 +44,6 @@ class SignupViewController: UIViewController {
         setNeedsStatusBarAppearanceUpdate()
         self.tabBarController?.tabBar.isHidden = true
     }
-    
-    // MARK: - IBActions
-    //===========================
 }
 
 // MARK: - Extension For Functions
@@ -585,15 +582,15 @@ extension SignupViewController: GIDSignInDelegate {
 
 //MARK:- HealthKit
 //=================
-extension SignupViewController{
-    func getStepCount(){
-        HealthKitManager.sharedInstance.yesterdaySteps { (value, error) in
-            if let err = error{
-                print(err.localizedDescription)
-            }
-            print(value)
-        }
-    }
+//extension SignupViewController{
+//    func getStepCount(){
+//        HealthKitManager.sharedInstance.yesterdaySteps { (value, error) in
+//            if let err = error{
+//                print(err.localizedDescription)
+//            }
+//            print(value)
+//        }
+//    }
     
 //    func getAgeSexAndBloodType(){
 //        do {
@@ -603,4 +600,4 @@ extension SignupViewController{
 //            print(error.localizedDescription)
 //        }
 //    }
-}
+//}

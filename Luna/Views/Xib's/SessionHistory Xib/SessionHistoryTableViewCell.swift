@@ -9,9 +9,13 @@ import UIKit
 
 class SessionHistoryTableViewCell: UITableViewCell {
 
+    // MARK: -IBOutlets
+    //===========================
     @IBOutlet weak var unitLbl: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
     
+    // MARK: -Life cycle
+    //===========================
     override func awakeFromNib() {
         super.awakeFromNib()
     }

@@ -9,8 +9,6 @@ import UIKit
 
 class SettingTableCell: UITableViewCell {
     
-    var switchTapped: ((UISwitch)->())?
-    
     // MARK: - IBOutlets
     //===========================
     @IBOutlet weak var subTitlelbl: UILabel!
@@ -18,6 +16,11 @@ class SettingTableCell: UITableViewCell {
     @IBOutlet weak var switchView: UISwitch!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var logoImgView: UIImageView!
+    
+    //MARK:-Variables
+    //==========================================
+    var switchTapped: ((UISwitch)->())?
+    
     
     // MARK: - Lifecycle
     //===========================

@@ -134,6 +134,10 @@ enum LocalizedString : String {
     case insulin_info
     case luna_Device_Paired
     case start
+    case start_date
+    case end_date
+    case select
+    case done
     case edit
     case about_5_minutes_to_complete
     case step

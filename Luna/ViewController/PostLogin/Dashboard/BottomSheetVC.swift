@@ -28,12 +28,8 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     //MARK:- VARIABLE
     //================
     // Variables for BG Charts
-    var appStateController: AppStateController?
     public var numPoints: Int = 13
-    public var linePlotData: [Double] = []
-    public var linePlotDataTime: [Double] = []
     var firstGraphLoad: Bool = true
-    var firstBasalGraphLoad: Bool = true
     var minAgoBG: Double = 0.0
     var currentOverride = 1.0
     // Vars for NS Pull
@@ -111,7 +107,6 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        willAppearSetup()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -152,10 +147,6 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
         }
         // Load Startup Data
         restartAllTimers()
-    }
-    
-    private func willAppearSetup(){
-
     }
     
     @objc func panGesture(_ recognizer: UIPanGestureRecognizer) {

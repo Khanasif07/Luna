@@ -11,8 +11,12 @@ import UIKit
 
 class SessionHistoryHeader: UITableViewHeaderFooterView {
     
+    // MARK: -IBOutlets
+    //===========================
     @IBOutlet weak var haedingLbl: UILabel!
     
+    // MARK: -Variables
+    //===========================
     var month: Int = 0  {
         didSet{
             switch month {

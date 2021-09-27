@@ -9,11 +9,16 @@ import UIKit
 
 class TypeTableCell: UITableViewCell {
     
+    //MARK:-IBOutlets
+    //==========================================
+    @IBOutlet weak var type2Btn: UIButton!
+    @IBOutlet weak var type1Btn: UIButton!
+    
+    //MARK:-Variables
+    //==========================================
     var type1BtnTapped: TapAction = nil
     var type2BtnTapped: TapAction = nil
     
-    @IBOutlet weak var type2Btn: UIButton!
-    @IBOutlet weak var type1Btn: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,7 +47,8 @@ class TypeTableCell: UITableViewCell {
         }
     }
     
-    
+    //MARK:-IBActions
+    //==========================================
     @IBAction func type2BtnAction(_ sender: UIButton) {
         if let handle = type2BtnTapped{
             handle()
@@ -54,5 +60,4 @@ class TypeTableCell: UITableViewCell {
             handle()
         }
     }
-    
 }

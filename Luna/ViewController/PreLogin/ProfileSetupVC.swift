@@ -102,7 +102,9 @@ class ProfileSetupVC: UIViewController {
                     FirestoreController.performCleanUp(for_logout: true)
                 }
             }
-        } cancelcompletion: {}
+        } cancelcompletion: {
+            //MARK:- Handle Failure condition
+        }
     }
     
     @IBAction func sendBtnTapped(_ sender: AppButton) {

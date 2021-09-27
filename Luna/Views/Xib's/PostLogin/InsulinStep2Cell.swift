@@ -18,9 +18,6 @@ class InsulinStep2Cell: UITableViewCell {
     @IBOutlet weak var radioBtn: UIButton!
     @IBOutlet weak var dataContainerView: UIView!
     
-    // MARK: - Variables
-    //===========================
-    
     // MARK: - Lifecycle
     //===========================
     override func awakeFromNib() {
@@ -35,9 +32,4 @@ class InsulinStep2Cell: UITableViewCell {
         dataContainerView.setBorder(width: 1.0, color: #colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1))
         dataContainerView.round(radius: 10.0)
     }
-    
-    // MARK: - IBActions
-    //===========================
-    
-    
 }

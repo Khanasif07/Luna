@@ -24,7 +24,4 @@ target 'Luna' do
   pod 'SwiftKeychainWrapper'
   pod 'Charts'
   pod 'KDCircularProgress'
-  pod "Pulsator"
-
- 
 end

@@ -8,6 +8,8 @@
 import UIKit
 class MessageSenderCell: UITableViewCell {
     
+    //MARK:-IBOutlets
+    //==========================================
     @IBOutlet weak var senderMsgLbl: UILabel!
     @IBOutlet weak var dataContainerView: UIView!
     
@@ -21,12 +23,3 @@ class MessageSenderCell: UITableViewCell {
     }
 }
 
-
-//MARK: PRIVATE FUNCTIONS
-//=======================
-extension MessageSenderCell {
-    
-    private func initialSetup() {
-       
-    }
-}

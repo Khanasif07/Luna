@@ -11,7 +11,7 @@ import Foundation
 class LoginSocialTableCell: UITableViewCell {
 
     //MARK:-IBOutlets
-
+    //==========================================
     @IBOutlet weak var appleBtnView: UIView!
     @IBOutlet weak var googleBtnView: UIView!
     @IBOutlet weak var appleBtn: UIButton!
@@ -20,6 +20,7 @@ class LoginSocialTableCell: UITableViewCell {
     @IBOutlet weak var socialBtnStackView: UIStackView!
 
     //MARK:-Variables
+    //==========================================
     var signupLoginDescText = LocalizedString.alreadyHaveAnAccount.localized
     var signupLoginText = LocalizedString.login.localized
     var appleBtnTapped: TapAction = nil
@@ -89,6 +90,8 @@ class LoginSocialTableCell: UITableViewCell {
         appleBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 7.5, bottom: 0, right: 0)
     }
     
+    //MARK:-IBActions
+    //==========================================
     @IBAction func googleBtnAction(_ sender: UIButton) {
         googleBtnTapped?()
     }

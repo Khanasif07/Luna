@@ -534,7 +534,6 @@ PODS:
     - NVActivityIndicatorView/Base (= 5.1.1)
   - NVActivityIndicatorView/Base (5.1.1)
   - PromisesObjC (2.0.0)
-  - Pulsator (0.6.0)
   - SwiftKeychainWrapper (4.0.1)
   - SwiftyJSON (5.0.1)
   - Toaster (2.3.0)
@@ -554,7 +553,6 @@ DEPENDENCIES:
   - KDCircularProgress
   - MessageKit
   - NVActivityIndicatorView
-  - Pulsator
   - SwiftKeychainWrapper
   - SwiftyJSON
   - Toaster
@@ -592,7 +590,6 @@ SPEC REPOS:
     - nanopb
     - NVActivityIndicatorView
     - PromisesObjC
-    - Pulsator
     - SwiftKeychainWrapper
     - SwiftyJSON
     - Toaster
@@ -629,11 +626,10 @@ SPEC CHECKSUMS:
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
-  Pulsator: eb5a9f9be4bdcbd19903984c65deca6aabe50a17
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: dc6e6011becb6687da9716634ec6cbea36429e93
+PODFILE CHECKSUM: 943e30884683a3eb48f7dd7b9f2eefe9b5d75107
 
 COCOAPODS: 1.10.1

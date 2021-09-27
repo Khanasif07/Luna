@@ -4,7 +4,6 @@
 //
 //  Created by Admin on 07/07/21.
 //
-import Pulsator
 import UIKit
 
 class SearchingDeviceVC: UIViewController {
@@ -16,10 +15,14 @@ class SearchingDeviceVC: UIViewController {
     @IBOutlet weak var IntroLbl: UILabel!
     @IBOutlet weak var outerView: UIView!
     
+    // MARK: - Variables
+    //===========================
     let pulsator = Pulsator()
     var deviceConnectedNavigation: BtnTapAction = nil
     var deviceNotConnectedNavigation: BtnTapAction = nil
     
+    // MARK: - Life Cycle
+    //===========================
     override func viewDidLoad() {
         super.viewDidLoad()
         if #available(iOS 13.0, *) {

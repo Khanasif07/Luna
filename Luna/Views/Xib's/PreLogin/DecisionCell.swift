@@ -9,16 +9,18 @@ import UIKit
 
 class DecisionCell: UITableViewCell {
     
-    var yesBtnTapped: TapAction = nil
-    var noBtnTapped: TapAction = nil
-    
+    //MARK:-IBOutlets
+    //==========================================
     @IBOutlet weak var noBtn: UIButton!
     @IBOutlet weak var yesBtn: UIButton!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
+    //MARK:-IBOutlets
+    //==========================================
+    var yesBtnTapped: TapAction = nil
+    var noBtnTapped: TapAction = nil
     
+    //MARK:-IBActions
+    //==========================================
     @IBAction func noBtnAction(_ sender: UIButton) {
         if let handle = noBtnTapped{
             handle()
@@ -30,5 +32,4 @@ class DecisionCell: UITableViewCell {
             handle()
         }
     }
-    
 }

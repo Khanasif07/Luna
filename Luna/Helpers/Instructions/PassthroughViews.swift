@@ -36,7 +36,7 @@ class InstructionsWindow: UIWindow {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let hitView = super.hitTest(point, with: event)
 
-        if hitView == self {
+        if hitView === self {
             return nil
         }
 
@@ -48,7 +48,7 @@ class PassthroughView: UIView {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let hitView = super.hitTest(point, with: event)
 
-        if hitView == self {
+        if hitView === self {
             return nil
         }
 
@@ -64,7 +64,7 @@ class InstructionsRootView: UIView {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let hitView = super.hitTest(point, with: event)
 
-        if hitView == self && passthrough {
+        if hitView === self && passthrough {
             return nil
         }
 

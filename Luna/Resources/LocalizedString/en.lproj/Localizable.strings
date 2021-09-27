@@ -36,7 +36,11 @@
 "step" = "STEP";
 "per_day" = "per day";
 "start" = "Start";
+"start_date" = "Start Date";
+"end_date" = "End Date";
 "edit" = "Edit";
+"done" = "Done";
+"select" = "Select";
 
 "change_Long_Acting_Insulin" = "Change Long Acting Insulin";
 "change_CGM" = "Change CGM";

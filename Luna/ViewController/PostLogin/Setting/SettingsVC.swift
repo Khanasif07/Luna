@@ -217,7 +217,7 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
             let vc = SystemSetupVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)
         case .delete_Account:
-            showAlertWithAction(title: LocalizedString.delete_Account.localized, msg: LocalizedString.are_you_sure_want_to_delete_account.localized, cancelTitle: LocalizedString.no.localized, actionTitle: LocalizedString.yes.localized) {
+            self.showAlertWithAction(title: LocalizedString.delete_Account.localized, msg: LocalizedString.are_you_sure_want_to_delete_account.localized, cancelTitle: LocalizedString.no.localized, actionTitle: LocalizedString.yes.localized) {
                 CommonFunctions.showActivityLoader()
                 switch loginType{
                 case .apple:
@@ -294,11 +294,15 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
                         }
                     })
                 }
-            } cancelcompletion: {}
+            } cancelcompletion: {
+                //MARK:- Handle Failure condition
+            }
         case .logout:
             showAlertWithAction(title: LocalizedString.logout.localized, msg: LocalizedString.are_you_sure_want_to_logout.localized, cancelTitle: LocalizedString.no.localized, actionTitle: LocalizedString.yes.localized) {
                 FirestoreController.performCleanUp(for_logout: true)
-            } cancelcompletion: {}
+            } cancelcompletion: {
+                //MARK:- Handle Failure condition
+            }
         case .about:
             let vc = AboutSectionVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)

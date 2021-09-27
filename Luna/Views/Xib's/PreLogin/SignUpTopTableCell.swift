@@ -7,16 +7,20 @@
 
 import UIKit
 class SignUpTopTableCell: UITableViewCell {
-    
-    var signUpBtnTapped: BtnTapAction = nil
-    var forgotPassBtnTapped: BtnTapAction = nil
-    
+        
+    //MARK:-IBOutlets
+    //==========================================
     @IBOutlet weak var forgotPassBtn: UIButton!
     @IBOutlet weak var subTitleLbl: UILabel!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var signUpBtn: AppButton!
     @IBOutlet weak var passTxtField: AppTextField!
     @IBOutlet weak var emailIdTxtField:AppTextField!
+    
+    //MARK:-Variables
+    //==========================================
+    var signUpBtnTapped: BtnTapAction = nil
+    var forgotPassBtnTapped: BtnTapAction = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -66,7 +70,8 @@ class SignUpTopTableCell: UITableViewCell {
         self.passTxtField.isSecureTextEntry = !sender.isSelected
     }
     
-    
+    //MARK:-IBActions
+    //==========================================
     @IBAction func forgotPassBtnAction(_ sender: UIButton) {
         if let handle = forgotPassBtnTapped{
             handle(sender)

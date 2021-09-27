@@ -18,7 +18,6 @@ extension BottomSheetVC :  ChartViewDelegate {
         if entry.data as? String == "hide"{
             chartView.highlightValue(nil, callDelegate: false)
         }
-        
     }
     
     func chartScaled(_ chartView: ChartViewBase, scaleX: CGFloat, scaleY: CGFloat) {

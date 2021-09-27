@@ -9,10 +9,14 @@ import UIKit
 
 class BottomSheetInsulinCell: UITableViewCell {
     
+    // MARK: - IBOutlets
+    //===========================
     @IBOutlet weak var insulinCountLbl: UILabel!
     @IBOutlet weak var activeInsulinLbl: UILabel!
     @IBOutlet weak var dataContainerView: UIView!
     
+    // MARK: - Life cycle
+    //===========================
     override func awakeFromNib() {
         super.awakeFromNib()
     }

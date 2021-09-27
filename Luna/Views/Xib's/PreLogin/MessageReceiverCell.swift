@@ -8,19 +8,15 @@
 import UIKit
 class MessageReceiverCell: UITableViewCell {
     
-    //    MARK: VARIABLES
-    //    ===============
-    
-    //    MARK: OUTLETS
-    //    =============
+    //MARK:-IBOutlets
+    //==========================================
     @IBOutlet weak var msgContainerView: UIView!
     @IBOutlet weak var msgLabel: UILabel!
     
-    //    MARK: CELL LIFE CYCLE
-    //    =====================
+    //MARK:-Life cycle
+    //==========================================
     override func awakeFromNib() {
         super.awakeFromNib()
-        initialSetup()
     }
     
     override func prepareForReuse() {
@@ -30,15 +26,6 @@ class MessageReceiverCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         msgContainerView.roundCorners([.topLeft, .topRight, .bottomRight], radius: 15)
-    }
-    
-}
-
-//MARK: PRIVATE FUNCTIONS
-//=======================
-extension MessageReceiverCell {
-    
-    private func initialSetup() {
     }
     
 }
