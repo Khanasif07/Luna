@@ -11,15 +11,15 @@ import UIKit
 
 enum AppFonts : String {
     
-    case SF_Pro_Display_Thin         = "SF-Pro-Display-Thin"
+    case SF_Pro_Display_Thin         = "SFProDisplay-Thin"
     case SF_Pro_Display_SemiboldItalic      = "SF-Pro-Display-SemiboldItalic"
     case SF_Pro_Display_RegularItalic               = "SF-Pro-Display-RegularItalic"
-    case SF_Pro_Display_Light                    = "SF-Pro-Display-Light"
-    case SF_Pro_Display_Regular  = "SF-Pro-Display-Regular"
-    case SF_Pro_Display_Bold                   = "SF-Pro-Display-Bold"
-    case SF_Pro_Display_Medium  = "SF-Pro-Display-Medium"
-    case SF_Pro_Display_Semibold                = "SF-Pro-Display-Semibold"
-    case SF_Pro_Display_Black                     = "SF-Pro-Display-Black"
+    case SF_Pro_Display_Light                    = "SFProDisplay-Light"
+    case SF_Pro_Display_Regular  = "SFProDisplay-Regular"
+    case SF_Pro_Display_Bold                   = "SFProDisplay-Bold"
+    case SF_Pro_Display_Medium  = "SFProDisplay-Medium"
+    case SF_Pro_Display_Semibold                = "SFProDisplay-Semibold"
+    case SF_Pro_Display_Black                     = "SFProDisplay-Black"
 }
 
 //Custom font size

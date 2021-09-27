@@ -6,6 +6,7 @@
 //
 import SwiftyJSON
 import Foundation
+
 struct SystemInfoModel{
     
     static var shared = SystemInfoModel()

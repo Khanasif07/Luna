@@ -46,9 +46,9 @@ class SystemSetupStep1VC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        manualView.round()
-        infoView.round()
-        doneBtn.round(radius: 4.0)
+        self.manualView.round()
+        self.infoView.round()
+        self.doneBtn.round(radius: 4.0)
     }
     
     // MARK: - IBActions
@@ -78,9 +78,7 @@ class SystemSetupStep1VC: UIViewController {
         //MARK:- Need to manage all three casE
         CommonFunctions.showActivityLoader()
         FirestoreController.setSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
-            print("Successfully")
             FirestoreController.updateUserSystemSetupStatus(isSystemSetupCompleted: true) {
-                print("Successfully")
                 CommonFunctions.hideActivityLoader()
                 AppUserDefaults.save(value: true, forKey: .isSystemSetupCompleted)
                 AppRouter.gotoHomeVC()
@@ -200,6 +198,7 @@ extension SystemSetupStep1VC {
             cell.cgmInsulinDataView.isHidden = true
             cell.titleLbl.text =  sections[indexPath.row].1 ? LocalizedString.luna_Device_Paired.localized : LocalizedString.pair_luna.localized
             cell.startBtn.setTitle(sections[indexPath.row].1 ? LocalizedString.edit.localized : LocalizedString.start.localized, for: .normal)
+            cell.startBtn.tag = sections[indexPath.row].1 ? 2 : 1
             if sections[indexPath.row].1 {
                 cell.startBtn.isEditable = true
             }
@@ -215,6 +214,7 @@ extension SystemSetupStep1VC {
             cell.directionText.isHidden = false
             cell.titleLbl.text =  sections[indexPath.row].1 ? SystemInfoModel.shared.cgmType : LocalizedString.link_cgm.localized
             cell.startBtn.setTitle(sections[indexPath.row].1 ? LocalizedString.edit.localized : LocalizedString.start.localized, for: .normal)
+            cell.startBtn.tag = sections[indexPath.row].1 ? 2 : 1
             cell.timeDescView.isHidden = sections[indexPath.row].1
             if sections[indexPath.row].1 {
                 cell.startBtn.isEditable = true
@@ -228,6 +228,7 @@ extension SystemSetupStep1VC {
             cell.directionText.isHidden = true
             cell.titleLbl.text =  sections[indexPath.row].1 ? SystemInfoModel.shared.longInsulinType : LocalizedString.insulin_info.localized
             cell.startBtn.setTitle(sections[indexPath.row].1 ? LocalizedString.edit.localized : LocalizedString.start.localized, for: .normal)
+            cell.startBtn.tag = sections[indexPath.row].1 ? 2 : 1
             cell.timeDescView.isHidden = sections[indexPath.row].1
             if sections[indexPath.row].1 {
                 cell.startBtn.isEditable = true
@@ -255,7 +256,7 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
                 self.navigationController?.pushViewController(vc, animated: true)
             case 1:
                 SystemInfoModel.shared.isFromSetting = false
-                if cell.startBtn.titleLabel?.text == LocalizedString.start.localized{
+                if cell.startBtn.tag == 1{
                     SystemInfoModel.shared.cgmUnit = 0
                     SystemInfoModel.shared.cgmType = ""
                 }
@@ -263,7 +264,7 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
                 self.navigationController?.pushViewController(vc, animated: true)
             default:
                 SystemInfoModel.shared.isFromSetting = false
-                if cell.startBtn.titleLabel?.text == LocalizedString.start.localized{
+                if cell.startBtn.tag == 1{
                     SystemInfoModel.shared.insulinUnit = 0
                     SystemInfoModel.shared.longInsulinSubType = ""
                     SystemInfoModel.shared.longInsulinType = ""
