@@ -12,6 +12,7 @@ class LoginSocialTableCell: UITableViewCell {
 
     //MARK:-IBOutlets
     //==========================================
+    @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var appleBtnView: UIView!
     @IBOutlet weak var googleBtnView: UIView!
     @IBOutlet weak var appleBtn: UIButton!
@@ -26,21 +27,28 @@ class LoginSocialTableCell: UITableViewCell {
     var appleBtnTapped: TapAction = nil
     var googleBtnTapped: TapAction = nil
     var loginBtnTapped: TapAction = nil
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.setUpFont()
         self.setUpAttributedString()
         self.setUpButtonInset()
-        self.setUpBorder()
         let imageView = UIImageView(image: UIImage(named: "apple"))
         appleBtn.setImage(imageView.image, for: .normal)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        self.setUpBorder()
         [self.googleBtnView,self.appleBtnView].forEach { (btnView) in
             btnView?.round(radius: 8.0)
         }
+    }
+    
+    public func setUpFont(){
+        self.titleLbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
+        self.googleBtn.titleLabel?.font = AppFonts.SF_Pro_Display_Medium.withSize(.x13)
+        self.appleBtn.titleLabel?.font = AppFonts.SF_Pro_Display_Medium.withSize(.x13)
     }
     
     private func setUpBorder(){

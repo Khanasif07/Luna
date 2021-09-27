@@ -24,6 +24,7 @@ class SignUpTopTableCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.setUpFont()
         self.setUpTextField()
     }
 
@@ -34,6 +35,15 @@ class SignUpTopTableCell: UITableViewCell {
             txtField?.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
         }
         signUpBtn.round(radius: 4.0)
+    }
+    
+    public func setUpFont(){
+        self.titleLbl.font = AppFonts.SF_Pro_Display_Bold.withSize(.x24)
+        self.subTitleLbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
+        self.signUpBtn.titleLabel?.font = AppFonts.SF_Pro_Display_Semibold.withSize(.x16)
+        self.forgotPassBtn.titleLabel?.font = AppFonts.SF_Pro_Display_Semibold.withSize(.x14)
+        self.passTxtField.font = AppFonts.SF_Pro_Display_Medium.withSize(.x16)
+        self.emailIdTxtField.font = AppFonts.SF_Pro_Display_Medium.withSize(.x16)
     }
     
     public func setUpTextField(){

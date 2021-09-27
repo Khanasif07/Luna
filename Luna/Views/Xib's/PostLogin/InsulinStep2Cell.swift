@@ -22,6 +22,7 @@ class InsulinStep2Cell: UITableViewCell {
     //===========================
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.setUpFont()
         self.radioBtn.isUserInteractionEnabled = false
         self.radioBtn.setImage(#imageLiteral(resourceName: "radioSelected"), for: .selected)
         self.radioBtn.setImage(#imageLiteral(resourceName: "radioUnSelected"), for: .normal)
@@ -29,7 +30,12 @@ class InsulinStep2Cell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        dataContainerView.setBorder(width: 1.0, color: #colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1))
-        dataContainerView.round(radius: 10.0)
+        self.dataContainerView.setBorder(width: 1.0, color: #colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1))
+        self.dataContainerView.round(radius: 10.0)
+    }
+    
+    public func setUpFont(){
+        self.insulinType.font = AppFonts.SF_Pro_Display_Medium.withSize(.x16)
+        self.insulinSubType.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
     }
 }

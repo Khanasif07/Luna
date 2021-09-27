@@ -11,6 +11,8 @@ class DecisionCell: UITableViewCell {
     
     //MARK:-IBOutlets
     //==========================================
+    @IBOutlet weak var yesLbl: UILabel!
+    @IBOutlet weak var noLbl: UILabel!
     @IBOutlet weak var noBtn: UIButton!
     @IBOutlet weak var yesBtn: UIButton!
     
@@ -18,6 +20,13 @@ class DecisionCell: UITableViewCell {
     //==========================================
     var yesBtnTapped: TapAction = nil
     var noBtnTapped: TapAction = nil
+    
+    //MARK:-Life cycle
+    //==========================================
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.setUpFont()
+    }
     
     //MARK:-IBActions
     //==========================================
@@ -31,5 +40,10 @@ class DecisionCell: UITableViewCell {
         if let handle = yesBtnTapped{
             handle()
         }
+    }
+    
+    public func setUpFont(){
+        self.yesLbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
+        self.noLbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
     }
 }

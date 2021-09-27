@@ -17,6 +17,7 @@ class MessageReceiverCell: UITableViewCell {
     //==========================================
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.setUpFont()
     }
     
     override func prepareForReuse() {
@@ -26,6 +27,10 @@ class MessageReceiverCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         msgContainerView.roundCorners([.topLeft, .topRight, .bottomRight], radius: 15)
+    }
+    
+    public func setUpFont(){
+        self.msgLabel.font = AppFonts.SF_Pro_Display_Medium.withSize(.x14)
     }
     
 }

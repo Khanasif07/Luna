@@ -47,5 +47,16 @@ class SessionHistoryHeader: UITableViewHeaderFooterView {
             }
         }
     }
+    
+    // MARK: -Life cycle
+    //===========================
+    override  func awakeFromNib() {
+        super.awakeFromNib()
+        self.setUpFont()
+    }
+    
+    public func setUpFont(){
+        self.haedingLbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x17)
+    }
 
 }

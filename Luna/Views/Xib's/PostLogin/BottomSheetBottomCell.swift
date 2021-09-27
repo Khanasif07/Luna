@@ -20,5 +20,12 @@ class BottomSheetBottomCell: UITableViewCell {
     //===========================
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.setUpFont()
+    }
+    
+    public func setUpFont(){
+        self.timeLbl.font = AppFonts.SF_Pro_Display_Medium.withSize(.x16)
+        self.cgmLbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
+        self.unitLbl.font = AppFonts.SF_Pro_Display_Medium.withSize(.x12)
     }
 }

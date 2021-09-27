@@ -11,6 +11,7 @@ class BottomSheetInsulinCell: UITableViewCell {
     
     // MARK: - IBOutlets
     //===========================
+    @IBOutlet weak var unitLbl: UILabel!
     @IBOutlet weak var insulinCountLbl: UILabel!
     @IBOutlet weak var activeInsulinLbl: UILabel!
     @IBOutlet weak var dataContainerView: UIView!
@@ -19,6 +20,7 @@ class BottomSheetInsulinCell: UITableViewCell {
     //===========================
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.setUpFont()
     }
     
     override func layoutSubviews() {
@@ -29,5 +31,11 @@ class BottomSheetInsulinCell: UITableViewCell {
     
     func populateCell(){
         self.insulinCountLbl.text =  "\(BleManager.sharedInstance.reservoirLevelData)".isEmpty ? "--" :  "\(BleManager.sharedInstance.reservoirLevelData)"
+    }
+    
+    public func setUpFont(){
+        self.insulinCountLbl.font = AppFonts.SF_Pro_Display_Bold.withSize(.x22)
+        self.activeInsulinLbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
+        self.unitLbl.font = AppFonts.SF_Pro_Display_Medium.withSize(.x12)
     }
 }

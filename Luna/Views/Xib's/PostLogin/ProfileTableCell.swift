@@ -26,6 +26,7 @@ class ProfileTableCell: UITableViewCell {
     //===========================
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.setUpFont()
         if isSetupforPasswordTxtfield{
             self.setupforPasswordTxtfield()
         }
@@ -58,6 +59,11 @@ class ProfileTableCell: UITableViewCell {
     @objc func secureTextField(_ sender: UIButton){
         sender.isSelected.toggle()
         self.txtField.isSecureTextEntry = !sender.isSelected
+    }
+    
+    public func setUpFont(){
+        self.titleLbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
+        self.txtField.font = AppFonts.SF_Pro_Display_Medium.withSize(.x16)
     }
     
 }

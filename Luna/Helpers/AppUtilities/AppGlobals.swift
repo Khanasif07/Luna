@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 typealias BtnTapAction = ((UIButton)->())?
 typealias TapAction = (()->())?
+typealias switchBtnAction = ((UISwitch)->())?
 
 var isUserLoggedin: Bool {
     let token = AppUserDefaults.value(forKey: .uid).stringValue

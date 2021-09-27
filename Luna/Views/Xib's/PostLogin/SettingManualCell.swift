@@ -20,5 +20,11 @@ class SettingManualCell: UITableViewCell {
     //===========================
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.setUpFont()
+    }
+    
+    public func setUpFont(){
+        self.queLbl.font = AppFonts.SF_Pro_Display_Medium.withSize(.x16)
+        self.ansLbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
     }
 }

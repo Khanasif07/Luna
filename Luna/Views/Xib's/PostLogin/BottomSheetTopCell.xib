@@ -84,6 +84,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="cgmArrowIcon" destination="YdR-fn-WdE" id="5zu-kX-QtQ"/>
+                <outlet property="cgmUnitLbl" destination="28s-Xn-M30" id="KpN-yc-A3v"/>
                 <outlet property="cgmValueLbl" destination="1va-4Q-uOr" id="yI1-dS-alW"/>
                 <outlet property="timeAgoLbl" destination="bGc-sk-oax" id="WfJ-fM-NN3"/>
             </connections>

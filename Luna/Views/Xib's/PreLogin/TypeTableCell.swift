@@ -19,9 +19,11 @@ class TypeTableCell: UITableViewCell {
     var type1BtnTapped: TapAction = nil
     var type2BtnTapped: TapAction = nil
     
-    
+    //MARK:-Life cycle
+    //==========================================
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.setUpFont()
         [type2Btn,type1Btn].forEach { (btn) in
             btn?.setBorder(width: 1.0, color: #colorLiteral(red: 0.6, green: 0.6, blue: 0.6, alpha: 1))
         }
@@ -45,6 +47,11 @@ class TypeTableCell: UITableViewCell {
             type1Btn.titleLabel?.textColor = #colorLiteral(red: 0.2745098039, green: 0.7607843137, blue: 0.5725490196, alpha: 1)
             type1Btn.backgroundColor = #colorLiteral(red: 0.9254901961, green: 0.9803921569, blue: 0.9568627451, alpha: 1)
         }
+    }
+    
+    public func setUpFont(){
+        self.type1Btn.titleLabel?.font = AppFonts.SF_Pro_Display_Medium.withSize(.x14)
+        self.type2Btn.titleLabel?.font = AppFonts.SF_Pro_Display_Medium.withSize(.x14)
     }
     
     //MARK:-IBActions

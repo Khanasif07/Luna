@@ -73,7 +73,9 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="noBtn" destination="N8N-M4-ltq" id="SbD-bB-hU3"/>
+                <outlet property="noLbl" destination="nHz-O6-NSM" id="siK-bG-F6v"/>
                 <outlet property="yesBtn" destination="j6W-Cc-YFe" id="Lj3-qv-jyl"/>
+                <outlet property="yesLbl" destination="XAE-Ld-ymi" id="E7a-Mu-eCC"/>
             </connections>
             <point key="canvasLocation" x="24.637681159420293" y="93.75"/>
         </tableViewCell>

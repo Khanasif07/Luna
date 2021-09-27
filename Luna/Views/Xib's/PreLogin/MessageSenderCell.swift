@@ -15,11 +15,16 @@ class MessageSenderCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.setUpFont()
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         dataContainerView.roundCorners([.topRight,.topLeft,.bottomLeft], radius: 15)
+    }
+    
+    public func setUpFont(){
+        self.senderMsgLbl.font = AppFonts.SF_Pro_Display_Medium.withSize(.x14)
     }
 }
 

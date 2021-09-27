@@ -133,6 +133,7 @@
                 <outlet property="googleBtnView" destination="bNr-lz-5pz" id="1uu-kW-EMM"/>
                 <outlet property="loginSocialLbl" destination="iam-fF-NYY" id="MV2-Z2-wqt"/>
                 <outlet property="socialBtnStackView" destination="k92-eR-OAv" id="GS8-QJ-9Ab"/>
+                <outlet property="titleLbl" destination="vou-bB-wPb" id="dIh-1z-qEb"/>
             </connections>
             <point key="canvasLocation" x="119.56521739130436" y="121.20535714285714"/>
         </tableViewCell>

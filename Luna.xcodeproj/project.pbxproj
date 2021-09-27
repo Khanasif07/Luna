@@ -841,10 +841,10 @@
 			isa = PBXGroup;
 			children = (
 				84F7BC4E266F06A1006C94DA /* Luna.entitlements */,
-				84CC12B82668CD87009316FC /* Controller */,
 				84E78B9C2685E8B800FABDCD /* Model */,
-				84CC12B32668CCE8009316FC /* ViewController */,
 				84CC12B12668C8E7009316FC /* Views */,
+				84CC12B32668CCE8009316FC /* ViewController */,
+				84CC12B82668CD87009316FC /* Controller */,
 				84CC12B02668C8D4009316FC /* Helpers */,
 				84CC12B52668CD10009316FC /* Resources */,
 			);

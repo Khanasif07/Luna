@@ -106,6 +106,7 @@
                 <outlet property="activeInsulinLbl" destination="R46-WA-AJ7" id="nBq-lC-8Tl"/>
                 <outlet property="dataContainerView" destination="wcV-Gu-UXR" id="cuD-jL-Xdf"/>
                 <outlet property="insulinCountLbl" destination="Da7-nA-eKJ" id="4i2-39-1i9"/>
+                <outlet property="unitLbl" destination="EuU-a0-G9X" id="gKM-ls-AjD"/>
             </connections>
             <point key="canvasLocation" x="92.753623188405811" y="118.52678571428571"/>
         </tableViewCell>

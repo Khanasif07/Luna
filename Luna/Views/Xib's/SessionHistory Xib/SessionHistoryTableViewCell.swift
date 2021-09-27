@@ -18,6 +18,11 @@ class SessionHistoryTableViewCell: UITableViewCell {
     //===========================
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.setUpFont()
     }
     
+    public func setUpFont(){
+        self.dateLbl.font = AppFonts.SF_Pro_Display_Semibold.withSize(.x16)
+        self.unitLbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
+    }    
 }

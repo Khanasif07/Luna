@@ -19,13 +19,13 @@ class SettingTableCell: UITableViewCell {
     
     //MARK:-Variables
     //==========================================
-    var switchTapped: ((UISwitch)->())?
-    
+    var switchTapped: switchBtnAction = nil
     
     // MARK: - Lifecycle
     //===========================
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.setUpFont()
     }
     
     // MARK: - IBActions
@@ -34,5 +34,10 @@ class SettingTableCell: UITableViewCell {
         if let handle = switchTapped{
             handle(sender)
         }
+    }
+    
+    public func setUpFont(){
+        self.titleLbl.font = AppFonts.SF_Pro_Display_Medium.withSize(.x16)
+        self.subTitlelbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
     }
 }

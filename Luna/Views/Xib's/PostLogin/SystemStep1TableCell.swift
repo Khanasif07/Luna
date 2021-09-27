@@ -31,7 +31,8 @@ class SystemStep1TableCell: UITableViewCell {
     //===========================
     override func awakeFromNib() {
         super.awakeFromNib()
-        startBtn.isEnabled = true
+        self.setUpFont()
+        self.startBtn.isEnabled = true
     }
     
     override func layoutSubviews() {
@@ -49,5 +50,11 @@ class SystemStep1TableCell: UITableViewCell {
         }
     }
     
-    
+    public func setUpFont(){
+        self.stepLbl.font = AppFonts.SF_Pro_Display_Medium.withSize(.x14)
+        self.titleLbl.font = AppFonts.SF_Pro_Display_Bold.withSize(.x22)
+        self.timeToCompleteLabel.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
+        self.unitLbl.font = AppFonts.SF_Pro_Display_Medium.withSize(.x12)
+        self.startBtn.titleLabel?.font = AppFonts.SF_Pro_Display_Semibold.withSize(.x16)
+    }
 }
