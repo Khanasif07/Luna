@@ -303,6 +303,7 @@ enum ApiKey {
     static var cgmData  : String {return "cgmData" }
     static var insulinData  : String {return "insulinData" }
     static var cgmUnit  : String {return "cgmUnit" }
+    static var previousCgmReadingTime : String { return "previousCgmReadingTime"}
     static var sgv  : String {return "sgv" }
     static var direction  : String {return "direction" }
     static var date  : String {return "date" }

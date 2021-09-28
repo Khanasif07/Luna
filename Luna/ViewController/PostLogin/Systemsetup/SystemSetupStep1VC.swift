@@ -64,6 +64,7 @@ class SystemSetupStep1VC: UIViewController {
             CommonFunctions.hideActivityLoader()
             CommonFunctions.showToastWithMessage(error.localizedDescription)
         }
+        CommonFunctions.hideActivityLoader()
     }
     
     @IBAction func infoBtnTapped(_ sender: UIButton) {

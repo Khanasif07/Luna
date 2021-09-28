@@ -28,6 +28,7 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     //MARK:- VARIABLE
     //================
     // Variables for BG Charts
+    let ScaleXMax:Float = 150.0
     public var numPoints: Int = 13
     var firstGraphLoad: Bool = true
     var minAgoBG: Double = 0.0
@@ -181,9 +182,13 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
         if let dict = notification.object as? NSDictionary {
             if let bgData = dict[ApiKey.cgmData] as? [ShareGlucoseData]{
                 self.bgData = bgData
+                let shareUserName = UserDefaultsRepository.shareUserName.value
+                let sharePassword = UserDefaultsRepository.sharePassword.value
+                let shareServer = UserDefaultsRepository.shareServer.value == "US" ?KnownShareServers.US.rawValue : KnownShareServers.NON_US.rawValue
+                dexShare = ShareClient(username: shareUserName, password: sharePassword, shareServer: shareServer )
+                self.restartAllTimers()
             }
         }
-//        self.restartAllTimers()
     }
 }
 

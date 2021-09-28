@@ -240,8 +240,8 @@ class FirestoreController:NSObject{
             AppUserDefaults.save(value: isBiometricEnable, forKey: .isBiometricSelected)
             AppUserDefaults.save(value: isBiometricCompleted, forKey: .isBiometricCompleted)
         }
-//        UserDefaultsRepository.shareUsUserdeerName.value = ""
-//        UserDefaultsRepository.sharePassword.value = ""
+        UserDefaultsRepository.shareUserName.value = ""
+        UserDefaultsRepository.sharePassword.value = ""
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         DispatchQueue.main.async {
             AppRouter.goToSignUpVC()
@@ -362,14 +362,6 @@ class FirestoreController:NSObject{
                 completion(err)
             }
         })
-    }
-    
-    //MARK:- SEND VERIFICATION MAIL WitH ACTIONCODE
-    //=======================
-    static func sendEmailVerificationWithActionCode(actionCodeSettings: ActionCodeSettings, completion:  @escaping FailureResponse){
-        //        Auth.auth().currentUser?.sendEmailVerification(with: actionCodeSettings, completion: { (error) in
-        //            completion(error)
-        //        })
     }
     
     //MARK:- setFirebaseData

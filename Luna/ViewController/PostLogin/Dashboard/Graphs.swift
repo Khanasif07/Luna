@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Charts
 
-let ScaleXMax:Float = 150.0
+
 extension BottomSheetVC :  ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         if chartView != cgmChartView {
@@ -21,7 +21,7 @@ extension BottomSheetVC :  ChartViewDelegate {
     }
     
     func chartScaled(_ chartView: ChartViewBase, scaleX: CGFloat, scaleY: CGFloat) {
-//        print("Chart Scaled: \(cgmChartView.scaleX), \(cgmChartView.scaleY)")
+        print("Chart Scaled: \(cgmChartView.scaleX), \(cgmChartView.scaleY)")
         
         // dont store huge values
         var scale: Float = Float(cgmChartView.scaleX)
@@ -57,7 +57,6 @@ extension BottomSheetVC :  ChartViewDelegate {
     
     func createGraph(){
         self.cgmChartView.clear()
-        
         // Create the BG Graph Data
         _ = bgData
         let bgChartEntry = [ChartDataEntry]()
@@ -77,7 +76,7 @@ extension BottomSheetVC :  ChartViewDelegate {
         lineBG.lineWidth = 3
         lineBG.circleRadius = 0
         lineBG.drawCircleHoleEnabled = false
-        lineBG.valueFont = .systemFont(ofSize: 9)
+        lineBG.valueFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
         lineBG.formLineWidth = 1
         lineBG.formSize = 15
         lineBG.setDrawHighlightIndicators(false)
@@ -93,10 +92,10 @@ extension BottomSheetVC :  ChartViewDelegate {
         lineBG.drawFilledEnabled = true
         lineBG.drawValuesEnabled = false
         //
-        data.setValueFont(UIFont.systemFont(ofSize: 12))
+        data.setValueFont(AppFonts.SF_Pro_Display_Regular.withSize(.x12))
 
         let marker = BalloonMarker(color: #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1),
-                                   font: .boldSystemFont(ofSize: 15.0),
+                                   font: AppFonts.SF_Pro_Display_Bold.withSize(.x15),
                                    textColor: .white,
                                    insets: UIEdgeInsets(top: 3.5, left: 5.5, bottom: 16, right: 5.5))
         marker.chartView = cgmChartView
