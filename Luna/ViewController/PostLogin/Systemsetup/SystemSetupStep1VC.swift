@@ -267,7 +267,7 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
                 SystemInfoModel.shared.isFromSetting = false
                 if cell.startBtn.tag == 1{
                     SystemInfoModel.shared.cgmUnit = 0
-                    SystemInfoModel.shared.cgmType = ""
+//                    SystemInfoModel.shared.cgmType = ""
                 }
                 let vc = CGMSelectorVC.instantiate(fromAppStoryboard: .CGPStoryboard)
                 self.navigationController?.pushViewController(vc, animated: true)

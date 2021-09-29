@@ -8,6 +8,7 @@ import CoreBluetooth
 import UIKit
 import HealthKit
 import Charts
+import Firebase
 
 class HomeVC: UIViewController {
     

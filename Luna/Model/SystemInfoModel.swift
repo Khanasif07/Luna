@@ -16,7 +16,7 @@ struct SystemInfoModel{
     var longInsulinSubType : String
     var previousCgmReadingTime : String = "0"
     var insulinUnit : Int
-    var cgmType : String
+    var cgmType : String = "Dexcom G6"
     var cgmUnit: Int
     var isFromSetting: Bool = false
     var cgmData : [ShareGlucoseData]?
@@ -31,9 +31,7 @@ struct SystemInfoModel{
         self.longInsulinType = json[ApiKey._id].stringValue
         self.longInsulinSubType = json[ApiKey.longInsulinSubType].stringValue
         self.insulinUnit = json[ApiKey.insulinUnit].intValue
-        self.cgmType = json[ApiKey.cgmType].stringValue
         self.cgmUnit = json[ApiKey.cgmUnit].intValue
-        self.previousCgmReadingTime = json[ApiKey.previousCgmReadingTime].stringValue
     }
     
 }

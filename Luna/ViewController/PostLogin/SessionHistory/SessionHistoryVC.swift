@@ -135,6 +135,7 @@ extension SessionHistoryVC : UITableViewDelegate, UITableViewDataSource {
         if  let cell = tableView.cellForRow(at: indexPath) as? SessionHistoryTableViewCell {
             let vc = SessionDescriptionVC.instantiate(fromAppStoryboard: .CGPStoryboard)
             vc.titleValue = cell.dateLbl.text ?? ""
+            vc.cgmDataArray =  SystemInfoModel.shared.cgmData ?? []
             vc.insulinDataModel = self.insulinSectionDataArray[indexPath.section].1[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
         }

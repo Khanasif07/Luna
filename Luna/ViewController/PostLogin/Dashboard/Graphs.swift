@@ -152,6 +152,7 @@ extension BottomSheetVC :  ChartViewDelegate {
         cgmChartView.highlightValue(nil, callDelegate: false)
         
         cgmChartView.data = data
+        cgmChartView.animate(yAxisDuration: 2.5)
         cgmChartView.setExtraOffsets(left: 10, top: 0, right: 10, bottom: 0)
         
     }

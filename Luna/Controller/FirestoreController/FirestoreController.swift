@@ -123,7 +123,7 @@ class FirestoreController:NSObject{
                         SystemInfoModel.shared.longInsulinSubType = data[ApiKey.longInsulinSubType] as? String ?? ""
                         SystemInfoModel.shared.insulinUnit = data[ApiKey.insulinUnit] as? Int ?? -1
                         SystemInfoModel.shared.cgmUnit = data[ApiKey.cgmUnit] as? Int ?? -1
-                        SystemInfoModel.shared.cgmType = data[ApiKey.cgmType] as? String ?? ""
+//                        SystemInfoModel.shared.cgmType = data[ApiKey.cgmType] as? String ?? ""
                         success()
                     }
                 }
@@ -163,8 +163,8 @@ class FirestoreController:NSObject{
     static func getFirebaseCGMData(success: @escaping (_ cgmModelArray: [ShareGlucoseData]) -> Void,
                                    failure:  @escaping FailureResponse){
         if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
-            db.collection(ApiKey.userSystemInfo)
-                .document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.cgmData).limit(to: 288).getDocuments { (snapshot, error) in
+            db.collection(ApiKey.sessionData)
+                .document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.sessionHistory).limit(to: 288).getDocuments { (snapshot, error) in
                     if let error = error {
                         failure(error)
                     } else{
@@ -929,6 +929,22 @@ class FirestoreController:NSObject{
             batch.commit {_ in
                 success()
                 //                self.delete(batchSize: batchSize)
+            }
+        }
+    }
+    
+    static func addBatchData(array:[ShareGlucoseData],success: @escaping ()-> ()) {
+        let userId = Auth.auth().currentUser?.uid ?? ""
+        let batch = db.batch()
+        array.forEach { (doc) in
+            let docRef = db.collection(ApiKey.sessionData).document(userId).collection(ApiKey.sessionHistory).document(String(doc.date))
+            batch.setData([ApiKey.sgv: doc.sgv,ApiKey.direction: doc.direction ?? "",ApiKey.date: doc.date], forDocument: docRef)
+        }
+        batch.commit { (err) in
+            if let err = err{
+                print("Error occured \(err)")
+            } else {
+            print("Commited successfully")
             }
         }
     }
