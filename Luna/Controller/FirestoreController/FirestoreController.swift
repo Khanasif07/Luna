@@ -93,6 +93,9 @@ class FirestoreController:NSObject{
                         user.isChangePassword = data[ApiKey.isChangePassword] as? Bool ?? false
                         user.deviceId = data[ApiKey.deviceId] as? String ?? ""
                         UserModel.main = user
+                        //MARK:- Important
+                        UserDefaultsRepository.shareUserName.value = data[ApiKey.shareUserName] as? String ?? ""
+                        UserDefaultsRepository.sharePassword.value = data[ApiKey.sharePassword] as? String ?? ""
                         AppUserDefaults.save(value: user.isProfileStepCompleted, forKey: .isProfileStepCompleted)
                         AppUserDefaults.save(value: true, forKey: .isBiometricCompleted)
                         AppUserDefaults.save(value: user.deviceId, forKey: .deviceId)
@@ -295,6 +298,8 @@ class FirestoreController:NSObject{
                                isChangePassword:Bool,
                                isBiometricOn:  Bool,
                                deviceId: String,
+                               shareUserName:String,
+                               sharePassword:String,
                                completion: @escaping () -> Void,
                                failure: @escaping FailureResponse) {
         var emailId  = email
@@ -321,7 +326,7 @@ class FirestoreController:NSObject{
                                                                    ApiKey.isProfileStepCompleted: false,
                                                                    ApiKey.isSystemSetupCompleted: false,
                                                                    ApiKey.userId: uid,ApiKey.isChangePassword: true,ApiKey.deviceId:deviceId,
-                                                                   ApiKey.isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue]){ err in
+                                                                   ApiKey.isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue,ApiKey.shareUserName:shareUserName,ApiKey.sharePassword:sharePassword]){ err in
                     if let err = err {
                         print("Error writing document: \(err)")
                         CommonFunctions.showToastWithMessage(err.localizedDescription)
@@ -464,6 +469,16 @@ class FirestoreController:NSObject{
         db.collection(ApiKey.users).document(uid).updateData([ApiKey.deviceId:deviceId])
     }
     
+    //MARK:- Update Dexcom creds
+    //================================
+    static func updateDexcomCreds(shareUserName: String,sharePassword:String) {
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        guard !uid.isEmpty else {
+            return
+        }
+        db.collection(ApiKey.users).document(uid).updateData([ApiKey.shareUserName:shareUserName,ApiKey.sharePassword:sharePassword])
+    }
+    
     //MARK:- Update user System Setup Status
     //================================
     static func updateUserSystemSetupStatus(isSystemSetupCompleted: Bool, completion: @escaping () -> Void,
@@ -483,7 +498,7 @@ class FirestoreController:NSObject{
     //================================
     static func addDeviceIdListener(_ completion: @escaping (String) -> Void,
                                     failure: @escaping FailureResponse){
-        let uid = AppUserDefaults.value(forKey: .uid).stringValue
+        let uid = Auth.auth().currentUser?.uid ?? ""
         guard !uid.isEmpty else { return }
         db.collection(ApiKey.users).document(uid)
             .addSnapshotListener { documentSnapshot, error in

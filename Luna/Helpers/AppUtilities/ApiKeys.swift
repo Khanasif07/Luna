@@ -44,6 +44,8 @@ enum ApiKey {
     static var currrentNonce : String {return "currrentNonce"}
     static var isChangePassword : String {return "isChangePassword"}
     
+    static var shareUserName : String {return "shareUserName"}
+    static var sharePassword : String {return "sharePassword"}
     
     
     static var userName : String {return "userName"}

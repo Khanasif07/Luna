@@ -34,7 +34,7 @@ final class ChartXValueFormatter: IAxisValueFormatter {
 //        } else {
 //            dateFormatter.setLocalizedDateFormatFromTemplate("hh:mm")
 //        }
-        dateFormatter.setLocalizedDateFormatFromTemplate("hh a")
+        dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.cgmDate12.rawValue)
         
         
         //let date = Date(timeIntervalSince1970: epochTimezoneOffset)

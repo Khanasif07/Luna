@@ -68,11 +68,11 @@ class CGMConnectedVC: UIViewController {
     @IBAction func okBtnTapped(_ sender: AppButton) {
         UserDefaultsRepository.shareUserName.value = AppUserDefaults.value(forKey: .shareUserName).stringValue
         UserDefaultsRepository.sharePassword.value = AppUserDefaults.value(forKey: .sharePassword).stringValue
-        SystemInfoModel.shared.cgmUnit = Int(ValueLbl.text ?? "") ?? 0
+        FirestoreController.updateDexcomCreds(shareUserName: AppUserDefaults.value(forKey: .shareUserName).stringValue, sharePassword: AppUserDefaults.value(forKey: .sharePassword).stringValue)
         self.dismiss(animated: true) {
             if let handle = self.cgmConnectedSuccess{
-                AppUserDefaults.save(value: self.cgmData, forKey: .cgmValue)
-                AppUserDefaults.save(value: self.directionString, forKey: .directionString)
+//                AppUserDefaults.save(value: self.cgmData, forKey: .cgmValue)
+//                AppUserDefaults.save(value: self.directionString, forKey: .directionString)
                 handle(sender,self.cgmData)
             }
         }

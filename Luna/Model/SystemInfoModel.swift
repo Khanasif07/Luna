@@ -14,7 +14,7 @@ struct SystemInfoModel{
     var longInsulinImage : UIImage = #imageLiteral(resourceName: "toujeoMax")
     var longInsulinType : String
     var longInsulinSubType : String
-    var previousCgmReadingTime : String
+    var previousCgmReadingTime : String = "0"
     var insulinUnit : Int
     var cgmType : String
     var cgmUnit: Int

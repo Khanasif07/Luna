@@ -9,12 +9,16 @@ import UIKit
 
 class CGMDATASHAREVC: UIViewController {
 
+    // MARK: - IBOutlets
+    //===========================
     @IBOutlet weak var outerView: UIView!
     @IBOutlet weak var okBtn: AppButton!
     @IBOutlet weak var conformLbl: UILabel!
     @IBOutlet weak var subTitleLbl: UILabel!
     @IBOutlet weak var titleLbl: UILabel!
     
+    // MARK: - Variables
+    //===========================
     var CGMConnectNavigation: BtnTapAction = nil
     
     override func viewDidLoad() {
