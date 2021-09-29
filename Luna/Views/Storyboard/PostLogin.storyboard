@@ -762,7 +762,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4r-58-7Gf">
-                                        <rect key="frame" x="20" y="50" width="374" height="782"/>
+                                        <rect key="frame" x="20" y="50" width="374" height="802"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms of service" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20V-Dm-ptG">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="17"/>
@@ -787,7 +787,7 @@
                                     <constraint firstAttribute="bottom" secondItem="k0n-ce-8NJ" secondAttribute="bottom" id="ML3-wV-heh"/>
                                     <constraint firstItem="96Q-Y7-AcZ" firstAttribute="centerX" secondItem="TkJ-B8-cNA" secondAttribute="centerX" id="c7Q-Sc-bYS"/>
                                     <constraint firstAttribute="trailing" secondItem="g4r-58-7Gf" secondAttribute="trailing" constant="20" id="cXB-Er-VkG"/>
-                                    <constraint firstAttribute="bottom" secondItem="g4r-58-7Gf" secondAttribute="bottom" constant="20" id="f8e-18-JHU"/>
+                                    <constraint firstAttribute="bottom" secondItem="g4r-58-7Gf" secondAttribute="bottom" id="f8e-18-JHU"/>
                                     <constraint firstItem="86r-rk-JTS" firstAttribute="leading" secondItem="TkJ-B8-cNA" secondAttribute="leading" id="idi-If-SfP"/>
                                     <constraint firstItem="20V-Dm-ptG" firstAttribute="width" secondItem="TkJ-B8-cNA" secondAttribute="width" constant="-40" id="k4s-sV-gXh"/>
                                     <constraint firstItem="96Q-Y7-AcZ" firstAttribute="centerY" secondItem="TkJ-B8-cNA" secondAttribute="centerY" id="kpI-sV-grz"/>

@@ -1840,10 +1840,10 @@ Luna devices</string>
                                 <constraints>
                                     <constraint firstItem="fXC-Nf-kwg" firstAttribute="centerY" secondItem="6HL-7g-HA2" secondAttribute="centerY" id="Enw-uk-Tta"/>
                                     <constraint firstItem="fXC-Nf-kwg" firstAttribute="centerX" secondItem="6HL-7g-HA2" secondAttribute="centerX" id="IfM-vw-uxP"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="fXC-Nf-kwg" secondAttribute="bottom" constant="35" id="cQr-1o-h8N"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="fXC-Nf-kwg" secondAttribute="bottom" constant="25" id="cQr-1o-h8N"/>
                                     <constraint firstItem="fXC-Nf-kwg" firstAttribute="leading" secondItem="6HL-7g-HA2" secondAttribute="leading" constant="28" id="lfP-zd-Dfk"/>
                                     <constraint firstAttribute="trailing" secondItem="fXC-Nf-kwg" secondAttribute="trailing" constant="28" id="zIz-zY-VcQ"/>
-                                    <constraint firstItem="fXC-Nf-kwg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6HL-7g-HA2" secondAttribute="top" constant="35" id="zTk-Rl-TOD"/>
+                                    <constraint firstItem="fXC-Nf-kwg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6HL-7g-HA2" secondAttribute="top" constant="25" id="zTk-Rl-TOD"/>
                                 </constraints>
                             </view>
                         </subviews>

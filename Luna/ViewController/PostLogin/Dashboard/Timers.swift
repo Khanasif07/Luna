@@ -52,7 +52,7 @@ extension BottomSheetVC {
             let formattedDuration = formatter.string(from: secondsAgo)
             self.timeAgoLbl.text = (formattedDuration ?? "") + " min ago"
             latestMinAgoString = formattedDuration ?? ""
-            SystemInfoModel.shared.previousCgmReadingTime = latestMinAgoString
+            SystemInfoModel.shared.previousCgmReadingTime = latestMinAgoString.isEmpty ? "0" : latestMinAgoString
             latestMinAgoString += " min ago"
         } else {
             self.timeAgoLbl.text = ""
