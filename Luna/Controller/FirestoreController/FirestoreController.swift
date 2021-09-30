@@ -144,27 +144,27 @@ class FirestoreController:NSObject{
         }
     }
     
-    //MARK:- Check CGM  info Exist or Not
-    //=======================
-    static func checkCGMDataExistInDatabase(success: @escaping () -> Void,
-                                            failure:  @escaping () -> Void){
-        db.collection(ApiKey.userSystemInfo).document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.cgmData).getDocuments { (snapshot, error ) in
-            guard let dicts = snapshot?.documents else { return }
-            if  !(dicts.isEmpty) {
-                success()
-            } else {
-                failure()
-            }
-        }
-    }
+//    //MARK:- Check CGM  info Exist or Not
+//    //=======================
+//    static func checkCGMDataExistInDatabase(success: @escaping () -> Void,
+//                                            failure:  @escaping () -> Void){
+//        db.collection(ApiKey.userSystemInfo).document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.cgmData).getDocuments { (snapshot, error ) in
+//            guard let dicts = snapshot?.documents else { return }
+//            if  !(dicts.isEmpty) {
+//                success()
+//            } else {
+//                failure()
+//            }
+//        }
+//    }
     
     //MARK:- Get CGM Data info
     //=======================
-    static func getFirebaseCGMData(success: @escaping (_ cgmModelArray: [ShareGlucoseData]) -> Void,
+    static func getFirebaseCGMData(date:Double,success: @escaping (_ cgmModelArray: [ShareGlucoseData]) -> Void,
                                    failure:  @escaping FailureResponse){
         if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
             db.collection(ApiKey.sessionData)
-                .document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.sessionHistory).limit(to: 288).getDocuments { (snapshot, error) in
+                .document(Auth.auth().currentUser?.uid ?? "").collection(String(date)).limit(to: 288).getDocuments { (snapshot, error) in
                     if let error = error {
                         failure(error)
                     } else{
@@ -180,6 +180,27 @@ class FirestoreController:NSObject{
                 }
         }
     }
+    
+    //MARK:- Get Session History Data
+    //=======================
+    static func getFirebaseSessionHistoryData(success: @escaping (_ cgmModelArray: [Double]) -> Void,
+                                              failure:  @escaping FailureResponse){
+        if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
+            db.collection(ApiKey.sessionData).document(Auth.auth().currentUser?.uid ?? "").getDocument(source: .server) { (document, error) in
+                    if let document = document, document.exists {
+                        if  let dataDescription = document.data(){
+                            print("Document data: \(dataDescription)")
+                            if  let array = dataDescription["cgmDateArray"] as? [Double]{
+                                print(array)
+                                success(array)
+                            }
+                        }
+                    } else {
+                        print("Document does not exist")
+                    }
+                }
+            }
+        }
     
     //MARK:- Get Insulin Data info
     //=======================
@@ -236,12 +257,14 @@ class FirestoreController:NSObject{
         let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
         let isBiometricEnable = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
         let isBiometricCompleted = AppUserDefaults.value(forKey: .isBiometricCompleted).boolValue
+        let updatedCgmDate = AppUserDefaults.value(forKey: .latestCgmDate).doubleValue
         AppUserDefaults.removeAllValues()
         UserModel.main = UserModel()
         if for_logout {
             AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
             AppUserDefaults.save(value: isBiometricEnable, forKey: .isBiometricSelected)
             AppUserDefaults.save(value: isBiometricCompleted, forKey: .isBiometricCompleted)
+            AppUserDefaults.save(value: updatedCgmDate, forKey: .latestCgmDate)
         }
         UserDefaultsRepository.shareUserName.value = ""
         UserDefaultsRepository.sharePassword.value = ""
@@ -900,13 +923,13 @@ class FirestoreController:NSObject{
         
     }
     
-    //MARK:-CreateCGMDataNode
-    //=======================
-    static func createCGMDataNode(direction: String,sgv: Int,date: TimeInterval){
-        let userId = Auth.auth().currentUser?.uid ?? ""
-        db.collection(ApiKey.userSystemInfo).document(userId).collection(ApiKey.cgmData).document(String(date)).setData([ApiKey.sgv: sgv,ApiKey.direction: direction,ApiKey.date: date])
-        
-    }
+//    //MARK:-CreateCGMDataNode
+//    //=======================
+//    static func createCGMDataNode(direction: String,sgv: Int,date: TimeInterval){
+//        let userId = Auth.auth().currentUser?.uid ?? ""
+//        db.collection(ApiKey.userSystemInfo).document(userId).collection(ApiKey.cgmData).document(String(date)).setData([ApiKey.sgv: sgv,ApiKey.direction: direction,ApiKey.date: date])
+//
+//    }
     
     static func createInsulinDataNode(insulinUnit: String,date: TimeInterval){
         let userId = Auth.auth().currentUser?.uid ?? ""
@@ -933,22 +956,34 @@ class FirestoreController:NSObject{
         }
     }
     
-    static func addBatchData(array:[ShareGlucoseData],success: @escaping ()-> ()) {
+    //MARK:-Add  cgm data array through batch operation
+    //=======================
+    static func addBatchData(currentDate:String,array:[ShareGlucoseData],success: @escaping ()-> ()) {
         let userId = Auth.auth().currentUser?.uid ?? ""
         let batch = db.batch()
         array.forEach { (doc) in
-            let docRef = db.collection(ApiKey.sessionData).document(userId).collection(ApiKey.sessionHistory).document(String(doc.date))
+            let docRef = db.collection(ApiKey.sessionData).document(userId).collection(currentDate).document(String(doc.date))
             batch.setData([ApiKey.sgv: doc.sgv,ApiKey.direction: doc.direction ?? "",ApiKey.date: doc.date], forDocument: docRef)
         }
         batch.commit { (err) in
             if let err = err{
                 print("Error occured \(err)")
             } else {
-            print("Commited successfully")
+                success()
             }
         }
     }
     
+    //MARK:-Add  cgm date  operation
+    //=======================
+    static func addCgmDateData(currentDate:Double) {
+        let userId = Auth.auth().currentUser?.uid ?? ""
+        db.collection(ApiKey.sessionData).document(userId).updateData([
+            ApiKey.cgmDateArray: FieldValue.arrayUnion([currentDate])
+        ])
+
+    }
+ 
     static func showAlert( title : String = "", msg : String,_ completion : (()->())? = nil) {
         let alertViewController = UIAlertController(title: title, message: msg, preferredStyle: UIAlertController.Style.alert)
         let okAction = UIAlertAction(title:"ok", style: UIAlertAction.Style.default) { (action : UIAlertAction) -> Void in

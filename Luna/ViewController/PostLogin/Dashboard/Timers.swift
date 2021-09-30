@@ -102,6 +102,16 @@ extension BottomSheetVC {
         // Check if the last reading is less than 10 minutes ago
         // to only pull 1 reading if that's all we need
         if bgData.count > 0 {
+            //MARK:- Importants
+            let date = Date(timeIntervalSince1970: bgData.last!.date)
+            let cgmDate = Date(timeIntervalSince1970: AppUserDefaults.value(forKey: .latestCgmDate).doubleValue)
+            if !Calendar.current.isDate(date, equalTo: cgmDate, toGranularity: .day) {
+                FirestoreController.addBatchData(currentDate: String(bgData.last!.date), array: bgData) {
+                    print("Commited successfully")
+                    AppUserDefaults.save(value: (self.bgData[self.bgData.count - 1].date), forKey: .latestCgmDate)
+                    FirestoreController.addCgmDateData(currentDate: (self.bgData.last!.date))
+                }
+            }
             let now = dateTimeUtils.getNowTimeIntervalUTC()
             let lastReadingTime = bgData.last!.date
             let secondsAgo = now - lastReadingTime
@@ -174,18 +184,18 @@ extension BottomSheetVC {
     
     // Alarm Timer
     // Run the alarm checker every 15 seconds
-    func startAlarmTimer(time: TimeInterval) {
-        alarmTimer = Timer.scheduledTimer(timeInterval: time,
-                                         target: self,
-                                         selector: #selector(self.alarmTimerDidEnd(_:)),
-                                         userInfo: nil,
-                                         repeats: true)
-        
-    }
+//    func startAlarmTimer(time: TimeInterval) {
+//        alarmTimer = Timer.scheduledTimer(timeInterval: time,
+//                                         target: self,
+//                                         selector: #selector(self.alarmTimerDidEnd(_:)),
+//                                         userInfo: nil,
+//                                         repeats: true)
+//
+//    }
     
-    @objc func alarmTimerDidEnd(_ timer:Timer) {
-        if bgData.count > 0 {
-            self.checkAlarms(bgs: bgData)
-        }
-    }
+//    @objc func alarmTimerDidEnd(_ timer:Timer) {
+//        if bgData.count > 0 {
+//            self.checkAlarms(bgs: bgData)
+//        }
+//    }
 }

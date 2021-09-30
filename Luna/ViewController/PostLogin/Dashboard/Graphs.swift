@@ -124,7 +124,6 @@ extension BottomSheetVC :  ChartViewDelegate {
         //MARK:- Important
         cgmChartView.xAxis.centerAxisLabelsEnabled = false
         cgmChartView.xAxis.setLabelCount(7, force: true) //enter the number of labels here
-//        cgmChartView.extraRightOffset = 20.0
         
         cgmChartView.leftAxis.enabled = true
         cgmChartView.leftAxis.labelPosition = YAxis.LabelPosition.outsideChart

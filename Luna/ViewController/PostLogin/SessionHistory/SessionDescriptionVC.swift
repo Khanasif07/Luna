@@ -23,17 +23,10 @@ class SessionDescriptionVC: UIViewController {
     // MARK: - Variables
     //==========================
     var sections = ["Glucose Graph","List View"]
-    var insulinDataModel : ShareGlucoseData?
+//    var insulinDataModel : ShareGlucoseData?
+    var sessionDay : Double?
     var titleValue: String = ""
     var cgmDataArray : [ShareGlucoseData] = []
-    var cgmData : [ShareGlucoseData] = []{
-        didSet{
-            self.cgmDataArray = cgmData.sorted(by: { (model1, model2) -> Bool in
-                return model1.date < model2.date
-            })
-//            self.mainTaeView.reloadData()
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,17 +36,25 @@ class SessionDescriptionVC: UIViewController {
         titleLbl.text = titleValue
         setupTableView()
         setupProgressBar()
-        if let selectedDate = insulinDataModel?.date{
-            let selectedLastDate = Calendar.current.date(byAdding: .minute, value: 5, to: (NSDate(timeIntervalSince1970: TimeInterval(selectedDate)) as Date))
-            let output = SystemInfoModel.shared.cgmData?.filter { (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) >= (NSDate(timeIntervalSince1970: TimeInterval(selectedDate)) as Date) && (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) <= selectedLastDate! }
-//            cgmData = output ?? []
-            insulinQty.text = "7 units"
-            let sortedCgmData = cgmDataArray.sorted(by: { (model1, model2) -> Bool in
+        FirestoreController.getFirebaseCGMData(date: sessionDay!) { (bgData) in
+            self.cgmDataArray = bgData
+            self.insulinQty.text = "-- units"
+            let sortedCgmData = bgData.sorted(by: { (model1, model2) -> Bool in
                 return model1.sgv < model2.sgv
             })
-            lowestGlucoseLbl.text = "\(sortedCgmData.first?.sgv ?? 0)" + " mg/dl"
-            highestGlucoseLbl.text = "\(sortedCgmData.last?.sgv ?? 0)" + " mg/dl"
+            self.lowestGlucoseLbl.text = "\(sortedCgmData.first?.sgv ?? 0)" + " mg/dl"
+            self.highestGlucoseLbl.text = "\(sortedCgmData.last?.sgv ?? 0)" + " mg/dl"
+            self.mainTaeView.reloadData()
+        } failure: { (error) -> (Void) in
+            print(error)
         }
+
+//        if let selectedDate = insulinDataModel?.date{
+//            let selectedLastDate = Calendar.current.date(byAdding: .minute, value: 5, to: (NSDate(timeIntervalSince1970: TimeInterval(selectedDate)) as Date))
+//            let output = SystemInfoModel.shared.cgmData?.filter { (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) >= (NSDate(timeIntervalSince1970: TimeInterval(selectedDate)) as Date) && (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) <= selectedLastDate! }
+//            cgmData = output ?? []
+            
+//        }
     }
     
     @IBAction func backBtnTapped(_ sender: UIButton) {

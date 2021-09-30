@@ -71,8 +71,8 @@ class CGMConnectedVC: UIViewController {
         FirestoreController.updateDexcomCreds(shareUserName: AppUserDefaults.value(forKey: .shareUserName).stringValue, sharePassword: AppUserDefaults.value(forKey: .sharePassword).stringValue)
         self.dismiss(animated: true) {
             if let handle = self.cgmConnectedSuccess{
-//                AppUserDefaults.save(value: self.cgmData, forKey: .cgmValue)
-//                AppUserDefaults.save(value: self.directionString, forKey: .directionString)
+                AppUserDefaults.save(value: self.cgmData, forKey: .cgmValue)
+                AppUserDefaults.save(value: self.directionString, forKey: .directionString)
                 handle(sender,self.cgmData)
             }
         }

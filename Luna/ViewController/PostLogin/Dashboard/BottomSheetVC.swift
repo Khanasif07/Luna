@@ -36,6 +36,7 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     // Vars for NS Pull
     var graphHours:Int=24
     var mmol = false as Bool
+    var latestCgmDate = AppUserDefaults.value(forKey: .latestCgmDate).doubleValue
     var urlUser = UserDefaultsRepository.url.value as String
     var token = UserDefaultsRepository.token.value as String
     var defaults : UserDefaults?
@@ -53,7 +54,6 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     // Min Ago Timer
     var minAgoTimer = Timer()
     var minAgoTimeInterval: TimeInterval = 1.0
-    
     
     // Check Alarms Timer
     // Don't check within 1 minute of alarm triggering to give the snoozer time to save data

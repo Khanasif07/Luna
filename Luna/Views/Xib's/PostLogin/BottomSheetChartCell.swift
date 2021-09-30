@@ -40,17 +40,16 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         cgmChartView.delegate = self
 
         cgmChartView.chartDescription?.enabled = true
-        cgmChartView.dragEnabled = true
-        cgmChartView.setScaleEnabled(false)
-        cgmChartView.pinchZoomEnabled = false
+//        cgmChartView.dragEnabled = true
+//        cgmChartView.setScaleEnabled(false)
+//        cgmChartView.pinchZoomEnabled = false
 
         let xAxis = cgmChartView.xAxis
         xAxis.labelPosition = .bottom
         xAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
         xAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
         xAxis.granularity = 1
-        xAxis.labelCount = 6
-        xAxis.valueFormatter = XAxisNameFormater()
+        xAxis.valueFormatter = ChartXValueFormatter()
 
         let leftAxis = cgmChartView.leftAxis
         leftAxis.removeAllLimitLines()
@@ -69,6 +68,9 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         marker.chartView = cgmChartView
         marker.minimumSize = CGSize(width: 50.0, height: 30.0)
         cgmChartView.marker = marker
+        
+//        cgmChartView.xAxis.centerAxisLabelsEnabled = false
+//        cgmChartView.xAxis.setLabelCount(7, force: true) //enter the number of labels here
 
         cgmChartView.rightAxis.enabled = false
         cgmChartView.xAxis.granularity = 0.0
@@ -76,11 +78,12 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         cgmChartView.legend.form = .none
         setDataCount(cgmData.endIndex, range: UInt32(cgmData.endIndex))
         cgmChartView.moveViewToX(cgmChartView.data?.yMax ?? 0.0 - 1)
-        cgmChartView.zoom(scaleX: 4.1, scaleY: 0, x: 0, y: 0)
+        cgmChartView.zoom(scaleX: 4.0, scaleY: 0, x: 0, y: 0)
         cgmChartView.animate(yAxisDuration: 2.5)
         cgmChartView.noDataText = "No glucose data available."
         cgmChartView.noDataTextColor = #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1)
         cgmChartView.noDataFont = AppFonts.SF_Pro_Display_Bold.withSize(.x15)
+        cgmChartView.setExtraOffsets(left: 10, top: 0, right: 20, bottom: 0)
         cgmChartView.clear()
     }
     

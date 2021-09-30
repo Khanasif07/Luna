@@ -38,7 +38,7 @@ class UserDefaultsRepository {
     static let shareServer = UserDefaultsValue<String>(key: "shareServer", default: "US")
     
     // Graph Settings
-    static let chartScaleX = UserDefaultsValue<Float>(key: "chartScaleX", default: 4.10)
+    static let chartScaleX = UserDefaultsValue<Float>(key: "chartScaleX", default: 4.0)
     static let showDots = UserDefaultsValue<Bool>(key: "showDots", default: true)
     static let smallGraphTreatments = UserDefaultsValue<Bool>(key: "smallGraphTreatments", default: true)
     static let showValues = UserDefaultsValue<Bool>(key: "showValues", default: true)
