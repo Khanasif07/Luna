@@ -116,14 +116,15 @@ extension BottomSheetVC :  ChartViewDelegate {
         ul.lineColor = NSUIColor.systemYellow.withAlphaComponent(0.5)
         cgmChartView.rightAxis.addLimitLine(ul)
         
-        // Add Now Line
-        //        startGraphNowTimer()
-        
         // Setup the main graph overall details
         cgmChartView.xAxis.valueFormatter = ChartXValueFormatter()
         cgmChartView.xAxis.granularity = 1800
         cgmChartView.xAxis.labelTextColor = NSUIColor.label
         cgmChartView.xAxis.labelPosition = XAxis.LabelPosition.bottom
+        //MARK:- Important
+        cgmChartView.xAxis.centerAxisLabelsEnabled = false
+        cgmChartView.xAxis.setLabelCount(7, force: true) //enter the number of labels here
+//        cgmChartView.extraRightOffset = 20.0
         
         cgmChartView.leftAxis.enabled = true
         cgmChartView.leftAxis.labelPosition = YAxis.LabelPosition.outsideChart
@@ -153,7 +154,7 @@ extension BottomSheetVC :  ChartViewDelegate {
         
         cgmChartView.data = data
         cgmChartView.animate(yAxisDuration: 2.5)
-        cgmChartView.setExtraOffsets(left: 10, top: 0, right: 10, bottom: 0)
+        cgmChartView.setExtraOffsets(left: 10, top: 0, right: 20, bottom: 0)
         
     }
 
@@ -252,7 +253,7 @@ extension BottomSheetVC :  ChartViewDelegate {
         xAxis.labelPosition = .bottom
         xAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
         xAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
-        xAxis.labelCount = 7
+//        xAxis.labelCount = 7
         
         let leftAxis = cgmChartView.leftAxis
         leftAxis.removeAllLimitLines()
