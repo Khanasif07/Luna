@@ -132,6 +132,7 @@
 		849B5A4A2697143B000AA5DC /* BottomSheetTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849B5A482697143B000AA5DC /* BottomSheetTopCell.xib */; };
 		849B7432269D612000C059E5 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849B7431269D612000C059E5 /* HealthKit.framework */; };
 		849B7436269D710600C059E5 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7435269D710600C059E5 /* HealthKitManager.swift */; };
+		849DE9C127049A6800D2663A /* LunaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DE9C027049A6800D2663A /* LunaTests.swift */; };
 		84AA878D26FAD1120047D86E /* Alarms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA878C26FAD1120047D86E /* Alarms.swift */; };
 		84AA879026FAE8900047D86E /* BottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA878F26FAE8900047D86E /* BottomSheetVC.swift */; };
 		84B06B6626E27E9A004902E4 /* Gilroy-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84B06B6526E27E9A004902E4 /* Gilroy-Medium.ttf */; };
@@ -220,6 +221,16 @@
 		84FDA0B1267DE8B600AC8BE9 /* DecisionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FDA0AF267DE8B600AC8BE9 /* DecisionCell.swift */; };
 		84FDA0B2267DE8B600AC8BE9 /* DecisionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84FDA0B0267DE8B600AC8BE9 /* DecisionCell.xib */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		849DE9C327049A6800D2663A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84CC128E2668C822009316FC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84CC12952668C822009316FC;
+			remoteInfo = Luna;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1863AF8726E23C7100902838 /* CoachMarkViewApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkViewApp.swift; sourceTree = "<group>"; };
@@ -348,6 +359,9 @@
 		849B5A482697143B000AA5DC /* BottomSheetTopCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetTopCell.xib; sourceTree = "<group>"; };
 		849B7431269D612000C059E5 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		849B7435269D710600C059E5 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		849DE9BE27049A6800D2663A /* LunaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LunaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		849DE9C027049A6800D2663A /* LunaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunaTests.swift; sourceTree = "<group>"; };
+		849DE9C227049A6800D2663A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84AA878C26FAD1120047D86E /* Alarms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarms.swift; sourceTree = "<group>"; };
 		84AA878F26FAE8900047D86E /* BottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetVC.swift; sourceTree = "<group>"; };
 		84B06B6526E27E9A004902E4 /* Gilroy-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Medium.ttf"; sourceTree = "<group>"; };
@@ -443,6 +457,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		849DE9BB27049A6800D2663A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84CC12932668C822009316FC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -796,6 +817,15 @@
 			path = HealthKitManager;
 			sourceTree = "<group>";
 		};
+		849DE9BF27049A6800D2663A /* LunaTests */ = {
+			isa = PBXGroup;
+			children = (
+				849DE9C027049A6800D2663A /* LunaTests.swift */,
+				849DE9C227049A6800D2663A /* Info.plist */,
+			);
+			path = LunaTests;
+			sourceTree = "<group>";
+		};
 		84AA87C026FD89D00047D86E /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -823,6 +853,7 @@
 			children = (
 				84CC12982668C822009316FC /* Luna */,
 				846F1A1B2678BFFE0034ACE0 /* Certificates */,
+				849DE9BF27049A6800D2663A /* LunaTests */,
 				84CC12972668C822009316FC /* Products */,
 				2D90EB116D7AE5068B0109C8 /* Pods */,
 				F2201812782A54B48AE7EE35 /* Frameworks */,
@@ -833,6 +864,7 @@
 			isa = PBXGroup;
 			children = (
 				84CC12962668C822009316FC /* Luna.app */,
+				849DE9BE27049A6800D2663A /* LunaTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1034,6 +1066,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		849DE9BD27049A6800D2663A /* LunaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 849DE9C727049A6800D2663A /* Build configuration list for PBXNativeTarget "LunaTests" */;
+			buildPhases = (
+				849DE9BA27049A6800D2663A /* Sources */,
+				849DE9BB27049A6800D2663A /* Frameworks */,
+				849DE9BC27049A6800D2663A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				849DE9C427049A6800D2663A /* PBXTargetDependency */,
+			);
+			name = LunaTests;
+			productName = LunaTests;
+			productReference = 849DE9BE27049A6800D2663A /* LunaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		84CC12952668C822009316FC /* Luna */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84CC12AA2668C823009316FC /* Build configuration list for PBXNativeTarget "Luna" */;
@@ -1062,9 +1112,13 @@
 		84CC128E2668C822009316FC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1220;
+				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1220;
 				TargetAttributes = {
+					849DE9BD27049A6800D2663A = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = 84CC12952668C822009316FC;
+					};
 					84CC12952668C822009316FC = {
 						CreatedOnToolsVersion = 12.2;
 					};
@@ -1084,11 +1138,19 @@
 			projectRoot = "";
 			targets = (
 				84CC12952668C822009316FC /* Luna */,
+				849DE9BD27049A6800D2663A /* LunaTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		849DE9BC27049A6800D2663A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84CC12942668C822009316FC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1243,6 +1305,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		849DE9BA27049A6800D2663A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				849DE9C127049A6800D2663A /* LunaTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84CC12922668C822009316FC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1414,6 +1484,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		849DE9C427049A6800D2663A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84CC12952668C822009316FC /* Luna */;
+			targetProxy = 849DE9C327049A6800D2663A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		8432A19B2672294200859B47 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
@@ -1434,6 +1512,49 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		849DE9C527049A6800D2663A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = R935LLU42T;
+				INFOPLIST_FILE = LunaTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.appinventiv.LunaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Luna.app/Luna";
+			};
+			name = Debug;
+		};
+		849DE9C627049A6800D2663A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = R935LLU42T;
+				INFOPLIST_FILE = LunaTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.appinventiv.LunaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Luna.app/Luna";
+			};
+			name = Release;
+		};
 		84CC12A82668C823009316FC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1471,6 +1592,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1532,6 +1654,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1558,8 +1681,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 13.0;
 				DEVELOPMENT_TEAM = 9S43J8Y2GN;
 				INFOPLIST_FILE = "$(SRCROOT)/Luna/Resources/Info.plist";
@@ -1570,7 +1693,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunadiabetes.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Prov;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1583,8 +1706,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 13.0;
 				DEVELOPMENT_TEAM = 9S43J8Y2GN;
 				INFOPLIST_FILE = "$(SRCROOT)/Luna/Resources/Info.plist";
@@ -1595,7 +1718,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunadiabetes.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Prov;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1604,6 +1727,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		849DE9C727049A6800D2663A /* Build configuration list for PBXNativeTarget "LunaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				849DE9C527049A6800D2663A /* Debug */,
+				849DE9C627049A6800D2663A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		84CC12912668C822009316FC /* Build configuration list for PBXProject "Luna" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
