@@ -904,20 +904,13 @@ class FirestoreController:NSObject{
     
     //MARK:-CreateMessageNode
     //=======================
-    static func createMessageNode(roomId:String,messageText:String,messageTime:FieldValue,messageId:String,messageType:String,messageStatus:Int,senderId:String,receiverId:String,mediaUrl:String,blocked: Bool, thumbNailURL: String,messageDuration: Int,price: Double){
-        
-        db.collection(ApiKey.messages).document(roomId).collection(ApiKey.chat).document(messageId).setData([ApiKey.messageText:messageText,
+    static func createMessageNode(messageText:String,messageTime:FieldValue,messageId:String,messageType:String,senderId:String){
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        db.collection(ApiKey.messages).document(uid).collection(ApiKey.contactUs).document(messageId).setData([ApiKey.messageText:messageText,
                                                                                                              ApiKey.messageId:messageId,
                                                                                                              ApiKey.messageTime:FieldValue.serverTimestamp(),
-                                                                                                             ApiKey.messageStatus:messageStatus,
                                                                                                              ApiKey.messageType:messageType,
-                                                                                                             ApiKey.senderId:senderId,
-                                                                                                             ApiKey.receiverId:receiverId,
-                                                                                                             ApiKey.roomId:roomId,
-                                                                                                             ApiKey.mediaUrl : mediaUrl,
-                                                                                                             ApiKey.blocked :blocked,
-                                                                                                             ApiKey.price: price,
-                                                                                                             ApiKey.messageDuration: messageDuration])
+                                                                                                             ApiKey.senderId:senderId           ])
         /// States of the messages
         /// 0 - pending, 1 - sent, 2 - delivered, 3 - read
         

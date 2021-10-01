@@ -97,7 +97,8 @@ extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
             let vc = SettingManualVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)
         case LocalizedString.customer_Support.localized:
-            openMail()
+            let vc = ContactUsVC.instantiate(fromAppStoryboard: .PostLogin)
+            self.navigationController?.pushViewController(vc, animated: true)
         case LocalizedString.privacy.localized:
             let vc = AboutTermsPolicyVC.instantiate(fromAppStoryboard: .PostLogin)
             vc.titleString =  sections[indexPath.row].1

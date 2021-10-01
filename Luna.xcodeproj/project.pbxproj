@@ -128,6 +128,10 @@
 		84861D7F26848EDD004B046C /* ProfileTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84861D7D26848EDD004B046C /* ProfileTableCell.swift */; };
 		84861D8026848EDD004B046C /* ProfileTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84861D7E26848EDD004B046C /* ProfileTableCell.xib */; };
 		84861D8326849FDB004B046C /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84861D8226849FDB004B046C /* ChangePasswordVC.swift */; };
+		849B255E27070CA000323876 /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B255D27070CA000323876 /* ContactUsVC.swift */; };
+		849B25622707101600323876 /* ContactsUsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B25602707101600323876 /* ContactsUsTableCell.swift */; };
+		849B25632707101600323876 /* ContactsUsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849B25612707101600323876 /* ContactsUsTableCell.xib */; };
+		849B25662707116900323876 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B25652707116900323876 /* CustomTextView.swift */; };
 		849B5A492697143B000AA5DC /* BottomSheetTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B5A472697143B000AA5DC /* BottomSheetTopCell.swift */; };
 		849B5A4A2697143B000AA5DC /* BottomSheetTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849B5A482697143B000AA5DC /* BottomSheetTopCell.xib */; };
 		849B7432269D612000C059E5 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849B7431269D612000C059E5 /* HealthKit.framework */; };
@@ -344,6 +348,10 @@
 		84861D7D26848EDD004B046C /* ProfileTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableCell.swift; sourceTree = "<group>"; };
 		84861D7E26848EDD004B046C /* ProfileTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableCell.xib; sourceTree = "<group>"; };
 		84861D8226849FDB004B046C /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
+		849B255D27070CA000323876 /* ContactUsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsVC.swift; sourceTree = "<group>"; };
+		849B25602707101600323876 /* ContactsUsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUsTableCell.swift; sourceTree = "<group>"; };
+		849B25612707101600323876 /* ContactsUsTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsUsTableCell.xib; sourceTree = "<group>"; };
+		849B25652707116900323876 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 		849B5A472697143B000AA5DC /* BottomSheetTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetTopCell.swift; sourceTree = "<group>"; };
 		849B5A482697143B000AA5DC /* BottomSheetTopCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetTopCell.xib; sourceTree = "<group>"; };
 		849B7431269D612000C059E5 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
@@ -629,6 +637,7 @@
 				84861D8226849FDB004B046C /* ChangePasswordVC.swift */,
 				84602902268C50F800141E0D /* AboutTermsPolicyVC.swift */,
 				84E2D9B726B12C17000C0FD8 /* SettingManualVC.swift */,
+				849B255D27070CA000323876 /* ContactUsVC.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -744,6 +753,8 @@
 				84F2A27C26984F3D000FDCD5 /* BottomSheetBottomCell.xib */,
 				84E2D9BA26B12D26000C0FD8 /* SettingManualCell.swift */,
 				84E2D9BB26B12D26000C0FD8 /* SettingManualCell.xib */,
+				849B25602707101600323876 /* ContactsUsTableCell.swift */,
+				849B25612707101600323876 /* ContactsUsTableCell.xib */,
 			);
 			path = PostLogin;
 			sourceTree = "<group>";
@@ -982,6 +993,7 @@
 				8455A3BE26805AA80061C55F /* InfoPlistParser.swift */,
 				84E78BC32685F9B400FABDCD /* CustomPickerView.swift */,
 				84F2A28026985398000FDCD5 /* LineDashedView.swift */,
+				849B25652707116900323876 /* CustomTextView.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -1110,6 +1122,7 @@
 				84D1F4FD2679D52700F131E0 /* SF-Pro-Display-BlackItalic.otf in Resources */,
 				84D1F4FA2679D52700F131E0 /* SF-Pro-Display-Ultralight.otf in Resources */,
 				84D1F4FE2679D52700F131E0 /* SF-Pro-Display-Black.otf in Resources */,
+				849B25632707101600323876 /* ContactsUsTableCell.xib in Resources */,
 				84D1F4F42679D52700F131E0 /* SF-Pro-Display-Bold.otf in Resources */,
 				845549112678D486000CC13D /* GoogleService-Info.plist in Resources */,
 				84D1F4F02679D52700F131E0 /* SF-Pro-Display-SemiboldItalic.otf in Resources */,
@@ -1281,6 +1294,7 @@
 				840A7DFC2696E98C005AA1E6 /* PairLunaVC.swift in Sources */,
 				84467287268DBECC00EC55FD /* InsulinStep1VC.swift in Sources */,
 				842E9B1B2695690B00F36A3D /* InsulinStep3VC.swift in Sources */,
+				849B255E27070CA000323876 /* ContactUsVC.swift in Sources */,
 				84CC12EC2668D0B8009316FC /* UIColorExtension.swift in Sources */,
 				8455A3C226820E010061C55F /* SettingsVC.swift in Sources */,
 				84B3500026CC9CC300ECF8F0 /* Platform.swift in Sources */,
@@ -1317,6 +1331,7 @@
 				188DB12D26E0993600FBF042 /* CoachMarkBodyDefaultView.swift in Sources */,
 				188DB13E26E0993600FBF042 /* CoachMarkSkipView.swift in Sources */,
 				84CC129A2668C822009316FC /* AppDelegate.swift in Sources */,
+				849B25662707116900323876 /* CustomTextView.swift in Sources */,
 				84CC12DA2668D00E009316FC /* AppFonts.swift in Sources */,
 				84CC12CA2668CF8D009316FC /* AppEnums.swift in Sources */,
 				84CC12EF2668D0CE009316FC /* NotificationExtension.swift in Sources */,
@@ -1409,6 +1424,7 @@
 				188DB13D26E0993600FBF042 /* UIView+Layout.swift in Sources */,
 				8455A3C7268211770061C55F /* SettingTableCell.swift in Sources */,
 				188DB14326E0993600FBF042 /* CoachMarksViewController.swift in Sources */,
+				849B25622707101600323876 /* ContactsUsTableCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

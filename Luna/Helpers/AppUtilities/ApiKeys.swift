@@ -16,6 +16,7 @@ enum ApiKey {
     static var code: String { return "CODE" }
     static var result: String { return "result" }
     static var message: String { return "message" }
+    static var contactUs : String { return "contactUs" }
     static var Authorization: String { return "Authorization" }
     static var authorization: String { return "authorization" }
     static var contentType: String { return "Content-Type" }

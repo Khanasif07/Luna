@@ -228,10 +228,11 @@ extension BleManager: CBPeripheralDelegate {
             self.insulinData = properDataArray.map({ (stringArray) -> InsulinDataModel in
                 return InsulinDataModel(insulinData: stringArray.first!, date: Double(stringArray.last!) ?? 0.0)
             })
-            for insulinModel in self.insulinData {
-                FirestoreController.createInsulinDataNode(insulinUnit: insulinModel.insulinData ?? "", date: Double(insulinModel.date))
-            }
-            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
+//            for insulinModel in self.insulinData {
+//                FirestoreController.createInsulinDataNode(insulinUnit: insulinModel.insulinData ?? "", date: Double(insulinModel.date))
+//            }
+//            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
+            print("handled Characteristic Value for dataOutCBUUID: \(String(describing: data))")
             print("handled Characteristic Value for dataOutCBUUID: \(String(describing: characteristic.value))")
         case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
             print("handled Characteristic Value for: \(String(describing: characteristic.value))")

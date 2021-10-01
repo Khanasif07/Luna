@@ -77,7 +77,7 @@ extension SessionHistoryVC {
             CommonFunctions.showToastWithMessage(error.localizedDescription)
             CommonFunctions.hideActivityLoader()
         }
-        CommonFunctions.showActivityLoader()
+        CommonFunctions.hideActivityLoader()
         //        FirestoreController.getFirebaseInsulinData { (insulinDataArray) in
         //            print(insulinDataArray)
         //            SystemInfoModel.shared.insulinData = insulinDataArray
