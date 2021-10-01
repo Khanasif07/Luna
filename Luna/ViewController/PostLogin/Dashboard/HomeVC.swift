@@ -8,6 +8,7 @@ import CoreBluetooth
 import UIKit
 import HealthKit
 import Charts
+import Firebase
 
 class HomeVC: UIViewController {
     
@@ -283,7 +284,7 @@ extension HomeVC {
         self.reservoirTitleLbl.text = DeviceStatus.ReservoirLevel.titleString
         //MARK:- System Status Data Set Up
         self.systemImgView.image = DeviceStatus.getSystemImage(systemInfo:data).1
-        if DeviceStatus.getSystemImage(systemInfo:data).0.isEmpty{
+        if DeviceStatus.getSystemImage(systemInfo:data).0.isEmpty || DeviceStatus.getReservoirImage(reservoirInfo:reservoirData).0.isEmpty{
             self.systemStatusLbl.alpha = 0
         }else {
             self.systemStatusLbl.alpha = 100

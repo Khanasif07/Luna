@@ -1563,7 +1563,7 @@ Luna devices</string>
                                                                     <color key="textColor" red="0.50544291730000002" green="0.51735407109999998" blue="0.53810626269999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8 units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hxt-Mg-nmH">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-- units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hxt-Mg-nmH">
                                                                     <rect key="frame" x="0.0" y="24" width="95" height="19.5"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
                                                                     <nil key="textColor"/>
@@ -1580,7 +1580,7 @@ Luna devices</string>
                                                                     <color key="textColor" red="0.50544291730000002" green="0.51735407109999998" blue="0.53810626269999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="201 mg/dL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQK-HD-W4x">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-- mg/dL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQK-HD-W4x">
                                                                     <rect key="frame" x="0.0" y="24" width="95" height="19.5"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
                                                                     <nil key="textColor"/>
@@ -1597,7 +1597,7 @@ Luna devices</string>
                                                                     <color key="textColor" red="0.50544291730000002" green="0.51735407109999998" blue="0.53810626269999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="143 mg/dL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yai-eT-aoc">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-- mg/dL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yai-eT-aoc">
                                                                     <rect key="frame" x="0.0" y="24" width="95" height="19.5"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
                                                                     <nil key="textColor"/>
@@ -1840,10 +1840,10 @@ Luna devices</string>
                                 <constraints>
                                     <constraint firstItem="fXC-Nf-kwg" firstAttribute="centerY" secondItem="6HL-7g-HA2" secondAttribute="centerY" id="Enw-uk-Tta"/>
                                     <constraint firstItem="fXC-Nf-kwg" firstAttribute="centerX" secondItem="6HL-7g-HA2" secondAttribute="centerX" id="IfM-vw-uxP"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="fXC-Nf-kwg" secondAttribute="bottom" constant="35" id="cQr-1o-h8N"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="fXC-Nf-kwg" secondAttribute="bottom" constant="25" id="cQr-1o-h8N"/>
                                     <constraint firstItem="fXC-Nf-kwg" firstAttribute="leading" secondItem="6HL-7g-HA2" secondAttribute="leading" constant="28" id="lfP-zd-Dfk"/>
                                     <constraint firstAttribute="trailing" secondItem="fXC-Nf-kwg" secondAttribute="trailing" constant="28" id="zIz-zY-VcQ"/>
-                                    <constraint firstItem="fXC-Nf-kwg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6HL-7g-HA2" secondAttribute="top" constant="35" id="zTk-Rl-TOD"/>
+                                    <constraint firstItem="fXC-Nf-kwg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6HL-7g-HA2" secondAttribute="top" constant="25" id="zTk-Rl-TOD"/>
                                 </constraints>
                             </view>
                         </subviews>

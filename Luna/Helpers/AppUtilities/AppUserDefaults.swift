@@ -121,6 +121,7 @@ extension AppUserDefaults {
         case homeCoachMarkShown
         case shareUserName
         case sharePassword
+        case latestCgmDate
     }
 }
 

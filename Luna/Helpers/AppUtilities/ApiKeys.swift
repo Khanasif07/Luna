@@ -16,6 +16,7 @@ enum ApiKey {
     static var code: String { return "CODE" }
     static var result: String { return "result" }
     static var message: String { return "message" }
+    static var contactUs : String { return "contactUs" }
     static var Authorization: String { return "Authorization" }
     static var authorization: String { return "authorization" }
     static var contentType: String { return "Content-Type" }
@@ -31,6 +32,9 @@ enum ApiKey {
     static var name : String {return "name"}
     static var users : String {return "users"}
     static var userSystemInfo : String {return "userSystemInfo"}
+    static var sessionData : String {return "sessionData"}
+    static var cgmDateArray : String {return "cgmDateArray"}
+    static var sessionHistory : String {return "sessionHistory"}
     static var firstName : String {return "firstName"}
     static var isBiometricOn : String {return "isBiometricOn"}
     static var deviceId : String { return "deviceId"}
@@ -44,6 +48,8 @@ enum ApiKey {
     static var currrentNonce : String {return "currrentNonce"}
     static var isChangePassword : String {return "isChangePassword"}
     
+    static var shareUserName : String {return "shareUserName"}
+    static var sharePassword : String {return "sharePassword"}
     
     
     static var userName : String {return "userName"}
@@ -303,6 +309,7 @@ enum ApiKey {
     static var cgmData  : String {return "cgmData" }
     static var insulinData  : String {return "insulinData" }
     static var cgmUnit  : String {return "cgmUnit" }
+    static var previousCgmReadingTime : String { return "previousCgmReadingTime"}
     static var sgv  : String {return "sgv" }
     static var direction  : String {return "direction" }
     static var date  : String {return "date" }

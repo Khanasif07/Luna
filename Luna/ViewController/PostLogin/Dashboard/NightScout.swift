@@ -200,9 +200,9 @@ extension  BottomSheetVC{
             bgData.removeAll()
         } else if bgData[bgData.count - 1].date != pullDate {
             bgData.removeFirst()
-            if data.count > 0 && UserDefaultsRepository.speakBG.value {
-                speakBG(sgv: data[data.count - 1].sgv)
-            }
+//            if data.count > 0 && UserDefaultsRepository.speakBG.value {
+//                speakBG(sgv: data[data.count - 1].sgv)
+//            }
         } else {
             if data.count > 0 {
 //                self.updateBadge(val: data[data.count - 1].sgv)
@@ -377,18 +377,18 @@ extension  BottomSheetVC{
                                    .withColonSeparatorInTime]
         if let lastPumpRecord = lastDeviceStatus?["pump"] as! [String : AnyObject]? {
             if (formatter.date(from: (lastPumpRecord["clock"] as! String))?.timeIntervalSince1970) != nil  {
-                if let reservoirData = lastPumpRecord["reservoir"] as? Double {
+//                if let reservoirData = lastPumpRecord["reservoir"] as? Double {
 //                    latestPumpVolume = reservoirData
                     //                    tableData[5].value = String(format:"%.0f", reservoirData) + "U"
-                } else {
+//                } else {
 //                    latestPumpVolume = 50.0
                     //                    tableData[5].value = "50+U"
-                }
+//                }
                 
-                if let uploader = lastDeviceStatus?["uploader"] as? [String:AnyObject] {
-                    let upbat = uploader["battery"] as! Double
+//                if let uploader = lastDeviceStatus?["uploader"] as? [String:AnyObject] {
+//                    let upbat = uploader["battery"] as! Double
                     //                    tableData[4].value = String(format:"%.0f", upbat) + "%"
-                }
+//                }
             }
         }
         

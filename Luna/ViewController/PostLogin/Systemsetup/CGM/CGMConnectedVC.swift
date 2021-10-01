@@ -11,6 +11,8 @@ import AVFoundation
 
 class CGMConnectedVC: UIViewController {
     
+    // MARK: - IBOutles
+    //===========================
     @IBOutlet weak var outerView: UIView!
     @IBOutlet weak var okBtn: AppButton!
     @IBOutlet weak var ValueLbl: UILabel!
@@ -19,6 +21,8 @@ class CGMConnectedVC: UIViewController {
     @IBOutlet weak var directionText : UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    // MARK: - Variables
+    //===========================
     var vcObj:UIViewController = UIViewController()
     var cgmConnectedSuccess: ((UIButton, String)->())?
     var cgmData : String = ""
@@ -39,6 +43,14 @@ class CGMConnectedVC: UIViewController {
         initialSetup()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        outerView.round(radius: 10.0)
+        outerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
+        self.okBtn.round(radius: 10.0)
+        self.okBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
             if userInterfaceStyle == .dark{
@@ -56,7 +68,7 @@ class CGMConnectedVC: UIViewController {
     @IBAction func okBtnTapped(_ sender: AppButton) {
         UserDefaultsRepository.shareUserName.value = AppUserDefaults.value(forKey: .shareUserName).stringValue
         UserDefaultsRepository.sharePassword.value = AppUserDefaults.value(forKey: .sharePassword).stringValue
-        SystemInfoModel.shared.cgmUnit = Int(ValueLbl.text ?? "") ?? 0
+        FirestoreController.updateDexcomCreds(shareUserName: AppUserDefaults.value(forKey: .shareUserName).stringValue, sharePassword: AppUserDefaults.value(forKey: .sharePassword).stringValue)
         self.dismiss(animated: true) {
             if let handle = self.cgmConnectedSuccess{
                 AppUserDefaults.save(value: self.cgmData, forKey: .cgmValue)
@@ -83,11 +95,8 @@ extension CGMConnectedVC {
         activityIndicator.isHidden = true
         self.titleLbl.textColor = UIColor.black
         self.subTitleLbl.textColor = AppColors.fontPrimaryColor
-        outerView.round(radius: 10.0)
-        outerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
+        self.subTitleLbl.text = "Your last CGM reading was from \(SystemInfoModel.shared.previousCgmReadingTime) minutes ago"
         self.okBtn.isEnabled = true
-        self.okBtn.round(radius: 10.0)
-        self.okBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
         connectDexcomAccount()
     }
     
@@ -172,9 +181,9 @@ extension CGMConnectedVC {
             bgData.removeAll()
         } else if bgData[bgData.count - 1].date != pullDate {
             bgData.removeFirst()
-            if data.count > 0 && UserDefaultsRepository.speakBG.value {
-                speakBG(sgv: data[data.count - 1].sgv)
-            }
+//            if data.count > 0 && UserDefaultsRepository.speakBG.value {
+//                speakBG(sgv: data[data.count - 1].sgv)
+//            }
         } else {
 //            if data.count > 0 {
 //                self.updateBadge(val: data[data.count - 1].sgv)
@@ -303,6 +312,9 @@ extension CGMConnectedVC {
         DispatchQueue.main.async {
             let entries = self.bgData
             if entries.count < 1 { return }
+            //MARK:- Important
+            UserDefaultsRepository.shareUserName.value = AppUserDefaults.value(forKey: .shareUserName).stringValue
+            UserDefaultsRepository.sharePassword.value = AppUserDefaults.value(forKey: .sharePassword).stringValue
             NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: [ApiKey.cgmData:entries])
 //            SystemInfoModel.shared.cgmData = self.bgData
 //            if SystemInfoModel.shared.isFromSetting {

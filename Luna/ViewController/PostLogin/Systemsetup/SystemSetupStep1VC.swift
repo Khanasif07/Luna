@@ -58,6 +58,10 @@ class SystemSetupStep1VC: UIViewController {
         FirestoreController.updateUserSystemSetupStatus(isSystemSetupCompleted: true) {
             SystemInfoModel.shared = SystemInfoModel()
             CommonFunctions.hideActivityLoader()
+            //MARK: - Important
+            if let uuid = UIDevice.current.identifierForVendor?.uuidString {
+                FirestoreController.updateDeviceID(deviceId: uuid)
+            }
             AppUserDefaults.save(value: true, forKey: .isSystemSetupCompleted)
             AppRouter.gotoHomeVC()
         } failure: { (error) -> (Void) in
@@ -80,6 +84,10 @@ class SystemSetupStep1VC: UIViewController {
         FirestoreController.setSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
             FirestoreController.updateUserSystemSetupStatus(isSystemSetupCompleted: true) {
                 CommonFunctions.hideActivityLoader()
+                //MARK: - Important
+                if let uuid = UIDevice.current.identifierForVendor?.uuidString {
+                    FirestoreController.updateDeviceID(deviceId: uuid)
+                }
                 AppUserDefaults.save(value: true, forKey: .isSystemSetupCompleted)
                 AppRouter.gotoHomeVC()
             } failure: { (error) -> (Void) in
@@ -258,7 +266,7 @@ extension SystemSetupStep1VC : UITableViewDelegate, UITableViewDataSource {
                 SystemInfoModel.shared.isFromSetting = false
                 if cell.startBtn.tag == 1{
                     SystemInfoModel.shared.cgmUnit = 0
-                    SystemInfoModel.shared.cgmType = ""
+//                    SystemInfoModel.shared.cgmType = ""
                 }
                 let vc = CGMSelectorVC.instantiate(fromAppStoryboard: .CGPStoryboard)
                 self.navigationController?.pushViewController(vc, animated: true)

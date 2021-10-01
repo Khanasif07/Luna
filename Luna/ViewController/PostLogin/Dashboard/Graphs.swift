@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Charts
 
-let ScaleXMax:Float = 150.0
+
 extension BottomSheetVC :  ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         if chartView != cgmChartView {
@@ -21,7 +21,7 @@ extension BottomSheetVC :  ChartViewDelegate {
     }
     
     func chartScaled(_ chartView: ChartViewBase, scaleX: CGFloat, scaleY: CGFloat) {
-//        print("Chart Scaled: \(cgmChartView.scaleX), \(cgmChartView.scaleY)")
+        print("Chart Scaled: \(cgmChartView.scaleX), \(cgmChartView.scaleY)")
         
         // dont store huge values
         var scale: Float = Float(cgmChartView.scaleX)
@@ -57,7 +57,6 @@ extension BottomSheetVC :  ChartViewDelegate {
     
     func createGraph(){
         self.cgmChartView.clear()
-        
         // Create the BG Graph Data
         _ = bgData
         let bgChartEntry = [ChartDataEntry]()
@@ -77,7 +76,7 @@ extension BottomSheetVC :  ChartViewDelegate {
         lineBG.lineWidth = 3
         lineBG.circleRadius = 0
         lineBG.drawCircleHoleEnabled = false
-        lineBG.valueFont = .systemFont(ofSize: 9)
+        lineBG.valueFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
         lineBG.formLineWidth = 1
         lineBG.formSize = 15
         lineBG.setDrawHighlightIndicators(false)
@@ -93,10 +92,10 @@ extension BottomSheetVC :  ChartViewDelegate {
         lineBG.drawFilledEnabled = true
         lineBG.drawValuesEnabled = false
         //
-        data.setValueFont(UIFont.systemFont(ofSize: 12))
+        data.setValueFont(AppFonts.SF_Pro_Display_Regular.withSize(.x12))
 
         let marker = BalloonMarker(color: #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1),
-                                   font: .boldSystemFont(ofSize: 15.0),
+                                   font: AppFonts.SF_Pro_Display_Bold.withSize(.x15),
                                    textColor: .white,
                                    insets: UIEdgeInsets(top: 3.5, left: 5.5, bottom: 16, right: 5.5))
         marker.chartView = cgmChartView
@@ -117,14 +116,14 @@ extension BottomSheetVC :  ChartViewDelegate {
         ul.lineColor = NSUIColor.systemYellow.withAlphaComponent(0.5)
         cgmChartView.rightAxis.addLimitLine(ul)
         
-        // Add Now Line
-        //        startGraphNowTimer()
-        
         // Setup the main graph overall details
         cgmChartView.xAxis.valueFormatter = ChartXValueFormatter()
         cgmChartView.xAxis.granularity = 1800
         cgmChartView.xAxis.labelTextColor = NSUIColor.label
         cgmChartView.xAxis.labelPosition = XAxis.LabelPosition.bottom
+        //MARK:- Important
+        cgmChartView.xAxis.centerAxisLabelsEnabled = false
+        cgmChartView.xAxis.setLabelCount(7, force: true) //enter the number of labels here
         
         cgmChartView.leftAxis.enabled = true
         cgmChartView.leftAxis.labelPosition = YAxis.LabelPosition.outsideChart
@@ -153,7 +152,8 @@ extension BottomSheetVC :  ChartViewDelegate {
         cgmChartView.highlightValue(nil, callDelegate: false)
         
         cgmChartView.data = data
-        cgmChartView.setExtraOffsets(left: 10, top: 0, right: 10, bottom: 0)
+        cgmChartView.animate(yAxisDuration: 2.5)
+        cgmChartView.setExtraOffsets(left: 10, top: 0, right: 20, bottom: 0)
         
     }
 
@@ -171,10 +171,6 @@ extension BottomSheetVC :  ChartViewDelegate {
                 topBG = Float(entries[i].sgv) + maxBGOffset
             }
             let value = ChartDataEntry(x: Double(entries[i].date), y: Double(entries[i].sgv), data: formatPillText(line1: bgUnits.toDisplayUnits(String(entries[i].sgv)), time: entries[i].date))
-            if UserDefaultsRepository.debugLog.value {
-                //writeDebugLog(value: "BG: " + value.description)
-                
-            }
             mainChart.addEntry(value)
             
             if Double(entries[i].sgv) >= Double(UserDefaultsRepository.highLine.value) {
@@ -252,7 +248,7 @@ extension BottomSheetVC :  ChartViewDelegate {
         xAxis.labelPosition = .bottom
         xAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
         xAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
-        xAxis.labelCount = 7
+//        xAxis.labelCount = 7
         
         let leftAxis = cgmChartView.leftAxis
         leftAxis.removeAllLimitLines()

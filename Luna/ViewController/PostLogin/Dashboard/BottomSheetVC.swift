@@ -28,6 +28,7 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     //MARK:- VARIABLE
     //================
     // Variables for BG Charts
+    let ScaleXMax:Float = 150.0
     public var numPoints: Int = 13
     var firstGraphLoad: Bool = true
     var minAgoBG: Double = 0.0
@@ -35,6 +36,7 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     // Vars for NS Pull
     var graphHours:Int=24
     var mmol = false as Bool
+    var latestCgmDate = AppUserDefaults.value(forKey: .latestCgmDate).doubleValue
     var urlUser = UserDefaultsRepository.url.value as String
     var token = UserDefaultsRepository.token.value as String
     var defaults : UserDefaults?
@@ -52,7 +54,6 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     // Min Ago Timer
     var minAgoTimer = Timer()
     var minAgoTimeInterval: TimeInterval = 1.0
-    
     
     // Check Alarms Timer
     // Don't check within 1 minute of alarm triggering to give the snoozer time to save data
@@ -181,9 +182,13 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
         if let dict = notification.object as? NSDictionary {
             if let bgData = dict[ApiKey.cgmData] as? [ShareGlucoseData]{
                 self.bgData = bgData
+                let shareUserName = UserDefaultsRepository.shareUserName.value
+                let sharePassword = UserDefaultsRepository.sharePassword.value
+                let shareServer = UserDefaultsRepository.shareServer.value == "US" ?KnownShareServers.US.rawValue : KnownShareServers.NON_US.rawValue
+                dexShare = ShareClient(username: shareUserName, password: sharePassword, shareServer: shareServer )
+                self.restartAllTimers()
             }
         }
-//        self.restartAllTimers()
     }
 }
 

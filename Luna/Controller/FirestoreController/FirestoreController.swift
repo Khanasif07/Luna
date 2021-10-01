@@ -93,6 +93,9 @@ class FirestoreController:NSObject{
                         user.isChangePassword = data[ApiKey.isChangePassword] as? Bool ?? false
                         user.deviceId = data[ApiKey.deviceId] as? String ?? ""
                         UserModel.main = user
+                        //MARK:- Important
+                        UserDefaultsRepository.shareUserName.value = data[ApiKey.shareUserName] as? String ?? ""
+                        UserDefaultsRepository.sharePassword.value = data[ApiKey.sharePassword] as? String ?? ""
                         AppUserDefaults.save(value: user.isProfileStepCompleted, forKey: .isProfileStepCompleted)
                         AppUserDefaults.save(value: true, forKey: .isBiometricCompleted)
                         AppUserDefaults.save(value: user.deviceId, forKey: .deviceId)
@@ -120,7 +123,7 @@ class FirestoreController:NSObject{
                         SystemInfoModel.shared.longInsulinSubType = data[ApiKey.longInsulinSubType] as? String ?? ""
                         SystemInfoModel.shared.insulinUnit = data[ApiKey.insulinUnit] as? Int ?? -1
                         SystemInfoModel.shared.cgmUnit = data[ApiKey.cgmUnit] as? Int ?? -1
-                        SystemInfoModel.shared.cgmType = data[ApiKey.cgmType] as? String ?? ""
+//                        SystemInfoModel.shared.cgmType = data[ApiKey.cgmType] as? String ?? ""
                         success()
                     }
                 }
@@ -141,27 +144,27 @@ class FirestoreController:NSObject{
         }
     }
     
-    //MARK:- Check CGM  info Exist or Not
-    //=======================
-    static func checkCGMDataExistInDatabase(success: @escaping () -> Void,
-                                            failure:  @escaping () -> Void){
-        db.collection(ApiKey.userSystemInfo).document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.cgmData).getDocuments { (snapshot, error ) in
-            guard let dicts = snapshot?.documents else { return }
-            if  !(dicts.isEmpty) {
-                success()
-            } else {
-                failure()
-            }
-        }
-    }
+//    //MARK:- Check CGM  info Exist or Not
+//    //=======================
+//    static func checkCGMDataExistInDatabase(success: @escaping () -> Void,
+//                                            failure:  @escaping () -> Void){
+//        db.collection(ApiKey.userSystemInfo).document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.cgmData).getDocuments { (snapshot, error ) in
+//            guard let dicts = snapshot?.documents else { return }
+//            if  !(dicts.isEmpty) {
+//                success()
+//            } else {
+//                failure()
+//            }
+//        }
+//    }
     
     //MARK:- Get CGM Data info
     //=======================
-    static func getFirebaseCGMData(success: @escaping (_ cgmModelArray: [ShareGlucoseData]) -> Void,
+    static func getFirebaseCGMData(date:Double,success: @escaping (_ cgmModelArray: [ShareGlucoseData]) -> Void,
                                    failure:  @escaping FailureResponse){
         if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
-            db.collection(ApiKey.userSystemInfo)
-                .document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.cgmData).limit(to: 288).getDocuments { (snapshot, error) in
+            db.collection(ApiKey.sessionData)
+                .document(Auth.auth().currentUser?.uid ?? "").collection(String(date)).limit(to: 288).getDocuments { (snapshot, error) in
                     if let error = error {
                         failure(error)
                     } else{
@@ -177,6 +180,27 @@ class FirestoreController:NSObject{
                 }
         }
     }
+    
+    //MARK:- Get Session History Data
+    //=======================
+    static func getFirebaseSessionHistoryData(success: @escaping (_ cgmModelArray: [Double]) -> Void,
+                                              failure:  @escaping FailureResponse){
+        if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
+            db.collection(ApiKey.sessionData).document(Auth.auth().currentUser?.uid ?? "").getDocument(source: .server) { (document, error) in
+                    if let document = document, document.exists {
+                        if  let dataDescription = document.data(){
+                            print("Document data: \(dataDescription)")
+                            if  let array = dataDescription["cgmDateArray"] as? [Double]{
+                                print(array)
+                                success(array)
+                            }
+                        }
+                    } else {
+                        print("Document does not exist")
+                    }
+                }
+            }
+        }
     
     //MARK:- Get Insulin Data info
     //=======================
@@ -233,15 +257,17 @@ class FirestoreController:NSObject{
         let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
         let isBiometricEnable = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
         let isBiometricCompleted = AppUserDefaults.value(forKey: .isBiometricCompleted).boolValue
+        let updatedCgmDate = AppUserDefaults.value(forKey: .latestCgmDate).doubleValue
         AppUserDefaults.removeAllValues()
         UserModel.main = UserModel()
         if for_logout {
             AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
             AppUserDefaults.save(value: isBiometricEnable, forKey: .isBiometricSelected)
             AppUserDefaults.save(value: isBiometricCompleted, forKey: .isBiometricCompleted)
+            AppUserDefaults.save(value: updatedCgmDate, forKey: .latestCgmDate)
         }
-//        UserDefaultsRepository.shareUsUserdeerName.value = ""
-//        UserDefaultsRepository.sharePassword.value = ""
+        UserDefaultsRepository.shareUserName.value = ""
+        UserDefaultsRepository.sharePassword.value = ""
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         DispatchQueue.main.async {
             AppRouter.goToSignUpVC()
@@ -295,6 +321,8 @@ class FirestoreController:NSObject{
                                isChangePassword:Bool,
                                isBiometricOn:  Bool,
                                deviceId: String,
+                               shareUserName:String,
+                               sharePassword:String,
                                completion: @escaping () -> Void,
                                failure: @escaping FailureResponse) {
         var emailId  = email
@@ -321,7 +349,7 @@ class FirestoreController:NSObject{
                                                                    ApiKey.isProfileStepCompleted: false,
                                                                    ApiKey.isSystemSetupCompleted: false,
                                                                    ApiKey.userId: uid,ApiKey.isChangePassword: true,ApiKey.deviceId:deviceId,
-                                                                   ApiKey.isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue]){ err in
+                                                                   ApiKey.isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue,ApiKey.shareUserName:shareUserName,ApiKey.sharePassword:sharePassword]){ err in
                     if let err = err {
                         print("Error writing document: \(err)")
                         CommonFunctions.showToastWithMessage(err.localizedDescription)
@@ -362,14 +390,6 @@ class FirestoreController:NSObject{
                 completion(err)
             }
         })
-    }
-    
-    //MARK:- SEND VERIFICATION MAIL WitH ACTIONCODE
-    //=======================
-    static func sendEmailVerificationWithActionCode(actionCodeSettings: ActionCodeSettings, completion:  @escaping FailureResponse){
-        //        Auth.auth().currentUser?.sendEmailVerification(with: actionCodeSettings, completion: { (error) in
-        //            completion(error)
-        //        })
     }
     
     //MARK:- setFirebaseData
@@ -472,6 +492,16 @@ class FirestoreController:NSObject{
         db.collection(ApiKey.users).document(uid).updateData([ApiKey.deviceId:deviceId])
     }
     
+    //MARK:- Update Dexcom creds
+    //================================
+    static func updateDexcomCreds(shareUserName: String,sharePassword:String) {
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        guard !uid.isEmpty else {
+            return
+        }
+        db.collection(ApiKey.users).document(uid).updateData([ApiKey.shareUserName:shareUserName,ApiKey.sharePassword:sharePassword])
+    }
+    
     //MARK:- Update user System Setup Status
     //================================
     static func updateUserSystemSetupStatus(isSystemSetupCompleted: Bool, completion: @escaping () -> Void,
@@ -491,7 +521,7 @@ class FirestoreController:NSObject{
     //================================
     static func addDeviceIdListener(_ completion: @escaping (String) -> Void,
                                     failure: @escaping FailureResponse){
-        let uid = AppUserDefaults.value(forKey: .uid).stringValue
+        let uid = Auth.auth().currentUser?.uid ?? ""
         guard !uid.isEmpty else { return }
         db.collection(ApiKey.users).document(uid)
             .addSnapshotListener { documentSnapshot, error in
@@ -874,32 +904,25 @@ class FirestoreController:NSObject{
     
     //MARK:-CreateMessageNode
     //=======================
-    static func createMessageNode(roomId:String,messageText:String,messageTime:FieldValue,messageId:String,messageType:String,messageStatus:Int,senderId:String,receiverId:String,mediaUrl:String,blocked: Bool, thumbNailURL: String,messageDuration: Int,price: Double){
-        
-        db.collection(ApiKey.messages).document(roomId).collection(ApiKey.chat).document(messageId).setData([ApiKey.messageText:messageText,
+    static func createMessageNode(messageText:String,messageTime:FieldValue,messageId:String,messageType:String,senderId:String){
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        db.collection(ApiKey.messages).document(uid).collection(ApiKey.contactUs).document(messageId).setData([ApiKey.messageText:messageText,
                                                                                                              ApiKey.messageId:messageId,
                                                                                                              ApiKey.messageTime:FieldValue.serverTimestamp(),
-                                                                                                             ApiKey.messageStatus:messageStatus,
                                                                                                              ApiKey.messageType:messageType,
-                                                                                                             ApiKey.senderId:senderId,
-                                                                                                             ApiKey.receiverId:receiverId,
-                                                                                                             ApiKey.roomId:roomId,
-                                                                                                             ApiKey.mediaUrl : mediaUrl,
-                                                                                                             ApiKey.blocked :blocked,
-                                                                                                             ApiKey.price: price,
-                                                                                                             ApiKey.messageDuration: messageDuration])
+                                                                                                             ApiKey.senderId:senderId           ])
         /// States of the messages
         /// 0 - pending, 1 - sent, 2 - delivered, 3 - read
         
     }
     
-    //MARK:-CreateCGMDataNode
-    //=======================
-    static func createCGMDataNode(direction: String,sgv: Int,date: TimeInterval){
-        let userId = Auth.auth().currentUser?.uid ?? ""
-        db.collection(ApiKey.userSystemInfo).document(userId).collection(ApiKey.cgmData).document(String(date)).setData([ApiKey.sgv: sgv,ApiKey.direction: direction,ApiKey.date: date])
-        
-    }
+//    //MARK:-CreateCGMDataNode
+//    //=======================
+//    static func createCGMDataNode(direction: String,sgv: Int,date: TimeInterval){
+//        let userId = Auth.auth().currentUser?.uid ?? ""
+//        db.collection(ApiKey.userSystemInfo).document(userId).collection(ApiKey.cgmData).document(String(date)).setData([ApiKey.sgv: sgv,ApiKey.direction: direction,ApiKey.date: date])
+//
+//    }
     
     static func createInsulinDataNode(insulinUnit: String,date: TimeInterval){
         let userId = Auth.auth().currentUser?.uid ?? ""
@@ -926,6 +949,34 @@ class FirestoreController:NSObject{
         }
     }
     
+    //MARK:-Add  cgm data array through batch operation
+    //=======================
+    static func addBatchData(currentDate:String,array:[ShareGlucoseData],success: @escaping ()-> ()) {
+        let userId = Auth.auth().currentUser?.uid ?? ""
+        let batch = db.batch()
+        array.forEach { (doc) in
+            let docRef = db.collection(ApiKey.sessionData).document(userId).collection(currentDate).document(String(doc.date))
+            batch.setData([ApiKey.sgv: doc.sgv,ApiKey.direction: doc.direction ?? "",ApiKey.date: doc.date], forDocument: docRef)
+        }
+        batch.commit { (err) in
+            if let err = err{
+                print("Error occured \(err)")
+            } else {
+                success()
+            }
+        }
+    }
+    
+    //MARK:-Add  cgm date  operation
+    //=======================
+    static func addCgmDateData(currentDate:Double) {
+        let userId = Auth.auth().currentUser?.uid ?? ""
+        db.collection(ApiKey.sessionData).document(userId).updateData([
+            ApiKey.cgmDateArray: FieldValue.arrayUnion([currentDate])
+        ])
+
+    }
+ 
     static func showAlert( title : String = "", msg : String,_ completion : (()->())? = nil) {
         let alertViewController = UIAlertController(title: title, message: msg, preferredStyle: UIAlertController.Style.alert)
         let okAction = UIAlertAction(title:"ok", style: UIAlertAction.Style.default) { (action : UIAlertAction) -> Void in

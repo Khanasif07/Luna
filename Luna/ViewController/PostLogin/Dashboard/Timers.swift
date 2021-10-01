@@ -12,9 +12,12 @@ import UIKit
 extension BottomSheetVC {
     
     func restartAllTimers() {
-        if !bgTimer.isValid { self.startBGTimer(time: 2) }
-        if !minAgoTimer.isValid { self.startMinAgoTimer(time: minAgoTimeInterval) }
-        if !alarmTimer.isValid { self.startAlarmTimer(time: 30) }
+        if UserDefaultsRepository.shareUserName.value != "" && UserDefaultsRepository.sharePassword.value != "" {
+            if !bgTimer.isValid { self.startBGTimer(time: 2) }
+            if !minAgoTimer.isValid { self.startMinAgoTimer(time: minAgoTimeInterval) }
+            // if !alarmTimer.isValid { self.startAlarmTimer(time: 30) }
+        } else {
+        }
     }
     
     
@@ -49,6 +52,7 @@ extension BottomSheetVC {
             let formattedDuration = formatter.string(from: secondsAgo)
             self.timeAgoLbl.text = (formattedDuration ?? "") + " min ago"
             latestMinAgoString = formattedDuration ?? ""
+            SystemInfoModel.shared.previousCgmReadingTime = latestMinAgoString.isEmpty ? "0" : latestMinAgoString
             latestMinAgoString += " min ago"
         } else {
             self.timeAgoLbl.text = ""
@@ -59,17 +63,17 @@ extension BottomSheetVC {
     // Runs a 60 second timer when an alarm is snoozed
     // Prevents the alarm from triggering again while saving the snooze time to settings
     // End function needs nothing done
-    func startCheckAlarmTimer(time: TimeInterval = 60) {
-        
-        checkAlarmTimer = Timer.scheduledTimer(timeInterval: time,
-                                               target: self,
-                                               selector: #selector(self.checkAlarmTimerDidEnd(_:)),
-                                               userInfo: nil,
-                                               repeats: false)
-    }
+//    func startCheckAlarmTimer(time: TimeInterval = 60) {
+//
+//        checkAlarmTimer = Timer.scheduledTimer(timeInterval: time,
+//                                               target: self,
+//                                               selector: #selector(self.checkAlarmTimerDidEnd(_:)),
+//                                               userInfo: nil,
+//                                               repeats: false)
+//    }
     
-    @objc func checkAlarmTimerDidEnd(_ timer:Timer) {
-    }
+//    @objc func checkAlarmTimerDidEnd(_ timer:Timer) {
+//    }
     
     // BG Timer
     // Runs to 5:10 after last reading timestamp
@@ -98,6 +102,16 @@ extension BottomSheetVC {
         // Check if the last reading is less than 10 minutes ago
         // to only pull 1 reading if that's all we need
         if bgData.count > 0 {
+            //MARK:- Importants
+            let date = Date(timeIntervalSince1970: bgData.last!.date)
+            let cgmDate = Date(timeIntervalSince1970: AppUserDefaults.value(forKey: .latestCgmDate).doubleValue)
+            if !Calendar.current.isDate(date, equalTo: cgmDate, toGranularity: .day) {
+                FirestoreController.addBatchData(currentDate: String(bgData.last!.date), array: bgData) {
+                    print("Commited successfully")
+                    AppUserDefaults.save(value: (self.bgData[self.bgData.count - 1].date), forKey: .latestCgmDate)
+                    FirestoreController.addCgmDateData(currentDate: (self.bgData.last!.date))
+                }
+            }
             let now = dateTimeUtils.getNowTimeIntervalUTC()
             let lastReadingTime = bgData.last!.date
             let secondsAgo = now - lastReadingTime
@@ -170,18 +184,18 @@ extension BottomSheetVC {
     
     // Alarm Timer
     // Run the alarm checker every 15 seconds
-    func startAlarmTimer(time: TimeInterval) {
-        alarmTimer = Timer.scheduledTimer(timeInterval: time,
-                                         target: self,
-                                         selector: #selector(self.alarmTimerDidEnd(_:)),
-                                         userInfo: nil,
-                                         repeats: true)
-        
-    }
+//    func startAlarmTimer(time: TimeInterval) {
+//        alarmTimer = Timer.scheduledTimer(timeInterval: time,
+//                                         target: self,
+//                                         selector: #selector(self.alarmTimerDidEnd(_:)),
+//                                         userInfo: nil,
+//                                         repeats: true)
+//
+//    }
     
-    @objc func alarmTimerDidEnd(_ timer:Timer) {
-        if bgData.count > 0 {
-            self.checkAlarms(bgs: bgData)
-        }
-    }
+//    @objc func alarmTimerDidEnd(_ timer:Timer) {
+//        if bgData.count > 0 {
+//            self.checkAlarms(bgs: bgData)
+//        }
+//    }
 }
