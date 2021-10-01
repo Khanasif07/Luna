@@ -279,59 +279,59 @@ extension Date {
 
  extension Date {
     
-    public func plus(seconds s: UInt) -> Date {
+    func plus(seconds s: UInt) -> Date {
         return self.addComponentsToDate(seconds: Int(s), minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func minus(seconds s: UInt) -> Date {
+    func minus(seconds s: UInt) -> Date {
         return self.addComponentsToDate(seconds: -Int(s), minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func plus(minutes m: UInt) -> Date {
+    func plus(minutes m: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: Int(m), hours: 0, days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func minus(minutes m: UInt) -> Date {
+    func minus(minutes m: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: -Int(m), hours: 0, days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func plus(hours h: UInt) -> Date {
+    func plus(hours h: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: Int(h), days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func minus(hours h: UInt) -> Date {
+    func minus(hours h: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: -Int(h), days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func plus(days d: UInt) -> Date {
+    func plus(days d: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: Int(d), weeks: 0, months: 0, years: 0)
     }
     
-    public func minus(days d: UInt) -> Date {
+    func minus(days d: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: -Int(d), weeks: 0, months: 0, years: 0)
     }
     
-    public func plus(weeks w: UInt) -> Date {
+     func plus(weeks w: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: Int(w), months: 0, years: 0)
     }
     
-    public func minus(weeks w: UInt) -> Date {
+     func minus(weeks w: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: -Int(w), months: 0, years: 0)
     }
     
-    public func plus(months m: UInt) -> Date {
+     func plus(months m: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: Int(m), years: 0)
     }
     
-    public func minus(months m: UInt) -> Date {
+     func minus(months m: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: -Int(m), years: 0)
     }
     
-    public func plus(years y: UInt) -> Date {
+     func plus(years y: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: Int(y))
     }
     
-    public func minus(years y: UInt) -> Date {
+     func minus(years y: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: -Int(y))
     }
     
@@ -357,48 +357,48 @@ extension Date {
         return Calendar.current.date(from: dc)!
     }
     
-    public static func secondsBetween(date1 d1:Date, date2 d2:Date) -> Int {
+     static func secondsBetween(date1 d1:Date, date2 d2:Date) -> Int {
         let dc = Calendar.current.dateComponents([.second], from: d1, to: d2)
         return dc.second!
     }
     
-    public static func minutesBetween(date1 d1: Date, date2 d2: Date) -> Int {
+     static func minutesBetween(date1 d1: Date, date2 d2: Date) -> Int {
         let dc = Calendar.current.dateComponents([.minute], from: d1, to: d2)
         return dc.minute!
     }
     
-    public static func hoursBetween(date1 d1: Date, date2 d2: Date) -> Int {
+     static func hoursBetween(date1 d1: Date, date2 d2: Date) -> Int {
         let dc = Calendar.current.dateComponents([.hour], from: d1, to: d2)
         return dc.hour!
     }
     
-    public static func daysBetween(date1 d1: Date, date2 d2: Date) -> Int {
+     static func daysBetween(date1 d1: Date, date2 d2: Date) -> Int {
         let dc = Calendar.current.dateComponents([.day], from: d1, to: d2)
         return dc.day!
     }
     
-    public static func weeksBetween(date1 d1: Date, date2 d2: Date) -> Int {
+     static func weeksBetween(date1 d1: Date, date2 d2: Date) -> Int {
         let dc = Calendar.current.dateComponents([.weekOfYear], from: d1, to: d2)
         return dc.weekOfYear!
     }
     
-    public static func monthsBetween(date1 d1: Date, date2 d2: Date) -> Int {
+     static func monthsBetween(date1 d1: Date, date2 d2: Date) -> Int {
         let dc = Calendar.current.dateComponents([.month], from: d1, to: d2)
         return dc.month!
     }
     
-    public static func yearsBetween(date1 d1: Date, date2 d2: Date) -> Int {
+     static func yearsBetween(date1 d1: Date, date2 d2: Date) -> Int {
         let dc = Calendar.current.dateComponents([.year], from: d1, to: d2)
         return dc.year!
     }
     
     //MARK- Comparison Methods
     
-    public func isGreaterThan(_ date: Date) -> Bool {
+     func isGreaterThan(_ date: Date) -> Bool {
         return (self.compare(date) == .orderedDescending)
     }
     
-    public func isLessThan(_ date: Date) -> Bool {
+     func isLessThan(_ date: Date) -> Bool {
         return (self.compare(date) == .orderedAscending)
     }
     

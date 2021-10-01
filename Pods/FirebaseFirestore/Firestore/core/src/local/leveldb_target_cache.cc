@@ -45,6 +45,7 @@ using model::DocumentKeySet;
 using model::ListenSequenceNumber;
 using model::SnapshotVersion;
 using model::TargetId;
+using nanopb::ByteString;
 using nanopb::Message;
 using nanopb::StringReader;
 

@@ -81,11 +81,11 @@ class Target {
     return limit_;
   }
 
-  const absl::optional<Bound>& start_at() const {
+  const std::shared_ptr<Bound>& start_at() const {
     return start_at_;
   }
 
-  const absl::optional<Bound>& end_at() const {
+  const std::shared_ptr<Bound>& end_at() const {
     return end_at_;
   }
 
@@ -111,8 +111,8 @@ class Target {
          FilterList filters,
          OrderByList order_bys,
          int32_t limit,
-         absl::optional<Bound> start_at,
-         absl::optional<Bound> end_at)
+         std::shared_ptr<Bound> start_at,
+         std::shared_ptr<Bound> end_at)
       : path_(std::move(path)),
         collection_group_(std::move(collection_group)),
         filters_(std::move(filters)),
@@ -130,8 +130,8 @@ class Target {
   FilterList filters_;
   OrderByList order_bys_;
   int32_t limit_ = kNoLimit;
-  absl::optional<Bound> start_at_;
-  absl::optional<Bound> end_at_;
+  std::shared_ptr<Bound> start_at_;
+  std::shared_ptr<Bound> end_at_;
 
   mutable std::string canonical_id_;
 };

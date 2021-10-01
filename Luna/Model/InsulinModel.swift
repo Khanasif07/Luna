@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct InsulinModel: Identifiable, Codable {
     let id: Int
     let date: Date

@@ -53,7 +53,7 @@ using DocumentSnapshotListener =
 using QuerySnapshotListener =
     std::unique_ptr<core::EventListener<QuerySnapshot>>;
 
-using QueryCallback = std::function<void(core::Query, bool)>;
+using QueryCallback = std::function<void(absl::optional<core::Query>)>;
 
 }  // namespace api
 }  // namespace firestore

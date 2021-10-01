@@ -19,16 +19,17 @@
 #include <cstdlib>
 #include <utility>
 
+#include "Firestore/core/src/model/document.h"
 #include "Firestore/core/src/model/field_path.h"
-#include "Firestore/core/src/model/mutable_document.h"
+#include "Firestore/core/src/model/field_value.h"
+#include "Firestore/core/src/model/no_document.h"
+#include "Firestore/core/src/model/unknown_document.h"
 #include "Firestore/core/src/util/hard_assert.h"
 #include "Firestore/core/src/util/to_string.h"
 
 namespace firebase {
 namespace firestore {
 namespace model {
-
-using nanopb::Message;
 
 static_assert(
     sizeof(Mutation) == sizeof(PatchMutation),
@@ -72,57 +73,75 @@ PatchMutation::Rep::Rep(DocumentKey&& key,
       mask_(std::move(mask)) {
 }
 
-void PatchMutation::Rep::ApplyToRemoteDocument(
-    MutableDocument& document, const MutationResult& mutation_result) const {
-  VerifyKeyMatches(document);
+MaybeDocument PatchMutation::Rep::ApplyToRemoteDocument(
+    const absl::optional<MaybeDocument>& maybe_doc,
+    const MutationResult& mutation_result) const {
+  VerifyKeyMatches(maybe_doc);
 
-  if (!precondition().IsValidFor(document)) {
+  if (!precondition().IsValidFor(maybe_doc)) {
     // Since the mutation was not rejected, we know that the precondition
     // matched on the backend. We therefore must not have the expected version
     // of the document in our cache and return an UnknownDocument with the known
     // update_time.
-    document.ConvertToUnknownDocument(mutation_result.version());
-    return;
+    return UnknownDocument(key(), mutation_result.version());
   }
 
-  ObjectValue& data = document.data();
-  auto transform_results =
-      ServerTransformResults(data, mutation_result.transform_results());
-  data.SetAll(GetPatch());
-  data.SetAll(std::move(transform_results));
-  document.ConvertToFoundDocument(mutation_result.version())
-      .SetHasCommittedMutations();
+  std::vector<FieldValue> transform_results =
+      mutation_result.transform_results() != absl::nullopt
+          ? ServerTransformResults(maybe_doc,
+                                   *mutation_result.transform_results())
+          : std::vector<FieldValue>();
+
+  ObjectValue new_data = PatchDocument(maybe_doc, transform_results);
+  const SnapshotVersion& version = mutation_result.version();
+  return Document(std::move(new_data), key(), version,
+                  DocumentState::kCommittedMutations);
 }
 
-void PatchMutation::Rep::ApplyToLocalView(
-    MutableDocument& document, const Timestamp& local_write_time) const {
-  VerifyKeyMatches(document);
+absl::optional<MaybeDocument> PatchMutation::Rep::ApplyToLocalView(
+    const absl::optional<MaybeDocument>& maybe_doc,
+    const Timestamp& local_write_time) const {
+  VerifyKeyMatches(maybe_doc);
 
-  if (!precondition().IsValidFor(document)) {
-    return;
+  if (!precondition().IsValidFor(maybe_doc)) {
+    return maybe_doc;
   }
 
-  ObjectValue& data = document.data();
-  auto transform_results = LocalTransformResults(data, local_write_time);
-  data.SetAll(GetPatch());
-  data.SetAll(std::move(transform_results));
-  document.ConvertToFoundDocument(GetPostMutationVersion(document))
-      .SetHasLocalMutations();
+  std::vector<FieldValue> transform_results =
+      LocalTransformResults(maybe_doc, local_write_time);
+
+  ObjectValue new_data = PatchDocument(maybe_doc, transform_results);
+  SnapshotVersion version = GetPostMutationVersion(maybe_doc);
+  return Document(std::move(new_data), key(), version,
+                  DocumentState::kLocalMutations);
 }
 
-TransformMap PatchMutation::Rep::GetPatch() const {
-  TransformMap result;
+ObjectValue PatchMutation::Rep::PatchDocument(
+    const absl::optional<MaybeDocument>& maybe_doc,
+    const std::vector<FieldValue>& transform_results) const {
+  ObjectValue data;
+  if (maybe_doc && maybe_doc->type() == MaybeDocument::Type::Document) {
+    data = Document(*maybe_doc).data();
+  } else {
+    data = ObjectValue::Empty();
+  }
+  data = PatchObject(data);
+  data = TransformObject(data, transform_results);
+  return data;
+}
+
+ObjectValue PatchMutation::Rep::PatchObject(ObjectValue obj) const {
   for (const FieldPath& path : mask_) {
     if (!path.empty()) {
-      auto value = value_.Get(path);
-      if (value) {
-        result[path] = DeepClone(*value);
+      absl::optional<FieldValue> new_value = value_.Get(path);
+      if (!new_value) {
+        obj = obj.Delete(path);
       } else {
-        result[path] = absl::nullopt;
+        obj = obj.Set(path, *new_value);
       }
     }
   }
-  return result;
+  return obj;
 }
 
 bool PatchMutation::Rep::Equals(const Mutation::Rep& other) const {

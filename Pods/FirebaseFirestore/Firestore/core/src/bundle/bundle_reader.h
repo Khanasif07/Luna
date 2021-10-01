@@ -98,9 +98,9 @@ class BundleReader {
   absl::optional<std::string> ReadLengthPrefix();
 
   /**
-   * Reads `required_size` number of chars from stream into internal `buffer_`.
+   * Reads `length` number of chars from stream into internal `buffer_`.
    */
-  void ReadJsonToBuffer(size_t required_size);
+  void ReadJsonToBuffer(size_t length);
 
   /**
    * Decodes internal `buffer_` into a `BundleElement`, returned as a unique_ptr

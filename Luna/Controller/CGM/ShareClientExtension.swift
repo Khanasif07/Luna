@@ -61,8 +61,8 @@ public class bgUnits {
             return removeDecimals(value)
         } else {
             // convert mg/dL to mmol/l
-            let _ : Float = Float(value)! * 0.0555
             //TODO - Aanchal
+//            let _ : Float = Float(value)! * 0.0555
             return ""//String(floatValue.cleanValue)
         }
     }

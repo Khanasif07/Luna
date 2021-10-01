@@ -31,7 +31,7 @@
 #import "Firestore/Source/API/FIRTransaction+Internal.h"
 #import "Firestore/Source/API/FIRWriteBatch+Internal.h"
 #import "Firestore/Source/API/FSTFirestoreComponent.h"
-#import "Firestore/Source/API/FSTUserDataReader.h"
+#import "Firestore/Source/API/FSTUserDataConverter.h"
 
 #include "Firestore/core/src/api/collection_reference.h"
 #include "Firestore/core/src/api/document_reference.h"
@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FIRFirestore ()
 
-@property(nonatomic, strong, readonly) FSTUserDataReader *dataReader;
+@property(nonatomic, strong, readonly) FSTUserDataConverter *dataConverter;
 
 @end
 
@@ -162,8 +162,8 @@ NS_ASSUME_NONNULL_BEGIN
       }
     };
 
-    _dataReader = [[FSTUserDataReader alloc] initWithDatabaseID:_firestore->database_id()
-                                                   preConverter:block];
+    _dataConverter = [[FSTUserDataConverter alloc] initWithDatabaseID:_firestore->database_id()
+                                                         preConverter:block];
     // Use the property setter so the default settings get plumbed into _firestoreClient.
     self.settings = [[FIRFirestoreSettings alloc] init];
   }
@@ -198,9 +198,6 @@ NS_ASSUME_NONNULL_BEGIN
   if (!collectionPath) {
     ThrowInvalidArgument("Collection path cannot be nil.");
   }
-  if (!collectionPath.length) {
-    ThrowInvalidArgument("Collection path cannot be empty.");
-  }
   if ([collectionPath containsString:@"//"]) {
     ThrowInvalidArgument("Invalid path (%s). Paths must not contain // in them.", collectionPath);
   }
@@ -212,9 +209,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (FIRDocumentReference *)documentWithPath:(NSString *)documentPath {
   if (!documentPath) {
     ThrowInvalidArgument("Document path cannot be nil.");
-  }
-  if (!documentPath.length) {
-    ThrowInvalidArgument("Document path cannot be empty.");
   }
   if ([documentPath containsString:@"//"]) {
     ThrowInvalidArgument("Invalid path (%s). Paths must not contain // in them.", documentPath);
@@ -228,9 +222,6 @@ NS_ASSUME_NONNULL_BEGIN
   if (!collectionID) {
     ThrowInvalidArgument("Collection ID cannot be nil.");
   }
-  if (!collectionID.length) {
-    ThrowInvalidArgument("Collection ID cannot be empty.");
-  }
   if ([collectionID containsString:@"/"]) {
     ThrowInvalidArgument("Invalid collection ID (%s). Collection IDs must not contain / in them.",
                          collectionID);
@@ -241,7 +232,8 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (FIRWriteBatch *)batch {
-  return [FIRWriteBatch writeBatchWithDataReader:self.dataReader writeBatch:_firestore->GetBatch()];
+  return [FIRWriteBatch writeBatchWithDataConverter:self.dataConverter
+                                         writeBatch:_firestore->GetBatch()];
 }
 
 - (void)runTransactionWithBlock:(UserUpdateBlock)updateBlock
@@ -443,13 +435,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)getQueryNamed:(NSString *)name completion:(void (^)(FIRQuery *_Nullable query))completion {
   auto firestore = _firestore;
-  auto callback = [completion, firestore](core::Query query, bool found) {
+  auto callback = [completion, firestore](absl::optional<core::Query> query) {
     if (!completion) {
       return;
     }
 
-    if (found) {
-      FIRQuery *firQuery = [[FIRQuery alloc] initWithQuery:std::move(query) firestore:firestore];
+    if (query.has_value()) {
+      FIRQuery *firQuery = [[FIRQuery alloc] initWithQuery:std::move(query.value())
+                                                 firestore:firestore];
       completion(firQuery);
     } else {
       completion(nil);

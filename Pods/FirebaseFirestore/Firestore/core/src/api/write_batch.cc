@@ -31,6 +31,7 @@ namespace firestore {
 namespace api {
 
 using model::DeleteMutation;
+using model::Mutation;
 using model::Precondition;
 using util::ThrowIllegalState;
 using util::ThrowInvalidArgument;
