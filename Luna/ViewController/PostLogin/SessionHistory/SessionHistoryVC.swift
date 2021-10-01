@@ -9,8 +9,13 @@ import UIKit
 
 class SessionHistoryVC: UIViewController {
     
+    // MARK: - IBOutlets
+    //===========================
     @IBOutlet weak var sessionHistoryTV: UITableView!
     
+    
+    // MARK: - Variables
+    //===========================
 //    var insulinSectionDataArray : [(Int,[ShareGlucoseData])] = []
     var insulinSectionDataArray : [(Int,[Double])] = []
     var sessionHistory = [Double]()
@@ -26,7 +31,7 @@ class SessionHistoryVC: UIViewController {
     //===========================
     @IBAction func filterBtnTapped(_ sender: AppButton) {
         let vc = SessionFilterVC.instantiate(fromAppStoryboard: .CGPStoryboard)
-//        vc.delegate = self
+        vc.delegate = self
         vc.startdate = startdate
         vc.enddate = enddate
         navigationController?.pushViewController(vc, animated: true)
@@ -34,10 +39,7 @@ class SessionHistoryVC: UIViewController {
     
     @IBAction func crossBtnTapped(_ sender: AppButton) {
         self.pop()
-        
     }
-    
-    
 }
 
 // MARK: - Extension For Functions
@@ -48,11 +50,14 @@ extension SessionHistoryVC {
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
-//        CommonFunctions.showActivityLoader()
-        self.getInsulinData()
-        sessionHistoryTV.registerCell(with: SessionHistoryTableViewCell.self)
-        sessionHistoryTV.delegate = self
-        sessionHistoryTV.dataSource = self
+        CommonFunctions.showActivityLoader()
+        self.sessionHistoryTV.registerCell(with: SessionHistoryTableViewCell.self)
+        self.sessionHistoryTV.delegate = self
+        self.sessionHistoryTV.dataSource = self
+        self.getSessionHistoryData()
+    }
+    
+    private func getSessionHistoryData(){
         FirestoreController.getFirebaseSessionHistoryData{ (insulinDataArray) in
             print(insulinDataArray)
             self.sessionHistory = insulinDataArray
@@ -69,50 +74,48 @@ extension SessionHistoryVC {
             self.sessionHistoryTV.reloadData()
             CommonFunctions.hideActivityLoader()
         }failure: { (error) -> (Void) in
-                CommonFunctions.showToastWithMessage(error.localizedDescription)
-                CommonFunctions.hideActivityLoader()
-            }
-    }
-    
-    private func getInsulinData(){
-//        FirestoreController.getFirebaseInsulinData { (insulinDataArray) in
-//            print(insulinDataArray)
-//            SystemInfoModel.shared.insulinData = insulinDataArray
-//            SystemInfoModel.shared.insulinData?.forEach({ (dataModel) in
-//                let month = dataModel.date.getMonthInterval()
-//                if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
-//                    if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
-//                        self.insulinSectionDataArray[selectedIndex].1.append(dataModel)
-//                    }
-//                } else {
-//                    self.insulinSectionDataArray.append((month, [dataModel]))
-//                }
-//            })
-//            self.SessionHistoryTV.reloadData()
-//            CommonFunctions.hideActivityLoader()
-//        } failure: { (error) -> (Void) in
-//            CommonFunctions.showToastWithMessage(error.localizedDescription)
-//            CommonFunctions.hideActivityLoader()
-//        }
-//        FirestoreController.getFirebaseCGMData { (cgmDataArray) in
-//            print(cgmDataArray)
-//            SystemInfoModel.shared.cgmData = cgmDataArray
-//            SystemInfoModel.shared.cgmData?.forEach({ (dataModel) in
-//                let month = dataModel.date.getMonthInterval()
-//                if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
-//                    if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
-//                        self.insulinSectionDataArray[selectedIndex].1.append(dataModel)
-//                    }
-//                } else {
-//                    self.insulinSectionDataArray.append((month, [dataModel]))
-//                }
-//            })
-//            self.sessionHistoryTV.reloadData()
-//            CommonFunctions.hideActivityLoader()
-//        } failure: { (error) -> (Void) in
-//            CommonFunctions.showToastWithMessage(error.localizedDescription)
-//            CommonFunctions.hideActivityLoader()
-//        }
+            CommonFunctions.showToastWithMessage(error.localizedDescription)
+            CommonFunctions.hideActivityLoader()
+        }
+        CommonFunctions.showActivityLoader()
+        //        FirestoreController.getFirebaseInsulinData { (insulinDataArray) in
+        //            print(insulinDataArray)
+        //            SystemInfoModel.shared.insulinData = insulinDataArray
+        //            SystemInfoModel.shared.insulinData?.forEach({ (dataModel) in
+        //                let month = dataModel.date.getMonthInterval()
+        //                if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
+        //                    if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
+        //                        self.insulinSectionDataArray[selectedIndex].1.append(dataModel)
+        //                    }
+        //                } else {
+        //                    self.insulinSectionDataArray.append((month, [dataModel]))
+        //                }
+        //            })
+        //            self.SessionHistoryTV.reloadData()
+        //            CommonFunctions.hideActivityLoader()
+        //        } failure: { (error) -> (Void) in
+        //            CommonFunctions.showToastWithMessage(error.localizedDescription)
+        //            CommonFunctions.hideActivityLoader()
+        //        }
+        //        FirestoreController.getFirebaseCGMData { (cgmDataArray) in
+        //            print(cgmDataArray)
+        //            SystemInfoModel.shared.cgmData = cgmDataArray
+        //            SystemInfoModel.shared.cgmData?.forEach({ (dataModel) in
+        //                let month = dataModel.date.getMonthInterval()
+        //                if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
+        //                    if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
+        //                        self.insulinSectionDataArray[selectedIndex].1.append(dataModel)
+        //                    }
+        //                } else {
+        //                    self.insulinSectionDataArray.append((month, [dataModel]))
+        //                }
+        //            })
+        //            self.sessionHistoryTV.reloadData()
+        //            CommonFunctions.hideActivityLoader()
+        //        } failure: { (error) -> (Void) in
+        //            CommonFunctions.showToastWithMessage(error.localizedDescription)
+        //            CommonFunctions.hideActivityLoader()
+        //        }
     }
     
     
@@ -162,40 +165,40 @@ extension SessionHistoryVC : UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-// MARK: - SessionFilterVCDelegate
+ //MARK: - SessionFilterVCDelegate
 //=====================================
-//extension SessionHistoryVC: SessionFilterVCDelegate{
-//    func filterApplied(startDate: Date?, endDate: Date?) {
-//        self.startdate = startDate!
-//        self.enddate = endDate!
-//        let output = SystemInfoModel.shared.cgmData?.filter { (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) >= self.startdate! && (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) <= self.enddate! }
-//        self.insulinSectionDataArray = []
-//        output?.forEach({ (dataModel) in
-//            let month = dataModel.date.getMonthInterval()
-//            if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
-//                if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
-//                    self.insulinSectionDataArray[selectedIndex].1.append(dataModel)
-//                }
-//            } else {
-//                self.insulinSectionDataArray.append((month, [dataModel]))
-//            }
-//        })
-//        self.sessionHistoryTV.reloadData()
-//    }
+extension SessionHistoryVC: SessionFilterVCDelegate{
+    func filterApplied(startDate: Date?, endDate: Date?) {
+        self.startdate = startDate!
+        self.enddate = endDate!
+        let output = self.sessionHistory.filter { (NSDate(timeIntervalSince1970: TimeInterval($0)) as Date) > self.startdate! && (NSDate(timeIntervalSince1970: TimeInterval($0)) as Date) < self.enddate! }
+        self.insulinSectionDataArray = []
+        output.forEach({ (data) in
+            let month = data.getMonthInterval()
+            if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
+                if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
+                    self.insulinSectionDataArray[selectedIndex].1.append(data)
+                }
+            } else {
+                self.insulinSectionDataArray.append((month, [data]))
+            }
+        })
+        self.sessionHistoryTV.reloadData()
+    }
     
-//    func resetFilter() {
-//        self.startdate = nil
-//        self.enddate = nil
-//        SystemInfoModel.shared.cgmData?.forEach({ (dataModel) in
-//            let month = dataModel.date.getMonthInterval()
-//            if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
-//                if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
-//                    self.insulinSectionDataArray[selectedIndex].1.append(dataModel)
-//                }
-//            } else {
-//                self.insulinSectionDataArray.append((month, [dataModel]))
-//            }
-//        })
-//        self.sessionHistoryTV.reloadData()
-//    }
-//}
+    func resetFilter() {
+        self.startdate = nil
+        self.enddate = nil
+        self.sessionHistory.forEach({ (data) in
+            let month = data.getMonthInterval()
+            if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
+                if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
+                    self.insulinSectionDataArray[selectedIndex].1.append(data)
+                }
+            } else {
+                self.insulinSectionDataArray.append((month, [data]))
+            }
+        })
+        self.sessionHistoryTV.reloadData()
+    }
+}

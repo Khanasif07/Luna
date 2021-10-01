@@ -7,7 +7,6 @@
 import Foundation
 import UIKit
 import Charts
-import UserNotifications
 
 class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     
@@ -21,11 +20,11 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         didSet{
 //            self.cgmData = self.cgmData.reversed()
             setDataCount(cgmData.endIndex, range: UInt32(cgmData.endIndex))
-            let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
-                                                        xAxis: cgmChartView.xAxis,
-                                                        transformer: self.cgmChartView.getTransformer(forAxis: .left),
-                                                        cgmData: self.cgmData)
-            self.cgmChartView.xAxisRenderer = customXAxisRender
+//            let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
+//                                                        xAxis: cgmChartView.xAxis,
+//                                                        transformer: self.cgmChartView.getTransformer(forAxis: .left),
+//                                                        cgmData: self.cgmData)
+//            self.cgmChartView.xAxisRenderer = customXAxisRender
         }
     }
     
@@ -40,15 +39,18 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         cgmChartView.delegate = self
 
         cgmChartView.chartDescription?.enabled = true
-//        cgmChartView.dragEnabled = true
-//        cgmChartView.setScaleEnabled(false)
-//        cgmChartView.pinchZoomEnabled = false
+        cgmChartView.dragEnabled = true
+        cgmChartView.setScaleEnabled(false)
+        cgmChartView.pinchZoomEnabled = false
 
         let xAxis = cgmChartView.xAxis
         xAxis.labelPosition = .bottom
         xAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
         xAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
-        xAxis.granularity = 1
+//        xAxis.granularity = 1
+        xAxis.granularity = 1800
+        xAxis.labelTextColor = NSUIColor.label
+        xAxis.labelPosition = XAxis.LabelPosition.bottom
         xAxis.valueFormatter = ChartXValueFormatter()
 
         let leftAxis = cgmChartView.leftAxis
@@ -56,7 +58,10 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         leftAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
         leftAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
         leftAxis.axisMaximum = 300
-        leftAxis.granularity = 0.0
+        //MARK: - Important
+        leftAxis.drawGridLinesEnabled = true
+        leftAxis.granularityEnabled = true
+        leftAxis.granularity = 1
         leftAxis.drawAxisLineEnabled = false
         leftAxis.axisMinimum = -0
         leftAxis.drawLimitLinesBehindDataEnabled = false
@@ -69,14 +74,13 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         marker.minimumSize = CGSize(width: 50.0, height: 30.0)
         cgmChartView.marker = marker
         
-//        cgmChartView.xAxis.centerAxisLabelsEnabled = false
-//        cgmChartView.xAxis.setLabelCount(7, force: true) //enter the number of labels here
+        cgmChartView.xAxis.centerAxisLabelsEnabled = false
+        cgmChartView.xAxis.setLabelCount(7, force: true) //enter the number of labels here
 
         cgmChartView.rightAxis.enabled = false
-        cgmChartView.xAxis.granularity = 0.0
         cgmChartView.xAxis.drawGridLinesEnabled = false
         cgmChartView.legend.form = .none
-        setDataCount(cgmData.endIndex, range: UInt32(cgmData.endIndex))
+        
         cgmChartView.moveViewToX(cgmChartView.data?.yMax ?? 0.0 - 1)
         cgmChartView.zoom(scaleX: 4.0, scaleY: 0, x: 0, y: 0)
         cgmChartView.animate(yAxisDuration: 2.5)
@@ -84,18 +88,36 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         cgmChartView.noDataTextColor = #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1)
         cgmChartView.noDataFont = AppFonts.SF_Pro_Display_Bold.withSize(.x15)
         cgmChartView.setExtraOffsets(left: 10, top: 0, right: 20, bottom: 0)
+        
+        cgmChartView.rightAxis.labelTextColor = NSUIColor.label
+        cgmChartView.rightAxis.labelPosition = YAxis.LabelPosition.outsideChart
+        cgmChartView.rightAxis.axisMinimum = 0.0
+        cgmChartView.rightAxis.gridLineDashLengths = [5.0, 5.0]
+        cgmChartView.rightAxis.drawGridLinesEnabled = false
+        cgmChartView.rightAxis.valueFormatter = ChartYMMOLValueFormatter()
+        cgmChartView.rightAxis.granularityEnabled = true
+        cgmChartView.rightAxis.granularity = 50
+        
+        cgmChartView.maxHighlightDistance = 15.0
+        cgmChartView.legend.enabled = false
+        cgmChartView.scaleYEnabled = false
+        cgmChartView.drawGridBackgroundEnabled = true
+        cgmChartView.gridBackgroundColor = NSUIColor.clear
+        
+        cgmChartView.highlightValue(nil, callDelegate: false)
         cgmChartView.clear()
+        setDataCount(cgmData.endIndex, range: UInt32(cgmData.endIndex))
     }
     
     func setDataCount(_ count: Int, range: UInt32) {
-//        let values = cgmData.map { (data) -> ChartDataEntry in
-//            return ChartDataEntry(x: Double(data.date), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
-//        }
-        var values = [ChartDataEntry]()
-        for (index, data) in cgmData.enumerated() {
-            let value = BarChartDataEntry(x: Double(index), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
-            values.append(value)
+        let values = cgmData.map { (data) -> ChartDataEntry in
+            return ChartDataEntry(x: Double(data.date), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
         }
+//        var values = [ChartDataEntry]()
+//        for (index, data) in cgmData.enumerated() {
+//            let value = BarChartDataEntry(x: Double(index), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
+//            values.append(value)
+//        }
         let set1 = LineChartDataSet(entries: values, label: "")
         set1.drawIconsEnabled = false
         setup(set1)
@@ -105,10 +127,9 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         set1.fillAlpha = 1.0
         set1.fill = Fill(linearGradient: gradient!, angle: 90.0)
         set1.drawFilledEnabled = true
-        set1.drawValuesEnabled = true
+        set1.drawValuesEnabled = false
 
         let data = LineChartData(dataSet: set1)
-        cgmChartView.maxVisibleCount = 10
         cgmChartView.data = data
     }
 
@@ -122,9 +143,4 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
             dataSet.formLineWidth = 1
             dataSet.formSize = 15
     }
-    
-    // MARK: - IBActions
-    //===========================
-    
-    
 }

@@ -171,10 +171,6 @@ extension BottomSheetVC :  ChartViewDelegate {
                 topBG = Float(entries[i].sgv) + maxBGOffset
             }
             let value = ChartDataEntry(x: Double(entries[i].date), y: Double(entries[i].sgv), data: formatPillText(line1: bgUnits.toDisplayUnits(String(entries[i].sgv)), time: entries[i].date))
-            if UserDefaultsRepository.debugLog.value {
-                //writeDebugLog(value: "BG: " + value.description)
-                
-            }
             mainChart.addEntry(value)
             
             if Double(entries[i].sgv) >= Double(UserDefaultsRepository.highLine.value) {
