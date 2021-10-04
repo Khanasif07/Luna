@@ -17,11 +17,14 @@ target 'Luna' do
   pod 'MessageKit'
   pod 'Firebase/Storage'
   pod 'Firebase/Crashlytics'
-  pod 'Firebase/Analytics'
+  pod 'Firebase/Analytics', '8.1.0'
   pod 'Firebase/Core'
   pod 'Firebase/Storage'
   pod 'GoogleSignIn', '~> 5.0.2'
   pod 'SwiftKeychainWrapper'
   pod 'Charts'
   pod 'KDCircularProgress'
+  
+  pod 'Firebase/Performance'
+  
 end

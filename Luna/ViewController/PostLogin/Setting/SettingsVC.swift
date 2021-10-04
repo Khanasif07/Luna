@@ -312,8 +312,6 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
             if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
                UIApplication.shared.open(settingsUrl)
              }
-        default:
-            CommonFunctions.showToastWithMessage("Under Development")
         }
     }
 }

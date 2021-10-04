@@ -89,7 +89,7 @@ StatusOr<std::unique_ptr<LevelDbPersistence>> LevelDbPersistence::Create(
   if (!created.ok()) return created.status();
 
   std::unique_ptr<DB> db = std::move(created).ValueOrDie();
-  LevelDbMigrations::RunMigrations(db.get(), serializer);
+  LevelDbMigrations::RunMigrations(db.get());
 
   LevelDbTransaction transaction(db.get(), "Start LevelDB");
   std::set<std::string> users = CollectUserSet(&transaction);

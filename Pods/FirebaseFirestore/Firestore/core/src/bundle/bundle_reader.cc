@@ -34,7 +34,7 @@ namespace {
 
 json Parse(absl::string_view s) {
   return json::parse(s.begin(), s.end(), /*callback=*/nullptr,
-                     /*allow_exceptions=*/false);
+                     /*allow_exception=*/false);
 }
 
 }  // namespace

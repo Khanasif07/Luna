@@ -35,8 +35,11 @@ This repository contains all Apple platform Firebase SDK source except FirebaseA
 and FirebaseML.
 
 Firebase is an app development platform with tools to help you build, grow and
-monetize your app. More information about Firebase can be found on the
-[official Firebase website](https://firebase.google.com).
+monetize your app. More information about Firebase can be found at
+[https://firebase.google.com](https://firebase.google.com).
+
+The repository also includes GoogleUtilities and GoogleDataTransport source
+which are utilities used by Firebase and other Google products.
 
 **Note** _FirebaseCombineSwift_ contains support for Apple's Combine framework. This module is currently under development, and not yet supported for use in production environments. Fore more details, please refer to the [docs](FirebaseCombineSwift/README.md).
 
@@ -90,7 +93,8 @@ pod 'FirebaseMessaging', :path => '/path/to/firebase-ios-sdk'
 ### Carthage (iOS only)
 
 Instructions for the experimental Carthage distribution are at
-[Carthage](Carthage.md).
+[Carthage](Carthage.md). If you have a new Mac with an Apple silicon chip, please see
+[these instructions](AppleSilicon.md).
 
 ### Using Firebase from a Framework or a library
 
@@ -144,7 +148,6 @@ Alternatively disable signing in each target:
 * Add `CODE_SIGNING_REQUIRED` setting with a value of `NO`
 
 ### Swift Package Manager
-* To enable test schemes: `./scripts/setup_spm_tests.sh`
 * `open Package.swift` or double click `Package.swift` in Finder.
 * Xcode will open the project
   * Choose a scheme for a library to build or test suite to run
@@ -277,11 +280,11 @@ app has communicated with our servers". This relies on Analytics and will not wo
 macOS/tvOS/watchOS/Catalyst.
 **It's safe to ignore the message and continue**, the rest of the SDKs will work as expected.
 
-#### Additional MacOS and Catalyst Notes
+#### Additional Catalyst Notes
 
 * FirebaseAuth and FirebaseMessaging require adding `Keychain Sharing Capability`
 to Build Settings.
-* For Catalyst, FirebaseFirestore requires signing the
+* FirebaseFirestore requires signing the
 [gRPC Resource target](https://github.com/firebase/firebase-ios-sdk/issues/3500#issuecomment-518741681).
 
 #### Additional Crashlytics Notes
@@ -300,7 +303,7 @@ iOS SDK.
 
 ## License
 
-The contents of this repository are licensed under the
+The contents of this repository is licensed under the
 [Apache License, version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
 Your use of Firebase is governed by the
