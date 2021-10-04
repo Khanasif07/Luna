@@ -92,16 +92,23 @@ extension CGMConnectedVC {
         if #available(iOS 13.0, *) {
         overrideUserInterfaceStyle = .light
         }
+        self.dataSetup()
+        self.connectDexcomAccount()
+    }
+    
+    private func dataSetup(){
         activityIndicator.isHidden = true
         self.titleLbl.textColor = UIColor.black
         self.subTitleLbl.textColor = AppColors.fontPrimaryColor
-        self.subTitleLbl.text = "Your last CGM reading was from \(SystemInfoModel.shared.previousCgmReadingTime) minutes ago"
+        if SystemInfoModel.shared.previousCgmReadingTime == "0" {
+            self.subTitleLbl.text = "CGM Reading time - \(Date().convertToDefaultTimeString())"
+        }else {
+            self.subTitleLbl.text = "Your last CGM reading was from \(SystemInfoModel.shared.previousCgmReadingTime) minutes ago"
+        }
         self.okBtn.isEnabled = true
-        connectDexcomAccount()
     }
     
     func connectDexcomAccount(){
-        
         okBtn.isEnabled = false
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()

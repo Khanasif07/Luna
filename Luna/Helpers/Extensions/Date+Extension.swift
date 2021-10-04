@@ -193,6 +193,14 @@ extension Date {
         return local
     }
     
+    func convertToDefaultTimeString() -> String {
+        // First, get a Date from the String
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = DateFormat.hour12.rawValue
+        let local = dateFormatter.string(from: self)
+        return local
+    }
+    
      func convertToString(inputFormat: DateFormat, outputFormat: DateFormat) -> String {
             // First, get a Date from the String
             let dateFormatter = DateFormatter()

@@ -152,6 +152,7 @@ extension HomeVC {
         FirestoreController.addDeviceIdListener(){ (deviceId) in
             if let uuid = UIDevice.current.identifierForVendor?.uuidString {
                 if deviceId != uuid{
+                    CommonFunctions.showToastWithMessage("Session Expired.")
                     FirestoreController.performCleanUp(for_logout: true)
                 }
             }
@@ -159,26 +160,6 @@ extension HomeVC {
             print("failure")
         }
     }
-    
-//    private func getCGMDataFromFirestore(){
-//        FirestoreController.checkCGMDataExistInDatabase {
-//            FirestoreController.getFirebaseCGMData { (cgmDataArray) in
-//                print(cgmDataArray)
-//                SystemInfoModel.shared.cgmData = cgmDataArray
-//                self.bottomSheetVC.cgmData = cgmDataArray
-//            } failure: { (error) -> (Void) in
-//                print(error.localizedDescription)
-//            }
-//        } failure: {
-//            print("CGM DATA NOT Available")
-//            if let cgmData = SystemInfoModel.shared.cgmData {
-//                self.bottomSheetVC.cgmData = cgmData
-//                for cgmModel in cgmData {
-//                    FirestoreController.createCGMDataNode(direction: cgmModel.direction ?? "", sgv: cgmModel.sgv, date: cgmModel.date)
-//                }
-//            }
-//        }
-//    }
     
     private func getUserSystemFromFirestore(){
         FirestoreController.getUserSystemInfoData {
