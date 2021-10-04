@@ -147,6 +147,7 @@ extension CGMConnectedVC {
         if !isNS && (latestDate + 330) < now {
             webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
             print("dex didn't load, triggered NS attempt")
+            CommonFunctions.showToastWithMessage("dex didn't load, triggered NS attempt")
             return
         }
         
