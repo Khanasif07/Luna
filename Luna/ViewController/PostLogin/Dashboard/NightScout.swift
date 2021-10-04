@@ -52,10 +52,6 @@ extension  BottomSheetVC{
     
     // NS BG Data Web call
     func webLoadNSBGData(onlyPullLastRecord: Bool = false) {
-        if UserDefaultsRepository.debugLog.value {
-            //self.writeDebugLog(value: "Download: BG")
-            
-        }
         // Set the count= in the url either to pull 24 hours or only the last record
         var points = "1"
         if !onlyPullLastRecord {

@@ -132,6 +132,7 @@
 		849B25622707101600323876 /* ContactsUsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B25602707101600323876 /* ContactsUsTableCell.swift */; };
 		849B25632707101600323876 /* ContactsUsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849B25612707101600323876 /* ContactsUsTableCell.xib */; };
 		849B25662707116900323876 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B25652707116900323876 /* CustomTextView.swift */; };
+		849B25CD270B1E6600323876 /* blank.wav in Resources */ = {isa = PBXBuildFile; fileRef = 849B25CC270B1E6600323876 /* blank.wav */; };
 		849B5A492697143B000AA5DC /* BottomSheetTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B5A472697143B000AA5DC /* BottomSheetTopCell.swift */; };
 		849B5A4A2697143B000AA5DC /* BottomSheetTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849B5A482697143B000AA5DC /* BottomSheetTopCell.xib */; };
 		849B7432269D612000C059E5 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849B7431269D612000C059E5 /* HealthKit.framework */; };
@@ -352,6 +353,7 @@
 		849B25602707101600323876 /* ContactsUsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUsTableCell.swift; sourceTree = "<group>"; };
 		849B25612707101600323876 /* ContactsUsTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsUsTableCell.xib; sourceTree = "<group>"; };
 		849B25652707116900323876 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
+		849B25CC270B1E6600323876 /* blank.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blank.wav; sourceTree = "<group>"; };
 		849B5A472697143B000AA5DC /* BottomSheetTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetTopCell.swift; sourceTree = "<group>"; };
 		849B5A482697143B000AA5DC /* BottomSheetTopCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetTopCell.xib; sourceTree = "<group>"; };
 		849B7431269D612000C059E5 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
@@ -897,6 +899,7 @@
 				84CC12C52668CF13009316FC /* LocalizedString */,
 				84D1F4DC2679D52700F131E0 /* Fonts */,
 				84CC12A22668C823009316FC /* Assets.xcassets */,
+				849B25CC270B1E6600323876 /* blank.wav */,
 				84CC12A72668C823009316FC /* Info.plist */,
 				846F1A1F2678C2220034ACE0 /* GoogleService-Info.plist */,
 			);
@@ -1140,6 +1143,7 @@
 				840A7E062696EB62005AA1E6 /* CGMTypeTableViewCell.xib in Resources */,
 				84FDA0AD267DCB5600AC8BE9 /* MessageReceiverCell.xib in Resources */,
 				8455492E2678FFFD000CC13D /* LoginSocialTableCell.xib in Resources */,
+				849B25CD270B1E6600323876 /* blank.wav in Resources */,
 				84D1F4F72679D52700F131E0 /* SF-Pro-Display-Semibold.otf in Resources */,
 				84F2A27E26984F3D000FDCD5 /* BottomSheetBottomCell.xib in Resources */,
 				8455A3C8268211770061C55F /* SettingTableCell.xib in Resources */,

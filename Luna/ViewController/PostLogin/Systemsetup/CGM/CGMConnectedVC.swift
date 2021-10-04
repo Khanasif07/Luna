@@ -33,7 +33,6 @@ class CGMConnectedVC: UIViewController {
     var bgTimer = Timer()
     var graphHours:Int = 24
     var latestDirectionString = ""
-    var backgroundTask = BackgroundTask()
     
     override func viewDidLoad() {
         super.viewDidLoad()

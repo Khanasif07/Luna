@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import Charts
-import EventKit
 import UserNotifications
 
 extension BottomSheetVC {
@@ -15,9 +13,6 @@ extension BottomSheetVC {
     @objc func appMovedToBackground() {
         // Allow screen to turn off
         UIApplication.shared.isIdleTimerDisabled = false;
-        
-        // We want to always come back to the home screen
-//        tabBarController?.selectedIndex = 0
         
         // Cancel the current timer and start a fresh background timer using the settings value only if background task is enabled
         
@@ -43,14 +38,14 @@ extension BottomSheetVC {
     func updateMinAgo(){
         if bgData.count > 0 {
             //MARK:- Importants
-            let date = Date(timeIntervalSince1970: bgData[bgData.count - 1].date)
-            let cgmDate = Date(timeIntervalSince1970: latestCgmDate)
-            if date != cgmDate {
-                FirestoreController.addBatchData(currentDate: String(bgData[bgData.count - 1].date), array: bgData) {
-                    AppUserDefaults.save(value: (self.bgData[self.bgData.count - 1].date), forKey: .latestCgmDate)
-                    self.latestCgmDate = self.bgData[self.bgData.count - 1].date
-                }
-            }
+//            let date = Date(timeIntervalSince1970: bgData[bgData.count - 1].date)
+//            let cgmDate = Date(timeIntervalSince1970: latestCgmDate)
+//            if date != cgmDate {
+//                FirestoreController.addBatchData(currentDate: String(bgData[bgData.count - 1].date), array: bgData) {
+//                    AppUserDefaults.save(value: (self.bgData[self.bgData.count - 1].date), forKey: .latestCgmDate)
+//                    self.latestCgmDate = self.bgData[self.bgData.count - 1].date
+//                }
+//            }
             let deltaTime = (TimeInterval(Date().timeIntervalSince1970)-bgData[bgData.count - 1].date) / 60
             minAgoBG = Double(TimeInterval(Date().timeIntervalSince1970)-bgData[bgData.count - 1].date)
             self.timeAgoLbl.text = String(Int(deltaTime)) + " min ago"

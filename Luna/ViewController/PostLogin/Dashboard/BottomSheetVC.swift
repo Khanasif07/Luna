@@ -58,7 +58,6 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     // Check Alarms Timer
     // Don't check within 1 minute of alarm triggering to give the snoozer time to save data
     var checkAlarmTimer = Timer()
-    var checkAlarmInterval: TimeInterval = 60.0
     
     var bgTimer = Timer()
     var deviceStatusTimer = Timer()
