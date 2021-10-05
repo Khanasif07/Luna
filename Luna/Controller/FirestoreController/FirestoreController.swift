@@ -183,16 +183,19 @@ class FirestoreController:NSObject{
     
     //MARK:- Get Session History Data
     //=======================
-    static func getFirebaseSessionHistoryData(success: @escaping (_ cgmModelArray: [Double]) -> Void,
+    static func getFirebaseSessionHistoryData(success: @escaping (_ cgmModelArray: [SessionHistory]) -> Void,
                                               failure:  @escaping FailureResponse){
         if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
             db.collection(ApiKey.sessionData).document(Auth.auth().currentUser?.uid ?? "").getDocument(source: .server) { (document, error) in
                     if let document = document, document.exists {
                         if  let dataDescription = document.data(){
                             print("Document data: \(dataDescription)")
-                            if  let array = dataDescription["cgmDateArray"] as? [Double]{
-                                print(array)
-                                success(array)
+                            let decoder = JSONDecoder()
+                            if  let dict = dataDescription["cgmDateArray"] as? [[String:Any]]{
+                                if let data = try? JSONSerialization.data(withJSONObject: dict, options: []){
+                                    let historyData = try? decoder.decode([SessionHistory].self, from: data)
+                                    success(historyData ?? [])
+                                }
                             }
                         }
                     } else {
@@ -257,14 +260,14 @@ class FirestoreController:NSObject{
         let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
         let isBiometricEnable = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
         let isBiometricCompleted = AppUserDefaults.value(forKey: .isBiometricCompleted).boolValue
-        let updatedCgmDate = AppUserDefaults.value(forKey: .latestCgmDate).doubleValue
+//        let updatedCgmDate = AppUserDefaults.value(forKey: .latestCgmDate).doubleValue
         AppUserDefaults.removeAllValues()
         UserModel.main = UserModel()
         if for_logout {
             AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
             AppUserDefaults.save(value: isBiometricEnable, forKey: .isBiometricSelected)
             AppUserDefaults.save(value: isBiometricCompleted, forKey: .isBiometricCompleted)
-            AppUserDefaults.save(value: updatedCgmDate, forKey: .latestCgmDate)
+//            AppUserDefaults.save(value: updatedCgmDate, forKey: .latestCgmDate)
         }
         UserDefaultsRepository.shareUserName.value = ""
         UserDefaultsRepository.sharePassword.value = ""
@@ -969,12 +972,29 @@ class FirestoreController:NSObject{
     
     //MARK:-Add  cgm date  operation
     //=======================
-    static func addCgmDateData(currentDate:Double) {
+    static func addCgmDateData(currentDate:Double,range:Double,startDate:Double,endDate:Double,insulin:Int) {
         let userId = Auth.auth().currentUser?.uid ?? ""
-        db.collection(ApiKey.sessionData).document(userId).updateData([
-            ApiKey.cgmDateArray: FieldValue.arrayUnion([currentDate])
-        ])
-
+        //
+        let specAdded: [String: Any] = [
+                    "date": currentDate,
+                    "insulin": insulin,
+            "range": range,
+                    "startDate": startDate,
+            "endDate": endDate
+                ]
+        //
+        db.collection(ApiKey.sessionData).document(userId).getDocument { (snapshot, error ) in
+            if  (snapshot?.exists)! {
+                db.collection(ApiKey.sessionData).document(userId).updateData([
+                    ApiKey.cgmDateArray: FieldValue.arrayUnion([specAdded])
+                ])
+            } else {
+                db.collection(ApiKey.sessionData).document(userId).setData([
+                    ApiKey.cgmDateArray: FieldValue.arrayUnion([specAdded])
+                ])
+            }
+        }
+        //
     }
  
     static func showAlert( title : String = "", msg : String,_ completion : (()->())? = nil) {

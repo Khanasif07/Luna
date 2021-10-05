@@ -102,7 +102,6 @@ extension SettingsVC {
         self.setUpdata()
         self.tableViewSetup()
         self.getLoginType()
-        print(Date().convertToDefaultTimeString())
     }
     
     private func tableViewSetup(){

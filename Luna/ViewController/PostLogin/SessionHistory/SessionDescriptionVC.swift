@@ -24,7 +24,7 @@ class SessionDescriptionVC: UIViewController {
     // MARK: - Variables
     //==========================
     var sections = ["Glucose Graph","List View"]
-//    var insulinDataModel : ShareGlucoseData?
+    var sessionModel : SessionHistory?
     var sessionDay : Double?
     var titleValue: String = ""
     var cgmDataArray : [ShareGlucoseData] = []

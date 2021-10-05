@@ -89,6 +89,22 @@ extension BottomSheetVC {
                                                repeats: false)
     }
     
+    private func getRangeValue(isShowPer: Bool = false)-> Double{
+        if self.bgData.endIndex > 0 {
+            let rangeArray = self.bgData.filter { (glucoseValue) -> Bool in
+                return glucoseValue.sgv >= 70 && glucoseValue.sgv <= 180
+            }
+            if isShowPer {
+                let rangePercentValue = ((100 * (rangeArray.endIndex)) / (self.bgData.endIndex))
+                return Double(rangePercentValue)
+            } else {
+                let rangePercentValue = (Double(rangeArray.endIndex) / Double(self.bgData.endIndex))
+                return rangePercentValue
+            }
+        }
+        return 0.0
+    }
+    
     @objc func bgTimerDidEnd(_ timer:Timer) {
         
         // reset timer to 1 minute if settings aren't entered
@@ -109,8 +125,7 @@ extension BottomSheetVC {
                 AppUserDefaults.save(value: (self.bgData[self.bgData.count - 1].date), forKey: .latestCgmDate)
                 FirestoreController.addBatchData(currentDate: String(bgData.last!.date), array: bgData) {
                     print("Commited successfully")
-//                    AppUserDefaults.save(value: (self.bgData[self.bgData.count - 1].date), forKey: .latestCgmDate)
-                    FirestoreController.addCgmDateData(currentDate: (self.bgData.last!.date))
+                    FirestoreController.addCgmDateData(currentDate: (self.bgData.last!.date), range: self.getRangeValue(isShowPer: true), startDate: (self.bgData.first!.date), endDate: (self.bgData.last!.date), insulin: 0)
                 }
             }
             let now = dateTimeUtils.getNowTimeIntervalUTC()

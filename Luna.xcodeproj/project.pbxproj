@@ -121,6 +121,7 @@
 		845B619126AAC2D900F9BC2A /* ShareClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B618F26AAC2D900F9BC2A /* ShareClient.swift */; };
 		845B619426AAC31800F9BC2A /* ShareClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B619326AAC31800F9BC2A /* ShareClientExtension.swift */; };
 		84602903268C50F800141E0D /* AboutTermsPolicyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84602902268C50F800141E0D /* AboutTermsPolicyVC.swift */; };
+		84606119270C3DF900DFD22A /* SessionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84606118270C3DF900DFD22A /* SessionHistory.swift */; };
 		847899732684824F00D1DF36 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847899722684824F00D1DF36 /* HomeVC.swift */; };
 		847899762684870F00D1DF36 /* AboutSectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847899752684870F00D1DF36 /* AboutSectionVC.swift */; };
 		847D1B292689A87A00220DAE /* SystemSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D1B282689A87A00220DAE /* SystemSetupVC.swift */; };
@@ -341,6 +342,7 @@
 		845B618F26AAC2D900F9BC2A /* ShareClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareClient.swift; sourceTree = "<group>"; };
 		845B619326AAC31800F9BC2A /* ShareClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareClientExtension.swift; sourceTree = "<group>"; };
 		84602902268C50F800141E0D /* AboutTermsPolicyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTermsPolicyVC.swift; sourceTree = "<group>"; };
+		84606118270C3DF900DFD22A /* SessionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistory.swift; sourceTree = "<group>"; };
 		846F1A1F2678C2220034ACE0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		847899722684824F00D1DF36 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		847899752684870F00D1DF36 /* AboutSectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSectionVC.swift; sourceTree = "<group>"; };
@@ -1033,6 +1035,7 @@
 				84E78B9D2685E8C500FABDCD /* UserModel.swift */,
 				8410611B26A9DC8E00BF7953 /* SystemInfoModel.swift */,
 				84B5A05926C28CD20051C06A /* InsulinModel.swift */,
+				84606118270C3DF900DFD22A /* SessionHistory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1327,6 +1330,7 @@
 				847899732684824F00D1DF36 /* HomeVC.swift in Sources */,
 				84CC12E02668D036009316FC /* AppConstants.swift in Sources */,
 				84B06BB926E29275004902E4 /* CoachMarkArrowViewApp.swift in Sources */,
+				84606119270C3DF900DFD22A /* SessionHistory.swift in Sources */,
 				84D1F4B42679C12900F131E0 /* TermsConditionVC.swift in Sources */,
 				84AA879026FAE8900047D86E /* BottomSheetVC.swift in Sources */,
 				188DB14B26E0993600FBF042 /* CoachMarkSkipDefaultView.swift in Sources */,

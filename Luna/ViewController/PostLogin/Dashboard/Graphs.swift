@@ -240,9 +240,9 @@ extension BottomSheetVC :  ChartViewDelegate {
         cgmChartView.delegate = self
         cgmChartView.chartDescription?.enabled = true
         //MARK: - Important
-//        cgmChartView.dragEnabled = true
-//        cgmChartView.setScaleEnabled(false)
-//        cgmChartView.pinchZoomEnabled = false
+        cgmChartView.dragEnabled = true
+        cgmChartView.setScaleEnabled(false)
+        cgmChartView.pinchZoomEnabled = false
         
         let xAxis = cgmChartView.xAxis
         xAxis.labelPosition = .bottom
