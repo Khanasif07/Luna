@@ -106,9 +106,10 @@ extension BottomSheetVC {
             let date = Date(timeIntervalSince1970: bgData.last!.date)
             let cgmDate = Date(timeIntervalSince1970: AppUserDefaults.value(forKey: .latestCgmDate).doubleValue)
             if !Calendar.current.isDate(date, equalTo: cgmDate, toGranularity: .day) {
+                AppUserDefaults.save(value: (self.bgData[self.bgData.count - 1].date), forKey: .latestCgmDate)
                 FirestoreController.addBatchData(currentDate: String(bgData.last!.date), array: bgData) {
                     print("Commited successfully")
-                    AppUserDefaults.save(value: (self.bgData[self.bgData.count - 1].date), forKey: .latestCgmDate)
+//                    AppUserDefaults.save(value: (self.bgData[self.bgData.count - 1].date), forKey: .latestCgmDate)
                     FirestoreController.addCgmDateData(currentDate: (self.bgData.last!.date))
                 }
             }

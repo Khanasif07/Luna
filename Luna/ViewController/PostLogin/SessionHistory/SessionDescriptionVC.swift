@@ -12,6 +12,7 @@ class SessionDescriptionVC: UIViewController {
     
     // MARK: - IBOutlets
     //===========================
+    @IBOutlet weak var rangePerValueLbl: UILabel!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var lowestGlucoseLbl: UILabel!
     @IBOutlet weak var highestGlucoseLbl: UILabel!
@@ -33,34 +34,12 @@ class SessionDescriptionVC: UIViewController {
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
-        titleLbl.text = titleValue
-        setupTableView()
-        setupProgressBar()
-        FirestoreController.getFirebaseCGMData(date: sessionDay!) { (bgData) in
-            self.cgmDataArray = bgData
-            self.insulinQty.text = "-- units"
-            let sortedCgmData = bgData.sorted(by: { (model1, model2) -> Bool in
-                return model1.sgv < model2.sgv
-            })
-            self.lowestGlucoseLbl.text = "\(sortedCgmData.first?.sgv ?? 0)" + " mg/dl"
-            self.highestGlucoseLbl.text = "\(sortedCgmData.last?.sgv ?? 0)" + " mg/dl"
-            self.mainTaeView.reloadData()
-        } failure: { (error) -> (Void) in
-            print(error)
-        }
-
-//        if let selectedDate = insulinDataModel?.date{
-//            let selectedLastDate = Calendar.current.date(byAdding: .minute, value: 5, to: (NSDate(timeIntervalSince1970: TimeInterval(selectedDate)) as Date))
-//            let output = SystemInfoModel.shared.cgmData?.filter { (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) >= (NSDate(timeIntervalSince1970: TimeInterval(selectedDate)) as Date) && (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) <= selectedLastDate! }
-//            cgmData = output ?? []
-            
-//        }
+        CommonFunctions.showActivityLoader()
+        self.titleLbl.text = titleValue
+        self.setupTableView()
+        self.setupProgressBar()
+        self.getCgmDataFromFirestore()
     }
-    
-    @IBAction func backBtnTapped(_ sender: UIButton) {
-        self.pop()
-    }
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
@@ -81,6 +60,12 @@ class SessionDescriptionVC: UIViewController {
         super.viewDidLayoutSubviews()
     }
     
+    // MARK: - IBActions
+    //===========================
+    @IBAction func backBtnTapped(_ sender: UIButton) {
+        self.pop()
+    }
+    
     private func setupProgressBar(){
         progress.startAngle = -90
         progress.progressThickness = 0.25
@@ -92,11 +77,6 @@ class SessionDescriptionVC: UIViewController {
         progress.glowAmount = 0.9
         progress.set(colors: #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         progress.trackColor = #colorLiteral(red: 0.9137254902, green: 0.9137254902, blue: 0.9176470588, alpha: 1)
-        progress.progress = 0
-//        progress.animate(fromAngle:  -90, toAngle: -90, duration: 2.0) { (success) in
-//            print(success)
-//            self.progress.pauseAnimation()
-//        }
     }
     
     private func setupTableView(){
@@ -106,9 +86,45 @@ class SessionDescriptionVC: UIViewController {
         self.mainTaeView.registerCell(with: BottomSheetChartCell.self)
         self.mainTaeView.registerCell(with: BottomSheetBottomCell.self)
     }
+    
+    private func getRangeValue(isShowPer: Bool = false)-> Double{
+        if self.cgmDataArray.endIndex > 0 {
+            let rangeArray = self.cgmDataArray.filter { (glucoseValue) -> Bool in
+                return glucoseValue.sgv >= 70 && glucoseValue.sgv <= 180
+            }
+            if isShowPer {
+                let rangePercentValue = ((100 * (rangeArray.endIndex)) / (self.cgmDataArray.endIndex))
+                return Double(rangePercentValue)
+            } else {
+                let rangePercentValue = (Double(rangeArray.endIndex) / Double(self.cgmDataArray.endIndex))
+                return rangePercentValue
+            }
+        }
+        return 0.0
+    }
+    
+    private func getCgmDataFromFirestore(){
+        FirestoreController.getFirebaseCGMData(date: sessionDay!) { (bgData) in
+            CommonFunctions.hideActivityLoader()
+            self.cgmDataArray = bgData
+            self.insulinQty.text = "-- units"
+            let sortedCgmData = bgData.sorted(by: { (model1, model2) -> Bool in
+                return model1.sgv < model2.sgv
+            })
+            self.lowestGlucoseLbl.text = "\(sortedCgmData.first?.sgv ?? 0)" + " mg/dl"
+            self.highestGlucoseLbl.text = "\(sortedCgmData.last?.sgv ?? 0)" + " mg/dl"
+            self.progress.progress = Double(self.getRangeValue())
+            self.rangePerValueLbl.text = "\(self.getRangeValue(isShowPer: true))"
+            self.mainTaeView.reloadData()
+        } failure: { (error) -> (Void) in
+            print(error)
+            CommonFunctions.hideActivityLoader()
+        }
+    }
 }
 
-
+// MARK: - UITableViewDelegate & UITableViewDataSource
+//===========================
 extension SessionDescriptionVC : UITableViewDelegate,UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
