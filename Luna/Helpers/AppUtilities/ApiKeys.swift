@@ -305,6 +305,8 @@ enum ApiKey {
     static var longInsulinType  : String {return "longInsulinType" }
     static var longInsulinSubType  : String {return "longInsulinSubType" }
     static var insulinUnit  : String {return "insulinUnit" }
+    static var insulin  : String {return "insulin" }
+    static var range  : String {return "range" }
     static var cgmType  : String {return "cgmType" }
     static var cgmData  : String {return "cgmData" }
     static var insulinData  : String {return "insulinData" }

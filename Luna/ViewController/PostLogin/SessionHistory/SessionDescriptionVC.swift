@@ -34,11 +34,13 @@ class SessionDescriptionVC: UIViewController {
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
-        CommonFunctions.showActivityLoader()
         self.titleLbl.text = titleValue
         self.setupTableView()
         self.setupProgressBar()
         self.getCgmDataFromFirestore()
+        CommonFunctions.delay(delay: 2.5) {
+            CommonFunctions.hideActivityLoader()
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -104,6 +106,7 @@ class SessionDescriptionVC: UIViewController {
     }
     
     private func getCgmDataFromFirestore(){
+        CommonFunctions.showActivityLoader()
         FirestoreController.getFirebaseCGMData(date: sessionDay!) { (bgData) in
             CommonFunctions.hideActivityLoader()
             self.cgmDataArray = bgData

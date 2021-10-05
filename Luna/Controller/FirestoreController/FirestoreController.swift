@@ -184,7 +184,7 @@ class FirestoreController:NSObject{
     //MARK:- Get Session History Data
     //=======================
     static func getFirebaseSessionHistoryData(success: @escaping (_ cgmModelArray: [SessionHistory]) -> Void,
-                                              failure:  @escaping FailureResponse){
+                                              failure:  @escaping  () -> Void){
         if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
             db.collection(ApiKey.sessionData).document(Auth.auth().currentUser?.uid ?? "").getDocument(source: .server) { (document, error) in
                     if let document = document, document.exists {
@@ -200,6 +200,7 @@ class FirestoreController:NSObject{
                         }
                     } else {
                         print("Document does not exist")
+                        failure()
                     }
                 }
             }
@@ -260,14 +261,14 @@ class FirestoreController:NSObject{
         let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
         let isBiometricEnable = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
         let isBiometricCompleted = AppUserDefaults.value(forKey: .isBiometricCompleted).boolValue
-//        let updatedCgmDate = AppUserDefaults.value(forKey: .latestCgmDate).doubleValue
+        let updatedCgmDate = AppUserDefaults.value(forKey: .latestCgmDate).doubleValue
         AppUserDefaults.removeAllValues()
         UserModel.main = UserModel()
         if for_logout {
             AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
             AppUserDefaults.save(value: isBiometricEnable, forKey: .isBiometricSelected)
             AppUserDefaults.save(value: isBiometricCompleted, forKey: .isBiometricCompleted)
-//            AppUserDefaults.save(value: updatedCgmDate, forKey: .latestCgmDate)
+            AppUserDefaults.save(value: updatedCgmDate, forKey: .latestCgmDate)
         }
         UserDefaultsRepository.shareUserName.value = ""
         UserDefaultsRepository.sharePassword.value = ""
@@ -976,11 +977,11 @@ class FirestoreController:NSObject{
         let userId = Auth.auth().currentUser?.uid ?? ""
         //
         let specAdded: [String: Any] = [
-                    "date": currentDate,
-                    "insulin": insulin,
-            "range": range,
-                    "startDate": startDate,
-            "endDate": endDate
+            ApiKey.date: currentDate,
+            ApiKey.insulinUnit: insulin,
+            ApiKey.range: range,
+            ApiKey.startdate: startDate,
+            ApiKey.endDate: endDate
                 ]
         //
         db.collection(ApiKey.sessionData).document(userId).getDocument { (snapshot, error ) in
@@ -994,7 +995,6 @@ class FirestoreController:NSObject{
                 ])
             }
         }
-        //
     }
  
     static func showAlert( title : String = "", msg : String,_ completion : (()->())? = nil) {

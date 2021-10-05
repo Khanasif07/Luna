@@ -72,11 +72,9 @@ extension SessionHistoryVC {
             })
             self.sessionHistoryTV.reloadData()
             CommonFunctions.hideActivityLoader()
-        }failure: { (error) -> (Void) in
-            CommonFunctions.showToastWithMessage(error.localizedDescription)
+        }failure: {
             CommonFunctions.hideActivityLoader()
         }
-        CommonFunctions.hideActivityLoader()
         //        FirestoreController.getFirebaseInsulinData { (insulinDataArray) in
         //            print(insulinDataArray)
         //            SystemInfoModel.shared.insulinData = insulinDataArray

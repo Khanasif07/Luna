@@ -28,7 +28,6 @@ class SessionHistoryTableViewCell: UITableViewCell {
     
     func configureCellData(model: SessionHistory){
         self.dateLbl.text = "\(model.startDate.getDateTimeFromTimeInterval(Date.DateFormat.mmdd.rawValue)) " + "-" + " \(model.endDate.getDateTimeFromTimeInterval(Date.DateFormat.mmdd.rawValue))"
-        let rangeText = "\(Int(model.range))"
-        self.unitLbl.text = "-- units delivered" + " | " +   "\(rangeText) % in range"
+        self.unitLbl.text = "-- units delivered" + " | " +   "\(Int(model.range))% in range"
     }
 }
