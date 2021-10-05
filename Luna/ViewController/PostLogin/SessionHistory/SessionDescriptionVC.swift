@@ -79,6 +79,8 @@ class SessionDescriptionVC: UIViewController {
         progress.glowAmount = 0.9
         progress.set(colors: #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         progress.trackColor = #colorLiteral(red: 0.9137254902, green: 0.9137254902, blue: 0.9176470588, alpha: 1)
+        rangePerValueLbl.text = "\(Int(self.sessionModel?.range ?? 0.0))%"
+        progress.progress = (sessionModel?.range ?? 0.0) / 100.0
     }
     
     private func setupTableView(){
@@ -92,7 +94,7 @@ class SessionDescriptionVC: UIViewController {
     private func getRangeValue(isShowPer: Bool = false)-> Double{
         if self.cgmDataArray.endIndex > 0 {
             let rangeArray = self.cgmDataArray.filter { (glucoseValue) -> Bool in
-                return glucoseValue.sgv >= 70 && glucoseValue.sgv <= 180
+                return glucoseValue.sgv >= Int((UserDefaultsRepository.lowLine.value)) && glucoseValue.sgv <= Int((UserDefaultsRepository.highLine.value))
             }
             if isShowPer {
                 let rangePercentValue = ((100 * (rangeArray.endIndex)) / (self.cgmDataArray.endIndex))
@@ -117,7 +119,7 @@ class SessionDescriptionVC: UIViewController {
             self.lowestGlucoseLbl.text = "\(sortedCgmData.first?.sgv ?? 0)" + " mg/dl"
             self.highestGlucoseLbl.text = "\(sortedCgmData.last?.sgv ?? 0)" + " mg/dl"
             self.progress.progress = Double(self.getRangeValue())
-            self.rangePerValueLbl.text = "\(self.getRangeValue(isShowPer: true))"
+//            self.rangePerValueLbl.text = "\(self.getRangeValue(isShowPer: true))"
             self.mainTaeView.reloadData()
         } failure: { (error) -> (Void) in
             print(error)
