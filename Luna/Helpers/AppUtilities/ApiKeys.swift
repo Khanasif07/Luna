@@ -28,6 +28,7 @@ enum ApiKey {
     static var block : String { return "block"}
     static var price : String { return "price"}
     static var messageDuration : String { return "messageDuration"}
+    static var lastUpdatedCGMDate: String { return "lastUpdatedCGMDate"}
     
     static var name : String {return "name"}
     static var users : String {return "users"}

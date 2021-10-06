@@ -18,7 +18,7 @@ class AboutSectionVC: UIViewController {
     // MARK: - Variables
     //===========================
 
-    var sections: [(UIImage,String)] = [(#imageLiteral(resourceName: "findAnswers"),LocalizedString.find_Answers.localized),(#imageLiteral(resourceName: "customerSupport"),LocalizedString.customer_Support.localized),(#imageLiteral(resourceName: "appVersion"),LocalizedString.app_Version.localized),(#imageLiteral(resourceName: "termsConditions"),LocalizedString.terms_Conditions.localized),(#imageLiteral(resourceName: "privacy"),LocalizedString.privacy.localized)]
+    var sections: [(UIImage,String)] = [(#imageLiteral(resourceName: "customerSupport"),LocalizedString.customer_Support.localized),(#imageLiteral(resourceName: "appVersion"),LocalizedString.app_Version.localized),(#imageLiteral(resourceName: "termsConditions"),LocalizedString.terms_Conditions.localized),(#imageLiteral(resourceName: "privacy"),LocalizedString.privacy.localized)]
     
     // MARK: - Lifecycle
     //===========================
@@ -93,9 +93,9 @@ extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch sections[indexPath.row].1 {
-        case LocalizedString.find_Answers.localized:
-            let vc = SettingManualVC.instantiate(fromAppStoryboard: .PostLogin)
-            self.navigationController?.pushViewController(vc, animated: true)
+//        case LocalizedString.find_Answers.localized:
+//            let vc = SettingManualVC.instantiate(fromAppStoryboard: .PostLogin)
+//            self.navigationController?.pushViewController(vc, animated: true)
         case LocalizedString.customer_Support.localized:
             let vc = ContactUsVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)

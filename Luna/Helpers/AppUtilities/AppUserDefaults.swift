@@ -122,6 +122,7 @@ extension AppUserDefaults {
         case shareUserName
         case sharePassword
         case latestCgmDate
+        case lastUpdatedCGMDate
     }
 }
 

@@ -214,7 +214,7 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
                     return
                 }
                 CommonFunctions.showActivityLoader()
-                FirestoreController.createUserNode(userId: "", email: self.emailTxt, password: self.passTxt, name: "", imageURL: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isSystemSetupCompleted: false, isChangePassword: true, isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue, deviceId: AppUserDefaults.value(forKey: .deviceId).stringValue,shareUserName: "",sharePassword: "", completion: {
+                FirestoreController.createUserNode(userId: "", email: self.emailTxt, password: self.passTxt, name: "", imageURL: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isSystemSetupCompleted: false, isChangePassword: true, isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue, deviceId: AppUserDefaults.value(forKey: .deviceId).stringValue,shareUserName: "",sharePassword: "", lastUpdatedCGMDate: AppUserDefaults.value(forKey: .lastUpdatedCGMDate).doubleValue, completion: {
                     CommonFunctions.hideActivityLoader()
                     if Auth.auth().currentUser?.isEmailVerified ?? false{
                         self.goToProfileSetupVC()

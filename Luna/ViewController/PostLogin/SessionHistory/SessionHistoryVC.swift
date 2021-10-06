@@ -168,7 +168,7 @@ extension SessionHistoryVC: SessionFilterVCDelegate{
     func filterApplied(startDate: Date?, endDate: Date?) {
         self.startdate = startDate!
         self.enddate = endDate!
-        let output = self.sessionHistory.filter { (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) > self.startdate! && (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) < self.enddate! }
+        let output = self.sessionHistory.filter { (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) >= self.startdate! && (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) <= self.enddate! }
         self.insulinSectionDataArray = []
         output.forEach({ (data) in
             let month = data.date.getMonthInterval()

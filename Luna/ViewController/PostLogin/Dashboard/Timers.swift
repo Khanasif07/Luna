@@ -43,7 +43,7 @@ extension BottomSheetVC {
             let formatter = DateComponentsFormatter()
             formatter.unitsStyle = .positional // Use the appropriate positioning for the current locale
             
-            if secondsAgo < 270 {
+            if secondsAgo < 300 {
                 formatter.allowedUnits = [ .minute] // Units to display in the formatted string
             } else {
                 formatter.allowedUnits = [ .minute, .second] // Units to display in the formatted string
@@ -54,6 +54,7 @@ extension BottomSheetVC {
             latestMinAgoString = formattedDuration ?? ""
             SystemInfoModel.shared.previousCgmReadingTime = latestMinAgoString.isEmpty ? "0" : latestMinAgoString
             latestMinAgoString += " min ago"
+            print(bgData.last!.date - AppUserDefaults.value(forKey: .lastUpdatedCGMDate).doubleValue)
         } else {
             self.timeAgoLbl.text = ""
         }
@@ -92,7 +93,7 @@ extension BottomSheetVC {
     private func getRangeValue(isShowPer: Bool = false)-> Double{
         if self.bgData.endIndex > 0 {
             let rangeArray = self.bgData.filter { (glucoseValue) -> Bool in
-                return glucoseValue.sgv >= 70 && glucoseValue.sgv <= 180
+                return glucoseValue.sgv >= Int((UserDefaultsRepository.lowLine.value)) && glucoseValue.sgv <= Int((UserDefaultsRepository.highLine.value))
             }
             if isShowPer {
                 let rangePercentValue = ((100 * (rangeArray.endIndex)) / (self.bgData.endIndex))
@@ -119,12 +120,16 @@ extension BottomSheetVC {
         // to only pull 1 reading if that's all we need
         if bgData.count > 0 {
             //MARK:- Importants
-            let date = Date(timeIntervalSince1970: bgData.last!.date)
-            let cgmDate = Date(timeIntervalSince1970: AppUserDefaults.value(forKey: .latestCgmDate).doubleValue)
-            if !Calendar.current.isDate(date, equalTo: cgmDate, toGranularity: .day) {
-                AppUserDefaults.save(value: (self.bgData[self.bgData.count - 1].date), forKey: .latestCgmDate)
+//            let date = Date(timeIntervalSince1970: bgData.last!.date)
+//            let cgmDate = Date(timeIntervalSince1970: AppUserDefaults.value(forKey: .latestCgmDate).doubleValue)
+            let lastUpdatedDate = AppUserDefaults.value(forKey: .lastUpdatedCGMDate).doubleValue
+//            print(Calendar.current.isDate(date, inSameDayAs: cgmDate))
+//            if !Calendar.current.isDate(date, equalTo: cgmDate, toGranularity: .day) {
+            if (bgData.last!.date - lastUpdatedDate) >= 86400 {
+                AppUserDefaults.save(value: (self.bgData[self.bgData.count - 1].date), forKey: .lastUpdatedCGMDate)
+                FirestoreController.updateLastUpdatedCGMDate(currentDate: (self.bgData[self.bgData.count - 1].date))
                 FirestoreController.addBatchData(currentDate: String(bgData.last!.date), array: bgData) {
-                    print("Commited successfully")
+                    print(" Add Batch Data Commited successfully")
                     FirestoreController.addCgmDateData(currentDate: (self.bgData.last!.date), range: self.getRangeValue(isShowPer: true), startDate: (self.bgData.first!.date), endDate: (self.bgData.last!.date), insulin: 0)
                 }
             }

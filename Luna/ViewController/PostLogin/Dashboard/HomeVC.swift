@@ -111,7 +111,6 @@ extension HomeVC {
         }else{
             self.setupSystemInfo()
         }
-        CommonFunctions.showActivityLoader()
         self.getUserInfoFromFirestore()
         self.getUserSystemFromFirestore()
         self.getInsulinFromFirestore()
@@ -142,6 +141,10 @@ extension HomeVC {
     }
     
     private func addObserver(){
+        CommonFunctions.showActivityLoader()
+        CommonFunctions.delay(delay: 10.0) {
+            CommonFunctions.hideActivityLoader()
+        }
         NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .BLEOnOffState, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bLEDidDisConnected), name: .BLEDidDisConnectSuccessfully, object: nil)

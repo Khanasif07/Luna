@@ -36,7 +36,7 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     // Vars for NS Pull
     var graphHours:Int=24
     var mmol = false as Bool
-    var latestCgmDate = AppUserDefaults.value(forKey: .latestCgmDate).doubleValue
+    var lastUpdatedCGMDate = AppUserDefaults.value(forKey: .lastUpdatedCGMDate).doubleValue
     var urlUser = UserDefaultsRepository.url.value as String
     var token = UserDefaultsRepository.token.value as String
     var defaults : UserDefaults?

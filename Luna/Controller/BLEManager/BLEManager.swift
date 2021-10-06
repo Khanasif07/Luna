@@ -22,6 +22,7 @@ let TDBD = CBUUID(string: "5927a433-a277-40b7-b2d4-e005330c5d99")
 let iobInput = CBUUID(string: "5927a433-a277-40b7-b2d4-92ff77eada32")
 let WriteAcknowledgement = CBUUID(string: "5927a433-a277-40b7-b2d4-0242ac130003")
 
+
 @objc public protocol BleProtocol {
     @objc optional func didDiscover(name:String, rssi:NSNumber)
     @objc optional func didConnect(name:String)
@@ -176,9 +177,9 @@ extension BleManager: CBPeripheralDelegate {
                 case iobInput:
                     writeValue(myCharacteristic: characteristic,value:  "5.0")
                 case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
-                    writeValue(myCharacteristic: characteristic,value:  "255:1632899217;")
+                    writeValue(myCharacteristic: characteristic,value:  "350:1632899217;")
                 case CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9"):
-                    writeValue(myCharacteristic: characteristic,value:  "250:1632899217;")
+                    writeValue(myCharacteristic: characteristic,value:  "350:1632899217;")
                 case dataOutCBUUID:
                     peripheral.setNotifyValue(true, for: characteristic)
                 case batteryCharacteristicCBUUID:
@@ -225,9 +226,9 @@ extension BleManager: CBPeripheralDelegate {
             let properDataArray = dataArray.map { (stringValue) -> [String] in
                 return stringValue.split{$0 == ":"}.map(String.init)
             }
-            self.insulinData = properDataArray.map({ (stringArray) -> InsulinDataModel in
-                return InsulinDataModel(insulinData: stringArray.first!, date: Double(stringArray.last!) ?? 0.0)
-            })
+//            self.insulinData = properDataArray.map({ (stringArray) -> InsulinDataModel in
+//                return InsulinDataModel(insulinData: stringArray.first!, date: Double(stringArray.last!) ?? 0.0)
+//            })
 //            for insulinModel in self.insulinData {
 //                FirestoreController.createInsulinDataNode(insulinUnit: insulinModel.insulinData ?? "", date: Double(insulinModel.date))
 //            }

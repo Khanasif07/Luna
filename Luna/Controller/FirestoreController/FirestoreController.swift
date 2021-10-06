@@ -92,10 +92,12 @@ class FirestoreController:NSObject{
                         user.isSystemSetupCompleted = data[ApiKey.isSystemSetupCompleted] as? Bool ?? false
                         user.isChangePassword = data[ApiKey.isChangePassword] as? Bool ?? false
                         user.deviceId = data[ApiKey.deviceId] as? String ?? ""
+                        user.lastUpdatedCGMDate = data[ApiKey.lastUpdatedCGMDate] as? Double ?? 0.0
                         UserModel.main = user
                         //MARK:- Important
                         UserDefaultsRepository.shareUserName.value = data[ApiKey.shareUserName] as? String ?? ""
                         UserDefaultsRepository.sharePassword.value = data[ApiKey.sharePassword] as? String ?? ""
+                        AppUserDefaults.save(value: user.lastUpdatedCGMDate, forKey: .lastUpdatedCGMDate)
                         AppUserDefaults.save(value: user.isProfileStepCompleted, forKey: .isProfileStepCompleted)
                         AppUserDefaults.save(value: true, forKey: .isBiometricCompleted)
                         AppUserDefaults.save(value: user.deviceId, forKey: .deviceId)
@@ -261,14 +263,15 @@ class FirestoreController:NSObject{
         let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
         let isBiometricEnable = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
         let isBiometricCompleted = AppUserDefaults.value(forKey: .isBiometricCompleted).boolValue
-        let updatedCgmDate = AppUserDefaults.value(forKey: .latestCgmDate).doubleValue
+//        let updatedCgmDate = AppUserDefaults.value(forKey: .latestCgmDate).doubleValue
         AppUserDefaults.removeAllValues()
+        SystemInfoModel.shared = SystemInfoModel()
         UserModel.main = UserModel()
         if for_logout {
             AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
             AppUserDefaults.save(value: isBiometricEnable, forKey: .isBiometricSelected)
             AppUserDefaults.save(value: isBiometricCompleted, forKey: .isBiometricCompleted)
-            AppUserDefaults.save(value: updatedCgmDate, forKey: .latestCgmDate)
+//            AppUserDefaults.save(value: updatedCgmDate, forKey: .latestCgmDate)
         }
         UserDefaultsRepository.shareUserName.value = ""
         UserDefaultsRepository.sharePassword.value = ""
@@ -327,6 +330,7 @@ class FirestoreController:NSObject{
                                deviceId: String,
                                shareUserName:String,
                                sharePassword:String,
+                               lastUpdatedCGMDate:Double,
                                completion: @escaping () -> Void,
                                failure: @escaping FailureResponse) {
         var emailId  = email
@@ -353,7 +357,7 @@ class FirestoreController:NSObject{
                                                                    ApiKey.isProfileStepCompleted: false,
                                                                    ApiKey.isSystemSetupCompleted: false,
                                                                    ApiKey.userId: uid,ApiKey.isChangePassword: true,ApiKey.deviceId:deviceId,
-                                                                   ApiKey.isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue,ApiKey.shareUserName:shareUserName,ApiKey.sharePassword:sharePassword]){ err in
+                                                                   ApiKey.isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue,ApiKey.shareUserName:shareUserName,ApiKey.sharePassword:sharePassword,ApiKey.lastUpdatedCGMDate:lastUpdatedCGMDate]){ err in
                     if let err = err {
                         print("Error writing document: \(err)")
                         CommonFunctions.showToastWithMessage(err.localizedDescription)
@@ -971,14 +975,14 @@ class FirestoreController:NSObject{
         }
     }
     
-    //MARK:-Add  cgm date  operation
+    //MARK:-Add  Last Updated CGM date
     //=======================
     static func addCgmDateData(currentDate:Double,range:Double,startDate:Double,endDate:Double,insulin:Int) {
         let userId = Auth.auth().currentUser?.uid ?? ""
         //
         let specAdded: [String: Any] = [
             ApiKey.date: currentDate,
-            ApiKey.insulinUnit: insulin,
+            ApiKey.insulin: insulin,
             ApiKey.range: range,
             ApiKey.startdate: startDate,
             ApiKey.endDate: endDate
@@ -993,6 +997,19 @@ class FirestoreController:NSObject{
                 db.collection(ApiKey.sessionData).document(userId).setData([
                     ApiKey.cgmDateArray: FieldValue.arrayUnion([specAdded])
                 ])
+            }
+        }
+    }
+    
+    //MARK:- Update last Updated CGM Date Value In User Info
+    //=======================
+    static func updateLastUpdatedCGMDate(currentDate:Double) {
+        let userId = Auth.auth().currentUser?.uid ?? ""
+        db.collection(ApiKey.users).document(userId).getDocument { (snapshot, error ) in
+            if  (snapshot?.exists)! {
+                db.collection(ApiKey.users).document(userId).updateData([ApiKey.lastUpdatedCGMDate: currentDate])
+            } else {
+                db.collection(ApiKey.sessionData).document(userId).updateData([ApiKey.lastUpdatedCGMDate: currentDate])
             }
         }
     }
