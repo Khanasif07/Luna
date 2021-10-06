@@ -54,7 +54,6 @@ extension BottomSheetVC {
             latestMinAgoString = formattedDuration ?? ""
             SystemInfoModel.shared.previousCgmReadingTime = latestMinAgoString.isEmpty ? "0" : latestMinAgoString
             latestMinAgoString += " min ago"
-            print(bgData.last!.date - AppUserDefaults.value(forKey: .lastUpdatedCGMDate).doubleValue)
         } else {
             self.timeAgoLbl.text = ""
         }
@@ -122,6 +121,7 @@ extension BottomSheetVC {
             //MARK:- Importants
 //            let date = Date(timeIntervalSince1970: bgData.last!.date)
 //            let cgmDate = Date(timeIntervalSince1970: AppUserDefaults.value(forKey: .latestCgmDate).doubleValue)
+            print(bgData.last!.date - AppUserDefaults.value(forKey: .lastUpdatedCGMDate).doubleValue)
             let lastUpdatedDate = AppUserDefaults.value(forKey: .lastUpdatedCGMDate).doubleValue
 //            print(Calendar.current.isDate(date, inSameDayAs: cgmDate))
 //            if !Calendar.current.isDate(date, equalTo: cgmDate, toGranularity: .day) {

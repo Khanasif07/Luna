@@ -37,6 +37,7 @@ extension  BottomSheetVC{
                 let data = result!
                 self.ProcessNSBGData(data: data, onlyPullLastRecord: onlyPullLastRecord)
             } else {
+                print((err?.localizedDescription) ?? "")
                 // If we get an error, immediately try to pull NS BG Data
                 self.webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
                 
@@ -84,6 +85,7 @@ extension  BottomSheetVC{
         // Downloader
         let getBGTask = URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else {
+                print(error?.localizedDescription ?? "")
                 if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
                     globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
                     //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
