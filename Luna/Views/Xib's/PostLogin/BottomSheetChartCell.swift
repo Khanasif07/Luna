@@ -18,13 +18,12 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     //===========================
     var cgmData : [ShareGlucoseData] = SystemInfoModel.shared.cgmData ?? []{
         didSet{
-//            self.cgmData = self.cgmData.reversed()
             setDataCount(cgmData.endIndex, range: UInt32(cgmData.endIndex))
-//            let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
-//                                                        xAxis: cgmChartView.xAxis,
-//                                                        transformer: self.cgmChartView.getTransformer(forAxis: .left),
-//                                                        cgmData: self.cgmData)
-//            self.cgmChartView.xAxisRenderer = customXAxisRender
+            let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
+                                                        xAxis: cgmChartView.xAxis,
+                                                        transformer: self.cgmChartView.getTransformer(forAxis: .left),
+                                                        cgmData: self.cgmData)
+            self.cgmChartView.xAxisRenderer = customXAxisRender
         }
     }
     
@@ -47,7 +46,6 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         xAxis.labelPosition = .bottom
         xAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
         xAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
-//        xAxis.granularity = 1
         xAxis.granularity = 1800
         xAxis.labelTextColor = NSUIColor.label
         xAxis.labelPosition = XAxis.LabelPosition.bottom
@@ -67,7 +65,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         leftAxis.drawLimitLinesBehindDataEnabled = false
 
         let marker = BalloonMarker(color: #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1),
-                                   font: .boldSystemFont(ofSize: 15.0),
+                                   font: AppFonts.SF_Pro_Display_Bold.withSize(.x15),
                                    textColor: .white,
                                    insets: UIEdgeInsets(top: 3.5, left: 5.5, bottom: 16, right: 5.5))
         marker.chartView = cgmChartView
@@ -106,18 +104,12 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         
         cgmChartView.highlightValue(nil, callDelegate: false)
         cgmChartView.clear()
-        setDataCount(cgmData.endIndex, range: UInt32(cgmData.endIndex))
     }
     
     func setDataCount(_ count: Int, range: UInt32) {
         let values = cgmData.map { (data) -> ChartDataEntry in
             return ChartDataEntry(x: Double(data.date), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
         }
-//        var values = [ChartDataEntry]()
-//        for (index, data) in cgmData.enumerated() {
-//            let value = BarChartDataEntry(x: Double(index), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
-//            values.append(value)
-//        }
         let set1 = LineChartDataSet(entries: values, label: "")
         set1.drawIconsEnabled = false
         setup(set1)

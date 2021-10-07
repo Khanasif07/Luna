@@ -127,7 +127,8 @@ extension BottomSheetVC :  ChartViewDelegate {
         
         cgmChartView.leftAxis.enabled = true
         cgmChartView.leftAxis.labelPosition = YAxis.LabelPosition.outsideChart
-        cgmChartView.leftAxis.axisMinimum = 0
+        cgmChartView.leftAxis.axisMinimum = -0
+        cgmChartView.leftAxis.axisMaximum = 300
         //MARK: - Important
         cgmChartView.leftAxis.drawGridLinesEnabled = true
         cgmChartView.leftAxis.granularityEnabled = true
@@ -167,9 +168,9 @@ extension BottomSheetVC :  ChartViewDelegate {
         
         var colors = [NSUIColor]()
         for i in 0..<entries.count{
-            if Float(entries[i].sgv) > topBG - maxBGOffset {
-                topBG = Float(entries[i].sgv) + maxBGOffset
-            }
+//            if Float(entries[i].sgv) > topBG - maxBGOffset {
+//                topBG = Float(entries[i].sgv) + maxBGOffset
+//            }
             let value = ChartDataEntry(x: Double(entries[i].date), y: Double(entries[i].sgv), data: formatPillText(line1: bgUnits.toDisplayUnits(String(entries[i].sgv)), time: entries[i].date))
             mainChart.addEntry(value)
             
@@ -193,13 +194,8 @@ extension BottomSheetVC :  ChartViewDelegate {
             }
         }
         
-        if UserDefaultsRepository.debugLog.value {
-            print("Total Colors: " + mainChart.colors.count.description)
-            
-        }
-        
         cgmChartView.rightAxis.axisMaximum = Double(topBG)
-        cgmChartView.setVisibleXRangeMinimum(600)
+//        cgmChartView.setVisibleXRangeMinimum(600)
         cgmChartView.data?.dataSets[dataIndex].notifyDataSetChanged()
         cgmChartView.data?.notifyDataChanged()
         cgmChartView.notifyDataSetChanged()
@@ -248,17 +244,13 @@ extension BottomSheetVC :  ChartViewDelegate {
         xAxis.labelPosition = .bottom
         xAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
         xAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
-//        xAxis.labelCount = 7
         
         let leftAxis = cgmChartView.leftAxis
         leftAxis.removeAllLimitLines()
         leftAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
         leftAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
-        leftAxis.axisMaximum = 300
-        leftAxis.granularity = 1.0
         //MARK: - Important
         leftAxis.drawAxisLineEnabled = false
-        leftAxis.axisMinimum = -0
         leftAxis.drawLimitLinesBehindDataEnabled = false
         cgmChartView.rightAxis.enabled = false
         cgmChartView.xAxis.granularity = 1800

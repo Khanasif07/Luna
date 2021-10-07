@@ -122,6 +122,7 @@
 		845B619426AAC31800F9BC2A /* ShareClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B619326AAC31800F9BC2A /* ShareClientExtension.swift */; };
 		84602903268C50F800141E0D /* AboutTermsPolicyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84602902268C50F800141E0D /* AboutTermsPolicyVC.swift */; };
 		84606119270C3DF900DFD22A /* SessionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84606118270C3DF900DFD22A /* SessionHistory.swift */; };
+		8460611D270EC9BC00DFD22A /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460611C270EC9BC00DFD22A /* PushNotificationManager.swift */; };
 		847899732684824F00D1DF36 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847899722684824F00D1DF36 /* HomeVC.swift */; };
 		847899762684870F00D1DF36 /* AboutSectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847899752684870F00D1DF36 /* AboutSectionVC.swift */; };
 		847D1B292689A87A00220DAE /* SystemSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D1B282689A87A00220DAE /* SystemSetupVC.swift */; };
@@ -343,6 +344,7 @@
 		845B619326AAC31800F9BC2A /* ShareClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareClientExtension.swift; sourceTree = "<group>"; };
 		84602902268C50F800141E0D /* AboutTermsPolicyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTermsPolicyVC.swift; sourceTree = "<group>"; };
 		84606118270C3DF900DFD22A /* SessionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistory.swift; sourceTree = "<group>"; };
+		8460611C270EC9BC00DFD22A /* PushNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
 		846F1A1F2678C2220034ACE0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		847899722684824F00D1DF36 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		847899752684870F00D1DF36 /* AboutSectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSectionVC.swift; sourceTree = "<group>"; };
@@ -796,6 +798,14 @@
 			path = ShareClient;
 			sourceTree = "<group>";
 		};
+		8460611B270EC96100DFD22A /* PushNotificationManager */ = {
+			isa = PBXGroup;
+			children = (
+				8460611C270EC9BC00DFD22A /* PushNotificationManager.swift */,
+			);
+			path = PushNotificationManager;
+			sourceTree = "<group>";
+		};
 		846F1A1B2678BFFE0034ACE0 /* Certificates */ = {
 			isa = PBXGroup;
 			children = (
@@ -911,6 +921,7 @@
 		84CC12B82668CD87009316FC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8460611B270EC96100DFD22A /* PushNotificationManager */,
 				84CC12992668C822009316FC /* AppDelegate.swift */,
 				84CC129B2668C822009316FC /* SceneDelegate.swift */,
 				84CC12BA2668CDDB009316FC /* FirestoreController */,
@@ -1302,6 +1313,7 @@
 				84467287268DBECC00EC55FD /* InsulinStep1VC.swift in Sources */,
 				842E9B1B2695690B00F36A3D /* InsulinStep3VC.swift in Sources */,
 				849B255E27070CA000323876 /* ContactUsVC.swift in Sources */,
+				8460611D270EC9BC00DFD22A /* PushNotificationManager.swift in Sources */,
 				84CC12EC2668D0B8009316FC /* UIColorExtension.swift in Sources */,
 				8455A3C226820E010061C55F /* SettingsVC.swift in Sources */,
 				84B3500026CC9CC300ECF8F0 /* Platform.swift in Sources */,

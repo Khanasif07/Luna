@@ -600,10 +600,10 @@ class FirestoreController:NSObject{
     
     //MARK:- Update user online status
     //================================
-    static func updateDeviceToken() {
+    static func updateDeviceToken(token: String) {
         let uid = AppUserDefaults.value(forKey: .uid).stringValue
         guard !uid.isEmpty else { return }
-        db.collection(ApiKey.users).document(uid).updateData([ApiKey.deviceToken: ""])
+        db.collection(ApiKey.users).document(uid).updateData([ApiKey.deviceToken: token])
     }
     
     //MARK:-Fetching Listing

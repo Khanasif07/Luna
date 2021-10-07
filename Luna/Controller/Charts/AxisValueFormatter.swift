@@ -116,15 +116,15 @@ final  class XAxisCustomRenderer: XAxisRenderer {
                     angleRadians: labelRotationAngleRadians)
 
 //                let indexData = cgmData[Int(i)]
-//                let cgmDate = String(indexData.date)
+////                let cgmDate = String(indexData.date)
 //                var icon: CGImage?
-//                SystemInfoModel.shared.insulinData?.forEach({ (model) in
-//                    let labelData = model.date.getDateTimeFromTimeInterval()
-//                    if labelData == label {
-//                        let rawIcon = #imageLiteral(resourceName: "lineOne")
-//                        icon = rawIcon.cgImage!
-//                    }
-//                })
+//                if indexData.sgv % 2 == 0{
+//                    let rawIcon = #imageLiteral(resourceName: "lineOne")
+//                    icon = rawIcon.cgImage!
+//                }else {
+//                    let rawIcon = #imageLiteral(resourceName: "lineTwo")
+//                    icon = rawIcon.cgImage!
+//                }
 //                if let myImage = icon{
 //                    context.draw(myImage, in: CGRect(x: position.x - 10 , y: position.y - 30, width: CGFloat(15), height: CGFloat(30)))
 //                }
