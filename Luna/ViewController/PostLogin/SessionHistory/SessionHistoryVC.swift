@@ -186,6 +186,7 @@ extension SessionHistoryVC: SessionFilterVCDelegate{
     func resetFilter() {
         self.startdate = nil
         self.enddate = nil
+        self.insulinSectionDataArray = []
         self.sessionHistory.forEach({ (data) in
             let month = data.date.getMonthInterval()
             if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
