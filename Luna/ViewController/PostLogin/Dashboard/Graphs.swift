@@ -66,6 +66,9 @@ extension BottomSheetVC :  ChartViewDelegate {
         // Setup BG line details
         let lineBG = LineChartDataSet(entries:bgChartEntry, label: "")
 //        lineBG.circleRadius = CGFloat(globalVariables.dotBG)
+        lineBG.fillAlpha = 1.0
+        lineBG.drawFilledEnabled = true
+        lineBG.drawValuesEnabled = false
         lineBG.circleColors = [NSUIColor.systemGreen]
         lineBG.drawCircleHoleEnabled = false
         lineBG.axisDependency = YAxis.AxisDependency.right
@@ -79,7 +82,7 @@ extension BottomSheetVC :  ChartViewDelegate {
         lineBG.valueFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
         lineBG.formLineWidth = 1
         lineBG.formSize = 15
-        lineBG.setDrawHighlightIndicators(false)
+//        lineBG.setDrawHighlightIndicators(false)
 //        lineBG.valueFont.withSize(50)
         // Setup the chart data of all lines
         let data = LineChartData()
@@ -87,10 +90,10 @@ extension BottomSheetVC :  ChartViewDelegate {
       //MARK: - Important
                 let gradientColors = [#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 0).cgColor,#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1).cgColor]
                 let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)
-        lineBG.fillAlpha = 1.0
+//        lineBG.fillAlpha = 1.0
         lineBG.fill = Fill(linearGradient: gradient!, angle: 90.0)
-        lineBG.drawFilledEnabled = true
-        lineBG.drawValuesEnabled = false
+//        lineBG.drawFilledEnabled = true
+//        lineBG.drawValuesEnabled = false
         //
         data.setValueFont(AppFonts.SF_Pro_Display_Regular.withSize(.x12))
 
@@ -117,10 +120,11 @@ extension BottomSheetVC :  ChartViewDelegate {
         cgmChartView.rightAxis.addLimitLine(ul)
         
         // Setup the main graph overall details
+        cgmChartView.data?.highlightEnabled = true
         cgmChartView.xAxis.valueFormatter = ChartXValueFormatter()
-        cgmChartView.xAxis.granularity = 1800
-        cgmChartView.xAxis.labelTextColor = NSUIColor.label
-        cgmChartView.xAxis.labelPosition = XAxis.LabelPosition.bottom
+//        cgmChartView.xAxis.granularity = 1800
+//        cgmChartView.xAxis.labelTextColor = NSUIColor.label
+//        cgmChartView.xAxis.labelPosition = XAxis.LabelPosition.bottom
         //MARK:- Important
         cgmChartView.xAxis.centerAxisLabelsEnabled = false
         cgmChartView.xAxis.setLabelCount(7, force: true) //enter the number of labels here
@@ -246,7 +250,7 @@ extension BottomSheetVC :  ChartViewDelegate {
         xAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
         
         let leftAxis = cgmChartView.leftAxis
-        leftAxis.removeAllLimitLines()
+//        leftAxis.removeAllLimitLines()
         leftAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
         leftAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
         //MARK: - Important

@@ -35,7 +35,9 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     }
     
     private func newChartSetUp(){
+        cgmChartView.clear()
         cgmChartView.delegate = self
+        cgmChartView.drawMarkers = true
 
         cgmChartView.chartDescription?.enabled = true
         cgmChartView.dragEnabled = true
@@ -65,7 +67,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         leftAxis.drawLimitLinesBehindDataEnabled = false
 
         let marker = BalloonMarker(color: #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1),
-                                   font: AppFonts.SF_Pro_Display_Bold.withSize(.x15),
+                                   font: AppFonts.SF_Pro_Display_Bold.withSize(.x13),
                                    textColor: .white,
                                    insets: UIEdgeInsets(top: 3.5, left: 5.5, bottom: 16, right: 5.5))
         marker.chartView = cgmChartView
@@ -101,7 +103,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         cgmChartView.scaleYEnabled = false
         cgmChartView.drawGridBackgroundEnabled = true
         cgmChartView.gridBackgroundColor = NSUIColor.clear
-        
+        cgmChartView.data?.highlightEnabled = true
         cgmChartView.highlightValue(nil, callDelegate: false)
         cgmChartView.clear()
     }
@@ -131,7 +133,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
             dataSet.lineWidth = 3
             dataSet.circleRadius = 0
             dataSet.drawCircleHoleEnabled = false
-            dataSet.valueFont = .systemFont(ofSize: 9)
+            dataSet.valueFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
             dataSet.formLineWidth = 1
             dataSet.formSize = 15
     }
