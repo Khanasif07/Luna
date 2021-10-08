@@ -8,8 +8,6 @@
 import Foundation
 import UIKit
 import Charts
-
-
 extension BottomSheetVC :  ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         if chartView != cgmChartView {
@@ -30,29 +28,6 @@ extension BottomSheetVC :  ChartViewDelegate {
         }
         //MARK:- IMPORTANT
 //        UserDefaultsRepository.chartScaleX.value = Float(scale)
-    }
-    
-    func updateBGCheckGraph() {
-        let dataIndex = 7
-        cgmChartView.lineData?.dataSets[dataIndex].clear()
-        
-        for i in 0..<bgCheckData.count{
-            let formatter = NumberFormatter()
-            formatter.minimumFractionDigits = 0
-            formatter.maximumFractionDigits = 2
-            formatter.minimumIntegerDigits = 1
-            
-            // skip if > 24 hours old
-            if bgCheckData[i].date < dateTimeUtils.getTimeInterval24HoursAgo() { continue }
-            
-            let value = ChartDataEntry(x: Double(bgCheckData[i].date), y: Double(bgCheckData[i].sgv), data: formatPillText(line1: bgUnits.toDisplayUnits(String(bgCheckData[i].sgv)), time: bgCheckData[i].date))
-            cgmChartView.data?.dataSets[dataIndex].addEntry(value)
-
-        }
-        
-        cgmChartView.data?.dataSets[dataIndex].notifyDataSetChanged()
-        cgmChartView.data?.notifyDataChanged()
-        cgmChartView.notifyDataSetChanged()
     }
     
     func createGraph(){
@@ -98,7 +73,7 @@ extension BottomSheetVC :  ChartViewDelegate {
         data.setValueFont(AppFonts.SF_Pro_Display_Regular.withSize(.x12))
 
         let marker = BalloonMarker(color: #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1),
-                                   font: AppFonts.SF_Pro_Display_Bold.withSize(.x15),
+                                   font: AppFonts.SF_Pro_Display_Bold.withSize(.x13),
                                    textColor: .white,
                                    insets: UIEdgeInsets(top: 3.5, left: 5.5, bottom: 16, right: 5.5))
         marker.chartView = cgmChartView
@@ -197,7 +172,6 @@ extension BottomSheetVC :  ChartViewDelegate {
                 mainChart.circleColors.append(colors[i])
             }
         }
-        
         cgmChartView.rightAxis.axisMaximum = Double(topBG)
 //        cgmChartView.setVisibleXRangeMinimum(600)
         cgmChartView.data?.dataSets[dataIndex].notifyDataSetChanged()
@@ -237,6 +211,7 @@ extension BottomSheetVC :  ChartViewDelegate {
     }
     
     public func newChartSetUp(){
+        cgmChartView.clear()
         cgmChartView.delegate = self
         cgmChartView.chartDescription?.enabled = true
         //MARK: - Important
@@ -263,6 +238,5 @@ extension BottomSheetVC :  ChartViewDelegate {
         cgmChartView.noDataText = "No glucose data available."
         cgmChartView.noDataTextColor = #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1)
         cgmChartView.noDataFont = AppFonts.SF_Pro_Display_Bold.withSize(.x15)
-        cgmChartView.clear()
     }
 }

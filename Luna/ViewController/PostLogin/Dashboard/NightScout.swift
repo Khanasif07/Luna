@@ -622,7 +622,7 @@ extension  BottomSheetVC{
     
     func clearOldBGCheck(){
         self.bgCheckData.removeAll()
-        self.updateBGCheckGraph()
+       // self.updateBGCheckGraph()
     }
     
     func clearOldOverride(){

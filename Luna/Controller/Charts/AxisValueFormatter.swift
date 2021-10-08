@@ -133,7 +133,6 @@ final  class XAxisCustomRenderer: XAxisRenderer {
     }
 }
 
-
 open class BalloonMarker: MarkerImage{
     @objc open var color: UIColor
     @objc open var arrowSize = CGSize(width: 12.5, height: 12.5)
@@ -310,10 +309,8 @@ open class BalloonMarker: MarkerImage{
 //        }
 //    }
     
-    @objc open func setLabel(_ newLabel: String)
-    {
-        label = newLabel
-        
+    @objc open func setLabel(_ newLabel: String) {
+         label = newLabel
         _drawAttributes.removeAll()
         _drawAttributes[.font] = self.font
         _drawAttributes[.paragraphStyle] = _paragraphStyle
