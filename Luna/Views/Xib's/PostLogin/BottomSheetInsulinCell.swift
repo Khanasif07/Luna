@@ -21,6 +21,7 @@ class BottomSheetInsulinCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setUpFont()
+        self.setUpAttributedString()
     }
     
     override func layoutSubviews() {
@@ -30,7 +31,17 @@ class BottomSheetInsulinCell: UITableViewCell {
     }
     
     func populateCell(){
-        self.insulinCountLbl.text =  "\(BleManager.sharedInstance.reservoirLevelData)".isEmpty ? "--" :  "\(BleManager.sharedInstance.reservoirLevelData)"
+        self.setUpAttributedString()
+//        self.insulinCountLbl.text =  "\(BleManager.sharedInstance.reservoirLevelData)".isEmpty ? "-- Units" :  "\(BleManager.sharedInstance.reservoirLevelData) Units"
+    }
+    
+    public func setUpAttributedString(){
+        let attributedString = NSMutableAttributedString(string: "\(BleManager.sharedInstance.reservoirLevelData)".isEmpty ? "--" :  "\(BleManager.sharedInstance.reservoirLevelData)" , attributes: [
+            .font: AppFonts.SF_Pro_Display_Bold.withSize(.x20)
+        ])
+        let privactAttText = (NSAttributedString(string: " Units", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black,NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Medium.withSize(.x12)]))
+        attributedString.append(privactAttText)
+        insulinCountLbl.attributedText = attributedString
     }
     
     public func setUpFont(){

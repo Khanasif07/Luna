@@ -306,12 +306,12 @@ extension HomeVC: CoachMarksControllerDataSource, CoachMarksControllerDelegate{
         
         switch index {
         case 0:
-            coachMarkBodyView.hintLabel.text = "The battery must be fully charged prior to starting a session.It’s a good habit to plug your device into a charger whenever it’s not in use. In fact, go ahead and charge it now!"
+            coachMarkBodyView.hintLabel.text = "The battery must be fully charged prior to starting a session. It’s a good habit to plug your device into a charger whenever it’s not in use. In fact, go ahead and charge it now!"
             coachMarkBodyView.hintLabel.textAlignment = .left
             coachMarkBodyView.nextButton.setTitle(LocalizedString.ok.localized.capitalized, for: .normal)
             
         default:
-            coachMarkBodyView.hintLabel.text = "Make sure you read the user manual before you start with your Luna system.You can access it now or later from the top of your screen."
+            coachMarkBodyView.hintLabel.text = "Make sure you read the user manual before you start with your Luna system. You can access it now or later from the top of your screen."
             coachMarkBodyView.hintLabel.textAlignment = .right
             coachMarkBodyView.nextButton.setTitle("Got it", for: .normal)
         }
