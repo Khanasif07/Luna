@@ -85,7 +85,7 @@ class SessionFilterVC: UIViewController {
             self.pop()
             return
         }
-        self.delegate?.filterApplied(startDate: startTimePicker.date, endDate: endTimePicker.date)
+        self.delegate?.filterApplied(startDate:  startdate, endDate:  enddate)
         self.pop()
     }
     
@@ -179,12 +179,13 @@ extension SessionFilterVC {
     
     @objc func DoneEndPicker(){
         let date = endTimePicker.date
+        self.enddate = date
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US")
         dateFormatter.dateFormat = Date.DateFormat.mmddyyyy.rawValue
         self.endTF.text = dateFormatter.string(from: date)
         view.endEditing(true)
-        self.proceedBtn.isEnabled = true
+        self.proceedBtn.isEnabled = (self.startdate != nil && self.enddate != nil)
     }
     
     // start time action
@@ -194,14 +195,16 @@ extension SessionFilterVC {
     
     @objc func DoneStatyPicker(){
         let date = startTimePicker.date
+        self.startdate = date
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US")
         dateFormatter.dateFormat = Date.DateFormat.mmddyyyy.rawValue
         self.startlTF.text = dateFormatter.string(from: date)
         view.endEditing(true)
-        self.proceedBtn.isEnabled = true
         self.endTF.text = ""
+        self.enddate = nil
         endTimePicker.minimumDate = Calendar.current.date(byAdding: .day, value: 1, to: startTimePicker.date)
+        self.proceedBtn.isEnabled = (self.startdate != nil && self.enddate != nil)
     }
     
 }
