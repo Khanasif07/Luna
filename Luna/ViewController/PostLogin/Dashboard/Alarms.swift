@@ -50,10 +50,10 @@ extension BottomSheetVC{
         
         // Exit if all is snoozed
         // still send persistent notification with all snoozed
-        if UserDefaultsRepository.alertSnoozeAllIsSnoozed.value {
-            persistentNotification(bgTime: currentBGTime)
-            return
-        }
+//        if UserDefaultsRepository.alertSnoozeAllIsSnoozed.value {
+//            persistentNotification(bgTime: currentBGTime)
+//            return
+//        }
         // still send persistent notification if no alarms trigger and persistent notification is on
         self.persistentNotification(bgTime: currentBGTime)
         

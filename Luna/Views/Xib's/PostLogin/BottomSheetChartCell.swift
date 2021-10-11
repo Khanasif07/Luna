@@ -49,7 +49,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         let date = Date(timeIntervalSince1970: time)
         let formattedDate = dateFormatter.string(from: date)
         
-        return line1 + "\r\n" + formattedDate
+        return line1 + "\r\n" + formattedDate.lowercased()
     }
     
     private func newChartSetUp(){
@@ -75,7 +75,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         leftAxis.removeAllLimitLines()
         leftAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
         leftAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
-        leftAxis.axisMaximum = 300
+        leftAxis.axisMaximum = Double(UserDefaultsRepository.minBGScale.value)
         //MARK: - Important
         leftAxis.drawGridLinesEnabled = true
         leftAxis.granularityEnabled = true
@@ -94,7 +94,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         
         cgmChartView.xAxis.centerAxisLabelsEnabled = false
         cgmChartView.xAxis.setLabelCount(7, force: true) //enter the number of labels here
-
+        cgmChartView.leftAxis.setLabelCount(8, force: true) //enter the number of labels here
         cgmChartView.xAxis.drawGridLinesEnabled = false
         cgmChartView.legend.form = .none
         

@@ -107,7 +107,7 @@ extension BottomSheetVC :  ChartViewDelegate {
         cgmChartView.leftAxis.enabled = true
         cgmChartView.leftAxis.labelPosition = YAxis.LabelPosition.outsideChart
         cgmChartView.leftAxis.axisMinimum = -0
-        cgmChartView.leftAxis.axisMaximum = 300
+        cgmChartView.leftAxis.axisMaximum =  Double(UserDefaultsRepository.minBGScale.value)
         //MARK: - Important
         cgmChartView.leftAxis.drawGridLinesEnabled = true
         cgmChartView.leftAxis.granularityEnabled = true
@@ -117,6 +117,7 @@ extension BottomSheetVC :  ChartViewDelegate {
         cgmChartView.rightAxis.labelPosition = YAxis.LabelPosition.outsideChart
         cgmChartView.rightAxis.axisMinimum = 0.0
         cgmChartView.rightAxis.axisMaximum = Double(maxBG)
+        cgmChartView.leftAxis.setLabelCount(8, force: true)
         cgmChartView.rightAxis.gridLineDashLengths = [5.0, 5.0]
         cgmChartView.rightAxis.drawGridLinesEnabled = false
         cgmChartView.rightAxis.valueFormatter = ChartYMMOLValueFormatter()
@@ -193,6 +194,7 @@ extension BottomSheetVC :  ChartViewDelegate {
         cgmChartView.moveViewToAnimated(xValue: dateTimeUtils.getNowTimeIntervalUTC() - (cgmChartView.visibleXRange * 0.7), yValue: 0.0, axis: .right, duration: 1, easingOption: .easeInBack)
     }
     
+    //MARK:- Important
     func formatPillText(line1: String, time: TimeInterval) -> String {
         let dateFormatter = DateFormatter()
         //let timezoneOffset = TimeZone.current.secondsFromGMT()
@@ -207,7 +209,7 @@ extension BottomSheetVC :  ChartViewDelegate {
         let date = Date(timeIntervalSince1970: time)
         let formattedDate = dateFormatter.string(from: date)
         
-        return line1 + "\r\n" + formattedDate
+        return line1 + "\r\n" + formattedDate.lowercased()
     }
     
     public func newChartSetUp(){

@@ -22,13 +22,14 @@ enum LocalizedString : String {
     case setting
     case notification
     case profile
+    case myProfile
     case notifications
     // MARK: - Alert Values
     //==============================
     case chooseOptions = "chooseOptions"
     case chooseFromGallery = "chooseFromGallery"
     case takePhoto = "takePhoto"
-    case cancel = "cancel"
+    case cancel = "Cancel"
     case gallery
     case camera
     case send

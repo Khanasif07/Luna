@@ -178,7 +178,7 @@ extension BottomSheetVC {
         }
 
         if UserDefaultsRepository.url.value != "" {
-            webLoadNSDeviceStatus()
+//            webLoadNSDeviceStatus()
         }
     }
     

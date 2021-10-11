@@ -29,7 +29,7 @@ class SettingsVC: UIViewController {
         var titleValue: String{
             switch self {
             case .profile:
-                return LocalizedString.profile.localized
+                return LocalizedString.myProfile.localized
             case .change_Password:
                 return LocalizedString.change_Password.localized
             case .face_ID:
