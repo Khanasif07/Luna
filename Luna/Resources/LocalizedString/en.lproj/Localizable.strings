@@ -60,6 +60,8 @@
 "face_ID" = "Face ID";
 "apple_Health" = "Apple Health";
 "luna" = "Luna";
+"luna_settings" = "Luna Settings";
+"app_settings" = "App Settings";
 "about" = "About";
 "delete_Account" = "Delete Account";
 "logout" = "Logout";

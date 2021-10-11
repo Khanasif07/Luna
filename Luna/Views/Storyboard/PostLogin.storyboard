@@ -692,6 +692,7 @@
                     <connections>
                         <outlet property="backView" destination="hgo-NN-9Hv" id="ref-cg-bwa"/>
                         <outlet property="systemTableView" destination="eAb-wo-pvO" id="MHJ-RY-3yp"/>
+                        <outlet property="titleLbl" destination="spr-G1-Xq0" id="AsX-dh-Jf0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6aS-Dr-nCg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

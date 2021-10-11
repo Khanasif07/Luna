@@ -21,7 +21,8 @@ class SettingsVC: UIViewController {
         case face_ID
         case touch_ID
         case apple_Health
-        case luna
+        case luna_settings
+        case app_settings
         case about
         case delete_Account
         case logout
@@ -36,8 +37,10 @@ class SettingsVC: UIViewController {
                 return LocalizedString.face_ID.localized
             case .apple_Health:
                 return LocalizedString.apple_Health.localized
-            case .luna:
-                return LocalizedString.luna.localized
+            case .luna_settings:
+                return LocalizedString.luna_settings.localized
+            case .app_settings:
+                return LocalizedString.app_settings.localized
             case .about:
                 return LocalizedString.about.localized
             case .delete_Account:
@@ -58,7 +61,7 @@ class SettingsVC: UIViewController {
     // MARK: - Variables
     //===========================
     public let db = Firestore.firestore()
-    var sections: [(UIImage,SettingSection)] = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "changePassword"),.change_Password),(#imageLiteral(resourceName: "faceId"),.face_ID),(#imageLiteral(resourceName: "appleHealth"),.apple_Health),(#imageLiteral(resourceName: "system"),.luna),(#imageLiteral(resourceName: "about"),.about),(#imageLiteral(resourceName: "deleteAccount"),.delete_Account),(#imageLiteral(resourceName: "logout"),.logout)]
+    var sections: [(UIImage,SettingSection)] = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "system"),.app_settings),(#imageLiteral(resourceName: "changePassword"),.change_Password),(#imageLiteral(resourceName: "about"),.about),(#imageLiteral(resourceName: "deleteAccount"),.delete_Account),(#imageLiteral(resourceName: "logout"),.logout)]
     
     // MARK: - Lifecycle
     //===========================
@@ -112,9 +115,9 @@ extension SettingsVC {
     
     private func setUpdata(){
         if !UserModel.main.isChangePassword {
-            self.sections = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "faceId"),!hasTopNotch ? .touch_ID : .face_ID),(#imageLiteral(resourceName: "appleHealth"),.apple_Health),(#imageLiteral(resourceName: "system"),.luna),(#imageLiteral(resourceName: "about"),.about),(#imageLiteral(resourceName: "deleteAccount"),.delete_Account),(#imageLiteral(resourceName: "logout"),.logout)]
+            self.sections = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "system"),.app_settings),(#imageLiteral(resourceName: "about"),.about),(#imageLiteral(resourceName: "deleteAccount"),.delete_Account),(#imageLiteral(resourceName: "logout"),.logout)]
         } else{
-            self.sections = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "changePassword"),.change_Password),(#imageLiteral(resourceName: "faceId"),!hasTopNotch ? .touch_ID : .face_ID),(#imageLiteral(resourceName: "appleHealth"),.apple_Health),(#imageLiteral(resourceName: "system"),.luna),(#imageLiteral(resourceName: "about"),.about),(#imageLiteral(resourceName: "deleteAccount"),.delete_Account),(#imageLiteral(resourceName: "logout"),.logout)]
+            self.sections = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "system"),.app_settings),(#imageLiteral(resourceName: "changePassword"),.change_Password),(#imageLiteral(resourceName: "about"),.about),(#imageLiteral(resourceName: "deleteAccount"),.delete_Account),(#imageLiteral(resourceName: "logout"),.logout)]
         }
     }
     
@@ -213,8 +216,13 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
         case .change_Password:
             let vc = ChangePasswordVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)
-        case .luna:
+        case .luna_settings:
             let vc = SystemSetupVC.instantiate(fromAppStoryboard: .PostLogin)
+            vc.settingType = .Luna
+            self.navigationController?.pushViewController(vc, animated: true)
+        case .app_settings:
+            let vc = SystemSetupVC.instantiate(fromAppStoryboard: .PostLogin)
+            vc.settingType = .App
             self.navigationController?.pushViewController(vc, animated: true)
         case .delete_Account:
             self.showAlertWithAction(title: LocalizedString.delete_Account.localized, msg: LocalizedString.are_you_sure_want_to_delete_account.localized, cancelTitle: LocalizedString.no.localized, actionTitle: LocalizedString.yes.localized) {

@@ -158,6 +158,8 @@ enum LocalizedString : String {
     case face_ID
     case apple_Health
     case luna
+    case luna_settings
+    case app_settings
     case about
     case delete_Account
     case touch_ID

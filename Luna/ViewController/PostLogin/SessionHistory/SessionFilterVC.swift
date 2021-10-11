@@ -200,6 +200,8 @@ extension SessionFilterVC {
         self.startlTF.text = dateFormatter.string(from: date)
         view.endEditing(true)
         self.proceedBtn.isEnabled = true
+        self.endTF.text = ""
+        endTimePicker.minimumDate = Calendar.current.date(byAdding: .day, value: 1, to: startTimePicker.date)
     }
     
 }
