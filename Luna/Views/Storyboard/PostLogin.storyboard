@@ -507,6 +507,7 @@
                         <outlet property="backView" destination="mtN-KU-iPB" id="Ief-Sj-dRv"/>
                         <outlet property="profileTableView" destination="bdv-fQ-v6x" id="DBP-Mc-R09"/>
                         <outlet property="saveBtn" destination="jiQ-TE-WoL" id="LXu-4E-zMT"/>
+                        <outlet property="titleLbl" destination="2nA-Wa-Skj" id="7Kn-2G-hwW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aJJ-B9-arw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

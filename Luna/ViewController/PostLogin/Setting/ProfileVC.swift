@@ -11,6 +11,7 @@ class ProfileVC: UIViewController {
     
     // MARK: - IBOutlets
     //===========================
+    @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var saveBtn: AppButton!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var profileTableView: UITableView!
@@ -85,6 +86,7 @@ extension ProfileVC {
     }
    
     private func tableViewSetup(){
+        self.titleLbl.text = LocalizedString.myProfile.localized
         self.saveBtn.isEnabled = (!UserModel.main.firstName.isEmpty && !UserModel.main.lastName.isEmpty && !UserModel.main.dob.isEmpty && !UserModel.main.email.isEmpty && !UserModel.main.diabetesType.isEmpty)
         self.profileTableView.delegate = self
         self.profileTableView.dataSource = self
