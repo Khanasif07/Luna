@@ -12,6 +12,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
 import SwiftyJSON
+import SwiftKeychainWrapper
 
 typealias JSONDictionary = [String : Any]
 typealias JSONDictionaryArray = [JSONDictionary]
@@ -259,6 +260,8 @@ class FirestoreController:NSObject{
         completion(false)
     }
     
+    //MARK:- PerformCleanUp
+    //=======================
     static func performCleanUp(for_logout: Bool = true) {
         let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
         let isBiometricEnable = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
@@ -287,6 +290,18 @@ class FirestoreController:NSObject{
             }
         }
     }
+    
+    //MARK:- RemoveKeychain
+    //=======================
+    static func  removeKeychain(){
+        KeychainWrapper.standard.removeObject(forKey: ApiKey.password)
+        KeychainWrapper.standard.removeObject(forKey: ApiKey.email)
+        KeychainWrapper.standard.removeObject(forKey: ApiKey.googleIdToken)
+        KeychainWrapper.standard.removeObject(forKey: ApiKey.googleAccessToken)
+        KeychainWrapper.standard.removeObject(forKey: ApiKey.appleIdToken)
+        KeychainWrapper.standard.removeObject(forKey: ApiKey.currrentNonce)
+    }
+    
     
     //MARK:- IsEMailVerified
     //=======================

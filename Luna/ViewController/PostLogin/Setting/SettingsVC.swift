@@ -61,7 +61,7 @@ class SettingsVC: UIViewController {
     // MARK: - Variables
     //===========================
     public let db = Firestore.firestore()
-    var sections: [(UIImage,SettingSection)] = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "system"),.app_settings),(#imageLiteral(resourceName: "changePassword"),.change_Password),(#imageLiteral(resourceName: "about"),.about),(#imageLiteral(resourceName: "deleteAccount"),.delete_Account),(#imageLiteral(resourceName: "logout"),.logout)]
+    var sections: [(UIImage,SettingSection)] = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "system"),.app_settings),(#imageLiteral(resourceName: "changePassword"),.change_Password),(#imageLiteral(resourceName: "about"),.about)]
     
     // MARK: - Lifecycle
     //===========================
@@ -115,19 +115,10 @@ extension SettingsVC {
     
     private func setUpdata(){
         if !UserModel.main.isChangePassword {
-            self.sections = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "system"),.app_settings),(#imageLiteral(resourceName: "about"),.about),(#imageLiteral(resourceName: "deleteAccount"),.delete_Account),(#imageLiteral(resourceName: "logout"),.logout)]
+            self.sections = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "system"),.app_settings),(#imageLiteral(resourceName: "about"),.about)]
         } else{
-            self.sections = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "system"),.app_settings),(#imageLiteral(resourceName: "changePassword"),.change_Password),(#imageLiteral(resourceName: "about"),.about),(#imageLiteral(resourceName: "deleteAccount"),.delete_Account),(#imageLiteral(resourceName: "logout"),.logout)]
+            self.sections = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "system"),.app_settings),(#imageLiteral(resourceName: "changePassword"),.change_Password),(#imageLiteral(resourceName: "about"),.about)]
         }
-    }
-    
-    private func removeKeychain(){
-        KeychainWrapper.standard.removeObject(forKey: ApiKey.password)
-        KeychainWrapper.standard.removeObject(forKey: ApiKey.email)
-        KeychainWrapper.standard.removeObject(forKey: ApiKey.googleIdToken)
-        KeychainWrapper.standard.removeObject(forKey: ApiKey.googleAccessToken)
-        KeychainWrapper.standard.removeObject(forKey: ApiKey.appleIdToken)
-        KeychainWrapper.standard.removeObject(forKey: ApiKey.currrentNonce)
     }
     
     private func getLoginType(){
@@ -248,7 +239,7 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
                                     CommonFunctions.showToastWithMessage(error.localizedDescription)
                                 } else {
                                     CommonFunctions.hideActivityLoader()
-                                    self.removeKeychain()
+                                    FirestoreController.removeKeychain()
                                     FirestoreController.performCleanUp(for_logout: false)
                                 }
                             }
@@ -273,7 +264,7 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
                                     CommonFunctions.showToastWithMessage(error.localizedDescription)
                                 } else {
                                     CommonFunctions.hideActivityLoader()
-                                    self.removeKeychain()
+                                    FirestoreController.removeKeychain()
                                     FirestoreController.performCleanUp(for_logout: false)
                                 }
                             }
@@ -295,7 +286,7 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
                                     CommonFunctions.showToastWithMessage(error.localizedDescription)
                                 } else {
                                     CommonFunctions.hideActivityLoader()
-                                    self.removeKeychain()
+                                    FirestoreController.removeKeychain()
                                     FirestoreController.performCleanUp(for_logout: false)
                                 }
                             }

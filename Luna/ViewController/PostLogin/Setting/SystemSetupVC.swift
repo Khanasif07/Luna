@@ -27,6 +27,8 @@ class SystemSetupVC: UIViewController {
     
     // MARK: - Variables
     //===========================
+    var backgroundView1 = UIView(frame: CGRect.zero)
+    var customView: CustomView?
     public let db = Firestore.firestore()
     var settingType : SettingType = .Luna
     var sections: [(UIImage,String,String)] = [(#imageLiteral(resourceName: "changeLongActingInsulin"),LocalizedString.change_Long_Acting_Insulin.localized,""),(#imageLiteral(resourceName: "changeCgm"),LocalizedString.change_CGM.localized,""),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),LocalizedString.change_connected_Luna_Device.localized,""),(#imageLiteral(resourceName: "alerts"),LocalizedString.alerts.localized,LocalizedString.explainer_what_they_do.localized)]
@@ -57,6 +59,16 @@ class SystemSetupVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         backView.round()
+        self.backgroundView1.frame = self.view.frame
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        if let touch = touches.first {
+            let position = touch.location(in: customView)
+            if position.y <= 102.0 && position.y >= 0.0 {
+            }else{ backgroundView1.removeFromSuperview()}
+        }
     }
     
     // MARK: - IBActions
@@ -80,6 +92,8 @@ extension SystemSetupVC {
             self.titleLbl.text = LocalizedString.luna_settings.localized
         }
         else{self.titleLbl.text = LocalizedString.app_settings.localized}
+        self.customView = CustomView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        self.customView?.delegate = self
         self.setUpSectionData()
         self.tableViewSetup()
         self.addObserver()
@@ -137,6 +151,23 @@ extension SystemSetupVC {
         }
     }
     
+    func showPopupMsg() {
+        self.backgroundView1.removeFromSuperview()
+        if let infoView = self.customView {
+            backgroundView1.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
+            customView?.frame = CGRect(x: 20.0, y: UIDevice.height / 2.0 - (50.0), width: UIDevice.width - 40.0 , height: 102.0)
+//            notificationPopUp?.message.text = msg
+//            notificationPopUp?.yesBtn.setTitle(ApiKey.continueUpperCase, for: .normal)
+//            notificationPopUp?.noBtn.setTitle(ApiKey.cancel, for: .normal)
+//            notificationPopUp?.noBtn.backgroundColor = AppColors.disableGrayColor
+//            notificationPopUp?.noBtn.setTitleColor(AppColors.blackColor, for: .normal)
+//            notificationPopUp?.title.text = forSuccess ? ApiKey.successUpperCase : LocalizedString.are_you_sure.localized
+//            notificationPopUp?.button.isHidden = !forSuccess
+//            notificationPopUp?.stackView.isHidden = forSuccess
+            backgroundView1.addSubview(infoView)
+            self.view.addSubview(backgroundView1)
+        }
+    }
 }
 
 // MARK: - Extension For TableView
@@ -196,9 +227,12 @@ extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
             case 0:
                 print("Do Nothing.")
             case 1:
-                if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
-                   UIApplication.shared.open(settingsUrl)
-                 }
+//                UIApplication.openSettingsURLString
+//                showAlert(msg: "To modify which data Luna shares with Apple Health:Open the Health App,select sources tab and select Luna App,Set desired permissions.")
+                self.showPopupMsg()
+//                if let settingsUrl = URL(string: "x-apple-health://") {
+//                   UIApplication.shared.open(settingsUrl)
+//                 }
             default:
                 CommonFunctions.showToastWithMessage("Under Development")
             }
@@ -219,6 +253,19 @@ extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
             default:
                 CommonFunctions.showToastWithMessage("Under Development")
             }
+        }
+    }
+}
+
+
+//MARK:- CustomViewDelegate
+//=================
+extension SystemSetupVC: CustomViewDelegate {
+    
+    func successBtnAction() {
+        self.backgroundView1.removeFromSuperview()
+        if let settingsUrl = URL(string: "x-apple-health://") {
+            UIApplication.shared.open(settingsUrl)
         }
     }
 }

@@ -184,7 +184,7 @@ extension HomeVC {
     private func getInsulinFromFirestore(){
         FirestoreController.getFirebaseInsulinData { (insulinDataArray) in
             print(insulinDataArray)
-            SystemInfoModel.shared.insulinData = insulinDataArray
+            SystemInfoModel.shared.insulinData = insulinDataArray.reversed()
             self.bottomSheetVC.mainTableView.reloadData()
         } failure: { (error) -> (Void) in
             print(error.localizedDescription)

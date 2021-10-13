@@ -123,9 +123,6 @@ extension ProfileVC {
             cell.txtField.text = picker.date.convertToDefaultString()
         }
     }
-    
-    
-    
 }
 
 // MARK: - Extension For TableView
@@ -191,7 +188,7 @@ extension ProfileVC : UITextFieldDelegate{
             cell?.txtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
         case sections[2].0:
             cell?.txtField.inputView = datePicker
-            cell?.txtField.placeholder = "mm/dd/yyyy"
+            cell?.txtField.placeholder = Date.DateFormat.mmddyyyy.rawValue
             cell?.txtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
         case sections[4].0:
             cell?.txtField.inputView = typePickerView
