@@ -46,6 +46,10 @@ extension BottomSheetVC :  ChartViewDelegate {
         // Setup BG line details
         let lineBG = LineChartDataSet(entries:bgChartEntry, label: "")
 //        lineBG.circleRadius = CGFloat(globalVariables.dotBG)
+        lineBG.highlightColor = #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1) // color of the line
+        lineBG.highlightLineWidth = 0.5
+        lineBG.drawHorizontalHighlightIndicatorEnabled = true // hide horizontal line
+        lineBG.drawVerticalHighlightIndicatorEnabled = true
         lineBG.fillAlpha = 1.0
         lineBG.drawFilledEnabled = true
         lineBG.drawValuesEnabled = false

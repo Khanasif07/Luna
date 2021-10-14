@@ -155,6 +155,10 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         }
         
         let set1 = LineChartDataSet(entries: mainChart, label: "")
+        set1.highlightColor = #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1) // color of the line
+        set1.highlightLineWidth = 1.0
+        set1.drawHorizontalHighlightIndicatorEnabled = true // hide horizontal line
+        set1.drawVerticalHighlightIndicatorEnabled = true
         //
         set1.colors.removeAll()
         set1.circleColors.removeAll()
