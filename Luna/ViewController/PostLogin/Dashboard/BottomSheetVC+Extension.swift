@@ -45,7 +45,6 @@ extension BottomSheetVC {
             self.timeAgoLbl.text = ""
             latestMinAgoString = ""
         }
-        
     }
     
     //Clear the info data before next pull. This ensures we aren't displaying old data if something fails.

@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import Charts
-import EventKit
 import UserNotifications
 import Photos
 
@@ -17,7 +16,7 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     
     //MARK:- OUTLETS
     //==============
-    @IBOutlet weak var cgmChartView: LineChartView!
+    @IBOutlet weak var cgmChartView: TappableLineChartView!
     @IBOutlet weak var mainCotainerView: UIView!
     @IBOutlet weak var bottomLayoutConstraint : NSLayoutConstraint!
     @IBOutlet weak var mainTableView: UITableView!
@@ -181,6 +180,7 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
         if let dict = notification.object as? NSDictionary {
             if let bgData = dict[ApiKey.cgmData] as? [ShareGlucoseData]{
                 self.bgData = bgData
+                SystemInfoModel.shared.cgmData = bgData
                 let shareUserName = UserDefaultsRepository.shareUserName.value
                 let sharePassword = UserDefaultsRepository.sharePassword.value
                 let shareServer = UserDefaultsRepository.shareServer.value == "US" ?KnownShareServers.US.rawValue : KnownShareServers.NON_US.rawValue

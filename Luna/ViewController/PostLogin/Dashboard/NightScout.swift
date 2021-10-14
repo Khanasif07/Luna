@@ -197,8 +197,10 @@ extension  BottomSheetVC{
         // If we already have data, we're going to pop it to the end and remove the first. If we have old or no data, we'll destroy the whole array and start over. This is simpler than determining how far back we need to get new data from in case Dex back-filled readings
         if !onlyPullLastRecord {
             bgData.removeAll()
+            SystemInfoModel.shared.cgmData?.removeAll()
         } else if bgData[bgData.count - 1].date != pullDate {
             bgData.removeFirst()
+            SystemInfoModel.shared.cgmData?.removeFirst()
 //            if data.count > 0 && UserDefaultsRepository.speakBG.value {
 //                speakBG(sgv: data[data.count - 1].sgv)
 //            }
@@ -222,7 +224,8 @@ extension  BottomSheetVC{
             }
             
         }
-        
+        //MARK:- Important
+        SystemInfoModel.shared.cgmData = bgData
         viewUpdateNSBG(isNS: isNS)
     }
     

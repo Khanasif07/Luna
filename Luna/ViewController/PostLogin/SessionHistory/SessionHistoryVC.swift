@@ -13,7 +13,6 @@ class SessionHistoryVC: UIViewController {
     //===========================
     @IBOutlet weak var sessionHistoryTV: UITableView!
     
-    
     // MARK: - Variables
     //===========================
 //    var insulinSectionDataArray : [(Int,[ShareGlucoseData])] = []
@@ -58,6 +57,9 @@ extension SessionHistoryVC {
     
     private func getSessionHistoryData(){
         CommonFunctions.showActivityLoader()
+        CommonFunctions.delay(delay: 10.0) {
+            CommonFunctions.hideActivityLoader()
+        }
         FirestoreController.getFirebaseSessionHistoryData{ (dataArray) in
             self.sessionHistory = dataArray
             self.sessionHistory.forEach({ (data) in

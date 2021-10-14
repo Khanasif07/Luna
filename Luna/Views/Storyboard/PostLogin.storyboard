@@ -976,7 +976,7 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F28-RG-VHm" customClass="LineChartView" customModule="Charts">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F28-RG-VHm" customClass="TappableLineChartView" customModule="Luna" customModuleProvider="target">
                                                     <rect key="frame" x="10" y="106" width="394" height="300"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
@@ -1019,7 +1019,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomLayoutConstraint" destination="uNl-v1-1KF" id="PqD-Ek-xLb"/>
-                        <outlet property="cgmChartView" destination="F28-RG-VHm" id="Tyg-oV-9jx"/>
+                        <outlet property="cgmChartView" destination="F28-RG-VHm" id="aea-xG-WnK"/>
                         <outlet property="cgmDirectionlbl" destination="iUG-9r-yow" id="zqa-lo-HBq"/>
                         <outlet property="cgmValueLbl" destination="DTG-S8-rOi" id="FYP-3b-d2i"/>
                         <outlet property="mainCotainerView" destination="AZ1-q5-zKw" id="TQh-LE-tCa"/>

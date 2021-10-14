@@ -102,7 +102,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         cgmChartView.noDataText = "No glucose data available."
         cgmChartView.noDataTextColor = #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1)
         cgmChartView.noDataFont = AppFonts.SF_Pro_Display_Bold.withSize(.x15)
-        cgmChartView.setExtraOffsets(left: 10, top: 0, right: 20, bottom: 0)
+        cgmChartView.setExtraOffsets(left: 10, top: 0, right: 25, bottom: 0)
         
         cgmChartView.rightAxis.enabled = false
         cgmChartView.rightAxis.labelTextColor = NSUIColor.label
@@ -110,7 +110,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         cgmChartView.rightAxis.axisMinimum = 0.0
         cgmChartView.rightAxis.gridLineDashLengths = [5.0, 5.0]
         cgmChartView.rightAxis.drawGridLinesEnabled = false
-        cgmChartView.rightAxis.valueFormatter = ChartYMMOLValueFormatter()
+//        cgmChartView.rightAxis.valueFormatter = ChartYMMOLValueFormatter()
         cgmChartView.rightAxis.granularityEnabled = true
         cgmChartView.rightAxis.granularity = 50
         

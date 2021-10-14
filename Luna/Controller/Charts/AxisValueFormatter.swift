@@ -133,6 +133,8 @@ final  class XAxisCustomRenderer: XAxisRenderer {
     }
 }
 
+//MARK:- Balloon Marker
+//=====================
 open class BalloonMarker: MarkerImage{
     @objc open var color: UIColor
     @objc open var arrowSize = CGSize(width: 12.5, height: 12.5)
@@ -295,7 +297,6 @@ open class BalloonMarker: MarkerImage{
     
     open override func refreshContent(entry: ChartDataEntry, highlight: Highlight)
     {
-        
         setLabel(entry.data as? String ?? "")
     }
 

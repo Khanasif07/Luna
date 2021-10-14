@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Charts
+
 extension BottomSheetVC :  ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         if chartView != cgmChartView {
@@ -16,6 +17,10 @@ extension BottomSheetVC :  ChartViewDelegate {
         if entry.data as? String == "hide"{
             chartView.highlightValue(nil, callDelegate: false)
         }
+    }
+    
+    func chartValueNothingSelected(_ chartView: ChartViewBase) {
+        chartView.highlightValue(nil, callDelegate: false)
     }
     
     func chartScaled(_ chartView: ChartViewBase, scaleX: CGFloat, scaleY: CGFloat) {
@@ -97,7 +102,7 @@ extension BottomSheetVC :  ChartViewDelegate {
         // Setup the main graph overall details
         cgmChartView.data?.highlightEnabled = true
         cgmChartView.xAxis.valueFormatter = ChartXValueFormatter()
-//        cgmChartView.xAxis.granularity = 1800
+        cgmChartView.xAxis.granularity = 1800
 //        cgmChartView.xAxis.labelTextColor = NSUIColor.label
 //        cgmChartView.xAxis.labelPosition = XAxis.LabelPosition.bottom
         //MARK:- Important
@@ -120,7 +125,7 @@ extension BottomSheetVC :  ChartViewDelegate {
         cgmChartView.leftAxis.setLabelCount(8, force: true)
         cgmChartView.rightAxis.gridLineDashLengths = [5.0, 5.0]
         cgmChartView.rightAxis.drawGridLinesEnabled = false
-        cgmChartView.rightAxis.valueFormatter = ChartYMMOLValueFormatter()
+//        cgmChartView.rightAxis.valueFormatter = ChartYMMOLValueFormatter()
         cgmChartView.rightAxis.granularityEnabled = true
         cgmChartView.rightAxis.granularity = 50
         
@@ -134,7 +139,7 @@ extension BottomSheetVC :  ChartViewDelegate {
         
         cgmChartView.data = data
         cgmChartView.animate(yAxisDuration: 2.5)
-        cgmChartView.setExtraOffsets(left: 10, top: 0, right: 20, bottom: 0)
+        cgmChartView.setExtraOffsets(left: 10, top: 0, right: 25, bottom: 0)
         
     }
 
@@ -142,9 +147,9 @@ extension BottomSheetVC :  ChartViewDelegate {
         let dataIndex = 0
         let entries = bgData
         if entries.count < 1 { return }
-        var mainChart = cgmChartView.lineData!.dataSets[dataIndex] as! LineChartDataSet
+        let mainChart = cgmChartView.lineData!.dataSets[dataIndex] as! LineChartDataSet
         mainChart.clear()
-        var maxBGOffset: Float = 50
+        var _: Float = 50
         
         var colors = [NSUIColor]()
         for i in 0..<entries.count{

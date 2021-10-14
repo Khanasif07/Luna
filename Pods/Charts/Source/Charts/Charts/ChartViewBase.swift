@@ -568,7 +568,25 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
             Swift.print("Can't select by touch. No data set.")
             return nil
         }
-        
+        //MARK: Important
+        if self.highlighter?.getHighlight(x: pt.x, y: pt.y) != nil {
+            return  self.highlighter?.getHighlight(x: pt.x, y: pt.y)
+        }
+        let selectedY = Int(pt.y)
+        if selectedY > 1 {
+            for i in 1...selectedY{
+                let highlight =  self.highlighter?.getHighlight(x: pt.x, y: CGFloat(i))
+                if highlight != nil {
+                    return highlight
+                }
+            }
+            for i in selectedY...350{
+                let highlight =  self.highlighter?.getHighlight(x: pt.x, y: CGFloat(i))
+                if highlight != nil {
+                    return highlight
+                }
+            }
+        }
         return self.highlighter?.getHighlight(x: pt.x, y: pt.y)
     }
 

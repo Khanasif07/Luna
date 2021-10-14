@@ -52,7 +52,7 @@ class CustomView: UIView {
             .font: AppFonts.SF_Pro_Display_Medium.withSize(.x14)
         ])
         let openText = (NSAttributedString(string: "Open the Health App", attributes: [NSAttributedString.Key.foregroundColor: UIColor(r: 61, g: 201, b: 147, alpha: 1.0),NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Bold.withSize(.x14)]))
-        let decText = (NSAttributedString(string: " ,select sources tab and select Luna App,Set desired permissions.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black,NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Medium.withSize(.x14)]))
+        let decText = (NSAttributedString(string: ", select sources tab and select Luna App, Set desired permissions.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black,NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Medium.withSize(.x14)]))
         attributedString.append(openText)
         attributedString.append(decText)
         messageText.attributedText = attributedString
