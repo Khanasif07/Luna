@@ -201,6 +201,7 @@ class FirestoreController:NSObject{
                                 }
                             }
                         }
+                        success([])
                     } else {
                         print("Document does not exist")
                         failure()

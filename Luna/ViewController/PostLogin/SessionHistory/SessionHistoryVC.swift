@@ -75,6 +75,7 @@ extension SessionHistoryVC {
             self.sessionHistoryTV.reloadData()
             CommonFunctions.hideActivityLoader()
         }failure: {
+            CommonFunctions.showToastWithMessage("No Session History data available.")
             CommonFunctions.hideActivityLoader()
         }
         //        FirestoreController.getFirebaseInsulinData { (insulinDataArray) in

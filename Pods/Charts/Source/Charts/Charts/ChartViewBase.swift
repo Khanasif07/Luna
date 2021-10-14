@@ -580,12 +580,12 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
                     return highlight
                 }
             }
-            for i in selectedY...350{
-                let highlight =  self.highlighter?.getHighlight(x: pt.x, y: CGFloat(i))
-                if highlight != nil {
-                    return highlight
-                }
-            }
+//            for i in selectedY...350{
+//                let highlight =  self.highlighter?.getHighlight(x: pt.x, y: CGFloat(i))
+//                if highlight != nil {
+//                    return highlight
+//                }
+//            }
         }
         return self.highlighter?.getHighlight(x: pt.x, y: pt.y)
     }
