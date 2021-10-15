@@ -22,14 +22,14 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" restorationIdentifier="CustomView" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="335" height="102"/>
+            <rect key="frame" x="0.0" y="0.0" width="335" height="120"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TH0-Ui-zmQ">
-                    <rect key="frame" x="5" y="5" width="325" height="92"/>
+                    <rect key="frame" x="5" y="5" width="325" height="110"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hg-ZV-MkS">
-                            <rect key="frame" x="10" y="10" width="305" height="72"/>
+                            <rect key="frame" x="10" y="10" width="305" height="90"/>
                             <string key="text">To modify which data Luna shares with Apple Health:Open the Health App,select sources tab and select Luna App,Set desired permissions.</string>
                             <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="15"/>
                             <nil key="textColor"/>

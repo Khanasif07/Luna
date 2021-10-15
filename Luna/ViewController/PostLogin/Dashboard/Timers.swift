@@ -128,6 +128,8 @@ extension BottomSheetVC {
             let lastUpdatedDate = AppUserDefaults.value(forKey: .lastUpdatedCGMDate).doubleValue
 //            print(Calendar.current.isDate(date, inSameDayAs: cgmDate))
 //            if !Calendar.current.isDate(date, equalTo: cgmDate, toGranularity: .day) {
+            print("LastUpdatedCGMDate")
+            print(bgData.last!.date - lastUpdatedDate)
             if (bgData.last!.date - lastUpdatedDate) >= 86400 {
                 AppUserDefaults.save(value: (self.bgData[self.bgData.count - 1].date), forKey: .lastUpdatedCGMDate)
                 FirestoreController.updateLastUpdatedCGMDate(currentDate: (self.bgData[self.bgData.count - 1].date))

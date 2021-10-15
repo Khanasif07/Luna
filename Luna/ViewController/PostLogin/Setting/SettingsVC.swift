@@ -61,7 +61,7 @@ class SettingsVC: UIViewController {
     // MARK: - Variables
     //===========================
     public let db = Firestore.firestore()
-    var sections: [(UIImage,SettingSection)] = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "system"),.app_settings),(#imageLiteral(resourceName: "changePassword"),.change_Password),(#imageLiteral(resourceName: "about"),.about)]
+    var sections: [(UIImage,SettingSection)] = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "system"),.app_settings),(#imageLiteral(resourceName: "about"),.about)]
     
     // MARK: - Lifecycle
     //===========================
@@ -117,7 +117,7 @@ extension SettingsVC {
         if !UserModel.main.isChangePassword {
             self.sections = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "system"),.app_settings),(#imageLiteral(resourceName: "about"),.about)]
         } else{
-            self.sections = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "system"),.app_settings),(#imageLiteral(resourceName: "changePassword"),.change_Password),(#imageLiteral(resourceName: "about"),.about)]
+            self.sections = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "system"),.app_settings),(#imageLiteral(resourceName: "about"),.about)]
         }
     }
     

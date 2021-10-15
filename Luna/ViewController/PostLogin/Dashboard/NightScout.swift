@@ -157,8 +157,10 @@ extension  BottomSheetVC{
         let now = dateTimeUtils.getNowTimeIntervalUTC()
         if !isNS && (latestDate + 330) < now {
             webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
-            CommonFunctions.showToastWithMessage("dex didn't load, triggered NS attempt")
-            print("dex didn't load, triggered NS attempt")
+            CommonFunctions.showToastWithMessage("Could not connect to Dexcom server at this time, please try again later.")
+            //MARK:- TO DO
+            print("Could not connect to Dexcom server at this time, please try again later.")
+//            print("dex didn't load, triggered NS attempt")
             return
         }
         

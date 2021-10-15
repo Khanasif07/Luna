@@ -10,5 +10,5 @@ import Foundation
 
 // Class that contains general constants used in different classes
 class CGMAppConstants {
-    internal static let APP_GROUP_ID = "group.com.$(unique_id).LoopFollow"
+    internal static let APP_GROUP_ID = "group.com.$(unique_id).Luna"
 }

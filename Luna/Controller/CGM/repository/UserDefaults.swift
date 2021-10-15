@@ -86,22 +86,4 @@ class UserDefaultsRepository {
     static let alwaysDownloadAllBG = UserDefaultsValue<Bool>(key: "alwaysDownloadAllBG", default: true)
     static let bgUpdateDelay = UserDefaultsValue<Int>(key: "bgUpdateDelay", default: 10)
     
-    
-    // Watch Calendar Settings
-    static let calendarIdentifier = UserDefaultsValue<String>(key: "calendarIdentifier", default: "")
-    static let savedEventID = UserDefaultsValue<String>(key: "savedEventID", default: "")
-    static let lastCalendarStartDate = UserDefaultsValue<Date?>(key: "lastCalendarStartDate", default: nil)
-    static let writeCalendarEvent = UserDefaultsValue<Bool>(key: "writeCalendarEvent", default: false)
-    static let watchLine1 = UserDefaultsValue<String>(key: "watchLine1", default: "%BG% %DIRECTION% %DELTA% %MINAGO%")
-    static let watchLine2 = UserDefaultsValue<String>(key: "watchLine2", default: "C:%COB% I:%IOB% B:%BASAL%")
-    static let saveImage = UserDefaultsValue<Bool>(key: "saveImage", default: false)
-    
-    // Alarm Settings
-    static let systemOutputVolume = UserDefaultsValue<Float>(key: "systemOutputVolume", default: 0.5)
-    static let fadeInTimeInterval = UserDefaultsValue<TimeInterval>(key: "fadeInTimeInterval", default: 0)
-    static let vibrate = UserDefaultsValue<Bool>(key: "vibrate", default: true)
-    static let overrideSystemOutputVolume = UserDefaultsValue<Bool>(key: "overrideSystemOutputVolume", default: true)
-    static let forcedOutputVolume = UserDefaultsValue<Float>(key: "forcedOutputVolume", default: 0.5)
-    
-    
 }

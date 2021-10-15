@@ -51,10 +51,12 @@ class CustomView: UIView {
         let attributedString = NSMutableAttributedString(string: "To modify which data Luna shares with Apple Health: " , attributes: [
             .font: AppFonts.SF_Pro_Display_Medium.withSize(.x14)
         ])
-        let openText = (NSAttributedString(string: "Open the Health App", attributes: [NSAttributedString.Key.foregroundColor: UIColor(r: 61, g: 201, b: 147, alpha: 1.0),NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Bold.withSize(.x14)]))
-        let decText = (NSAttributedString(string: ", select sources tab and select Luna App, Set desired permissions.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black,NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Medium.withSize(.x14)]))
+        let openText = (NSAttributedString(string: "\n1. Open the Health App", attributes: [NSAttributedString.Key.foregroundColor: UIColor(r: 61, g: 201, b: 147, alpha: 1.0),NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Bold.withSize(.x14)]))
+        let decText = (NSAttributedString(string: "\n2. Select sources tab and select Luna App", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black,NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Medium.withSize(.x14)]))
+        let decText1 = (NSAttributedString(string: "\n3. Set desired permissions", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black,NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Medium.withSize(.x14)]))
         attributedString.append(openText)
         attributedString.append(decText)
+        attributedString.append(decText1)
         messageText.attributedText = attributedString
         messageText.isUserInteractionEnabled = true
         messageText.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(self.tapLabel(_:))))

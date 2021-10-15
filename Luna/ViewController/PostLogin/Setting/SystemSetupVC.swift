@@ -110,7 +110,11 @@ extension SystemSetupVC {
             if settingType == .Luna {
                 self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),LocalizedString.change_Long_Acting_Insulin.localized,"\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),LocalizedString.change_CGM.localized,"\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),LocalizedString.change_connected_Luna_Device.localized,BleManager.sharedInstance.myperipheral?.name ?? ""),(#imageLiteral(resourceName: "alerts"),LocalizedString.alerts.localized,LocalizedString.explainer_what_they_do.localized)]
             }else {
-                self.sections = [(#imageLiteral(resourceName: "faceId"),!hasTopNotch ? LocalizedString.touch_ID.localized : LocalizedString.face_ID.localized,""),(#imageLiteral(resourceName: "appleHealth"),LocalizedString.apple_Health.localized,"")]
+                if !UserModel.main.isChangePassword {
+                    self.sections = [(#imageLiteral(resourceName: "faceId"),!hasTopNotch ? LocalizedString.touch_ID.localized : LocalizedString.face_ID.localized,""),(#imageLiteral(resourceName: "appleHealth"),LocalizedString.apple_Health.localized,"")]
+                } else{
+                    self.sections = [(#imageLiteral(resourceName: "faceId"),!hasTopNotch ? LocalizedString.touch_ID.localized : LocalizedString.face_ID.localized,""),(#imageLiteral(resourceName: "appleHealth"),LocalizedString.apple_Health.localized,""),(#imageLiteral(resourceName: "changePassword"),LocalizedString.change_Password.localized,"")]
+                }
             }
         }
     
@@ -155,7 +159,7 @@ extension SystemSetupVC {
         self.backgroundView1.removeFromSuperview()
         if let infoView = self.customView {
             backgroundView1.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
-            customView?.frame = CGRect(x: 20.0, y: UIDevice.height / 2.0 - (50.0), width: UIDevice.width - 40.0 , height: 102.0)
+            customView?.frame = CGRect(x: 20.0, y: UIDevice.height / 2.0 - (50.0), width: UIDevice.width - 40.0 , height: 120.0)
 //            notificationPopUp?.message.text = msg
 //            notificationPopUp?.yesBtn.setTitle(ApiKey.continueUpperCase, for: .normal)
 //            notificationPopUp?.noBtn.setTitle(ApiKey.cancel, for: .normal)
@@ -234,7 +238,8 @@ extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
 //                   UIApplication.shared.open(settingsUrl)
 //                 }
             default:
-                CommonFunctions.showToastWithMessage("Under Development")
+                let vc = ChangePasswordVC.instantiate(fromAppStoryboard: .PostLogin)
+                self.navigationController?.pushViewController(vc, animated: true)
             }
         default:
             switch indexPath.row {
