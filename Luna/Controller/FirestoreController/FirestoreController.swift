@@ -926,8 +926,8 @@ class FirestoreController:NSObject{
     //MARK:-CreateMessageNode
     //=======================
     static func createMessageNode(messageText:String,messageTime:FieldValue,messageId:String,messageType:String,senderId:String){
-        let uid = Auth.auth().currentUser?.uid ?? ""
-        db.collection(ApiKey.messages).document(uid).collection(ApiKey.contactUs).document(messageId).setData([ApiKey.messageText:messageText,
+        guard let userId = Auth.auth().currentUser?.uid  else { return }
+        db.collection(ApiKey.messages).document(userId).collection(ApiKey.contactUs).document(messageId).setData([ApiKey.messageText:messageText,
                                                                                                              ApiKey.messageId:messageId,
                                                                                                              ApiKey.messageTime:FieldValue.serverTimestamp(),
                                                                                                              ApiKey.messageType:messageType,
@@ -946,13 +946,13 @@ class FirestoreController:NSObject{
 //    }
     
     static func createInsulinDataNode(insulinUnit: String,date: TimeInterval){
-        let userId = Auth.auth().currentUser?.uid ?? ""
+        guard let userId = Auth.auth().currentUser?.uid  else { return }
         db.collection(ApiKey.userSystemInfo).document(userId).collection(ApiKey.insulinData).document(String(date)).setData([ApiKey.insulinUnit: insulinUnit,ApiKey.date: date])
     }
     
     
     static func delete(batchSize: Int = 288,success: @escaping ()-> ()) {
-        let userId = Auth.auth().currentUser?.uid ?? ""
+        guard let userId = Auth.auth().currentUser?.uid  else { return }
         // Limit query to avoid out-of-memory errors on large collections.
         // When deleting a collection guaranteed to fit in memory, batching can be avoided entirely.
         db.collection(ApiKey.userSystemInfo).document(userId).collection(ApiKey.cgmData).limit(to: batchSize).getDocuments { (docset, error) in
@@ -973,12 +973,17 @@ class FirestoreController:NSObject{
     //MARK:-Add  cgm data array through batch operation
     //=======================
     static func addBatchData(currentDate:String,array:[ShareGlucoseData],success: @escaping ()-> ()) {
-        let userId = Auth.auth().currentUser?.uid ?? ""
+        guard let userId = Auth.auth().currentUser?.uid  else { return }
         let batch = db.batch()
+        let sfReference = db.collection(ApiKey.users).document(userId)
+        
         array.forEach { (doc) in
             let docRef = db.collection(ApiKey.sessionData).document(userId).collection(currentDate).document(String(doc.date))
             batch.setData([ApiKey.sgv: doc.sgv,ApiKey.direction: doc.direction ?? "",ApiKey.date: doc.date], forDocument: docRef)
         }
+        //
+        batch.updateData([ApiKey.lastUpdatedCGMDate: currentDate], forDocument: sfReference)
+        //
         batch.commit { (err) in
             if let err = err{
                 print("Error occured \(err)")
@@ -991,7 +996,7 @@ class FirestoreController:NSObject{
     //MARK:-Add  Last Updated CGM date
     //=======================
     static func addCgmDateData(currentDate:Double,range:Double,startDate:Double,endDate:Double,insulin:Int) {
-        let userId = Auth.auth().currentUser?.uid ?? ""
+        guard let userId = Auth.auth().currentUser?.uid  else { return }
         //
         let specAdded: [String: Any] = [
             ApiKey.date: currentDate,
@@ -1014,17 +1019,75 @@ class FirestoreController:NSObject{
         }
     }
     
+    //MARK:- simpleTransaction
+    //=======================
+    static func simpleTransactionToAddCGMData(currentDate:Double,range:Double,startDate:Double,endDate:Double,insulin:Int) {
+        guard let userId = Auth.auth().currentUser?.uid  else { return }
+        let sfReference = db.collection(ApiKey.sessionData).document(userId)
+        
+        let specAdded: [String: Any] = [
+            ApiKey.date: currentDate,
+            ApiKey.insulin: insulin,
+            ApiKey.range: range,
+            ApiKey.startdate: startDate,
+            ApiKey.endDate: endDate
+        ]
+        
+        db.runTransaction({ (transaction, errorPointer) -> Any? in
+            let sfDocument: DocumentSnapshot
+            do {
+                try sfDocument = transaction.getDocument(sfReference)
+            } catch let fetchError as NSError {
+                errorPointer?.pointee = fetchError
+                return nil
+            }
+            
+//            guard let oldPopulation = sfDocument.data() else {
+//                let error = NSError(
+//                    domain: "AppErrorDomain",
+//                    code: -1,
+//                    userInfo: [
+//                        NSLocalizedDescriptionKey: "Unable to retrieve population from snapshot \(sfDocument)"
+//                    ]
+//                )
+//                errorPointer?.pointee = error
+//                return nil
+//            }
+            
+            // Note: this could be done without a transaction
+            //       by updating the population using FieldValue.increment()
+            //transaction.updateData(["population": oldPopulation + 1], forDocument: sfReference)
+            if   (sfDocument.data()) != nil{
+                transaction.updateData([
+                    ApiKey.cgmDateArray: FieldValue.arrayUnion([specAdded])
+                ], forDocument: sfReference)
+            } else {
+                transaction.setData([
+                    ApiKey.cgmDateArray: FieldValue.arrayUnion([specAdded])
+                ], forDocument: sfReference)
+            }
+            return nil
+        }) { (object, error) in
+            if let error = error {
+                print("Transaction failed: \(error)")
+            } else {
+                print("Transaction successfully committed!")
+            }
+        }
+        // [END simple_transaction]
+    }
+    
     //MARK:- Update last Updated CGM Date Value In User Info
     //=======================
     static func updateLastUpdatedCGMDate(currentDate:Double) {
-        let userId = Auth.auth().currentUser?.uid ?? ""
-        db.collection(ApiKey.users).document(userId).getDocument { (snapshot, error ) in
-            if  (snapshot?.exists)! {
+        guard let userId = Auth.auth().currentUser?.uid  else { return }
+//        db.collection(ApiKey.users).document(userId).getDocument { (snapshot, error ) in
+//            if  (snapshot?.exists)! {
                 db.collection(ApiKey.users).document(userId).updateData([ApiKey.lastUpdatedCGMDate: currentDate])
-            } else {
-                db.collection(ApiKey.sessionData).document(userId).updateData([ApiKey.lastUpdatedCGMDate: currentDate])
-            }
-        }
+//            } else {
+//                db.collection(ApiKey.sessionData).document(userId).updateData([ApiKey.lastUpdatedCGMDate: currentDate])
+//            }
+//        }
     }
  
     static func showAlert( title : String = "", msg : String,_ completion : (()->())? = nil) {
