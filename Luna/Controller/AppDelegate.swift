@@ -13,7 +13,7 @@ import IQKeyboardManagerSwift
 import UserNotifications
 import GoogleSignIn
 import FirebaseFirestore
-
+import Instabug
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate ,GIDSignInDelegate,UNUserNotificationCenterDelegate{
@@ -38,6 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,GIDSignInDelegate,UNUserN
         registerPushNotification()
         Messaging.messaging().delegate = self
         AppRouter.checkAppInitializationFlow()
+        
+        Instabug.start(withToken: "4752436a003d8335517aba1613a87842", invocationEvents: [.shake, .screenshot])
         return true
     }
     

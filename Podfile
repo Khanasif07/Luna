@@ -26,5 +26,6 @@ target 'Luna' do
   pod 'KDCircularProgress'
   
   pod 'Firebase/Performance'
+  pod 'Instabug'
   
 end
