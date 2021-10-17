@@ -7,6 +7,7 @@
 import UIKit
 import Foundation
 
+//MARK:- DeviceStatus  Enum
 enum DeviceStatus {
     case Battery
     case ReservoirLevel

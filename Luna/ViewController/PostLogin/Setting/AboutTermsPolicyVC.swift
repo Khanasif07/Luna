@@ -68,6 +68,8 @@ extension AboutTermsPolicyVC {
         if #available(iOS 13.0, *) {
         overrideUserInterfaceStyle = .light
         }
+        self.textLbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
+        self.descLbl.font = AppFonts.SF_Pro_Display_Semibold.withSize(.x16)
         self.manageWkWebView()
     }
     

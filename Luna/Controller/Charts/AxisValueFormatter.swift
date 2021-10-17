@@ -116,15 +116,15 @@ final  class XAxisCustomRenderer: XAxisRenderer {
                     angleRadians: labelRotationAngleRadians)
 
 //                let indexData = cgmData[Int(i)]
-//                let cgmDate = String(indexData.date)
+////                let cgmDate = String(indexData.date)
 //                var icon: CGImage?
-//                SystemInfoModel.shared.insulinData?.forEach({ (model) in
-//                    let labelData = model.date.getDateTimeFromTimeInterval()
-//                    if labelData == label {
-//                        let rawIcon = #imageLiteral(resourceName: "lineOne")
-//                        icon = rawIcon.cgImage!
-//                    }
-//                })
+//                if indexData.sgv % 2 == 0{
+//                    let rawIcon = #imageLiteral(resourceName: "lineOne")
+//                    icon = rawIcon.cgImage!
+//                }else {
+//                    let rawIcon = #imageLiteral(resourceName: "lineTwo")
+//                    icon = rawIcon.cgImage!
+//                }
 //                if let myImage = icon{
 //                    context.draw(myImage, in: CGRect(x: position.x - 10 , y: position.y - 30, width: CGFloat(15), height: CGFloat(30)))
 //                }
@@ -133,9 +133,8 @@ final  class XAxisCustomRenderer: XAxisRenderer {
     }
 }
 
-
-
-
+//MARK:- Balloon Marker
+//=====================
 open class BalloonMarker: MarkerImage{
     @objc open var color: UIColor
     @objc open var arrowSize = CGSize(width: 12.5, height: 12.5)
@@ -149,6 +148,14 @@ open class BalloonMarker: MarkerImage{
     fileprivate var _paragraphStyle: NSMutableParagraphStyle?
     fileprivate var _drawAttributes = [NSAttributedString.Key : Any]()
     
+    static let formatter: DateComponentsFormatter = {
+        let f = DateComponentsFormatter()
+        f.allowedUnits = [.minute, .second]
+        f.unitsStyle = .short
+        return f
+    }()
+
+    
     @objc public init(color: UIColor, font: UIFont, textColor: UIColor, insets: UIEdgeInsets)
     {
         self.color = color
@@ -158,6 +165,11 @@ open class BalloonMarker: MarkerImage{
         
         _paragraphStyle = NSParagraphStyle.default.mutableCopy() as? NSMutableParagraphStyle
         _paragraphStyle?.alignment = .center
+        //
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        _drawAttributes = [.font: font, .paragraphStyle: paragraphStyle, .foregroundColor: textColor, .baselineOffset: NSNumber(value: 0)]
+        //
         super.init()
     }
     
@@ -207,112 +219,99 @@ open class BalloonMarker: MarkerImage{
         return offset
     }
     
-    open override func draw(context: CGContext, point: CGPoint)
-    {
-        guard let label = label else { return }
-        
-        let offset = self.offsetForDrawing(atPoint: point)
-        let size = self.size
-        
-        var rect = CGRect(
-            origin: CGPoint(
-                x: point.x + offset.x,
-                y: point.y + offset.y),
-            size: size)
-        rect.origin.x -= size.width / 2.0
-        rect.origin.y -= size.height
-        
-        context.saveGState()
+//    open override func draw(context: CGContext, point: CGPoint)
+    open override func draw(context: CGContext, point: CGPoint) {
+           guard let label = label else { return }
+           
+           let offset = self.offsetForDrawing(atPoint: point)
+           let size = self.size
+           
+           var rect = CGRect(
+               origin: CGPoint(
+                   x: point.x + offset.x,
+                   y: point.y + offset.y),
+               size: size)
+           rect.origin.x -= size.width / 2.0
+           rect.origin.y -= size.height
+           
+           context.saveGState()
+           
+           context.setFillColor(color.cgColor)
+           
+           if offset.y > 0 {
+               
+               context.beginPath()
+               let rect2 = CGRect(x: rect.origin.x, y: rect.origin.y + arrowSize.height, width: rect.size.width, height: rect.size.height - arrowSize.height)
+               let clipPath = UIBezierPath(roundedRect: rect2, cornerRadius: 5.0).cgPath
+               context.addPath(clipPath)
+               context.closePath()
+               context.fillPath()
+               
+               // arraow vertex
+               context.beginPath()
+               let p1 = CGPoint(x: rect.origin.x + rect.size.width / 2.0 - arrowSize.width / 2.0, y: rect.origin.y + arrowSize.height + 1)
+               context.move(to: p1)
+               context.addLine(to: CGPoint(x: p1.x + arrowSize.width, y: p1.y))
+               context.addLine(to: CGPoint(x: point.x, y: point.y))
+               context.addLine(to: p1)
 
-        context.setFillColor(color.cgColor)
+               context.fillPath()
+               
+           } else {
+               context.beginPath()
+               let rect2 = CGRect(x: rect.origin.x, y: rect.origin.y, width: rect.size.width, height: rect.size.height - arrowSize.height)
+               let clipPath = UIBezierPath(roundedRect: rect2, cornerRadius: 5.0).cgPath
+               context.addPath(clipPath)
+               context.closePath()
+               context.fillPath()
 
-        if offset.y > 0
-        {
-            context.beginPath()
-            context.move(to: CGPoint(
-                x: rect.origin.x,
-                y: rect.origin.y + arrowSize.height))
-            context.addLine(to: CGPoint(
-                x: rect.origin.x + (rect.size.width - arrowSize.width) / 2.0,
-                y: rect.origin.y + arrowSize.height))
-            //arrow vertex
-            context.addLine(to: CGPoint(
-                x: point.x,
-                y: point.y))
-            context.addLine(to: CGPoint(
-                x: rect.origin.x + (rect.size.width + arrowSize.width) / 2.0,
-                y: rect.origin.y + arrowSize.height))
-            context.addLine(to: CGPoint(
-                x: rect.origin.x + rect.size.width,
-                y: rect.origin.y + arrowSize.height))
-            context.addLine(to: CGPoint(
-                x: rect.origin.x + rect.size.width,
-                y: rect.origin.y + rect.size.height))
-            context.addLine(to: CGPoint(
-                x: rect.origin.x,
-                y: rect.origin.y + rect.size.height))
-            context.addLine(to: CGPoint(
-                x: rect.origin.x,
-                y: rect.origin.y + arrowSize.height))
-            context.fillPath()
-        }
-        else
-        {
-            context.beginPath()
-            context.move(to: CGPoint(
-                x: rect.origin.x,
-                y: rect.origin.y))
-            context.addLine(to: CGPoint(
-                x: rect.origin.x + rect.size.width,
-                y: rect.origin.y))
-            context.addLine(to: CGPoint(
-                x: rect.origin.x + rect.size.width,
-                y: rect.origin.y + rect.size.height - arrowSize.height))
-            context.addLine(to: CGPoint(
-                x: rect.origin.x + (rect.size.width + arrowSize.width) / 2.0,
-                y: rect.origin.y + rect.size.height - arrowSize.height))
-            //arrow vertex
-            context.addLine(to: CGPoint(
-                x: point.x,
-                y: point.y))
-            context.addLine(to: CGPoint(
-                x: rect.origin.x + (rect.size.width - arrowSize.width) / 2.0,
-                y: rect.origin.y + rect.size.height - arrowSize.height))
-            context.addLine(to: CGPoint(
-                x: rect.origin.x,
-                y: rect.origin.y + rect.size.height - arrowSize.height))
-            context.addLine(to: CGPoint(
-                x: rect.origin.x,
-                y: rect.origin.y))
-            context.fillPath()
-        }
-        
-        if offset.y > 0 {
-            rect.origin.y += self.insets.top + arrowSize.height
-        } else {
-            rect.origin.y += self.insets.top
-        }
+               // arraow vertex
+               context.beginPath()
+               let p1 = CGPoint(x: rect.origin.x + rect.size.width / 2.0 - arrowSize.width / 2.0, y: rect.origin.y + rect.size.height - arrowSize.height - 1)
+               context.move(to: p1)
+               context.addLine(to: CGPoint(x: p1.x + arrowSize.width, y: p1.y))
+               context.addLine(to: CGPoint(x: point.x, y: point.y))
+               context.addLine(to: p1)
 
-        rect.size.height -= self.insets.top + self.insets.bottom
-        
-        UIGraphicsPushContext(context)
-        
-        label.draw(in: rect, withAttributes: _drawAttributes)
-        
-        UIGraphicsPopContext()
-        
-        context.restoreGState()
-    }
+               context.fillPath()
+           }
+           
+           if offset.y > 0 {
+               rect.origin.y += self.insets.top + arrowSize.height
+           } else {
+               rect.origin.y += self.insets.top
+           }
+           
+           rect.size.height -= self.insets.top + self.insets.bottom
+           
+           UIGraphicsPushContext(context)
+           
+           label.draw(in: rect, withAttributes: _drawAttributes)
+           
+           UIGraphicsPopContext()
+           
+           context.restoreGState()
+       }
+
+
     
     open override func refreshContent(entry: ChartDataEntry, highlight: Highlight)
     {
-        setLabel(String(Int((entry.y))))
+        setLabel(entry.data as? String ?? "")
     }
+
+//    open override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
+//        if entry.data != nil {
+//            //var multiplier = entry.data as! Double * 100.0
+//            //labelText = String(format: "%.0f%%", multiplier)
+//            label = entry.data as? String ?? ""
+//        } else {
+//            label = String(entry.y)
+//        }
+//    }
     
-    @objc open func setLabel(_ newLabel: String)
-    {
-        label = newLabel
-        
+    @objc open func setLabel(_ newLabel: String) {
+         label = newLabel
         _drawAttributes.removeAll()
         _drawAttributes[.font] = self.font
         _drawAttributes[.paragraphStyle] = _paragraphStyle
@@ -326,5 +325,11 @@ open class BalloonMarker: MarkerImage{
         size.width = max(minimumSize.width, size.width)
         size.height = max(minimumSize.height, size.height)
         self.size = size
+    }
+    
+    private func customString(_ value: Double) -> String {
+        let formattedString = BalloonMarker.formatter.string(from: TimeInterval(value))!
+        // using this to convert the left axis values formatting, ie 2 min
+        return "\(formattedString)"
     }
 }

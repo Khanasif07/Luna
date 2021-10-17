@@ -1513,7 +1513,7 @@ Luna devices</string>
                                             <constraint firstItem="hyy-ji-N9y" firstAttribute="top" secondItem="fkH-dj-kyg" secondAttribute="top" id="zEL-pZ-Gkn"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ei7-5w-O73">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ei7-5w-O73">
                                         <rect key="frame" x="0.0" y="94" width="414" height="802"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <view key="tableHeaderView" contentMode="scaleToFill" id="OU0-96-gvc">
@@ -1580,7 +1580,7 @@ Luna devices</string>
                                                                     <color key="textColor" red="0.50544291730000002" green="0.51735407109999998" blue="0.53810626269999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-- mg/dL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQK-HD-W4x">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-- mg/dl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQK-HD-W4x">
                                                                     <rect key="frame" x="0.0" y="24" width="95" height="19.5"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
                                                                     <nil key="textColor"/>
@@ -1597,7 +1597,7 @@ Luna devices</string>
                                                                     <color key="textColor" red="0.50544291730000002" green="0.51735407109999998" blue="0.53810626269999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-- mg/dL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yai-eT-aoc">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-- mg/dl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yai-eT-aoc">
                                                                     <rect key="frame" x="0.0" y="24" width="95" height="19.5"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
                                                                     <nil key="textColor"/>
@@ -1663,6 +1663,7 @@ Luna devices</string>
                         <outlet property="lowestGlucoseLbl" destination="yai-eT-aoc" id="4h1-G5-iZy"/>
                         <outlet property="mainTaeView" destination="ei7-5w-O73" id="JZY-4p-8H2"/>
                         <outlet property="progress" destination="kks-vg-SYe" id="fI6-1L-0Vt"/>
+                        <outlet property="rangePerValueLbl" destination="uhJ-PB-M7X" id="dyD-dN-pdX"/>
                         <outlet property="titleLbl" destination="4u6-yT-gjs" id="NR0-yx-Db0"/>
                         <outlet property="topNavView" destination="XNF-US-wqr" id="vjr-mk-37f"/>
                     </connections>

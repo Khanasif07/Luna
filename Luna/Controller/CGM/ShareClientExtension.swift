@@ -56,9 +56,10 @@ public struct globalVariables {
 
 public class bgUnits {
     
-    static func toDisplayUnits(_ value: String) -> String {
-        if UserDefaultsRepository.units.value == "mg/dL" {
-            return removeDecimals(value)
+    static func toDisplayUnits(_ value: String,_ isUnitHidden: Bool = false) -> String {
+        if UserDefaultsRepository.units.value == "mg/dl" {
+            //MARK:- Important
+            return removeDecimals(value) +  (isUnitHidden ? "" : " \(UserDefaultsRepository.units.value)")
         } else {
             // convert mg/dL to mmol/l
             //TODO - Aanchal

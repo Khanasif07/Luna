@@ -11,6 +11,7 @@ class ProfileVC: UIViewController {
     
     // MARK: - IBOutlets
     //===========================
+    @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var saveBtn: AppButton!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var profileTableView: UITableView!
@@ -85,6 +86,7 @@ extension ProfileVC {
     }
    
     private func tableViewSetup(){
+        self.titleLbl.text = LocalizedString.myProfile.localized
         self.saveBtn.isEnabled = (!UserModel.main.firstName.isEmpty && !UserModel.main.lastName.isEmpty && !UserModel.main.dob.isEmpty && !UserModel.main.email.isEmpty && !UserModel.main.diabetesType.isEmpty)
         self.profileTableView.delegate = self
         self.profileTableView.dataSource = self
@@ -121,9 +123,6 @@ extension ProfileVC {
             cell.txtField.text = picker.date.convertToDefaultString()
         }
     }
-    
-    
-    
 }
 
 // MARK: - Extension For TableView
@@ -189,7 +188,7 @@ extension ProfileVC : UITextFieldDelegate{
             cell?.txtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
         case sections[2].0:
             cell?.txtField.inputView = datePicker
-            cell?.txtField.placeholder = "mm/dd/yyyy"
+            cell?.txtField.placeholder = Date.DateFormat.mmddyyyy.rawValue
             cell?.txtField.setBorder(width: 1.0, color: AppColors.appGreenColor)
         case sections[4].0:
             cell?.txtField.inputView = typePickerView

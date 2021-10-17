@@ -111,7 +111,6 @@ extension HomeVC {
         }else{
             self.setupSystemInfo()
         }
-        CommonFunctions.showActivityLoader()
         self.getUserInfoFromFirestore()
         self.getUserSystemFromFirestore()
         self.getInsulinFromFirestore()
@@ -142,6 +141,10 @@ extension HomeVC {
     }
     
     private func addObserver(){
+        CommonFunctions.showActivityLoader()
+        CommonFunctions.delay(delay: 10.0) {
+            CommonFunctions.hideActivityLoader()
+        }
         NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .BLEOnOffState, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bLEDidDisConnected), name: .BLEDidDisConnectSuccessfully, object: nil)
@@ -152,6 +155,7 @@ extension HomeVC {
         FirestoreController.addDeviceIdListener(){ (deviceId) in
             if let uuid = UIDevice.current.identifierForVendor?.uuidString {
                 if deviceId != uuid{
+                    CommonFunctions.showToastWithMessage("Session Expired.")
                     FirestoreController.performCleanUp(for_logout: true)
                 }
             }
@@ -159,26 +163,6 @@ extension HomeVC {
             print("failure")
         }
     }
-    
-//    private func getCGMDataFromFirestore(){
-//        FirestoreController.checkCGMDataExistInDatabase {
-//            FirestoreController.getFirebaseCGMData { (cgmDataArray) in
-//                print(cgmDataArray)
-//                SystemInfoModel.shared.cgmData = cgmDataArray
-//                self.bottomSheetVC.cgmData = cgmDataArray
-//            } failure: { (error) -> (Void) in
-//                print(error.localizedDescription)
-//            }
-//        } failure: {
-//            print("CGM DATA NOT Available")
-//            if let cgmData = SystemInfoModel.shared.cgmData {
-//                self.bottomSheetVC.cgmData = cgmData
-//                for cgmModel in cgmData {
-//                    FirestoreController.createCGMDataNode(direction: cgmModel.direction ?? "", sgv: cgmModel.sgv, date: cgmModel.date)
-//                }
-//            }
-//        }
-//    }
     
     private func getUserSystemFromFirestore(){
         FirestoreController.getUserSystemInfoData {
@@ -200,7 +184,7 @@ extension HomeVC {
     private func getInsulinFromFirestore(){
         FirestoreController.getFirebaseInsulinData { (insulinDataArray) in
             print(insulinDataArray)
-            SystemInfoModel.shared.insulinData = insulinDataArray
+            SystemInfoModel.shared.insulinData = insulinDataArray.reversed()
             self.bottomSheetVC.mainTableView.reloadData()
         } failure: { (error) -> (Void) in
             print(error.localizedDescription)
@@ -322,12 +306,12 @@ extension HomeVC: CoachMarksControllerDataSource, CoachMarksControllerDelegate{
         
         switch index {
         case 0:
-            coachMarkBodyView.hintLabel.text = "The battery must be fully charged prior to starting a session.It’s a good habit to plug your device into a charger whenever it’s not in use. In fact, go ahead and charge it now!"
+            coachMarkBodyView.hintLabel.text = "The battery must be fully charged prior to starting a session. It’s a good habit to plug your device into a charger whenever it’s not in use. In fact, go ahead and charge it now!"
             coachMarkBodyView.hintLabel.textAlignment = .left
             coachMarkBodyView.nextButton.setTitle(LocalizedString.ok.localized.capitalized, for: .normal)
             
         default:
-            coachMarkBodyView.hintLabel.text = "Make sure you read the user manual before you start with your Luna system.You can access it now or later from the top of your screen."
+            coachMarkBodyView.hintLabel.text = "Make sure you read the user manual before you start with your Luna system. You can access it now or later from the top of your screen."
             coachMarkBodyView.hintLabel.textAlignment = .right
             coachMarkBodyView.nextButton.setTitle("Got it", for: .normal)
         }

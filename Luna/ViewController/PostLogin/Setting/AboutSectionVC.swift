@@ -7,6 +7,10 @@
 
 import UIKit
 import MessageUI
+import SwiftKeychainWrapper
+import FirebaseAuth
+import FirebaseDatabase
+import Firebase
 
 class AboutSectionVC: UIViewController {
     
@@ -18,7 +22,7 @@ class AboutSectionVC: UIViewController {
     // MARK: - Variables
     //===========================
 
-    var sections: [(UIImage,String)] = [(#imageLiteral(resourceName: "findAnswers"),LocalizedString.find_Answers.localized),(#imageLiteral(resourceName: "customerSupport"),LocalizedString.customer_Support.localized),(#imageLiteral(resourceName: "appVersion"),LocalizedString.app_Version.localized),(#imageLiteral(resourceName: "termsConditions"),LocalizedString.terms_Conditions.localized),(#imageLiteral(resourceName: "privacy"),LocalizedString.privacy.localized)]
+    var sections: [(UIImage,String)] = [(#imageLiteral(resourceName: "customerSupport"),LocalizedString.customer_Support.localized),(#imageLiteral(resourceName: "appVersion"),LocalizedString.app_Version.localized),(#imageLiteral(resourceName: "termsConditions"),LocalizedString.terms_Conditions.localized),(#imageLiteral(resourceName: "privacy"),LocalizedString.privacy.localized),(#imageLiteral(resourceName: "deleteAccount"),LocalizedString.delete_Account.localized),(#imageLiteral(resourceName: "logout"),LocalizedString.logout.localized)]
     
     // MARK: - Lifecycle
     //===========================
@@ -93,9 +97,9 @@ extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch sections[indexPath.row].1 {
-        case LocalizedString.find_Answers.localized:
-            let vc = SettingManualVC.instantiate(fromAppStoryboard: .PostLogin)
-            self.navigationController?.pushViewController(vc, animated: true)
+//        case LocalizedString.find_Answers.localized:
+//            let vc = SettingManualVC.instantiate(fromAppStoryboard: .PostLogin)
+//            self.navigationController?.pushViewController(vc, animated: true)
         case LocalizedString.customer_Support.localized:
             let vc = ContactUsVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)
@@ -113,6 +117,93 @@ extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
             vc.titleString =  sections[indexPath.row].1
             vc.stringType = .tnc
             self.navigationController?.pushViewController(vc, animated: true)
+        case LocalizedString.delete_Account.localized:
+            self.showAlertWithAction(title: LocalizedString.delete_Account.localized, msg: LocalizedString.are_you_sure_want_to_delete_account.localized, cancelTitle: LocalizedString.no.localized, actionTitle: LocalizedString.yes.localized) {
+                CommonFunctions.showActivityLoader()
+                switch loginType{
+                case .apple:
+                    guard let idTokenString = KeychainWrapper.standard.string(forKey: ApiKey.appleIdToken), let nonce = KeychainWrapper.standard.string(forKey: ApiKey.currrentNonce) else {
+                        CommonFunctions.hideActivityLoader()
+                        return
+                    }
+                    let appleCredential = OAuthProvider.credential(withProviderID: "apple.com",
+                                                                      idToken: idTokenString,
+                                                                      rawNonce: nonce)
+                    Auth.auth().currentUser?.reauthenticate(with: appleCredential, completion: { (result, error) in
+                        if let error = error {
+                            CommonFunctions.hideActivityLoader()
+                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                        }
+                        else {
+                            Auth.auth().currentUser?.delete { error in
+                                if let error = error {
+                                    CommonFunctions.hideActivityLoader()
+                                    CommonFunctions.showToastWithMessage(error.localizedDescription)
+                                } else {
+                                    CommonFunctions.hideActivityLoader()
+                                    FirestoreController.removeKeychain()
+                                    FirestoreController.performCleanUp(for_logout: false)
+                                }
+                            }
+                        }
+                    })
+                case .google:
+                    guard let idTokenString = KeychainWrapper.standard.string(forKey: ApiKey.googleIdToken), let accessToken = KeychainWrapper.standard.string(forKey: ApiKey.googleAccessToken) else {
+                        CommonFunctions.hideActivityLoader()
+                        return
+                    }
+                    let googleCredential = GoogleAuthProvider.credential(withIDToken: idTokenString,
+                                                                   accessToken: accessToken)
+                    Auth.auth().currentUser?.reauthenticate(with: googleCredential, completion: { (result, error) in
+                        if let error = error {
+                            CommonFunctions.hideActivityLoader()
+                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                        }
+                        else {
+                            Auth.auth().currentUser?.delete { error in
+                                if let error = error {
+                                    CommonFunctions.hideActivityLoader()
+                                    CommonFunctions.showToastWithMessage(error.localizedDescription)
+                                } else {
+                                    CommonFunctions.hideActivityLoader()
+                                    FirestoreController.removeKeychain()
+                                    FirestoreController.performCleanUp(for_logout: false)
+                                }
+                            }
+                        }
+                    })
+                case .email_password:
+                    let email = AppUserDefaults.value(forKey: .defaultEmail).stringValue
+                    let password = AppUserDefaults.value(forKey: .defaultPassword).stringValue
+                    let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+                    Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (result, error) in
+                        if let error = error {
+                            CommonFunctions.hideActivityLoader()
+                            CommonFunctions.showToastWithMessage(error.localizedDescription)
+                        }
+                        else {
+                            Auth.auth().currentUser?.delete { error in
+                                if let error = error {
+                                    CommonFunctions.hideActivityLoader()
+                                    CommonFunctions.showToastWithMessage(error.localizedDescription)
+                                } else {
+                                    CommonFunctions.hideActivityLoader()
+                                    FirestoreController.removeKeychain()
+                                    FirestoreController.performCleanUp(for_logout: false)
+                                }
+                            }
+                        }
+                    })
+                }
+            } cancelcompletion: {
+                //MARK:- Handle Failure condition
+            }
+        case LocalizedString.logout.localized:
+            showAlertWithAction(title: LocalizedString.logout.localized, msg: LocalizedString.are_you_sure_want_to_logout.localized, cancelTitle: LocalizedString.no.localized, actionTitle: LocalizedString.yes.localized) {
+                FirestoreController.performCleanUp(for_logout: true)
+            } cancelcompletion: {
+                //MARK:- Handle Failure condition
+            }
         default:
             CommonFunctions.showToastWithMessage("Under Development")
         }

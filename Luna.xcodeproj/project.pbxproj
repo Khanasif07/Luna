@@ -121,6 +121,8 @@
 		845B619126AAC2D900F9BC2A /* ShareClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B618F26AAC2D900F9BC2A /* ShareClient.swift */; };
 		845B619426AAC31800F9BC2A /* ShareClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B619326AAC31800F9BC2A /* ShareClientExtension.swift */; };
 		84602903268C50F800141E0D /* AboutTermsPolicyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84602902268C50F800141E0D /* AboutTermsPolicyVC.swift */; };
+		84606119270C3DF900DFD22A /* SessionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84606118270C3DF900DFD22A /* SessionHistory.swift */; };
+		8460611D270EC9BC00DFD22A /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460611C270EC9BC00DFD22A /* PushNotificationManager.swift */; };
 		847899732684824F00D1DF36 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847899722684824F00D1DF36 /* HomeVC.swift */; };
 		847899762684870F00D1DF36 /* AboutSectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847899752684870F00D1DF36 /* AboutSectionVC.swift */; };
 		847D1B292689A87A00220DAE /* SystemSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D1B282689A87A00220DAE /* SystemSetupVC.swift */; };
@@ -132,12 +134,16 @@
 		849B25622707101600323876 /* ContactsUsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B25602707101600323876 /* ContactsUsTableCell.swift */; };
 		849B25632707101600323876 /* ContactsUsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849B25612707101600323876 /* ContactsUsTableCell.xib */; };
 		849B25662707116900323876 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B25652707116900323876 /* CustomTextView.swift */; };
+		849B25CD270B1E6600323876 /* blank.wav in Resources */ = {isa = PBXBuildFile; fileRef = 849B25CC270B1E6600323876 /* blank.wav */; };
 		849B5A492697143B000AA5DC /* BottomSheetTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B5A472697143B000AA5DC /* BottomSheetTopCell.swift */; };
 		849B5A4A2697143B000AA5DC /* BottomSheetTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849B5A482697143B000AA5DC /* BottomSheetTopCell.xib */; };
 		849B7432269D612000C059E5 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849B7431269D612000C059E5 /* HealthKit.framework */; };
 		849B7436269D710600C059E5 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7435269D710600C059E5 /* HealthKitManager.swift */; };
+		84AA00902716C04200E7E1F8 /* CustomLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA008F2716C04200E7E1F8 /* CustomLineChartView.swift */; };
 		84AA878D26FAD1120047D86E /* Alarms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA878C26FAD1120047D86E /* Alarms.swift */; };
 		84AA879026FAE8900047D86E /* BottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA878F26FAE8900047D86E /* BottomSheetVC.swift */; };
+		84AAFFA72715780D00E7E1F8 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AAFFA62715780D00E7E1F8 /* CustomView.swift */; };
+		84AAFFAA2715782400E7E1F8 /* CustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84AAFFA92715782400E7E1F8 /* CustomView.xib */; };
 		84B06B6626E27E9A004902E4 /* Gilroy-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84B06B6526E27E9A004902E4 /* Gilroy-Medium.ttf */; };
 		84B06BB826E29275004902E4 /* CoachMarkArrowViewApp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B06BB626E29275004902E4 /* CoachMarkArrowViewApp.xib */; };
 		84B06BB926E29275004902E4 /* CoachMarkArrowViewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B06BB726E29275004902E4 /* CoachMarkArrowViewApp.swift */; };
@@ -340,6 +346,8 @@
 		845B618F26AAC2D900F9BC2A /* ShareClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareClient.swift; sourceTree = "<group>"; };
 		845B619326AAC31800F9BC2A /* ShareClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareClientExtension.swift; sourceTree = "<group>"; };
 		84602902268C50F800141E0D /* AboutTermsPolicyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTermsPolicyVC.swift; sourceTree = "<group>"; };
+		84606118270C3DF900DFD22A /* SessionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistory.swift; sourceTree = "<group>"; };
+		8460611C270EC9BC00DFD22A /* PushNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
 		846F1A1F2678C2220034ACE0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		847899722684824F00D1DF36 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		847899752684870F00D1DF36 /* AboutSectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSectionVC.swift; sourceTree = "<group>"; };
@@ -352,12 +360,16 @@
 		849B25602707101600323876 /* ContactsUsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUsTableCell.swift; sourceTree = "<group>"; };
 		849B25612707101600323876 /* ContactsUsTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsUsTableCell.xib; sourceTree = "<group>"; };
 		849B25652707116900323876 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
+		849B25CC270B1E6600323876 /* blank.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blank.wav; sourceTree = "<group>"; };
 		849B5A472697143B000AA5DC /* BottomSheetTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetTopCell.swift; sourceTree = "<group>"; };
 		849B5A482697143B000AA5DC /* BottomSheetTopCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetTopCell.xib; sourceTree = "<group>"; };
 		849B7431269D612000C059E5 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		849B7435269D710600C059E5 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		84AA008F2716C04200E7E1F8 /* CustomLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLineChartView.swift; sourceTree = "<group>"; };
 		84AA878C26FAD1120047D86E /* Alarms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarms.swift; sourceTree = "<group>"; };
 		84AA878F26FAE8900047D86E /* BottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetVC.swift; sourceTree = "<group>"; };
+		84AAFFA62715780D00E7E1F8 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		84AAFFA92715782400E7E1F8 /* CustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomView.xib; sourceTree = "<group>"; };
 		84B06B6526E27E9A004902E4 /* Gilroy-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Medium.ttf"; sourceTree = "<group>"; };
 		84B06BB626E29275004902E4 /* CoachMarkArrowViewApp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoachMarkArrowViewApp.xib; sourceTree = "<group>"; };
 		84B06BB726E29275004902E4 /* CoachMarkArrowViewApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkArrowViewApp.swift; sourceTree = "<group>"; };
@@ -792,6 +804,14 @@
 			path = ShareClient;
 			sourceTree = "<group>";
 		};
+		8460611B270EC96100DFD22A /* PushNotificationManager */ = {
+			isa = PBXGroup;
+			children = (
+				8460611C270EC9BC00DFD22A /* PushNotificationManager.swift */,
+			);
+			path = PushNotificationManager;
+			sourceTree = "<group>";
+		};
 		846F1A1B2678BFFE0034ACE0 /* Certificates */ = {
 			isa = PBXGroup;
 			children = (
@@ -825,6 +845,7 @@
 				84B34FF326CC99CC00ECF8F0 /* AxisValueFormatter.swift */,
 				84B34FFC26CC9C7B00ECF8F0 /* Perform+Color.swift */,
 				84B34FFF26CC9CC300ECF8F0 /* Platform.swift */,
+				84AA008F2716C04200E7E1F8 /* CustomLineChartView.swift */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -869,6 +890,8 @@
 				84D1F4D82679CF2D00F131E0 /* CustomClasses */,
 				84CC12C02668CE8B009316FC /* Extensions */,
 				84CC12BF2668CE7C009316FC /* AppUtilities */,
+				84AAFFA62715780D00E7E1F8 /* CustomView.swift */,
+				84AAFFA92715782400E7E1F8 /* CustomView.xib */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -897,6 +920,7 @@
 				84CC12C52668CF13009316FC /* LocalizedString */,
 				84D1F4DC2679D52700F131E0 /* Fonts */,
 				84CC12A22668C823009316FC /* Assets.xcassets */,
+				849B25CC270B1E6600323876 /* blank.wav */,
 				84CC12A72668C823009316FC /* Info.plist */,
 				846F1A1F2678C2220034ACE0 /* GoogleService-Info.plist */,
 			);
@@ -906,6 +930,7 @@
 		84CC12B82668CD87009316FC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8460611B270EC96100DFD22A /* PushNotificationManager */,
 				84CC12992668C822009316FC /* AppDelegate.swift */,
 				84CC129B2668C822009316FC /* SceneDelegate.swift */,
 				84CC12BA2668CDDB009316FC /* FirestoreController */,
@@ -1030,6 +1055,7 @@
 				84E78B9D2685E8C500FABDCD /* UserModel.swift */,
 				8410611B26A9DC8E00BF7953 /* SystemInfoModel.swift */,
 				84B5A05926C28CD20051C06A /* InsulinModel.swift */,
+				84606118270C3DF900DFD22A /* SessionHistory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1123,6 +1149,7 @@
 				84D1F4FA2679D52700F131E0 /* SF-Pro-Display-Ultralight.otf in Resources */,
 				84D1F4FE2679D52700F131E0 /* SF-Pro-Display-Black.otf in Resources */,
 				849B25632707101600323876 /* ContactsUsTableCell.xib in Resources */,
+				84AAFFAA2715782400E7E1F8 /* CustomView.xib in Resources */,
 				84D1F4F42679D52700F131E0 /* SF-Pro-Display-Bold.otf in Resources */,
 				845549112678D486000CC13D /* GoogleService-Info.plist in Resources */,
 				84D1F4F02679D52700F131E0 /* SF-Pro-Display-SemiboldItalic.otf in Resources */,
@@ -1140,6 +1167,7 @@
 				840A7E062696EB62005AA1E6 /* CGMTypeTableViewCell.xib in Resources */,
 				84FDA0AD267DCB5600AC8BE9 /* MessageReceiverCell.xib in Resources */,
 				8455492E2678FFFD000CC13D /* LoginSocialTableCell.xib in Resources */,
+				849B25CD270B1E6600323876 /* blank.wav in Resources */,
 				84D1F4F72679D52700F131E0 /* SF-Pro-Display-Semibold.otf in Resources */,
 				84F2A27E26984F3D000FDCD5 /* BottomSheetBottomCell.xib in Resources */,
 				8455A3C8268211770061C55F /* SettingTableCell.xib in Resources */,
@@ -1295,6 +1323,7 @@
 				84467287268DBECC00EC55FD /* InsulinStep1VC.swift in Sources */,
 				842E9B1B2695690B00F36A3D /* InsulinStep3VC.swift in Sources */,
 				849B255E27070CA000323876 /* ContactUsVC.swift in Sources */,
+				8460611D270EC9BC00DFD22A /* PushNotificationManager.swift in Sources */,
 				84CC12EC2668D0B8009316FC /* UIColorExtension.swift in Sources */,
 				8455A3C226820E010061C55F /* SettingsVC.swift in Sources */,
 				84B3500026CC9CC300ECF8F0 /* Platform.swift in Sources */,
@@ -1323,6 +1352,7 @@
 				847899732684824F00D1DF36 /* HomeVC.swift in Sources */,
 				84CC12E02668D036009316FC /* AppConstants.swift in Sources */,
 				84B06BB926E29275004902E4 /* CoachMarkArrowViewApp.swift in Sources */,
+				84606119270C3DF900DFD22A /* SessionHistory.swift in Sources */,
 				84D1F4B42679C12900F131E0 /* TermsConditionVC.swift in Sources */,
 				84AA879026FAE8900047D86E /* BottomSheetVC.swift in Sources */,
 				188DB14B26E0993600FBF042 /* CoachMarkSkipDefaultView.swift in Sources */,
@@ -1356,6 +1386,7 @@
 				84CC12E62668D057009316FC /* DeviceDetail.swift in Sources */,
 				84CC13192668D25B009316FC /* UIView+Extension.swift in Sources */,
 				84F2A278269849ED000FDCD5 /* BottomSheetInsulinCell.swift in Sources */,
+				84AA00902716C04200E7E1F8 /* CustomLineChartView.swift in Sources */,
 				84CC130D2668D1F3009316FC /* Dictionary+Extension.swift in Sources */,
 				84E78B9E2685E8C500FABDCD /* UserModel.swift in Sources */,
 				8455491C2678DDBA000CC13D /* SignupViewController.swift in Sources */,
@@ -1387,6 +1418,7 @@
 				84CC12FE2668D17A009316FC /* UICollectionView+Extension.swift in Sources */,
 				84B06F0A269C0BE00059B293 /* SessionDescriptionVC.swift in Sources */,
 				188DB14A26E0993600FBF042 /* CoachMarkPosition.swift in Sources */,
+				84AAFFA72715780D00E7E1F8 /* CustomView.swift in Sources */,
 				8418D7CD26B01BC500BAB256 /* DateTime.swift in Sources */,
 				188DB14926E0993600FBF042 /* CoachMark.swift in Sources */,
 				84F7BC51266F11BA006C94DA /* AppleLoginManager.swift in Sources */,
@@ -1576,7 +1608,7 @@
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17.0;
 				DEVELOPMENT_TEAM = 9S43J8Y2GN;
 				INFOPLIST_FILE = "$(SRCROOT)/Luna/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1601,7 +1633,7 @@
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17.0;
 				DEVELOPMENT_TEAM = 9S43J8Y2GN;
 				INFOPLIST_FILE = "$(SRCROOT)/Luna/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

@@ -16,15 +16,15 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     
     // MARK: - Variables
     //===========================
-    var cgmData : [ShareGlucoseData] = SystemInfoModel.shared.cgmData ?? []{
+    let ScaleXMax:Float = 150.0
+    var cgmData : [ShareGlucoseData] = []{
         didSet{
-//            self.cgmData = self.cgmData.reversed()
             setDataCount(cgmData.endIndex, range: UInt32(cgmData.endIndex))
-//            let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
-//                                                        xAxis: cgmChartView.xAxis,
-//                                                        transformer: self.cgmChartView.getTransformer(forAxis: .left),
-//                                                        cgmData: self.cgmData)
-//            self.cgmChartView.xAxisRenderer = customXAxisRender
+            let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
+                                                        xAxis: cgmChartView.xAxis,
+                                                        transformer: self.cgmChartView.getTransformer(forAxis: .left),
+                                                        cgmData: self.cgmData)
+            self.cgmChartView.xAxisRenderer = customXAxisRender
         }
     }
     
@@ -35,8 +35,27 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         newChartSetUp()
     }
     
+    func formatPillText(line1: String, time: TimeInterval) -> String {
+        let dateFormatter = DateFormatter()
+        //let timezoneOffset = TimeZone.current.secondsFromGMT()
+        //let epochTimezoneOffset = value + Double(timezoneOffset)
+        if dateTimeUtils.is24Hour() {
+            dateFormatter.setLocalizedDateFormatFromTemplate("HH:mm")
+        } else {
+            dateFormatter.setLocalizedDateFormatFromTemplate("hh:mm")
+        }
+        
+        //let date = Date(timeIntervalSince1970: epochTimezoneOffset)
+        let date = Date(timeIntervalSince1970: time)
+        let formattedDate = dateFormatter.string(from: date)
+        
+        return line1 + "\r\n" + formattedDate.lowercased()
+    }
+    
     private func newChartSetUp(){
+        cgmChartView.clear()
         cgmChartView.delegate = self
+        cgmChartView.drawMarkers = true
 
         cgmChartView.chartDescription?.enabled = true
         cgmChartView.dragEnabled = true
@@ -45,19 +64,17 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
 
         let xAxis = cgmChartView.xAxis
         xAxis.labelPosition = .bottom
-        xAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
         xAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
-//        xAxis.granularity = 1
         xAxis.granularity = 1800
         xAxis.labelTextColor = NSUIColor.label
-        xAxis.labelPosition = XAxis.LabelPosition.bottom
+//        xAxis.labelPosition = XAxis.LabelPosition.bottom
         xAxis.valueFormatter = ChartXValueFormatter()
 
         let leftAxis = cgmChartView.leftAxis
         leftAxis.removeAllLimitLines()
         leftAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
         leftAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
-        leftAxis.axisMaximum = 300
+        leftAxis.axisMaximum = Double(UserDefaultsRepository.minBGScale.value)
         //MARK: - Important
         leftAxis.drawGridLinesEnabled = true
         leftAxis.granularityEnabled = true
@@ -67,7 +84,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         leftAxis.drawLimitLinesBehindDataEnabled = false
 
         let marker = BalloonMarker(color: #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1),
-                                   font: .boldSystemFont(ofSize: 15.0),
+                                   font: AppFonts.SF_Pro_Display_Bold.withSize(.x13),
                                    textColor: .white,
                                    insets: UIEdgeInsets(top: 3.5, left: 5.5, bottom: 16, right: 5.5))
         marker.chartView = cgmChartView
@@ -76,49 +93,86 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         
         cgmChartView.xAxis.centerAxisLabelsEnabled = false
         cgmChartView.xAxis.setLabelCount(7, force: true) //enter the number of labels here
-
-        cgmChartView.rightAxis.enabled = false
+        cgmChartView.leftAxis.setLabelCount(8, force: true) //enter the number of labels here
         cgmChartView.xAxis.drawGridLinesEnabled = false
         cgmChartView.legend.form = .none
         
-        cgmChartView.moveViewToX(cgmChartView.data?.yMax ?? 0.0 - 1)
         cgmChartView.zoom(scaleX: 4.0, scaleY: 0, x: 0, y: 0)
         cgmChartView.animate(yAxisDuration: 2.5)
         cgmChartView.noDataText = "No glucose data available."
         cgmChartView.noDataTextColor = #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1)
         cgmChartView.noDataFont = AppFonts.SF_Pro_Display_Bold.withSize(.x15)
-        cgmChartView.setExtraOffsets(left: 10, top: 0, right: 20, bottom: 0)
+        cgmChartView.setExtraOffsets(left: 10, top: 0, right: 25, bottom: 0)
         
+        cgmChartView.rightAxis.enabled = false
         cgmChartView.rightAxis.labelTextColor = NSUIColor.label
         cgmChartView.rightAxis.labelPosition = YAxis.LabelPosition.outsideChart
         cgmChartView.rightAxis.axisMinimum = 0.0
         cgmChartView.rightAxis.gridLineDashLengths = [5.0, 5.0]
         cgmChartView.rightAxis.drawGridLinesEnabled = false
-        cgmChartView.rightAxis.valueFormatter = ChartYMMOLValueFormatter()
+//        cgmChartView.rightAxis.valueFormatter = ChartYMMOLValueFormatter()
         cgmChartView.rightAxis.granularityEnabled = true
         cgmChartView.rightAxis.granularity = 50
+        
+        //Add lower red line based on low alert value
+        let ll = ChartLimitLine()
+        ll.limit = Double(UserDefaultsRepository.lowLine.value)
+        ll.lineColor = NSUIColor.systemRed.withAlphaComponent(0.5)
+        cgmChartView.rightAxis.addLimitLine(ll)
+        
+        //Add upper yellow line based on low alert value
+        let ul = ChartLimitLine()
+        ul.limit = Double(UserDefaultsRepository.highLine.value)
+        ul.lineColor = NSUIColor.systemYellow.withAlphaComponent(0.5)
+        cgmChartView.rightAxis.addLimitLine(ul)
         
         cgmChartView.maxHighlightDistance = 15.0
         cgmChartView.legend.enabled = false
         cgmChartView.scaleYEnabled = false
         cgmChartView.drawGridBackgroundEnabled = true
         cgmChartView.gridBackgroundColor = NSUIColor.clear
-        
+        cgmChartView.data?.highlightEnabled = true
         cgmChartView.highlightValue(nil, callDelegate: false)
-        cgmChartView.clear()
-        setDataCount(cgmData.endIndex, range: UInt32(cgmData.endIndex))
+        cgmChartView.moveViewToAnimated(xValue: dateTimeUtils.getNowTimeIntervalUTC() - (cgmChartView.visibleXRange * 0.7), yValue: 0.0, axis: .right, duration: 1, easingOption: .easeInBack)
     }
     
     func setDataCount(_ count: Int, range: UInt32) {
-        let values = cgmData.map { (data) -> ChartDataEntry in
-            return ChartDataEntry(x: Double(data.date), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
-        }
-//        var values = [ChartDataEntry]()
-//        for (index, data) in cgmData.enumerated() {
-//            let value = BarChartDataEntry(x: Double(index), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
-//            values.append(value)
+//        let values = cgmData.map { (data) -> ChartDataEntry in
+//            return ChartDataEntry(x: Double(data.date), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
 //        }
-        let set1 = LineChartDataSet(entries: values, label: "")
+        var colors = [NSUIColor]()
+        var mainChart = [ChartDataEntry]()
+        for i in 0..<cgmData.count{
+            let value = ChartDataEntry(x: Double(cgmData[i].date), y: Double(cgmData[i].sgv), data: formatPillText(line1: bgUnits.toDisplayUnits(String(cgmData[i].sgv)), time: cgmData[i].date))
+            mainChart.append(value)
+            if Double(cgmData[i].sgv) >= Double(UserDefaultsRepository.highLine.value) {
+                colors.append(NSUIColor.systemYellow)
+            } else if Double(cgmData[i].sgv) <= Double(UserDefaultsRepository.lowLine.value) {
+                colors.append(NSUIColor.systemRed)
+            } else {
+                colors.append(NSUIColor.systemGreen)
+            }
+        }
+        
+        let set1 = LineChartDataSet(entries: mainChart, label: "")
+        set1.highlightColor = #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1) // color of the line
+        set1.highlightLineWidth = 1.0
+        set1.drawHorizontalHighlightIndicatorEnabled = true // hide horizontal line
+        set1.drawVerticalHighlightIndicatorEnabled = true
+        //
+        set1.colors.removeAll()
+        set1.circleColors.removeAll()
+        
+        if colors.count > 0 {
+            for i in 0..<colors.count{
+                set1.addColor(colors[i])
+                set1.circleColors.append(colors[i])
+            }
+        }
+        set1.notifyDataSetChanged()
+        cgmChartView.data?.notifyDataChanged()
+        cgmChartView.notifyDataSetChanged()
+        //
         set1.drawIconsEnabled = false
         setup(set1)
 
@@ -131,16 +185,42 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
 
         let data = LineChartData(dataSet: set1)
         cgmChartView.data = data
+        // Move to current reading everytime new readings load
     }
 
     private func setup(_ dataSet: LineChartDataSet) {
-            dataSet.setColor(#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
-            dataSet.setCircleColor(.clear)
+//            dataSet.setColor(#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
+//            dataSet.setCircleColor(.clear)
             dataSet.lineWidth = 3
             dataSet.circleRadius = 0
             dataSet.drawCircleHoleEnabled = false
-            dataSet.valueFont = .systemFont(ofSize: 9)
+            dataSet.valueFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
             dataSet.formLineWidth = 1
             dataSet.formSize = 15
+    }
+}
+
+//MARK:- ChartViewDelegate
+//===============================
+extension BottomSheetChartCell{
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        if chartView != cgmChartView {
+            cgmChartView.moveViewToX(entry.x)
+        }
+        if entry.data as? String == "hide"{
+            chartView.highlightValue(nil, callDelegate: false)
+        }
+    }
+    
+    func chartScaled(_ chartView: ChartViewBase, scaleX: CGFloat, scaleY: CGFloat) {
+        print("Chart Scaled: \(cgmChartView.scaleX), \(cgmChartView.scaleY)")
+        
+        // dont store huge values
+        var scale: Float = Float(cgmChartView.scaleX)
+        if(scale > ScaleXMax ) {
+            scale = ScaleXMax
+        }
+        //MARK:- IMPORTANT
+        //        UserDefaultsRepository.chartScaleX.value = Float(scale)
     }
 }

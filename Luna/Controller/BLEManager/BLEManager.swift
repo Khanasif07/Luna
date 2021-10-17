@@ -21,6 +21,9 @@ let IOBout = CBUUID(string: "378ec9d6-075c-4bf6-89dc-0a8267f7b7b7")
 let TDBD = CBUUID(string: "5927a433-a277-40b7-b2d4-e005330c5d99")
 let iobInput = CBUUID(string: "5927a433-a277-40b7-b2d4-92ff77eada32")
 let WriteAcknowledgement = CBUUID(string: "5927a433-a277-40b7-b2d4-0242ac130003")
+//
+let collectionInsulinDoses = CBUUID(string: "ad4e6052-390a-4107-8e2d-11af2d258189")
+//
 
 @objc public protocol BleProtocol {
     @objc optional func didDiscover(name:String, rssi:NSNumber)
@@ -39,7 +42,7 @@ public class BleManager: NSObject{
     
     public var delegate :BleProtocol?
     var centralManager :CBCentralManager!
-    //    var peripheralManager :CBPeripheralManager!
+    var peripheralManager :CBPeripheralManager!
     var myperipheral :CBPeripheral?
     var mychar :CBCharacteristic!
     var myservice :CBService?
@@ -156,15 +159,12 @@ extension BleManager: CBPeripheralDelegate {
         for characteristic in characteristics {
             print(characteristic)
             if characteristic.properties.contains(.read) {
-                print("\(characteristic.uuid): properties contains .read")
                 peripheral.readValue(for: characteristic)
             }
             if characteristic.properties.contains(.notify) {
-                print("\(characteristic.uuid): properties contains .notify")
                 peripheral.setNotifyValue(true, for: characteristic)
             }
             if characteristic.properties.contains(.indicate){
-                print("\(characteristic.uuid): properties contains .indicate")
                 peripheral.setNotifyValue(true, for: characteristic)
             }
             if characteristic.properties.contains(.write) {
@@ -176,9 +176,9 @@ extension BleManager: CBPeripheralDelegate {
                 case iobInput:
                     writeValue(myCharacteristic: characteristic,value:  "5.0")
                 case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
-                    writeValue(myCharacteristic: characteristic,value:  "255:1632899217;")
+                    writeValue(myCharacteristic: characteristic,value:  "350:1632899217;")
                 case CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9"):
-                    writeValue(myCharacteristic: characteristic,value:  "250:1632899217;")
+                    writeValue(myCharacteristic: characteristic,value:  "350:1632899217;")
                 case dataOutCBUUID:
                     peripheral.setNotifyValue(true, for: characteristic)
                 case batteryCharacteristicCBUUID:
@@ -221,13 +221,13 @@ extension BleManager: CBPeripheralDelegate {
             print(data)
         case dataOutCBUUID:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-            let dataArray = data.split{$0 == ";"}.map(String.init)
-            let properDataArray = dataArray.map { (stringValue) -> [String] in
-                return stringValue.split{$0 == ":"}.map(String.init)
-            }
-            self.insulinData = properDataArray.map({ (stringArray) -> InsulinDataModel in
-                return InsulinDataModel(insulinData: stringArray.first!, date: Double(stringArray.last!) ?? 0.0)
-            })
+//            let dataArray = data.split{$0 == ";"}.map(String.init)
+//            let properDataArray = dataArray.map { (stringValue) -> [String] in
+//                return stringValue.split{$0 == ":"}.map(String.init)
+//            }
+//            self.insulinData = properDataArray.map({ (stringArray) -> InsulinDataModel in
+//                return InsulinDataModel(insulinData: stringArray.first!, date: Double(stringArray.last!) ?? 0.0)
+//            })
 //            for insulinModel in self.insulinData {
 //                FirestoreController.createInsulinDataNode(insulinUnit: insulinModel.insulinData ?? "", date: Double(insulinModel.date))
 //            }
@@ -247,6 +247,9 @@ extension BleManager: CBPeripheralDelegate {
         case  iobInput:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for iobInput:  \(data)")
+        case collectionInsulinDoses:
+            let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
+            print("handled Characteristic Value for collectionInsulinDoses:  \(data)")
         default:
             print("Unhandled Characteristic UUID: \(characteristic.uuid)")
         }
@@ -315,7 +318,7 @@ extension BleManager: CBCentralManagerDelegate {
     
     public func centralManager (_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("DisConnected!")
-        central.connect(peripheral, options: nil)
+        centralManager.connect(peripheral, options: nil)
         isMyPeripheralConected = false
 //        myperipheral?.delegate = self
 //        myperipheral = nil
@@ -334,5 +337,36 @@ extension BleManager: CBCentralManagerDelegate {
         myperipheral = nil
         systemStatusData = ""
     }
+    
+    public func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?)
+       {
+//           delegate?.log!(message: "in did start adv.")
+           if(error != nil)
+           {
+//               delegate?.log!(message: "advertising error")
+               
+               print("advertising error: \(error!.localizedDescription)")
+           }
+           else
+           {
+//               delegate?.log!(message: "advertising started")
+               print("advertising started")
+           }
+       }
+    
+    public func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?)
+        {
+//            delegate?.log!(message: "in did add service")
+            
+            if(error != nil)
+            {
+//                delegate?.log!(message: "error in add service")
+                print("error in addservice: \(error!.localizedDescription)")
+            }
+            else
+            {
+                peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey : [service.uuid]])
+            }
+        }
 }
 

@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import Charts
-import EventKit
 import UserNotifications
 import Photos
 
@@ -17,7 +16,7 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     
     //MARK:- OUTLETS
     //==============
-    @IBOutlet weak var cgmChartView: LineChartView!
+    @IBOutlet weak var cgmChartView: TappableLineChartView!
     @IBOutlet weak var mainCotainerView: UIView!
     @IBOutlet weak var bottomLayoutConstraint : NSLayoutConstraint!
     @IBOutlet weak var mainTableView: UITableView!
@@ -36,7 +35,7 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     // Vars for NS Pull
     var graphHours:Int=24
     var mmol = false as Bool
-    var latestCgmDate = AppUserDefaults.value(forKey: .latestCgmDate).doubleValue
+    var lastUpdatedCGMDate = AppUserDefaults.value(forKey: .lastUpdatedCGMDate).doubleValue
     var urlUser = UserDefaultsRepository.url.value as String
     var token = UserDefaultsRepository.token.value as String
     var defaults : UserDefaults?
@@ -58,7 +57,6 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     // Check Alarms Timer
     // Don't check within 1 minute of alarm triggering to give the snoozer time to save data
     var checkAlarmTimer = Timer()
-    var checkAlarmInterval: TimeInterval = 60.0
     
     var bgTimer = Timer()
     var deviceStatusTimer = Timer()
@@ -182,6 +180,7 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
         if let dict = notification.object as? NSDictionary {
             if let bgData = dict[ApiKey.cgmData] as? [ShareGlucoseData]{
                 self.bgData = bgData
+                SystemInfoModel.shared.cgmData = bgData
                 let shareUserName = UserDefaultsRepository.shareUserName.value
                 let sharePassword = UserDefaultsRepository.sharePassword.value
                 let shareServer = UserDefaultsRepository.shareServer.value == "US" ?KnownShareServers.US.rawValue : KnownShareServers.NON_US.rawValue

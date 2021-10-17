@@ -22,13 +22,14 @@ enum LocalizedString : String {
     case setting
     case notification
     case profile
+    case myProfile
     case notifications
     // MARK: - Alert Values
     //==============================
     case chooseOptions = "chooseOptions"
     case chooseFromGallery = "chooseFromGallery"
     case takePhoto = "takePhoto"
-    case cancel = "cancel"
+    case cancel = "Cancel"
     case gallery
     case camera
     case send
@@ -157,6 +158,8 @@ enum LocalizedString : String {
     case face_ID
     case apple_Health
     case luna
+    case luna_settings
+    case app_settings
     case about
     case delete_Account
     case touch_ID

@@ -26,11 +26,11 @@ class SessionFilterVC: UIViewController {
     //===========================
     var startdate: Date?
     var enddate: Date?
-    private lazy var StartTimePicker: UIDatePicker = {
+    private lazy var startTimePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.backgroundColor = .white
         picker.datePickerMode = UIDatePicker.Mode.date
-        
+        picker.maximumDate = Calendar.current.date(byAdding: .year, value: 0, to: Date())
         if #available(iOS 13.4, *) {
             picker.preferredDatePickerStyle = .wheels
             picker.sizeToFit()
@@ -40,9 +40,9 @@ class SessionFilterVC: UIViewController {
         return picker
     }()
     
-    private lazy var EndTimePicker: UIDatePicker = {
+    private lazy var endTimePicker: UIDatePicker = {
         let picker = UIDatePicker()
-        picker.minimumDate = Calendar.current.date(byAdding: .year, value: -100, to: StartTimePicker.date)
+        picker.maximumDate = Calendar.current.date(byAdding: .year, value: 0, to: Date())
         picker.backgroundColor = .white
         picker.datePickerMode = UIDatePicker.Mode.date
         if #available(iOS 13.4, *) {
@@ -85,7 +85,7 @@ class SessionFilterVC: UIViewController {
             self.pop()
             return
         }
-        self.delegate?.filterApplied(startDate: StartTimePicker.date, endDate: EndTimePicker.date)
+        self.delegate?.filterApplied(startDate:  startdate, endDate:  enddate)
         self.pop()
     }
     
@@ -139,7 +139,7 @@ extension SessionFilterVC {
         cancelButton.tintColor = .red
         toolBar2.setItems([cancelButton, spaceButton1, selectButton,spaceButton, doneButton], animated: false)
         toolBar2.isUserInteractionEnabled = true
-        self.startlTF.inputView = StartTimePicker
+        self.startlTF.inputView = startTimePicker
         self.startlTF.inputAccessoryView = toolBar2
         
         //....for end time
@@ -164,7 +164,7 @@ extension SessionFilterVC {
         cancelButton2.tintColor = .red
         toolBar3.setItems([cancelButton2,spaceButton3, selectButton1,spaceButton2, doneButton2], animated: false)
         toolBar3.isUserInteractionEnabled = true
-        endTF.inputView = EndTimePicker
+        endTF.inputView = endTimePicker
         endTF.inputAccessoryView = toolBar3
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = Date.DateFormat.mmddyyyy.rawValue
@@ -178,13 +178,14 @@ extension SessionFilterVC {
     }
     
     @objc func DoneEndPicker(){
-        let date = EndTimePicker.date
+        let date = endTimePicker.date
+        self.enddate = date
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US")
         dateFormatter.dateFormat = Date.DateFormat.mmddyyyy.rawValue
         self.endTF.text = dateFormatter.string(from: date)
         view.endEditing(true)
-        self.proceedBtn.isEnabled = true
+        self.proceedBtn.isEnabled = (self.startdate != nil && self.enddate != nil)
     }
     
     // start time action
@@ -193,13 +194,17 @@ extension SessionFilterVC {
     }
     
     @objc func DoneStatyPicker(){
-        let date = StartTimePicker.date
+        let date = startTimePicker.date
+        self.startdate = date
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US")
         dateFormatter.dateFormat = Date.DateFormat.mmddyyyy.rawValue
         self.startlTF.text = dateFormatter.string(from: date)
         view.endEditing(true)
-        self.proceedBtn.isEnabled = true
+        self.endTF.text = ""
+        self.enddate = nil
+        endTimePicker.minimumDate = Calendar.current.date(byAdding: .day, value: 1, to: startTimePicker.date)
+        self.proceedBtn.isEnabled = (self.startdate != nil && self.enddate != nil)
     }
     
 }

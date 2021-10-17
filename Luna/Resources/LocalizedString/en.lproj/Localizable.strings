@@ -42,9 +42,9 @@
 "done" = "Done";
 "select" = "Select";
 
-"change_Long_Acting_Insulin" = "Change Long Acting Insulin";
-"change_CGM" = "Change CGM";
-"change_connected_Luna_Device" = "Change connected Luna Device";
+"change_Long_Acting_Insulin" = "Long Acting Insulin";
+"change_CGM" = "CGM";
+"change_connected_Luna_Device" = "Luna Controller";
 "alerts" = "Alerts";
 "explainer_what_they_do" = "Explainer what they do";
 "choosePdf" = "Choose Pdf";
@@ -55,10 +55,13 @@
 "how_to_connect_your_CGM" = "How to connect your CGM?";
 
 "profile" = "Profile";
+"myProfile" = "My Profile";
 "change_Password" = "Change Password";
 "face_ID" = "Face ID";
 "apple_Health" = "Apple Health";
 "luna" = "Luna";
+"luna_settings" = "Luna Settings";
+"app_settings" = "App Settings";
 "about" = "About";
 "delete_Account" = "Delete Account";
 "logout" = "Logout";

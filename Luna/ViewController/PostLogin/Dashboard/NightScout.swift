@@ -37,6 +37,7 @@ extension  BottomSheetVC{
                 let data = result!
                 self.ProcessNSBGData(data: data, onlyPullLastRecord: onlyPullLastRecord)
             } else {
+                print((err?.localizedDescription) ?? "")
                 // If we get an error, immediately try to pull NS BG Data
                 self.webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
                 
@@ -52,10 +53,6 @@ extension  BottomSheetVC{
     
     // NS BG Data Web call
     func webLoadNSBGData(onlyPullLastRecord: Bool = false) {
-        if UserDefaultsRepository.debugLog.value {
-            //self.writeDebugLog(value: "Download: BG")
-            
-        }
         // Set the count= in the url either to pull 24 hours or only the last record
         var points = "1"
         if !onlyPullLastRecord {
@@ -88,6 +85,7 @@ extension  BottomSheetVC{
         // Downloader
         let getBGTask = URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else {
+                print(error?.localizedDescription ?? "")
                 if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
                     globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
                     //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
@@ -159,7 +157,10 @@ extension  BottomSheetVC{
         let now = dateTimeUtils.getNowTimeIntervalUTC()
         if !isNS && (latestDate + 330) < now {
             webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
-            print("dex didn't load, triggered NS attempt")
+            CommonFunctions.showToastWithMessage("Could not connect to Dexcom server at this time, please try again later.")
+            //MARK:- TO DO
+            print("Could not connect to Dexcom server at this time, please try again later.")
+//            print("dex didn't load, triggered NS attempt")
             return
         }
         
@@ -198,8 +199,10 @@ extension  BottomSheetVC{
         // If we already have data, we're going to pop it to the end and remove the first. If we have old or no data, we'll destroy the whole array and start over. This is simpler than determining how far back we need to get new data from in case Dex back-filled readings
         if !onlyPullLastRecord {
             bgData.removeAll()
+            SystemInfoModel.shared.cgmData?.removeAll()
         } else if bgData[bgData.count - 1].date != pullDate {
             bgData.removeFirst()
+            SystemInfoModel.shared.cgmData?.removeFirst()
 //            if data.count > 0 && UserDefaultsRepository.speakBG.value {
 //                speakBG(sgv: data[data.count - 1].sgv)
 //            }
@@ -223,7 +226,8 @@ extension  BottomSheetVC{
             }
             
         }
-        
+        //MARK:- Important
+        SystemInfoModel.shared.cgmData = bgData
         viewUpdateNSBG(isNS: isNS)
     }
     
@@ -245,7 +249,7 @@ extension  BottomSheetVC{
             _ = latestBG - priorBG as Int
             _ = entries[latestEntryi].date
             //MARK: - Important
-            self.cgmValueLbl.text = bgUnits.toDisplayUnits(String(latestBG))
+            self.cgmValueLbl.text = bgUnits.toDisplayUnits(String(latestBG),true)
             self.setBGTextColor()
             
             if let directionBG = entries[latestEntryi].direction {
@@ -263,312 +267,312 @@ extension  BottomSheetVC{
     }
     
     // NS Device Status Web Call
-    func webLoadNSDeviceStatus() {
-        if UserDefaultsRepository.debugLog.value {
-            //            self.writeDebugLog(value: "Download: device status")
-            
-        }
-        let urlUser = UserDefaultsRepository.url.value
-        
-        
-        // NS Api is not working to find by greater than date
-        var urlStringDeviceStatus = urlUser + "/api/v1/devicestatus.json?count=288"
-        if token != "" {
-            urlStringDeviceStatus = urlUser + "/api/v1/devicestatus.json?count=288&token=" + token
-        }
-        let escapedAddress = urlStringDeviceStatus.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed)
-        guard let urlDeviceStatus = URL(string: escapedAddress!) else {
-            if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
-                globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
-                //self.sendNotification(title: "Nightscout Failure", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
-            }
-            DispatchQueue.main.async {
-                if self.deviceStatusTimer.isValid {
-                    self.deviceStatusTimer.invalidate()
-                }
-                self.startDeviceStatusTimer(time: 10)
-            }
-            
-            return
-        }
-        
-        
-        var requestDeviceStatus = URLRequest(url: urlDeviceStatus)
-        requestDeviceStatus.cachePolicy = URLRequest.CachePolicy.reloadIgnoringLocalCacheData
-        
-        
-        let deviceStatusTask = URLSession.shared.dataTask(with: requestDeviceStatus) { data, response, error in
-            
-            guard error == nil else {
-                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
-                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
-                    //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
-                }
-                DispatchQueue.main.async {
-                    if self.deviceStatusTimer.isValid {
-                        self.deviceStatusTimer.invalidate()
-                    }
-                    self.startDeviceStatusTimer(time: 10)
-                }
-                return
-            }
-            
-            guard let data = data else {
-                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
-                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
-                    //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
-                }
-                DispatchQueue.main.async {
-                    if self.deviceStatusTimer.isValid {
-                        self.deviceStatusTimer.invalidate()
-                    }
-                    self.startDeviceStatusTimer(time: 10)
-                }
-                return
-            }
-            
-            
-            let json = try? (JSONSerialization.jsonObject(with: data) as? [[String:AnyObject]])
-            if let json = json {
-                DispatchQueue.main.async {
-                    self.updateDeviceStatusDisplay(jsonDeviceStatus: json)
-                }
-            } else {
-                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
-                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
-                    //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
-                }
-                DispatchQueue.main.async {
-                    if self.deviceStatusTimer.isValid {
-                        self.deviceStatusTimer.invalidate()
-                    }
-                    self.startDeviceStatusTimer(time: 10)
-                }
-                return
-            }
-        }
-        deviceStatusTask.resume()
-        
-    }
+//    func webLoadNSDeviceStatus() {
+//        if UserDefaultsRepository.debugLog.value {
+//            //            self.writeDebugLog(value: "Download: device status")
+//
+//        }
+//        let urlUser = UserDefaultsRepository.url.value
+//
+//
+//        // NS Api is not working to find by greater than date
+//        var urlStringDeviceStatus = urlUser + "/api/v1/devicestatus.json?count=288"
+//        if token != "" {
+//            urlStringDeviceStatus = urlUser + "/api/v1/devicestatus.json?count=288&token=" + token
+//        }
+//        let escapedAddress = urlStringDeviceStatus.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed)
+//        guard let urlDeviceStatus = URL(string: escapedAddress!) else {
+//            if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
+//                globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
+//                //self.sendNotification(title: "Nightscout Failure", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
+//            }
+//            DispatchQueue.main.async {
+//                if self.deviceStatusTimer.isValid {
+//                    self.deviceStatusTimer.invalidate()
+//                }
+//                self.startDeviceStatusTimer(time: 10)
+//            }
+//
+//            return
+//        }
+//
+//
+//        var requestDeviceStatus = URLRequest(url: urlDeviceStatus)
+//        requestDeviceStatus.cachePolicy = URLRequest.CachePolicy.reloadIgnoringLocalCacheData
+//
+//
+//        let deviceStatusTask = URLSession.shared.dataTask(with: requestDeviceStatus) { data, response, error in
+//
+//            guard error == nil else {
+//                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
+//                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
+//                    //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
+//                }
+//                DispatchQueue.main.async {
+//                    if self.deviceStatusTimer.isValid {
+//                        self.deviceStatusTimer.invalidate()
+//                    }
+//                    self.startDeviceStatusTimer(time: 10)
+//                }
+//                return
+//            }
+//
+//            guard let data = data else {
+//                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
+//                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
+//                    //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
+//                }
+//                DispatchQueue.main.async {
+//                    if self.deviceStatusTimer.isValid {
+//                        self.deviceStatusTimer.invalidate()
+//                    }
+//                    self.startDeviceStatusTimer(time: 10)
+//                }
+//                return
+//            }
+//
+//
+//            let json = try? (JSONSerialization.jsonObject(with: data) as? [[String:AnyObject]])
+//            if let json = json {
+//                DispatchQueue.main.async {
+//                    self.updateDeviceStatusDisplay(jsonDeviceStatus: json)
+//                }
+//            } else {
+//                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
+//                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
+//                    //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
+//                }
+//                DispatchQueue.main.async {
+//                    if self.deviceStatusTimer.isValid {
+//                        self.deviceStatusTimer.invalidate()
+//                    }
+//                    self.startDeviceStatusTimer(time: 10)
+//                }
+//                return
+//            }
+//        }
+//        deviceStatusTask.resume()
+//
+//    }
     
     // NS Device Status Response Processor
-    func updateDeviceStatusDisplay(jsonDeviceStatus: [[String:AnyObject]]) {
-        self.clearLastInfoData(index: 0)
-        self.clearLastInfoData(index: 1)
-        self.clearLastInfoData(index: 3)
-        self.clearLastInfoData(index: 4)
-        self.clearLastInfoData(index: 5)
-        if UserDefaultsRepository.debugLog.value {
-            //            self.writeDebugLog(value: "Process: device status")
-            
-        }
-        if jsonDeviceStatus.count == 0 {
-            return
-        }
-        
-        //Process the current data first
-        let lastDeviceStatus = jsonDeviceStatus[0] as [String : AnyObject]?
-        
-        //pump and uploader
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withFullDate,
-                                   .withTime,
-                                   .withDashSeparatorInDate,
-                                   .withColonSeparatorInTime]
-        if let lastPumpRecord = lastDeviceStatus?["pump"] as! [String : AnyObject]? {
-            if (formatter.date(from: (lastPumpRecord["clock"] as! String))?.timeIntervalSince1970) != nil  {
-//                if let reservoirData = lastPumpRecord["reservoir"] as? Double {
-//                    latestPumpVolume = reservoirData
-                    //                    tableData[5].value = String(format:"%.0f", reservoirData) + "U"
+//    func updateDeviceStatusDisplay(jsonDeviceStatus: [[String:AnyObject]]) {
+//        self.clearLastInfoData(index: 0)
+//        self.clearLastInfoData(index: 1)
+//        self.clearLastInfoData(index: 3)
+//        self.clearLastInfoData(index: 4)
+//        self.clearLastInfoData(index: 5)
+//        if UserDefaultsRepository.debugLog.value {
+//            //            self.writeDebugLog(value: "Process: device status")
+//
+//        }
+//        if jsonDeviceStatus.count == 0 {
+//            return
+//        }
+//
+//        //Process the current data first
+//        let lastDeviceStatus = jsonDeviceStatus[0] as [String : AnyObject]?
+//
+//        //pump and uploader
+//        let formatter = ISO8601DateFormatter()
+//        formatter.formatOptions = [.withFullDate,
+//                                   .withTime,
+//                                   .withDashSeparatorInDate,
+//                                   .withColonSeparatorInTime]
+//        if let lastPumpRecord = lastDeviceStatus?["pump"] as! [String : AnyObject]? {
+//            if (formatter.date(from: (lastPumpRecord["clock"] as! String))?.timeIntervalSince1970) != nil  {
+////                if let reservoirData = lastPumpRecord["reservoir"] as? Double {
+////                    latestPumpVolume = reservoirData
+//                    //                    tableData[5].value = String(format:"%.0f", reservoirData) + "U"
+////                } else {
+////                    latestPumpVolume = 50.0
+//                    //                    tableData[5].value = "50+U"
+////                }
+//
+////                if let uploader = lastDeviceStatus?["uploader"] as? [String:AnyObject] {
+////                    let upbat = uploader["battery"] as! Double
+//                    //                    tableData[4].value = String(format:"%.0f", upbat) + "%"
+////                }
+//            }
+//        }
+//
+//        // Loop
+//        if let lastLoopRecord = lastDeviceStatus?["loop"] as! [String : AnyObject]? {
+//            //print("Loop: \(lastLoopRecord)")
+//            if let lastLoopTime = formatter.date(from: (lastLoopRecord["timestamp"] as! String))?.timeIntervalSince1970  {
+//                UserDefaultsRepository.alertLastLoopTime.value = lastLoopTime
+//                if UserDefaultsRepository.debugLog.value {
+//                    //                    self.writeDebugLog(value: "lastLoopTime: " + String(lastLoopTime))
+//
+//                }
+//                if let failure = lastLoopRecord["failureReason"] {
+//                    //                    LoopStatusLabel.text = "X"
+//                    latestLoopStatusString = "X"
+//                    if UserDefaultsRepository.debugLog.value {
+//                        //self.writeDebugLog(value: "Loop Failure: X")
+//
+//                    }
 //                } else {
-//                    latestPumpVolume = 50.0
-                    //                    tableData[5].value = "50+U"
+//                    var wasEnacted = false
+//                    if let enacted = lastLoopRecord["enacted"] as? [String:AnyObject] {
+//                        if UserDefaultsRepository.debugLog.value {
+//                            //self.writeDebugLog(value: "Loop: Was Enacted")
+//
+//                        }
+//                        wasEnacted = true
+//                        if let lastTempBasal = enacted["rate"] as? Double {
+//
+//                        }
+//                    }
+//                    if let iobdata = lastLoopRecord["iob"] as? [String:AnyObject] {
+//                        //                        tableData[0].value = String(format:"%.2f", (iobdata["iob"] as! Double))
+////                        latestIOB = String(format:"%.2f", (iobdata["iob"] as! Double))
+//                    }
+//                    if let cobdata = lastLoopRecord["cob"] as? [String:AnyObject] {
+//                        //                        tableData[1].value = String(format:"%.0f", cobdata["cob"] as! Double)
+////                        latestCOB = String(format:"%.0f", cobdata["cob"] as! Double)
+//                    }
+//                    if let predictdata = lastLoopRecord["predicted"] as? [String:AnyObject] {
+//                        let prediction = predictdata["values"] as! [Int]
+//                        //                        PredictionLabel.text = bgUnits.toDisplayUnits(String(Int(prediction.last!)))
+//                        //                        PredictionLabel.textColor = UIColor.systemPurple
+//                        if UserDefaultsRepository.downloadPrediction.value && latestLoopTime < lastLoopTime {
+//                            //                            predictionData.removeAll()
+//                            var predictionTime = lastLoopTime
+//                            let toLoad = Int(UserDefaultsRepository.predictionToLoad.value * 12)
+//                            var i = 0
+//                            while i <= toLoad {
+//                                if i < prediction.count {
+//                                    let prediction = ShareGlucoseData(sgv: prediction[i], direction: "flat", date: predictionTime)
+//                                    //                                    predictionData.append(prediction)
+//                                    predictionTime += 300
+//                                }
+//                                i += 1
+//                            }
+//
+//                            let predMin = prediction.min()
+//                            let predMax = prediction.max()
+//                            //                            tableData[9].value = bgUnits.toDisplayUnits(String(predMin!)) + "/" + bgUnits.toDisplayUnits(String(predMax!))
+//
+//                            //                            updatePredictionGraph()
+//                        }
+//                    }
+//                    if let recBolus = lastLoopRecord["recommendedBolus"] as? Double {
+//                        //                        tableData[8].value = String(format:"%.2fU", recBolus)
+//                    }
+//                    if let loopStatus = lastLoopRecord["recommendedTempBasal"] as? [String:AnyObject] {
+//                        if let tempBasalTime = formatter.date(from: (loopStatus["timestamp"] as! String))?.timeIntervalSince1970 {
+//                            var lastBGTime = lastLoopTime
+//                            if bgData.count > 0 {
+//                                lastBGTime = bgData[bgData.count - 1].date
+//                            }
+//                            if UserDefaultsRepository.debugLog.value {
+//                                //self.writeDebugLog(value: "tempBasalTime: " + String(tempBasalTime))
+//
+//                            }
+//                            if UserDefaultsRepository.debugLog.value {
+//                                //                                self.writeDebugLog(value: "lastBGTime: " + String(lastBGTime))
+//
+//                            }
+//                            if UserDefaultsRepository.debugLog.value {
+//                                //                                self.writeDebugLog(value: "wasEnacted: " + String(wasEnacted))
+//
+//                            }
+//                            if tempBasalTime > lastBGTime && !wasEnacted {
+//                                //                                LoopStatusLabel.text = "⏀"
+//                                latestLoopStatusString = "⏀"
+//                                if UserDefaultsRepository.debugLog.value {
+//                                    //                                    self.writeDebugLog(value: "Open Loop: recommended temp. temp time > bg time, was not enacted")
+//
+//                                }
+//                            } else {
+//                                //                                LoopStatusLabel.text = "↻"
+//                                latestLoopStatusString = "↻"
+//                                if UserDefaultsRepository.debugLog.value {
+//                                    //                                    self.writeDebugLog(value: "Looping: recommended temp, but temp time is < bg time and/or was enacted")
+//
+//                                }
+//                            }
+//                        }
+//                    } else {
+//                        //                        LoopStatusLabel.text = "↻"
+//                        latestLoopStatusString = "↻"
+//                        if UserDefaultsRepository.debugLog.value {
+//                            //self.writeDebugLog(value: "Looping: no recommended temp")
+//
+//                        }
+//                    }
+//
 //                }
-                
-//                if let uploader = lastDeviceStatus?["uploader"] as? [String:AnyObject] {
-//                    let upbat = uploader["battery"] as! Double
-                    //                    tableData[4].value = String(format:"%.0f", upbat) + "%"
+//
+//                if ((TimeInterval(Date().timeIntervalSince1970) - lastLoopTime) / 60) > 15 {
+//                    //                    LoopStatusLabel.text = "⚠"
+//                    latestLoopStatusString = "⚠"
 //                }
-            }
-        }
-        
-        // Loop
-        if let lastLoopRecord = lastDeviceStatus?["loop"] as! [String : AnyObject]? {
-            //print("Loop: \(lastLoopRecord)")
-            if let lastLoopTime = formatter.date(from: (lastLoopRecord["timestamp"] as! String))?.timeIntervalSince1970  {
-                UserDefaultsRepository.alertLastLoopTime.value = lastLoopTime
-                if UserDefaultsRepository.debugLog.value {
-                    //                    self.writeDebugLog(value: "lastLoopTime: " + String(lastLoopTime))
-                    
-                }
-                if let failure = lastLoopRecord["failureReason"] {
-                    //                    LoopStatusLabel.text = "X"
-                    latestLoopStatusString = "X"
-                    if UserDefaultsRepository.debugLog.value {
-                        //self.writeDebugLog(value: "Loop Failure: X")
-                        
-                    }
-                } else {
-                    var wasEnacted = false
-                    if let enacted = lastLoopRecord["enacted"] as? [String:AnyObject] {
-                        if UserDefaultsRepository.debugLog.value {
-                            //self.writeDebugLog(value: "Loop: Was Enacted")
-                            
-                        }
-                        wasEnacted = true
-                        if let lastTempBasal = enacted["rate"] as? Double {
-                            
-                        }
-                    }
-                    if let iobdata = lastLoopRecord["iob"] as? [String:AnyObject] {
-                        //                        tableData[0].value = String(format:"%.2f", (iobdata["iob"] as! Double))
-//                        latestIOB = String(format:"%.2f", (iobdata["iob"] as! Double))
-                    }
-                    if let cobdata = lastLoopRecord["cob"] as? [String:AnyObject] {
-                        //                        tableData[1].value = String(format:"%.0f", cobdata["cob"] as! Double)
-//                        latestCOB = String(format:"%.0f", cobdata["cob"] as! Double)
-                    }
-                    if let predictdata = lastLoopRecord["predicted"] as? [String:AnyObject] {
-                        let prediction = predictdata["values"] as! [Int]
-                        //                        PredictionLabel.text = bgUnits.toDisplayUnits(String(Int(prediction.last!)))
-                        //                        PredictionLabel.textColor = UIColor.systemPurple
-                        if UserDefaultsRepository.downloadPrediction.value && latestLoopTime < lastLoopTime {
-                            //                            predictionData.removeAll()
-                            var predictionTime = lastLoopTime
-                            let toLoad = Int(UserDefaultsRepository.predictionToLoad.value * 12)
-                            var i = 0
-                            while i <= toLoad {
-                                if i < prediction.count {
-                                    let prediction = ShareGlucoseData(sgv: prediction[i], direction: "flat", date: predictionTime)
-                                    //                                    predictionData.append(prediction)
-                                    predictionTime += 300
-                                }
-                                i += 1
-                            }
-                            
-                            let predMin = prediction.min()
-                            let predMax = prediction.max()
-                            //                            tableData[9].value = bgUnits.toDisplayUnits(String(predMin!)) + "/" + bgUnits.toDisplayUnits(String(predMax!))
-                            
-                            //                            updatePredictionGraph()
-                        }
-                    }
-                    if let recBolus = lastLoopRecord["recommendedBolus"] as? Double {
-                        //                        tableData[8].value = String(format:"%.2fU", recBolus)
-                    }
-                    if let loopStatus = lastLoopRecord["recommendedTempBasal"] as? [String:AnyObject] {
-                        if let tempBasalTime = formatter.date(from: (loopStatus["timestamp"] as! String))?.timeIntervalSince1970 {
-                            var lastBGTime = lastLoopTime
-                            if bgData.count > 0 {
-                                lastBGTime = bgData[bgData.count - 1].date
-                            }
-                            if UserDefaultsRepository.debugLog.value {
-                                //self.writeDebugLog(value: "tempBasalTime: " + String(tempBasalTime))
-                                
-                            }
-                            if UserDefaultsRepository.debugLog.value {
-                                //                                self.writeDebugLog(value: "lastBGTime: " + String(lastBGTime))
-                                
-                            }
-                            if UserDefaultsRepository.debugLog.value {
-                                //                                self.writeDebugLog(value: "wasEnacted: " + String(wasEnacted))
-                                
-                            }
-                            if tempBasalTime > lastBGTime && !wasEnacted {
-                                //                                LoopStatusLabel.text = "⏀"
-                                latestLoopStatusString = "⏀"
-                                if UserDefaultsRepository.debugLog.value {
-                                    //                                    self.writeDebugLog(value: "Open Loop: recommended temp. temp time > bg time, was not enacted")
-                                    
-                                }
-                            } else {
-                                //                                LoopStatusLabel.text = "↻"
-                                latestLoopStatusString = "↻"
-                                if UserDefaultsRepository.debugLog.value {
-                                    //                                    self.writeDebugLog(value: "Looping: recommended temp, but temp time is < bg time and/or was enacted")
-                                    
-                                }
-                            }
-                        }
-                    } else {
-                        //                        LoopStatusLabel.text = "↻"
-                        latestLoopStatusString = "↻"
-                        if UserDefaultsRepository.debugLog.value {
-                            //self.writeDebugLog(value: "Looping: no recommended temp")
-                            
-                        }
-                    }
-                    
-                }
-                
-                if ((TimeInterval(Date().timeIntervalSince1970) - lastLoopTime) / 60) > 15 {
-                    //                    LoopStatusLabel.text = "⚠"
-                    latestLoopStatusString = "⚠"
-                }
-                latestLoopTime = lastLoopTime
-            } // end lastLoopTime
-        } // end lastLoop Record
-        
-        var oText = "" as String
-        currentOverride = 1.0
-        if let lastOverride = lastDeviceStatus?["override"] as! [String : AnyObject]? {
-            if let lastOverrideTime = formatter.date(from: (lastOverride["timestamp"] as! String))?.timeIntervalSince1970  {
-            }
-            if lastOverride["active"] as! Bool {
-                
-                let lastCorrection  = lastOverride["currentCorrectionRange"] as! [String: AnyObject]
-                if let multiplier = lastOverride["multiplier"] as? Double {
-                    currentOverride = multiplier
-                    oText += String(format: "%.0f%%", (multiplier * 100))
-                }
-                else
-                {
-                    oText += "100%"
-                }
-                oText += " ("
-                let minValue = lastCorrection["minValue"] as! Double
-                let maxValue = lastCorrection["maxValue"] as! Double
-                oText += bgUnits.toDisplayUnits(String(minValue)) + "-" + bgUnits.toDisplayUnits(String(maxValue)) + ")"
-                
-                //                tableData[3].value =  oText
-            }
-        }
-        
-        //        infoTable.reloadData()
-        
-        // Start the timer based on the timestamp
-        let now = dateTimeUtils.getNowTimeIntervalUTC()
-        let secondsAgo = now - latestLoopTime
-        
-        DispatchQueue.main.async {
-            // if Loop is overdue over: 20:00, re-attempt every 5 minutes
-            if secondsAgo >= (20 * 60) {
-                self.startDeviceStatusTimer(time: (5 * 60))
-                print("started 5 minute device status timer")
-                
-                // if the Loop is overdue: 10:00-19:59, re-attempt every minute
-            } else if secondsAgo >= (10 * 60) {
-                self.startDeviceStatusTimer(time: 60)
-                print("started 1 minute device status timer")
-                
-                // if the Loop is overdue: 7:00-9:59, re-attempt every 30 seconds
-            } else if secondsAgo >= (7 * 60) {
-                self.startDeviceStatusTimer(time: 30)
-                print("started 30 second device status timer")
-                
-                // if the Loop is overdue: 5:00-6:59 re-attempt every 10 seconds
-            } else if secondsAgo >= (5 * 60) {
-                self.startDeviceStatusTimer(time: 10)
-                print("started 10 second device status timer")
-                
-                // We have a current Loop. Set timer to 5:10 from last reading
-            } else {
-                self.startDeviceStatusTimer(time: 310 - secondsAgo)
-                let timerVal = 310 - secondsAgo
-                print("started 5:10 device status timer: \(timerVal)")
-            }
-        }
-    }
+//                latestLoopTime = lastLoopTime
+//            } // end lastLoopTime
+//        } // end lastLoop Record
+//
+//        var oText = "" as String
+//        currentOverride = 1.0
+//        if let lastOverride = lastDeviceStatus?["override"] as! [String : AnyObject]? {
+//            if let lastOverrideTime = formatter.date(from: (lastOverride["timestamp"] as! String))?.timeIntervalSince1970  {
+//            }
+//            if lastOverride["active"] as! Bool {
+//
+//                let lastCorrection  = lastOverride["currentCorrectionRange"] as! [String: AnyObject]
+//                if let multiplier = lastOverride["multiplier"] as? Double {
+//                    currentOverride = multiplier
+//                    oText += String(format: "%.0f%%", (multiplier * 100))
+//                }
+//                else
+//                {
+//                    oText += "100%"
+//                }
+//                oText += " ("
+//                let minValue = lastCorrection["minValue"] as! Double
+//                let maxValue = lastCorrection["maxValue"] as! Double
+//                oText += bgUnits.toDisplayUnits(String(minValue)) + "-" + bgUnits.toDisplayUnits(String(maxValue)) + ")"
+//
+//                //                tableData[3].value =  oText
+//            }
+//        }
+//
+//        //        infoTable.reloadData()
+//
+//        // Start the timer based on the timestamp
+//        let now = dateTimeUtils.getNowTimeIntervalUTC()
+//        let secondsAgo = now - latestLoopTime
+//
+//        DispatchQueue.main.async {
+//            // if Loop is overdue over: 20:00, re-attempt every 5 minutes
+//            if secondsAgo >= (20 * 60) {
+//                self.startDeviceStatusTimer(time: (5 * 60))
+//                print("started 5 minute device status timer")
+//
+//                // if the Loop is overdue: 10:00-19:59, re-attempt every minute
+//            } else if secondsAgo >= (10 * 60) {
+//                self.startDeviceStatusTimer(time: 60)
+//                print("started 1 minute device status timer")
+//
+//                // if the Loop is overdue: 7:00-9:59, re-attempt every 30 seconds
+//            } else if secondsAgo >= (7 * 60) {
+//                self.startDeviceStatusTimer(time: 30)
+//                print("started 30 second device status timer")
+//
+//                // if the Loop is overdue: 5:00-6:59 re-attempt every 10 seconds
+//            } else if secondsAgo >= (5 * 60) {
+//                self.startDeviceStatusTimer(time: 10)
+//                print("started 10 second device status timer")
+//
+//                // We have a current Loop. Set timer to 5:10 from last reading
+//            } else {
+//                self.startDeviceStatusTimer(time: 310 - secondsAgo)
+//                let timerVal = 310 - secondsAgo
+//                print("started 5:10 device status timer: \(timerVal)")
+//            }
+//        }
+//    }
     
     // NS Profile Web Call
     func webLoadNSProfile() {
@@ -623,7 +627,7 @@ extension  BottomSheetVC{
     
     func clearOldBGCheck(){
         self.bgCheckData.removeAll()
-        self.updateBGCheckGraph()
+       // self.updateBGCheckGraph()
     }
     
     func clearOldOverride(){
