@@ -39,12 +39,13 @@ final class ChartXValueFormatter: IAxisValueFormatter {
             let currentCgmValue = value.rounded(.towardZero)
             print(currentCgmValue)
             if lastCGMValue.date - value <= 300 {
-                print("lastCGMValue \(lastCGMValue.date)")
-                let dateFormatter = DateFormatter()
-                dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.hour12.rawValue)
-                let date = Date(timeIntervalSince1970: value)
-                let formattedDate = dateFormatter.string(from: date)
-                return formattedDate.lowercased()
+//                print("lastCGMValue \(lastCGMValue.date)")
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.hour12.rawValue)
+//                let date = Date(timeIntervalSince1970: value)
+//                let formattedDate = dateFormatter.string(from: date)
+//                return formattedDate.lowercased()
+                return "now"
             }else {
                 let dateFormatter = DateFormatter()
                 dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.cgmDate12.rawValue)

@@ -72,6 +72,8 @@
 	</dict>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>$(PRODUCT_NAME) uses bluetooth to find, connect and transfer data between different BLE devices.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs permisson</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>$(PRODUCT_NAME) uses bluetooth to find, connect and transfer data between different BLE devices.</string>
 	<key>NSCameraUsageDescription</key>
