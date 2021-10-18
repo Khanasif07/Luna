@@ -47,6 +47,7 @@ public class BleManager: NSObject{
     var mychar :CBCharacteristic!
     var myservice :CBService?
     //    var peripherals :[peripheralWithRssi]!
+    var cgmWriteCBCharacteristic : CBCharacteristic?
     var rescanTimer :Timer?
     var rssiTimer :Timer?
     var batteryData: String = ""
@@ -103,6 +104,17 @@ public class BleManager: NSObject{
         if isMyPeripheralConected { //check if myPeripheral is connected to send data
             let dataToSend: Data = value.data(using: String.Encoding.utf8)!
             myperipheral?.writeValue(dataToSend as Data, for: myCharacteristic, type: CBCharacteristicWriteType.withResponse)    //Writing the data to the peripheral
+        } else {
+            print("Not connected")
+        }
+    }
+    
+    public func writeCGMTimeStampValue(value: String = "50") {
+        if isMyPeripheralConected { //check if myPeripheral is connected to send data
+            let dataToSend: Data = value.data(using: String.Encoding.utf8)!
+            if let  cgmWriteCBCharacteristic = self.cgmWriteCBCharacteristic{
+                myperipheral?.writeValue(dataToSend as Data, for: cgmWriteCBCharacteristic , type: CBCharacteristicWriteType.withResponse)
+            }
         } else {
             print("Not connected")
         }
@@ -174,11 +186,13 @@ extension BleManager: CBPeripheralDelegate {
                     writeValue(myCharacteristic: characteristic,value: "#GET_DOSE_DATA")
                 //writeValue(myCharacteristic: characteristic,value:  "GET_ERROR_LOG")
                 case iobInput:
-                    writeValue(myCharacteristic: characteristic,value:  "5.0")
-                case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
-                    writeValue(myCharacteristic: characteristic,value:  "350:1632899217;")
+//                    writeValue(myCharacteristic: characteristic,value:  "8")
+                    print(characteristic.value)
+//                case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
+//                    writeValue(myCharacteristic: characteristic,value:  "300:1634549055;")
                 case CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9"):
-                    writeValue(myCharacteristic: characteristic,value:  "350:1632899217;")
+                    self.cgmWriteCBCharacteristic = characteristic
+//                    writeValue(myCharacteristic: characteristic,value:  "300:1634549055;")
                 case dataOutCBUUID:
                     peripheral.setNotifyValue(true, for: characteristic)
                 case batteryCharacteristicCBUUID:
@@ -188,7 +202,7 @@ extension BleManager: CBPeripheralDelegate {
                 case statusCBUUID:
                     peripheral.setNotifyValue(true, for: characteristic)
                 case TDBD:
-                    writeValue(myCharacteristic: characteristic,value:  "50")
+                    writeValue(myCharacteristic: characteristic,value:  "8")
                 default:
                     peripheral.setNotifyValue(true, for: characteristic)
                 }

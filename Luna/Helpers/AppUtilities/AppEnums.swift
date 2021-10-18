@@ -49,8 +49,10 @@ enum DeviceStatus {
     }
     
    static func getReservoirImage(reservoirInfo: String)-> (String,UIImage?){
-        let intValue = Int(reservoirInfo) ?? -1
+        let intValue = Int(reservoirInfo) ?? -2
         switch intValue {
+        case -1:
+            return ("Fill",#imageLiteral(resourceName: "reservoir0Bars"))
         case 0:
             return ("Fill",#imageLiteral(resourceName: "reservoir0Bars"))
         case 1:

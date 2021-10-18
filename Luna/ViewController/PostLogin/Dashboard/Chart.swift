@@ -35,9 +35,9 @@ final class ChartXValueFormatter: IAxisValueFormatter {
 //            dateFormatter.setLocalizedDateFormatFromTemplate("hh:mm")
 //        }
         if let lastCGMValue = SystemInfoModel.shared.cgmData?.last{
-            print(value)
-            let currentCgmValue = value.rounded(.towardZero)
-            print(currentCgmValue)
+//            print(value)
+//            let currentCgmValue = value.rounded(.towardZero)
+//            print(currentCgmValue)
             if lastCGMValue.date - value <= 300 {
 //                print("lastCGMValue \(lastCGMValue.date)")
 //                let dateFormatter = DateFormatter()
@@ -54,19 +54,6 @@ final class ChartXValueFormatter: IAxisValueFormatter {
                 return formattedDate.lowercased()
             }
         }
-//        if Int(value) % 2 == 0 {
-//        dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.cgmDate12.rawValue)
-//            //let date = Date(timeIntervalSince1970: epochTimezoneOffset)
-//            let date = Date(timeIntervalSince1970: value)
-//            let formattedDate = dateFormatter.string(from: date)
-//            return formattedDate.lowercased()
-//        }else{
-//            dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.hour12.rawValue)
-//            //let date = Date(timeIntervalSince1970: epochTimezoneOffset)
-//            let date = Date(timeIntervalSince1970: value)
-//            let formattedDate = dateFormatter.string(from: date)
-//            return formattedDate.lowercased()
-//        }
         //let date = Date(timeIntervalSince1970: epochTimezoneOffset)
         let dateFormatter = DateFormatter()
         let date = Date(timeIntervalSince1970: value)

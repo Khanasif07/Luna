@@ -68,6 +68,12 @@ public class bgUnits {
         }
     }
     
+    static func toSendCGMTimeStampsUnits(_ date: String,_ sgv: String) -> String {
+        print("\(sgv)" + ":" + "\(bgUnits.removeDecimals(date));")
+        return "\(sgv)" + ":" + "\(bgUnits.removeDecimals(date));"
+        //“600:1631566277;”
+    }
+    
     // if a "." is contained, simply takes the left part of the string only
     static func removeDecimals(_ value : String) -> String {
         if !value.contains(".") {

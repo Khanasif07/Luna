@@ -262,7 +262,7 @@ extension HomeVC {
         }else {
             self.reservoirImgView.alpha = 100
             self.reservoirEmptyLbl.isHidden = true
-            self.reservoirStatusLbl.alpha = 0
+            self.reservoirStatusLbl.alpha = 100
             self.reservoirStatusLbl.text = DeviceStatus.getReservoirImage(reservoirInfo:reservoirData).0
         }
         self.reservoirTitleLbl.text = DeviceStatus.ReservoirLevel.titleString

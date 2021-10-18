@@ -972,13 +972,13 @@ class FirestoreController:NSObject{
     
     //MARK:-Add  cgm data array through batch operation
     //=======================
-    static func addBatchData(currentDate:String,array:[ShareGlucoseData],success: @escaping ()-> ()) {
+    static func addBatchData(currentDate: Double,array:[ShareGlucoseData],success: @escaping ()-> ()) {
         guard let userId = Auth.auth().currentUser?.uid  else { return }
         let batch = db.batch()
         let sfReference = db.collection(ApiKey.users).document(userId)
         
         array.forEach { (doc) in
-            let docRef = db.collection(ApiKey.sessionData).document(userId).collection(currentDate).document(String(doc.date))
+            let docRef = db.collection(ApiKey.sessionData).document(userId).collection(String(currentDate)).document(String(doc.date))
             batch.setData([ApiKey.sgv: doc.sgv,ApiKey.direction: doc.direction ?? "",ApiKey.date: doc.date], forDocument: docRef)
         }
         //

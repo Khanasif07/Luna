@@ -247,10 +247,12 @@ extension  BottomSheetVC{
             let latestBG = entries[latestEntryi].sgv
             let priorBG = entries[latestEntryi - 1].sgv
             _ = latestBG - priorBG as Int
-            _ = entries[latestEntryi].date
+            let latestDate = entries[latestEntryi].date
             //MARK: - Important
             self.cgmValueLbl.text = bgUnits.toDisplayUnits(String(latestBG),true)
             self.setBGTextColor()
+            //MARK:- Importants
+            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(latestBG)))
             
             if let directionBG = entries[latestEntryi].direction {
                 self.cgmDirectionlbl.text = self.bgDirectionGraphic(directionBG)
