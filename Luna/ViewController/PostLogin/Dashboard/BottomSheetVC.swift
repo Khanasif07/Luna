@@ -46,7 +46,7 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     var backgroundTask = BackgroundTask()
     
     // Refresh NS Data
-    var timer = Timer()
+//    var timer = Timer()
     // check every 30 Seconds whether new bgvalues should be retrieved
     let timeInterval: TimeInterval = 30.0
     

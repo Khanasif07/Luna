@@ -74,11 +74,11 @@ enum DeviceStatus {
         case 9:
             return ("Medium",#imageLiteral(resourceName: "reservoir9Bars"))
         case 10:
-            return ("Full",#imageLiteral(resourceName: "reservoir10Bars"))
+            return ("",#imageLiteral(resourceName: "reservoir10Bars"))
         case 11:
-            return ("Full",#imageLiteral(resourceName: "reservoir10Bars"))
+            return ("",#imageLiteral(resourceName: "reservoir10Bars"))
         case 12:
-            return ("Full",#imageLiteral(resourceName: "reservoir10Bars"))
+            return ("",#imageLiteral(resourceName: "reservoir10Bars"))
         default:
             return ("",#imageLiteral(resourceName: "reservoir0Bars"))
         }

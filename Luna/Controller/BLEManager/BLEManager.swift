@@ -59,6 +59,7 @@ public class BleManager: NSObject{
     var isScanning :Bool = false
     var isMyPeripheralConected :Bool = false
     var isAdvertising :Bool = false
+    var statusTimer = Timer()
     
     private override init (){
         super.init ()
@@ -146,6 +147,28 @@ public class BleManager: NSObject{
         rescanTimer?.invalidate()
         rescanTimer = nil
     }
+    
+    func startStatusTimer(time: TimeInterval =  60 * 5) {
+        statusTimer = Timer.scheduledTimer(timeInterval: time,
+                                       target: self,
+                                       selector: #selector(self.statusTimerDidEnd(_:)),
+                                       userInfo: nil,
+                                       repeats: false)
+    }
+    
+    @objc func statusTimerDidEnd(_ timer:Timer) {
+        if !isMyPeripheralConected {
+            self.batteryData = ""
+            self.reservoirLevelData = ""
+            self.delegate?.didDisconnect?()
+        }
+        DispatchQueue.main.async {
+            if self.statusTimer.isValid {
+                self.statusTimer.invalidate()
+            }
+            self.startStatusTimer()
+        }
+    }
 }
 // MARK: - Extension For CBPeripheralDelegate
 //===========================
@@ -182,7 +205,7 @@ extension BleManager: CBPeripheralDelegate {
             if characteristic.properties.contains(.write) {
                 switch characteristic.uuid {
                 case dataInCBUUID:
-//                    writeValue(myCharacteristic: characteristic,value: "#CLEAR_DOSE_DATA")
+                    //writeValue(myCharacteristic: characteristic,value: "#CLEAR_DOSE_DATA")
                     writeValue(myCharacteristic: characteristic,value: "#GET_DOSE_DATA")
 //                writeValue(myCharacteristic: characteristic,value:  "GET_ERROR_LOG")
                 case iobInput:
@@ -220,6 +243,7 @@ extension BleManager: CBPeripheralDelegate {
         case ReservoirLevelCharacteristicCBUUID:
             print("handled Characteristic Value for Reservoir Level: \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
+            print(data)
             self.reservoirLevelData = data
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: nil)
         case statusCBUUID:
@@ -330,6 +354,7 @@ extension BleManager: CBCentralManagerDelegate {
         myperipheral?.discoverServices(nil)
         CommonFunctions.showToastWithMessage("Bluetooth connected.")
         delegate?.didConnect?(name: "Bluetooth connected.")
+        if !statusTimer.isValid { self.startStatusTimer(time: 60 * 5) }
     }
     
     public func centralManager (_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
@@ -340,6 +365,12 @@ extension BleManager: CBCentralManagerDelegate {
 //        myperipheral = nil
         systemStatusData = ""
         NotificationCenter.default.post(name: Notification.Name.BLEDidDisConnectSuccessfully, object: nil)
+        DispatchQueue.main.async {
+            if self.statusTimer.isValid {
+                self.statusTimer.invalidate()
+            }
+            self.startStatusTimer()
+        }
     }
     
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
