@@ -252,6 +252,7 @@ extension  BottomSheetVC{
             self.cgmValueLbl.text = bgUnits.toDisplayUnits(String(latestBG),true)
             self.setBGTextColor()
             //MARK:- Importants
+            //Send time stamps to Luna Hardware
             BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(latestBG)))
             
             if let directionBG = entries[latestEntryi].direction {

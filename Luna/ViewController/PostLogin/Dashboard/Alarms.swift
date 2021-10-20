@@ -12,7 +12,7 @@ extension BottomSheetVC{
     
     func checkAlarms(bgs: [ShareGlucoseData]){
         // Don't check or fire alarms within 1 minute of prior alarm
-        if checkAlarmTimer.isValid {  return }
+//        if checkAlarmTimer.isValid {  return }
         
         _ = Date()
 //        let now = date.timeIntervalSince1970

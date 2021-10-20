@@ -20,8 +20,8 @@ let lunaCBUUID = CBUUID(string: "DE612C8C-46C0-46B6-B820-4C92A6E67D97")
 let IOBout = CBUUID(string: "378ec9d6-075c-4bf6-89dc-0a8267f7b7b7")
 let TDBD = CBUUID(string: "5927a433-a277-40b7-b2d4-e005330c5d99")
 let iobInput = CBUUID(string: "5927a433-a277-40b7-b2d4-92ff77eada32")
-let WriteAcknowledgement = CBUUID(string: "5927a433-a277-40b7-b2d4-0242ac130003")
-//
+//let WriteAcknowledgement = CBUUID(string: "5927a433-a277-40b7-b2d4-0242ac130003")
+let WriteAcknowledgement = CBUUID(string: "5927A433-A277-40B7-B2D4-B6FF29B861A6")
 let collectionInsulinDoses = CBUUID(string: "ad4e6052-390a-4107-8e2d-11af2d258189")
 //
 
@@ -184,7 +184,7 @@ extension BleManager: CBPeripheralDelegate {
                 case dataInCBUUID:
 //                    writeValue(myCharacteristic: characteristic,value: "#CLEAR_DOSE_DATA")
                     writeValue(myCharacteristic: characteristic,value: "#GET_DOSE_DATA")
-                //writeValue(myCharacteristic: characteristic,value:  "GET_ERROR_LOG")
+//                writeValue(myCharacteristic: characteristic,value:  "GET_ERROR_LOG")
                 case iobInput:
 //                    writeValue(myCharacteristic: characteristic,value:  "8")
                     print(characteristic.value)
@@ -265,7 +265,9 @@ extension BleManager: CBPeripheralDelegate {
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for collectionInsulinDoses:  \(data)")
         default:
+            let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("Unhandled Characteristic UUID: \(characteristic.uuid)")
+            print(data)
         }
     }
     

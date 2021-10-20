@@ -38,7 +38,12 @@ extension BottomSheetVC {
             let bgSeconds = bgData.last!.date
             let now = Date().timeIntervalSince1970
             let secondsAgo = now - bgSeconds
-            
+            //MARK:- Importants
+            print("SecondsAgo:\(secondsAgo)")
+            if secondsAgo >= 360{
+                self.cgmDirectionlbl.text = ""
+                self.cgmValueLbl.text = "--"
+            }
             // Update Min Ago Displays
             let formatter = DateComponentsFormatter()
             formatter.unitsStyle = .positional // Use the appropriate positioning for the current locale
@@ -123,11 +128,7 @@ extension BottomSheetVC {
         // to only pull 1 reading if that's all we need
         if bgData.count > 0 {
             //MARK:- Importants
-//            let date = Date(timeIntervalSince1970: bgData.last!.date)
-//            let cgmDate = Date(timeIntervalSince1970: AppUserDefaults.value(forKey: .latestCgmDate).doubleValue)
             let lastUpdatedDate = AppUserDefaults.value(forKey: .lastUpdatedCGMDate).doubleValue
-//            print(Calendar.current.isDate(date, inSameDayAs: cgmDate))
-//            if !Calendar.current.isDate(date, equalTo: cgmDate, toGranularity: .day) {
             print("LastUpdatedCGMDate")
             let currentDate = bgData.last!.date
             print(currentDate - lastUpdatedDate)
@@ -166,11 +167,11 @@ extension BottomSheetVC {
     // Changes to 1 minute increments after 10:00
     // Changes to 5 minute increments after 20:00 stale data
     func startDeviceStatusTimer(time: TimeInterval =  60 * 5) {
-        deviceStatusTimer = Timer.scheduledTimer(timeInterval: time,
-                                               target: self,
-                                               selector: #selector(self.deviceStatusTimerDidEnd(_:)),
-                                               userInfo: nil,
-                                               repeats: false)
+//        deviceStatusTimer = Timer.scheduledTimer(timeInterval: time,
+//                                               target: self,
+//                                               selector: #selector(self.deviceStatusTimerDidEnd(_:)),
+//                                               userInfo: nil,
+//                                               repeats: false)
     }
     
     @objc func deviceStatusTimerDidEnd(_ timer:Timer) {
@@ -190,11 +191,11 @@ extension BottomSheetVC {
     // Runs on 10 minute intervals
     // Pauses with stale BG data
     func startProfileTimer(time: TimeInterval =  60 * 10) {
-        profileTimer = Timer.scheduledTimer(timeInterval: time,
-                                               target: self,
-                                               selector: #selector(self.profileTimerDidEnd(_:)),
-                                               userInfo: nil,
-                                               repeats: false)
+//        profileTimer = Timer.scheduledTimer(timeInterval: time,
+//                                               target: self,
+//                                               selector: #selector(self.profileTimerDidEnd(_:)),
+//                                               userInfo: nil,
+//                                               repeats: false)
     }
     
     @objc func profileTimerDidEnd(_ timer:Timer) {

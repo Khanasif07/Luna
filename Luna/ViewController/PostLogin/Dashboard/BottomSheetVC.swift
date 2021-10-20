@@ -38,10 +38,10 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     var lastUpdatedCGMDate = AppUserDefaults.value(forKey: .lastUpdatedCGMDate).doubleValue
     var urlUser = UserDefaultsRepository.url.value as String
     var token = UserDefaultsRepository.token.value as String
-    var defaults : UserDefaults?
-    let consoleLogging = true
-    var timeofLastBGUpdate = 0 as TimeInterval
-    var nsVerifiedAlerted = false
+//    var defaults : UserDefaults?
+//    let consoleLogging = true
+//    var timeofLastBGUpdate = 0 as TimeInterval
+//    var nsVerifiedAlerted = false
     
     var backgroundTask = BackgroundTask()
     
@@ -52,16 +52,16 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     
     // Min Ago Timer
     var minAgoTimer = Timer()
-    var minAgoTimeInterval: TimeInterval = 1.0
+    var minAgoTimeInterval: TimeInterval = 10.0
     
     // Check Alarms Timer
     // Don't check within 1 minute of alarm triggering to give the snoozer time to save data
-    var checkAlarmTimer = Timer()
+//    var checkAlarmTimer = Timer()
     
     var bgTimer = Timer()
-    var deviceStatusTimer = Timer()
-    var alarmTimer = Timer()
-    var profileTimer = Timer()
+//    var deviceStatusTimer = Timer()
+//    var alarmTimer = Timer()
+//    var profileTimer = Timer()
     
     // Info Table Setup
     var bgCheckData: [ShareGlucoseData] = []
@@ -71,11 +71,7 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     var latestDirectionString = ""
     var latestMinAgoString = ""
     var latestDeltaString = ""
-    var latestLoopStatusString = ""
-    var latestLoopTime: Double = 0
     var topBG: Float = UserDefaultsRepository.minBGScale.value
-    var lastOverrideAlarm: TimeInterval = 0
-    
     // share
     var bgDataShare: [ShareGlucoseData] = []
     var dexShare: ShareClient?;
