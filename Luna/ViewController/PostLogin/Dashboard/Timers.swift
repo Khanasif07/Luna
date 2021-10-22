@@ -39,7 +39,7 @@ extension BottomSheetVC {
             let now = Date().timeIntervalSince1970
             let secondsAgo = now - bgSeconds
             //MARK:- Importants
-            print("SecondsAgo:\(secondsAgo)")
+//            print("SecondsAgo:\(secondsAgo)")
             if secondsAgo >= 360{
                 self.cgmDirectionlbl.text = ""
                 self.cgmValueLbl.text = "--"
