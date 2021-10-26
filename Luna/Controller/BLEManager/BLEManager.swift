@@ -48,6 +48,7 @@ public class BleManager: NSObject{
     var myservice :CBService?
     //    var peripherals :[peripheralWithRssi]!
     var cgmWriteCBCharacteristic : CBCharacteristic?
+    var cgmDataInCharacteristic : CBCharacteristic?
     var rescanTimer :Timer?
     var rssiTimer :Timer?
     var batteryData: String = ""
@@ -192,7 +193,6 @@ extension BleManager: CBPeripheralDelegate {
         guard let characteristics = service.characteristics else { return }
         
         for characteristic in characteristics {
-            print(characteristic)
             if characteristic.properties.contains(.read) {
                 peripheral.readValue(for: characteristic)
             }
@@ -206,7 +206,9 @@ extension BleManager: CBPeripheralDelegate {
                 switch characteristic.uuid {
                 case dataInCBUUID:
                     //writeValue(myCharacteristic: characteristic,value: "#CLEAR_DOSE_DATA")
+                    self.cgmDataInCharacteristic = characteristic
                     writeValue(myCharacteristic: characteristic,value: "#GET_DOSE_DATA")
+                    peripheral.setNotifyValue(true, for: characteristic)
 //                writeValue(myCharacteristic: characteristic,value:  "GET_ERROR_LOG")
                 case iobInput:
 //                    writeValue(myCharacteristic: characteristic,value:  "8")
@@ -215,7 +217,6 @@ extension BleManager: CBPeripheralDelegate {
 //                    writeValue(myCharacteristic: characteristic,value:  "300:1634549055;")
                 case CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9"):
                     self.cgmWriteCBCharacteristic = characteristic
-//                    writeValue(myCharacteristic: characteristic,value:  "300:1634549055;")
                 case dataOutCBUUID:
                     peripheral.setNotifyValue(true, for: characteristic)
                 case batteryCharacteristicCBUUID:
@@ -257,6 +258,21 @@ extension BleManager: CBPeripheralDelegate {
         case writableCharacteristicCBUUID:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print(data)
+        case dataInCBUUID:
+            let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
+//            let dataArray = data.split{$0 == ";"}.map(String.init)
+//            let properDataArray = dataArray.map { (stringValue) -> [String] in
+//                return stringValue.split{$0 == ":"}.map(String.init)
+//            }
+//            self.insulinData = properDataArray.map({ (stringArray) -> InsulinDataModel in
+//                return InsulinDataModel(insulinData: stringArray.first!, date: Double(stringArray.last!) ?? 0.0)
+//            })
+//            for insulinModel in self.insulinData {
+//                FirestoreController.createInsulinDataNode(insulinUnit: insulinModel.insulinData ?? "", date: Double(insulinModel.date))
+//            }
+//            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
+            print("handled Characteristic Value for dataInCBUUID: \(String(describing: data))")
+            print("handled Characteristic Value for dataInCBUUID: \(String(describing: characteristic.value))")
         case dataOutCBUUID:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
 //            let dataArray = data.split{$0 == ";"}.map(String.init)
@@ -271,7 +287,7 @@ extension BleManager: CBPeripheralDelegate {
 //            }
 //            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
             print("handled Characteristic Value for dataOutCBUUID: \(String(describing: data))")
-            print("handled Characteristic Value for dataOutCBUUID: \(String(describing: characteristic.value))")
+            print("\(String(describing: characteristic.value))")
         case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
             print("handled Characteristic Value for: \(String(describing: characteristic.value))")
         case CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9"):
@@ -282,9 +298,15 @@ extension BleManager: CBPeripheralDelegate {
         case WriteAcknowledgement:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for WriteAcknowledgement:  \(data)")
+            if let dataInCharacteristic = self.cgmDataInCharacteristic{
+                writeValue(myCharacteristic: dataInCharacteristic,value: "#GET_DOSE_DATA")
+            }
         case  iobInput:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for iobInput:  \(data)")
+            if let dataInCharacteristic = self.cgmDataInCharacteristic{
+                writeValue(myCharacteristic: dataInCharacteristic,value: "#GET_DOSE_DATA")
+            }
         case collectionInsulinDoses:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for collectionInsulinDoses:  \(data)")

@@ -47,6 +47,7 @@ final class ChartXValueFormatter: IAxisValueFormatter {
 //                return formattedDate.lowercased()
                 return "now"
             }else {
+                print(value)
                 let dateFormatter = DateFormatter()
                 dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.cgmDate12.rawValue)
                 let date = Date(timeIntervalSince1970: value)
