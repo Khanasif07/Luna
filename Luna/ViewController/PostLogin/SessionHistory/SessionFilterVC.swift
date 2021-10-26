@@ -30,7 +30,7 @@ class SessionFilterVC: UIViewController {
         let picker = UIDatePicker()
         picker.backgroundColor = .white
         picker.datePickerMode = UIDatePicker.Mode.date
-        picker.maximumDate = Calendar.current.date(byAdding: .year, value: 0, to: Date())
+        picker.maximumDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())
         if #available(iOS 13.4, *) {
             picker.preferredDatePickerStyle = .wheels
             picker.sizeToFit()
@@ -42,7 +42,8 @@ class SessionFilterVC: UIViewController {
     
     private lazy var endTimePicker: UIDatePicker = {
         let picker = UIDatePicker()
-        picker.maximumDate = Calendar.current.date(byAdding: .year, value: 0, to: Date())
+        picker.minimumDate = Calendar.current.date(byAdding: .day, value: 0, to:  Date())
+        picker.maximumDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())
         picker.backgroundColor = .white
         picker.datePickerMode = UIDatePicker.Mode.date
         if #available(iOS 13.4, *) {
@@ -203,7 +204,8 @@ extension SessionFilterVC {
         view.endEditing(true)
         self.endTF.text = ""
         self.enddate = nil
-        endTimePicker.minimumDate = Calendar.current.date(byAdding: .day, value: 1, to: startTimePicker.date)
+//        endTimePicker.maximumDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())
+        endTimePicker.minimumDate = Calendar.current.date(byAdding: .day, value: 0, to: startTimePicker.date)
         self.proceedBtn.isEnabled = (self.startdate != nil && self.enddate != nil)
     }
     
