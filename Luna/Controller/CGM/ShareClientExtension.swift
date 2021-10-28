@@ -130,8 +130,9 @@ public struct InsulinDataModel: Codable {
         sgv = dict[ApiKey.sgv] as? Int ?? 0
     }
     
-    init(insulinData:String,date: TimeInterval){
+    init(insulinData:String,date: TimeInterval,sgv:Int){
         self.insulinData = insulinData
         self.date = date
+        self.sgv = sgv
     }
 }

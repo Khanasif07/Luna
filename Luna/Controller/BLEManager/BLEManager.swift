@@ -270,13 +270,22 @@ extension BleManager: CBPeripheralDelegate {
                 return stringValue.split{$0 == ":"}.map(String.init)
             }
             self.insulinData = properDataArray.map({ (stringArray) -> InsulinDataModel in
-                return InsulinDataModel(insulinData: stringArray.first!, date: Double(stringArray.last!) ?? 0.0)
+                return InsulinDataModel(insulinData: stringArray.first!, date: Double(stringArray.last!) ?? 0.0, sgv: 0)
             })
             if self.insulinData.endIndex > 0 {
-                SystemInfoModel.shared.insulinData = self.insulinData.reversed()
+                let filteredInsulinData = self.insulinData.map { (insulinModel) -> InsulinDataModel in
+                    if let index = SystemInfoModel.shared.cgmData?.firstIndex(where: { (cgmData) -> Bool in
+                        return cgmData.date == insulinModel.date
+                    }){
+                        return InsulinDataModel(insulinData: insulinModel.insulinData ?? "", date: insulinModel.date,sgv: SystemInfoModel.shared.cgmData?[index].sgv ?? 0)
+                    }
+                    return  InsulinDataModel(insulinData: insulinModel.insulinData ?? "", date: insulinModel.date,sgv: 0)
+                }
+                SystemInfoModel.shared.insulinData = filteredInsulinData.reversed()
                 NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
+                print(filteredInsulinData)
             }
-            print(insulinData)
+         
 //            for insulinModel in self.insulinData {
 //                FirestoreController.createInsulinDataNode(insulinUnit: insulinModel.insulinData ?? "", date: Double(insulinModel.date))
 //            }

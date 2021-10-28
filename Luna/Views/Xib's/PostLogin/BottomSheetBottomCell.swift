@@ -23,6 +23,12 @@ class BottomSheetBottomCell: UITableViewCell {
         self.setUpFont()
     }
     
+    func populateCell(model: InsulinDataModel){
+        self.timeLbl.text = (Double(model.date) ).getDateTimeFromTimeInterval(Date.DateFormat.hour12.rawValue)
+        self.unitLbl.text = (model.insulinData ?? "") + " Units"
+        self.cgmLbl.text = "\(model.sgv ?? 0) " + UserDefaultsRepository.units.value
+    }
+    
     public func setUpFont(){
         self.timeLbl.font = AppFonts.SF_Pro_Display_Medium.withSize(.x16)
         self.cgmLbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)

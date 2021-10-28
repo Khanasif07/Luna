@@ -227,7 +227,7 @@ extension  BottomSheetVC{
         //MARK:- Important
         SystemInfoModel.shared.cgmData = bgData
         viewUpdateNSBG(isNS: isNS)
-        print(bgData)
+//        print(bgData)
         //MARK:- Important
         let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
                                                     xAxis: cgmChartView.xAxis,

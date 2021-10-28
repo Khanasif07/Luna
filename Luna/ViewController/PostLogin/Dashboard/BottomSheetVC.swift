@@ -265,8 +265,7 @@ extension BottomSheetVC : UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueCell(with: BottomSheetBottomCell.self, indexPath: indexPath)
             cell.topLineDashView.isHidden = indexPath.row == 0
             if let insulinData = SystemInfoModel.shared.insulinData {
-            cell.timeLbl.text = (Double(insulinData[indexPath.row].date) ).getDateTimeFromTimeInterval(Date.DateFormat.hour12.rawValue)
-            cell.unitLbl.text = (insulinData[indexPath.row].insulinData ?? "") + " Units"
+                cell.populateCell(model:insulinData[indexPath.row])
             }
             return cell
         default:
