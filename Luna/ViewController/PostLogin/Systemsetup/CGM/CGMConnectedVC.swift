@@ -148,7 +148,6 @@ extension CGMConnectedVC {
         let now = dateTimeUtils.getNowTimeIntervalUTC()
         if !isNS && (latestDate + 330) < now {
             webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
-            print("dex didn't load, triggered NS attempt")
             CommonFunctions.showToastWithMessage("Could not connect to Dexcom server at this time, please try again later.")
             self.dismiss(animated: true, completion: nil)
             return

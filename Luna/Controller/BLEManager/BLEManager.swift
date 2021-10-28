@@ -260,34 +260,27 @@ extension BleManager: CBPeripheralDelegate {
             print(data)
         case dataInCBUUID:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-//            let dataArray = data.split{$0 == ";"}.map(String.init)
-//            let properDataArray = dataArray.map { (stringValue) -> [String] in
-//                return stringValue.split{$0 == ":"}.map(String.init)
-//            }
-//            self.insulinData = properDataArray.map({ (stringArray) -> InsulinDataModel in
-//                return InsulinDataModel(insulinData: stringArray.first!, date: Double(stringArray.last!) ?? 0.0)
-//            })
-//            for insulinModel in self.insulinData {
-//                FirestoreController.createInsulinDataNode(insulinUnit: insulinModel.insulinData ?? "", date: Double(insulinModel.date))
-//            }
-//            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
-            print("handled Characteristic Value for dataInCBUUID: \(String(describing: data))")
             print("handled Characteristic Value for dataInCBUUID: \(String(describing: characteristic.value))")
         case dataOutCBUUID:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-//            let dataArray = data.split{$0 == ";"}.map(String.init)
-//            let properDataArray = dataArray.map { (stringValue) -> [String] in
-//                return stringValue.split{$0 == ":"}.map(String.init)
-//            }
-//            self.insulinData = properDataArray.map({ (stringArray) -> InsulinDataModel in
-//                return InsulinDataModel(insulinData: stringArray.first!, date: Double(stringArray.last!) ?? 0.0)
-//            })
+            let dataArray = data.split{$0 == ";"}.map(String.init)
+            let insulinDataArray = dataArray.filter { $0.contains(s: "0.5:")
+            }
+            let properDataArray = insulinDataArray.map { (stringValue) -> [String] in
+                return stringValue.split{$0 == ":"}.map(String.init)
+            }
+            self.insulinData = properDataArray.map({ (stringArray) -> InsulinDataModel in
+                return InsulinDataModel(insulinData: stringArray.first!, date: Double(stringArray.last!) ?? 0.0)
+            })
+            if self.insulinData.endIndex > 0 {
+                SystemInfoModel.shared.insulinData = self.insulinData.reversed()
+                NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
+            }
+            print(insulinData)
 //            for insulinModel in self.insulinData {
 //                FirestoreController.createInsulinDataNode(insulinUnit: insulinModel.insulinData ?? "", date: Double(insulinModel.date))
 //            }
-//            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
             print("handled Characteristic Value for dataOutCBUUID: \(String(describing: data))")
-            print("\(String(describing: characteristic.value))")
         case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
             print("handled Characteristic Value for: \(String(describing: characteristic.value))")
         case CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9"):

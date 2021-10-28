@@ -116,12 +116,13 @@ final  class XAxisCustomRenderer: XAxisRenderer {
                     angleRadians: labelRotationAngleRadians)
 
 //                let indexData = cgmData[Int(i)]
-////                let cgmDate = String(indexData.date)
+//                let cgmDate = String(indexData.date)
+//                print("\(i)"+" \(cgmDate)")
 //                var icon: CGImage?
-//                if indexData.sgv % 2 == 0{
+//                if cgmDate == "1635336580" {
 //                    let rawIcon = #imageLiteral(resourceName: "lineOne")
 //                    icon = rawIcon.cgImage!
-//                }else {
+//                }else{
 //                    let rawIcon = #imageLiteral(resourceName: "lineTwo")
 //                    icon = rawIcon.cgImage!
 //                }

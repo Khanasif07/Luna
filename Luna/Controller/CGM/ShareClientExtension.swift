@@ -122,10 +122,12 @@ extension ShareClient {
 public struct InsulinDataModel: Codable {
     var date: TimeInterval
     var insulinData: String?
+    var sgv: Int?
     
     init(_ dict: [String:Any]){
         date = dict[ApiKey.date] as? TimeInterval ?? 0.0
         insulinData = dict[ApiKey.insulinUnit] as? String ?? ""
+        sgv = dict[ApiKey.sgv] as? Int ?? 0
     }
     
     init(insulinData:String,date: TimeInterval){

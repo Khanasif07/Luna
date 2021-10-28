@@ -159,8 +159,6 @@ extension  BottomSheetVC{
             webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
             CommonFunctions.showToastWithMessage("Could not connect to Dexcom server at this time, please try again later.")
             //MARK:- TO DO
-            print("Could not connect to Dexcom server at this time, please try again later.")
-//            print("dex didn't load, triggered NS attempt")
             return
         }
         
@@ -229,6 +227,13 @@ extension  BottomSheetVC{
         //MARK:- Important
         SystemInfoModel.shared.cgmData = bgData
         viewUpdateNSBG(isNS: isNS)
+        print(bgData)
+        //MARK:- Important
+        let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
+                                                    xAxis: cgmChartView.xAxis,
+                                                    transformer: self.cgmChartView.getTransformer(forAxis: .left),
+                                                    cgmData: self.bgData)
+        self.cgmChartView.xAxisRenderer = customXAxisRender
     }
     
     // NS BG Data Front end updater
