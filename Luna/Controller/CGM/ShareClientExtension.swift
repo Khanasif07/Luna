@@ -71,6 +71,7 @@ public class bgUnits {
     static func toSendCGMTimeStampsUnits(_ date: String,_ sgv: String) -> String {
         print("\(sgv)" + ":" + "\(bgUnits.removeDecimals(date));")
         return "\(sgv)" + ":" + "\(bgUnits.removeDecimals(date));"
+//        return "\(300)" + ":" + "\(bgUnits.removeDecimals(date));"
         //“600:1631566277;”
     }
     

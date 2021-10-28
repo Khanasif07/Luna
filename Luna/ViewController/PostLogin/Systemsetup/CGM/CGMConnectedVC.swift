@@ -13,6 +13,7 @@ class CGMConnectedVC: UIViewController {
     
     // MARK: - IBOutles
     //===========================
+    @IBOutlet weak var unitLbl: UILabel!
     @IBOutlet weak var outerView: UIView!
     @IBOutlet weak var okBtn: AppButton!
     @IBOutlet weak var ValueLbl: UILabel!
@@ -30,7 +31,7 @@ class CGMConnectedVC: UIViewController {
     
     var dexShare: ShareClient?;
     var bgData: [ShareGlucoseData] = []
-    var bgTimer = Timer()
+//    var bgTimer = Timer()
     var graphHours:Int = 24
     var latestDirectionString = ""
     
@@ -96,6 +97,7 @@ extension CGMConnectedVC {
     
     private func dataSetup(){
         activityIndicator.isHidden = true
+        self.unitLbl.text = UserDefaultsRepository.units.value
         self.titleLbl.textColor = UIColor.black
         self.subTitleLbl.textColor = AppColors.fontPrimaryColor
         if SystemInfoModel.shared.previousCgmReadingTime == "0" {
@@ -103,6 +105,7 @@ extension CGMConnectedVC {
         }else {
             self.subTitleLbl.text = "Your last CGM reading was from \(SystemInfoModel.shared.previousCgmReadingTime) minutes ago"
         }
+        
         self.okBtn.isEnabled = true
     }
     
@@ -147,6 +150,7 @@ extension CGMConnectedVC {
             webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
             print("dex didn't load, triggered NS attempt")
             CommonFunctions.showToastWithMessage("Could not connect to Dexcom server at this time, please try again later.")
+            self.dismiss(animated: true, completion: nil)
             return
         }
         
@@ -339,7 +343,7 @@ extension CGMConnectedVC {
             self.activityIndicator.stopAnimating()
             self.activityIndicator.isHidden = true
             self.titleLbl.text = "Your Dexcom G6 CGM is connected"
-            self.ValueLbl.text = bgUnits.toDisplayUnits(String(latestBG))
+            self.ValueLbl.text = bgUnits.toDisplayUnits(String(latestBG),true)
             self.cgmData = bgUnits.toDisplayUnits(String(latestBG))
 //            snoozerBG = bgUnits.toDisplayUnits(String(latestBG))
             self.setBGTextColor()

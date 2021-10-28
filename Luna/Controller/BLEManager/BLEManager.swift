@@ -304,9 +304,9 @@ extension BleManager: CBPeripheralDelegate {
         case  iobInput:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for iobInput:  \(data)")
-            if let dataInCharacteristic = self.cgmDataInCharacteristic{
-                writeValue(myCharacteristic: dataInCharacteristic,value: "#GET_DOSE_DATA")
-            }
+//            if let dataInCharacteristic = self.cgmDataInCharacteristic{
+//                writeValue(myCharacteristic: dataInCharacteristic,value: "#GET_DOSE_DATA")
+//            }
         case collectionInsulinDoses:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for collectionInsulinDoses:  \(data)")
