@@ -979,7 +979,7 @@ class FirestoreController:NSObject{
         
         array.forEach { (doc) in
             let docRef = db.collection(ApiKey.sessionData).document(userId).collection(String(currentDate)).document(String(doc.date))
-            batch.setData([ApiKey.sgv: doc.sgv,ApiKey.direction: doc.direction ?? "",ApiKey.date: doc.date], forDocument: docRef)
+            batch.setData([ApiKey.sgv: doc.sgv,ApiKey.direction: doc.direction ?? "",ApiKey.date: doc.date,ApiKey.insulin: doc.insulin ?? ""], forDocument: docRef)
         }
         //
         batch.updateData([ApiKey.lastUpdatedCGMDate: currentDate], forDocument: sfReference)

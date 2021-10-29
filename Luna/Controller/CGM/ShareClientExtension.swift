@@ -12,17 +12,20 @@ public struct ShareGlucoseData: Codable {
     var sgv: Int
     var date: TimeInterval
     var direction: String?
+    var insulin: String?
     
     init(_ dict: [String:Any]){
         self.sgv = dict[ApiKey.sgv] as? Int ?? 0
         date = dict[ApiKey.date] as? TimeInterval ?? 0.0
         direction = dict[ApiKey.direction] as? String ?? ""
+        insulin = dict[ApiKey.insulin] as? String ?? "0"
     }
     
-    init(sgv:Int,direction: String,date: TimeInterval){
+    init(sgv:Int,direction: String,date: TimeInterval,insulin: String = "0"){
         self.sgv = sgv
         self.date = date
         self.direction = direction
+        self.insulin = insulin
     }
 }
 

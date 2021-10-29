@@ -205,14 +205,14 @@ extension BleManager: CBPeripheralDelegate {
             if characteristic.properties.contains(.write) {
                 switch characteristic.uuid {
                 case dataInCBUUID:
-                    //writeValue(myCharacteristic: characteristic,value: "#CLEAR_DOSE_DATA")
+//                    writeValue(myCharacteristic: characteristic,value: "#CLEAR_DOSE_DATA")
                     self.cgmDataInCharacteristic = characteristic
                     writeValue(myCharacteristic: characteristic,value: "#GET_DOSE_DATA")
                     peripheral.setNotifyValue(true, for: characteristic)
 //                writeValue(myCharacteristic: characteristic,value:  "GET_ERROR_LOG")
-                case iobInput:
+//                case iobInput:
 //                    writeValue(myCharacteristic: characteristic,value:  "8")
-                    print(characteristic.value)
+//                    print(characteristic.value)
 //                case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
 //                    writeValue(myCharacteristic: characteristic,value:  "300:1634549055;")
                 case CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9"):
@@ -259,7 +259,6 @@ extension BleManager: CBPeripheralDelegate {
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print(data)
         case dataInCBUUID:
-            let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for dataInCBUUID: \(String(describing: characteristic.value))")
         case dataOutCBUUID:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
@@ -277,6 +276,7 @@ extension BleManager: CBPeripheralDelegate {
                     if let index = SystemInfoModel.shared.cgmData?.firstIndex(where: { (cgmData) -> Bool in
                         return cgmData.date == insulinModel.date
                     }){
+                        SystemInfoModel.shared.cgmData?[index].insulin = "0.5"
                         return InsulinDataModel(insulinData: insulinModel.insulinData ?? "", date: insulinModel.date,sgv: SystemInfoModel.shared.cgmData?[index].sgv ?? 0)
                     }
                     return  InsulinDataModel(insulinData: insulinModel.insulinData ?? "", date: insulinModel.date,sgv: 0)

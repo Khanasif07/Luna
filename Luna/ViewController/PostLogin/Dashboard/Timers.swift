@@ -114,6 +114,16 @@ extension BottomSheetVC {
         return 0.0
     }
     
+    private func getInsulinDosesValue(isShowPer: Bool = false)-> Int{
+        if self.bgData.endIndex > 0 {
+            let rangeArray = self.bgData.filter { (glucoseValue) -> Bool in
+                return glucoseValue.insulin == "0.5"
+            }
+            return (rangeArray.endIndex)
+        }
+        return 0
+    }
+    
     @objc func bgTimerDidEnd(_ timer:Timer) {
         
         // reset timer to 1 minute if settings aren't entered
@@ -130,7 +140,8 @@ extension BottomSheetVC {
             //MARK:- Importants
             let lastUpdatedDate = AppUserDefaults.value(forKey: .lastUpdatedCGMDate).doubleValue
             print("LastUpdatedCGMDate")
-            let currentDate = bgData.last!.date
+            let currentDate = self.bgData.last!.date
+            let startDate = self.bgData.first!.date
             print(currentDate - lastUpdatedDate)
             if (currentDate - lastUpdatedDate) >= 86400 {
                 AppUserDefaults.save(value: (currentDate), forKey: .lastUpdatedCGMDate)
@@ -138,7 +149,7 @@ extension BottomSheetVC {
 //                FirestoreController.updateLastUpdatedCGMDate(currentDate: (self.bgData[self.bgData.count - 1].date))
                 FirestoreController.addBatchData(currentDate: currentDate, array: bgData) {
                     print("Add Batch Data Commited successfully")
-                    FirestoreController.simpleTransactionToAddCGMData(currentDate: (currentDate), range: self.getRangeValue(isShowPer: true), startDate: (self.bgData.first!.date), endDate: (currentDate), insulin: 0)
+                    FirestoreController.simpleTransactionToAddCGMData(currentDate: (currentDate), range: self.getRangeValue(isShowPer: true), startDate: (startDate), endDate: (currentDate), insulin: self.getInsulinDosesValue())
 //                    FirestoreController.addCgmDateData(currentDate: (self.bgData.last!.date), range: self.getRangeValue(isShowPer: true), startDate: (self.bgData.first!.date), endDate: (self.bgData.last!.date), insulin: 0)
                 }
             }
