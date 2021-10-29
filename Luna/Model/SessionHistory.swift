@@ -13,17 +13,17 @@ struct SessionHistory :Codable{
     var endDate: Double = 0.0
     var startDate: Double = 0.0
     var range: Double = 0.0
-    var insulin: Int = 0
+    var insulin: Double = 0
     
     init(){
     }
     
     init (dict: JSONDictionary){
-        self.date = dict[ApiKey._id] as? Double ?? 0.0
-        self.startDate = dict[ApiKey.authToken] as? Double ?? 0.0
-        self.endDate = dict[ApiKey.createdAt] as? Double ?? 0.0
-        self.range = dict[ApiKey.email] as? Double ?? 0.0
-        self.insulin = dict[ApiKey.emailVerified] as? Int ?? 0
+        self.date = dict[ApiKey.date] as? Double ?? 0.0
+        self.startDate = dict[ApiKey.startDate] as? Double ?? 0.0
+        self.endDate = dict[ApiKey.endDate] as? Double ?? 0.0
+        self.range = dict[ApiKey.range] as? Double ?? 0.0
+        self.insulin = dict[ApiKey.insulin] as? Double ?? 0.0
     }
    
 }

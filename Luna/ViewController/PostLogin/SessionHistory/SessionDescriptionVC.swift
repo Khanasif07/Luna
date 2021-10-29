@@ -28,6 +28,7 @@ class SessionDescriptionVC: UIViewController {
     var sessionDay : Double?
     var titleValue: String = ""
     var cgmDataArray : [ShareGlucoseData] = []
+    var insulinDataArray : [ShareGlucoseData]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,19 +108,30 @@ class SessionDescriptionVC: UIViewController {
         return 0.0
     }
     
+    private func filterInsulinDosesListing(){
+        let filteredInsulinArray =  self.cgmDataArray.filter({$0.insulin == "0.5"})
+        if filteredInsulinArray.endIndex > 0 {
+            self.sections = ["Glucose Graph","List View"]
+            self.insulinDataArray = filteredInsulinArray
+            self.insulinQty.text = "\(filteredInsulinArray.endIndex) units"
+        }else{
+            self.sections = ["Glucose Graph"]
+            self.insulinQty.text = "-- units"
+        }
+    }
+    
     private func getCgmDataFromFirestore(){
         CommonFunctions.showActivityLoader()
         FirestoreController.getFirebaseCGMData(date: sessionDay!) { (bgData) in
             CommonFunctions.hideActivityLoader()
             self.cgmDataArray = bgData
-            self.insulinQty.text = "-- units"
+            self.filterInsulinDosesListing()
             let sortedCgmData = bgData.sorted(by: { (model1, model2) -> Bool in
                 return model1.sgv < model2.sgv
             })
-            self.lowestGlucoseLbl.text = "\(sortedCgmData.first?.sgv ?? 0)" + " mg/dl"
-            self.highestGlucoseLbl.text = "\(sortedCgmData.last?.sgv ?? 0)" + " mg/dl"
+            self.lowestGlucoseLbl.text = "\(sortedCgmData.first?.sgv ?? 0)" + " \(UserDefaultsRepository.units.value)"
+            self.highestGlucoseLbl.text = "\(sortedCgmData.last?.sgv ?? 0)" + " \(UserDefaultsRepository.units.value)"
             self.progress.progress = Double(self.getRangeValue())
-//            self.rangePerValueLbl.text = "\(self.getRangeValue(isShowPer: true))"
             self.mainTaeView.reloadData()
         } failure: { (error) -> (Void) in
             print(error)
@@ -132,10 +144,10 @@ class SessionDescriptionVC: UIViewController {
 //===========================
 extension SessionDescriptionVC : UITableViewDelegate,UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return sections.endIndex
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ?  1 :  0
+        return section == 0 ?  1 :  (self.insulinDataArray?.endIndex ?? 0)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -146,6 +158,9 @@ extension SessionDescriptionVC : UITableViewDelegate,UITableViewDataSource{
             return cell
         default:
             let cell = tableView.dequeueCell(with: BottomSheetBottomCell.self)
+            if let insulinData = self.insulinDataArray {
+                cell.populateCellForCGMModel(model:insulinData[indexPath.row])
+            }
             return cell
         }
     }

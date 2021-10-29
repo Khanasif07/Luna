@@ -206,6 +206,7 @@ enum ApiKey {
     static var requestType : String { return "requestType" }
     static var startdate : String { return "startDate" }
     static var endDate : String { return "endDate" }
+    static var startDate : String { return "startDate" }
     static var amount: String { return "amount" }
     static var totalAmount: String { return "totalAmount" }
     static var garageRequestId: String { return "garageRequestId" }
