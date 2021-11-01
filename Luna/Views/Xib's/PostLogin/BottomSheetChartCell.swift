@@ -54,6 +54,13 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     
     private func newChartSetUp(){
         cgmChartView.clear()
+        //
+        let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
+                                                    xAxis: cgmChartView.xAxis,
+                                                    transformer: self.cgmChartView.getTransformer(forAxis: .left),
+                                                    cgmData: self.cgmData)
+        self.cgmChartView.xAxisRenderer = customXAxisRender
+        //
         cgmChartView.delegate = self
         cgmChartView.drawMarkers = true
 

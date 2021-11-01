@@ -76,7 +76,7 @@ final  class XAxisCustomRenderer: XAxisRenderer {
                 position.x = CGFloat(entries[i])
             }
 
-            position.y = 0.0
+            position.y = -5.0
             position = position.applying(valueToPixelMatrix)
 
             if viewPortHandler.isInBoundsX(position.x){
