@@ -271,6 +271,9 @@ extension BleManager: CBPeripheralDelegate {
             self.insulinData = properDataArray.map({ (stringArray) -> InsulinDataModel in
                 return InsulinDataModel(insulinData: stringArray.first!, date: Double(stringArray.last!) ?? 0.0, sgv: 0)
             })
+            //
+            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
+            //
             if self.insulinData.endIndex > 0 {
                 let filteredInsulinData = self.insulinData.map { (insulinModel) -> InsulinDataModel in
                     if let index = SystemInfoModel.shared.cgmData?.firstIndex(where: { (cgmData) -> Bool in

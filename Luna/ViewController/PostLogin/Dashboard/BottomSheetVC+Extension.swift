@@ -84,27 +84,27 @@ extension BottomSheetVC {
         return graphics[value]!
     }
     
-    func persistentNotification(bgTime: TimeInterval){
-        if UserDefaultsRepository.persistentNotification.value && bgTime > UserDefaultsRepository.persistentNotificationLastBGTime.value && bgData.count > 0 {
-            self.sendNotification(self, bgVal: bgUnits.toDisplayUnits(String(bgData[bgData.count - 1].sgv)), directionVal: latestDirectionString, deltaVal: bgUnits.toDisplayUnits(String(latestDeltaString)), minAgoVal: latestMinAgoString, alertLabelVal: "Latest BG")
-        }
+    func persistentNotification(bgTime: TimeInterval,body: String){
+//        if UserDefaultsRepository.persistentNotification.value && bgTime > UserDefaultsRepository.persistentNotificationLastBGTime.value && bgData.count > 0 {
+        self.sendNotification(self, bgVal: bgUnits.toDisplayUnits(String(bgData[bgData.count - 1].sgv)), directionVal: latestDirectionString,body: body)
+//        }
     }
     
-    func sendNotification(_ sender: Any, bgVal: String, directionVal: String, deltaVal: String, minAgoVal: String, alertLabelVal: String) {
+    func sendNotification(_ sender: Any, bgVal: String, directionVal: String,body: String) {
         
         UNUserNotificationCenter.current().delegate = self
         
         let content = UNMutableNotificationContent()
-        content.title = alertLabelVal
-        content.subtitle += bgVal + " "
-        content.subtitle += directionVal + " "
-        content.subtitle += deltaVal
+        content.title = ""
+        content.subtitle = ""
         content.categoryIdentifier = "category"
+        content.body = body
+//        content.badge = 1
         // This is needed to trigger vibrate on watch and phone
         // TODO:
         // See if we can use .Critcal
         // See if we should use this method instead of direct sound player
-        content.sound = .default
+        content.sound = .defaultCritical
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)

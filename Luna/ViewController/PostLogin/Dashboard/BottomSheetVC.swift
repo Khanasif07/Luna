@@ -216,6 +216,10 @@ extension BottomSheetVC {
         if let dict = notification.object as? NSDictionary {
                 print(dict)
         }
+        if self.bgData.endIndex > 0{
+        let currentBGTime = self.bgData[(bgData.count) - 1].date
+        self.persistentNotification(bgTime: currentBGTime,body: "Your session has been completed and you have [X.X] units of active Insulin On Board. Make sure to consider this before making any diabetes related decisions for the next 6 hours.")
+        }
         self.mainTableView.reloadData()
     }
     
