@@ -54,6 +54,7 @@ public class BleManager: NSObject{
     var batteryData: String = ""
     var reservoirLevelData: String = ""
     var systemStatusData : String = ""
+    var iobData: Double = 0.0
     var insulinData : [InsulinDataModel] = []
     var isKeepConnect = true
     var isConnect :Bool = false
@@ -240,18 +241,18 @@ extension BleManager: CBPeripheralDelegate {
             print("handled Characteristic Value for Battery Level: \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.batteryData = data
-            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: nil)
+            NotificationCenter.default.post(name: Notification.Name.BatteryUpdateValue, object: nil)
         case ReservoirLevelCharacteristicCBUUID:
             print("handled Characteristic Value for Reservoir Level: \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print(data)
             self.reservoirLevelData = data
-            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: nil)
+            NotificationCenter.default.post(name: Notification.Name.ReservoirUpdateValue, object: nil)
         case statusCBUUID:
             print("handled Characteristic Value for status : \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.systemStatusData = data
-            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: nil)
+            NotificationCenter.default.post(name: Notification.Name.StatusUpdateValue, object: nil)
         case firmwareRevisionString:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for firmwareRevisionString:  \(data)")
@@ -299,6 +300,7 @@ extension BleManager: CBPeripheralDelegate {
             print("handled Characteristic Value for: \(String(describing: characteristic.value))")
         case IOBout:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
+            self.iobData = Double(data) ?? 0.0
             print("handled Characteristic Value for IOBout:  \(data)")
         case WriteAcknowledgement:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""

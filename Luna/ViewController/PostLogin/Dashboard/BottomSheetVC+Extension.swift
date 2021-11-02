@@ -84,7 +84,7 @@ extension BottomSheetVC {
         return graphics[value]!
     }
     
-    func persistentNotification(bgTime: TimeInterval,body: String){
+    func persistentNotification(body: String){
 //        if UserDefaultsRepository.persistentNotification.value && bgTime > UserDefaultsRepository.persistentNotificationLastBGTime.value && bgData.count > 0 {
         self.sendNotification(self, bgVal: bgUnits.toDisplayUnits(String(bgData[bgData.count - 1].sgv)), directionVal: latestDirectionString,body: body)
 //        }
