@@ -187,6 +187,7 @@ extension SessionHistoryVC: SessionFilterVCDelegate{
                 self.insulinSectionDataArray.append((month, [data]))
             }
         })
+        self.insulinSectionDataArray = self.insulinSectionDataArray.reversed()
         self.sessionHistoryTV.reloadData()
     }
     

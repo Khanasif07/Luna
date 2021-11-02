@@ -42,7 +42,7 @@ extension BottomSheetVC{
         }
         
         
-        let currentBGTime = bgs[bgs.count - 1].date
+//        let currentBGTime = bgs[bgs.count - 1].date
 //        var alarmTriggered = false
 //        var numLoops = 0
 //        checkQuietHours()
@@ -55,7 +55,7 @@ extension BottomSheetVC{
 //            return
 //        }
         // still send persistent notification if no alarms trigger and persistent notification is on
-        self.persistentNotification(bgTime: currentBGTime)
+//        self.persistentNotification(bgTime: currentBGTime)
         
     }
 }
