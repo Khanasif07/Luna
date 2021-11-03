@@ -35,6 +35,7 @@ struct UserModel{
     var userType : String
     var deviceId: String
     var lastUpdatedCGMDate: Double
+    var isAlertsOn: Bool
     
     init() {
         self.init(JSON([:]))
@@ -60,6 +61,7 @@ struct UserModel{
         self.isBiometricOn = json[ApiKey.isBiometricOn].boolValue
         self.deviceId = json[ApiKey.deviceId].stringValue
         self.lastUpdatedCGMDate = json[ApiKey.lastUpdatedCGMDate].doubleValue
+        self.isAlertsOn = json[ApiKey.isAlertsOn].boolValue
     }
     
      func fetchUserModel(dict: JSONDictionary) -> UserModel {
@@ -99,7 +101,8 @@ struct UserModel{
             ApiKey.isProfileStepCompleted: isProfileStepCompleted,
             ApiKey.isSystemSetupCompleted : isSystemSetupCompleted,
             ApiKey.deviceId : deviceId,
-            ApiKey.lastUpdatedCGMDate:lastUpdatedCGMDate
+            ApiKey.lastUpdatedCGMDate:lastUpdatedCGMDate,
+            ApiKey.isAlertsOn : isAlertsOn
         ]
         AppUserDefaults.save(value: dict, forKey: .fullUserProfile)
     }

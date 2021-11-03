@@ -190,16 +190,23 @@ extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
             cell.titleLbl.text = sections[indexPath.row].1
             cell.subTitlelbl.text = sections[indexPath.row].2
             cell.logoImgView.image = sections[indexPath.row].0
-//            cell.nextBtn.isHidden = false
-//            cell.switchView.isHidden = true
             if indexPath.row == 3{
                 cell.switchView.isUserInteractionEnabled = true
                 cell.nextBtn.isHidden = true
                 cell.switchView.isHidden = false
-                cell.switchView.isOn = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
+                cell.switchView.isOn = AppUserDefaults.value(forKey: .isAlertsOn).boolValue
             }else{
                 cell.nextBtn.isHidden = false
                 cell.switchView.isHidden = true
+            }
+            cell.switchTapped = { [weak self] sender in
+                guard let self = self else { return }
+                if indexPath.row == 3 {
+                    let isOn = AppUserDefaults.value(forKey: .isAlertsOn).boolValue
+                    self.db.collection(ApiKey.users).document(UserModel.main.id).updateData([ApiKey.isAlertsOn: !isOn])
+                    AppUserDefaults.save(value: !isOn, forKey: .isAlertsOn)
+                    self.systemTableView.reloadData()
+                }
             }
             return cell
         case .App:

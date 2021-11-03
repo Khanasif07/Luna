@@ -112,7 +112,6 @@ extension AppUserDefaults {
         case garageAddress
         case name
         case userId
-        case contactFetchDate
         case pushNotificationStatus
         case canChangePassword
         case unreadCount
@@ -123,6 +122,7 @@ extension AppUserDefaults {
         case sharePassword
         case latestCgmDate
         case lastUpdatedCGMDate
+        case isAlertsOn
     }
 }
 

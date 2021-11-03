@@ -94,6 +94,7 @@ class FirestoreController:NSObject{
                         user.isChangePassword = data[ApiKey.isChangePassword] as? Bool ?? false
                         user.deviceId = data[ApiKey.deviceId] as? String ?? ""
                         user.lastUpdatedCGMDate = data[ApiKey.lastUpdatedCGMDate] as? Double ?? 0.0
+                        user.isAlertsOn = data[ApiKey.isAlertsOn] as? Bool ?? false
                         UserModel.main = user
                         //MARK:- Important
                         UserDefaultsRepository.shareUserName.value = data[ApiKey.shareUserName] as? String ?? ""
@@ -104,6 +105,7 @@ class FirestoreController:NSObject{
                         AppUserDefaults.save(value: user.deviceId, forKey: .deviceId)
                         AppUserDefaults.save(value: user.isBiometricOn, forKey: .isBiometricSelected)
                         AppUserDefaults.save(value: user.isSystemSetupCompleted, forKey: .isSystemSetupCompleted)
+                        AppUserDefaults.save(value: user.isAlertsOn, forKey: .isAlertsOn)
                         success()
                     }
                 }
@@ -493,6 +495,26 @@ class FirestoreController:NSObject{
             return
         }
         db.collection(ApiKey.users).document(uid).updateData([ApiKey.isBiometricOn:isBiometricOn]){
+            (error) in
+            if let err = error {
+                failure(err)
+            } else {
+                completion()
+            }
+        }
+    }
+    
+    
+    //MARK:- Update Alerts status
+    //================================
+    static func updateUserAlertsStatus(isAlertsOn: Bool, completion: @escaping () -> Void,
+                                          failure: @escaping FailureResponse,failures: @escaping () -> Void) {
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        guard !uid.isEmpty else {
+            failures()
+            return
+        }
+        db.collection(ApiKey.users).document(uid).updateData([ApiKey.isAlertsOn:isAlertsOn]){
             (error) in
             if let err = error {
                 failure(err)
