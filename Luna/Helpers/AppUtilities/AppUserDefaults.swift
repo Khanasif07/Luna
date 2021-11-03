@@ -123,6 +123,7 @@ extension AppUserDefaults {
         case latestCgmDate
         case lastUpdatedCGMDate
         case isAlertsOn
+        case reservoirLevel
     }
 }
 

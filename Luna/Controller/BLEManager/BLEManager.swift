@@ -246,6 +246,7 @@ extension BleManager: CBPeripheralDelegate {
             print("handled Characteristic Value for Reservoir Level: \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print(data)
+            AppUserDefaults.save(value: data == "-1" ? "" : data, forKey: .reservoirLevel)
             self.reservoirLevelData = data
             NotificationCenter.default.post(name: Notification.Name.ReservoirUpdateValue, object: nil)
         case statusCBUUID:
