@@ -219,7 +219,6 @@ extension BottomSheetVC {
         if let dict = notification.object as? NSDictionary {
                 print(dict)
         }
-        self.reservoirUpdateValue(notification: notification)
         self.mainTableView.reloadData()
     }
     
@@ -255,7 +254,7 @@ extension BottomSheetVC {
             return
         }
         
-        if BleManager.sharedInstance.reservoirLevelData != "-1" && Int(BleManager.sharedInstance.batteryData) ?? 0 <= 95  && UserModel.main.isAlertsOn{
+        if BleManager.sharedInstance.reservoirLevelData != "-1" && Int(BleManager.sharedInstance.batteryData) ?? 0 <= 75  && UserModel.main.isAlertsOn{
             var bodyText  = "Your Luna device is only "
             bodyText += BleManager.sharedInstance.batteryData
             bodyText += " % charged and may not last the entire session."
