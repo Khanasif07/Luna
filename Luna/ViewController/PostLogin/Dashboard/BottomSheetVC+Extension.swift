@@ -86,11 +86,11 @@ extension BottomSheetVC {
     
     func persistentNotification(body: String){
 //        if UserDefaultsRepository.persistentNotification.value && bgTime > UserDefaultsRepository.persistentNotificationLastBGTime.value && bgData.count > 0 {
-        self.sendNotification(self, bgVal: bgUnits.toDisplayUnits(String(bgData[bgData.count - 1].sgv)), directionVal: latestDirectionString,body: body)
+        self.sendNotification(self,body: body)
 //        }
     }
     
-    func sendNotification(_ sender: Any, bgVal: String, directionVal: String,body: String) {
+    func sendNotification(_ sender: Any,body: String) {
         
         UNUserNotificationCenter.current().delegate = self
         

@@ -205,6 +205,7 @@ extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
                     let isOn = AppUserDefaults.value(forKey: .isAlertsOn).boolValue
                     self.db.collection(ApiKey.users).document(UserModel.main.id).updateData([ApiKey.isAlertsOn: !isOn])
                     AppUserDefaults.save(value: !isOn, forKey: .isAlertsOn)
+                    UserModel.main.isAlertsOn = !isOn
                     self.systemTableView.reloadData()
                 }
             }
