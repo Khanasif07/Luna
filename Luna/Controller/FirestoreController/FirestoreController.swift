@@ -186,6 +186,29 @@ class FirestoreController:NSObject{
         }
     }
     
+//    MARK:- Get Insulin Data info
+//    =======================
+    static func getFirebaseInsulinData(date:Double,success: @escaping (_ cgmModelArray: [InsulinDataModel]) -> Void,
+                                   failure:  @escaping FailureResponse){
+        if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
+            db.collection(ApiKey.insulinData)
+                .document(Auth.auth().currentUser?.uid ?? "").collection(String(date)).getDocuments { (snapshot, error) in
+                    if let error = error {
+                        failure(error)
+                    } else{
+                        print("============================")
+                        var cgmModelArray = [InsulinDataModel]()
+                        guard let dicts = snapshot?.documents else { return }
+                        dicts.forEach { (queryDocumentSnapshot) in
+                            let cgmModel = InsulinDataModel(queryDocumentSnapshot.data())
+                            cgmModelArray.append(cgmModel)
+                        }
+                        success(cgmModelArray)
+                    }
+                }
+        }
+    }
+    
     //MARK:- Get Session History Data
     //=======================
     static func getFirebaseSessionHistoryData(success: @escaping (_ cgmModelArray: [SessionHistory]) -> Void,
@@ -211,28 +234,28 @@ class FirestoreController:NSObject{
             }
         }
     
-    //MARK:- Get Insulin Data info
-    //=======================
-    static func getFirebaseInsulinData(success: @escaping (_ cgmModelArray: [InsulinDataModel]) -> Void,
-                                       failure:  @escaping FailureResponse){
-        if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
-            db.collection(ApiKey.userSystemInfo)
-                .document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.insulinData).getDocuments { (snapshot, error) in
-                    if let error = error {
-                        failure(error)
-                    } else{
-                        print("============================")
-                        var insulinModelArray = [InsulinDataModel]()
-                        guard let dicts = snapshot?.documents else { return }
-                        dicts.forEach { (queryDocumentSnapshot) in
-                            let cgmModel = InsulinDataModel(queryDocumentSnapshot.data())
-                            insulinModelArray.append(cgmModel)
-                        }
-                        success(insulinModelArray)
-                    }
-                }
-        }
-    }
+//    //MARK:- Get Insulin Data info
+//    //=======================
+//    static func getFirebaseInsulinData(success: @escaping (_ cgmModelArray: [InsulinDataModel]) -> Void,
+//                                       failure:  @escaping FailureResponse){
+//        if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
+//            db.collection(ApiKey.insulinData)
+//                .document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.insulinData).getDocuments { (snapshot, error) in
+//                    if let error = error {
+//                        failure(error)
+//                    } else{
+//                        print("============================")
+//                        var insulinModelArray = [InsulinDataModel]()
+//                        guard let dicts = snapshot?.documents else { return }
+//                        dicts.forEach { (queryDocumentSnapshot) in
+//                            let cgmModel = InsulinDataModel(queryDocumentSnapshot.data())
+//                            insulinModelArray.append(cgmModel)
+//                        }
+//                        success(insulinModelArray)
+//                    }
+//                }
+//        }
+//    }
     
     //MARK:- Get info
     //=======================
@@ -1000,7 +1023,7 @@ class FirestoreController:NSObject{
         let sfReference = db.collection(ApiKey.users).document(userId)
         
         array.forEach { (doc) in
-            let docRef = db.collection(ApiKey.sessionData).document(userId).collection(String(currentDate)).document(String(doc.date))
+            let docRef =  db.collection(ApiKey.sessionData).document(userId).collection(String(currentDate)).document(String(doc.date))
             batch.setData([ApiKey.sgv: doc.sgv,ApiKey.direction: doc.direction ?? "",ApiKey.date: doc.date,ApiKey.insulin: doc.insulin ?? ""], forDocument: docRef)
         }
         //
@@ -1015,31 +1038,49 @@ class FirestoreController:NSObject{
         }
     }
     
-    //MARK:-Add  Last Updated CGM date
+    //MARK:-Add  Insulin data array through batch operation
     //=======================
-    static func addCgmDateData(currentDate:Double,range:Double,startDate:Double,endDate:Double,insulin:Int) {
+    static func addInsulinBatchData(currentDate: Double,array:[InsulinDataModel],success: @escaping ()-> ()) {
         guard let userId = Auth.auth().currentUser?.uid  else { return }
-        //
-        let specAdded: [String: Any] = [
-            ApiKey.date: currentDate,
-            ApiKey.insulin: insulin,
-            ApiKey.range: range,
-            ApiKey.startdate: startDate,
-            ApiKey.endDate: endDate
-                ]
-        //
-        db.collection(ApiKey.sessionData).document(userId).getDocument { (snapshot, error ) in
-            if  (snapshot?.exists)! {
-                db.collection(ApiKey.sessionData).document(userId).updateData([
-                    ApiKey.cgmDateArray: FieldValue.arrayUnion([specAdded])
-                ])
+        let batch = db.batch()
+        array.forEach { (doc) in
+        let docRef = db.collection(ApiKey.insulinData).document(userId).collection(String(currentDate)).document(String(doc.date))
+        batch.setData([ApiKey.sgv: doc.sgv ?? "",ApiKey.date: doc.date,ApiKey.insulin: doc.insulinData ?? ""], forDocument: docRef)
+        }
+        batch.commit { (err) in
+            if let err = err{
+                print("Error occured \(err)")
             } else {
-                db.collection(ApiKey.sessionData).document(userId).setData([
-                    ApiKey.cgmDateArray: FieldValue.arrayUnion([specAdded])
-                ])
+                success()
             }
         }
     }
+    
+//    //MARK:-Add  Last Updated CGM date
+//    //=======================
+//    static func addCgmDateData(currentDate:Double,range:Double,startDate:Double,endDate:Double,insulin:Int) {
+//        guard let userId = Auth.auth().currentUser?.uid  else { return }
+//        //
+//        let specAdded: [String: Any] = [
+//            ApiKey.date: currentDate,
+//            ApiKey.insulin: insulin,
+//            ApiKey.range: range,
+//            ApiKey.startdate: startDate,
+//            ApiKey.endDate: endDate
+//                ]
+//        //
+//        db.collection(ApiKey.sessionData).document(userId).getDocument { (snapshot, error ) in
+//            if  (snapshot?.exists)! {
+//                db.collection(ApiKey.sessionData).document(userId).updateData([
+//                    ApiKey.cgmDateArray: FieldValue.arrayUnion([specAdded])
+//                ])
+//            } else {
+//                db.collection(ApiKey.sessionData).document(userId).setData([
+//                    ApiKey.cgmDateArray: FieldValue.arrayUnion([specAdded])
+//                ])
+//            }
+//        }
+//    }
     
     //MARK:- simpleTransaction
     //=======================

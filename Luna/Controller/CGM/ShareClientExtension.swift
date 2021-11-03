@@ -129,7 +129,7 @@ public struct InsulinDataModel: Codable {
     
     init(_ dict: [String:Any]){
         date = dict[ApiKey.date] as? TimeInterval ?? 0.0
-        insulinData = dict[ApiKey.insulinUnit] as? String ?? ""
+        insulinData = dict[ApiKey.insulin] as? String ?? ""
         sgv = dict[ApiKey.sgv] as? Int ?? 0
     }
     

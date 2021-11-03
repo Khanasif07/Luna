@@ -226,6 +226,18 @@ extension  BottomSheetVC{
         }
         //MARK:- Important
         SystemInfoModel.shared.cgmData = bgData
+        //
+        if (SystemInfoModel.shared.insulinData.endIndex) > 0 {
+            SystemInfoModel.shared.insulinData.forEach { (insulinModel) in
+                if let index = bgData.firstIndex(where: { (cgmData) -> Bool in
+                    return cgmData.date == insulinModel.date
+                }){
+                    SystemInfoModel.shared.cgmData?[index].insulin = "0.5"
+                    bgData[index].insulin = "0.5"
+                }
+            }
+        }
+        //
         viewUpdateNSBG(isNS: isNS)
 //        print(bgData)
         //MARK:- Important

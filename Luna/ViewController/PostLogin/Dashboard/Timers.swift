@@ -145,12 +145,9 @@ extension BottomSheetVC {
             print(currentDate - lastUpdatedDate)
             if (currentDate - lastUpdatedDate) >= 86400 {
                 AppUserDefaults.save(value: (currentDate), forKey: .lastUpdatedCGMDate)
-               
-//                FirestoreController.updateLastUpdatedCGMDate(currentDate: (self.bgData[self.bgData.count - 1].date))
                 FirestoreController.addBatchData(currentDate: currentDate, array: bgData) {
-                    print("Add Batch Data Commited successfully")
+                    print("Add CGM Batch Data Commited successfully")
                     FirestoreController.simpleTransactionToAddCGMData(currentDate: (currentDate), range: self.getRangeValue(isShowPer: true), startDate: (startDate), endDate: (currentDate), insulin: self.getInsulinDosesValue())
-//                    FirestoreController.addCgmDateData(currentDate: (self.bgData.last!.date), range: self.getRangeValue(isShowPer: true), startDate: (self.bgData.first!.date), endDate: (self.bgData.last!.date), insulin: 0)
                 }
             }
             let now = dateTimeUtils.getNowTimeIntervalUTC()

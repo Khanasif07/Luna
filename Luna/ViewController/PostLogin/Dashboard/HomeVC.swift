@@ -182,7 +182,7 @@ extension HomeVC {
     }
     
     private func getInsulinFromFirestore(){
-        FirestoreController.getFirebaseInsulinData { (insulinDataArray) in
+        FirestoreController.getFirebaseInsulinData(date: UserModel.main.lastUpdatedCGMDate){ (insulinDataArray) in
             print(insulinDataArray)
             SystemInfoModel.shared.insulinData = insulinDataArray.reversed()
             self.bottomSheetVC.mainTableView.reloadData()

@@ -219,6 +219,7 @@ extension BottomSheetVC {
         if let dict = notification.object as? NSDictionary {
                 print(dict)
         }
+        self.reservoirUpdateValue(notification: notification)
         self.mainTableView.reloadData()
     }
     
@@ -332,7 +333,7 @@ extension BottomSheetVC {
 //========================
 extension BottomSheetVC : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 1 ? (SystemInfoModel.shared.insulinData?.endIndex ?? 0) : 1
+        return section == 1 ? (SystemInfoModel.shared.insulinData.endIndex) : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -344,9 +345,7 @@ extension BottomSheetVC : UITableViewDelegate,UITableViewDataSource {
         case 1:
             let cell = tableView.dequeueCell(with: BottomSheetBottomCell.self, indexPath: indexPath)
             cell.topLineDashView.isHidden = indexPath.row == 0
-            if let insulinData = SystemInfoModel.shared.insulinData {
-                cell.populateCell(model:insulinData[indexPath.row])
-            }
+            cell.populateCell(model:SystemInfoModel.shared.insulinData[indexPath.row])
             return cell
         default:
             return UITableViewCell()
