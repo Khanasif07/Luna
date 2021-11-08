@@ -115,7 +115,8 @@ extension InsulinStep3VC {
         insulinType.text = "\(SystemInfoModel.shared.longInsulinType)"
         insulinSubType.text = "\(SystemInfoModel.shared.longInsulinSubType)"
         insulinImgView.image = SystemInfoModel.shared.longInsulinImage
-        insulinDescLbl.text = "How many units of \(SystemInfoModel.shared.longInsulinType) do you take daily? This should be what your doctor has prescribed for you to take regularly."
+        insulinDescLbl.text = "How many units of \(SystemInfoModel.shared.longInsulinType) do you normally take daily?"
+      //  This should be what your doctor has prescribed for you to take regularly.
         self.doneBtn.isEnabled = !(insulinCountTxtField.text?.isEmpty ?? true)
     }
     

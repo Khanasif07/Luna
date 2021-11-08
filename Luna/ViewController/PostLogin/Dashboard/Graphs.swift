@@ -54,15 +54,16 @@ extension BottomSheetVC :  ChartViewDelegate {
         lineBG.drawFilledEnabled = true
         lineBG.drawValuesEnabled = false
         lineBG.circleColors = [NSUIColor.systemGreen]
-        lineBG.drawCircleHoleEnabled = false
+        lineBG.drawCircleHoleEnabled = true
         lineBG.axisDependency = YAxis.AxisDependency.right
         lineBG.highlightEnabled = true
         lineBG.drawValuesEnabled = false
         //MARK: - Important
         lineBG.setCircleColor(.clear)
         lineBG.lineWidth = 3
-        lineBG.circleRadius = 0
-        lineBG.drawCircleHoleEnabled = false
+        lineBG.circleRadius = 5.0
+        lineBG.drawCirclesEnabled = true
+//        lineBG.drawCircleHoleEnabled = false
         lineBG.valueFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
         lineBG.formLineWidth = 1
         lineBG.formSize = 15
