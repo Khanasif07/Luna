@@ -103,7 +103,7 @@
 
 "faceID_Touch_ID_may_not_be_available_or_configured" = "Face ID/Touch ID may not be available or configured";
 "what_is_your_first_name" = "What is your first name?";
-"hello_and_welcome_to_Luna" = "Hello and welcome to Luna!";
+"hello_and_welcome_to_Luna" = "Welcome to Luna, to get you started we will ask you some questions about who you are. This is so we know who we are working with and personalizing the app for you. Data privacy is paramount to everything we do. We protect your data to the highest standards as required by HIPAA and won't sell it ever";
 "please_provide_your_details_to_set_up_your_profile" = "Please provide your details to set up your profile";
 "what_your_date_of_birth" = "What’s your date of birth";
 

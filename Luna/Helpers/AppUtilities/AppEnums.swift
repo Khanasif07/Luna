@@ -88,7 +88,7 @@ enum DeviceStatus {
         let intValue = Int(systemInfo)
         switch intValue {
         case 0:
-            return ("Automating",#imageLiteral(resourceName: "automating"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
+            return ("",#imageLiteral(resourceName: "automating"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         case 1:
             return ("Stopped",#imageLiteral(resourceName: "stopped"),#colorLiteral(red: 0.9450980392, green: 0.2705882353, blue: 0.2392156863, alpha: 1))
         case 2:

@@ -402,7 +402,7 @@ extension Optional where Wrapped == String {
 enum ValidityExression : String {
     
     case userName = "^[a-zA-z\\u0080-\\uFFFFß]{1,}+[a-zA-z0-9!@#$%&*-]{2,15}"
-    case email =  "[A-Z0-9a-z\\u0080-\\uFFFF.-_]+@[A-Za-z\\u0080-\\uFFFF0-9.-]+\\.[A-Za-z\\u0080-\\uFFFFß]{1,50}"
+    case email =  "[A-Z0-9a-z\\u0080-\\uFFFF.+-_]+@[A-Za-z\\u0080-\\uFFFF0-9.+-]+\\.[A-Za-z\\u0080-\\uFFFFß]{1,50}"
     case mobileNumber = "^[0-9]{8,14}$"
     case hardPassword = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[!\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~])(?=.*\\d)[A-Za-z0-9 !\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~]{8,16}"
     case nickName = "^[a-zA-Z0-9\\s]{3,40}"
@@ -413,7 +413,7 @@ enum ValidityExression : String {
 
 enum ValidCharaters: String{
     case userName = "^[a-zA-z\\u0080-\\uFFFFß]{1,}+[a-zA-z0-9!@#$%&*-]{0,15}"
-    case email =  "^[a-zA-Z\\u0080-\\uFFFFß0-9!@#$%&*._-]{0,100}"
+    case email =  "^[a-zA-Z\\u0080-\\uFFFFß0-9!@#$%&*._+-]{0,100}"
     case mobileNumber = "^[0-9]{0,16}$"
     case password = "^[a-zA-Z0-9!@#._$%&*]{0,30}"//"^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,32}$"
     case name = "^[a-zA-Z0-9!@#._$%&*\\s-]{0,40}"
