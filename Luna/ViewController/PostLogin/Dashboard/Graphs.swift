@@ -244,7 +244,7 @@ extension BottomSheetVC :  ChartViewDelegate {
         leftAxis.drawAxisLineEnabled = false
         leftAxis.drawLimitLinesBehindDataEnabled = false
         cgmChartView.rightAxis.enabled = false
-        cgmChartView.xAxis.granularity = 1800
+        cgmChartView.xAxis.granularity = 86400
         cgmChartView.xAxis.drawGridLinesEnabled = false
         cgmChartView.legend.form = .none
         cgmChartView.noDataText = "No glucose data available."

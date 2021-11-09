@@ -211,9 +211,9 @@ extension BleManager: CBPeripheralDelegate {
                     writeValue(myCharacteristic: characteristic,value: "#GET_DOSE_DATA")
                     peripheral.setNotifyValue(true, for: characteristic)
 //                writeValue(myCharacteristic: characteristic,value:  "GET_ERROR_LOG")
-//                case iobInput:
-//                    writeValue(myCharacteristic: characteristic,value:  "8")
-//                    print(characteristic.value)
+                case iobInput:
+                    writeValue(myCharacteristic: characteristic,value:  "8")
+                    peripheral.setNotifyValue(true, for: characteristic)
 //                case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
 //                    writeValue(myCharacteristic: characteristic,value:  "300:1634549055;")
                 case CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9"):
@@ -305,12 +305,6 @@ extension BleManager: CBPeripheralDelegate {
         case WriteAcknowledgement:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for WriteAcknowledgement:  \(data)")
-            if let dataInCharacteristic = self.cgmDataInCharacteristic{
-                writeValue(myCharacteristic: dataInCharacteristic,value: "#GET_DOSE_DATA")
-            }
-        case  iobInput:
-            let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-            print("handled Characteristic Value for iobInput:  \(data)")
             if let dataInCharacteristic = self.cgmDataInCharacteristic{
                 writeValue(myCharacteristic: dataInCharacteristic,value: "#GET_DOSE_DATA")
             }
