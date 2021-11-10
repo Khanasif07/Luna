@@ -36,9 +36,6 @@ final class ChartXValueFormatter: IAxisValueFormatter {
 //        }
        
         if let lastCGMValue = SystemInfoModel.shared.cgmData?.last{
-//            print(value)
-//            let currentCgmValue = value.rounded(.towardZero)
-//            print(currentCgmValue)
             if lastCGMValue.date - value <= 300 {
                 print("lastCGMValue \(lastCGMValue.date)")
                 let dateFormatter = DateFormatter()
