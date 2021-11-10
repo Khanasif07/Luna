@@ -21,7 +21,7 @@ public struct ShareGlucoseData: Codable {
         insulin = dict[ApiKey.insulin] as? String ?? "0"
     }
     
-    init(sgv:Int,direction: String,date: TimeInterval,insulin: String = "0"){
+    public init(sgv:Int,date: TimeInterval,direction: String,insulin: String = "0"){
         self.sgv = sgv
         self.date = date
         self.direction = direction
@@ -113,7 +113,7 @@ extension ShareClient {
             
                 let newShareData = ShareGlucoseData(
                     sgv: Int(result![i].glucose),
-                    direction: TrendTable[trend], date: result![i].timestamp.timeIntervalSince1970
+                    date: result![i].timestamp.timeIntervalSince1970, direction: TrendTable[trend]
                 )
                 shareData.append(newShareData)
             }

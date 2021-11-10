@@ -16,7 +16,7 @@ import FirebaseFirestore
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate ,GIDSignInDelegate,UNUserNotificationCenterDelegate{
+class AppDelegate: UIResponder, UIApplicationDelegate ,GIDSignInDelegate{
    
     
     public var window: UIWindow?
@@ -149,7 +149,7 @@ extension AppDelegate {
 
 //MARK:- Push Notification
 //=========================
-extension AppDelegate:MessagingDelegate{
+extension AppDelegate:MessagingDelegate,UNUserNotificationCenterDelegate{
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
@@ -167,6 +167,7 @@ extension AppDelegate:MessagingDelegate{
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+            print("Push notification received in foreground.")
             completionHandler([.alert, .badge, .sound])
     }
     

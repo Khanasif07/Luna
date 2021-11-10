@@ -23,7 +23,7 @@ final class basalFillFormatter: IFillFormatter {
 
 final class ChartXValueFormatter: IAxisValueFormatter {
     
-
+    var xAxisLabelsArray :[String] = []
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         
        
@@ -34,16 +34,27 @@ final class ChartXValueFormatter: IAxisValueFormatter {
 //        } else {
 //            dateFormatter.setLocalizedDateFormatFromTemplate("hh:mm")
 //        }
+       
         if let lastCGMValue = SystemInfoModel.shared.cgmData?.last{
 //            print(value)
 //            let currentCgmValue = value.rounded(.towardZero)
 //            print(currentCgmValue)
             if lastCGMValue.date - value <= 300 {
-//                print("lastCGMValue \(lastCGMValue.date)")
-//                let dateFormatter = DateFormatter()
-//                dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.hour12.rawValue)
-//                let date = Date(timeIntervalSince1970: value)
-//                let formattedDate = dateFormatter.string(from: date)
+                print("lastCGMValue \(lastCGMValue.date)")
+                let dateFormatter = DateFormatter()
+                dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.cgmDate12.rawValue)
+                let date = Date(timeIntervalSince1970: value)
+                let formattedDate = dateFormatter.string(from: date)
+                print(formattedDate)
+                xAxisLabelsArray.append(formattedDate.lowercased())
+                print(xAxisLabelsArray)
+                if xAxisLabelsArray.count == 7 {
+                    let hasDuplicates = xAxisLabelsArray.count != Set(xAxisLabelsArray).count
+                    if (xAxisLabelsArray[5] ==  xAxisLabelsArray[4]) && hasDuplicates{
+                        NotificationCenter.default.post(name: Notification.Name.XAxisLabelsDuplicateValue, object: [:])
+                    }
+                }
+                xAxisLabelsArray = []
 //                return formattedDate.lowercased()
                 return "now"
             }else {
@@ -52,6 +63,7 @@ final class ChartXValueFormatter: IAxisValueFormatter {
                 dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.cgmDate12.rawValue)
                 let date = Date(timeIntervalSince1970: value)
                 let formattedDate = dateFormatter.string(from: date)
+                xAxisLabelsArray.append(formattedDate.lowercased())
                 return formattedDate.lowercased()
             }
         }

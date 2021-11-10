@@ -107,7 +107,7 @@ extension BottomSheetVC :  ChartViewDelegate {
         // Setup the main graph overall details
         cgmChartView.data?.highlightEnabled = true
         cgmChartView.xAxis.valueFormatter = ChartXValueFormatter()
-        cgmChartView.xAxis.granularity = 1800
+        cgmChartView.xAxis.granularity = 86400
 //        cgmChartView.xAxis.labelTextColor = NSUIColor.label
 //        cgmChartView.xAxis.labelPosition = XAxis.LabelPosition.bottom
         //MARK:- Important

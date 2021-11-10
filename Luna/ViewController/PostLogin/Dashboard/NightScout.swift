@@ -219,7 +219,7 @@ extension  BottomSheetVC{
                 dateString.round(FloatingPointRoundingRule.toNearestOrEven)
             }
             if dateString >= dateTimeUtils.getTimeInterval24HoursAgo() {
-                let reading = ShareGlucoseData(sgv: data[data.count - 1 - i].sgv, direction: data[data.count - 1 - i].direction ?? "", date: dateString)
+                let reading = ShareGlucoseData(sgv: data[data.count - 1 - i].sgv, date: dateString, direction: data[data.count - 1 - i].direction ?? "")
                 bgData.append(reading)
             }
             
@@ -251,10 +251,10 @@ extension  BottomSheetVC{
     // NS BG Data Front end updater
     func viewUpdateNSBG (isNS: Bool) {
         DispatchQueue.main.async {
-            if UserDefaultsRepository.debugLog.value {
-                print("Display: BG")
-                print("Num BG: " + self.bgData.count.description)
-            }
+//            if UserDefaultsRepository.debugLog.value {
+//                print("Display: BG")
+//                print("Num BG: " + self.bgData.count.description)
+//            }
             let entries = self.bgData
             if entries.count < 1 { return }
             self.updateBGGraph()
@@ -704,7 +704,7 @@ extension  BottomSheetVC{
             if dateTimeStamp < (dateTimeUtils.getNowTimeIntervalUTC() + (60 * 60)) {
                 // Make the dot
                 //let dot = ShareGlucoseData(value: Double(carbs), date: Double(dateTimeStamp), sgv: Int(sgv.sgv))
-                let dot = ShareGlucoseData(sgv: sgv, direction: "", date: Double(dateTimeStamp))
+                let dot = ShareGlucoseData(sgv: sgv, date: Double(dateTimeStamp), direction: "")
                 bgCheckData.append(dot)
             }
         }

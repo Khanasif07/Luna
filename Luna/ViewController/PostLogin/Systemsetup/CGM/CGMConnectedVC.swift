@@ -208,7 +208,7 @@ extension CGMConnectedVC {
                 dateString.round(FloatingPointRoundingRule.toNearestOrEven)
             }
             if dateString >= dateTimeUtils.getTimeInterval24HoursAgo() {
-                let reading = ShareGlucoseData(sgv: data[data.count - 1 - i].sgv, direction: data[data.count - 1 - i].direction ?? "", date: dateString)
+                let reading = ShareGlucoseData(sgv: data[data.count - 1 - i].sgv, date: dateString, direction: data[data.count - 1 - i].direction ?? "")
                 bgData.append(reading)
             }
             

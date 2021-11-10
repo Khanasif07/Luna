@@ -419,7 +419,7 @@ extension LoginViewController : UITextFieldDelegate{
         case cell?.emailIdTxtField:
             return (string.checkIfValidCharaters(.email) || string.isEmpty) && newString.length <= 50
         case cell?.passTxtField:
-            return (string.checkIfValidCharaters(.password) || string.isEmpty) && newString.length <= 25
+            return (string.isEmpty) && newString.length <= 25
         default:
             return false
         }

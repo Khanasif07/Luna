@@ -92,7 +92,7 @@ extension BottomSheetVC {
     
     func sendNotification(_ sender: Any,body: String) {
         
-        UNUserNotificationCenter.current().delegate = self
+//        UNUserNotificationCenter.current().delegate = self
         
         let content = UNMutableNotificationContent()
         content.title = ""
@@ -138,7 +138,14 @@ extension BottomSheetVC {
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
 
     }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+//            completionHandler([.alert, .badge, .sound])
+        print("Push notification received in foreground.")
+        completionHandler(UNNotificationPresentationOptions.alert)
+    }
+    
 }
 

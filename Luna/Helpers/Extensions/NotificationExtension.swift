@@ -14,6 +14,7 @@ extension Notification.Name {
     static let insulinConnectedSuccessfully = Notification.Name("insulinConnectedSuccessfully")
     static let cgmConnectedSuccessfully = Notification.Name("cgmConnectedSuccessfully")
     static let BleDidUpdateValue = Notification.Name("BleDidUpdateValue")
+    static let XAxisLabelsDuplicateValue = Notification.Name("XAxisLabelsDuplicateValue")
     static let BatteryUpdateValue = Notification.Name("BatteryUpdateValue")
     static let ReservoirUpdateValue = Notification.Name("ReservoirUpdateValue")
     static let StatusUpdateValue = Notification.Name("StatusUpdateValue")

@@ -142,7 +142,6 @@ extension BottomSheetVC {
             print("LastUpdatedCGMDate")
             let currentDate = self.bgData.last!.date
             let startDate = self.bgData.first!.date
-            print(currentDate - lastUpdatedDate)
             if (currentDate - lastUpdatedDate) >= 86400 {
                 AppUserDefaults.save(value: (currentDate), forKey: .lastUpdatedCGMDate)
                 FirestoreController.addBatchData(currentDate: currentDate, array: bgData) {
