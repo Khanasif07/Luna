@@ -42,7 +42,7 @@
 "done" = "Done";
 "select" = "Select";
 
-"change_Long_Acting_Insulin" = "Long Acting Insulin";
+"change_Long_Acting_Insulin" = "Long-Acting Insulin";
 "change_CGM" = "CGM";
 "change_connected_Luna_Device" = "Luna Controller";
 "alerts" = "Alerts";

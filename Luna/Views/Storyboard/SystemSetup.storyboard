@@ -258,8 +258,8 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Gj2-PB-Jk6">
                                                 <rect key="frame" x="20" y="124" width="374" height="89"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Long Acting Insulin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2m-8e-UsH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="151" height="21.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Long-Acting Insulin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2m-8e-UsH">
+                                                        <rect key="frame" x="0.0" y="0.0" width="155" height="21.5"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -304,7 +304,7 @@
                                                             </stackView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2md-vo-VE8">
                                                                 <rect key="frame" x="0.0" y="33.5" width="334" height="95.5"/>
-                                                                <string key="text">Therapy settings for long acting insulin could affect insulin dosing and lead to hypoglycemia. If you have any questions about your Long Acting Insulin settings, talk to your healthcare provider before you proceed.</string>
+                                                                <string key="text">Therapy settings for long-acting insulin could affect insulin dosing and lead to hypoglycemia. If you have any questions about your long-Acting Insulin settings, talk to your healthcare provider before you proceed.</string>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -529,7 +529,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="57"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select your Long Acting Insulin" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZC-ai-yQF">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select your Long-Acting Insulin" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZC-ai-yQF">
                             <rect key="frame" x="20" y="27.5" width="335" height="19.5"/>
                             <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
                             <color key="textColor" red="0.15686274509803921" green="0.17254901960784313" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
@@ -734,34 +734,34 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JS2-NF-SIk">
-                                        <rect key="frame" x="28" y="269.5" width="358" height="357.5"/>
+                                        <rect key="frame" x="28" y="268.5" width="358" height="359"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="UJ4-ip-0t8">
-                                                <rect key="frame" x="24" y="51" width="310" height="208.5"/>
+                                                <rect key="frame" x="24" y="51" width="310" height="210"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please confirm that you have correctly entered how many units of long-acting insulin you normally take daily." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6uI-t6-6aG">
-                                                        <rect key="frame" x="0.0" y="0.0" width="310" height="63"/>
+                                                        <rect key="frame" x="1" y="0.0" width="308.5" height="64.5"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hmo-iA-qe6">
-                                                        <rect key="frame" x="35" y="93" width="240" height="85.5"/>
+                                                        <rect key="frame" x="35" y="94.5" width="240" height="85.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="R62-K9-7Za">
-                                                                <rect key="frame" x="90.5" y="0.0" width="59.5" height="53.5"/>
+                                                                <rect key="frame" x="88" y="0.0" width="64" height="53"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJr-2N-p0P">
-                                                                        <rect key="frame" x="0.0" y="2" width="24.5" height="51.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="29" height="53"/>
                                                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="44"/>
                                                                         <color key="textColor" name="outgoingMessageBackground"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nyt-nL-py3">
-                                                                        <rect key="frame" x="29.5" y="28.5" width="30" height="25"/>
+                                                                        <rect key="frame" x="34" y="28" width="30" height="25"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFr-1X-4g7">
-                                                                                <rect key="frame" x="-0.5" y="0.0" width="30.5" height="16.5"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="30" height="17"/>
                                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
                                                                                 <color key="textColor" red="0.45098039215686275" green="0.46274509803921571" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -778,7 +778,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Basaglar" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSv-tK-ViZ">
-                                                                <rect key="frame" x="20" y="64.5" width="200" height="21"/>
+                                                                <rect key="frame" x="20" y="64" width="200" height="21.5"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -796,7 +796,7 @@
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n80-B4-5ke">
-                                                        <rect key="frame" x="155" y="208.5" width="0.0" height="0.0"/>
+                                                        <rect key="frame" x="155" y="210" width="0.0" height="0.0"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                         <color key="textColor" red="0.45098039220000002" green="0.46274509800000002" blue="0.48627450979999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -804,7 +804,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xeg-Ks-nb5" customClass="AppButton" customModule="Luna" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="293.5" width="318" height="44"/>
+                                                <rect key="frame" x="20" y="295" width="318" height="44"/>
                                                 <color key="backgroundColor" red="0.52941176469999995" green="0.74509803919999995" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="bIR-NR-Pep"/>
