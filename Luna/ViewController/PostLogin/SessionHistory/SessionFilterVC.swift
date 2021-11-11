@@ -42,7 +42,7 @@ class SessionFilterVC: UIViewController {
     
     private lazy var endTimePicker: UIDatePicker = {
         let picker = UIDatePicker()
-        picker.minimumDate = Calendar.current.date(byAdding: .day, value: 0, to:  Date())
+//        picker.minimumDate = Calendar.current.date(byAdding: .day, value: 0, to:  Date())
         picker.maximumDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())
         picker.backgroundColor = .white
         picker.datePickerMode = UIDatePicker.Mode.date
