@@ -63,20 +63,20 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         //
         cgmChartView.delegate = self
         cgmChartView.drawMarkers = true
-
+        
         cgmChartView.chartDescription?.enabled = true
         cgmChartView.dragEnabled = true
         cgmChartView.setScaleEnabled(false)
         cgmChartView.pinchZoomEnabled = false
-
+        
         let xAxis = cgmChartView.xAxis
         xAxis.labelPosition = .bottom
         xAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
         xAxis.granularity = 86400
         xAxis.labelTextColor = NSUIColor.label
-//        xAxis.labelPosition = XAxis.LabelPosition.bottom
+        //        xAxis.labelPosition = XAxis.LabelPosition.bottom
         xAxis.valueFormatter = ChartXValueFormatter()
-
+        
         let leftAxis = cgmChartView.leftAxis
         leftAxis.removeAllLimitLines()
         leftAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
@@ -89,7 +89,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         leftAxis.drawAxisLineEnabled = false
         leftAxis.axisMinimum = -0
         leftAxis.drawLimitLinesBehindDataEnabled = false
-
+        
         let marker = BalloonMarker(color: #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1),
                                    font: AppFonts.SF_Pro_Display_Bold.withSize(.x13),
                                    textColor: .white,
@@ -117,7 +117,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         cgmChartView.rightAxis.axisMinimum = 0.0
         cgmChartView.rightAxis.gridLineDashLengths = [5.0, 5.0]
         cgmChartView.rightAxis.drawGridLinesEnabled = false
-//        cgmChartView.rightAxis.valueFormatter = ChartYMMOLValueFormatter()
+        //        cgmChartView.rightAxis.valueFormatter = ChartYMMOLValueFormatter()
         cgmChartView.rightAxis.granularityEnabled = true
         cgmChartView.rightAxis.granularity = 50
         
@@ -144,9 +144,9 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     }
     
     func setDataCount(_ count: Int, range: UInt32) {
-//        let values = cgmData.map { (data) -> ChartDataEntry in
-//            return ChartDataEntry(x: Double(data.date), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
-//        }
+        //        let values = cgmData.map { (data) -> ChartDataEntry in
+        //            return ChartDataEntry(x: Double(data.date), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
+        //        }
         var colors = [NSUIColor]()
         var mainChart = [ChartDataEntry]()
         for i in 0..<cgmData.count{
@@ -182,7 +182,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         //
         set1.drawIconsEnabled = false
         setup(set1)
-
+        
         let gradientColors = [#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 0).cgColor,#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1).cgColor]
         let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)
         set1.fillAlpha = 1.0
@@ -191,21 +191,21 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         set1.fill = Fill(linearGradient: gradient!, angle: 90.0)
         set1.drawFilledEnabled = true
         set1.drawValuesEnabled = false
-
+        
         let data = LineChartData(dataSet: set1)
         cgmChartView.data = data
         // Move to current reading everytime new readings load
     }
-
+    
     private func setup(_ dataSet: LineChartDataSet) {
-//            dataSet.setColor(#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
-//            dataSet.setCircleColor(.clear)
-            dataSet.lineWidth = 3
-            dataSet.circleRadius = 5.0
-            dataSet.drawCircleHoleEnabled = false
-            dataSet.valueFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
-            dataSet.formLineWidth = 1
-            dataSet.formSize = 15
+        //            dataSet.setColor(#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
+        //            dataSet.setCircleColor(.clear)
+        dataSet.lineWidth = 3
+        dataSet.circleRadius = 5.0
+        dataSet.drawCircleHoleEnabled = true
+        dataSet.valueFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
+        dataSet.formLineWidth = 1
+        dataSet.formSize = 15
     }
 }
 

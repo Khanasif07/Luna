@@ -115,6 +115,12 @@ final  class XAxisCustomRenderer: XAxisRenderer {
                     constrainedToSize: labelMaxSize,
                     anchor: anchor,
                     angleRadians: labelRotationAngleRadians)
+                
+                context.beginPath()
+                context.move(to: CGPoint(x: position.x, y: position.y))
+                context.addLine(to: CGPoint(x: position.x, y: self.viewPortHandler.contentBottom))
+                context.strokePath()
+                
 
 //                let indexData = cgmData[Int(i)]
 //                let cgmDate = String(indexData.date)

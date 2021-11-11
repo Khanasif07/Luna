@@ -455,20 +455,20 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuG-C6-TZq">
-                                        <rect key="frame" x="28" y="283.5" width="358" height="329"/>
+                                        <rect key="frame" x="28" y="321" width="358" height="254"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your last CGM reading was from 0 minutes ago" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDL-A8-xRl">
-                                                <rect key="frame" x="20" y="198.5" width="318" height="37.5"/>
+                                                <rect key="frame" x="20" y="123.5" width="318" height="37.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="yb9-oj-gLl">
-                                                <rect key="frame" x="169" y="93" width="20" height="46"/>
+                                                <rect key="frame" x="169" y="58" width="20" height="46"/>
                                                 <color key="color" red="0.3294117647" green="0.69803921570000005" blue="0.36862745099999999" alpha="0.4038728828" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             </activityIndicatorView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEh-Uz-yUf">
-                                                <rect key="frame" x="179" y="93" width="0.0" height="46"/>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEh-Uz-yUf">
+                                                <rect key="frame" x="179" y="58" width="0.0" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="46" id="dXq-vx-lDX"/>
                                                     <constraint firstAttribute="height" constant="46" id="zmg-fc-4gJ"/>
@@ -478,7 +478,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OXT-oO-h97" customClass="AppButton" customModule="Luna" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="266" width="318" height="44"/>
+                                                <rect key="frame" x="20" y="191" width="318" height="44"/>
                                                 <color key="backgroundColor" red="0.52941176469999995" green="0.74509803919999995" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="266-pZ-qdP"/>
@@ -508,8 +508,8 @@
                                                     <action selector="crossBtnTapped:" destination="Z3M-Ej-Kml" eventType="touchUpInside" id="o7w-H5-QFu"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pub-Jn-LpW">
-                                                <rect key="frame" x="181" y="93" width="46" height="46"/>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pub-Jn-LpW">
+                                                <rect key="frame" x="181" y="58" width="46" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="pub-Jn-LpW" secondAttribute="height" multiplier="1:1" id="yeF-ix-4ad"/>
                                                 </constraints>
@@ -517,8 +517,8 @@
                                                 <color key="textColor" name="outgoingMessageBackground"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mg/dl" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rho-Hi-Qaq">
-                                                <rect key="frame" x="161" y="141.5" width="36.5" height="17"/>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mg/dl" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rho-Hi-Qaq">
+                                                <rect key="frame" x="161" y="106.5" width="36.5" height="17"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
                                                 <color key="textColor" red="0.45098039215686275" green="0.46274509803921571" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -540,13 +540,13 @@
                                             <constraint firstItem="pgx-DI-1yR" firstAttribute="leading" secondItem="zuG-C6-TZq" secondAttribute="leading" constant="51" id="RCh-wX-rFg"/>
                                             <constraint firstItem="yb9-oj-gLl" firstAttribute="bottom" secondItem="zEh-Uz-yUf" secondAttribute="bottom" id="ZFp-zu-2bN"/>
                                             <constraint firstItem="Iro-js-TfH" firstAttribute="top" secondItem="zuG-C6-TZq" secondAttribute="top" constant="15" id="f97-K4-ANY"/>
-                                            <constraint firstItem="zEh-Uz-yUf" firstAttribute="top" secondItem="pgx-DI-1yR" secondAttribute="bottom" constant="35" id="ihT-Q2-Bog"/>
+                                            <constraint firstItem="zEh-Uz-yUf" firstAttribute="top" secondItem="pgx-DI-1yR" secondAttribute="bottom" id="ihT-Q2-Bog"/>
                                             <constraint firstItem="pgx-DI-1yR" firstAttribute="top" secondItem="zuG-C6-TZq" secondAttribute="top" constant="16" id="mVJ-je-VFc"/>
                                             <constraint firstItem="yb9-oj-gLl" firstAttribute="centerX" secondItem="zEh-Uz-yUf" secondAttribute="centerX" id="oAf-qx-TD5"/>
                                             <constraint firstAttribute="trailing" secondItem="pgx-DI-1yR" secondAttribute="trailing" constant="51" id="oXp-mq-b62"/>
                                             <constraint firstItem="zEh-Uz-yUf" firstAttribute="centerX" secondItem="zuG-C6-TZq" secondAttribute="centerX" id="pjB-db-OLc"/>
                                             <constraint firstItem="Rho-Hi-Qaq" firstAttribute="centerX" secondItem="zuG-C6-TZq" secondAttribute="centerX" id="sbn-6D-Xn3"/>
-                                            <constraint firstItem="eDL-A8-xRl" firstAttribute="top" secondItem="Rho-Hi-Qaq" secondAttribute="bottom" constant="40" id="tcw-ux-SUP"/>
+                                            <constraint firstItem="eDL-A8-xRl" firstAttribute="top" secondItem="Rho-Hi-Qaq" secondAttribute="bottom" id="tcw-ux-SUP"/>
                                             <constraint firstItem="yb9-oj-gLl" firstAttribute="top" secondItem="zEh-Uz-yUf" secondAttribute="top" id="tsq-T0-Z1e"/>
                                             <constraint firstAttribute="bottom" secondItem="OXT-oO-h97" secondAttribute="bottom" constant="19" id="zqm-TG-pJP"/>
                                         </constraints>
@@ -1524,13 +1524,13 @@ Luna devices</string>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="nlv-ag-Wy2">
                                                     <rect key="frame" x="83.5" y="156" width="48.5" height="38.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhJ-PB-M7X">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="0.0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhJ-PB-M7X">
                                                             <rect key="frame" x="2.5" y="0.0" width="43.5" height="21.5"/>
                                                             <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="in range" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbL-CF-GC1">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="in range" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbL-CF-GC1">
                                                             <rect key="frame" x="0.0" y="21.5" width="48.5" height="17"/>
                                                             <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
                                                             <color key="textColor" red="0.45098039215686275" green="0.46274509803921571" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1685,7 +1685,7 @@ Luna devices</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fXC-Nf-kwg">
-                                        <rect key="frame" x="28" y="149.5" width="358" height="597"/>
+                                        <rect key="frame" x="28" y="164" width="358" height="568"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follow the steps below then tap “Pair” again." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5TB-zY-xze">
                                                 <rect key="frame" x="20" y="257.5" width="318" height="19.5"/>
@@ -1828,7 +1828,7 @@ Luna devices</string>
                                             <constraint firstItem="j6Q-ew-nOS" firstAttribute="top" secondItem="f2r-nK-x7t" secondAttribute="bottom" constant="22" id="Pck-z8-TF9"/>
                                             <constraint firstAttribute="trailing" secondItem="Dbk-fT-A05" secondAttribute="trailing" constant="24" id="Rzr-Es-lUM"/>
                                             <constraint firstItem="Dbk-fT-A05" firstAttribute="top" secondItem="5TB-zY-xze" secondAttribute="bottom" constant="21" id="TwV-kx-Oi7"/>
-                                            <constraint firstAttribute="bottom" secondItem="QwG-eR-jrp" secondAttribute="bottom" constant="29" id="acb-Dw-wPu"/>
+                                            <constraint firstAttribute="bottom" secondItem="QwG-eR-jrp" secondAttribute="bottom" id="acb-Dw-wPu"/>
                                             <constraint firstItem="lqK-Yq-pK4" firstAttribute="top" secondItem="Dbk-fT-A05" secondAttribute="bottom" constant="20" id="eUe-sy-1m7"/>
                                             <constraint firstItem="ven-fs-60B" firstAttribute="top" secondItem="fXC-Nf-kwg" secondAttribute="top" constant="16" id="fQH-NY-qxm"/>
                                             <constraint firstAttribute="trailing" secondItem="f2r-nK-x7t" secondAttribute="trailing" constant="50" id="fWg-bh-FO3"/>
