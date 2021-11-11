@@ -404,6 +404,11 @@ extension LoginViewController : UITextFieldDelegate{
             self.passTxt = txt
             cell?.signUpBtn.isEnabled = signUpBtnStatus()
             cell?.passTxtField.setBorder(width: 1.0, color: AppColors.fontPrimaryColor)
+            if !self.isPassValid(string: self.passTxt).0{
+                cell?.passTxtField.setError(self.isPassValid(string: self.passTxt).1)
+            }else{
+                cell?.passTxtField.setError("",show: false)
+            }
         default:
             cell?.signUpBtn.isEnabled = signUpBtnStatus()
         }
@@ -419,7 +424,7 @@ extension LoginViewController : UITextFieldDelegate{
         case cell?.emailIdTxtField:
             return (string.checkIfValidCharaters(.email) || string.isEmpty) && newString.length <= 50
         case cell?.passTxtField:
-            return newString.length <= 25 && (string.checkIfValidCharaters(.email) || string.isEmpty)
+            return (string.checkIfValidCharaters(.email) || string.isEmpty)
         default:
             return false
         }

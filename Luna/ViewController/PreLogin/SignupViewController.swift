@@ -322,7 +322,7 @@ extension SignupViewController : UITextFieldDelegate{
         case cell?.emailIdTxtField:
             return (string.checkIfValidCharaters(.email) || string.isEmpty) && newString.length <= 50
         case cell?.passTxtField:
-            return (string.checkIfValidCharaters(.email) || string.isEmpty) && newString.length <= 25
+            return (string.checkIfValidCharaters(.email) || string.isEmpty)
         default:
             return false
         }
