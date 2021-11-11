@@ -1056,6 +1056,32 @@ class FirestoreController:NSObject{
         }
     }
     
+    static func changeEmail(_ updatedEmail:String,success: @escaping () -> Void,
+                            failure:  @escaping FailureResponse) {
+        if let user = Auth.auth().currentUser {
+            // re authenticate the user
+            let email = AppUserDefaults.value(forKey: .defaultEmail).stringValue
+            let password = AppUserDefaults.value(forKey: .defaultPassword).stringValue
+            let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+            user.reauthenticate(with: credential) { (result, error) in
+                if let error = error {
+                    // An error happened.
+                    failure(error)
+                } else {
+                    // User re-authenticated.
+                    user.updateEmail(to: updatedEmail) { (error) in
+                        if let error = error {
+                            // An error happened.
+                            failure(error)
+                        } else {
+                            success()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
 //    //MARK:-Add  Last Updated CGM date
 //    //=======================
 //    static func addCgmDateData(currentDate:Double,range:Double,startDate:Double,endDate:Double,insulin:Int) {

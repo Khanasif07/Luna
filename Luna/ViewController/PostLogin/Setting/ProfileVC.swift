@@ -55,6 +55,13 @@ class ProfileVC: UIViewController {
     }
     
     @IBAction func saveBtnAction(_ sender: AppButton) {
+//        FirestoreController.changeEmail("usertest@yopmail.com") {
+//            CommonFunctions.showToastWithMessage("Profile updated successfully.")
+//        } failure: { (error) -> (Void) in
+//            CommonFunctions.showToastWithMessage(error.localizedDescription)
+//        }
+//
+//        return
         CommonFunctions.showActivityLoader()
         FirestoreController.updateUserNode(email: sections[3].1, password: AppUserDefaults.value(forKey: .defaultPassword).stringValue, firstName: sections[0].1, lastName: sections[1].1, dob: sections[2].1, diabetesType: sections[4].1, isProfileStepCompleted: UserModel.main.isProfileStepCompleted, isSystemSetupCompleted: UserModel.main.isSystemSetupCompleted, isBiometricOn: UserModel.main.isBiometricOn) {
             FirestoreController.getFirebaseUserData {
@@ -84,7 +91,7 @@ extension ProfileVC {
         tableViewSetup()
         setupDatePicker()
     }
-   
+    
     private func tableViewSetup(){
         self.titleLbl.text = LocalizedString.myProfile.localized
         self.saveBtn.isEnabled = (!UserModel.main.firstName.isEmpty && !UserModel.main.lastName.isEmpty && !UserModel.main.dob.isEmpty && !UserModel.main.email.isEmpty && !UserModel.main.diabetesType.isEmpty)
@@ -158,8 +165,8 @@ extension ProfileVC : UITableViewDelegate, UITableViewDataSource {
             cell.txtField.setButtonToRightView(btn: UIButton(), selectedImage: nil, normalImage: nil, size: CGSize(width: 0, height: 0))
         }
         if  sections[indexPath.row].0 == LocalizedString.email.localized{
-            cell.isUserInteractionEnabled = false
-            cell.txtField.textColor = .lightGray
+            cell.isUserInteractionEnabled = loginType == .email_password
+            cell.txtField.textColor = loginType == .email_password ? .label : .lightGray
         }else{
             cell.isUserInteractionEnabled = true
             cell.txtField.textColor = .label
