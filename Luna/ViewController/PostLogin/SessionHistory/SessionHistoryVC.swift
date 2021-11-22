@@ -72,50 +72,13 @@ extension SessionHistoryVC {
                     self.insulinSectionDataArray.append((month, [data]))
                 }
             })
+            self.insulinSectionDataArray = self.insulinSectionDataArray.reversed()
             self.sessionHistoryTV.reloadData()
             CommonFunctions.hideActivityLoader()
         }failure: {
             CommonFunctions.showToastWithMessage("No Session History data available.")
             CommonFunctions.hideActivityLoader()
         }
-        //        FirestoreController.getFirebaseInsulinData { (insulinDataArray) in
-        //            print(insulinDataArray)
-        //            SystemInfoModel.shared.insulinData = insulinDataArray
-        //            SystemInfoModel.shared.insulinData?.forEach({ (dataModel) in
-        //                let month = dataModel.date.getMonthInterval()
-        //                if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
-        //                    if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
-        //                        self.insulinSectionDataArray[selectedIndex].1.append(dataModel)
-        //                    }
-        //                } else {
-        //                    self.insulinSectionDataArray.append((month, [dataModel]))
-        //                }
-        //            })
-        //            self.SessionHistoryTV.reloadData()
-        //            CommonFunctions.hideActivityLoader()
-        //        } failure: { (error) -> (Void) in
-        //            CommonFunctions.showToastWithMessage(error.localizedDescription)
-        //            CommonFunctions.hideActivityLoader()
-        //        }
-        //        FirestoreController.getFirebaseCGMData { (cgmDataArray) in
-        //            print(cgmDataArray)
-        //            SystemInfoModel.shared.cgmData = cgmDataArray
-        //            SystemInfoModel.shared.cgmData?.forEach({ (dataModel) in
-        //                let month = dataModel.date.getMonthInterval()
-        //                if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
-        //                    if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
-        //                        self.insulinSectionDataArray[selectedIndex].1.append(dataModel)
-        //                    }
-        //                } else {
-        //                    self.insulinSectionDataArray.append((month, [dataModel]))
-        //                }
-        //            })
-        //            self.sessionHistoryTV.reloadData()
-        //            CommonFunctions.hideActivityLoader()
-        //        } failure: { (error) -> (Void) in
-        //            CommonFunctions.showToastWithMessage(error.localizedDescription)
-        //            CommonFunctions.hideActivityLoader()
-        //        }
     }
     
     
@@ -205,6 +168,7 @@ extension SessionHistoryVC: SessionFilterVCDelegate{
                 self.insulinSectionDataArray.append((month, [data]))
             }
         })
+        self.insulinSectionDataArray = self.insulinSectionDataArray.reversed()
         self.sessionHistoryTV.reloadData()
     }
 }

@@ -168,7 +168,7 @@ public class BleManager: NSObject{
             if self.statusTimer.isValid {
                 self.statusTimer.invalidate()
             }
-            self.startStatusTimer()
+//            self.startStatusTimer()
         }
     }
 }
@@ -377,7 +377,7 @@ extension BleManager: CBCentralManagerDelegate {
         myperipheral?.discoverServices(nil)
         CommonFunctions.showToastWithMessage("Bluetooth connected.")
         delegate?.didConnect?(name: "Bluetooth connected.")
-        if !statusTimer.isValid { self.startStatusTimer(time: 60 * 5) }
+//        if !statusTimer.isValid { self.startStatusTimer(time: 60 * 5) }
     }
     
     public func centralManager (_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
