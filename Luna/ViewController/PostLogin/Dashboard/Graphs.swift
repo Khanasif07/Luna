@@ -60,8 +60,8 @@ extension BottomSheetVC :  ChartViewDelegate {
         lineBG.drawValuesEnabled = false
         //MARK: - Important
         lineBG.setCircleColor(.clear)
-        lineBG.lineWidth = 3
-        lineBG.circleRadius = 5.0
+        lineBG.lineWidth = 0
+        lineBG.circleRadius = 3.5
         lineBG.drawCirclesEnabled = true
         lineBG.valueFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
         lineBG.formLineWidth = 1

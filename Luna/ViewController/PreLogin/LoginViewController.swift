@@ -158,24 +158,6 @@ extension LoginViewController {
         self.present(scene, animated: true, completion: nil)
     }
     
-    private func getActionCodes()->ActionCodeSettings{
-        let actionCodeSettings =  ActionCodeSettings.init()
-        actionCodeSettings.handleCodeInApp = true
-        var components = URLComponents()
-        let queryItemEmailName = InfoPlistParser.getStringValue(forKey: ApiKey.firebaseOpenAppQueryItemEmail)
-        let querySchemeName = InfoPlistParser.getStringValue(forKey: ApiKey.firebaseOpenAppScheme)
-        let queryUrlPrefixName = InfoPlistParser.getStringValue(forKey: ApiKey.firebaseOpenAppURLPrefix)
-        components.scheme = querySchemeName
-        components.host = queryUrlPrefixName
-        let emailUrlQueryItem = URLQueryItem(name: queryItemEmailName, value: self.emailTxt)
-        components.queryItems = [emailUrlQueryItem]
-        guard let linkUrl = components.url else { return  ActionCodeSettings.init() }
-        print("link parameter is \(linkUrl)")
-        actionCodeSettings.url = linkUrl
-        actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
-        return actionCodeSettings
-    }
-    
     private func bioMetricSignin() {
         var error: NSError?
         if #available(iOS 8.0, macOS 10.12.1, *) {
@@ -266,15 +248,13 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                             }
                         } else {
                             CommonFunctions.hideActivityLoader()
-                            Auth.auth().currentUser?.sendEmailVerification(with: self.getActionCodes(), completion: { (err) in
-                                if let err = err {
-                                    CommonFunctions.showToastWithMessage(err.localizedDescription)
-                                    return
-                                }
+                            FirestoreController.sendEmailVerificationLink(emailTxt: self.emailTxt) {
                                 DispatchQueue.main.async {
                                     self.gotoEmailVerificationPopUpVC()
                                 }
-                            })
+                            } failure: { (errs) -> (Void) in
+                                CommonFunctions.showToastWithMessage(errs.localizedDescription)
+                            }
                         }
                     }
                 } else {
@@ -303,17 +283,15 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                             }
                         } else {
                             CommonFunctions.hideActivityLoader()
-                            Auth.auth().currentUser?.sendEmailVerification(with: self.getActionCodes(), completion: { (err) in
-                                if let err = err {
-                                    CommonFunctions.showToastWithMessage(err.localizedDescription)
-                                    return
-                                }
+                            FirestoreController.sendEmailVerificationLink(emailTxt: self.emailTxt) {
                                 DispatchQueue.main.async {
                                     self.passTxt = ""
                                     self.loginTableView.reloadData()
                                     self.gotoEmailVerificationPopUpVC()
                                 }
-                            })
+                            } failure: { (errs) -> (Void) in
+                                CommonFunctions.showToastWithMessage(errs.localizedDescription)
+                            }
                         }
                     }) { (message, code) in
                         CommonFunctions.hideActivityLoader()

@@ -55,23 +55,34 @@ class ProfileVC: UIViewController {
     }
     
     @IBAction func saveBtnAction(_ sender: AppButton) {
-//        FirestoreController.changeEmail("usertest@yopmail.com") {
-//            CommonFunctions.showToastWithMessage("Profile updated successfully.")
-//        } failure: { (error) -> (Void) in
-//            CommonFunctions.showToastWithMessage(error.localizedDescription)
-//        }
-//
-//        return
         CommonFunctions.showActivityLoader()
         FirestoreController.updateUserNode(email: sections[3].1, password: AppUserDefaults.value(forKey: .defaultPassword).stringValue, firstName: sections[0].1, lastName: sections[1].1, dob: sections[2].1, diabetesType: sections[4].1, isProfileStepCompleted: UserModel.main.isProfileStepCompleted, isSystemSetupCompleted: UserModel.main.isSystemSetupCompleted, isBiometricOn: UserModel.main.isBiometricOn) {
-            FirestoreController.getFirebaseUserData {
-                CommonFunctions.hideActivityLoader()
-                self.pop()
+            //
+            if self.sections[3].1 != UserModel.main.email{
                 CommonFunctions.showToastWithMessage("Profile updated successfully.")
-            } failure: { (error) -> (Void) in
-                CommonFunctions.hideActivityLoader()
-                CommonFunctions.showToastWithMessage(error.localizedDescription)
+                FirestoreController.changeEmail(self.sections[3].1) {
+                    CommonFunctions.hideActivityLoader()
+                    FirestoreController.sendEmailVerificationLink(emailTxt: self.sections[3].1) {
+                        CommonFunctions.showToastWithMessage(LocalizedString.please_check_your_email_sent.localized)
+                        FirestoreController.performCleanUp(for_logout: true)
+                    } failure: { (error) -> (Void) in
+                        CommonFunctions.showToastWithMessage(error.localizedDescription)
+                    }
+                } failure: { (error) -> (Void) in
+                    CommonFunctions.hideActivityLoader()
+                    CommonFunctions.showToastWithMessage(error.localizedDescription)
+                }
+            } else{
+                FirestoreController.getFirebaseUserData {
+                    CommonFunctions.hideActivityLoader()
+                    self.pop()
+                    CommonFunctions.showToastWithMessage("Profile updated successfully.")
+                } failure: { (error) -> (Void) in
+                    CommonFunctions.hideActivityLoader()
+                    CommonFunctions.showToastWithMessage(error.localizedDescription)
+                }
             }
+            //
         } failure: { (error) -> (Void) in
             CommonFunctions.hideActivityLoader()
             CommonFunctions.showToastWithMessage(error.localizedDescription)
@@ -165,8 +176,8 @@ extension ProfileVC : UITableViewDelegate, UITableViewDataSource {
             cell.txtField.setButtonToRightView(btn: UIButton(), selectedImage: nil, normalImage: nil, size: CGSize(width: 0, height: 0))
         }
         if  sections[indexPath.row].0 == LocalizedString.email.localized{
-            cell.isUserInteractionEnabled = loginType == .email_password
-            cell.txtField.textColor = loginType == .email_password ? .label : .lightGray
+            cell.isUserInteractionEnabled = UserModel.main.isChangePassword
+            cell.txtField.textColor = UserModel.main.isChangePassword ? .label : .lightGray
         }else{
             cell.isUserInteractionEnabled = true
             cell.txtField.textColor = .label

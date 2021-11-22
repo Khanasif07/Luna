@@ -428,16 +428,6 @@ class FirestoreController:NSObject{
         }
     }
     
-    //MARK:- SEND VERIFICATION MAIL
-    //=======================
-    static func sendEmailVerification( completion:  @escaping FailureResponse){
-        Auth.auth().currentUser?.sendEmailVerification(completion: { (error) in
-            if let err = error {
-                completion(err)
-            }
-        })
-    }
-    
     //MARK:- setFirebaseData
     //=======================
     static func setFirebaseData(userId: String,
@@ -1082,6 +1072,36 @@ class FirestoreController:NSObject{
         }
     }
     
+    static func getActionCodes(value:String)->ActionCodeSettings{
+        let actionCodeSettings =  ActionCodeSettings.init()
+        actionCodeSettings.handleCodeInApp = true
+        var components = URLComponents()
+        let queryItemEmailName = InfoPlistParser.getStringValue(forKey: ApiKey.firebaseOpenAppQueryItemEmail)
+        let querySchemeName = InfoPlistParser.getStringValue(forKey: ApiKey.firebaseOpenAppScheme)
+        let queryUrlPrefixName = InfoPlistParser.getStringValue(forKey: ApiKey.firebaseOpenAppURLPrefix)
+        components.scheme = querySchemeName
+        components.host = queryUrlPrefixName
+        components.path = "/open"
+        let emailUrlQueryItem = URLQueryItem(name: queryItemEmailName, value: value)
+        components.queryItems = [emailUrlQueryItem]
+        guard let linkUrl = components.url else { return  ActionCodeSettings.init() }
+        print("link parameter is \(linkUrl)")
+        actionCodeSettings.url = linkUrl
+        actionCodeSettings.dynamicLinkDomain = "lunadiabetes.page.link"
+        actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
+        return actionCodeSettings
+    }
+    
+    static func sendEmailVerificationLink(emailTxt:String,success: @escaping () -> Void,
+                                          failure:  @escaping FailureResponse){
+        Auth.auth().currentUser?.sendEmailVerification(with: self.getActionCodes(value: emailTxt), completion: { (err) in
+            if let err = err {
+                failure(err)
+                return
+            }
+            success()
+        })
+    }
 //    //MARK:-Add  Last Updated CGM date
 //    //=======================
 //    static func addCgmDateData(currentDate:Double,range:Double,startDate:Double,endDate:Double,insulin:Int) {

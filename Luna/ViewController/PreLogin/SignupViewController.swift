@@ -111,26 +111,6 @@ extension SignupViewController {
         self.present(scene, animated: true, completion: nil)
     }
     
-    private func getActionCodes()->ActionCodeSettings{
-        let actionCodeSettings =  ActionCodeSettings.init()
-        actionCodeSettings.handleCodeInApp = true
-        var components = URLComponents()
-        let queryItemEmailName = InfoPlistParser.getStringValue(forKey: ApiKey.firebaseOpenAppQueryItemEmail)
-        let querySchemeName = InfoPlistParser.getStringValue(forKey: ApiKey.firebaseOpenAppScheme)
-        let queryUrlPrefixName = InfoPlistParser.getStringValue(forKey: ApiKey.firebaseOpenAppURLPrefix)
-        components.scheme = querySchemeName
-        components.host = queryUrlPrefixName
-        components.path = "/open"
-        let emailUrlQueryItem = URLQueryItem(name: queryItemEmailName, value: self.emailTxt)
-        components.queryItems = [emailUrlQueryItem]
-        guard let linkUrl = components.url else { return  ActionCodeSettings.init() }
-        print("link parameter is \(linkUrl)")
-        actionCodeSettings.url = linkUrl
-        actionCodeSettings.dynamicLinkDomain = "lunadiabetes.page.link"
-        actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
-        return actionCodeSettings
-    }
-    
     private func showAlertForBiometric(){
         var bioMetricReason = ""
         var biometric = ""
@@ -151,7 +131,13 @@ extension SignupViewController {
                 AppUserDefaults.save(value: true, forKey: .isBiometricSelected)
                 AppUserDefaults.save(value: true, forKey: .isBiometricCompleted)
                 CommonFunctions.hideActivityLoader()
-                self.sendEmailVerificationLink()
+                FirestoreController.sendEmailVerificationLink(emailTxt: self.emailTxt) {
+                    DispatchQueue.main.async {
+                        self.gotoEmailVerificationPopUpVC()
+                    }
+                } failure: { (err) -> (Void) in
+                    CommonFunctions.showToastWithMessage(err.localizedDescription)
+                }
             } failure: { (error) -> (Void) in
                 CommonFunctions.hideActivityLoader()
             } failures: {
@@ -165,25 +151,20 @@ extension SignupViewController {
                 AppUserDefaults.save(value: false, forKey: .isBiometricSelected)
                 AppUserDefaults.save(value: true, forKey: .isBiometricCompleted)
                 CommonFunctions.hideActivityLoader()
-                self.sendEmailVerificationLink()
+                FirestoreController.sendEmailVerificationLink(emailTxt: self.emailTxt) {
+                    DispatchQueue.main.async {
+                        self.gotoEmailVerificationPopUpVC()
+                    }
+                } failure: { (err) -> (Void) in
+                    CommonFunctions.showToastWithMessage(err.localizedDescription)
+                }
+                
             } failure: { (error) -> (Void) in
                 CommonFunctions.hideActivityLoader()
             } failures: {
                 CommonFunctions.hideActivityLoader()
             }
         }
-    }
-    
-    private func sendEmailVerificationLink(){
-        Auth.auth().currentUser?.sendEmailVerification(with: self.getActionCodes(), completion: { (err) in
-            if let err = err {
-                CommonFunctions.showToastWithMessage(err.localizedDescription)
-                return
-            }
-            DispatchQueue.main.async {
-                self.gotoEmailVerificationPopUpVC()
-            }
-        })
     }
 }
 
