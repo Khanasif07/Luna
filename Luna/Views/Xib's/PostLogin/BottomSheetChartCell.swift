@@ -200,7 +200,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     private func setup(_ dataSet: LineChartDataSet) {
         //            dataSet.setColor(#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         //            dataSet.setCircleColor(.clear)
-        dataSet.lineWidth = 0
+        dataSet.lineWidth = 3
         dataSet.circleRadius = 5.0
         dataSet.drawCircleHoleEnabled = true
         dataSet.valueFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)

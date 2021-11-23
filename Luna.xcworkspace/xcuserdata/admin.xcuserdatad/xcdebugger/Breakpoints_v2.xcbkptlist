@@ -14,8 +14,8 @@
             filePath = "Luna/ViewController/PostLogin/Dashboard/NightScout.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "636"
-            endingLineNumber = "636"
+            startingLineNumber = "637"
+            endingLineNumber = "637"
             landmarkName = "webLoadNSProfile()"
             landmarkType = "7">
          </BreakpointContent>

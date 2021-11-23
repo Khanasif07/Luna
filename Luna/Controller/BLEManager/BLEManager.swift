@@ -78,7 +78,8 @@ public class BleManager: NSObject{
     public func beginScan(){
         if isScanning == false{
             isKeepConnect = true
-            self.centralManager.scanForPeripherals(withServices: [lunaCBUUID], options: nil)
+//            self.centralManager.scanForPeripherals(withServices: [lunaCBUUID], options: nil)
+            self.centralManager.scanForPeripherals(withServices: [], options: nil)
             self.rescanTimer =  Timer.scheduledTimer(timeInterval: 15,
                                                      target: self,
                                                      selector: #selector(scanningFinished),
@@ -349,7 +350,8 @@ extension BleManager: CBCentralManagerDelegate {
             NotificationCenter.default.post(name: Notification.Name.BLEOnOffState, object: nil)
         case .poweredOn:
             print("central.state is .poweredOn")
-            centralManager.scanForPeripherals(withServices: [lunaCBUUID],options: nil)
+//            centralManager.scanForPeripherals(withServices: [lunaCBUUID],options: nil)
+            centralManager.scanForPeripherals(withServices: [],options: nil)
             self.rescanTimer =  Timer.scheduledTimer(timeInterval: 15,
                                                      target: self,
                                                      selector: #selector(scanningFinished),
@@ -364,10 +366,12 @@ extension BleManager: CBCentralManagerDelegate {
                                advertisementData: [String: Any], rssi RSSI: NSNumber) {
         print(peripheral.name ?? "")
         print(peripheral.identifier)
+        if peripheral.name == "LUNA"{
         myperipheral = peripheral
         myperipheral?.delegate = self
         centralManager.stopScan()
         centralManager.connect(myperipheral!, options: [CBConnectPeripheralOptionNotifyOnConnectionKey:true, CBConnectPeripheralOptionNotifyOnDisconnectionKey: true])
+        }
     }
     
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {

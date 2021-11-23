@@ -37,14 +37,12 @@ final class ChartXValueFormatter: IAxisValueFormatter {
        
         if let lastCGMValue = SystemInfoModel.shared.cgmData?.last{
             if lastCGMValue.date - value <= 300 {
-                print("lastCGMValue \(lastCGMValue.date)")
+//                print("lastCGMValue \(lastCGMValue.date)")
                 let dateFormatter = DateFormatter()
                 dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.cgmDate12.rawValue)
                 let date = Date(timeIntervalSince1970: value)
                 let formattedDate = dateFormatter.string(from: date)
-                print(formattedDate)
                 xAxisLabelsArray.append(formattedDate.lowercased())
-                print(xAxisLabelsArray)
                 if xAxisLabelsArray.count == 7 {
                     let hasDuplicates = xAxisLabelsArray.count != Set(xAxisLabelsArray).count
                     if (xAxisLabelsArray[5] ==  xAxisLabelsArray[4]) && hasDuplicates{

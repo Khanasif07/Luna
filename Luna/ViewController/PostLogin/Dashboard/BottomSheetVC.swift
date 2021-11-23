@@ -257,7 +257,7 @@ extension BottomSheetVC {
                 print(dict)
         }
         self.mainTableView.reloadData()
-        if BleManager.sharedInstance.reservoirLevelData == "-1" && BleManager.sharedInstance.iobData > 0.0  && UserModel.main.isAlertsOn{
+        if BleManager.sharedInstance.reservoirLevelData == "-1" && BleManager.sharedInstance.iobData >= 0.0  && UserModel.main.isAlertsOn{
             var bodyText  = "Your session has been completed and you have "
             bodyText += "\(BleManager.sharedInstance.iobData)"
             bodyText += " units of active Insulin On Board. Make sure to consider this before making any diabetes related decisions for the next 6 hours."
