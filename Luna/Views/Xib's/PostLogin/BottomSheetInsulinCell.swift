@@ -36,7 +36,7 @@ class BottomSheetInsulinCell: UITableViewCell {
     }
     
     public func setUpAttributedString(){
-        let attributedString = NSMutableAttributedString(string: "\(BleManager.sharedInstance.reservoirLevelData)".isEmpty ? "--" : (BleManager.sharedInstance.reservoirLevelData == "-1" ? "--" : "\(BleManager.sharedInstance.iobData)") , attributes: [
+        let attributedString = NSMutableAttributedString(string: "\(BleManager.sharedInstance.reservoirLevelData)".isEmpty ? "--" : "\(BleManager.sharedInstance.iobData)", attributes: [
             .font: AppFonts.SF_Pro_Display_Bold.withSize(.x20)
         ])
         let privactAttText = (NSAttributedString(string: " Units", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black,NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Medium.withSize(.x12)]))

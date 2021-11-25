@@ -157,7 +157,7 @@ extension  BottomSheetVC{
         let now = dateTimeUtils.getNowTimeIntervalUTC()
         if !isNS && (latestDate + 330) < now {
             webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
-            CommonFunctions.showToastWithMessage("Could not connect to Dexcom server at this time, please try again later.")
+            CommonFunctions.showToastWithMessage("CGM data unavailable")
             //MARK:- TO DO
             return
         }
@@ -270,7 +270,7 @@ extension  BottomSheetVC{
             self.setBGTextColor()
             //MARK:- Importants
             //Send time stamps to Luna Hardware
-            let randomBGValue = Int.random(in: 250..<300)
+            let randomBGValue = Int.random(in: 275..<300)
 //            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(latestBG)))
             BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(randomBGValue)))
             if let directionBG = entries[latestEntryi].direction {

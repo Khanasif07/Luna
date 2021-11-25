@@ -242,7 +242,9 @@ extension BottomSheetVC {
         if let dict = notification.object as? NSDictionary {
                 print(dict)
         }
-        self.mainTableView.reloadData()
+        DispatchQueue.main.async {
+            self.mainTableView.reloadData()
+        }
         if BleManager.sharedInstance.reservoirLevelData != "-1" && Int(BleManager.sharedInstance.batteryData) ?? 0 < 75 && UserModel.main.isAlertsOn{
             var bodyText  = "Your Luna device is only "
             bodyText += BleManager.sharedInstance.batteryData
@@ -256,8 +258,10 @@ extension BottomSheetVC {
         if let dict = notification.object as? NSDictionary {
                 print(dict)
         }
-        self.mainTableView.reloadData()
-        if BleManager.sharedInstance.reservoirLevelData == "-1" && BleManager.sharedInstance.iobData >= 0.0  && UserModel.main.isAlertsOn{
+        DispatchQueue.main.async {
+            self.mainTableView.reloadData()
+        }
+        if BleManager.sharedInstance.reservoirLevelData == "-1" && BleManager.sharedInstance.iobData > 0.0  && UserModel.main.isAlertsOn{
             var bodyText  = "Your session has been completed and you have "
             bodyText += "\(BleManager.sharedInstance.iobData)"
             bodyText += " units of active Insulin On Board. Make sure to consider this before making any diabetes related decisions for the next 6 hours."
@@ -298,7 +302,9 @@ extension BottomSheetVC {
         if let dict = notification.object as? NSDictionary {
                 print(dict)
         }
-        self.mainTableView.reloadData()
+        DispatchQueue.main.async {
+            self.mainTableView.reloadData()
+        }
         if BleManager.sharedInstance.reservoirLevelData != "-1" && BleManager.sharedInstance.systemStatusData == "4"  && UserModel.main.isAlertsOn{
         self.persistentNotification(body: "Luna is not receiving CGM data. Check to see if your CGM is working and paired with Luna properly.")
             return

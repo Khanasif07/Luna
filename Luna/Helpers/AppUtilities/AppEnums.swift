@@ -56,11 +56,11 @@ enum DeviceStatus {
         case 0:
             return ("Fill",#imageLiteral(resourceName: "reservoir0Bars"),#colorLiteral(red: 0.9450980392, green: 0.2705882353, blue: 0.2392156863, alpha: 1))
         case 1:
-            return ("Low",#imageLiteral(resourceName: "reservoir1Bar"),#colorLiteral(red: 0.9607843137, green: 0.5450980392, blue: 0.262745098, alpha: 1))
+            return ("Fill",#imageLiteral(resourceName: "reservoir0Bars"),#colorLiteral(red: 0.9607843137, green: 0.5450980392, blue: 0.262745098, alpha: 1))
         case 2:
-            return ("Low",#imageLiteral(resourceName: "reservoir2Bars"),#colorLiteral(red: 0.9607843137, green: 0.5450980392, blue: 0.262745098, alpha: 1))
+            return ("Low",#imageLiteral(resourceName: "reservoir1Bar"),#colorLiteral(red: 0.9607843137, green: 0.5450980392, blue: 0.262745098, alpha: 1))
         case 3:
-            return ("Low",#imageLiteral(resourceName: "reservoir3Bars"),#colorLiteral(red: 0.9607843137, green: 0.5450980392, blue: 0.262745098, alpha: 1))
+            return ("Low",#imageLiteral(resourceName: "reservoir1Bar"),#colorLiteral(red: 0.9607843137, green: 0.5450980392, blue: 0.262745098, alpha: 1))
         case 4:
             return ("Medium",#imageLiteral(resourceName: "reservoir4Bars"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         case 5:
@@ -68,15 +68,15 @@ enum DeviceStatus {
         case 6:
             return ("Medium",#imageLiteral(resourceName: "reservoir6Bars"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         case 7:
-            return ("Medium",#imageLiteral(resourceName: "reservoir7Bars"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
+            return ("Medium",#imageLiteral(resourceName: "reservoir6Bars"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         case 8:
-            return ("Medium",#imageLiteral(resourceName: "reservoir8Bars"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
+            return ("Medium",#imageLiteral(resourceName: "reservoir6Bars"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         case 9:
-            return ("Medium",#imageLiteral(resourceName: "reservoir9Bars"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
+            return ("Medium",#imageLiteral(resourceName: "reservoir7Bars"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         case 10:
-            return ("Full",#imageLiteral(resourceName: "reservoir10Bars"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
+            return ("Full",#imageLiteral(resourceName: "reservoir8Bars"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         case 11:
-            return ("Full",#imageLiteral(resourceName: "reservoir10Bars"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
+            return ("Full",#imageLiteral(resourceName: "reservoir9Bars"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         case 12:
             return ("Full",#imageLiteral(resourceName: "reservoir10Bars"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         default:

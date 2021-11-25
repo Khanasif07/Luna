@@ -163,6 +163,7 @@ public class BleManager: NSObject{
         if !isMyPeripheralConected {
             self.batteryData = ""
             self.reservoirLevelData = ""
+            self.iobData = 0.0
             self.delegate?.didDisconnect?()
         }
         DispatchQueue.main.async {
@@ -301,7 +302,8 @@ extension BleManager: CBPeripheralDelegate {
             print("handled Characteristic Value for: \(String(describing: characteristic.value))")
         case IOBout:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-            self.iobData = Double(data) ?? 0.0
+            self.iobData = (Double(data) ?? 0.0).roundToDecimal(1)
+            NotificationCenter.default.post(name: Notification.Name.ReservoirUpdateValue, object: nil)
             print("handled Characteristic Value for IOBout:  \(data)")
         case WriteAcknowledgement:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""

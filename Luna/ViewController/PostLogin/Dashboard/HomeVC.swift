@@ -167,6 +167,9 @@ extension HomeVC {
         CommonFunctions.delay(delay: 10.0) {
             CommonFunctions.hideActivityLoader()
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(batteryUpdateValue), name: .BatteryUpdateValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reservoirUpdateValue), name: .ReservoirUpdateValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(statusUpdateValue), name: .StatusUpdateValue, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .BLEOnOffState, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bLEDidDisConnected), name: .BLEDidDisConnectSuccessfully, object: nil)
@@ -231,6 +234,18 @@ extension HomeVC {
     @objc func bLEDidDisConnected(){
         self.setupSystemInfo()
         CommonFunctions.showToastWithMessage("Bluetooth Disconnected.")
+    }
+    
+    @objc func batteryUpdateValue(notification : NSNotification){
+        self.setupSystemInfo()
+    }
+    
+    @objc func reservoirUpdateValue(notification : NSNotification){
+        self.setupSystemInfo()
+    }
+    
+    @objc func statusUpdateValue(notification : NSNotification){
+        self.setupSystemInfo()
     }
     
     func addBottomSheetView() {
