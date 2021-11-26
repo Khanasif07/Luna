@@ -68,7 +68,20 @@ final  class XAxisCustomRenderer: XAxisRenderer {
         }
 
         let entries = xAxis.entries
-
+        //
+        var entriesTuplesArray = [(Bool,Double,Int)]()
+        let insulintimestamp = SystemInfoModel.shared.insulinData.first?.date ?? 0.0
+        for i in stride(from: 0, to: entries.count - 1, by: 1){
+            if entries[i] <= insulintimestamp && entries[i+1] > insulintimestamp{
+                entriesTuplesArray.insert((true, insulintimestamp - entries[i],i) , at: i)
+            }else{
+                entriesTuplesArray.insert((false, 0,i), at: i)
+            }
+        }
+        let selectedEnteries = entriesTuplesArray.filter { (tuples) -> Bool in
+            return tuples.0
+        }        
+        //
         for i in stride(from: 0, to: entries.count, by: 1){
             if centeringEnabled{
                 position.x = CGFloat(xAxis.centeredEntries[i])
@@ -83,28 +96,28 @@ final  class XAxisCustomRenderer: XAxisRenderer {
             if viewPortHandler.isInBoundsX(position.x){
                 let label = xAxis.valueFormatter?.stringForValue(xAxis.entries[i], axis: xAxis) ?? ""
 
-                let labelns = label as NSString
+//                let labelns = label as NSString
 
-                if xAxis.isAvoidFirstLastClippingEnabled{
-                    // avoid clipping of the last
-                    if i == xAxis.entryCount - 1 && xAxis.entryCount > 1{
-                        let width = labelns.boundingRect(with: labelMaxSize,
-                                                         options: .usesLineFragmentOrigin,
-                                                         attributes: labelAttrs, context: nil).size.width
-
-                        if width > (viewPortHandler.offsetRight) * 2.0
-                            && position.x + width > viewPortHandler.chartWidth
-                        {
-                            position.x -= width / 2.0
-                        }
-                    }
-                    else if i == 0{ // avoid clipping of the first
-                        let width = labelns.boundingRect(with: labelMaxSize,
-                                                         options: .usesLineFragmentOrigin,
-                                                         attributes: labelAttrs, context: nil).size.width
-                        position.x += width / 2.0
-                    }
-                }
+//                if xAxis.isAvoidFirstLastClippingEnabled{
+//                    // avoid clipping of the last
+//                    if i == xAxis.entryCount - 1 && xAxis.entryCount > 1{
+//                        let width = labelns.boundingRect(with: labelMaxSize,
+//                                                         options: .usesLineFragmentOrigin,
+//                                                         attributes: labelAttrs, context: nil).size.width
+//
+//                        if width > (viewPortHandler.offsetRight) * 2.0
+//                            && position.x + width > viewPortHandler.chartWidth
+//                        {
+//                            position.x -= width / 2.0
+//                        }
+//                    }
+//                    else if i == 0{ // avoid clipping of the first
+//                        let width = labelns.boundingRect(with: labelMaxSize,
+//                                                         options: .usesLineFragmentOrigin,
+//                                                         attributes: labelAttrs, context: nil).size.width
+//                        position.x += width / 2.0
+//                    }
+//                }
                 //Draw the time labels
                 drawLabel(
                     context: context,
@@ -113,29 +126,29 @@ final  class XAxisCustomRenderer: XAxisRenderer {
                     y: position.y,
                     attributes: labelAttrs,
                     constrainedToSize: labelMaxSize,
-                    anchor: anchor,
+                    anchor: CGPoint(x: 0,y: 0),
                     angleRadians: labelRotationAngleRadians)
                 //MARK:- Used to draw vertical line top and bottom
-                context.beginPath()
-                context.move(to: CGPoint(x: position.x, y: position.y))
-                context.addLine(to: CGPoint(x: position.x, y: self.viewPortHandler.contentBottom))
-                context.strokePath()
+//                context.beginPath()
+//                context.move(to: CGPoint(x: position.x, y: position.y))
+//                context.addLine(to: CGPoint(x: position.x, y: self.viewPortHandler.contentBottom))
+//                context.strokePath()
                 
-
-//                let indexData = cgmData[Int(i)]
-//                let cgmDate = String(indexData.date)
-//                print("\(i)"+" \(cgmDate)")
-//                var icon: CGImage?
-//                if cgmDate == "1635336580" {
-//                    let rawIcon = #imageLiteral(resourceName: "lineOne")
-//                    icon = rawIcon.cgImage!
-//                }else{
-//                    let rawIcon = #imageLiteral(resourceName: "lineTwo")
-//                    icon = rawIcon.cgImage!
-//                }
-//                if let myImage = icon{
-//                    context.draw(myImage, in: CGRect(x: position.x - 10 , y: position.y - 30, width: CGFloat(15), height: CGFloat(30)))
-//                }
+                var icon: CGImage?
+                if i == (selectedEnteries.first?.2 ?? -1){
+                    let rawIcon = #imageLiteral(resourceName: "lineOne")
+                    icon = rawIcon.cgImage!
+//                    print(selectedEnteries)
+//                    print(entries)
+//                    print(insulintimestamp)
+                }else{
+                    let rawIcon = #imageLiteral(resourceName: "splashVector")
+                    icon = rawIcon.cgImage!
+                }
+                if let myImage = icon{
+                    let minutes = ((selectedEnteries.first?.1 ?? 0.0) * 48.35) / 3600.0
+                    context.draw(myImage, in: CGRect(x: position.x - 7.5 + CGFloat(minutes), y: position.y - 30, width: CGFloat(15), height: CGFloat(30)))
+                }
             }
         }
     }

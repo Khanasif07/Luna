@@ -274,14 +274,6 @@ extension BottomSheetVC {
             return
         }
         
-        if BleManager.sharedInstance.reservoirLevelData != "-1" && Int(BleManager.sharedInstance.batteryData) ?? 0 <= 75  && UserModel.main.isAlertsOn{
-            var bodyText  = "Your Luna device is only "
-            bodyText += BleManager.sharedInstance.batteryData
-            bodyText += " % charged and may not last the entire session."
-            self.persistentNotification(body: bodyText)
-            return
-        }
-        
         if BleManager.sharedInstance.reservoirLevelData == "0"  && UserModel.main.isAlertsOn {
         self.persistentNotification(body: "Luna has detected that there is no insulin in the Reservoir. Please discard this Reservoir and place the Luna Controller back on the Charger for 60 seconds to reset the device.")
             return
