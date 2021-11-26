@@ -56,14 +56,19 @@ class FirestoreController:NSObject{
                 UserModel.main.isChangePassword = true
                 AppUserDefaults.save(value: withEmail, forKey: .defaultEmail)
                 AppUserDefaults.save(value: password, forKey: .defaultPassword)
-                if !uid.isEmpty {
-                    db.collection(ApiKey.users).document(uid).updateData([ApiKey.email: emailId,ApiKey.password: password, ApiKey.deviceToken: AppUserDefaults.value(forKey: .fcmToken).stringValue,
-                                                                          ApiKey.deviceType: "iOS",
-                                                                          ApiKey.userId: uid])
-                    success()
-                } else {
-                    failure("documentFetchingError", 110)
+                //Encrypted password
+                if let encrypedData = AES256Crypter.encryptionAESModeECB(messageData: password.data(using: String.Encoding.utf8)!, key: "Luna"){
+                    let encryptedPassword = (String(bytes: encrypedData, encoding: String.Encoding.utf8) ?? "")
+                    if !uid.isEmpty {
+                        db.collection(ApiKey.users).document(uid).updateData([ApiKey.email: emailId,ApiKey.password: encryptedPassword, ApiKey.deviceToken: AppUserDefaults.value(forKey: .fcmToken).stringValue,
+                                                                              ApiKey.deviceType: "iOS",
+                                                                              ApiKey.userId: uid])
+                        success()
+                    } else {
+                        failure("documentFetchingError", 110)
+                    }
                 }
+                //
             }
         }
     }
@@ -87,7 +92,12 @@ class FirestoreController:NSObject{
                         user.lastName = data[ApiKey.lastName] as? String ?? ""
                         user.dob = data[ApiKey.dob] as? String ?? ""
                         user.email = data[ApiKey.email] as? String ?? ""
-                        user.password = data[ApiKey.password] as? String ?? ""
+                        //
+                        if let decryptedData = AES256Crypter.decryptionAESModeECB(messageData: (data[ApiKey.password] as? String ?? "").data(using: String.Encoding.utf8)!, key: "Luna"){
+                            print(String(bytes: decryptedData, encoding: String.Encoding.utf8) ?? "")
+                            user.password = String(bytes: decryptedData, encoding: String.Encoding.utf8) ?? ""
+                        }
+                        //
                         user.diabetesType = data[ApiKey.diabetesType] as? String ?? ""
                         user.isProfileStepCompleted = data[ApiKey.isProfileStepCompleted] as? Bool ?? false
                         user.isSystemSetupCompleted = data[ApiKey.isSystemSetupCompleted] as? Bool ?? false
@@ -98,7 +108,12 @@ class FirestoreController:NSObject{
                         UserModel.main = user
                         //MARK:- Important
                         UserDefaultsRepository.shareUserName.value = data[ApiKey.shareUserName] as? String ?? ""
-                        UserDefaultsRepository.sharePassword.value = data[ApiKey.sharePassword] as? String ?? ""
+                        //
+                        if let decryptedData = AES256Crypter.decryptionAESModeECB(messageData: (data[ApiKey.sharePassword] as? String ?? "").data(using: String.Encoding.utf8)!, key: "Luna"){
+                            print(String(bytes: decryptedData, encoding: String.Encoding.utf8) ?? "")
+                            UserDefaultsRepository.sharePassword.value = String(bytes: decryptedData, encoding: String.Encoding.utf8) ?? ""
+                        }
+                        //
                         AppUserDefaults.save(value: user.lastUpdatedCGMDate, forKey: .lastUpdatedCGMDate)
                         AppUserDefaults.save(value: user.isProfileStepCompleted, forKey: .isProfileStepCompleted)
                         AppUserDefaults.save(value: true, forKey: .isBiometricCompleted)
@@ -188,7 +203,7 @@ class FirestoreController:NSObject{
     
 //    MARK:- Get Insulin Data info
 //    =======================
-    static func getFirebaseInsulinData(date:Double,success: @escaping (_ cgmModelArray: [InsulinDataModel]) -> Void,
+    static func getFirebaseInsulinData(date:Double,success: @escaping (_ cgmModelArray: [ShareGlucoseData]) -> Void,
                                    failure:  @escaping FailureResponse){
         if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
             db.collection(ApiKey.insulinData)
@@ -197,10 +212,10 @@ class FirestoreController:NSObject{
                         failure(error)
                     } else{
                         print("============================")
-                        var cgmModelArray = [InsulinDataModel]()
+                        var cgmModelArray = [ShareGlucoseData]()
                         guard let dicts = snapshot?.documents else { return }
                         dicts.forEach { (queryDocumentSnapshot) in
-                            let cgmModel = InsulinDataModel(queryDocumentSnapshot.data())
+                            let cgmModel = ShareGlucoseData(queryDocumentSnapshot.data())
                             cgmModelArray.append(cgmModel)
                         }
                         success(cgmModelArray)
@@ -388,22 +403,27 @@ class FirestoreController:NSObject{
                 AppUserDefaults.save(value: true, forKey: .isSignupCompleted)
                 AppUserDefaults.save(value: email, forKey: .defaultEmail)
                 AppUserDefaults.save(value: password, forKey: .defaultPassword)
-                db.collection(ApiKey.users).document(uid).setData([ApiKey.deviceType:"iOS",
-                                                                   ApiKey.email: email,
-                                                                   ApiKey.deviceToken:AppUserDefaults.value(forKey: .fcmToken).stringValue,
-                                                                   ApiKey.password:password,
-                                                                   ApiKey.isProfileStepCompleted: false,
-                                                                   ApiKey.isSystemSetupCompleted: false,
-                                                                   ApiKey.userId: uid,ApiKey.isChangePassword: true,ApiKey.deviceId:deviceId,
-                                                                   ApiKey.isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue,ApiKey.shareUserName:shareUserName,ApiKey.sharePassword:sharePassword,ApiKey.lastUpdatedCGMDate:lastUpdatedCGMDate]){ err in
-                    if let err = err {
-                        print("Error writing document: \(err)")
-                        CommonFunctions.showToastWithMessage(err.localizedDescription)
-                    } else {
-                        print("Document successfully written!")
+                //
+                if let encrypedData = AES256Crypter.encryptionAESModeECB(messageData: password.data(using: String.Encoding.utf8)!, key: "Luna"){
+                    let encryptedPassword = (String(bytes: encrypedData, encoding: String.Encoding.utf8) ?? "")
+                    db.collection(ApiKey.users).document(uid).setData([ApiKey.deviceType:"iOS",
+                                                                       ApiKey.email: email,
+                                                                       ApiKey.deviceToken:AppUserDefaults.value(forKey: .fcmToken).stringValue,
+                                                                       ApiKey.password:encryptedPassword,
+                                                                       ApiKey.isProfileStepCompleted: false,
+                                                                       ApiKey.isSystemSetupCompleted: false,
+                                                                       ApiKey.userId: uid,ApiKey.isChangePassword: true,ApiKey.deviceId:deviceId,
+                                                                       ApiKey.isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue,ApiKey.shareUserName:shareUserName,ApiKey.sharePassword:sharePassword,ApiKey.lastUpdatedCGMDate:lastUpdatedCGMDate]){ err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                            CommonFunctions.showToastWithMessage(err.localizedDescription)
+                        } else {
+                            print("Document successfully written!")
+                        }
                     }
+                    completion()
                 }
-                completion()
+                //
             }
         }
     }
@@ -555,7 +575,10 @@ class FirestoreController:NSObject{
         guard !uid.isEmpty else {
             return
         }
-        db.collection(ApiKey.users).document(uid).updateData([ApiKey.shareUserName:shareUserName,ApiKey.sharePassword:sharePassword])
+        if let encrypedData = AES256Crypter.encryptionAESModeECB(messageData: sharePassword.data(using: String.Encoding.utf8)!, key: "Luna"){
+            let encryptedSharePassword = (String(bytes: encrypedData, encoding: String.Encoding.utf8) ?? "")
+            db.collection(ApiKey.users).document(uid).updateData([ApiKey.shareUserName:shareUserName,ApiKey.sharePassword:encryptedSharePassword])
+        }
     }
     
     //MARK:- Update user System Setup Status
@@ -1030,12 +1053,12 @@ class FirestoreController:NSObject{
     
     //MARK:-Add  Insulin data array through batch operation
     //=======================
-    static func addInsulinBatchData(currentDate: Double,array:[InsulinDataModel],success: @escaping ()-> ()) {
+    static func addInsulinBatchData(currentDate: Double,array:[ShareGlucoseData],success: @escaping ()-> ()) {
         guard let userId = Auth.auth().currentUser?.uid  else { return }
         let batch = db.batch()
         array.forEach { (doc) in
         let docRef = db.collection(ApiKey.insulinData).document(userId).collection(String(currentDate)).document(String(doc.date))
-        batch.setData([ApiKey.sgv: doc.sgv ?? "",ApiKey.date: doc.date,ApiKey.insulin: doc.insulinData ?? ""], forDocument: docRef)
+            batch.setData([ApiKey.sgv: doc.sgv ,ApiKey.date: doc.date,ApiKey.insulin: doc.insulin ?? ""], forDocument: docRef)
         }
         batch.commit { (err) in
             if let err = err{

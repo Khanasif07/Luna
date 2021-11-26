@@ -17,13 +17,14 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     // MARK: - Variables
     //===========================
     let ScaleXMax:Float = 150.0
+    var insulinData : [ShareGlucoseData] = []
     var cgmData : [ShareGlucoseData] = []{
         didSet{
             setDataCount(cgmData.endIndex, range: UInt32(cgmData.endIndex))
             let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
                                                         xAxis: cgmChartView.xAxis,
                                                         transformer: self.cgmChartView.getTransformer(forAxis: .left),
-                                                        cgmData: self.cgmData)
+                                                        cgmData: self.cgmData,insulinData: self.insulinData)
             self.cgmChartView.xAxisRenderer = customXAxisRender
         }
     }
@@ -58,7 +59,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
                                                     xAxis: cgmChartView.xAxis,
                                                     transformer: self.cgmChartView.getTransformer(forAxis: .left),
-                                                    cgmData: self.cgmData)
+                                                    cgmData: self.cgmData,insulinData: self.insulinData)
         self.cgmChartView.xAxisRenderer = customXAxisRender
         //
         cgmChartView.delegate = self
@@ -186,7 +187,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         let gradientColors = [#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 0).cgColor,#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1).cgColor]
         let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)
         set1.fillAlpha = 1.0
-        set1.circleRadius = 5.0
+        set1.circleRadius = 2.0
         set1.drawCirclesEnabled = true
         set1.fill = Fill(linearGradient: gradient!, angle: 90.0)
         set1.drawFilledEnabled = true
@@ -200,8 +201,8 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     private func setup(_ dataSet: LineChartDataSet) {
         //            dataSet.setColor(#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         //            dataSet.setCircleColor(.clear)
-        dataSet.lineWidth = 3
-        dataSet.circleRadius = 5.0
+        dataSet.lineWidth = 0
+        dataSet.circleRadius = 2.0
         dataSet.drawCircleHoleEnabled = true
         dataSet.valueFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
         dataSet.formLineWidth = 1

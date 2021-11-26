@@ -55,7 +55,7 @@ public class BleManager: NSObject{
     var reservoirLevelData: String = ""
     var systemStatusData : String = ""
     var iobData: Double = 0.0
-    var insulinData : [InsulinDataModel] = []
+    var insulinData : [ShareGlucoseData] = []
     var isKeepConnect = true
     var isConnect :Bool = false
     var isScanning :Bool = false
@@ -164,6 +164,7 @@ public class BleManager: NSObject{
             self.batteryData = ""
             self.reservoirLevelData = ""
             self.iobData = 0.0
+            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
             self.delegate?.didDisconnect?()
         }
         DispatchQueue.main.async {
@@ -272,18 +273,18 @@ extension BleManager: CBPeripheralDelegate {
             let properDataArray = insulinDataArray.map { (stringValue) -> [String] in
                 return stringValue.split{$0 == ":"}.map(String.init)
             }
-            self.insulinData = properDataArray.map({ (stringArray) -> InsulinDataModel in
-                return InsulinDataModel(insulinData: stringArray.first!, date: Double(stringArray.last!) ?? 0.0, sgv: 0)
+            self.insulinData = properDataArray.map({ (stringArray) -> ShareGlucoseData in
+                return ShareGlucoseData( sgv: 0,date: Double(stringArray.last!) ?? 0.0,direction: "",insulin: stringArray.first!)
             })
             if self.insulinData.endIndex > 0 {
-                let filteredInsulinData = self.insulinData.map { (insulinModel) -> InsulinDataModel in
+                let filteredInsulinData = self.insulinData.map { (insulinModel) -> ShareGlucoseData in
                     if let index = SystemInfoModel.shared.cgmData?.firstIndex(where: { (cgmData) -> Bool in
                         return cgmData.date == insulinModel.date
                     }){
                         SystemInfoModel.shared.cgmData?[index].insulin = "0.5"
-                        return InsulinDataModel(insulinData: insulinModel.insulinData ?? "", date: insulinModel.date,sgv: SystemInfoModel.shared.cgmData?[index].sgv ?? 0)
+                        return  ShareGlucoseData(sgv: SystemInfoModel.shared.cgmData?[index].sgv ?? 0, date: insulinModel.date,direction:"",insulin: insulinModel.insulin ?? "")
                     }
-                    return  InsulinDataModel(insulinData: insulinModel.insulinData ?? "", date: insulinModel.date,sgv: 0)
+                    return  ShareGlucoseData(sgv: 0, date: insulinModel.date,direction:"",insulin: insulinModel.insulin ?? "")
                 }
                 SystemInfoModel.shared.insulinData = filteredInsulinData.reversed()
                 FirestoreController.addInsulinBatchData(currentDate: UserModel.main.lastUpdatedCGMDate, array: SystemInfoModel.shared.insulinData) {

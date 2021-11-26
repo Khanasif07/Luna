@@ -23,10 +23,10 @@ class BottomSheetBottomCell: UITableViewCell {
         self.setUpFont()
     }
     
-    func populateCell(model: InsulinDataModel){
+    func populateCell(model: ShareGlucoseData){
         self.timeLbl.text = (Double(model.date) ).getDateTimeFromTimeInterval(Date.DateFormat.hour12.rawValue)
-        self.unitLbl.text = (model.insulinData ?? "") + " Units"
-        self.cgmLbl.text = "\(model.sgv ?? 0) " + UserDefaultsRepository.units.value
+        self.unitLbl.text = (model.insulin ?? "") + " Units"
+        self.cgmLbl.text = "\(model.sgv) " + UserDefaultsRepository.units.value
     }
     
     func populateCellForCGMModel(model: ShareGlucoseData){

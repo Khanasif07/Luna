@@ -122,20 +122,21 @@ extension ShareClient {
     }
 }
 
-public struct InsulinDataModel: Codable {
-    var date: TimeInterval
-    var insulinData: String?
-    var sgv: Int?
-    
-    init(_ dict: [String:Any]){
-        date = dict[ApiKey.date] as? TimeInterval ?? 0.0
-        insulinData = dict[ApiKey.insulin] as? String ?? ""
-        sgv = dict[ApiKey.sgv] as? Int ?? 0
-    }
-    
-    init(insulinData:String,date: TimeInterval,sgv:Int){
-        self.insulinData = insulinData
-        self.date = date
-        self.sgv = sgv
-    }
-}
+//public struct InsulinDataModel: Codable {
+//    var date: TimeInterval
+//    var insulin: String?
+//    var sgv: Int?
+//    var direction: String?
+//
+//    init(_ dict: [String:Any]){
+//        date = dict[ApiKey.date] as? TimeInterval ?? 0.0
+//        insulin = dict[ApiKey.insulin] as? String ?? ""
+//        sgv = dict[ApiKey.sgv] as? Int ?? 0
+//    }
+//
+//    init(insulin:String,date: TimeInterval,sgv:Int){
+//        self.insulin = insulin
+//        self.date = date
+//        self.sgv = sgv
+//    }
+//}

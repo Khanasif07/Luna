@@ -244,7 +244,7 @@ extension  BottomSheetVC{
         let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
                                                     xAxis: cgmChartView.xAxis,
                                                     transformer: self.cgmChartView.getTransformer(forAxis: .left),
-                                                    cgmData: self.bgData)
+                                                    cgmData: self.bgData,insulinData: SystemInfoModel.shared.insulinData)
         self.cgmChartView.xAxisRenderer = customXAxisRender
     }
     

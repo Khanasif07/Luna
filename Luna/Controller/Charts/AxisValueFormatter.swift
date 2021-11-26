@@ -29,9 +29,11 @@ final class XAxisNameFormater: NSObject, IAxisValueFormatter {
 final  class XAxisCustomRenderer: XAxisRenderer {
 
     var cgmData : [ShareGlucoseData] = []
+    var insulinData : [ShareGlucoseData] = []
 
-    init(viewPortHandler: ViewPortHandler, xAxis: XAxis, transformer: Transformer, cgmData: [ShareGlucoseData]) {
+    init(viewPortHandler: ViewPortHandler, xAxis: XAxis, transformer: Transformer, cgmData: [ShareGlucoseData],insulinData: [ShareGlucoseData]) {
         self.cgmData = cgmData
+        self.insulinData = insulinData
         super.init(viewPortHandler: viewPortHandler, xAxis: xAxis, transformer: transformer)
     }
 
@@ -70,17 +72,18 @@ final  class XAxisCustomRenderer: XAxisRenderer {
         let entries = xAxis.entries
         //
         var entriesTuplesArray = [(Bool,Double,Int)]()
-        let insulintimestamp = SystemInfoModel.shared.insulinData.first?.date ?? 0.0
-        for i in stride(from: 0, to: entries.count - 1, by: 1){
-            if entries[i] <= insulintimestamp && entries[i+1] > insulintimestamp{
-                entriesTuplesArray.insert((true, insulintimestamp - entries[i],i) , at: i)
-            }else{
-                entriesTuplesArray.insert((false, 0,i), at: i)
+        for j in stride(from: 0, to: insulinData.count, by: 1){
+            for i in stride(from: 0, to: entries.count - 1, by: 1){
+                if entries[i] <= insulinData[j].date && entries[i+1] > insulinData[j].date{
+                    entriesTuplesArray.insert((true, insulinData[j].date - entries[i],i) , at: i)
+                }else{
+                    entriesTuplesArray.insert((false, 0,i), at: i)
+                }
             }
         }
         let selectedEnteries = entriesTuplesArray.filter { (tuples) -> Bool in
             return tuples.0
-        }        
+        }
         //
         for i in stride(from: 0, to: entries.count, by: 1){
             if centeringEnabled{
@@ -135,19 +138,24 @@ final  class XAxisCustomRenderer: XAxisRenderer {
 //                context.strokePath()
                 
                 var icon: CGImage?
-                if i == (selectedEnteries.first?.2 ?? -1){
-                    let rawIcon = #imageLiteral(resourceName: "lineOne")
+                switch i {
+                case (selectedEnteries.first?.2 ?? -1):
+                    let rawIcon = #imageLiteral(resourceName: "lineTwo")
                     icon = rawIcon.cgImage!
-//                    print(selectedEnteries)
-//                    print(entries)
-//                    print(insulintimestamp)
-                }else{
+                    if let myImage = icon{
+                        let minutes = ((selectedEnteries.first?.1 ?? 0.0) * 48.35) / 3600.0
+                        context.draw(myImage, in: CGRect(x: position.x - 7.5 + CGFloat(minutes), y: position.y - 30, width: CGFloat(15), height: CGFloat(30)))
+                    }
+                case (selectedEnteries.last?.2 ?? -1):
+                    let rawIcon = #imageLiteral(resourceName: "lineTwo")
+                    icon = rawIcon.cgImage!
+                    if let myImage = icon{
+                        let minutes = ((selectedEnteries.last?.1 ?? 0.0) * 48.35) / 3600.0
+                        context.draw(myImage, in: CGRect(x: position.x - 7.5 + CGFloat(minutes), y: position.y - 30, width: CGFloat(15), height: CGFloat(30)))
+                    }
+                default:
                     let rawIcon = #imageLiteral(resourceName: "splashVector")
                     icon = rawIcon.cgImage!
-                }
-                if let myImage = icon{
-                    let minutes = ((selectedEnteries.first?.1 ?? 0.0) * 48.35) / 3600.0
-                    context.draw(myImage, in: CGRect(x: position.x - 7.5 + CGFloat(minutes), y: position.y - 30, width: CGFloat(15), height: CGFloat(30)))
                 }
             }
         }

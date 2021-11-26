@@ -235,7 +235,9 @@ extension BottomSheetVC {
         if let dict = notification.object as? NSDictionary {
                 print(dict)
         }
-        self.mainTableView.reloadData()
+        DispatchQueue.main.async {
+            self.mainTableView.reloadData()
+        }
     }
     
     @objc func batteryUpdateValue(notification : NSNotification){

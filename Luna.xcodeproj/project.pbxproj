@@ -185,6 +185,7 @@
 		84CC13162668D23C009316FC /* Url+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC13152668D23C009316FC /* Url+Extension.swift */; };
 		84CC13192668D25B009316FC /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC13182668D25B009316FC /* UIView+Extension.swift */; };
 		84CC13212668D588009316FC /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC13202668D588009316FC /* LocalizedString.swift */; };
+		84CE274327509CF80045F987 /* EncryptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CE274227509CF80045F987 /* EncryptionController.swift */; };
 		84D1F4B42679C12900F131E0 /* TermsConditionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1F4B32679C12900F131E0 /* TermsConditionVC.swift */; };
 		84D1F4DA2679CF4C00F131E0 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1F4D92679CF4C00F131E0 /* CommonFunctions.swift */; };
 		84D1F4EF2679D52700F131E0 /* SF-Pro-Display-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 84D1F4DD2679D52700F131E0 /* SF-Pro-Display-Thin.otf */; };
@@ -413,6 +414,7 @@
 		84CC13152668D23C009316FC /* Url+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Url+Extension.swift"; sourceTree = "<group>"; };
 		84CC13182668D25B009316FC /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		84CC13202668D588009316FC /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
+		84CE274227509CF80045F987 /* EncryptionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionController.swift; sourceTree = "<group>"; };
 		84D1F4B32679C12900F131E0 /* TermsConditionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsConditionVC.swift; sourceTree = "<group>"; };
 		84D1F4D92679CF4C00F131E0 /* CommonFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
 		84D1F4DD2679D52700F131E0 /* SF-Pro-Display-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Thin.otf"; sourceTree = "<group>"; };
@@ -930,9 +932,10 @@
 		84CC12B82668CD87009316FC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				8460611B270EC96100DFD22A /* PushNotificationManager */,
 				84CC12992668C822009316FC /* AppDelegate.swift */,
 				84CC129B2668C822009316FC /* SceneDelegate.swift */,
+				84CE274127509CDF0045F987 /* Encryption */,
+				8460611B270EC96100DFD22A /* PushNotificationManager */,
 				84CC12BA2668CDDB009316FC /* FirestoreController */,
 				84CC12C32668CECC009316FC /* AppleManager */,
 				84C0A6B226CC980A00AB6F2A /* Charts */,
@@ -1009,6 +1012,14 @@
 				8432A19B2672294200859B47 /* Localizable.strings */,
 			);
 			path = LocalizedString;
+			sourceTree = "<group>";
+		};
+		84CE274127509CDF0045F987 /* Encryption */ = {
+			isa = PBXGroup;
+			children = (
+				84CE274227509CF80045F987 /* EncryptionController.swift */,
+			);
+			path = Encryption;
 			sourceTree = "<group>";
 		};
 		84D1F4D82679CF2D00F131E0 /* CustomClasses */ = {
@@ -1404,6 +1415,7 @@
 				188DB13326E0993600FBF042 /* PresentationContext.swift in Sources */,
 				188DB14C26E0993600FBF042 /* TranslucentOverlayStyleManager.swift in Sources */,
 				84CC13162668D23C009316FC /* Url+Extension.swift in Sources */,
+				84CE274327509CF80045F987 /* EncryptionController.swift in Sources */,
 				84CC13102668D20A009316FC /* String+Extension.swift in Sources */,
 				84CC13072668D1BD009316FC /* UIScreen+Extension.swift in Sources */,
 				84E78BC42685F9B400FABDCD /* CustomPickerView.swift in Sources */,

@@ -102,7 +102,7 @@ extension HomeVC {
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
-        self.getLoginType()
+//        self.getLoginType()
         self.setUpFont()
         self.setupHealthkit()
         self.addObserver()
@@ -118,25 +118,25 @@ extension HomeVC {
         self.addUserSessionListener()
     }
     
-    private func getLoginType(){
-        if let providerData = Auth.auth().currentUser?.providerData {
-            for userInfo in providerData {
-                switch userInfo.providerID {
-                case LoginType.google.title:
-                    loginType = .google
-                    return
-                case LoginType.apple.title:
-                    loginType = .apple
-                    return
-                case LoginType.email_password.title:
-                    loginType = .email_password
-                    return
-                default:
-                    print("provider is \(userInfo.providerID)")
-                }
-            }
-        }
-    }
+//    private func getLoginType(){
+//        if let providerData = Auth.auth().currentUser?.providerData {
+//            for userInfo in providerData {
+//                switch userInfo.providerID {
+//                case LoginType.google.title:
+//                    loginType = .google
+//                    return
+//                case LoginType.apple.title:
+//                    loginType = .apple
+//                    return
+//                case LoginType.email_password.title:
+//                    loginType = .email_password
+//                    return
+//                default:
+//                    print("provider is \(userInfo.providerID)")
+//                }
+//            }
+//        }
+//    }
    
     
     private func setUpFont(){
