@@ -50,7 +50,6 @@ public class BleManager: NSObject{
     var cgmWriteCBCharacteristic : CBCharacteristic?
     var cgmDataInCharacteristic : CBCharacteristic?
     var rescanTimer :Timer?
-    var rssiTimer :Timer?
     var batteryData: String = ""
     var reservoirLevelData: String = ""
     var systemStatusData : String = ""
@@ -61,6 +60,7 @@ public class BleManager: NSObject{
     var isScanning :Bool = false
     var isMyPeripheralConected :Bool = false
     var isAdvertising :Bool = false
+    var isUnpaired :Bool = false
     var statusTimer = Timer()
     
     private override init (){
@@ -100,6 +100,7 @@ public class BleManager: NSObject{
     
     public func disConnect (){
         isKeepConnect = false
+        isUnpaired = true
         centralManager.cancelPeripheralConnection(myperipheral!)
     }
     
@@ -389,10 +390,9 @@ extension BleManager: CBCentralManagerDelegate {
     
     public func centralManager (_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("DisConnected!")
-        centralManager.connect(peripheral, options: nil)
+        if !isUnpaired{ centralManager.connect(peripheral, options: nil)}
+        isUnpaired = false
         isMyPeripheralConected = false
-//        myperipheral?.delegate = self
-//        myperipheral = nil
         systemStatusData = ""
         NotificationCenter.default.post(name: Notification.Name.BLEDidDisConnectSuccessfully, object: nil)
         DispatchQueue.main.async {

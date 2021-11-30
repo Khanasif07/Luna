@@ -44,6 +44,13 @@ class PairLunaVC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func proceedBtnAction(_ sender: UIButton) {
+        //
+        if BleManager.sharedInstance.myperipheral?.state == .connected {
+            BleManager.sharedInstance.disConnect()
+            self.pop()
+            return
+        }
+        //
         let scene =  SearchingDeviceVC.instantiate(fromAppStoryboard: .CGPStoryboard)
         scene.deviceConnectedNavigation = { [weak self] (sender) in
             guard let self = self else { return }
@@ -123,6 +130,13 @@ extension PairLunaVC {
         SubIntroLbl.textColor = AppColors.fontPrimaryColor
         InfoIntroLbl.textColor =  AppColors.fontPrimaryColor
         self.proceedBtn.isEnabled = true
+        if BleManager.sharedInstance.myperipheral?.state == .connected {
+            self.proceedBtn.setTitle("Unpair", for: .normal)
+            self.InfoIntroLbl.text = "Your Luna Controller is paired, to unpair your Luna Controller, tap the “Unpair” button below"
+        }else {
+            self.proceedBtn.setTitle("Pair", for: .normal)
+            self.InfoIntroLbl.text = "To pair your Luna Controller, bring it close to your phone and tap the “Pair” button below"
+        }
         self.proceedBtn.round(radius: 10.0)
         self.proceedBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
     }

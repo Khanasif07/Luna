@@ -38,14 +38,15 @@ extension  BottomSheetVC{
                 self.ProcessNSBGData(data: data, onlyPullLastRecord: onlyPullLastRecord)
             } else {
                 print((err?.localizedDescription) ?? "")
+                CommonFunctions.showToastWithMessage(err?.localizedDescription ?? "")
                 // If we get an error, immediately try to pull NS BG Data
                 self.webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
                 
                 if globalVariables.dexVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
                     globalVariables.dexVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
-                    DispatchQueue.main.async {
+//                    DispatchQueue.main.async {
                         //                        self.sendNotification(title: "Dexcom Share Error", body: "Please double check user name and password, internet connection, and sharing status.")
-                    }
+//                    }
                 }
             }
         }
@@ -270,9 +271,9 @@ extension  BottomSheetVC{
             self.setBGTextColor()
             //MARK:- Importants
             //Send time stamps to Luna Hardware
-            let randomBGValue = Int.random(in: 275..<300)
-//            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(latestBG)))
-            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(randomBGValue)))
+//            let randomBGValue = Int.random(in: 275..<350)
+            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(latestBG)))
+//            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(randomBGValue)))
             if let directionBG = entries[latestEntryi].direction {
                 self.cgmDirectionlbl.text = self.bgDirectionGraphic(directionBG)
                 self.latestDirectionString = self.bgDirectionGraphic(directionBG)

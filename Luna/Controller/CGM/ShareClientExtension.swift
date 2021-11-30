@@ -95,7 +95,7 @@ public class bgUnits {
 // TODO: probably better to make this an inherited class rather than an extension
 extension ShareClient {
 
-    public func fetchData(_ entries: Int, callback: @escaping (ShareError?, [ShareGlucoseData]?) -> Void) {
+    public func fetchData(_ entries: Int, callback: @escaping (Error?, [ShareGlucoseData]?) -> Void) {
         
         self.fetchLast(entries) { (error, result) -> () in
             guard error == nil || result != nil else {
@@ -121,22 +121,3 @@ extension ShareClient {
          }
     }
 }
-
-//public struct InsulinDataModel: Codable {
-//    var date: TimeInterval
-//    var insulin: String?
-//    var sgv: Int?
-//    var direction: String?
-//
-//    init(_ dict: [String:Any]){
-//        date = dict[ApiKey.date] as? TimeInterval ?? 0.0
-//        insulin = dict[ApiKey.insulin] as? String ?? ""
-//        sgv = dict[ApiKey.sgv] as? Int ?? 0
-//    }
-//
-//    init(insulin:String,date: TimeInterval,sgv:Int){
-//        self.insulin = insulin
-//        self.date = date
-//        self.sgv = sgv
-//    }
-//}

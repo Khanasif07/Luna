@@ -99,7 +99,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         marker.minimumSize = CGSize(width: 50.0, height: 30.0)
         cgmChartView.marker = marker
         
-        cgmChartView.xAxis.centerAxisLabelsEnabled = false
+        cgmChartView.xAxis.centerAxisLabelsEnabled = true
         cgmChartView.xAxis.setLabelCount(7, force: true) //enter the number of labels here
         cgmChartView.leftAxis.setLabelCount(8, force: true) //enter the number of labels here
         cgmChartView.xAxis.drawGridLinesEnabled = false
