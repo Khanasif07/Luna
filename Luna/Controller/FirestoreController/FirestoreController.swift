@@ -477,10 +477,8 @@ class FirestoreController:NSObject{
                                                               ApiKey.dob: dob,ApiKey.isChangePassword: isChangePassword,ApiKey.isBiometricOn: isBiometricOn]){ err in
             if let err = err {
                 failure(err)
-                print("Error writing document: \(err)")
             } else {
                 completion()
-                print("Document successfully written!")
             }
         }
     }

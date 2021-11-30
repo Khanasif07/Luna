@@ -99,28 +99,28 @@ final  class XAxisCustomRenderer: XAxisRenderer {
             if viewPortHandler.isInBoundsX(position.x){
                 let label = xAxis.valueFormatter?.stringForValue(xAxis.entries[i], axis: xAxis) ?? ""
 
-//                let labelns = label as NSString
+                let labelns = label as NSString
 
-//                if xAxis.isAvoidFirstLastClippingEnabled{
-//                    // avoid clipping of the last
-//                    if i == xAxis.entryCount - 1 && xAxis.entryCount > 1{
-//                        let width = labelns.boundingRect(with: labelMaxSize,
-//                                                         options: .usesLineFragmentOrigin,
-//                                                         attributes: labelAttrs, context: nil).size.width
-//
-//                        if width > (viewPortHandler.offsetRight) * 2.0
-//                            && position.x + width > viewPortHandler.chartWidth
-//                        {
-//                            position.x -= width / 2.0
-//                        }
-//                    }
-//                    else if i == 0{ // avoid clipping of the first
-//                        let width = labelns.boundingRect(with: labelMaxSize,
-//                                                         options: .usesLineFragmentOrigin,
-//                                                         attributes: labelAttrs, context: nil).size.width
-//                        position.x += width / 2.0
-//                    }
-//                }
+                if xAxis.isAvoidFirstLastClippingEnabled{
+                    // avoid clipping of the last
+                    if i == xAxis.entryCount - 1 && xAxis.entryCount > 1{
+                        let width = labelns.boundingRect(with: labelMaxSize,
+                                                         options: .usesLineFragmentOrigin,
+                                                         attributes: labelAttrs, context: nil).size.width
+
+                        if width > (viewPortHandler.offsetRight) * 2.0
+                            && position.x + width > viewPortHandler.chartWidth
+                        {
+                            position.x -= width / 2.0
+                        }
+                    }
+                    else if i == 0{ // avoid clipping of the first
+                        let width = labelns.boundingRect(with: labelMaxSize,
+                                                         options: .usesLineFragmentOrigin,
+                                                         attributes: labelAttrs, context: nil).size.width
+                        position.x += width / 2.0
+                    }
+                }
                 //Draw the time labels
                 drawLabel(
                     context: context,
@@ -129,13 +129,13 @@ final  class XAxisCustomRenderer: XAxisRenderer {
                     y: position.y,
                     attributes: labelAttrs,
                     constrainedToSize: labelMaxSize,
-                    anchor: CGPoint(x: 0,y: 0),
+                    anchor: anchor,
                     angleRadians: labelRotationAngleRadians)
                 //MARK:- Used to draw vertical line top and bottom
-//                context.beginPath()
-//                context.move(to: CGPoint(x: position.x, y: position.y))
-//                context.addLine(to: CGPoint(x: position.x, y: self.viewPortHandler.contentBottom))
-//                context.strokePath()
+                context.beginPath()
+                context.move(to: CGPoint(x: position.x, y: position.y))
+                context.addLine(to: CGPoint(x: position.x, y: self.viewPortHandler.contentBottom))
+                context.strokePath()
                 
                 var icon: CGImage?
                 switch i {
