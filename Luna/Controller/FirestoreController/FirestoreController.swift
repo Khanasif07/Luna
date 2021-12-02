@@ -1123,32 +1123,7 @@ class FirestoreController:NSObject{
             success()
         })
     }
-//    //MARK:-Add  Last Updated CGM date
-//    //=======================
-//    static func addCgmDateData(currentDate:Double,range:Double,startDate:Double,endDate:Double,insulin:Int) {
-//        guard let userId = Auth.auth().currentUser?.uid  else { return }
-//        //
-//        let specAdded: [String: Any] = [
-//            ApiKey.date: currentDate,
-//            ApiKey.insulin: insulin,
-//            ApiKey.range: range,
-//            ApiKey.startdate: startDate,
-//            ApiKey.endDate: endDate
-//                ]
-//        //
-//        db.collection(ApiKey.sessionData).document(userId).getDocument { (snapshot, error ) in
-//            if  (snapshot?.exists)! {
-//                db.collection(ApiKey.sessionData).document(userId).updateData([
-//                    ApiKey.cgmDateArray: FieldValue.arrayUnion([specAdded])
-//                ])
-//            } else {
-//                db.collection(ApiKey.sessionData).document(userId).setData([
-//                    ApiKey.cgmDateArray: FieldValue.arrayUnion([specAdded])
-//                ])
-//            }
-//        }
-//    }
-    
+
     //MARK:- simpleTransaction
     //=======================
     static func simpleTransactionToAddCGMData(currentDate:Double,range:Double,startDate:Double,endDate:Double,insulin:Int) {

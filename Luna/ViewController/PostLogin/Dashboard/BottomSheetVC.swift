@@ -232,18 +232,12 @@ extension BottomSheetVC {
     }
     
     @objc func bleDidUpdateValue(notification : NSNotification){
-        if let dict = notification.object as? NSDictionary {
-                print(dict)
-        }
         DispatchQueue.main.async {
             self.mainTableView.reloadData()
         }
     }
     
     @objc func batteryUpdateValue(notification : NSNotification){
-        if let dict = notification.object as? NSDictionary {
-                print(dict)
-        }
         DispatchQueue.main.async {
             self.mainTableView.reloadData()
         }
@@ -257,9 +251,6 @@ extension BottomSheetVC {
     }
     
     @objc func reservoirUpdateValue(notification : NSNotification){
-        if let dict = notification.object as? NSDictionary {
-                print(dict)
-        }
         DispatchQueue.main.async {
             self.mainTableView.reloadData()
         }
@@ -293,9 +284,6 @@ extension BottomSheetVC {
     }
     
     @objc func statusUpdateValue(notification : NSNotification){
-        if let dict = notification.object as? NSDictionary {
-                print(dict)
-        }
         DispatchQueue.main.async {
             self.mainTableView.reloadData()
         }

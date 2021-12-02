@@ -109,7 +109,7 @@ class SessionDescriptionVC: UIViewController {
     }
     
     private func filterInsulinDosesListing(){
-        let filteredInsulinArray =  self.cgmDataArray.filter({$0.insulin == "0.5"})
+        let filteredInsulinArray =  self.cgmDataArray.filter({$0.insulin == "0.5" || $0.insulin == "0.25"})
         if filteredInsulinArray.endIndex > 0 {
             self.sections = ["Glucose Graph","List View"]
             self.insulinDataArray = filteredInsulinArray
@@ -154,7 +154,7 @@ extension SessionDescriptionVC : UITableViewDelegate,UITableViewDataSource{
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueCell(with: BottomSheetChartCell.self)
-            cell.insulinData = insulinDataArray ?? []
+            cell.insulinData = insulinDataArray?.reversed() ?? []
             cell.cgmData = self.cgmDataArray
             return cell
         default:

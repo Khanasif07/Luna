@@ -71,13 +71,13 @@ final  class XAxisCustomRenderer: XAxisRenderer {
 
         let entries = xAxis.entries
         //
-        var entriesTuplesArray = [(Bool,Double,Int)]()
+        var entriesTuplesArray = [(Bool,Double,Int,String)]()
         for j in stride(from: 0, to: insulinData.count, by: 1){
             for i in stride(from: 0, to: entries.count - 1, by: 1){
                 if entries[i] <= insulinData[j].date && entries[i+1] > insulinData[j].date{
-                    entriesTuplesArray.insert((true, insulinData[j].date - entries[i],i) , at: i)
+                    entriesTuplesArray.insert((true, insulinData[j].date - entries[i],i,insulinData[j].insulin!) , at: i)
                 }else{
-                    entriesTuplesArray.insert((false, 0,i), at: i)
+                    entriesTuplesArray.insert((false, 0,i,""), at: i)
                 }
             }
         }
@@ -138,24 +138,27 @@ final  class XAxisCustomRenderer: XAxisRenderer {
                 context.strokePath()
                 
                 var icon: CGImage?
-                switch i {
-                case (selectedEnteries.first?.2 ?? -1):
-                    let rawIcon = #imageLiteral(resourceName: "lineTwo")
-                    icon = rawIcon.cgImage!
-                    if let myImage = icon{
-                        let minutes = ((selectedEnteries.first?.1 ?? 0.0) * 48.35) / 3600.0
-                        context.draw(myImage, in: CGRect(x: position.x - 7.5 + CGFloat(minutes), y: position.y - 30, width: CGFloat(15), height: CGFloat(30)))
+                for entry in selectedEnteries {
+                    if entry.2 == i {
+                        if entry.3 == "0.25"{
+                            let rawIcon = #imageLiteral(resourceName: "lunaEndLine")
+                            icon = rawIcon.cgImage!
+                            if let myImage = icon{
+                                let minutes = ((entry.1) * 48.35) / 3600.0
+                                context.draw(myImage, in: CGRect(x: position.x - 0.5 + CGFloat(minutes), y: position.y - 266.0, width: CGFloat(1), height: CGFloat(263)))
+                            }
+                        }else{
+                            let rawIcon = #imageLiteral(resourceName: "lineTwo")
+                            icon = rawIcon.cgImage!
+                            if let myImage = icon{
+                                let minutes = ((entry.1) * 48.35) / 3600.0
+                                context.draw(myImage, in: CGRect(x: position.x - 7.5 + CGFloat(minutes), y: position.y - 30, width: CGFloat(15), height: CGFloat(30)))
+                            }
+                        }
+                    }else{
+                        let rawIcon = #imageLiteral(resourceName: "splashVector")
+                        icon = rawIcon.cgImage!
                     }
-                case (selectedEnteries.last?.2 ?? -1):
-                    let rawIcon = #imageLiteral(resourceName: "lineTwo")
-                    icon = rawIcon.cgImage!
-                    if let myImage = icon{
-                        let minutes = ((selectedEnteries.last?.1 ?? 0.0) * 48.35) / 3600.0
-                        context.draw(myImage, in: CGRect(x: position.x - 7.5 + CGFloat(minutes), y: position.y - 30, width: CGFloat(15), height: CGFloat(30)))
-                    }
-                default:
-                    let rawIcon = #imageLiteral(resourceName: "splashVector")
-                    icon = rawIcon.cgImage!
                 }
             }
         }
