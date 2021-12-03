@@ -105,7 +105,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         cgmChartView.xAxis.drawGridLinesEnabled = false
         cgmChartView.legend.form = .none
         
-        cgmChartView.zoom(scaleX: 4.0, scaleY: 0, x: 0, y: 0)
+        cgmChartView.zoom(scaleX: (0.013888888888889) * CGFloat(cgmData.endIndex), scaleY: 0, x: 0, y: 0)
         cgmChartView.animate(yAxisDuration: 2.5)
         cgmChartView.noDataText = "No glucose data available."
         cgmChartView.noDataTextColor = #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1)
@@ -148,6 +148,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         //        let values = cgmData.map { (data) -> ChartDataEntry in
         //            return ChartDataEntry(x: Double(data.date), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
         //        }
+        cgmChartView.zoom(scaleX: (0.013888888888889) * CGFloat(cgmData.endIndex), scaleY: 0, x: 0, y: 0)
         var colors = [NSUIColor]()
         var mainChart = [ChartDataEntry]()
         for i in 0..<cgmData.count{

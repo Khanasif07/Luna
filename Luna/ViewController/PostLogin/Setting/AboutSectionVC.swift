@@ -21,8 +21,8 @@ class AboutSectionVC: UIViewController {
     
     // MARK: - Variables
     //===========================
-
-    var sections: [(UIImage,String)] = [(#imageLiteral(resourceName: "customerSupport"),LocalizedString.customer_Support.localized),(#imageLiteral(resourceName: "appVersion"),LocalizedString.app_Version.localized),(#imageLiteral(resourceName: "termsConditions"),LocalizedString.terms_Conditions.localized),(#imageLiteral(resourceName: "privacy"),LocalizedString.privacy.localized),(#imageLiteral(resourceName: "deleteAccount"),LocalizedString.delete_Account.localized),(#imageLiteral(resourceName: "logout"),LocalizedString.logout.localized)]
+//    (#imageLiteral(resourceName: "customerSupport"),LocalizedString.customer_Support.localized),
+    var sections: [(UIImage,String)] = [(#imageLiteral(resourceName: "appVersion"),LocalizedString.app_Version.localized),(#imageLiteral(resourceName: "termsConditions"),LocalizedString.terms_Conditions.localized),(#imageLiteral(resourceName: "privacy"),LocalizedString.privacy.localized),(#imageLiteral(resourceName: "deleteAccount"),LocalizedString.delete_Account.localized),(#imageLiteral(resourceName: "logout"),LocalizedString.logout.localized)]
     
     // MARK: - Lifecycle
     //===========================

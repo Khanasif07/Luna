@@ -33,6 +33,10 @@ class UserDefaultsRepository {
     static let units = UserDefaultsValue<String>(key: "units", default: "mg/dl")
     
     // Dexcom Share Settings
+    static let sessionStartDate = UserDefaultsValue<Double>(key: "sessionStartDate", default: 0.0)
+    static let sessionEndDate = UserDefaultsValue<Double>(key: "sessionEndDate", default: 0.0)
+    
+    // Dexcom Share Settings
     static let shareUserName = UserDefaultsValue<String>(key: "shareUserName", default: "")
     static let sharePassword = UserDefaultsValue<String>(key: "sharePassword", default: "")
     static let shareServer = UserDefaultsValue<String>(key: "shareServer", default: "US")

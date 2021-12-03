@@ -30,7 +30,7 @@ class MessageReceiverCell: UITableViewCell {
     }
     
     public func setUpFont(){
-        self.msgLabel.font = AppFonts.SF_Pro_Display_Medium.withSize(.x14)
+        self.msgLabel.font = AppFonts.SF_Pro_Display_Medium.withSize(.x15)
     }
     
 }

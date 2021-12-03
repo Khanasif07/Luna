@@ -228,6 +228,24 @@ extension  BottomSheetVC{
         //MARK:- Important
         SystemInfoModel.shared.cgmData = bgData
         //
+        if UserDefaultsRepository.sessionStartDate.value != 0.0{
+            if let beginSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: { (bgData) -> Bool in
+                return bgData.date == UserDefaultsRepository.sessionStartDate.value
+            }){
+                SystemInfoModel.shared.cgmData?[beginSessionIndex].insulin = "0.25"
+                bgData[beginSessionIndex].insulin = "0.25"
+            }
+        }
+        //END === 0.75
+        if UserDefaultsRepository.sessionEndDate.value != 0.0{
+            if let endSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: { (bgData) -> Bool in
+                return bgData.date == UserDefaultsRepository.sessionEndDate.value
+            }){
+                SystemInfoModel.shared.cgmData?[endSessionIndex].insulin = "0.75"
+                bgData[endSessionIndex].insulin = "0.75"
+            }
+        }
+        //
         if (SystemInfoModel.shared.insulinData.endIndex) > 0 {
             SystemInfoModel.shared.insulinData.forEach { (insulinModel) in
                 if let index = bgData.firstIndex(where: { (cgmData) -> Bool in
@@ -240,12 +258,14 @@ extension  BottomSheetVC{
         }
         //
         viewUpdateNSBG(isNS: isNS)
-//        print(bgData)
         //MARK:- Important
+        let insulinDataArray = self.bgData.filter { (bgData) -> Bool in
+            return bgData.insulin == "0.25" || bgData.insulin == "0.5" || bgData.insulin == "0.75"
+        }
         let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
                                                     xAxis: cgmChartView.xAxis,
                                                     transformer: self.cgmChartView.getTransformer(forAxis: .left),
-                                                    cgmData: self.bgData,insulinData: SystemInfoModel.shared.insulinData)
+                                                    cgmData: self.bgData,insulinData: insulinDataArray)
         self.cgmChartView.xAxisRenderer = customXAxisRender
     }
     
@@ -271,9 +291,9 @@ extension  BottomSheetVC{
             self.setBGTextColor()
             //MARK:- Importants
             //Send time stamps to Luna Hardware
-            let randomBGValue = Int.random(in: 275..<300)
-//            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(latestBG)))
-            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(randomBGValue)))
+//            let randomBGValue = Int.random(in: 275..<300)
+            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(latestBG)))
+//            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(randomBGValue)))
             if let directionBG = entries[latestEntryi].direction {
                 self.cgmDirectionlbl.text = self.bgDirectionGraphic(directionBG)
                 self.latestDirectionString = self.bgDirectionGraphic(directionBG)

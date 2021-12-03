@@ -147,7 +147,14 @@ final  class XAxisCustomRenderer: XAxisRenderer {
                                 let minutes = ((entry.1) * 48.35) / 3600.0
                                 context.draw(myImage, in: CGRect(x: position.x - 0.5 + CGFloat(minutes), y: position.y - 266.0, width: CGFloat(1), height: CGFloat(263)))
                             }
-                        }else{
+                        }else if entry.3 == "0.75" {
+                            let rawIcon = #imageLiteral(resourceName: "lunaEndLine")
+                            icon = rawIcon.cgImage!
+                            if let myImage = icon{
+                                let minutes = ((entry.1) * 48.35) / 3600.0
+                                context.draw(myImage, in: CGRect(x: position.x - 0.5 + CGFloat(minutes), y: position.y - 266.0, width: CGFloat(1), height: CGFloat(263)))
+                            }
+                        } else {
                             let rawIcon = #imageLiteral(resourceName: "lineTwo")
                             icon = rawIcon.cgImage!
                             if let myImage = icon{

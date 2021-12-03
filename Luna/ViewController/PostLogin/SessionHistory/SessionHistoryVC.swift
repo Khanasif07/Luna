@@ -63,7 +63,7 @@ extension SessionHistoryVC {
         FirestoreController.getFirebaseSessionHistoryData{ (dataArray) in
             self.sessionHistory = dataArray
             self.sessionHistory.forEach({ (data) in
-                let month = data.date.getMonthInterval()
+                let month = data.startDate.getMonthInterval()
                 if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
                     if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
                         self.insulinSectionDataArray[selectedIndex].1.append(data)
@@ -122,7 +122,8 @@ extension SessionHistoryVC : UITableViewDelegate, UITableViewDataSource {
             let vc = SessionDescriptionVC.instantiate(fromAppStoryboard: .CGPStoryboard)
             vc.sessionModel = self.insulinSectionDataArray[indexPath.section].1[indexPath.row]
             vc.titleValue = cell.dateLbl.text ?? ""
-            vc.sessionDay = self.insulinSectionDataArray[indexPath.section].1[indexPath.row].date
+            vc.sessionStartDate = self.insulinSectionDataArray[indexPath.section].1[indexPath.row].startDate
+            vc.sessionEndDate = self.insulinSectionDataArray[indexPath.section].1[indexPath.row].endDate
             navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -138,10 +139,10 @@ extension SessionHistoryVC: SessionFilterVCDelegate{
         if let selectedEndDate = endDate{
             self.enddate = selectedEndDate
         }
-        let output = self.sessionHistory.filter { (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) >= self.startdate! && (NSDate(timeIntervalSince1970: TimeInterval($0.date)) as Date) <= self.enddate! }
+        let output = self.sessionHistory.filter { (NSDate(timeIntervalSince1970: TimeInterval($0.startDate)) as Date) >= self.startdate! && (NSDate(timeIntervalSince1970: TimeInterval($0.startDate)) as Date) <= self.enddate! }
         self.insulinSectionDataArray = []
         output.forEach({ (data) in
-            let month = data.date.getMonthInterval()
+            let month = data.startDate.getMonthInterval()
             if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
                 if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
                     self.insulinSectionDataArray[selectedIndex].1.append(data)
@@ -159,7 +160,7 @@ extension SessionHistoryVC: SessionFilterVCDelegate{
         self.enddate = nil
         self.insulinSectionDataArray = []
         self.sessionHistory.forEach({ (data) in
-            let month = data.date.getMonthInterval()
+            let month = data.startDate.getMonthInterval()
             if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
                 if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
                     self.insulinSectionDataArray[selectedIndex].1.append(data)

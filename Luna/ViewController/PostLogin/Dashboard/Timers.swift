@@ -98,31 +98,31 @@ extension BottomSheetVC {
                                                repeats: false)
     }
     
-    private func getRangeValue(isShowPer: Bool = false)-> Double{
-        if self.bgData.endIndex > 0 {
-            let rangeArray = self.bgData.filter { (glucoseValue) -> Bool in
-                return glucoseValue.sgv >= Int((UserDefaultsRepository.lowLine.value)) && glucoseValue.sgv <= Int((UserDefaultsRepository.highLine.value))
-            }
-            if isShowPer {
-                let rangePercentValue = ((100 * (rangeArray.endIndex)) / (self.bgData.endIndex))
-                return Double(rangePercentValue)
-            } else {
-                let rangePercentValue = (Double(rangeArray.endIndex) / Double(self.bgData.endIndex))
-                return rangePercentValue
-            }
-        }
-        return 0.0
-    }
-    
-    private func getInsulinDosesValue(isShowPer: Bool = false)-> Int{
-        if self.bgData.endIndex > 0 {
-            let rangeArray = self.bgData.filter { (glucoseValue) -> Bool in
-                return glucoseValue.insulin == "0.5"
-            }
-            return (rangeArray.endIndex)
-        }
-        return 0
-    }
+//    private func getRangeValue(isShowPer: Bool = false)-> Double{
+//        if self.bgData.endIndex > 0 {
+//            let rangeArray = self.bgData.filter { (glucoseValue) -> Bool in
+//                return glucoseValue.sgv >= Int((UserDefaultsRepository.lowLine.value)) && glucoseValue.sgv <= Int((UserDefaultsRepository.highLine.value))
+//            }
+//            if isShowPer {
+//                let rangePercentValue = ((100 * (rangeArray.endIndex)) / (self.bgData.endIndex))
+//                return Double(rangePercentValue)
+//            } else {
+//                let rangePercentValue = (Double(rangeArray.endIndex) / Double(self.bgData.endIndex))
+//                return rangePercentValue
+//            }
+//        }
+//        return 0.0
+//    }
+//    
+//    private func getInsulinDosesValue(isShowPer: Bool = false)-> Int{
+//        if self.bgData.endIndex > 0 {
+//            let rangeArray = self.bgData.filter { (glucoseValue) -> Bool in
+//                return glucoseValue.insulin == "0.5"
+//            }
+//            return (rangeArray.endIndex)
+//        }
+//        return 0
+//    }
     
     @objc func bgTimerDidEnd(_ timer:Timer) {
         
@@ -137,8 +137,8 @@ extension BottomSheetVC {
         // Check if the last reading is less than 10 minutes ago
         // to only pull 1 reading if that's all we need
         if bgData.count > 0 {
-            let myRange: ClosedRange = 100...110
-            print(bgData[myRange])
+//            let myRange: ClosedRange = 100...110
+//            print(bgData[myRange])
 //            //MARK:- Importants
 //            let lastUpdatedDate = AppUserDefaults.value(forKey: .lastUpdatedCGMDate).doubleValue
 //            print("LastUpdatedCGMDate")

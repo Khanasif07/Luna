@@ -25,10 +25,12 @@ class SessionDescriptionVC: UIViewController {
     //==========================
     var sections = ["Glucose Graph","List View"]
     var sessionModel : SessionHistory?
-    var sessionDay : Double?
+    var sessionStartDate : Double?
+    var sessionEndDate : Double?
     var titleValue: String = ""
     var cgmDataArray : [ShareGlucoseData] = []
     var insulinDataArray : [ShareGlucoseData]?
+    var filterInsulinDataArray: [ShareGlucoseData]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,11 +111,14 @@ class SessionDescriptionVC: UIViewController {
     }
     
     private func filterInsulinDosesListing(){
-        let filteredInsulinArray =  self.cgmDataArray.filter({$0.insulin == "0.5" || $0.insulin == "0.25"})
+        let filteredInsulinArray =  self.cgmDataArray.filter({$0.insulin == "0.5" || $0.insulin == "0.25" || $0.insulin == "0.75"})
         if filteredInsulinArray.endIndex > 0 {
             self.sections = ["Glucose Graph","List View"]
             self.insulinDataArray = filteredInsulinArray
-            self.insulinQty.text = "\(filteredInsulinArray.endIndex) units"
+            self.filterInsulinDataArray = self.insulinDataArray?.filter({ (bgData) -> Bool in
+                return bgData.insulin == "0.5"
+            })
+            self.insulinQty.text = "\(filterInsulinDataArray?.endIndex ?? 0) units"
         }else{
             self.sections = ["Glucose Graph"]
             self.insulinQty.text = "-- units"
@@ -122,7 +127,7 @@ class SessionDescriptionVC: UIViewController {
     
     private func getCgmDataFromFirestore(){
         CommonFunctions.showActivityLoader()
-        FirestoreController.getFirebaseCGMData(date: sessionDay!) { (bgData) in
+        FirestoreController.getFirebaseCGMData(startDate: sessionStartDate ?? 0.0,endDate: sessionEndDate ?? 0.0) { (bgData) in
             CommonFunctions.hideActivityLoader()
             self.cgmDataArray = bgData
             self.filterInsulinDosesListing()
@@ -147,7 +152,7 @@ extension SessionDescriptionVC : UITableViewDelegate,UITableViewDataSource{
         return sections.endIndex
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ?  1 :  (self.insulinDataArray?.endIndex ?? 0)
+        return section == 0 ?  1 :  (self.filterInsulinDataArray?.endIndex ?? 0)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -159,7 +164,7 @@ extension SessionDescriptionVC : UITableViewDelegate,UITableViewDataSource{
             return cell
         default:
             let cell = tableView.dequeueCell(with: BottomSheetBottomCell.self)
-            if let insulinData = self.insulinDataArray {
+            if let insulinData = self.filterInsulinDataArray {
                 cell.populateCellForCGMModel(model:insulinData[indexPath.row])
             }
             return cell

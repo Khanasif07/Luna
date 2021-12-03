@@ -180,11 +180,12 @@ class FirestoreController:NSObject{
     
     //MARK:- Get CGM Data info
     //=======================
-    static func getFirebaseCGMData(date:Double,success: @escaping (_ cgmModelArray: [ShareGlucoseData]) -> Void,
+    static func getFirebaseCGMData(startDate:Double, endDate:Double,success: @escaping (_ cgmModelArray: [ShareGlucoseData]) -> Void,
                                    failure:  @escaping FailureResponse){
         if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
+            let dataKey = String(startDate) + "_" + String(endDate)
             db.collection(ApiKey.sessionData)
-                .document(Auth.auth().currentUser?.uid ?? "").collection(String(date)).limit(to: 288).getDocuments { (snapshot, error) in
+                .document(Auth.auth().currentUser?.uid ?? "").collection(dataKey).limit(to: 288).getDocuments { (snapshot, error) in
                     if let error = error {
                         failure(error)
                     } else{
@@ -234,7 +235,7 @@ class FirestoreController:NSObject{
                         if  let dataDescription = document.data(){
                             print("Document data: \(dataDescription)")
                             let decoder = JSONDecoder()
-                            if  let dict = dataDescription["cgmDateArray"] as? [[String:Any]]{
+                            if  let dict = dataDescription[ApiKey.sessionHistoryData] as? [[String:Any]]{
                                 if let data = try? JSONSerialization.data(withJSONObject: dict, options: []){
                                     let historyData = try? decoder.decode([SessionHistory].self, from: data)
                                     success(historyData ?? [])
@@ -1028,17 +1029,18 @@ class FirestoreController:NSObject{
     
     //MARK:-Add  cgm data array through batch operation
     //=======================
-    static func addBatchData(currentDate: Double,array:[ShareGlucoseData],success: @escaping ()-> ()) {
+    static func addBatchData(startDate: Double,endDate: Double,array:[ShareGlucoseData],success: @escaping ()-> ()) {
         guard let userId = Auth.auth().currentUser?.uid  else { return }
         let batch = db.batch()
-        let sfReference = db.collection(ApiKey.users).document(userId)
+//        let sfReference = db.collection(ApiKey.users).document(userId)
         
         array.forEach { (doc) in
-            let docRef =  db.collection(ApiKey.sessionData).document(userId).collection(String(currentDate)).document(String(doc.date))
+            let docKey = String(startDate) + "_" + String(endDate)
+            let docRef =  db.collection(ApiKey.sessionData).document(userId).collection(docKey).document(String(doc.date))
             batch.setData([ApiKey.sgv: doc.sgv,ApiKey.direction: doc.direction ?? "",ApiKey.date: doc.date,ApiKey.insulin: doc.insulin ?? ""], forDocument: docRef)
         }
         //
-        batch.updateData([ApiKey.lastUpdatedCGMDate: currentDate], forDocument: sfReference)
+//        batch.updateData([ApiKey.lastUpdatedCGMDate: currentDate], forDocument: sfReference)
         //
         batch.commit { (err) in
             if let err = err{
@@ -1126,12 +1128,11 @@ class FirestoreController:NSObject{
 
     //MARK:- simpleTransaction
     //=======================
-    static func simpleTransactionToAddCGMData(currentDate:Double,range:Double,startDate:Double,endDate:Double,insulin:Int) {
+    static func simpleTransactionToAddCGMData(startDate:Double,range:Double,endDate:Double,insulin:Int) {
         guard let userId = Auth.auth().currentUser?.uid  else { return }
         let sfReference = db.collection(ApiKey.sessionData).document(userId)
         
         let specAdded: [String: Any] = [
-            ApiKey.date: currentDate,
             ApiKey.insulin: insulin,
             ApiKey.range: range,
             ApiKey.startdate: startDate,
@@ -1164,11 +1165,11 @@ class FirestoreController:NSObject{
             //transaction.updateData(["population": oldPopulation + 1], forDocument: sfReference)
             if   (sfDocument.data()) != nil{
                 transaction.updateData([
-                    ApiKey.cgmDateArray: FieldValue.arrayUnion([specAdded])
+                    ApiKey.sessionHistoryData: FieldValue.arrayUnion([specAdded])
                 ], forDocument: sfReference)
             } else {
                 transaction.setData([
-                    ApiKey.cgmDateArray: FieldValue.arrayUnion([specAdded])
+                    ApiKey.sessionHistoryData: FieldValue.arrayUnion([specAdded])
                 ], forDocument: sfReference)
             }
             return nil

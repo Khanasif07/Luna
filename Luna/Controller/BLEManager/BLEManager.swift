@@ -22,6 +22,7 @@ let TDBD = CBUUID(string: "5927a433-a277-40b7-b2d4-e005330c5d99")
 let iobInput = CBUUID(string: "5927a433-a277-40b7-b2d4-92ff77eada32")
 //let WriteAcknowledgement = CBUUID(string: "5927a433-a277-40b7-b2d4-0242ac130003")
 let WriteAcknowledgement = CBUUID(string: "5927A433-A277-40B7-B2D4-B6FF29B861A6")
+let CGMWriteCharacteristicCBUUID = CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9")
 let collectionInsulinDoses = CBUUID(string: "ad4e6052-390a-4107-8e2d-11af2d258189")
 //
 
@@ -175,6 +176,32 @@ public class BleManager: NSObject{
 //            self.startStatusTimer()
         }
     }
+    
+    private func getRangeValue(bgData: [ShareGlucoseData],isShowPer: Bool = false)-> Double{
+        if bgData.endIndex > 0 {
+            let rangeArray = bgData.filter { (glucoseValue) -> Bool in
+                return glucoseValue.sgv >= Int((UserDefaultsRepository.lowLine.value)) && glucoseValue.sgv <= Int((UserDefaultsRepository.highLine.value))
+            }
+            if isShowPer {
+                let rangePercentValue = ((100 * (rangeArray.endIndex)) / (bgData.endIndex))
+                return Double(rangePercentValue)
+            } else {
+                let rangePercentValue = (Double(rangeArray.endIndex) / Double(bgData.endIndex))
+                return rangePercentValue
+            }
+        }
+        return 0.0
+    }
+    
+    private func getInsulinDosesValue(bgData: [ShareGlucoseData],isShowPer: Bool = false)-> Int{
+        if bgData.endIndex > 0 {
+            let rangeArray = bgData.filter { (glucoseValue) -> Bool in
+                return glucoseValue.insulin == "0.5"
+            }
+            return (rangeArray.endIndex)
+        }
+        return 0
+    }
 }
 // MARK: - Extension For CBPeripheralDelegate
 //===========================
@@ -249,7 +276,6 @@ extension BleManager: CBPeripheralDelegate {
         case ReservoirLevelCharacteristicCBUUID:
             print("handled Characteristic Value for Reservoir Level: \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-            print(data)
             AppUserDefaults.save(value: data == "-1" ? "" : data, forKey: .reservoirLevel)
             self.reservoirLevelData = data
             NotificationCenter.default.post(name: Notification.Name.ReservoirUpdateValue, object: nil)
@@ -269,6 +295,19 @@ extension BleManager: CBPeripheralDelegate {
         case dataOutCBUUID:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             let dataArray = data.split{$0 == ";"}.map(String.init)
+            let filterDataArray = dataArray.map { (stringValue) -> [String] in
+                return stringValue.split{$0 == ":"}.map(String.init)
+            }
+            //BEGIN === 0.25
+            if filterDataArray.first?.first == "BEGIN"{
+                UserDefaultsRepository.sessionStartDate.value = Double(filterDataArray.first?.last ?? "") ?? 0.0
+                if let beginSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: { (bgData) -> Bool in
+                    return bgData.date == UserDefaultsRepository.sessionStartDate.value
+                }){
+                SystemInfoModel.shared.cgmData?[beginSessionIndex].insulin = "0.25"
+                }
+            }
+            //Insulin === 0.50
             let insulinDataArray = dataArray.filter { $0.contains(s: "0.5:")
             }
             let properDataArray = insulinDataArray.map { (stringValue) -> [String] in
@@ -290,11 +329,36 @@ extension BleManager: CBPeripheralDelegate {
                 SystemInfoModel.shared.insulinData = filteredInsulinData.reversed()
                 FirestoreController.addInsulinBatchData(currentDate: UserModel.main.lastUpdatedCGMDate, array: SystemInfoModel.shared.insulinData) {
                     print("Add Insulin Data Succesfully.")
+                }
+                print(filteredInsulinData)
+            }
+            //END === 0.75
+            if filterDataArray.last?.first == "END" && filterDataArray.first?.first == "BEGIN"{
+                UserDefaultsRepository.sessionEndDate.value = Double(filterDataArray.last?.last ?? "") ?? 0.0
+                if let endSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: { (bgData) -> Bool in
+                    return bgData.date == UserDefaultsRepository.sessionStartDate.value
+                }){
+                    SystemInfoModel.shared.cgmData?[endSessionIndex].insulin = "0.75"
+                }
+                let startSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: { (bgData) -> Bool in
+                    bgData.date == UserDefaultsRepository.sessionStartDate.value
+                })
+                let endSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: { (bgData) -> Bool in
+                    bgData.date == UserDefaultsRepository.sessionEndDate.value
+                })
+                if let startIndex = startSessionIndex,let endIndex = endSessionIndex{
+                    let myRange: ClosedRange = (startIndex - 12)...(endIndex)
+                    let rangeBgData = (SystemInfoModel.shared.cgmData?[myRange] ?? []).map { (bgData) -> ShareGlucoseData in
+                        ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: bgData.insulin ?? "")
+                    }
+                    FirestoreController.addBatchData(startDate: UserDefaultsRepository.sessionStartDate.value, endDate: UserDefaultsRepository.sessionEndDate.value, array: rangeBgData) {
+                        print("Add CGM Batch Data Commited successfully")
+                        FirestoreController.simpleTransactionToAddCGMData(startDate:UserDefaultsRepository.sessionStartDate.value,range: self.getRangeValue(bgData: rangeBgData, isShowPer: true),endDate: UserDefaultsRepository.sessionEndDate.value,insulin: self.getInsulinDosesValue(bgData: rangeBgData))
+                    }
                     if let dataInCharacteristic = self.cgmDataInCharacteristic{
                         self.writeValue(myCharacteristic: dataInCharacteristic,value: "#CLEAR_DOSE_DATA")
                     }
                 }
-                print(filteredInsulinData)
             }
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
             print("handled Characteristic Value for dataOutCBUUID: \(String(describing: data))")
@@ -354,7 +418,6 @@ extension BleManager: CBCentralManagerDelegate {
             NotificationCenter.default.post(name: Notification.Name.BLEOnOffState, object: nil)
         case .poweredOn:
             print("central.state is .poweredOn")
-//            centralManager.scanForPeripherals(withServices: [lunaCBUUID],options: nil)
             centralManager.scanForPeripherals(withServices: [],options: nil)
             self.rescanTimer =  Timer.scheduledTimer(timeInterval: 15,
                                                      target: self,
@@ -385,7 +448,6 @@ extension BleManager: CBCentralManagerDelegate {
         myperipheral?.discoverServices(nil)
         CommonFunctions.showToastWithMessage("Bluetooth connected.")
         delegate?.didConnect?(name: "Bluetooth connected.")
-//        if !statusTimer.isValid { self.startStatusTimer(time: 60 * 5) }
     }
     
     public func centralManager (_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
@@ -415,33 +477,20 @@ extension BleManager: CBCentralManagerDelegate {
         systemStatusData = ""
     }
     
-    public func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?)
-       {
-//           delegate?.log!(message: "in did start adv.")
-           if(error != nil)
-           {
-//               delegate?.log!(message: "advertising error")
-               
+    public func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?){
+           if(error != nil){
                print("advertising error: \(error!.localizedDescription)")
            }
-           else
-           {
-//               delegate?.log!(message: "advertising started")
+           else{
                print("advertising started")
            }
        }
     
-    public func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?)
-        {
-//            delegate?.log!(message: "in did add service")
-            
-            if(error != nil)
-            {
-//                delegate?.log!(message: "error in add service")
+    public func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?){
+            if(error != nil){
                 print("error in addservice: \(error!.localizedDescription)")
             }
-            else
-            {
+            else{
                 peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey : [service.uuid]])
             }
         }

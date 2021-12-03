@@ -8,8 +8,6 @@
 import Foundation
 
 struct SessionHistory :Codable{
-    
-    var date: Double = 0.0
     var endDate: Double = 0.0
     var startDate: Double = 0.0
     var range: Double = 0.0
@@ -19,7 +17,6 @@ struct SessionHistory :Codable{
     }
     
     init (dict: JSONDictionary){
-        self.date = dict[ApiKey.date] as? Double ?? 0.0
         self.startDate = dict[ApiKey.startDate] as? Double ?? 0.0
         self.endDate = dict[ApiKey.endDate] as? Double ?? 0.0
         self.range = dict[ApiKey.range] as? Double ?? 0.0
