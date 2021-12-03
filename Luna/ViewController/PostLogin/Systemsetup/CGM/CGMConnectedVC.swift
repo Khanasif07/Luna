@@ -233,7 +233,7 @@ extension CGMConnectedVC {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.titleLbl.text = "Connection failed!"
-                    self.showAlert(title: "Dexcom Share Error", msg: "Please double check user name and password, internet connection, and sharing status.") {
+                    self.showAlert(title: "Dexcom Server Error", msg: err?.localizedDescription ?? "") {
                         
                         SystemInfoModel.shared.cgmUnit = Int(self.ValueLbl.text ?? "") ?? 0
                         self.dismiss(animated: true) {

@@ -98,32 +98,6 @@ extension BottomSheetVC {
                                                repeats: false)
     }
     
-//    private func getRangeValue(isShowPer: Bool = false)-> Double{
-//        if self.bgData.endIndex > 0 {
-//            let rangeArray = self.bgData.filter { (glucoseValue) -> Bool in
-//                return glucoseValue.sgv >= Int((UserDefaultsRepository.lowLine.value)) && glucoseValue.sgv <= Int((UserDefaultsRepository.highLine.value))
-//            }
-//            if isShowPer {
-//                let rangePercentValue = ((100 * (rangeArray.endIndex)) / (self.bgData.endIndex))
-//                return Double(rangePercentValue)
-//            } else {
-//                let rangePercentValue = (Double(rangeArray.endIndex) / Double(self.bgData.endIndex))
-//                return rangePercentValue
-//            }
-//        }
-//        return 0.0
-//    }
-//    
-//    private func getInsulinDosesValue(isShowPer: Bool = false)-> Int{
-//        if self.bgData.endIndex > 0 {
-//            let rangeArray = self.bgData.filter { (glucoseValue) -> Bool in
-//                return glucoseValue.insulin == "0.5"
-//            }
-//            return (rangeArray.endIndex)
-//        }
-//        return 0
-//    }
-    
     @objc func bgTimerDidEnd(_ timer:Timer) {
         
         // reset timer to 1 minute if settings aren't entered

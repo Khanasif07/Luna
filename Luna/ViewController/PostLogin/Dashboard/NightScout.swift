@@ -618,10 +618,6 @@ extension  BottomSheetVC{
     
     // NS Profile Web Call
     func webLoadNSProfile() {
-        if UserDefaultsRepository.debugLog.value {
-            //            self.writeDebugLog(value: "Download: profile")
-            
-        }
         let urlUser = UserDefaultsRepository.url.value
         var urlString = urlUser + "/api/v1/profile/current.json"
         if token != "" {
@@ -688,10 +684,6 @@ extension  BottomSheetVC{
     
     // NS BG Check Response Processor
     func processNSBGCheck(entries: [[String:AnyObject]]) {
-        if UserDefaultsRepository.debugLog.value {
-            //self.writeDebugLog(value: "Process: BG Check")
-            
-        }
         // because it's a small array, we're going to destroy and reload every time.
         bgCheckData.removeAll()
         for i in 0..<entries.count {
@@ -716,10 +708,6 @@ extension  BottomSheetVC{
             let dateTimeStamp = dateString!.timeIntervalSince1970
             
             guard let sgv = currentEntry?["glucose"] as? Int else {
-                if UserDefaultsRepository.debugLog.value {
-                    //self.writeDebugLog(value: "ERROR: Non-Int Glucose entry")
-                    
-                }
                 continue
             }
             

@@ -11,22 +11,6 @@ import UIKit
 
 class UserDefaultsRepository {
 
-    // DisplayValues total
-    static let infoDataTotal = UserDefaultsValue<Int>(key: "infoDataTotal", default: 0)
-    static let infoNames = UserDefaultsValue<[String]>(key: "infoNames", default: [
-        "IOB",
-        "COB",
-        "Basal",
-        "Override",
-        "Battery",
-        "Pump",
-        "SAGE",
-        "CAGE",
-        "Rec. Bolus",
-        "Pred."])
-    static let infoSort = UserDefaultsValue<[Int]>(key: "infoSort", default: [0,1,2,3,4,5,6,7,8,9])
-    static let infoVisible = UserDefaultsValue<[Bool]>(key: "infoVisible", default: [true,true,true,true,true,true,true,true,true,true])
-    
     // Nightscout Settings
     static let url = UserDefaultsValue<String>(key: "url", default: "")
     static let token = UserDefaultsValue<String>(key: "token", default: "")
@@ -41,34 +25,28 @@ class UserDefaultsRepository {
     static let sharePassword = UserDefaultsValue<String>(key: "sharePassword", default: "")
     static let shareServer = UserDefaultsValue<String>(key: "shareServer", default: "US")
     
+    static let dosingDataArray = UserDefaultsValue<Array>(key: "dosingDataArray", default: [["jnj"]])
     // Graph Settings
     static let chartScaleX = UserDefaultsValue<Float>(key: "chartScaleX", default: 4.0)
     static let showDots = UserDefaultsValue<Bool>(key: "showDots", default: true)
-    static let smallGraphTreatments = UserDefaultsValue<Bool>(key: "smallGraphTreatments", default: true)
-    static let showValues = UserDefaultsValue<Bool>(key: "showValues", default: true)
-    static let showAbsorption = UserDefaultsValue<Bool>(key: "showAbsorption", default: true)
-    static let showLines = UserDefaultsValue<Bool>(key: "showLines", default: true)
-    static let hoursToLoad = UserDefaultsValue<Int>(key: "hoursToLoad", default: 24)
-    static let predictionToLoad = UserDefaultsValue<Double>(key: "predictionToLoad", default: 1)
-    static let minBasalScale = UserDefaultsValue<Double>(key: "minBasalScale", default: 5.0)
+//    static let smallGraphTreatments = UserDefaultsValue<Bool>(key: "smallGraphTreatments", default: true)
+//    static let showValues = UserDefaultsValue<Bool>(key: "showValues", default: true)
+//    static let showAbsorption = UserDefaultsValue<Bool>(key: "showAbsorption", default: true)
+//    static let showLines = UserDefaultsValue<Bool>(key: "showLines", default: true)
+//    static let hoursToLoad = UserDefaultsValue<Int>(key: "hoursToLoad", default: 24)
+//    static let predictionToLoad = UserDefaultsValue<Double>(key: "predictionToLoad", default: 1)
+//    static let minBasalScale = UserDefaultsValue<Double>(key: "minBasalScale", default: 5.0)
     static let minBGScale = UserDefaultsValue<Float>(key: "minBGScale", default: 350.0)
-    static let showDIALines = UserDefaultsValue<Bool>(key: "showDIAMarkers", default: true)
+//    static let showDIALines = UserDefaultsValue<Bool>(key: "showDIAMarkers", default: true)
     static let lowLine = UserDefaultsValue<Float>(key: "lowLine", default: 70.0)
     static let highLine = UserDefaultsValue<Float>(key: "highLine", default: 180.0)
-    static let smallGraphHeight = UserDefaultsValue<Int>(key: "smallGraphHeight", default: 40)
-    
+//    static let smallGraphHeight = UserDefaultsValue<Int>(key: "smallGraphHeight", default: 40)
     
     // General Settings
     static let colorBGText = UserDefaultsValue<Bool>(key: "colorBGText", default: true)
-    static let showStats = UserDefaultsValue<Bool>(key: "showStats", default: true)
-    static let useIFCC = UserDefaultsValue<Bool>(key: "useIFCC", default: false)
-    static let showSmallGraph = UserDefaultsValue<Bool>(key: "showSmallGraph", default: true)
-    static let speakBG = UserDefaultsValue<Bool>(key: "speakBG", default: false)
     static let backgroundRefreshFrequency = UserDefaultsValue<Double>(key: "backgroundRefreshFrequency", default: 1)
     static let backgroundRefresh = UserDefaultsValue<Bool>(key: "backgroundRefresh", default: true)
     static let appBadge = UserDefaultsValue<Bool>(key: "appBadge", default: true)
-    static let dimScreenWhenIdle = UserDefaultsValue<Int>(key: "dimScreenWhenIdle", default: 0)
-    static let forceDarkMode = UserDefaultsValue<Bool>(key: "forceDarkMode", default: true)
     static let persistentNotification = UserDefaultsValue<Bool>(key: "persistentNotification", default: true)
     static let persistentNotificationLastBGTime = UserDefaultsValue<TimeInterval>(key: "persistentNotificationLastBGTime", default: 0)
     static let screenlockSwitchState = UserDefaultsValue<Bool>(
@@ -80,13 +58,6 @@ class UserDefaultsRepository {
     
     // Advanced Settings
     static let onlyDownloadBG = UserDefaultsValue<Bool>(key: "onlyDownloadBG", default: false)
-    static let downloadTreatments = UserDefaultsValue<Bool>(key: "downloadTreatments", default: true)
-    static let downloadPrediction = UserDefaultsValue<Bool>(key: "downloadPrediction", default: true)
-    static let graphOtherTreatments = UserDefaultsValue<Bool>(key: "graphOtherTreatments", default: true)
-    static let graphBasal = UserDefaultsValue<Bool>(key: "graphBasal", default: true)
-    static let graphBolus = UserDefaultsValue<Bool>(key: "graphBolus", default: true)
-    static let graphCarbs = UserDefaultsValue<Bool>(key: "graphCarbs", default: true)
-    static let debugLog = UserDefaultsValue<Bool>(key: "debugLog", default: false)
     static let alwaysDownloadAllBG = UserDefaultsValue<Bool>(key: "alwaysDownloadAllBG", default: false)
     static let bgUpdateDelay = UserDefaultsValue<Int>(key: "bgUpdateDelay", default: 10)
     

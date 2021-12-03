@@ -97,9 +97,6 @@ extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch sections[indexPath.row].1 {
-//        case LocalizedString.find_Answers.localized:
-//            let vc = SettingManualVC.instantiate(fromAppStoryboard: .PostLogin)
-//            self.navigationController?.pushViewController(vc, animated: true)
         case LocalizedString.customer_Support.localized:
             let vc = ContactUsVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)
@@ -209,36 +206,36 @@ extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-
-// MARK: - Extension For MFMailComposeViewControllerDelegate
-//==========================================================
-extension AboutSectionVC: MFMailComposeViewControllerDelegate{
-    
-    func openMail() {
-        if MFMailComposeViewController.canSendMail() {
-            let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-            UINavigationBar.appearance().barTintColor = UIColor.white
-            let composeVC = MFMailComposeViewController()
-            composeVC.mailComposeDelegate = self
-            composeVC.setToRecipients(["support@lunadiabetes.com"])
-            composeVC.setSubject("Luna iOS App Feedback")
-            composeVC.setMessageBody("""
-            ------------------------------
-            Device Information
-            ------------------------------
-            iOS Version = \(DeviceDetail.os_version)
-            Luna App Version = \(appVersion ?? "1.0")
-            Phone = \(DeviceDetail.device_model)
-            Thank you!
-            """, isHTML: false)
-            self.present(composeVC, animated: true, completion: nil)
-        } else{
-            showAlert(msg: "Mail not configured")            
-        }
-    }
-    
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        UINavigationBar.appearance().barTintColor = UIColor.black
-        controller.dismiss(animated: true)
-    }
-}
+//
+//// MARK: - Extension For MFMailComposeViewControllerDelegate
+////==========================================================
+//extension AboutSectionVC: MFMailComposeViewControllerDelegate{
+//
+//    func openMail() {
+//        if MFMailComposeViewController.canSendMail() {
+//            let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+//            UINavigationBar.appearance().barTintColor = UIColor.white
+//            let composeVC = MFMailComposeViewController()
+//            composeVC.mailComposeDelegate = self
+//            composeVC.setToRecipients(["support@lunadiabetes.com"])
+//            composeVC.setSubject("Luna iOS App Feedback")
+//            composeVC.setMessageBody("""
+//            ------------------------------
+//            Device Information
+//            ------------------------------
+//            iOS Version = \(DeviceDetail.os_version)
+//            Luna App Version = \(appVersion ?? "1.0")
+//            Phone = \(DeviceDetail.device_model)
+//            Thank you!
+//            """, isHTML: false)
+//            self.present(composeVC, animated: true, completion: nil)
+//        } else{
+//            showAlert(msg: "Mail not configured")
+//        }
+//    }
+//
+//    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+//        UINavigationBar.appearance().barTintColor = UIColor.black
+//        controller.dismiss(animated: true)
+//    }
+//}

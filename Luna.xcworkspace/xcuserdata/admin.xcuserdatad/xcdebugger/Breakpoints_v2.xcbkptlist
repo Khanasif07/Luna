@@ -14,8 +14,8 @@
             filePath = "Luna/ViewController/PostLogin/Dashboard/NightScout.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "658"
-            endingLineNumber = "658"
+            startingLineNumber = "654"
+            endingLineNumber = "654"
             landmarkName = "webLoadNSProfile()"
             landmarkType = "7">
          </BreakpointContent>
@@ -98,22 +98,6 @@
             endingLineNumber = "207"
             landmarkName = "unknown"
             landmarkType = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "006E8D73-2435-4074-A476-DF4E9FB73B57"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Luna/ViewController/PostLogin/Systemsetup/CGM/CGMConnectedVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
-            landmarkName = "webLoadDexShare(onlyPullLastRecord:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

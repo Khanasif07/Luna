@@ -127,7 +127,7 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     }
     
     private func cgmSetUp(){
-        UserDefaultsRepository.infoNames.value.removeAll()
+//        UserDefaultsRepository.infoNames.value.removeAll()
         // TODO: need non-us server ?
         let shareUserName = UserDefaultsRepository.shareUserName.value
         let sharePassword = UserDefaultsRepository.sharePassword.value
