@@ -155,7 +155,7 @@ final  class XAxisCustomRenderer: XAxisRenderer {
                                 context.draw(myImage, in: CGRect(x: position.x - 0.5 + CGFloat(minutes), y: position.y - 266.0, width: CGFloat(1), height: CGFloat(263)))
                             }
                         } else {
-                            let rawIcon = #imageLiteral(resourceName: "lineTwo")
+                            let rawIcon = #imageLiteral(resourceName: "lineOne")
                             icon = rawIcon.cgImage!
                             if let myImage = icon{
                                 let minutes = ((entry.1) * 48.35) / 3600.0

@@ -567,6 +567,20 @@ class FirestoreController:NSObject{
         db.collection(ApiKey.users).document(uid).updateData([ApiKey.deviceId:deviceId])
     }
     
+    //MARK:- Update user password
+    //================================
+    static func updatePassword(_ password: String) {
+        print(password)
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        guard !uid.isEmpty else {
+            return
+        }
+        if let encrypedData = AES256Crypter.encryptionAESModeECB(messageData: password.data(using: String.Encoding.utf8)!, key: "Luna"){
+            let encryptedPassword = (String(bytes: encrypedData, encoding: String.Encoding.utf8) ?? "")
+            db.collection(ApiKey.users).document(uid).updateData([ApiKey.password: encryptedPassword])
+        }
+    }
+    
     //MARK:- Update Dexcom creds
     //================================
     static func updateDexcomCreds(shareUserName: String,sharePassword:String) {

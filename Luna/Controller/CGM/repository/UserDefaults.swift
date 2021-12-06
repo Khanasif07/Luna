@@ -9,6 +9,22 @@
 import Foundation
 import UIKit
 
+struct DosingHistory: Codable {
+    var sessionStatus: String
+    var sessionTime: Double
+    var insulin: String
+    var sessionExpired: Bool
+    var sessionCreated: Bool?
+    
+    init(sessionStatus:String, sessionTime: Double, insulin: String, sessionExpired: Bool,sessionCreated: Bool = false){
+        self.sessionTime = sessionTime
+        self.sessionStatus = sessionStatus
+        self.insulin = insulin
+        self.sessionExpired = sessionExpired
+        self.sessionCreated = sessionCreated
+    }
+}
+
 class UserDefaultsRepository {
 
     // Nightscout Settings
@@ -24,8 +40,6 @@ class UserDefaultsRepository {
     static let shareUserName = UserDefaultsValue<String>(key: "shareUserName", default: "")
     static let sharePassword = UserDefaultsValue<String>(key: "sharePassword", default: "")
     static let shareServer = UserDefaultsValue<String>(key: "shareServer", default: "US")
-    
-    static let dosingDataArray = UserDefaultsValue<Array>(key: "dosingDataArray", default: [["jnj"]])
     // Graph Settings
     static let chartScaleX = UserDefaultsValue<Float>(key: "chartScaleX", default: 4.0)
     static let showDots = UserDefaultsValue<Bool>(key: "showDots", default: true)

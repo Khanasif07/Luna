@@ -79,6 +79,7 @@ class ChangePasswordVC: UIViewController {
                 return
             }
             CommonFunctions.hideActivityLoader()
+            FirestoreController.updatePassword(self.newPass)
             KeychainWrapper.standard.set(self.newPass, forKey: ApiKey.password)
             CommonFunctions.showToastWithMessage("Password changed successfully ")
             self.pop()

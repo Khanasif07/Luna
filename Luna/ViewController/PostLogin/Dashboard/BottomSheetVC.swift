@@ -207,6 +207,13 @@ extension BottomSheetVC {
         self.mainTableView.registerCell(with: BottomSheetInsulinCell.self)
         self.mainTableView.registerCell(with: BottomSheetBottomCell.self)
         setupfooterView()
+        if let fetchedData = UserDefaults.standard.data(forKey: "dosingHistoryData") {
+            let fetchedDosingData = try! JSONDecoder().decode([DosingHistory].self, from: fetchedData)
+            SystemInfoModel.shared.dosingData = fetchedDosingData
+            DispatchQueue.main.async {
+                self.mainTableView.reloadData()
+            }
+        }
     }
     
     private func addObserver(){
@@ -219,9 +226,6 @@ extension BottomSheetVC {
     }
     
     @objc func xAxisLabelsDuplicateValue(notification : NSNotification){
-        if let dict = notification.object as? NSDictionary {
-                print(dict)
-        }
         if let lastData = bgData.last{
             if lastData.date < dateTimeUtils.getNowTimeIntervalUTC() {
                 bgData.removeFirst()

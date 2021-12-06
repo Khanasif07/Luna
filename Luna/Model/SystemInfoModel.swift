@@ -21,6 +21,7 @@ struct SystemInfoModel{
     var isFromSetting: Bool = false
     var cgmData : [ShareGlucoseData]?
     var insulinData : [ShareGlucoseData] = []
+    var dosingData : [DosingHistory] = []
     
     init() {
         self.init(JSON([:]))

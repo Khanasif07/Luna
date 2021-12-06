@@ -148,8 +148,10 @@ extension CGMConnectedVC {
         let now = dateTimeUtils.getNowTimeIntervalUTC()
         if !isNS && (latestDate + 330) < now {
             webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
+            DispatchQueue.main.async {
             CommonFunctions.showToastWithMessage("CGM data unavailable")
             self.dismiss(animated: true, completion: nil)
+            }
             return
         }
         
