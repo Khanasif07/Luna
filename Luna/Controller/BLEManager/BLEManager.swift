@@ -320,8 +320,46 @@ extension BleManager: CBPeripheralDelegate {
                     SystemInfoModel.shared.dosingData[index].sessionExpired = true
                 }
             }
-            //
             SystemInfoModel.shared.dosingData = SystemInfoModel.shared.dosingData.filter({$0.sessionExpired == false})
+            //
+            if let firstBeginSession = SystemInfoModel.shared.dosingData.firstIndex(where: { $0.sessionStatus == "BEGIN" && $0.sessionCreated == false
+            }){
+                UserDefaultsRepository.sessionStartDate.value = SystemInfoModel.shared.dosingData[firstBeginSession].sessionTime
+                for firstEndSession in stride(from: firstBeginSession + 1, to: SystemInfoModel.shared.dosingData.count, by: 1){
+                    if SystemInfoModel.shared.dosingData[firstEndSession].sessionStatus == "END" && SystemInfoModel.shared.dosingData[firstEndSession].sessionCreated == false{
+                        UserDefaultsRepository.sessionEndDate.value = SystemInfoModel.shared.dosingData[firstEndSession].sessionTime
+                        break
+                    }
+                }
+            }
+            if UserDefaultsRepository.sessionStartDate.value != 0.0 && UserDefaultsRepository.sessionEndDate.value != 0.0{
+                let startSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: {$0.date == UserDefaultsRepository.sessionStartDate.value})
+                let endSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: {$0.date == UserDefaultsRepository.sessionEndDate.value})
+                if let startIndex = startSessionIndex,let endIndex = endSessionIndex{
+                    let myRange: ClosedRange = (startIndex - 1)...(endIndex + 1)
+                    let rangeBgData = (SystemInfoModel.shared.cgmData?[myRange] ?? []).map { (bgData) -> ShareGlucoseData in
+                        ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: bgData.insulin ?? "")
+                    }
+                    FirestoreController.addBatchData(startDate: UserDefaultsRepository.sessionStartDate.value, endDate: UserDefaultsRepository.sessionEndDate.value, array: rangeBgData) {
+                        let startSession = SystemInfoModel.shared.dosingData.firstIndex(where: {$0.sessionTime == UserDefaultsRepository.sessionStartDate.value})
+                        let endSession = SystemInfoModel.shared.dosingData.firstIndex(where: {$0.sessionTime == UserDefaultsRepository.sessionEndDate.value})
+                        if let startIndexx = startSession,let endIndexx = endSession{
+                            SystemInfoModel.shared.dosingData[startIndexx].sessionCreated = true
+                            SystemInfoModel.shared.dosingData[endIndexx].sessionCreated = true
+                        }
+                        let dosingData = try! JSONEncoder().encode(SystemInfoModel.shared.dosingData)
+                        UserDefaults.standard.set(dosingData, forKey: "dosingHistoryData")
+                        print("Add CGM Batch Data Commited successfully")
+                        if UserDefaultsRepository.sessionStartDate.value != 0.0 && UserDefaultsRepository.sessionEndDate.value != 0.0 {
+                            FirestoreController.simpleTransactionToAddCGMData(startDate:UserDefaultsRepository.sessionStartDate.value,range: self.getRangeValue(bgData: rangeBgData, isShowPer: true),endDate: UserDefaultsRepository.sessionEndDate.value,insulin: self.getInsulinDosesValue(bgData: rangeBgData))
+                        }
+                        UserDefaultsRepository.sessionStartDate.value = 0.0
+                        UserDefaultsRepository.sessionEndDate.value = 0.0
+                    }
+                }
+            }
+            
+            //
             if SystemInfoModel.shared.dosingData.endIndex > 0 {
                 let dosingData = try! JSONEncoder().encode(SystemInfoModel.shared.dosingData)
                 UserDefaults.standard.set(dosingData, forKey: "dosingHistoryData")
@@ -335,33 +373,12 @@ extension BleManager: CBPeripheralDelegate {
             }
             print(SystemInfoModel.shared.dosingData)
             //
-            if let firstBeginSession = SystemInfoModel.shared.dosingData.firstIndex(where: { $0.sessionStatus == "BEGIN" && $0.sessionCreated == false
-            }){
-                UserDefaultsRepository.sessionStartDate.value = SystemInfoModel.shared.dosingData[firstBeginSession].sessionTime
-                for firstEndSession in stride(from: firstBeginSession + 1, to: SystemInfoModel.shared.dosingData.count, by: 1){
-                    if SystemInfoModel.shared.dosingData[firstEndSession].sessionStatus == "END" && SystemInfoModel.shared.dosingData[firstEndSession].sessionCreated == false{
-                        UserDefaultsRepository.sessionEndDate.value = SystemInfoModel.shared.dosingData[firstEndSession].sessionTime
-                    }
-                }
-            }
-           
-            //
             
 //            if let dataInCharacteristic = self.cgmDataInCharacteristic{
 //                if !dataArray.isEmpty{
 //                self.writeValue(myCharacteristic: dataInCharacteristic,value: "#CLEAR_DOSE_DATA")
 //                }
 //            }
-            //
-//                if let startIndex = startSessionIndex,let endIndex = endSessionIndex{
-//                    let myRange: ClosedRange = (startIndex)...(endIndex)
-//                    let rangeBgData = (SystemInfoModel.shared.cgmData?[myRange] ?? []).map { (bgData) -> ShareGlucoseData in
-//                        ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: bgData.insulin ?? "")
-//                    }
-//                    FirestoreController.addBatchData(startDate: UserDefaultsRepository.sessionStartDate.value, endDate: UserDefaultsRepository.sessionEndDate.value, array: rangeBgData) {
-//                        print("Add CGM Batch Data Commited successfully")
-//                        FirestoreController.simpleTransactionToAddCGMData(startDate:UserDefaultsRepository.sessionStartDate.value,range: self.getRangeValue(bgData: rangeBgData, isShowPer: true),endDate: UserDefaultsRepository.sessionEndDate.value,insulin: self.getInsulinDosesValue(bgData: rangeBgData))
-//                    }
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
             print("handled Characteristic Value for dataOutCBUUID: \(String(describing: data))")
         case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):

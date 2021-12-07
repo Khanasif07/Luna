@@ -30,10 +30,11 @@ final  class XAxisCustomRenderer: XAxisRenderer {
 
     var cgmData : [ShareGlucoseData] = []
     var insulinData : [ShareGlucoseData] = []
+    var minGapBwTwoLabels: Double =  0.0
 
     init(viewPortHandler: ViewPortHandler, xAxis: XAxis, transformer: Transformer, cgmData: [ShareGlucoseData],insulinData: [ShareGlucoseData]) {
         self.cgmData = cgmData
-        self.insulinData = insulinData
+        self.insulinData = insulinData.sorted(by: { $0.date < $1.date })
         super.init(viewPortHandler: viewPortHandler, xAxis: xAxis, transformer: transformer)
     }
 
@@ -74,7 +75,11 @@ final  class XAxisCustomRenderer: XAxisRenderer {
         var entriesTuplesArray = [(Bool,Double,Int,String)]()
         for j in stride(from: 0, to: insulinData.count, by: 1){
             for i in stride(from: 0, to: entries.count - 1, by: 1){
-                if entries[i] <= insulinData[j].date && entries[i+1] > insulinData[j].date{
+                if entries[i] < insulinData[j].date && entries[i+1] > insulinData[j].date{
+                    entriesTuplesArray.insert((true, insulinData[j].date - entries[i],i,insulinData[j].insulin!) , at: i)
+                }else if entries[i] == insulinData[j].date{
+                    entriesTuplesArray.insert((true, insulinData[j].date - entries[i],i,insulinData[j].insulin!) , at: i)
+                }else if entries[i+1] == insulinData[j].date {
                     entriesTuplesArray.insert((true, insulinData[j].date - entries[i],i,insulinData[j].insulin!) , at: i)
                 }else{
                     entriesTuplesArray.insert((false, 0,i,""), at: i)
@@ -83,6 +88,9 @@ final  class XAxisCustomRenderer: XAxisRenderer {
         }
         let selectedEnteries = entriesTuplesArray.filter { (tuples) -> Bool in
             return tuples.0
+        }
+        if entries.endIndex > 1{
+            minGapBwTwoLabels = entries[1] - entries[0]
         }
         //
         for i in stride(from: 0, to: entries.count, by: 1){
@@ -144,21 +152,21 @@ final  class XAxisCustomRenderer: XAxisRenderer {
                             let rawIcon = #imageLiteral(resourceName: "lunaEndLine")
                             icon = rawIcon.cgImage!
                             if let myImage = icon{
-                                let minutes = ((entry.1) * 48.35) / 3600.0
+                                let minutes = ((entry.1) * 48.35416666418314) / minGapBwTwoLabels
                                 context.draw(myImage, in: CGRect(x: position.x - 0.5 + CGFloat(minutes), y: position.y - 266.0, width: CGFloat(1), height: CGFloat(263)))
                             }
                         }else if entry.3 == "0.75" {
                             let rawIcon = #imageLiteral(resourceName: "lunaEndLine")
                             icon = rawIcon.cgImage!
                             if let myImage = icon{
-                                let minutes = ((entry.1) * 48.35) / 3600.0
+                                let minutes = ((entry.1) * 48.35) / minGapBwTwoLabels
                                 context.draw(myImage, in: CGRect(x: position.x - 0.5 + CGFloat(minutes), y: position.y - 266.0, width: CGFloat(1), height: CGFloat(263)))
                             }
                         } else {
                             let rawIcon = #imageLiteral(resourceName: "lineOne")
                             icon = rawIcon.cgImage!
                             if let myImage = icon{
-                                let minutes = ((entry.1) * 48.35) / 3600.0
+                                let minutes = ((entry.1) * 48.35416666418314) / minGapBwTwoLabels
                                 context.draw(myImage, in: CGRect(x: position.x - 7.5 + CGFloat(minutes), y: position.y - 30, width: CGFloat(15), height: CGFloat(30)))
                             }
                         }

@@ -15,7 +15,6 @@ class SessionHistoryVC: UIViewController {
     
     // MARK: - Variables
     //===========================
-//    var insulinSectionDataArray : [(Int,[ShareGlucoseData])] = []
     var insulinSectionDataArray : [(Int,[SessionHistory])] = []
     var sessionHistory = [SessionHistory]()
     var startdate: Date?
@@ -73,6 +72,7 @@ extension SessionHistoryVC {
                 }
             })
             self.insulinSectionDataArray = self.insulinSectionDataArray.reversed()
+//            self.insulinSectionDataArray = self.insulinSectionDataArray.
             self.sessionHistoryTV.reloadData()
             CommonFunctions.hideActivityLoader()
         }failure: {
