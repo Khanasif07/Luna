@@ -15,7 +15,7 @@ class SessionHistoryVC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var insulinSectionDataArray : [(Int,[SessionHistory])] = []
+    var insulinSectionDataArray : [(String,[SessionHistory])] = []
     var sessionHistory = [SessionHistory]()
     var startdate: Date?
     var enddate: Date?
@@ -61,18 +61,23 @@ extension SessionHistoryVC {
         }
         FirestoreController.getFirebaseSessionHistoryData{ (dataArray) in
             self.sessionHistory = dataArray
+            self.sessionHistory = self.sessionHistory.sorted(by: { $0.startDate > $1.startDate})
             self.sessionHistory.forEach({ (data) in
                 let month = data.startDate.getMonthInterval()
                 if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
-                    if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
+                    if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == data.title}){
                         self.insulinSectionDataArray[selectedIndex].1.append(data)
+                    }else{
+                        self.insulinSectionDataArray.append((data.title, [data]))
                     }
                 } else {
-                    self.insulinSectionDataArray.append((month, [data]))
+                    self.insulinSectionDataArray.append((month, []))
+                    self.insulinSectionDataArray.append((data.title, [data]))
                 }
             })
-            self.insulinSectionDataArray = self.insulinSectionDataArray.reversed()
-//            self.insulinSectionDataArray = self.insulinSectionDataArray.
+            self.insulinSectionDataArray = self.insulinSectionDataArray.map({ (tuples) -> (String,[SessionHistory]) in
+                return (tuples.0,tuples.1.reversed())
+            })
             self.sessionHistoryTV.reloadData()
             CommonFunctions.hideActivityLoader()
         }failure: {
@@ -104,7 +109,7 @@ extension SessionHistoryVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -118,18 +123,16 @@ extension SessionHistoryVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if  let cell = tableView.cellForRow(at: indexPath) as? SessionHistoryTableViewCell {
-            let vc = SessionDescriptionVC.instantiate(fromAppStoryboard: .CGPStoryboard)
-            vc.sessionModel = self.insulinSectionDataArray[indexPath.section].1[indexPath.row]
-            vc.titleValue = cell.dateLbl.text ?? ""
-            vc.sessionStartDate = self.insulinSectionDataArray[indexPath.section].1[indexPath.row].startDate
-            vc.sessionEndDate = self.insulinSectionDataArray[indexPath.section].1[indexPath.row].endDate
-            navigationController?.pushViewController(vc, animated: true)
-        }
+        let vc = SessionDescriptionVC.instantiate(fromAppStoryboard: .CGPStoryboard)
+        vc.sessionModel = self.insulinSectionDataArray[indexPath.section].1[indexPath.row]
+        vc.titleValue = self.insulinSectionDataArray[indexPath.section].1[indexPath.row].title
+        vc.sessionStartDate = self.insulinSectionDataArray[indexPath.section].1[indexPath.row].startDate
+        vc.sessionEndDate = self.insulinSectionDataArray[indexPath.section].1[indexPath.row].endDate
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
- //MARK: - SessionFilterVCDelegate
+//MARK: - SessionFilterVCDelegate
 //=====================================
 extension SessionHistoryVC: SessionFilterVCDelegate{
     func filterApplied(startDate: Date?, endDate: Date?) {
@@ -144,14 +147,19 @@ extension SessionHistoryVC: SessionFilterVCDelegate{
         output.forEach({ (data) in
             let month = data.startDate.getMonthInterval()
             if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
-                if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
+                if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == data.title}){
                     self.insulinSectionDataArray[selectedIndex].1.append(data)
+                }else{
+                    self.insulinSectionDataArray.append((data.title, [data]))
                 }
             } else {
-                self.insulinSectionDataArray.append((month, [data]))
+                self.insulinSectionDataArray.append((month, []))
+                self.insulinSectionDataArray.append((data.title, [data]))
             }
         })
-        self.insulinSectionDataArray = self.insulinSectionDataArray.reversed()
+        self.insulinSectionDataArray = self.insulinSectionDataArray.map({ (tuples) -> (String,[SessionHistory]) in
+            return (tuples.0,tuples.1.reversed())
+        })
         self.sessionHistoryTV.reloadData()
     }
     
@@ -162,14 +170,19 @@ extension SessionHistoryVC: SessionFilterVCDelegate{
         self.sessionHistory.forEach({ (data) in
             let month = data.startDate.getMonthInterval()
             if self.insulinSectionDataArray.contains(where: {$0.0 == month}){
-                if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == month}){
+                if let selectedIndex = self.insulinSectionDataArray.firstIndex(where: {$0.0 == data.title}){
                     self.insulinSectionDataArray[selectedIndex].1.append(data)
+                }else{
+                    self.insulinSectionDataArray.append((data.title, [data]))
                 }
             } else {
-                self.insulinSectionDataArray.append((month, [data]))
+                self.insulinSectionDataArray.append((month, []))
+                self.insulinSectionDataArray.append((data.title, [data]))
             }
         })
-        self.insulinSectionDataArray = self.insulinSectionDataArray.reversed()
+        self.insulinSectionDataArray = self.insulinSectionDataArray.map({ (tuples) -> (String,[SessionHistory]) in
+            return (tuples.0,tuples.1.reversed())
+        })
         self.sessionHistoryTV.reloadData()
     }
 }

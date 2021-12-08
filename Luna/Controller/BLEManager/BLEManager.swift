@@ -374,11 +374,11 @@ extension BleManager: CBPeripheralDelegate {
             print(SystemInfoModel.shared.dosingData)
             //
             
-//            if let dataInCharacteristic = self.cgmDataInCharacteristic{
-//                if !dataArray.isEmpty{
-//                self.writeValue(myCharacteristic: dataInCharacteristic,value: "#CLEAR_DOSE_DATA")
-//                }
-//            }
+            if let dataInCharacteristic = self.cgmDataInCharacteristic{
+                if !dataArray.isEmpty{
+                self.writeValue(myCharacteristic: dataInCharacteristic,value: "#CLEAR_DOSE_DATA")
+                }
+            }
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
             print("handled Characteristic Value for dataOutCBUUID: \(String(describing: data))")
         case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
@@ -455,7 +455,7 @@ extension BleManager: CBCentralManagerDelegate {
                                advertisementData: [String: Any], rssi RSSI: NSNumber) {
         print(peripheral.name ?? "")
         print(peripheral.identifier)
-        if peripheral.name == "LUNA"{
+        if peripheral.name == AppConstants.appName{
         myperipheral = peripheral
         myperipheral?.delegate = self
         centralManager.stopScan()

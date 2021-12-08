@@ -111,26 +111,12 @@ extension BottomSheetVC {
         // Check if the last reading is less than 10 minutes ago
         // to only pull 1 reading if that's all we need
         if bgData.count > 0 {
-//            let myRange: ClosedRange = 100...110
-//            print(bgData[myRange])
-//            //MARK:- Importants
-//            let lastUpdatedDate = AppUserDefaults.value(forKey: .lastUpdatedCGMDate).doubleValue
-//            print("LastUpdatedCGMDate")
-//            let currentDate = self.bgData.last!.date
-//            let startDate = self.bgData.first!.date
-//            if (currentDate - lastUpdatedDate) >= 86400 {
-//                AppUserDefaults.save(value: (currentDate), forKey: .lastUpdatedCGMDate)
-//                FirestoreController.addBatchData(currentDate: currentDate, array: bgData) {
-//                    print("Add CGM Batch Data Commited successfully")
-//                    FirestoreController.simpleTransactionToAddCGMData(currentDate: (currentDate), range: self.getRangeValue(isShowPer: true), startDate: (startDate), endDate: (currentDate), insulin: self.getInsulinDosesValue())
-//                }
-//            }
-//            let now = dateTimeUtils.getNowTimeIntervalUTC()
-//            let lastReadingTime = bgData.last!.date
-//            let secondsAgo = now - lastReadingTime
-//            if secondsAgo < 10*60 {
-//                onlyPullLastRecord = true
-//            }
+            let now = dateTimeUtils.getNowTimeIntervalUTC()
+            let lastReadingTime = bgData.last!.date
+            let secondsAgo = now - lastReadingTime
+            if secondsAgo < 10*60 {
+                onlyPullLastRecord = true
+            }
         }
         
         if UserDefaultsRepository.alwaysDownloadAllBG.value { onlyPullLastRecord = false }

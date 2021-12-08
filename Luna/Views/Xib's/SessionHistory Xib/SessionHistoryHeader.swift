@@ -17,33 +17,35 @@ class SessionHistoryHeader: UITableViewHeaderFooterView {
     
     // MARK: -Variables
     //===========================
-    var month: Int = 0  {
+    var month: String = ""  {
         didSet{
             switch month {
-            case 1:
+            case "1":
                 haedingLbl.text = "January"
-            case 2:
+            case "2":
                 haedingLbl.text = "Feb"
-            case 3:
+            case "3":
                 haedingLbl.text = "March"
-            case 4:
+            case "4":
                 haedingLbl.text = "April"
-            case 5:
+            case "5":
                 haedingLbl.text = "May"
-            case 6:
+            case "6":
                 haedingLbl.text = "June"
-            case 7:
+            case "7":
                 haedingLbl.text = "July"
-            case 8:
+            case "8":
                 haedingLbl.text = "August"
-            case 9:
+            case "9":
                 haedingLbl.text = "September"
-            case 10:
+            case "10":
                 haedingLbl.text = "October"
-            case 11:
+            case "11":
                 haedingLbl.text = "November"
-            default:
+            case "12":
                 haedingLbl.text = "December"
+            default:
+                haedingLbl.text = month
             }
         }
     }
@@ -56,7 +58,7 @@ class SessionHistoryHeader: UITableViewHeaderFooterView {
     }
     
     public func setUpFont(){
-        self.haedingLbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x17)
+        self.haedingLbl.font = AppFonts.SF_Pro_Display_Medium.withSize(.x16)
     }
 
 }

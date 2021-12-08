@@ -31,7 +31,6 @@ class CGMConnectedVC: UIViewController {
     
     var dexShare: ShareClient?;
     var bgData: [ShareGlucoseData] = []
-//    var bgTimer = Timer()
     var graphHours:Int = 24
     var latestDirectionString = ""
     

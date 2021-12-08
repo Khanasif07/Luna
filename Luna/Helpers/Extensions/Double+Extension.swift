@@ -47,11 +47,11 @@ extension Double {
        
     }
     
-    public func getMonthInterval(_ dateFormat: String = "hh a")-> Int{
+    public func getMonthInterval(_ dateFormat: String = "hh a")-> String{
         //Convert to Date
         //let date = NSDate(timeIntervalSince1970: self / 1000.0)
         let date = NSDate(timeIntervalSince1970: TimeInterval(self))
-        return (Calendar.current as NSCalendar).components(.month, from: date as Date).month!
+        return "\((Calendar.current as NSCalendar).components(.month, from: date as Date).month!)"
     }
 }
 

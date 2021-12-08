@@ -112,12 +112,12 @@ class SessionDescriptionVC: UIViewController {
     
     private func filterInsulinDosesListing(){
         let filteredInsulinArray =  self.cgmDataArray.filter({$0.insulin == "0.5" || $0.insulin == "0.25" || $0.insulin == "0.75"})
-        if filteredInsulinArray.endIndex > 0 {
+        self.insulinDataArray = filteredInsulinArray
+        self.filterInsulinDataArray = self.insulinDataArray?.filter({ (bgData) -> Bool in
+            return bgData.insulin == "0.5"
+        })
+        if filterInsulinDataArray?.endIndex ?? 0 > 0 {
             self.sections = ["Glucose Graph","List View"]
-            self.insulinDataArray = filteredInsulinArray
-            self.filterInsulinDataArray = self.insulinDataArray?.filter({ (bgData) -> Bool in
-                return bgData.insulin == "0.5"
-            })
             self.insulinQty.text = "\(filterInsulinDataArray?.endIndex ?? 0) units"
         }else{
             self.sections = ["Glucose Graph"]
