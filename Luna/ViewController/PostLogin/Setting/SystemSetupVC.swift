@@ -202,11 +202,12 @@ extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
             cell.switchTapped = { [weak self] sender in
                 guard let self = self else { return }
                 if indexPath.row == 3 {
-                    let isOn = AppUserDefaults.value(forKey: .isAlertsOn).boolValue
-                    self.db.collection(ApiKey.users).document(UserModel.main.id).updateData([ApiKey.isAlertsOn: !isOn])
-                    AppUserDefaults.save(value: !isOn, forKey: .isAlertsOn)
-                    UserModel.main.isAlertsOn = !isOn
-                    self.systemTableView.reloadData()
+                     self.showAlert(msg: "Under Development")
+//                    let isOn = AppUserDefaults.value(forKey: .isAlertsOn).boolValue
+//                    self.db.collection(ApiKey.users).document(UserModel.main.id).updateData([ApiKey.isAlertsOn: !isOn])
+//                    AppUserDefaults.save(value: !isOn, forKey: .isAlertsOn)
+//                    UserModel.main.isAlertsOn = !isOn
+                      self.systemTableView.reloadData()
                 }
             }
             return cell

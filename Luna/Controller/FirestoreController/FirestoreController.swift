@@ -639,15 +639,13 @@ class FirestoreController:NSObject{
                                   longInsulinSubType: String,
                                   insulinUnit: Int,
                                   cgmType: String,
-                                  cgmUnit: Int,
                                   completion: @escaping () -> Void,
                                   failure: @escaping FailureResponse){
         db.collection(ApiKey.userSystemInfo).document(userId).setData([
                                                                         ApiKey.longInsulinType: longInsulinType,
                                                                         ApiKey.longInsulinSubType:longInsulinSubType,
                                                                         ApiKey.insulinUnit:insulinUnit,
-                                                                        ApiKey.cgmType: cgmType,
-                                                                        ApiKey.cgmUnit:cgmUnit]){ err in
+                                                                        ApiKey.cgmType: cgmType]){ err in
             if let err = err {
                 failure(err)
                 print("Error writing document: \(err)")
@@ -1043,7 +1041,7 @@ class FirestoreController:NSObject{
     
     //MARK:-Add  cgm data array through batch operation
     //=======================
-    static func addBatchData(sessionId: String,startDate: Double,endDate: Double,array:[ShareGlucoseData],success: @escaping ()-> ()) {
+    static func addBatchData(sessionId: String,startDate: Double,endDate: Double,array:[ShareGlucoseData],success: @escaping (_ sessionId: String)-> ()) {
         guard let userId = Auth.auth().currentUser?.uid  else { return }
         let batch = db.batch()
         array.forEach { (doc) in
@@ -1055,8 +1053,9 @@ class FirestoreController:NSObject{
         batch.commit { (err) in
             if let err = err{
                 print("Error occured \(err)")
+                CommonFunctions.showToastWithMessage(err.localizedDescription)
             } else {
-                success()
+                success(sessionId)
             }
         }
     }

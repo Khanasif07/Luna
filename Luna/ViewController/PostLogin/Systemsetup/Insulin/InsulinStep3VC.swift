@@ -75,7 +75,7 @@ class InsulinStep3VC: UIViewController {
                         CommonFunctions.showToastWithMessage(error.localizedDescription)
                     }
                 } failure: {
-                    FirestoreController.setSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
+                    FirestoreController.setSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType) {
                         CommonFunctions.hideActivityLoader()
                         NotificationCenter.default.post(name: Notification.Name.insulinConnectedSuccessfully, object: nil)
                         self.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)

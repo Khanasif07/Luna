@@ -277,7 +277,7 @@ extension  BottomSheetVC{
             //MARK:- Importants
             //Send time stamps to Luna Hardware
 //            let randomBGValue = Int.random(in: 300..<325)
-            let updatedBG = latestBG + 100
+            let updatedBG = latestBG + 135
             BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(updatedBG)))
 //            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(randomBGValue)))
             if let directionBG = entries[latestEntryi].direction {

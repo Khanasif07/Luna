@@ -87,7 +87,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         let leftAxis = cgmChartView.leftAxis
         leftAxis.removeAllLimitLines()
         leftAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
-        leftAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
+        leftAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x13)
         leftAxis.axisMaximum = Double(UserDefaultsRepository.minBGScale.value)
         //MARK: - Important
         leftAxis.drawGridLinesEnabled = true
