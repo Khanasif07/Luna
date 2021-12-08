@@ -78,7 +78,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         
         let xAxis = cgmChartView.xAxis
         xAxis.labelPosition = .bottom
-        xAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
+        xAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x10)
         xAxis.granularity = 86400
         xAxis.labelTextColor = NSUIColor.label
         //        xAxis.labelPosition = XAxis.LabelPosition.bottom

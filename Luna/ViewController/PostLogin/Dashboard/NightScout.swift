@@ -228,6 +228,12 @@ extension  BottomSheetVC{
         //MARK:- Important
         SystemInfoModel.shared.cgmData = bgData
         //
+        if SystemInfoModel.shared.dosingData.isEmpty{
+        if let fetchedData = UserDefaults.standard.data(forKey: ApiKey.dosingHistoryData) {
+            let fetchedDosingData = try! JSONDecoder().decode([DosingHistory].self, from: fetchedData)
+            if !fetchedDosingData.isEmpty{SystemInfoModel.shared.dosingData = fetchedDosingData}
+        }
+        }
         SystemInfoModel.shared.dosingData.forEach { (dosingHistory) in
            if let indexx = SystemInfoModel.shared.cgmData?.firstIndex(where: { (bgData) -> Bool in
             bgData.date == dosingHistory.sessionTime
@@ -237,7 +243,6 @@ extension  BottomSheetVC{
            }
         }
         //
-//        viewUpdateNSBG(isNS: isNS)
         //MARK:- Important
         let insulinDataArray = self.bgData.filter { (bgData) -> Bool in
             return bgData.insulin == "0.25" || bgData.insulin == "0.5" || bgData.insulin == "0.75"
