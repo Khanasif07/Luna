@@ -121,13 +121,13 @@ class SessionDescriptionVC: UIViewController {
             self.insulinQty.text = "\(filterInsulinDataArray?.endIndex ?? 0) units"
         }else{
             self.sections = ["Glucose Graph"]
-            self.insulinQty.text = "-- units"
+            self.insulinQty.text = "0 units"
         }
     }
     
     private func getCgmDataFromFirestore(){
         CommonFunctions.showActivityLoader()
-        FirestoreController.getFirebaseCGMData(startDate: sessionStartDate ?? 0.0,endDate: sessionEndDate ?? 0.0) { (bgData) in
+        FirestoreController.getFirebaseCGMData(sessionId: sessionModel?.sessionId ?? "",startDate: sessionStartDate ?? 0.0,endDate: sessionEndDate ?? 0.0) { (bgData) in
             CommonFunctions.hideActivityLoader()
             self.cgmDataArray = bgData
             self.filterInsulinDosesListing()

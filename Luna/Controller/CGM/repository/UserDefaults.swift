@@ -14,7 +14,7 @@ struct DosingHistory: Codable {
     var sessionTime: Double
     var insulin: String
     var sessionExpired: Bool
-    var sessionCreated: Bool?
+    var sessionCreated: Bool
     
     init(sessionStatus:String, sessionTime: Double, insulin: String, sessionExpired: Bool,sessionCreated: Bool = false){
         self.sessionTime = sessionTime

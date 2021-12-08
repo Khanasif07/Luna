@@ -17,9 +17,15 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     // MARK: - Variables
     //===========================
     let ScaleXMax:Float = 150.0
+    var xAxisLabelCount: Int = 7
     var insulinData : [ShareGlucoseData] = []
     var cgmData : [ShareGlucoseData] = []{
         didSet{
+//            if cgmData.endIndex >= 67{
+//                xAxisLabelCount = 7
+//            } else {
+//                xAxisLabelCount = Int((0.104477611940299) * Double(cgmData.endIndex))
+//            }
             setDataCount(cgmData.endIndex, range: UInt32(cgmData.endIndex))
             let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
                                                         xAxis: cgmChartView.xAxis,
@@ -76,7 +82,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         xAxis.granularity = 86400
         xAxis.labelTextColor = NSUIColor.label
         //        xAxis.labelPosition = XAxis.LabelPosition.bottom
-        xAxis.valueFormatter = ChartXValueFormatter()
+        xAxis.valueFormatter = ChartXValueFormatterSessionInfo()
         
         let leftAxis = cgmChartView.leftAxis
         leftAxis.removeAllLimitLines()
@@ -100,7 +106,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         cgmChartView.marker = marker
         
         cgmChartView.xAxis.centerAxisLabelsEnabled = false
-        cgmChartView.xAxis.setLabelCount(7, force: true) //enter the number of labels here
+        cgmChartView.xAxis.setLabelCount(xAxisLabelCount, force: true) //enter the number of labels here
         cgmChartView.leftAxis.setLabelCount(8, force: true) //enter the number of labels here
         cgmChartView.xAxis.drawGridLinesEnabled = false
         cgmChartView.legend.form = .none
@@ -145,9 +151,6 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     }
     
     func setDataCount(_ count: Int, range: UInt32) {
-        //        let values = cgmData.map { (data) -> ChartDataEntry in
-        //            return ChartDataEntry(x: Double(data.date), y: Double(data.sgv), icon: #imageLiteral(resourceName: "reservoir7Bars"))
-        //        }
         cgmChartView.zoom(scaleX: (0.013888888888889) * CGFloat(cgmData.endIndex), scaleY: 0, x: 0, y: 0)
         var colors = [NSUIColor]()
         var mainChart = [ChartDataEntry]()

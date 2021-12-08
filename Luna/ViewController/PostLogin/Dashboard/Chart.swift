@@ -37,7 +37,6 @@ final class ChartXValueFormatter: IAxisValueFormatter {
        
         if let lastCGMValue = SystemInfoModel.shared.cgmData?.last{
             if lastCGMValue.date - value <= 300 {
-//                print("lastCGMValue \(lastCGMValue.date)")
                 let dateFormatter = DateFormatter()
                 dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.cgmDate12.rawValue)
                 let date = Date(timeIntervalSince1970: value)
@@ -50,12 +49,14 @@ final class ChartXValueFormatter: IAxisValueFormatter {
                     }
                 }
                 xAxisLabelsArray = []
-//                return formattedDate.lowercased()
                 return "now"
             }else {
-//                print(value)
                 let dateFormatter = DateFormatter()
+                if SystemInfoModel.shared.cgmData?.endIndex ?? 67 >= 67{
                 dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.cgmDate12.rawValue)
+                }else{
+                    dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.hour12.rawValue)
+                }
                 let date = Date(timeIntervalSince1970: value)
                 let formattedDate = dateFormatter.string(from: date)
                 xAxisLabelsArray.append(formattedDate.lowercased())
@@ -64,6 +65,25 @@ final class ChartXValueFormatter: IAxisValueFormatter {
         }
         //let date = Date(timeIntervalSince1970: epochTimezoneOffset)
         let dateFormatter = DateFormatter()
+        if SystemInfoModel.shared.cgmData?.endIndex ?? 67 >= 67{
+        dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.cgmDate12.rawValue)
+        }else{
+            dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.hour12.rawValue)
+        }
+        let date = Date(timeIntervalSince1970: value)
+        let formattedDate = dateFormatter.string(from: date)
+        return formattedDate.lowercased()
+    }
+}
+
+final class ChartXValueFormatterSessionInfo: IAxisValueFormatter {
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        let dateFormatter = DateFormatter()
+//        if SystemInfoModel.shared.cgmData?.endIndex ?? 67 >= 67{
+//            dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.cgmDate12.rawValue)
+//        }else{
+        dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.hour12.rawValue)
+//        }
         let date = Date(timeIntervalSince1970: value)
         let formattedDate = dateFormatter.string(from: date)
         return formattedDate.lowercased()

@@ -8,6 +8,7 @@
 import Foundation
 
 struct SessionHistory :Codable{
+    var sessionId: String?
     var endDate: Double = 0.0
     var startDate: Double = 0.0
     var range: Double = 0.0
@@ -28,6 +29,7 @@ struct SessionHistory :Codable{
         self.endDate = dict[ApiKey.endDate] as? Double ?? 0.0
         self.range = dict[ApiKey.range] as? Double ?? 0.0
         self.insulin = dict[ApiKey.insulin] as? Double ?? 0.0
+        self.sessionId = dict[ApiKey.sessionId] as? String ?? ""
     }
    
 }

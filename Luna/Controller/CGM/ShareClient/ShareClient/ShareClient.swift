@@ -150,7 +150,7 @@ public class ShareClient {
                 callback(nil, token)
             } else {
                 // failure is a JSON object containing the error reason
-                let errorCode = (decoded as? [String: String])?["Code"] ?? "unknown"
+                _ = (decoded as? [String: String])?["Code"] ?? "unknown"
 //                callback(.loginError(errorCode: errorCode), nil)
                 callback(error, nil)
             }

@@ -34,7 +34,9 @@ enum ApiKey {
     static var users : String {return "users"}
     static var userSystemInfo : String {return "userSystemInfo"}
     static var sessionData : String {return "sessionData"}
+    static var sessionId : String {return "sessionId"}
     static var sessionHistoryData : String {return "sessionHistoryData"}
+    static var dosingHistoryData : String {return "dosingHistoryData"}
     static var sessionHistory : String {return "sessionHistory"}
     static var firstName : String {return "firstName"}
     static var isBiometricOn : String {return "isBiometricOn"}

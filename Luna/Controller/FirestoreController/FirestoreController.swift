@@ -180,10 +180,10 @@ class FirestoreController:NSObject{
     
     //MARK:- Get CGM Data info
     //=======================
-    static func getFirebaseCGMData(startDate:Double, endDate:Double,success: @escaping (_ cgmModelArray: [ShareGlucoseData]) -> Void,
+    static func getFirebaseCGMData(sessionId: String,startDate:Double, endDate:Double,success: @escaping (_ cgmModelArray: [ShareGlucoseData]) -> Void,
                                    failure:  @escaping FailureResponse){
         if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
-            let dataKey = String(startDate) + "_" + String(endDate)
+            let dataKey =  sessionId.isEmpty ? String(startDate) + "_" + String(endDate) : sessionId
             db.collection(ApiKey.sessionData)
                 .document(Auth.auth().currentUser?.uid ?? "").collection(dataKey).limit(to: 288).getDocuments { (snapshot, error) in
                     if let error = error {
@@ -1043,19 +1043,15 @@ class FirestoreController:NSObject{
     
     //MARK:-Add  cgm data array through batch operation
     //=======================
-    static func addBatchData(startDate: Double,endDate: Double,array:[ShareGlucoseData],success: @escaping ()-> ()) {
+    static func addBatchData(sessionId: String,startDate: Double,endDate: Double,array:[ShareGlucoseData],success: @escaping ()-> ()) {
         guard let userId = Auth.auth().currentUser?.uid  else { return }
         let batch = db.batch()
-//        let sfReference = db.collection(ApiKey.users).document(userId)
-        
         array.forEach { (doc) in
-            let docKey = String(startDate) + "_" + String(endDate)
+//            let docKey = String(startDate) + "_" + String(endDate)
+            let docKey = sessionId
             let docRef =  db.collection(ApiKey.sessionData).document(userId).collection(docKey).document(String(doc.date))
             batch.setData([ApiKey.sgv: doc.sgv,ApiKey.direction: doc.direction ?? "",ApiKey.date: doc.date,ApiKey.insulin: doc.insulin ?? ""], forDocument: docRef)
         }
-        //
-//        batch.updateData([ApiKey.lastUpdatedCGMDate: currentDate], forDocument: sfReference)
-        //
         batch.commit { (err) in
             if let err = err{
                 print("Error occured \(err)")
@@ -1139,14 +1135,22 @@ class FirestoreController:NSObject{
             success()
         })
     }
+    
+    /// Mark:- Fetching the message ID
+    static func getSessionId() -> String {
+        guard let userId = Auth.auth().currentUser?.uid  else { return ""}
+        let messageId = db.collection(ApiKey.sessionData).document(userId).collection(ApiKey.sessionHistoryData).document().documentID
+        return messageId
+    }
 
     //MARK:- simpleTransaction
     //=======================
-    static func simpleTransactionToAddCGMData(startDate:Double,range:Double,endDate:Double,insulin:Int) {
+    static func simpleTransactionToAddCGMData(sessionId: String,startDate:Double,range:Double,endDate:Double,insulin:Int) {
         guard let userId = Auth.auth().currentUser?.uid  else { return }
         let sfReference = db.collection(ApiKey.sessionData).document(userId)
         
         let specAdded: [String: Any] = [
+            ApiKey.sessionId: sessionId,
             ApiKey.insulin: insulin,
             ApiKey.range: range,
             ApiKey.startdate: startDate,
