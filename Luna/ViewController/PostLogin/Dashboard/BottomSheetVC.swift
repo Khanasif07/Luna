@@ -209,7 +209,7 @@ extension BottomSheetVC {
         setupfooterView()
         if let fetchedData = UserDefaults.standard.data(forKey: ApiKey.dosingHistoryData) {
             let fetchedDosingData = try! JSONDecoder().decode([DosingHistory].self, from: fetchedData)
-//            SystemInfoModel.shared.dosingData = fetchedDosingData
+            SystemInfoModel.shared.dosingData = fetchedDosingData
             DispatchQueue.main.async {
                 self.mainTableView.reloadData()
             }

@@ -121,7 +121,7 @@ extension BottomSheetVC {
         
         if UserDefaultsRepository.alwaysDownloadAllBG.value { onlyPullLastRecord = false }
         
-        if UserDefaultsRepository.shareUserName.value != "" && UserDefaultsRepository.sharePassword.value != "" {
+        if !UserDefaultsRepository.shareUserName.value.isEmpty && !UserDefaultsRepository.sharePassword.value.isEmpty {
             webLoadDexShare(onlyPullLastRecord: onlyPullLastRecord)
         } else {
             webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
