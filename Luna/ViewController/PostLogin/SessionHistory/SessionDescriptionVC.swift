@@ -118,7 +118,7 @@ class SessionDescriptionVC: UIViewController {
         })
         if filterInsulinDataArray?.endIndex ?? 0 > 0 {
             self.sections = ["Glucose Graph","List View"]
-            self.insulinQty.text = "\(filterInsulinDataArray?.endIndex ?? 0) units"
+            self.insulinQty.text = "\((filterInsulinDataArray?.endIndex ?? 0) / 2) units"
         }else{
             self.sections = ["Glucose Graph"]
             self.insulinQty.text = "0 units"
