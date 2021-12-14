@@ -136,6 +136,7 @@ extension SystemSetupVC {
     private func tableViewSetup(){
         self.systemTableView.delegate = self
         self.systemTableView.dataSource = self
+        self.systemTableView.registerHeaderFooter(with: SettingHeaderView.self)
         self.systemTableView.registerCell(with: SettingTableCell.self)
     }
     
@@ -179,7 +180,20 @@ extension SystemSetupVC {
 extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections.endIndex
+        return 1
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        sections.endIndex
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = tableView.dequeueHeaderFooter(with: SettingHeaderView.self)
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 45.0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -187,10 +201,10 @@ extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
         case .Luna:
             let cell = tableView.dequeueCell(with: SettingTableCell.self)
             cell.subTitlelbl.isHidden = false
-            cell.titleLbl.text = sections[indexPath.row].1
-            cell.subTitlelbl.text = sections[indexPath.row].2
-            cell.logoImgView.image = sections[indexPath.row].0
-            if indexPath.row == 3{
+            cell.titleLbl.text = sections[indexPath.section].1
+            cell.subTitlelbl.text = sections[indexPath.section].2
+            cell.logoImgView.image = sections[indexPath.section].0
+            if indexPath.section == 3{
                 cell.switchView.isUserInteractionEnabled = true
                 cell.nextBtn.isHidden = true
                 cell.switchView.isHidden = false
@@ -201,7 +215,7 @@ extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
             }
             cell.switchTapped = { [weak self] sender in
                 guard let self = self else { return }
-                if indexPath.row == 3 {
+                if indexPath.section == 3 {
                      self.showAlert(msg: "Under Development")
 //                    let isOn = AppUserDefaults.value(forKey: .isAlertsOn).boolValue
 //                    self.db.collection(ApiKey.users).document(UserModel.main.id).updateData([ApiKey.isAlertsOn: !isOn])
@@ -214,9 +228,9 @@ extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
         case .App:
             let cell = tableView.dequeueCell(with: SettingTableCell.self)
             cell.subTitlelbl.isHidden = true
-            cell.titleLbl.text = sections[indexPath.row].1
-            cell.logoImgView.image = sections[indexPath.row].0
-            if indexPath.row == 0{
+            cell.titleLbl.text = sections[indexPath.section].1
+            cell.logoImgView.image = sections[indexPath.section].0
+            if indexPath.section == 0{
                 cell.switchView.isUserInteractionEnabled = true
                 cell.nextBtn.isHidden = true
                 cell.switchView.isHidden = false
@@ -227,7 +241,7 @@ extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
             }
             cell.switchTapped = { [weak self] sender in
                 guard let self = self else { return }
-                if indexPath.row == 0 {
+                if indexPath.section == 0 {
                     let isOn = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
                     self.db.collection(ApiKey.users).document(UserModel.main.id).updateData([ApiKey.isBiometricOn: !isOn])
                     AppUserDefaults.save(value: !isOn, forKey: .isBiometricSelected)
@@ -245,7 +259,7 @@ extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch settingType {
         case .App:
-            switch indexPath.row {
+            switch indexPath.section {
             case 0:
                 print("Do Nothing.")
             case 1:
@@ -260,7 +274,7 @@ extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         default:
-            switch indexPath.row {
+            switch indexPath.section {
             case 2:
                 SystemInfoModel.shared.isFromSetting = true
                 let vc = PairLunaVC.instantiate(fromAppStoryboard: .CGPStoryboard)

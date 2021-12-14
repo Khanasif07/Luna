@@ -70,6 +70,7 @@ extension AboutSectionVC {
     private func tableViewSetup(){
         self.aboutTableView.delegate = self
         self.aboutTableView.dataSource = self
+        self.aboutTableView.registerHeaderFooter(with: SettingHeaderView.self)
         self.aboutTableView.registerCell(with: SettingTableCell.self)
     }
 }
@@ -79,13 +80,26 @@ extension AboutSectionVC {
 extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections.endIndex
+        return 1
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        sections.endIndex
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = tableView.dequeueHeaderFooter(with: SettingHeaderView.self)
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 45.0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(with: SettingTableCell.self)
-        cell.titleLbl.text = sections[indexPath.row].1
-        cell.logoImgView.image = sections[indexPath.row].0
+        cell.titleLbl.text = sections[indexPath.section].1
+        cell.logoImgView.image = sections[indexPath.section].0
         cell.nextBtn.isHidden = false
         cell.switchView.isHidden = true
         return cell
@@ -96,22 +110,22 @@ extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch sections[indexPath.row].1 {
+        switch sections[indexPath.section].1 {
         case LocalizedString.customer_Support.localized:
             let vc = ContactUsVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)
         case LocalizedString.privacy.localized:
             let vc = AboutTermsPolicyVC.instantiate(fromAppStoryboard: .PostLogin)
-            vc.titleString =  sections[indexPath.row].1
+            vc.titleString =  sections[indexPath.section].1
             vc.stringType = .privacyPolicy
             self.navigationController?.pushViewController(vc, animated: true)
         case LocalizedString.app_Version.localized:
             let vc = AboutTermsPolicyVC.instantiate(fromAppStoryboard: .PostLogin)
-            vc.titleString =  sections[indexPath.row].1
+            vc.titleString =  sections[indexPath.section].1
             self.navigationController?.pushViewController(vc, animated: true)
         case LocalizedString.terms_Conditions.localized:
             let vc = AboutTermsPolicyVC.instantiate(fromAppStoryboard: .PostLogin)
-            vc.titleString =  sections[indexPath.row].1
+            vc.titleString =  sections[indexPath.section].1
             vc.stringType = .tnc
             self.navigationController?.pushViewController(vc, animated: true)
         case LocalizedString.delete_Account.localized:

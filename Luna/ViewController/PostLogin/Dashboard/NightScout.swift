@@ -33,21 +33,32 @@ extension  BottomSheetVC{
         dexShare?.fetchData(count) { (err, result) -> () in
             
             // TODO: add error checking
-            if(err == nil) {
+             if(err == nil) {
                 let data = result!
                 self.ProcessNSBGData(data: data, onlyPullLastRecord: onlyPullLastRecord)
             } else {
+                if let lastData = self.bgData.last{
+                    if lastData.date < dateTimeUtils.getNowTimeIntervalUTC() && dateTimeUtils.getNowTimeIntervalUTC() - lastData.date > 5 * 60{
+                        self.bgData.removeFirst()
+                        SystemInfoModel.shared.cgmData?.removeFirst()
+                        self.bgData.append(ShareGlucoseData(sgv: -1, date: lastData.date + 300.0, direction: lastData.direction ?? "", insulin: lastData.insulin ?? ""))
+                        SystemInfoModel.shared.cgmData?.append(ShareGlucoseData(sgv: -1, date: lastData.date + 300.0, direction: lastData.direction ?? "", insulin: lastData.insulin ?? ""))
+                        DispatchQueue.main.async {
+                        self.updateBGGraph()
+                        }
+                    }
+                }
                 print((err?.localizedDescription) ?? "")
                 CommonFunctions.showToastWithMessage(err?.localizedDescription ?? "")
                 // If we get an error, immediately try to pull NS BG Data
                 self.webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
                 
-                if globalVariables.dexVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
-                    globalVariables.dexVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
-//                    DispatchQueue.main.async {
-                        //                        self.sendNotification(title: "Dexcom Share Error", body: "Please double check user name and password, internet connection, and sharing status.")
-//                    }
-                }
+//                if globalVariables.dexVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
+//                    globalVariables.dexVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
+////                    DispatchQueue.main.async {
+//                        //                        self.sendNotification(title: "Dexcom Share Error", body: "Please double check user name and password, internet connection, and sharing status.")
+////                    }
+//                }
             }
         }
     }
@@ -68,15 +79,15 @@ extension  BottomSheetVC{
             urlBGDataPath = urlBGDataPath + "token=" + token + "&count=" + points
         }
         guard let urlBGData = URL(string: urlBGDataPath) else {
-            if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
-                globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
-                //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
-            }
+//            if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
+//                globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
+//                //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
+//            }
             DispatchQueue.main.async {
                 if self.bgTimer.isValid {
                     self.bgTimer.invalidate()
                 }
-                self.startBGTimer(time: 10)
+                self.startBGTimer(time: 60)
             }
             return
         }
@@ -87,29 +98,29 @@ extension  BottomSheetVC{
         let getBGTask = URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else {
                 print(error?.localizedDescription ?? "")
-                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
-                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
-                    //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
-                }
+//                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
+//                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
+//                    self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
+//                }
                 DispatchQueue.main.async {
                     if self.bgTimer.isValid {
                         self.bgTimer.invalidate()
                     }
-                    self.startBGTimer(time: 10)
+                    self.startBGTimer(time: 60)
                 }
                 return
                 
             }
             guard let data = data else {
-                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
-                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
-                    //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
-                }
+//                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
+//                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
+//                    //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
+//                }
                 DispatchQueue.main.async {
                     if self.bgTimer.isValid {
                         self.bgTimer.invalidate()
                     }
-                    self.startBGTimer(time: 10)
+                    self.startBGTimer(time: 60)
                 }
                 return
                 
@@ -124,10 +135,10 @@ extension  BottomSheetVC{
                     
                 }
             } else {
-                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
-                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
-                    //self.sendNotification(title: "Nightscout Failure", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
-                }
+//                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
+//                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
+//                    //self.sendNotification(title: "Nightscout Failure", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
+//                }
                 DispatchQueue.main.async {
                     if self.bgTimer.isValid {
                         self.bgTimer.invalidate()

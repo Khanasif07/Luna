@@ -110,6 +110,7 @@ extension SettingsVC {
     private func tableViewSetup(){
         self.settingTableView.delegate = self
         self.settingTableView.dataSource = self
+        self.settingTableView.registerHeaderFooter(with: SettingHeaderView.self)
         self.settingTableView.registerCell(with: SettingTableCell.self)
     }
     
@@ -157,14 +158,18 @@ extension SettingsVC {
 extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return sections.endIndex
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(with: SettingTableCell.self)
-        cell.titleLbl.text = sections[indexPath.row].1.titleValue
-        cell.logoImgView.image = sections[indexPath.row].0
-        switch sections[indexPath.row].1 {
+        cell.titleLbl.text = sections[indexPath.section].1.titleValue
+        cell.logoImgView.image = sections[indexPath.section].0
+        switch sections[indexPath.section].1 {
         case .face_ID,.touch_ID:
             cell.switchView.isUserInteractionEnabled = true
             cell.nextBtn.isHidden = true
@@ -182,17 +187,26 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
         }
         cell.switchTapped = { [weak self] sender in
             guard let self = self else { return }
-            if self.sections[indexPath.row].1 ==  .face_ID ||  self.sections[indexPath.row].1 ==  .touch_ID {
+            if self.sections[indexPath.section].1 ==  .face_ID ||  self.sections[indexPath.section].1 ==  .touch_ID {
                 let isOn = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
                 self.db.collection(ApiKey.users).document(UserModel.main.id).updateData([ApiKey.isBiometricOn: !isOn])
                 AppUserDefaults.save(value: !isOn, forKey: .isBiometricSelected)
                 self.settingTableView.reloadData()
             }
-            if self.sections[indexPath.row].1 ==  .apple_Health {
+            if self.sections[indexPath.section].1 ==  .apple_Health {
                 CommonFunctions.showToastWithMessage("Under Development")
             }
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = tableView.dequeueHeaderFooter(with: SettingHeaderView.self)
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 45.0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -200,7 +214,7 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch sections[indexPath.row].1 {
+        switch sections[indexPath.section].1 {
         case .profile:
             let vc = ProfileVC.instantiate(fromAppStoryboard: .PostLogin)
             self.navigationController?.pushViewController(vc, animated: true)

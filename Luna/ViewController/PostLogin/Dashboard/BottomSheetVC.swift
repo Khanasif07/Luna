@@ -38,15 +38,9 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     var lastUpdatedCGMDate = AppUserDefaults.value(forKey: .lastUpdatedCGMDate).doubleValue
     var urlUser = UserDefaultsRepository.url.value as String
     var token = UserDefaultsRepository.token.value as String
-//    var defaults : UserDefaults?
-//    let consoleLogging = true
-//    var timeofLastBGUpdate = 0 as TimeInterval
-//    var nsVerifiedAlerted = false
-    
     var backgroundTask = BackgroundTask()
     
     // Refresh NS Data
-//    var timer = Timer()
     // check every 30 Seconds whether new bgvalues should be retrieved
     let timeInterval: TimeInterval = 30.0
     
@@ -56,16 +50,10 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     
     // Check Alarms Timer
     // Don't check within 1 minute of alarm triggering to give the snoozer time to save data
-//    var checkAlarmTimer = Timer()
-    
     var bgTimer = Timer()
-//    var deviceStatusTimer = Timer()
-//    var alarmTimer = Timer()
-//    var profileTimer = Timer()
     
     // Info Table Setup
     var bgCheckData: [ShareGlucoseData] = []
-    
     var bgData: [ShareGlucoseData] = []
     
     var newBGPulled = false
@@ -230,7 +218,9 @@ extension BottomSheetVC {
             if lastData.date < dateTimeUtils.getNowTimeIntervalUTC() {
                 bgData.removeFirst()
                 bgData.append(ShareGlucoseData(sgv: lastData.sgv, date: lastData.date + 300.0, direction: lastData.direction ?? "", insulin: lastData.insulin ?? ""))
-                self.updateBGGraph()
+                DispatchQueue.main.async {
+                    self.updateBGGraph()
+                }
             }
         }
     }

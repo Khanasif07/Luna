@@ -12,10 +12,9 @@ import UIKit
 extension BottomSheetVC {
     
     func restartAllTimers() {
-        if UserDefaultsRepository.shareUserName.value != "" && UserDefaultsRepository.sharePassword.value != "" {
-            if !bgTimer.isValid { self.startBGTimer(time: 2) }
+        if !UserDefaultsRepository.shareUserName.value.isEmpty && !UserDefaultsRepository.sharePassword.value.isEmpty {
+            if !bgTimer.isValid { self.startBGTimer(time: 10) }
             if !minAgoTimer.isValid { self.startMinAgoTimer(time: minAgoTimeInterval) }
-            // if !alarmTimer.isValid { self.startAlarmTimer(time: 30) }
         } else {
         }
     }
@@ -40,7 +39,7 @@ extension BottomSheetVC {
             let secondsAgo = now - bgSeconds
             //MARK:- Importants
 //            print("SecondsAgo:\(secondsAgo)")
-            if secondsAgo >= 360{
+            if secondsAgo >= 360 || (bgData.last!.sgv == -1){
                 self.cgmDirectionlbl.text = ""
                 self.cgmValueLbl.text = "--"
             }
@@ -101,8 +100,8 @@ extension BottomSheetVC {
     @objc func bgTimerDidEnd(_ timer:Timer) {
         
         // reset timer to 1 minute if settings aren't entered
-        if UserDefaultsRepository.shareUserName.value == "" && UserDefaultsRepository.sharePassword.value == "" && UserDefaultsRepository.url.value == "" {
-            startBGTimer(time: 60)
+        if UserDefaultsRepository.shareUserName.value.isEmpty && UserDefaultsRepository.sharePassword.value.isEmpty && UserDefaultsRepository.url.value.isEmpty {
+            startBGTimer(time: 5 * 60)
             return
         }
         

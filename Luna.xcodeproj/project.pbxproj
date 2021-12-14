@@ -94,6 +94,8 @@
 		842E9B1E2695710300F36A3D /* InsulinStep4VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842E9B1D2695710300F36A3D /* InsulinStep4VC.swift */; };
 		8432A1992672294200859B47 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8432A19B2672294200859B47 /* Localizable.strings */; };
 		8432A19F2672319B00859B47 /* BiometricIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8432A19E2672319B00859B47 /* BiometricIDAuth.swift */; };
+		843E3343276869B90081C1A9 /* SettingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843E3342276869B90081C1A9 /* SettingHeaderView.swift */; };
+		843E3346276869E10081C1A9 /* SettingHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843E3345276869E10081C1A9 /* SettingHeaderView.xib */; };
 		8445788726AFE14B008B93AD /* PairLunaProblemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8445788626AFE14B008B93AD /* PairLunaProblemVC.swift */; };
 		84467271268D867600EC55FD /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84467270268D867600EC55FD /* BLEManager.swift */; };
 		84467275268DAE1E00EC55FD /* SystemSetup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84467274268DAE1E00EC55FD /* SystemSetup.storyboard */; };
@@ -320,6 +322,8 @@
 		842E9B1D2695710300F36A3D /* InsulinStep4VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep4VC.swift; sourceTree = "<group>"; };
 		8432A19A2672294200859B47 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8432A19E2672319B00859B47 /* BiometricIDAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuth.swift; sourceTree = "<group>"; };
+		843E3342276869B90081C1A9 /* SettingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderView.swift; sourceTree = "<group>"; };
+		843E3345276869E10081C1A9 /* SettingHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingHeaderView.xib; sourceTree = "<group>"; };
 		8445788626AFE14B008B93AD /* PairLunaProblemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairLunaProblemVC.swift; sourceTree = "<group>"; };
 		84467270268D867600EC55FD /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
 		84467274268DAE1E00EC55FD /* SystemSetup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SystemSetup.storyboard; sourceTree = "<group>"; };
@@ -769,6 +773,8 @@
 				84E2D9BB26B12D26000C0FD8 /* SettingManualCell.xib */,
 				849B25602707101600323876 /* ContactsUsTableCell.swift */,
 				849B25612707101600323876 /* ContactsUsTableCell.xib */,
+				843E3342276869B90081C1A9 /* SettingHeaderView.swift */,
+				843E3345276869E10081C1A9 /* SettingHeaderView.xib */,
 			);
 			path = PostLogin;
 			sourceTree = "<group>";
@@ -1154,6 +1160,7 @@
 				84D1F4F92679D52700F131E0 /* SF-Pro-Display-HeavyItalic.otf in Resources */,
 				84D1F4F82679D52700F131E0 /* SF-Pro-Display-MediumItalic.otf in Resources */,
 				84D1F4EF2679D52700F131E0 /* SF-Pro-Display-Thin.otf in Resources */,
+				843E3346276869E10081C1A9 /* SettingHeaderView.xib in Resources */,
 				84F2A27126981DD8000FDCD5 /* BottomSheetChartCell.xib in Resources */,
 				84D1F4FC2679D52700F131E0 /* SF-Pro-Display-LightItalic.otf in Resources */,
 				84D1F4FD2679D52700F131E0 /* SF-Pro-Display-BlackItalic.otf in Resources */,
@@ -1352,6 +1359,7 @@
 				840A7DFD2696E98C005AA1E6 /* DeviceConnectedVC.swift in Sources */,
 				84CC12E92668D083009316FC /* UITableView+ UITableViewCellExtension.swift in Sources */,
 				84FDA0A3267DC5D700AC8BE9 /* ProfileSetupVC.swift in Sources */,
+				843E3343276869B90081C1A9 /* SettingHeaderView.swift in Sources */,
 				188DB14626E0993600FBF042 /* MaskView.swift in Sources */,
 				8448DBDF2701A9570040137F /* Pulsator.swift in Sources */,
 				84FDA0A7267DCB1000AC8BE9 /* MessageSenderCell.swift in Sources */,
