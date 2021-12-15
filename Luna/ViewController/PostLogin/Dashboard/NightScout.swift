@@ -73,7 +73,7 @@ extension  BottomSheetVC{
         
         // URL processor
         var urlBGDataPath: String = UserDefaultsRepository.url.value + "/api/v1/entries/sgv.json?"
-        if token == "" {
+        if token.isEmpty {
             urlBGDataPath = urlBGDataPath + "count=" + points
         } else {
             urlBGDataPath = urlBGDataPath + "token=" + token + "&count=" + points
@@ -169,7 +169,7 @@ extension  BottomSheetVC{
         let now = dateTimeUtils.getNowTimeIntervalUTC()
         if !isNS && (latestDate + 330) < now {
             webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
-            CommonFunctions.showToastWithMessage("CGM data unavailable")
+            CommonFunctions.showToastWithMessage("Dexcom CGM data unavailable")
             //MARK:- TO DO
             return
         }
@@ -288,7 +288,7 @@ extension  BottomSheetVC{
             //MARK:- Importants
             //Send time stamps to Luna Hardware
 //            let randomBGValue = Int.random(in: 300..<325)
-            let updatedBG = latestBG > 200 ? latestBG + 75 : latestBG + 125
+            let updatedBG = latestBG > 200 ? latestBG + (375 - latestBG - 50) : latestBG + 125
             BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(updatedBG)))
 //            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(randomBGValue)))
             if let directionBG = entries[latestEntryi].direction {

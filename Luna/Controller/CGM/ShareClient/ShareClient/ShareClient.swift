@@ -285,7 +285,7 @@ private let dexcomUserAgent = "Dexcom Share/3.0.2.11 CFNetwork/711.2.23 Darwin/1
 private let dexcomApplicationId = "d89443d2-327c-4a6f-89e5-496bbb0317db"
 private let dexcomLoginPath = "/ShareWebServices/Services/General/LoginPublisherAccountByName"
 private let dexcomLatestGlucosePath = "/ShareWebServices/Services/Publisher/ReadPublisherLatestGlucoseValues"
-private let maxReauthAttempts = 5
+private let maxReauthAttempts = 2
 
 // TODO use an HTTP library which supports JSON and futures instead of callbacks.
 // using cocoapods in a playground appears complicated
@@ -330,7 +330,6 @@ public class ShareClient {
         self.shareServer = shareServer
     }
     public convenience init(username: String, password: String, shareServer:KnownShareServers=KnownShareServers.US) {
-
         self.init(username: username, password: password, shareServer:shareServer.rawValue)
 
     }

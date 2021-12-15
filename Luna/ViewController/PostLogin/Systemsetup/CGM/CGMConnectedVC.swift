@@ -28,6 +28,7 @@ class CGMConnectedVC: UIViewController {
     var cgmConnectedSuccess: ((UIButton, String)->())?
     var cgmData : String = ""
     var directionString : String = ""
+    var token = UserDefaultsRepository.token.value as String
     
     var dexShare: ShareClient?;
     var bgData: [ShareGlucoseData] = []
@@ -148,7 +149,7 @@ extension CGMConnectedVC {
         if !isNS && (latestDate + 330) < now {
             webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
             DispatchQueue.main.async {
-            CommonFunctions.showToastWithMessage("CGM data unavailable")
+            CommonFunctions.showToastWithMessage("Dexcom CGM data unavailable")
             self.dismiss(animated: true, completion: nil)
             }
             return
@@ -263,16 +264,16 @@ extension CGMConnectedVC {
         
         // URL processor
         var urlBGDataPath: String = UserDefaultsRepository.url.value + "/api/v1/entries/sgv.json?"
-//        if token == "" {
+        if token.isEmpty {
             urlBGDataPath = urlBGDataPath + "count=" + points
-//        } else {
-//            urlBGDataPath = urlBGDataPath + "token=" + token + "&count=" + points
-//        }
+        } else {
+            urlBGDataPath = urlBGDataPath + "token=" + token + "&count=" + points
+        }
         guard let urlBGData = URL(string: urlBGDataPath) else {
-            if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
-                globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
+//            if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
+//                globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
                 //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
-            }
+//            }
             return
         }
         var request = URLRequest(url: urlBGData)
@@ -281,18 +282,18 @@ extension CGMConnectedVC {
         // Downloader
         let getBGTask = URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else {
-                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
-                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
-                    //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
-                }
+//                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
+//                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
+//                    self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
+//                }
                 return
                 
             }
             guard let data = data else {
-                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
-                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
+//                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
+//                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
                     //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
-                }
+//                }
                 return
                 
             }
@@ -306,10 +307,10 @@ extension CGMConnectedVC {
                     
                 }
             } else {
-                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
-                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
+//                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
+//                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
                     //self.sendNotification(title: "Nightscout Failure", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
-                }
+//                }
                 return
                 
             }

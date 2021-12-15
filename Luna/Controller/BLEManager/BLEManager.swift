@@ -202,7 +202,7 @@ public class BleManager: NSObject{
         return 0
     }
     
-    private func manageInsulinData(data: [[String]]){
+    private func manageInsulinData(data: [[String]],bytes: Int){
         //
         let now = dateTimeUtils.getNowTimeIntervalUTC()
         if let fetchedData = UserDefaults.standard.data(forKey: ApiKey.dosingHistoryData) {
@@ -210,7 +210,8 @@ public class BleManager: NSObject{
             if !fetchedDosingData.isEmpty{SystemInfoModel.shared.dosingData = fetchedDosingData}
         }
         data.forEach { (tupls) in
-            let  dosing = DosingHistory(sessionStatus: tupls.first ?? "", sessionTime: Double(tupls.last ?? "") ?? 0.0, insulin: (tupls.first ?? "") == "BEGIN" ? "0.25" : (tupls.first ?? "") == "END" ? "0.75" : "0.5" , sessionExpired: false,sessionCreated: false)
+            let insulin =  ((tupls.first ?? "") == "BEGIN" ? "0.25" : ((tupls.first ?? "") == "END" ? "0.75" : "0.5"))
+            let  dosing = DosingHistory(sessionStatus: tupls.first ?? "", sessionTime: Double(tupls.last ?? "") ?? 0.0, insulin: insulin, sessionExpired: false,sessionCreated: false)
             if !SystemInfoModel.shared.dosingData.contains(where: {$0.sessionTime == dosing.sessionTime}){
                 if (SystemInfoModel.shared.dosingData.last?.sessionStatus) == dosing.sessionStatus && dosing.sessionStatus == "BEGIN" {
                     SystemInfoModel.shared.dosingData.removeLast()
@@ -288,6 +289,13 @@ public class BleManager: NSObject{
                 }
             }
         }
+        print(bytes)
+//        if let dataInCharacteristic = self.cgmDataInCharacteristic{
+//            if !data.isEmpty && bytes > 1{
+//                self.writeValue(myCharacteristic: dataInCharacteristic,value: "#CLEAR_DOSE_DATA")
+//            }
+//        }
+        NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
         print(SystemInfoModel.shared.dosingData)
     }
 }
@@ -326,7 +334,6 @@ extension BleManager: CBPeripheralDelegate {
                 switch characteristic.uuid {
                 case dataInCBUUID:
                     self.cgmDataInCharacteristic = characteristic
-                    writeValue(myCharacteristic: characteristic,value: "#GET_DOSE_DATA")
                     peripheral.setNotifyValue(true, for: characteristic)
                 case iobInput:
                     writeValue(myCharacteristic: characteristic,value:  "8")
@@ -384,15 +391,9 @@ extension BleManager: CBPeripheralDelegate {
             }
             CommonFunctions.delay(delay: 5) {
                 if !filterDataArray.isEmpty{
-                    self.manageInsulinData(data: filterDataArray)
+                    self.manageInsulinData(data: filterDataArray,bytes: characteristic.value?.count ?? 0)
                 }
             }
-//            if let dataInCharacteristic = self.cgmDataInCharacteristic{
-//                if !dataArray.isEmpty{
-//                self.writeValue(myCharacteristic: dataInCharacteristic,value: "#CLEAR_DOSE_DATA")
-//                }
-//            }
-            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
             print("handled Characteristic Value for dataOutCBUUID: \(String(describing: data))")
         case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
             print("handled Characteristic Value for: \(String(describing: characteristic.value))")
@@ -401,9 +402,6 @@ extension BleManager: CBPeripheralDelegate {
         case IOBout:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.iobData = (Double(data) ?? 0.0).roundToDecimal(1)
-//            if let dataInCharacteristic = self.cgmDataInCharacteristic{
-//                writeValue(myCharacteristic: dataInCharacteristic,value: "#GET_DOSE_DATA")
-//            }
             NotificationCenter.default.post(name: Notification.Name.ReservoirUpdateValue, object: nil)
             print("handled Characteristic Value for IOBout:  \(data)")
         case WriteAcknowledgement:

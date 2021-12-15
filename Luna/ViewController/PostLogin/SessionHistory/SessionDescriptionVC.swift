@@ -115,7 +115,7 @@ class SessionDescriptionVC: UIViewController {
         self.insulinDataArray = filteredInsulinArray
         self.filterInsulinDataArray = self.insulinDataArray?.filter({ (bgData) -> Bool in
             return bgData.insulin == "0.5"
-        })
+        }).sorted(by: {$0.date > $1.date})
         if filterInsulinDataArray?.endIndex ?? 0 > 0 {
             self.sections = ["Glucose Graph","List View"]
             self.insulinQty.text = "\((filterInsulinDataArray?.endIndex ?? 0) / 2) units"
