@@ -29,6 +29,7 @@ class CGMConnectedVC: UIViewController {
     var cgmData : String = ""
     var directionString : String = ""
     var token = UserDefaultsRepository.token.value as String
+    var errMessage : String = ""
     
     var dexShare: ShareClient?;
     var bgData: [ShareGlucoseData] = []
@@ -123,9 +124,9 @@ extension CGMConnectedVC {
         var onlyPullLastRecord = false
         if UserDefaultsRepository.alwaysDownloadAllBG.value { onlyPullLastRecord = false }
         if !shareUserName.isEmpty && !sharePassword.isEmpty {
-            webLoadDexShare(onlyPullLastRecord: onlyPullLastRecord)
+            self.webLoadDexShare(onlyPullLastRecord: onlyPullLastRecord)
         } else {
-            webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
+            self.webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
         }
     }
     
@@ -154,39 +155,6 @@ extension CGMConnectedVC {
             }
             return
         }
-        
-        // Start the BG timer based on the reading
-//        let secondsAgo = now - latestDate
-        
-//        DispatchQueue.main.async {
-//            // if reading is overdue over: 20:00, re-attempt every 5 minutes
-//            if secondsAgo >= (20 * 60) {
-//                self.startBGTimer(time: (5 * 60))
-//                print("##### started 5 minute bg timer")
-//
-//            // if the reading is overdue: 10:00-19:59, re-attempt every minute
-//            } else if secondsAgo >= (10 * 60) {
-//                self.startBGTimer(time: 60)
-//                print("##### started 1 minute bg timer")
-//
-//            // if the reading is overdue: 7:00-9:59, re-attempt every 30 seconds
-//            } else if secondsAgo >= (7 * 60) {
-//                self.startBGTimer(time: 30)
-//                print("##### started 30 second bg timer")
-//
-//            // if the reading is overdue: 5:00-6:59 re-attempt every 10 seconds
-//            } else if secondsAgo >= (5 * 60) {
-//                self.startBGTimer(time: 10)
-//                print("##### started 10 second bg timer")
-//
-//            // We have a current reading. Set timer to 5:10 from last reading
-//            } else {
-//                self.startBGTimer(time: 300 - secondsAgo + Double(UserDefaultsRepository.bgUpdateDelay.value))
-//                let timerVal = 310 - secondsAgo
-//                print("##### started 5:10 bg timer: \(timerVal)")
-//            }
-//        }
-        
         // If we already have data, we're going to pop it to the end and remove the first. If we have old or no data, we'll destroy the whole array and start over. This is simpler than determining how far back we need to get new data from in case Dex back-filled readings
         if !onlyPullLastRecord {
             bgData.removeAll()
@@ -231,11 +199,26 @@ extension CGMConnectedVC {
                 self.ProcessNSBGData(data: data, onlyPullLastRecord: onlyPullLastRecord)
             } else {
                 // If we get an error, immediately try to pull NS BG Data
+                guard let actualError = err else { return }
+                switch actualError {
+                case .dataError(reason: let luna):
+                    print(luna)
+                    self.errMessage = luna
+                case .loginError(errorCode: let luna):
+                    print(luna)
+                    self.errMessage = luna
+                case .httpError(let err):
+                    print(err.localizedDescription)
+                    self.errMessage = err.localizedDescription
+                default:
+                    print(actualError.localizedDescription)
+                    self.errMessage = actualError.localizedDescription
+                }
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.titleLbl.text = "Connection failed!"
-                    self.showAlert(title: "Dexcom Server Error", msg: err?.localizedDescription ?? "") {
+                    self.showAlert(title: "Dexcom Server Error", msg: self.errMessage) {
                         
                         SystemInfoModel.shared.cgmUnit = Int(self.ValueLbl.text ?? "") ?? 0
                         self.dismiss(animated: true) {
@@ -246,9 +229,9 @@ extension CGMConnectedVC {
                 
                 self.webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
                 
-                if globalVariables.dexVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
-                    globalVariables.dexVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
-                }
+//                if globalVariables.dexVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
+//                    globalVariables.dexVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
+//                }
             }
         }
     }

@@ -161,7 +161,7 @@ private var TrendTable: [String] = [
 // TODO: probably better to make this an inherited class rather than an extension
 extension ShareClient {
 
-    public func fetchData(_ entries: Int, callback: @escaping (Error?, [ShareGlucoseData]?) -> Void) {
+    public func fetchData(_ entries: Int, callback: @escaping (ShareError?, [ShareGlucoseData]?) -> Void) {
         
         self.fetchLast(entries) { (error, result) -> () in
             guard error == nil || result != nil else {

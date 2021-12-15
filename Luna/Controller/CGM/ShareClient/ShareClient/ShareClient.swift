@@ -334,11 +334,11 @@ public class ShareClient {
 
     }
 
-    public func fetchLast(_ n: Int, callback: @escaping (Error?, [ShareGlucose]?) -> Void) {
+    public func fetchLast(_ n: Int, callback: @escaping (ShareError?, [ShareGlucose]?) -> Void) {
         fetchLastWithRetries(n, remaining: maxReauthAttempts, callback: callback)
     }
 
-    private func ensureToken(_ callback: @escaping (Error?) -> Void) {
+    private func ensureToken(_ callback: @escaping (ShareError?) -> Void) {
         if token != nil {
             callback(nil)
         } else {
@@ -353,7 +353,7 @@ public class ShareClient {
         }
     }
 
-    private func fetchToken(_ callback: @escaping (Error?, String?) -> Void) {
+    private func fetchToken(_ callback: @escaping (ShareError?, String?) -> Void) {
         let data = [
             "accountName": username,
             "password": password,
@@ -366,16 +366,14 @@ public class ShareClient {
 
         dexcomPOST(url, JSONData: data as [String : AnyObject]?) { (error, response) in
             if let error = error {
-//                return callback(.httpError(error), nil)
-                return callback(error,nil)
+                return callback(.httpError(error), nil)
             }
 
             guard let   response = response,
                 let data = response.data(using: .utf8),
                 let decoded = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
                 else {
-//                    return callback(.loginError(errorCode: "unknown"), nil)
-                return callback(error,nil)
+                    return callback(.loginError(errorCode: "unknown"), nil)
             }
 
             if let token = decoded as? String {
@@ -383,22 +381,20 @@ public class ShareClient {
                 callback(nil, token)
             } else {
                 // failure is a JSON object containing the error reason
-//                let errorCode = (decoded as? [String: String])?["Code"] ?? "unknown"
-//                callback(.loginError(errorCode: errorCode), nil)
-                return callback(error,nil)
+                let errorCode = (decoded as? [String: String])?["Code"] ?? "unknown"
+                callback(.loginError(errorCode: errorCode), nil)
             }
         }
     }
 
-    private func fetchLastWithRetries(_ n: Int, remaining: Int, callback: @escaping (Error?, [ShareGlucose]?) -> Void) {
+    private func fetchLastWithRetries(_ n: Int, remaining: Int, callback: @escaping (ShareError?, [ShareGlucose]?) -> Void) {
         ensureToken() { (error) in
             guard error == nil else {
                 return callback(error, nil)
             }
 
             guard var components = URLComponents(string: self.shareServer + dexcomLatestGlucosePath) else {
-//                return callback(.fetchError, nil)
-                  return callback(error,nil)
+                return callback(.fetchError, nil)
             }
 
             // Dexcom Share only returns up to 24 hrs of data today
@@ -411,14 +407,12 @@ public class ShareClient {
             ]
 
             guard let url = components.url else {
-//                return callback(.fetchError, nil)
-                return callback(error,nil)
+                return callback(.fetchError, nil)
             }
 
             dexcomPOST(url) { (error, response) in
                 if let error = error {
-//                    return callback(.httpError(error), nil)
-                    return callback(error,nil)
+                    return callback(.httpError(error), nil)
                 }
 
                 do {
@@ -452,8 +446,7 @@ public class ShareClient {
                 } catch let error as ShareError {
                     callback(error, nil)
                 } catch {
-//                    callback(.fetchError, nil)
-                    callback(error,nil)
+                    callback(.fetchError, nil)
                 }
             }
         }

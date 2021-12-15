@@ -48,8 +48,22 @@ extension  BottomSheetVC{
                         }
                     }
                 }
-                print((err?.localizedDescription) ?? "")
-                CommonFunctions.showToastWithMessage(err?.localizedDescription ?? "")
+                guard let actualError = err as? ShareError else { return }
+                switch actualError {
+                case .dataError(reason: let luna):
+                    print(luna)
+                    self.errMessage = luna
+                case .loginError(errorCode: let luna):
+                    print(luna)
+                    self.errMessage = luna
+                case .httpError(let err):
+                    print(err.localizedDescription)
+                    self.errMessage = err.localizedDescription
+                default:
+                    print(actualError.localizedDescription)
+                    self.errMessage = actualError.localizedDescription
+                }
+                CommonFunctions.showToastWithMessage(self.errMessage)
                 // If we get an error, immediately try to pull NS BG Data
                 self.webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
                 

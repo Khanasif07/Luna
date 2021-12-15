@@ -28,7 +28,7 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     //================
     // Variables for BG Charts
     let ScaleXMax:Float = 150.0
-    public var numPoints: Int = 13
+    var errMessage :String = ""
     var firstGraphLoad: Bool = true
     var minAgoBG: Double = 0.0
     var currentOverride = 1.0
