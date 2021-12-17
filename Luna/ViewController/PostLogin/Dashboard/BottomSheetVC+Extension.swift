@@ -85,9 +85,11 @@ extension BottomSheetVC {
     }
     
     func persistentNotification(body: String){
-//        if UserDefaultsRepository.persistentNotification.value && bgTime > UserDefaultsRepository.persistentNotificationLastBGTime.value && bgData.count > 0 {
-        self.sendNotification(self,body: body)
-//        }
+        //        if UserDefaultsRepository.persistentNotification.value && bgTime > UserDefaultsRepository.persistentNotificationLastBGTime.value && bgData.count > 0 {
+        CommonFunctions.delay(delay: 5.0) {
+            self.sendNotification(self,body: body)
+        }
+        //        }
     }
     
     func sendNotification(_ sender: Any,body: String) {
