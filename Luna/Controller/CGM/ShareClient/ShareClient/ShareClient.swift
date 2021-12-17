@@ -426,7 +426,8 @@ public class ShareClient {
                             self.token = nil
                             return self.fetchLastWithRetries(n, remaining: remaining - 1, callback: callback)
                         } else {
-                            throw ShareError.dataError(reason: "Failed to decode SGVs as array after trying to reauth: " + response)
+//                            throw ShareError.dataError(reason: "Failed to decode SGVs as array after trying to reauth: " + response)
+                            throw ShareError.dataError(reason: "AccountInvalid" + response)
                         }
                     }
 
