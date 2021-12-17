@@ -227,7 +227,7 @@ public class BleManager: NSObject{
             }
         }
         //
-        SystemInfoModel.shared.dosingData = SystemInfoModel.shared.dosingData.filter({ now - $0.sessionTime <= 86400.0})
+        SystemInfoModel.shared.dosingData = SystemInfoModel.shared.dosingData.filter({ (now - $0.sessionTime <= 86400.0)})
         UserDefaultsRepository.sessionStartDate.value = 0.0
         UserDefaultsRepository.sessionEndDate.value  = 0.0
         //
@@ -489,13 +489,16 @@ extension BleManager: CBCentralManagerDelegate {
         isUnpaired = false
         isMyPeripheralConected = false
         systemStatusData = ""
+        batteryData = ""
+        reservoirLevelData = ""
+        self.iobData = 0.0
         NotificationCenter.default.post(name: Notification.Name.BLEDidDisConnectSuccessfully, object: nil)
-        DispatchQueue.main.async {
-            if self.statusTimer.isValid {
-                self.statusTimer.invalidate()
-            }
-            self.startStatusTimer()
-        }
+//        DispatchQueue.main.async {
+//            if self.statusTimer.isValid {
+//                self.statusTimer.invalidate()
+//            }
+//            self.startStatusTimer()
+//        }
     }
     
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
@@ -508,6 +511,8 @@ extension BleManager: CBCentralManagerDelegate {
         myperipheral?.delegate = nil
         myperipheral = nil
         systemStatusData = ""
+        batteryData = ""
+        reservoirLevelData = ""
     }
     
     public func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?){

@@ -219,15 +219,13 @@ extension CGMConnectedVC {
                     self.activityIndicator.isHidden = true
                     self.titleLbl.text = "Connection failed!"
                     self.showAlert(title: "Dexcom Server Error", msg: self.errMessage) {
-                        
                         SystemInfoModel.shared.cgmUnit = Int(self.ValueLbl.text ?? "") ?? 0
                         self.dismiss(animated: true) {
-                            
                         }
                     }
                 }
                 
-                self.webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
+//                self.webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
                 
 //                if globalVariables.dexVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
 //                    globalVariables.dexVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()

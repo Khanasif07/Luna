@@ -48,7 +48,7 @@ extension  BottomSheetVC{
                         }
                     }
                 }
-                guard let actualError = err as? ShareError else { return }
+                guard let actualError = err else { return }
                 switch actualError {
                 case .dataError(reason: let luna):
                     print(luna)

@@ -29,7 +29,15 @@ class SessionFilterVC: UIViewController {
     private lazy var startTimePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.backgroundColor = .white
+        var minDateComponent = Calendar.current.dateComponents([.day,.month,.year], from: Date())
+        minDateComponent.day = 01
+        minDateComponent.month = 01
+        minDateComponent.year = 2020
+
+        let minDate = Calendar.current.date(from: minDateComponent)
+        print(" min date : \(String(describing: minDate))")
         picker.datePickerMode = UIDatePicker.Mode.date
+        picker.minimumDate = minDate
         picker.maximumDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())
         if #available(iOS 13.4, *) {
             picker.preferredDatePickerStyle = .wheels

@@ -93,7 +93,7 @@ class FirestoreController:NSObject{
                         user.dob = data[ApiKey.dob] as? String ?? ""
                         user.email = data[ApiKey.email] as? String ?? ""
                         //
-                        if let decryptedData = AES256Crypter.decryptionAESModeECB(messageData: (data[ApiKey.password] as? String ?? "").data(using: String.Encoding.utf8)!, key: "Luna"){
+                        if let decryptedData = AES256Crypter.decryptionAESModeECB(messageData: (data[ApiKey.password] as? String ?? "").data(using: String.Encoding.utf8) ?? Data(), key: "Luna"){
                             print(String(bytes: decryptedData, encoding: String.Encoding.utf8) ?? "")
                             user.password = String(bytes: decryptedData, encoding: String.Encoding.utf8) ?? ""
                         }
@@ -109,7 +109,7 @@ class FirestoreController:NSObject{
                         //MARK:- Important
                         UserDefaultsRepository.shareUserName.value = data[ApiKey.shareUserName] as? String ?? ""
                         //
-                        if let decryptedData = AES256Crypter.decryptionAESModeECB(messageData: (data[ApiKey.sharePassword] as? String ?? "").data(using: String.Encoding.utf8)!, key: "Luna"){
+                        if let decryptedData = AES256Crypter.decryptionAESModeECB(messageData: (data[ApiKey.sharePassword] as? String ?? "").data(using: String.Encoding.utf8) ?? Data(), key: "Luna"){
                             print(String(bytes: decryptedData, encoding: String.Encoding.utf8) ?? "")
                             UserDefaultsRepository.sharePassword.value = String(bytes: decryptedData, encoding: String.Encoding.utf8) ?? ""
                         }
@@ -304,6 +304,14 @@ class FirestoreController:NSObject{
     //MARK:- PerformCleanUp
     //=======================
     static func performCleanUp(for_logout: Bool = true) {
+        //
+//        if let fetchedData = UserDefaults.standard.data(forKey: ApiKey.dosingHistoryData) {
+//            let fetchedDosingData = try! JSONDecoder().decode([DosingHistory].self, from: fetchedData)
+//            if !fetchedDosingData.isEmpty{SystemInfoModel.shared.dosingData = fetchedDosingData}
+//        }
+//        let dosingData = try! JSONEncoder().encode(SystemInfoModel.shared.dosingData)
+//        UserDefaults.standard.set(dosingData, forKey: ApiKey.dosingHistoryData)
+        //
         let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
         let isBiometricEnable = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
         let isBiometricCompleted = AppUserDefaults.value(forKey: .isBiometricCompleted).boolValue

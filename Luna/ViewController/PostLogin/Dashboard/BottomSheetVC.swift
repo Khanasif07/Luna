@@ -34,8 +34,6 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     var currentOverride = 1.0
     // Vars for NS Pull
     var graphHours:Int=24
-    var mmol = false as Bool
-    var lastUpdatedCGMDate = AppUserDefaults.value(forKey: .lastUpdatedCGMDate).doubleValue
     var urlUser = UserDefaultsRepository.url.value as String
     var token = UserDefaultsRepository.token.value as String
     var backgroundTask = BackgroundTask()

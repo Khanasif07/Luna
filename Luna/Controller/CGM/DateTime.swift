@@ -41,7 +41,7 @@ public class dateTimeUtils {
     
     static func getTimeInterval24HoursAgo() -> TimeInterval {
         let today = Date()
-        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: today)!
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: today) ?? Date()
         return yesterday.timeIntervalSince1970
     }
     
@@ -59,7 +59,7 @@ public class dateTimeUtils {
     
     static func nowMinus24HoursTimeInterval() -> String {
         let today = Date()
-        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: today)!
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: today)  ?? Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         dateFormatter.locale = Locale(identifier: "en_US")
@@ -70,7 +70,7 @@ public class dateTimeUtils {
     
     static func nowMinus10DaysTimeInterval() -> String {
         let today = Date()
-        let oldDate = Calendar.current.date(byAdding: .day, value: -10, to: today)!
+        let oldDate = Calendar.current.date(byAdding: .day, value: -10, to: today)  ?? Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         dateFormatter.locale = Locale(identifier: "en_US")
@@ -88,7 +88,7 @@ public class dateTimeUtils {
     }
     
     static func is24Hour() -> Bool {
-        let dateFormat = DateFormatter.dateFormat(fromTemplate: "j", options: 0, locale: Locale.current)!
+        let dateFormat = DateFormatter.dateFormat(fromTemplate: "j", options: 0, locale: Locale.current)  ?? ""
 
         return dateFormat.firstIndex(of: "a") == nil
     }
