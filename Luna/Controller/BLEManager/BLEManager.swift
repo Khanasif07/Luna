@@ -485,20 +485,26 @@ extension BleManager: CBCentralManagerDelegate {
     
     public func centralManager (_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("DisConnected!")
-        if !isUnpaired{ centralManager.connect(peripheral, options: nil)}
+        if !isUnpaired{
+            systemStatusData = ""
+            centralManager.connect(peripheral, options: nil)}
+        else{
+            systemStatusData = ""
+            batteryData = ""
+            reservoirLevelData = ""
+            iobData = 0.0
+        }
         isUnpaired = false
         isMyPeripheralConected = false
-        systemStatusData = ""
-        batteryData = ""
-        reservoirLevelData = ""
-        self.iobData = 0.0
         NotificationCenter.default.post(name: Notification.Name.BLEDidDisConnectSuccessfully, object: nil)
-//        DispatchQueue.main.async {
-//            if self.statusTimer.isValid {
-//                self.statusTimer.invalidate()
-//            }
-//            self.startStatusTimer()
-//        }
+        if !isUnpaired{
+            DispatchQueue.main.async {
+                if self.statusTimer.isValid {
+                    self.statusTimer.invalidate()
+                }
+                self.startStatusTimer()
+            }
+        }
     }
     
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
