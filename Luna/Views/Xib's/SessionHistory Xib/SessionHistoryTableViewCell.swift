@@ -25,6 +25,6 @@ class SessionHistoryTableViewCell: UITableViewCell {
     }
     
     func configureCellData(model: SessionHistory){
-        self.unitLbl.text = "\(model.insulin / 2) units delivered" + " | " +   "\(Int(model.range))% in range"
+        self.unitLbl.text = "\(Double(model.insulin) / 2) units delivered" + " | " +   "\(Int(model.range))% in range"
     }
 }

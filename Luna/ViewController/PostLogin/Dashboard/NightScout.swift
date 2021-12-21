@@ -301,8 +301,8 @@ extension  BottomSheetVC{
             self.setBGTextColor()
             //MARK:- Importants
             //Send time stamps to Luna Hardware
-//            let randomBGValue = Int.random(in: 300..<325)
-            let updatedBG = latestBG > 200 ? latestBG + (375 - latestBG - 50) : latestBG + 125
+            let randomBGValue = Int.random(in: 275..<325)
+            let updatedBG = latestBG > 120 ? randomBGValue : latestBG + 100
             BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(updatedBG)))
 //            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(randomBGValue)))
             if let directionBG = entries[latestEntryi].direction {
