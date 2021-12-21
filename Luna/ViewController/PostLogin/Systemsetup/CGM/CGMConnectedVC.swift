@@ -202,14 +202,32 @@ extension CGMConnectedVC {
                 guard let actualError = err else { return }
                 switch actualError {
                 case .dataError(reason: let luna):
-                    print(luna)
-                    self.errMessage = luna
+                    if luna == "AccountPasswordInvalid"{
+                        self.errMessage = "Account Password Invalid"
+                    }
+                    else if luna == "AccountInvalid"{
+                        self.errMessage = "Account Invalid"
+                    }else {
+                        self.errMessage = luna
+                    }
                 case .loginError(errorCode: let luna):
-                    print(luna)
-                    self.errMessage = luna
+                    if luna == "AccountPasswordInvalid"{
+                        self.errMessage = "Account Password Invalid"
+                    }
+                    else if luna == "AccountInvalid"{
+                        self.errMessage = "Account Invalid"
+                    }else {
+                        self.errMessage = luna
+                    }
                 case .httpError(let err):
-                    print(err.localizedDescription)
-                    self.errMessage = err.localizedDescription
+                    if err.localizedDescription == "AccountPasswordInvalid"{
+                        self.errMessage = "Account Password Invalid"
+                    }
+                    else if err.localizedDescription == "AccountInvalid"{
+                        self.errMessage = "Account Invalid"
+                    }else {
+                        self.errMessage = err.localizedDescription
+                    }
                 default:
                     print(actualError.localizedDescription)
                     self.errMessage = actualError.localizedDescription
