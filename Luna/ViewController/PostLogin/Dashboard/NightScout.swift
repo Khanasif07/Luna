@@ -101,7 +101,7 @@ extension  BottomSheetVC{
                 if self.bgTimer.isValid {
                     self.bgTimer.invalidate()
                 }
-                self.startBGTimer(time: 60)
+                self.startBGTimer(time: 30)
             }
             return
         }
@@ -120,7 +120,7 @@ extension  BottomSheetVC{
                     if self.bgTimer.isValid {
                         self.bgTimer.invalidate()
                     }
-                    self.startBGTimer(time: 60)
+                    self.startBGTimer(time: 30)
                 }
                 return
                 
@@ -134,7 +134,7 @@ extension  BottomSheetVC{
                     if self.bgTimer.isValid {
                         self.bgTimer.invalidate()
                     }
-                    self.startBGTimer(time: 60)
+                    self.startBGTimer(time: 30)
                 }
                 return
                 
@@ -157,7 +157,7 @@ extension  BottomSheetVC{
                     if self.bgTimer.isValid {
                         self.bgTimer.invalidate()
                     }
-                    self.startBGTimer(time: 10)
+                    self.startBGTimer(time: 30)
                 }
                 return
                 
@@ -182,6 +182,19 @@ extension  BottomSheetVC{
         
         let now = dateTimeUtils.getNowTimeIntervalUTC()
         if !isNS && (latestDate + 330) < now {
+            //
+            if let lastData = self.bgData.last{
+                if lastData.date < dateTimeUtils.getNowTimeIntervalUTC() && dateTimeUtils.getNowTimeIntervalUTC() - lastData.date > 5 * 60{
+                    self.bgData.removeFirst()
+                    SystemInfoModel.shared.cgmData?.removeFirst()
+                    self.bgData.append(ShareGlucoseData(sgv: -1, date: lastData.date + 300.0, direction: lastData.direction ?? "", insulin: lastData.insulin ?? ""))
+                    SystemInfoModel.shared.cgmData?.append(ShareGlucoseData(sgv: -1, date: lastData.date + 300.0, direction: lastData.direction ?? "", insulin: lastData.insulin ?? ""))
+                    DispatchQueue.main.async {
+                    self.updateBGGraph()
+                    }
+                }
+            }
+            //
             webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
             CommonFunctions.showToastWithMessage("Dexcom CGM data unavailable")
             //MARK:- TO DO

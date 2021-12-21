@@ -81,12 +81,12 @@ extension BottomSheetVC {
     {
         let 
             graphics:[String:String]=["Flat":"→","DoubleUp":"↑↑","SingleUp":"↑","FortyFiveUp":"↗","FortyFiveDown":"↘︎","SingleDown":"↓","DoubleDown":"↓↓","None":"-","NONE":"-","NOT COMPUTABLE":"-","RATE OUT OF RANGE":"-", "": "-","NotComputable":  "-"]
-        return graphics[value]!
+        return graphics[value] ?? ""
     }
     
     func persistentNotification(body: String){
         //        if UserDefaultsRepository.persistentNotification.value && bgTime > UserDefaultsRepository.persistentNotificationLastBGTime.value && bgData.count > 0 {
-        CommonFunctions.delay(delay: 5.0) {
+        if !isNotificationProgress{
             self.sendNotification(self,body: body)
         }
         //        }
@@ -95,7 +95,7 @@ extension BottomSheetVC {
     func sendNotification(_ sender: Any,body: String) {
         
 //        UNUserNotificationCenter.current().delegate = self
-        
+        self.isNotificationProgress = true
         let content = UNMutableNotificationContent()
         content.title = ""
         content.subtitle = ""
@@ -115,6 +115,9 @@ extension BottomSheetVC {
         let action = UNNotificationAction(identifier: "snooze", title: "Snooze", options: [])
         let category = UNNotificationCategory(identifier: "category", actions: [action], intentIdentifiers: [], options: [])
         UNUserNotificationCenter.current().setNotificationCategories([category])
+        CommonFunctions.delay(delay: 2.5) {
+            self.isNotificationProgress = false
+        }
 //    }
 }
     

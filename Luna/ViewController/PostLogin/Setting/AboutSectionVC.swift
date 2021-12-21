@@ -184,8 +184,8 @@ extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
                         }
                     })
                 case .email_password:
-                    let email = AppUserDefaults.value(forKey: .defaultEmail).stringValue
-                    let password = AppUserDefaults.value(forKey: .defaultPassword).stringValue
+                    let email = UserModel.main.email
+                    let password = UserModel.main.password
                     let credential = EmailAuthProvider.credential(withEmail: email, password: password)
                     Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (result, error) in
                         if let error = error {

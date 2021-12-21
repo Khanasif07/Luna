@@ -389,7 +389,7 @@ extension BleManager: CBPeripheralDelegate {
             let filterDataArray = dataArray.map { (stringValue) -> [String] in
                 return stringValue.split{$0 == ":"}.map(String.init)
             }
-            CommonFunctions.delay(delay: 5) {
+            CommonFunctions.delay(delay: 2.5) {
                 if !filterDataArray.isEmpty{
                     self.manageInsulinData(data: filterDataArray,bytes: characteristic.value?.count ?? 0)
                 }

@@ -123,9 +123,9 @@ extension SettingsVC {
     }
     
     private func getLoginType(){
-        if let providerData = Auth.auth().currentUser?.providerData {
-            for userInfo in providerData {
-                switch userInfo.providerID {
+        if let providerData = Auth.auth().currentUser?.providerData.last {
+//            for userInfo in providerData {
+                switch providerData.providerID {
                 case LoginType.google.title:
                     loginType = .google
                     return
@@ -136,9 +136,9 @@ extension SettingsVC {
                     loginType = .email_password
                     return
                 default:
-                    print("provider is \(userInfo.providerID)")
+                    print("provider is \(providerData.providerID)")
                 }
-            }
+//            }
         }
     }
     

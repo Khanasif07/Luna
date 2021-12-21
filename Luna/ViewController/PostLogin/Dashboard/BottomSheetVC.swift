@@ -30,8 +30,8 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     let ScaleXMax:Float = 150.0
     var errMessage :String = ""
     var firstGraphLoad: Bool = true
+    var isNotificationProgress: Bool = false
     var minAgoBG: Double = 0.0
-    var currentOverride = 1.0
     // Vars for NS Pull
     var graphHours:Int=24
     var urlUser = UserDefaultsRepository.url.value as String
@@ -226,6 +226,7 @@ extension BottomSheetVC {
     @objc func bleDidUpdateValue(notification : NSNotification){
         DispatchQueue.main.async {
             self.mainTableView.reloadData()
+            self.updateBGGraph()
         }
     }
     

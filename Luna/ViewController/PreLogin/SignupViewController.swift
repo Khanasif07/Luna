@@ -195,7 +195,7 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource {
                     return
                 }
                 CommonFunctions.showActivityLoader()
-                FirestoreController.createUserNode(userId: "", email: self.emailTxt, password: self.passTxt, name: "", imageURL: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isSystemSetupCompleted: false, isChangePassword: true, isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue, deviceId: AppUserDefaults.value(forKey: .deviceId).stringValue,shareUserName: "",sharePassword: "", lastUpdatedCGMDate: AppUserDefaults.value(forKey: .lastUpdatedCGMDate).doubleValue, completion: {
+                FirestoreController.createUserNode(userId: "", email: self.emailTxt, password: self.passTxt, name: "", imageURL: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isSystemSetupCompleted: false, isChangePassword: true, isBiometricOn: AppUserDefaults.value(forKey: .isBiometricSelected).boolValue, deviceId: AppUserDefaults.value(forKey: .deviceId).stringValue,shareUserName: "",sharePassword: "", isAlertsOn:true, completion: {
                     CommonFunctions.hideActivityLoader()
                     if Auth.auth().currentUser?.isEmailVerified ?? false{
                         self.goToProfileSetupVC()
@@ -423,7 +423,7 @@ extension SignupViewController: ASAuthorizationControllerDelegate,ASAuthorizatio
                             CommonFunctions.showToastWithMessage(error.localizedDescription)
                         }
                     } failure: { () -> (Void) in
-                        FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: currentUser.displayName ?? "", lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isSystemSetupCompleted: false, isChangePassword: false, isBiometricOn: true) {
+                        FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: currentUser.displayName ?? "", lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isSystemSetupCompleted: false, isChangePassword: false, isBiometricOn: true, isAlertsOn: true) {
                             CommonFunctions.hideActivityLoader()
                             DispatchQueue.main.async {
                                 if UserModel.main.isSystemSetupCompleted {
@@ -512,7 +512,7 @@ extension SignupViewController: GIDSignInDelegate {
                         CommonFunctions.showToastWithMessage(error.localizedDescription)
                     }
                 } failure: { () -> (Void) in
-                    FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: user.profile.name, lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isSystemSetupCompleted: false, isChangePassword: false, isBiometricOn: true) {
+                    FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: user.profile.name, lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isSystemSetupCompleted: false, isChangePassword: false, isBiometricOn: true, isAlertsOn: true) {
                         CommonFunctions.hideActivityLoader()
                         DispatchQueue.main.async {
                             if UserModel.main.isSystemSetupCompleted {
