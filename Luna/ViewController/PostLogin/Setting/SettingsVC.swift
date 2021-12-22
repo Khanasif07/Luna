@@ -176,9 +176,7 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
             cell.switchView.isHidden = false
             cell.switchView.isOn = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
         case .apple_Health:
-//            cell.switchView.isUserInteractionEnabled = false
             cell.nextBtn.isHidden = false
-//            cell.switchView.isHidden = false
             cell.switchView.isOn = HealthKitManager.sharedInstance.isEnabled
             cell.switchView.isHidden = true
         default:
@@ -192,9 +190,6 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
                 self.db.collection(ApiKey.users).document(UserModel.main.id).updateData([ApiKey.isBiometricOn: !isOn])
                 AppUserDefaults.save(value: !isOn, forKey: .isBiometricSelected)
                 self.settingTableView.reloadData()
-            }
-            if self.sections[indexPath.section].1 ==  .apple_Health {
-                CommonFunctions.showToastWithMessage("Under Development")
             }
         }
         return cell

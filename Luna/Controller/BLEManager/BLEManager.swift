@@ -290,11 +290,13 @@ public class BleManager: NSObject{
             }
         }
         print(bytes)
-//        if let dataInCharacteristic = self.cgmDataInCharacteristic{
-//            if !data.isEmpty && bytes > 1{
-//                self.writeValue(myCharacteristic: dataInCharacteristic,value: "#CLEAR_DOSE_DATA")
-//            }
-//        }
+        if let dataInCharacteristic = self.cgmDataInCharacteristic{
+            if !data.isEmpty && bytes > 1{
+                CommonFunctions.delay(delay: 2.5) {
+                    self.writeValue(myCharacteristic: dataInCharacteristic,value: "#CLEAR_DOSE_DATA")
+                }
+            }
+        }
         NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
         print(SystemInfoModel.shared.dosingData)
     }

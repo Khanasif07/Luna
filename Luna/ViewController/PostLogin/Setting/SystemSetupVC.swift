@@ -76,7 +76,6 @@ class SystemSetupVC: UIViewController {
     @IBAction func backBtnAction(_ sender: Any) {
         self.pop()
     }
-    
 }
 
 // MARK: - Extension For Functions
@@ -216,7 +215,6 @@ extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
             cell.switchTapped = { [weak self] sender in
                 guard let self = self else { return }
                 if indexPath.section == 3 {
-//                     self.showAlert(msg: "Under Development")
                     let isOn = AppUserDefaults.value(forKey: .isAlertsOn).boolValue
                     self.db.collection(ApiKey.users).document(UserModel.main.id).updateData([ApiKey.isAlertsOn: !isOn])
                     AppUserDefaults.save(value: !isOn, forKey: .isAlertsOn)
@@ -288,7 +286,7 @@ extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
                 let vc = CGMSelectorVC.instantiate(fromAppStoryboard: .CGPStoryboard)
                 self.navigationController?.pushViewController(vc, animated: true)
             default:
-                CommonFunctions.showToastWithMessage("Under Development")
+                print("Do Nothing.")
             }
         }
     }
