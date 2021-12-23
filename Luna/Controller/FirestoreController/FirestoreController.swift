@@ -305,13 +305,7 @@ class FirestoreController:NSObject{
     //=======================
     static func performCleanUp(for_logout: Bool = true) {
         //
-//        if let fetchedData = UserDefaults.standard.data(forKey: ApiKey.dosingHistoryData) {
-//            let fetchedDosingData = try! JSONDecoder().decode([DosingHistory].self, from: fetchedData)
-//            if !fetchedDosingData.isEmpty{SystemInfoModel.shared.dosingData = fetchedDosingData}
-//        }
-//        let dosingData = try! JSONEncoder().encode(SystemInfoModel.shared.dosingData)
-//        UserDefaults.standard.set(dosingData, forKey: ApiKey.dosingHistoryData)
-        //
+        let dosingData = UserDefaults.standard.data(forKey: ApiKey.dosingHistoryData)
         let isTermsAndConditionSelected  = AppUserDefaults.value(forKey: .isTermsAndConditionSelected).boolValue
         let isBiometricEnable = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
         let isBiometricCompleted = AppUserDefaults.value(forKey: .isBiometricCompleted).boolValue
@@ -322,6 +316,7 @@ class FirestoreController:NSObject{
             AppUserDefaults.save(value: isTermsAndConditionSelected, forKey: .isTermsAndConditionSelected)
             AppUserDefaults.save(value: isBiometricEnable, forKey: .isBiometricSelected)
             AppUserDefaults.save(value: isBiometricCompleted, forKey: .isBiometricCompleted)
+            UserDefaults.standard.set(dosingData, forKey: ApiKey.dosingHistoryData)
         }
         UserDefaultsRepository.shareUserName.value = ""
         UserDefaultsRepository.sharePassword.value = ""

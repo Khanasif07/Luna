@@ -85,11 +85,9 @@ extension BottomSheetVC {
     }
     
     func persistentNotification(body: String){
-        //        if UserDefaultsRepository.persistentNotification.value && bgTime > UserDefaultsRepository.persistentNotificationLastBGTime.value && bgData.count > 0 {
-        if !isNotificationProgress{
+        if !isNotificationProgress && UserModel.main.isAlertsOn{
             self.sendNotification(self,body: body)
         }
-        //        }
     }
     
     func sendNotification(_ sender: Any,body: String) {
@@ -115,7 +113,7 @@ extension BottomSheetVC {
         let action = UNNotificationAction(identifier: "snooze", title: "Snooze", options: [])
         let category = UNNotificationCategory(identifier: "category", actions: [action], intentIdentifiers: [], options: [])
         UNUserNotificationCenter.current().setNotificationCategories([category])
-        CommonFunctions.delay(delay: 2.5) {
+        CommonFunctions.delay(delay: 10.0) {
             self.isNotificationProgress = false
         }
 //    }

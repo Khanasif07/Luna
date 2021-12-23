@@ -233,66 +233,66 @@ extension BottomSheetVC {
     @objc func batteryUpdateValue(notification : NSNotification){
         DispatchQueue.main.async {
             self.mainTableView.reloadData()
-        }
-        if BleManager.sharedInstance.reservoirLevelData != "-1" && Int(BleManager.sharedInstance.batteryData) ?? 0 <= 75 && (Int(BleManager.sharedInstance.batteryData) ?? 0) % 5 == 0 && UserModel.main.isAlertsOn{
-            var bodyText  = "Your Luna device is only "
-            bodyText += BleManager.sharedInstance.batteryData
-            bodyText += " % charged and may not last the entire session."
-        self.persistentNotification(body: bodyText)
-            return
+            if BleManager.sharedInstance.reservoirLevelData != "-1" && Int(BleManager.sharedInstance.batteryData) ?? 0 <= 75 && (Int(BleManager.sharedInstance.batteryData) ?? 0) % 5 == 0 {
+                var bodyText  = "Your Luna device is only "
+                bodyText += BleManager.sharedInstance.batteryData
+                bodyText += " % charged and may not last the entire session."
+                self.persistentNotification(body: bodyText)
+                return
+            }
         }
     }
     
     @objc func reservoirUpdateValue(notification : NSNotification){
         DispatchQueue.main.async {
             self.mainTableView.reloadData()
-        }
-        if BleManager.sharedInstance.reservoirLevelData == "-1" && BleManager.sharedInstance.iobData > 0.0  && UserModel.main.isAlertsOn{
-            var bodyText  = "Your session has been completed and you have "
-            bodyText += "\(BleManager.sharedInstance.iobData)"
-            bodyText += " units of active Insulin On Board. Make sure to consider this before making any diabetes related decisions for the next 6 hours."
-        self.persistentNotification(body: bodyText)
-            return
-        }
-        
-        if BleManager.sharedInstance.reservoirLevelData != "-1" && BleManager.sharedInstance.systemStatusData == "4"  && UserModel.main.isAlertsOn{
-        self.persistentNotification(body: "Luna is not receiving CGM data. Check to see if your CGM is working and paired with Luna properly.")
-            return
-        }
-        
-        if BleManager.sharedInstance.reservoirLevelData == "0"  && UserModel.main.isAlertsOn {
-        self.persistentNotification(body: "Luna has detected that there is no insulin in the Reservoir. Please discard this Reservoir and place the Luna Controller back on the Charger for 60 seconds to reset the device.")
-            return
-        }
-        
-        if BleManager.sharedInstance.reservoirLevelData  != "-1" && BleManager.sharedInstance.systemStatusData == "1" && UserModel.main.isAlertsOn {
-        self.persistentNotification(body: "Luna has detected an occlusion in the system. Please discard this reservoir and place the Luna Controller back on the Charger for 60 seconds to reset the device.")
-            return
-        }
-        
-        if BleManager.sharedInstance.reservoirLevelData  != "-1" && BleManager.sharedInstance.systemStatusData != "1"  && BleManager.sharedInstance.systemStatusData != "0"  && BleManager.sharedInstance.systemStatusData != "4"  && UserModel.main.isAlertsOn{
-        self.persistentNotification(body: "Luna has detected a failure in the system. Please check the dashboard on the App for more information. If the problem can’t be resolved, discard this Reservoir and place the Luna Controller back on the Charger for 60 seconds to reset the device.")
-            return
+            if BleManager.sharedInstance.reservoirLevelData == "-1" && BleManager.sharedInstance.iobData > 0.0{
+                var bodyText  = "Your session has been completed and you have "
+                bodyText += "\(BleManager.sharedInstance.iobData)"
+                bodyText += " units of active Insulin On Board. Make sure to consider this before making any diabetes related decisions for the next 6 hours."
+                self.persistentNotification(body: bodyText)
+                return
+            }
+            
+            if BleManager.sharedInstance.reservoirLevelData != "-1" && BleManager.sharedInstance.systemStatusData == "4"{
+                self.persistentNotification(body: "Luna is not receiving CGM data. Check to see if your CGM is working and paired with Luna properly.")
+                return
+            }
+            
+            if BleManager.sharedInstance.reservoirLevelData == "0"{
+                self.persistentNotification(body: "Luna has detected that there is no insulin in the Reservoir. Please discard this Reservoir and place the Luna Controller back on the Charger for 60 seconds to reset the device.")
+                return
+            }
+            
+            if BleManager.sharedInstance.reservoirLevelData  != "-1" && BleManager.sharedInstance.systemStatusData == "1"{
+                self.persistentNotification(body: "Luna has detected an occlusion in the system. Please discard this reservoir and place the Luna Controller back on the Charger for 60 seconds to reset the device.")
+                return
+            }
+            
+            if BleManager.sharedInstance.reservoirLevelData  != "-1" && BleManager.sharedInstance.systemStatusData != "1"  && BleManager.sharedInstance.systemStatusData != "0"  && BleManager.sharedInstance.systemStatusData != "4"{
+                self.persistentNotification(body: "Luna has detected a failure in the system. Please check the dashboard on the App for more information. If the problem can’t be resolved, discard this Reservoir and place the Luna Controller back on the Charger for 60 seconds to reset the device.")
+                return
+            }
         }
     }
     
     @objc func statusUpdateValue(notification : NSNotification){
         DispatchQueue.main.async {
             self.mainTableView.reloadData()
-        }
-        if BleManager.sharedInstance.reservoirLevelData != "-1" && BleManager.sharedInstance.systemStatusData == "4"  && UserModel.main.isAlertsOn{
-        self.persistentNotification(body: "Luna is not receiving CGM data. Check to see if your CGM is working and paired with Luna properly.")
-            return
-        }
-        
-        if BleManager.sharedInstance.reservoirLevelData  != "-1" && BleManager.sharedInstance.systemStatusData == "1"   && UserModel.main.isAlertsOn {
-        self.persistentNotification(body: "Luna has detected an occlusion in the system. Please discard this reservoir and place the Luna Controller back on the Charger for 60 seconds to reset the device.")
-            return
-        }
-        
-        if BleManager.sharedInstance.reservoirLevelData  != "-1" && BleManager.sharedInstance.systemStatusData != "1"  && BleManager.sharedInstance.systemStatusData != "0"  && BleManager.sharedInstance.systemStatusData != "4"  && UserModel.main.isAlertsOn{
-        self.persistentNotification(body: "Luna has detected a failure in the system. Please check the dashboard on the App for more information. If the problem can’t be resolved, discard this Reservoir and place the Luna Controller back on the Charger for 60 seconds to reset the device.")
-            return
+            if BleManager.sharedInstance.reservoirLevelData != "-1" && BleManager.sharedInstance.systemStatusData == "4"{
+                self.persistentNotification(body: "Luna is not receiving CGM data. Check to see if your CGM is working and paired with Luna properly.")
+                return
+            }
+            
+            if BleManager.sharedInstance.reservoirLevelData  != "-1" && BleManager.sharedInstance.systemStatusData == "1"{
+                self.persistentNotification(body: "Luna has detected an occlusion in the system. Please discard this reservoir and place the Luna Controller back on the Charger for 60 seconds to reset the device.")
+                return
+            }
+            
+            if BleManager.sharedInstance.reservoirLevelData  != "-1" && BleManager.sharedInstance.systemStatusData != "1"  && BleManager.sharedInstance.systemStatusData != "0"  && BleManager.sharedInstance.systemStatusData != "4"{
+                self.persistentNotification(body: "Luna has detected a failure in the system. Please check the dashboard on the App for more information. If the problem can’t be resolved, discard this Reservoir and place the Luna Controller back on the Charger for 60 seconds to reset the device.")
+                return
+            }
         }
     }
     
