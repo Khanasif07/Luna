@@ -279,8 +279,8 @@ public class BleManager: NSObject{
         }
         //
         if SystemInfoModel.shared.dosingData.endIndex > 0 {
-            let dosingData = try! JSONEncoder().encode(SystemInfoModel.shared.dosingData)
-            UserDefaults.standard.set(dosingData, forKey: ApiKey.dosingHistoryData)
+//            let dosingData = try! JSONEncoder().encode(SystemInfoModel.shared.dosingData)
+//            UserDefaults.standard.set(dosingData, forKey: ApiKey.dosingHistoryData)
             SystemInfoModel.shared.dosingData.forEach { (dosingHistory) in
                 if let indexx = SystemInfoModel.shared.cgmData?.firstIndex(where: { (bgData) -> Bool in
                     bgData.date == dosingHistory.sessionTime
@@ -288,8 +288,9 @@ public class BleManager: NSObject{
                     SystemInfoModel.shared.cgmData?[indexx].insulin = dosingHistory.insulin
                 }
             }
+            let dosingData = try! JSONEncoder().encode(SystemInfoModel.shared.dosingData)
+            UserDefaults.standard.set(dosingData, forKey: ApiKey.dosingHistoryData)
         }
-        print(bytes)
         if let dataInCharacteristic = self.cgmDataInCharacteristic{
             if !data.isEmpty && bytes > 1{
                 CommonFunctions.delay(delay: 2.5) {

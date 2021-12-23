@@ -14,58 +14,10 @@
             filePath = "Luna/ViewController/PostLogin/Dashboard/BottomSheetVC+Extension.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "userNotificationCenter(_:willPresent:withCompletionHandler:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "181E813D-BDC6-4EFE-9858-15A33B40CAF3"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Luna/Controller/BLEManager/BLEManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
-            landmarkName = "manageInsulinData(data:bytes:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "181E813D-BDC6-4EFE-9858-15A33B40CAF3 - 4db9f93adf13ab8b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Luna.BleManager.(manageInsulinData in _ECB612CB8BA6D39F830A7EBEA1F5D658)(data: Swift.Array&lt;Swift.Array&lt;Swift.String&gt;&gt;, bytes: Swift.Int) -&gt; ()"
-                  moduleName = "Luna"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/admin/Desktop/Luna%20Diabetes/Luna/Controller/BLEManager/BLEManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "258"
-                  endingLineNumber = "258"
-                  offsetFromSymbolStart = "4400">
-               </Location>
-               <Location
-                  uuid = "181E813D-BDC6-4EFE-9858-15A33B40CAF3 - 963bd382676f7597"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #7 (Luna.ShareGlucoseData) -&gt; Luna.ShareGlucoseData in Luna.BleManager.(manageInsulinData in _ECB612CB8BA6D39F830A7EBEA1F5D658)(data: Swift.Array&lt;Swift.Array&lt;Swift.String&gt;&gt;, bytes: Swift.Int) -&gt; ()"
-                  moduleName = "Luna"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/admin/Desktop/Luna%20Diabetes/Luna/Controller/BLEManager/BLEManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "259"
-                  endingLineNumber = "259"
-                  offsetFromSymbolStart = "20">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

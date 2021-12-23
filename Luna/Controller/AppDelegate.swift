@@ -4,7 +4,7 @@
 //
 //  Created by Admin on 03/06/21.
 //
-
+import Instabug
 import UIKit
 import FirebaseAuth
 import Firebase
@@ -13,7 +13,6 @@ import IQKeyboardManagerSwift
 import UserNotifications
 import GoogleSignIn
 import FirebaseFirestore
-
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate ,GIDSignInDelegate{
@@ -37,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,GIDSignInDelegate{
         removeAllNotifications()
         registerPushNotification()
         Messaging.messaging().delegate = self
+        Instabug.start(withToken: "", invocationEvents: [.shake,.screenshot])
         AppRouter.checkAppInitializationFlow()
         return true
     }
@@ -45,9 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,GIDSignInDelegate{
         
 
         // This application should be called in background every X Minutes
-        UIApplication.shared.setMinimumBackgroundFetchInterval(
-            TimeInterval(UserDefaultsRepository.backgroundRefreshFrequency.value * 60)
-        )
+//        UIApplication.shared.setMinimumBackgroundFetchInterval(
+//            TimeInterval(UserDefaultsRepository.backgroundRefreshFrequency.value * 60)
+//        )
         
         // set "prevent screen lock" to ON when the app is started for the first time
         if !UserDefaultsRepository.screenlockSwitchState.exists {

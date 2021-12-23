@@ -24,7 +24,7 @@ target 'Luna' do
   pod 'SwiftKeychainWrapper'
   pod 'Charts'
   pod 'KDCircularProgress'
-  
+  pod 'Instabug'
   pod 'Firebase/Performance'
   
 end
