@@ -57,10 +57,9 @@ public class BleManager: NSObject{
     var iobData: Double = 0.0
     var insulinData : [ShareGlucoseData] = []
     var isKeepConnect = true
-    var isConnect :Bool = false
+    var isDataOutPutProcess :Bool = false
     var isScanning :Bool = false
     var isMyPeripheralConected :Bool = false
-    var isAdvertising :Bool = false
     var isUnpaired :Bool = false
     var statusTimer = Timer()
     
@@ -167,7 +166,6 @@ public class BleManager: NSObject{
             self.reservoirLevelData = ""
             self.iobData = 0.0
             NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
-            self.delegate?.didDisconnect?()
         }
         DispatchQueue.main.async {
             if self.statusTimer.isValid {
@@ -264,8 +262,8 @@ public class BleManager: NSObject{
                     SystemInfoModel.shared.dosingData[startIndexx].sessionCreated = true
                     SystemInfoModel.shared.dosingData[endIndexx].sessionCreated = true
                 }
-                let dosingData = try! JSONEncoder().encode(SystemInfoModel.shared.dosingData)
-                UserDefaults.standard.set(dosingData, forKey: ApiKey.dosingHistoryData)
+//                let dosingData = try! JSONEncoder().encode(SystemInfoModel.shared.dosingData)
+//                UserDefaults.standard.set(dosingData, forKey: ApiKey.dosingHistoryData)
                 //
                 FirestoreController.addBatchData(sessionId: FirestoreController.getSessionId(), startDate: UserDefaultsRepository.sessionStartDate.value, endDate: UserDefaultsRepository.sessionEndDate.value, array: rangeBgData) { (sessionId) in
                     print("Add CGM Batch Data Commited successfully")
@@ -279,8 +277,6 @@ public class BleManager: NSObject{
         }
         //
         if SystemInfoModel.shared.dosingData.endIndex > 0 {
-//            let dosingData = try! JSONEncoder().encode(SystemInfoModel.shared.dosingData)
-//            UserDefaults.standard.set(dosingData, forKey: ApiKey.dosingHistoryData)
             SystemInfoModel.shared.dosingData.forEach { (dosingHistory) in
                 if let indexx = SystemInfoModel.shared.cgmData?.firstIndex(where: { (bgData) -> Bool in
                     bgData.date == dosingHistory.sessionTime
@@ -293,7 +289,8 @@ public class BleManager: NSObject{
         }
         if let dataInCharacteristic = self.cgmDataInCharacteristic{
             if !data.isEmpty && bytes > 1{
-                CommonFunctions.delay(delay: 2.5) {
+                CommonFunctions.delay(delay: 10.0) {
+                    self.isDataOutPutProcess = false
                     self.writeValue(myCharacteristic: dataInCharacteristic,value: "#CLEAR_DOSE_DATA")
                 }
             }
@@ -392,10 +389,9 @@ extension BleManager: CBPeripheralDelegate {
             let filterDataArray = dataArray.map { (stringValue) -> [String] in
                 return stringValue.split{$0 == ":"}.map(String.init)
             }
-            CommonFunctions.delay(delay: 2.5) {
-                if !filterDataArray.isEmpty{
+            if !filterDataArray.isEmpty && !self.isDataOutPutProcess{
+                    self.isDataOutPutProcess = true
                     self.manageInsulinData(data: filterDataArray,bytes: characteristic.value?.count ?? 0)
-                }
             }
             print("handled Characteristic Value for dataOutCBUUID: \(String(describing: data))")
         case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):

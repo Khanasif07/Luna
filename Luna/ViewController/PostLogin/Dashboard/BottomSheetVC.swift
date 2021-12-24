@@ -236,7 +236,7 @@ extension BottomSheetVC {
             if BleManager.sharedInstance.reservoirLevelData != "-1" && Int(BleManager.sharedInstance.batteryData) ?? 0 <= 75 && (Int(BleManager.sharedInstance.batteryData) ?? 0) % 5 == 0 {
                 var bodyText  = "Your Luna device is only "
                 bodyText += BleManager.sharedInstance.batteryData
-                bodyText += " % charged and may not last the entire session."
+                bodyText += "% charged and may not last the entire session."
                 self.persistentNotification(body: bodyText)
                 return
             }
