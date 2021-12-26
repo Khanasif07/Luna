@@ -230,7 +230,7 @@ class FirestoreController:NSObject{
     static func getFirebaseSessionHistoryData(success: @escaping (_ cgmModelArray: [SessionHistory]) -> Void,
                                               failure:  @escaping  () -> Void){
         if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
-            db.collection(ApiKey.sessionData).document(Auth.auth().currentUser?.uid ?? "").getDocument(source: .cache) { (document, error) in
+            db.collection(ApiKey.sessionData).document(Auth.auth().currentUser?.uid ?? "").getDocument(source: .default) { (document, error) in
                     if let document = document, document.exists {
                         if  let dataDescription = document.data(){
                             print("Document data: \(dataDescription)")

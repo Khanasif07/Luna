@@ -10,7 +10,6 @@ import Foundation
 struct SystemInfoModel{
     
     static var shared = SystemInfoModel()
-    
     var longInsulinImage : UIImage = #imageLiteral(resourceName: "toujeoMax")
     var longInsulinType : String
     var longInsulinSubType : String

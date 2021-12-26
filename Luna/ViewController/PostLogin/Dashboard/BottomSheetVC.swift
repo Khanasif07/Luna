@@ -193,13 +193,6 @@ extension BottomSheetVC {
         self.mainTableView.registerCell(with: BottomSheetInsulinCell.self)
         self.mainTableView.registerCell(with: BottomSheetBottomCell.self)
         setupfooterView()
-        if let fetchedData = UserDefaults.standard.data(forKey: ApiKey.dosingHistoryData) {
-            let fetchedDosingData = try! JSONDecoder().decode([DosingHistory].self, from: fetchedData)
-            SystemInfoModel.shared.dosingData = fetchedDosingData
-            DispatchQueue.main.async {
-                self.mainTableView.reloadData()
-            }
-        }
     }
     
     private func addObserver(){
@@ -299,6 +292,13 @@ extension BottomSheetVC {
     private func setupfooterView(){
         let view = UIView.init(frame: CGRect.init(origin: CGPoint.zero, size: CGSize.init(width: self.view.frame.width, height: 100.0)))
         self.mainTableView.tableFooterView = view
+        if let fetchedData = UserDefaults.standard.data(forKey: ApiKey.dosingHistoryData) {
+            let fetchedDosingData = try! JSONDecoder().decode([DosingHistory].self, from: fetchedData)
+            SystemInfoModel.shared.dosingData = fetchedDosingData
+            DispatchQueue.main.async {
+                self.mainTableView.reloadData()
+            }
+        }
     }
     
     private func setupSwipeGesture() {

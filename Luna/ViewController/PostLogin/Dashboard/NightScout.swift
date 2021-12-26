@@ -266,6 +266,7 @@ extension  BottomSheetVC{
         //MARK:- Important
         SystemInfoModel.shared.cgmData = bgData
         //
+        print(SystemInfoModel.shared.dosingData)
         if SystemInfoModel.shared.dosingData.isEmpty{
         if let fetchedData = UserDefaults.standard.data(forKey: ApiKey.dosingHistoryData) {
             let fetchedDosingData = try! JSONDecoder().decode([DosingHistory].self, from: fetchedData)
