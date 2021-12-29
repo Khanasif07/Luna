@@ -53,7 +53,7 @@ final class ChartXValueFormatter: IAxisValueFormatter {
             }else {
                 let dateFormatter = DateFormatter()
                 if SystemInfoModel.shared.cgmData?.endIndex ?? 67 >= 67{
-                dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.cgmDate12.rawValue)
+                dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.hour12.rawValue)
                 }else{
                     dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.hour12.rawValue)
                 }

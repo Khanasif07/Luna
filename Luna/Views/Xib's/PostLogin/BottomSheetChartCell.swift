@@ -21,11 +21,6 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     var insulinData : [ShareGlucoseData] = []
     var cgmData : [ShareGlucoseData] = []{
         didSet{
-//            if cgmData.endIndex >= 67{
-//                xAxisLabelCount = 7
-//            } else {
-//                xAxisLabelCount = Int((0.104477611940299) * Double(cgmData.endIndex))
-//            }
             setDataCount(cgmData.endIndex, range: UInt32(cgmData.endIndex))
             let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
                                                         xAxis: cgmChartView.xAxis,
@@ -78,16 +73,16 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         
         let xAxis = cgmChartView.xAxis
         xAxis.labelPosition = .bottom
-        xAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
+        xAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x11)
         xAxis.granularity = 86400
-        xAxis.labelTextColor = NSUIColor.label
+        xAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
         //        xAxis.labelPosition = XAxis.LabelPosition.bottom
         xAxis.valueFormatter = ChartXValueFormatterSessionInfo()
         
         let leftAxis = cgmChartView.leftAxis
         leftAxis.removeAllLimitLines()
         leftAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
-        leftAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
+        leftAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x11)
         leftAxis.axisMaximum = Double(UserDefaultsRepository.minBGScale.value)
         //MARK: - Important
         leftAxis.drawGridLinesEnabled = true

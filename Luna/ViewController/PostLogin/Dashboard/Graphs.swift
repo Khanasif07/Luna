@@ -233,12 +233,12 @@ extension BottomSheetVC :  ChartViewDelegate {
         let xAxis = cgmChartView.xAxis
         xAxis.labelPosition = .bottom
         xAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
-        xAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
+        xAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x11)
         
         let leftAxis = cgmChartView.leftAxis
 //        leftAxis.removeAllLimitLines()
         leftAxis.labelTextColor = #colorLiteral(red: 0.4509803922, green: 0.462745098, blue: 0.4862745098, alpha: 1)
-        leftAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
+        leftAxis.labelFont = AppFonts.SF_Pro_Display_Regular.withSize(.x11)
         //MARK: - Important
         leftAxis.drawAxisLineEnabled = false
         leftAxis.drawLimitLinesBehindDataEnabled = false
