@@ -13,7 +13,6 @@ class SettingHeaderView: UITableViewHeaderFooterView {
     // MARK: -IBOutlets
     //===========================
    
-    
     // MARK: -Variables
     //===========================
     

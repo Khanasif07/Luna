@@ -93,120 +93,10 @@ enum ApiKey {
     static var onlyMyExpertise :  String {return "onlyMyExpertise"}
     
     static var search : String {return "search"}
-    static var isTeacher : String {return "isTeacher"}
-    static var isStudent : String {return "isStudent"}
     static var dob : String {return "dob"}
-    static var education : String {return "education"}
-    static var bio : String {return "bio"}
-    static var role : String {return "role"}
-    static var totalExperience : String {return "totalExperience"}
-    static var categoryId : String {return "categoryId"}
-    static var parentId : String {return "parentId"}
-    static var years : String {return "years"}
-    static var expertise : String {return "expertise"}
-    static var socialType : String {return "socialType"}
-    static var socialId : String {return "socialId"}
-    static var title : String { return "title"}
-    static var subCategoryId : String { return "subCategoryId"}
-    static var level : String { return "level"}
-    static var url : String { return "url"}
-    static var mediaType : String { return "mediaType"}
-    static var duration : String { return "duration"}
-    static var previewUrl : String { return "previewUrl"}
-    static var previewDuration : String { return "previewDuration"}
-    static var thumbnail : String { return "thumbnail"}
-    static var creditId : String { return "creditId"}
-    static var oneDayAcessCredits : String { return "oneDayAcessCredits"}
-    static var weeklyAcessCredits : String { return "weeklyAcessCredits"}
-    static var biweeklyAcessCredits : String { return "biweeklyAcessCredits"}
-    static var monthlyAcessCredits : String { return "monthlyAcessCredits"}
-    static var currentRole : String { return "currentRole" }
     static var oldPassword : String { return "oldPassword" }
     static var newPassword : String { return "newPassword" }
-    static var sweatLevel: String{ return "sweatLevel"}
-    static var playlistId: String{ return "playlistId"}
-    static var videoId: String{ return "videoId"}
-    static var type: String{ return "type"}
-    static var teacherProfile: String { return "teacherProfile"}
-    static var studentProfile: String { return "studentProfile"}
-    static var videoHostingCreditId: String { return "videoHostingCreditId"}
-    static var credits: String{ return "credits"}
-    static var previewType: String{ return "previewType"}
-    static var isLogin: String{ return "isLogin"}
-    static var minvideoCount: String{ return "minvideoCount"}
-    static var emailVerifyToken: String { return "emailVerifyToken" }
-    static var canChangePassword: String { return "canChangePassword" }
-    static var commission: String { return "commission" }
-    static var logoUrl: String { return "logoUrl" }
-    static var accepted : String { return "accepted" }
-    static var isAlreadyRated: String { return " isAlreadyRated "}
-    static var isvideoPurchased: String { return " isvideoPurchased"}
-    static var videosPurchased: String { return "videosPurchased"}
-    static var creditPoints: String { return "creditPoints"}
-    static var interests: String { return "interests"}
-    static var reportedCount: String { return "reportedCount"}
-    static var videosOnPlatform: String { return "videosOnPlatform"}
-    static var reviewCount: String { return "reviewCount"}
-    static var rating: String { return "rating"}
-    static var ratingId: String { return "ratingId"}
-    static var categoryID: String { return "categoryId"}
-    static var review: String { return "review"}
-    static var length: String{ return "length"}
-    static var notificationId: String{ return "notificationId"}
-    static var membershipCredits: String{ return "membershipCredits"}
-    static var isSubscribed: String{ return "isSubscribed"}
-    static var phoneNoAdded: String { return "phoneNoAdded" }
-    
-    static var logo: String { return "logo" }
-    static var latitude: String { return "latitude" }
-    static var longitude: String { return "longitude" }
-    static var address: String { return "address" }
-    static var images: String { return "images" }
-    static var commercialRegister: String { return "commercialRegister" }
-    static var vatCertificate: String { return "vatCertificate" }
-    static var municipalityLicense: String { return "municipalityLicense" }
-    static var ownerId: String { return "ownerId" }
-    static var bank: String { return "bank" }
-    static var accountNumber: String { return "accountNumber" }
-    
-    static var width: String { return "width" }
-    static var profile: String { return "profile" }
-    static var rimSize: String { return "rimSize" }
-    static var quantity: String { return "quantity"}
-    static var countries: String { return "countries" }
-    static var tyreBrands: String { return "tyreBrands" }
-    static var country: String { return "country" }
-    
-    static var maxInstallationPrice: String { return "maxInstallationPrice" }
-    static var minInstallationPrice: String { return "minInstallationPrice" }
-    static var services: String { return "services" }
-    static var serviceId: String { return "serviceId" }
-    static var brands: String { return "brands" }
-    static var district : String { return "district" }
-    static var garageProfile : String { return "garageProfile" }
-    static var garageName : String { return "garageName" }
-    static var garageAddress : String { return "garageAddress" }
-    static var isgarageProfileComplete : String { return "isgarageProfileComplete" }
-    static var garageModel : String { return "garageModel" }
-    static var serviceName : String { return "serviceName" }
-    
-    static var year : String { return "year" }
-    static var modelName : String { return "modelName" }
-    static var makeId: String { return "makeId" }
-    static var model : String { return "model" }
-    static var make: String { return "make" }
-    static var makeUser: String {return "makeUser" }
-    static var countryId: String { return "countryId" }
-    static var countryName: String { return "countryName" }
-    static var iconImage: String { return "iconImage" }
-    static var brandName: String { return "brandName" }
-    static var brandId: String { return "brandId" }
-    static var reason: String { return "reason" }
-    static var time: String { return "time" }
-    static var requestId : String { return "requestId" }
-    static var bidData : String { return "bidData" }
-    static var bidId : String { return "bidId" }
-    static var requestType : String { return "requestType" }
+
     static var startdate : String { return "startDate" }
     static var endDate : String { return "endDate" }
     static var startDate : String { return "startDate" }
@@ -217,6 +107,8 @@ enum ApiKey {
     static var maxDistance: String { return "maxDistance" }
     static var bidSort: String { return "bidSort" }
     static var minDistance: String { return "minDistance" }
+    static var beginCaps: String { return "BEGIN" }
+    static var endCaps: String { return "END" }
 
     
     //     MARK: Firestore Keys
@@ -237,31 +129,6 @@ enum ApiKey {
     static var firebaseOpenAppScheme : String { return "FirebaseOpenAppScheme"}
     static var firebaseOpenAppURLPrefix : String { return "FirebaseOpenAppURLPrefix"}
     static var firebaseOpenAppQueryItemEmail : String { return "FirebaseOpenAppQueryItemEmail"}
-    
-    
-    //MARK:-RoomInfo
-    //===============
-    static var roomId : String {return "roomId"}
-    static var roomImage : String {return "roomImage"}
-    static var roomName  : String {return "roomName"}
-    static var userInfo  :  String {return "userInfo"}
-    static var userDetails : String {return "userDetails" }
-    static var addedTime  : String {return "addedTime"}
-    static var deleteTime : String {return "deleteTime"}
-    static var leaveTime   : String {return "leaveTime"}
-    static var typingStatus : String {return "typingStatus"}
-    static var roomType : String {return "roomType"}
-    static var mediaUrl : String {return "mediaUrl"}
-    static var batchCount : String {return "batchCount"}
-    static var chatType : String {return "chatType"}
-    static var single : String {return "single"}
-    static var singleCaps : String {return "Single"}
-    static var group : String {return "group"}
-    static var admin : String {return "admin"}
-    static var groupName : String {return "groupName"}
-    static var groupImage : String {return "groupImage"}
-    
-//    static var deviceId    : String {return "deviceId"}
     static var deviceToken : String {return "deviceToken"}
     static var onlineStatus : String {return "onlineStatus"}
     static var messageText : String {return "messageText"}
@@ -278,34 +145,7 @@ enum ApiKey {
     static var text : String { return "text" }
     
 
-    static var newRequests: String {return "newRequests"}
-    static var acceptedRequets: String {return "acceptedRequets"}
     
-    static var phoneChanged: String {return "phoneChanged"}
-    static var emailChanged: String {return "emailChanged"}
-    static var garageId: String {return "garageId"}
-    static var garageUserId: String {return "garageUserId"}
-    static var bidRequestId: String {return "bidRequestId"}
-    static var acceptedProposalId: String {return "acceptedProposalId"}
-    static var serviceStatus: String {return "serviceStatus"}
-    
-    static var revenue: String { return "revenue" }
-    static var reviewId: String {return "reviewId"}
-    static var reportedTime: String {return "reportedTime"}
-    static var reportReason: String {return "reportReason"}
-    static var isacceptedProposalEdited: String {return "isacceptedProposalEdited"}
-
-    static var ratingCount: String {return "ratingCount"}
-    static var averageRating: String {return "averageRating"}
-    static var ongoingServices: String {return "ongoingServices"}
-    static var servicesCompletedToday: String {return "servicesCompletedToday"}
-    static var notificationType : String {return "notificationType"}
-    static var gcm_notification_type : String {return "gcm.notification.type"}
-    static var gcm_notification_requestId : String {return "gcm.notification.requestId"}
-    static var gcm_notification_senderId : String {return "gcm.notification.senderId"}
-    static var gcm_notification_bidRequestId : String {return "gcm.notification.bidRequestId"}
-    static var gcm_notification_userRole : String {return "gcm.notification.userRole"}
-    static var gcm_notification_userImage : String {return "gcm.notification.userImage" }
     
     static var longInsulinType  : String {return "longInsulinType" }
     static var longInsulinSubType  : String {return "longInsulinSubType" }

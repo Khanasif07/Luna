@@ -185,7 +185,4 @@ class HealthKitManager: NSObject {
             }
         })
     }
-
-
-    
 }

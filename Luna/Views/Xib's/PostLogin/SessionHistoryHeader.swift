@@ -2,7 +2,7 @@
 //  ShopClosedHeader.swift
 //  Excursity
 //
-//  Created by Atendra on 04/06/19.
+//  Created by Admin on 04/06/19.
 //  Copyright © 2019 Mobulous. All rights reserved.
 //
 

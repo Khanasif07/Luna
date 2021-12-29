@@ -32,7 +32,6 @@ class BottomSheetInsulinCell: UITableViewCell {
     
     func populateCell(){
         self.setUpAttributedString()
-//        self.insulinCountLbl.text =  "\(BleManager.sharedInstance.reservoirLevelData)".isEmpty ? "-- Units" :  "\(BleManager.sharedInstance.reservoirLevelData) Units"
     }
     
     public func setUpAttributedString(){

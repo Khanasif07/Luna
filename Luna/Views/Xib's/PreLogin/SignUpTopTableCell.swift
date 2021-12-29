@@ -93,5 +93,4 @@ class SignUpTopTableCell: UITableViewCell {
             handle(sender)
         }
     }
-    
 }

@@ -42,13 +42,6 @@ class SystemStep1TableCell: UITableViewCell {
         dataContainerView.round(radius: 10.0)
     }
     
-    // MARK: - IBActions
-    //===========================
-    @IBAction func startBtnAction(_ sender: AppButton) {
-        if let handle = startBtnTapped{
-            handle()
-        }
-    }
     
     public func setUpFont(){
         self.stepLbl.font = AppFonts.SF_Pro_Display_Medium.withSize(.x14)
@@ -56,5 +49,13 @@ class SystemStep1TableCell: UITableViewCell {
         self.timeToCompleteLabel.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
         self.unitLbl.font = AppFonts.SF_Pro_Display_Medium.withSize(.x12)
         self.startBtn.titleLabel?.font = AppFonts.SF_Pro_Display_Semibold.withSize(.x16)
+    }
+    
+    // MARK: - IBActions
+    //===========================
+    @IBAction func startBtnAction(_ sender: AppButton) {
+        if let handle = startBtnTapped{
+            handle()
+        }
     }
 }

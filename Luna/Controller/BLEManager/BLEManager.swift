@@ -20,7 +20,6 @@ let lunaCBUUID = CBUUID(string: "DE612C8C-46C0-46B6-B820-4C92A6E67D97")
 let IOBout = CBUUID(string: "378ec9d6-075c-4bf6-89dc-0a8267f7b7b7")
 let TDBD = CBUUID(string: "5927a433-a277-40b7-b2d4-e005330c5d99")
 let iobInput = CBUUID(string: "5927a433-a277-40b7-b2d4-92ff77eada32")
-//let WriteAcknowledgement = CBUUID(string: "5927a433-a277-40b7-b2d4-0242ac130003")
 let WriteAcknowledgement = CBUUID(string: "5927A433-A277-40B7-B2D4-B6FF29B861A6")
 let CGMWriteCharacteristicCBUUID = CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9")
 let collectionInsulinDoses = CBUUID(string: "ad4e6052-390a-4107-8e2d-11af2d258189")
@@ -45,9 +44,6 @@ public class BleManager: NSObject{
     var centralManager :CBCentralManager!
     var peripheralManager :CBPeripheralManager!
     var myperipheral :CBPeripheral?
-    var mychar :CBCharacteristic!
-    var myservice :CBService?
-    //    var peripherals :[peripheralWithRssi]!
     var cgmWriteCBCharacteristic : CBCharacteristic?
     var cgmDataInCharacteristic : CBCharacteristic?
     var rescanTimer :Timer?
@@ -88,9 +84,6 @@ public class BleManager: NSObject{
         }
     }
     
-    /**
-     stop scan ble device
-     */
     public func breakScan(){
         rescanTimer?.invalidate()
         rescanTimer = nil
@@ -103,7 +96,6 @@ public class BleManager: NSObject{
         isUnpaired = true
         centralManager.cancelPeripheralConnection(myperipheral!)
     }
-    
     
     public func writeValue(myCharacteristic: CBCharacteristic,value: String = "50") {
         if isMyPeripheralConected { //check if myPeripheral is connected to send data
@@ -208,13 +200,13 @@ public class BleManager: NSObject{
             if !fetchedDosingData.isEmpty{SystemInfoModel.shared.dosingData = fetchedDosingData}
         }
         data.forEach { (tupls) in
-            let insulin =  ((tupls.first ?? "") == "BEGIN" ? "0.25" : ((tupls.first ?? "") == "END" ? "0.75" : "0.5"))
+            let insulin =  ((tupls.first ?? "") == ApiKey.beginCaps ? "0.25" : ((tupls.first ?? "") == ApiKey.endCaps ? "0.75" : "0.5"))
             let  dosing = DosingHistory(sessionStatus: tupls.first ?? "", sessionTime: Double(tupls.last ?? "") ?? 0.0, insulin: insulin, sessionExpired: false,sessionCreated: false)
             if !SystemInfoModel.shared.dosingData.contains(where: {$0.sessionTime == dosing.sessionTime}){
-                if (SystemInfoModel.shared.dosingData.last?.sessionStatus) == dosing.sessionStatus && dosing.sessionStatus == "BEGIN" {
+                if (SystemInfoModel.shared.dosingData.last?.sessionStatus) == dosing.sessionStatus && dosing.sessionStatus == ApiKey.beginCaps {
                     SystemInfoModel.shared.dosingData.removeLast()
                     SystemInfoModel.shared.dosingData.append(dosing)
-                }else if (SystemInfoModel.shared.dosingData.last?.sessionStatus) == dosing.sessionStatus && dosing.sessionStatus == "END"{
+                }else if (SystemInfoModel.shared.dosingData.last?.sessionStatus) == dosing.sessionStatus && dosing.sessionStatus == ApiKey.endCaps{
                     SystemInfoModel.shared.dosingData.append(dosing)
                     SystemInfoModel.shared.dosingData.removeLast()
                 }else{
@@ -229,11 +221,11 @@ public class BleManager: NSObject{
         UserDefaultsRepository.sessionStartDate.value = 0.0
         UserDefaultsRepository.sessionEndDate.value  = 0.0
         //
-        if let firstBeginSession = SystemInfoModel.shared.dosingData.firstIndex(where: { $0.sessionStatus == "BEGIN" && $0.sessionCreated == false
+        if let firstBeginSession = SystemInfoModel.shared.dosingData.firstIndex(where: { $0.sessionStatus == ApiKey.beginCaps && $0.sessionCreated == false
         }){
             UserDefaultsRepository.sessionStartDate.value = SystemInfoModel.shared.dosingData[firstBeginSession].sessionTime
             for firstEndSession in stride(from: firstBeginSession + 1, to: SystemInfoModel.shared.dosingData.count, by: 1){
-                if SystemInfoModel.shared.dosingData[firstEndSession].sessionStatus == "END" && SystemInfoModel.shared.dosingData[firstEndSession].sessionCreated == false{
+                if SystemInfoModel.shared.dosingData[firstEndSession].sessionStatus == ApiKey.endCaps && SystemInfoModel.shared.dosingData[firstEndSession].sessionCreated == false{
                     UserDefaultsRepository.sessionEndDate.value = SystemInfoModel.shared.dosingData[firstEndSession].sessionTime
                     break
                 }

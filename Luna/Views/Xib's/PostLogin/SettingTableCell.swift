@@ -27,17 +27,15 @@ class SettingTableCell: UITableViewCell {
         super.awakeFromNib()
         self.setUpFont()
     }
-    
+    public func setUpFont(){
+        self.titleLbl.font = AppFonts.SF_Pro_Display_Medium.withSize(.x16)
+        self.subTitlelbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
+    }
     // MARK: - IBActions
     //===========================
     @IBAction func switchBtnAction(_ sender: UISwitch) {
         if let handle = switchTapped{
             handle(sender)
         }
-    }
-    
-    public func setUpFont(){
-        self.titleLbl.font = AppFonts.SF_Pro_Display_Medium.withSize(.x16)
-        self.subTitlelbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
     }
 }

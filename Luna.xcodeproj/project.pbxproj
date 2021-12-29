@@ -577,15 +577,6 @@
 			path = "Pair Luna";
 			sourceTree = "<group>";
 		};
-		840A7E032696EB49005AA1E6 /* CGMXib */ = {
-			isa = PBXGroup;
-			children = (
-				840A7E052696EB62005AA1E6 /* CGMTypeTableViewCell.swift */,
-				840A7E042696EB62005AA1E6 /* CGMTypeTableViewCell.xib */,
-			);
-			path = CGMXib;
-			sourceTree = "<group>";
-		};
 		840A7E2C2696ED96005AA1E6 /* SessionHistory */ = {
 			isa = PBXGroup;
 			children = (
@@ -594,17 +585,6 @@
 				840A7ED62697060E005AA1E6 /* SessionFilterVC.swift */,
 			);
 			path = SessionHistory;
-			sourceTree = "<group>";
-		};
-		840A7E302696EF9B005AA1E6 /* SessionHistory Xib */ = {
-			isa = PBXGroup;
-			children = (
-				840A7E602696F0E6005AA1E6 /* SessionHistoryHeader.swift */,
-				840A7E5F2696F0E6005AA1E6 /* SessionHistoryHeader.xib */,
-				840A7E642696F190005AA1E6 /* SessionHistoryTableViewCell.swift */,
-				840A7E652696F190005AA1E6 /* SessionHistoryTableViewCell.xib */,
-			);
-			path = "SessionHistory Xib";
 			sourceTree = "<group>";
 		};
 		8418D7CF26B01F4E00BAB256 /* repository */ = {
@@ -723,8 +703,6 @@
 		845549242678E07C000CC13D /* Xib's */ = {
 			isa = PBXGroup;
 			children = (
-				840A7E302696EF9B005AA1E6 /* SessionHistory Xib */,
-				840A7E032696EB49005AA1E6 /* CGMXib */,
 				8455A3C426820EA30061C55F /* PostLogin */,
 				845549252678FA9E000CC13D /* PreLogin */,
 			);
@@ -753,6 +731,12 @@
 		8455A3C426820EA30061C55F /* PostLogin */ = {
 			isa = PBXGroup;
 			children = (
+				840A7E052696EB62005AA1E6 /* CGMTypeTableViewCell.swift */,
+				840A7E042696EB62005AA1E6 /* CGMTypeTableViewCell.xib */,
+				840A7E602696F0E6005AA1E6 /* SessionHistoryHeader.swift */,
+				840A7E5F2696F0E6005AA1E6 /* SessionHistoryHeader.xib */,
+				840A7E642696F190005AA1E6 /* SessionHistoryTableViewCell.swift */,
+				840A7E652696F190005AA1E6 /* SessionHistoryTableViewCell.xib */,
 				8455A3C5268211770061C55F /* SettingTableCell.swift */,
 				8455A3C6268211770061C55F /* SettingTableCell.xib */,
 				84861D7D26848EDD004B046C /* ProfileTableCell.swift */,
@@ -818,6 +802,15 @@
 				8460611C270EC9BC00DFD22A /* PushNotificationManager.swift */,
 			);
 			path = PushNotificationManager;
+			sourceTree = "<group>";
+		};
+		846C83B8277C5593001F9259 /* CustomHealthView */ = {
+			isa = PBXGroup;
+			children = (
+				84AAFFA62715780D00E7E1F8 /* CustomView.swift */,
+				84AAFFA92715782400E7E1F8 /* CustomView.xib */,
+			);
+			path = CustomHealthView;
 			sourceTree = "<group>";
 		};
 		846F1A1B2678BFFE0034ACE0 /* Certificates */ = {
@@ -894,12 +887,11 @@
 		84CC12B02668C8D4009316FC /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				846C83B8277C5593001F9259 /* CustomHealthView */,
 				188DB0F726E0993600FBF042 /* Instructions */,
 				84D1F4D82679CF2D00F131E0 /* CustomClasses */,
 				84CC12C02668CE8B009316FC /* Extensions */,
 				84CC12BF2668CE7C009316FC /* AppUtilities */,
-				84AAFFA62715780D00E7E1F8 /* CustomView.swift */,
-				84AAFFA92715782400E7E1F8 /* CustomView.xib */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";

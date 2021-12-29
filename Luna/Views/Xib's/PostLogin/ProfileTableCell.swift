@@ -46,7 +46,12 @@ class ProfileTableCell: UITableViewCell {
         }
     }
     
-    func setupforPasswordTxtfield(){
+    public func setUpFont(){
+        self.titleLbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
+        self.txtField.font = AppFonts.SF_Pro_Display_Medium.withSize(.x16)
+    }
+    
+    public func setupforPasswordTxtfield(){
         self.txtField.isSecureTextEntry = true
         let show = UIButton()
         show.isSelected = false
@@ -60,10 +65,4 @@ class ProfileTableCell: UITableViewCell {
         sender.isSelected.toggle()
         self.txtField.isSecureTextEntry = !sender.isSelected
     }
-    
-    public func setUpFont(){
-        self.titleLbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
-        self.txtField.font = AppFonts.SF_Pro_Display_Medium.withSize(.x16)
-    }
-    
 }
