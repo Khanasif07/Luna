@@ -103,7 +103,6 @@ class FirestoreController:NSObject{
                         user.isSystemSetupCompleted = data[ApiKey.isSystemSetupCompleted] as? Bool ?? false
                         user.isChangePassword = data[ApiKey.isChangePassword] as? Bool ?? false
                         user.deviceId = data[ApiKey.deviceId] as? String ?? ""
-                        user.lastUpdatedCGMDate = data[ApiKey.lastUpdatedCGMDate] as? Double ?? 0.0
                         user.isAlertsOn = data[ApiKey.isAlertsOn] as? Bool ?? false
                         UserModel.main = user
                         //MARK:- Important
@@ -114,7 +113,6 @@ class FirestoreController:NSObject{
                             UserDefaultsRepository.sharePassword.value = String(bytes: decryptedData, encoding: String.Encoding.utf8) ?? ""
                         }
                         //
-                        AppUserDefaults.save(value: user.lastUpdatedCGMDate, forKey: .lastUpdatedCGMDate)
                         AppUserDefaults.save(value: user.isProfileStepCompleted, forKey: .isProfileStepCompleted)
                         AppUserDefaults.save(value: true, forKey: .isBiometricCompleted)
                         AppUserDefaults.save(value: user.deviceId, forKey: .deviceId)
@@ -163,20 +161,6 @@ class FirestoreController:NSObject{
             }
         }
     }
-    
-//    //MARK:- Check CGM  info Exist or Not
-//    //=======================
-//    static func checkCGMDataExistInDatabase(success: @escaping () -> Void,
-//                                            failure:  @escaping () -> Void){
-//        db.collection(ApiKey.userSystemInfo).document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.cgmData).getDocuments { (snapshot, error ) in
-//            guard let dicts = snapshot?.documents else { return }
-//            if  !(dicts.isEmpty) {
-//                success()
-//            } else {
-//                failure()
-//            }
-//        }
-//    }
     
     //MARK:- Get CGM Data info
     //=======================
@@ -249,29 +233,6 @@ class FirestoreController:NSObject{
                 }
             }
         }
-    
-//    //MARK:- Get Insulin Data info
-//    //=======================
-//    static func getFirebaseInsulinData(success: @escaping (_ cgmModelArray: [InsulinDataModel]) -> Void,
-//                                       failure:  @escaping FailureResponse){
-//        if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
-//            db.collection(ApiKey.insulinData)
-//                .document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.insulinData).getDocuments { (snapshot, error) in
-//                    if let error = error {
-//                        failure(error)
-//                    } else{
-//                        print("============================")
-//                        var insulinModelArray = [InsulinDataModel]()
-//                        guard let dicts = snapshot?.documents else { return }
-//                        dicts.forEach { (queryDocumentSnapshot) in
-//                            let cgmModel = InsulinDataModel(queryDocumentSnapshot.data())
-//                            insulinModelArray.append(cgmModel)
-//                        }
-//                        success(insulinModelArray)
-//                    }
-//                }
-//        }
-//    }
     
     //MARK:- Get info
     //=======================
@@ -352,23 +313,6 @@ class FirestoreController:NSObject{
     static func IsEmailVerified(completion:@escaping(_ success: Bool) -> Void)  {
         let isEmailVerification  = Auth.auth().currentUser?.isEmailVerified ??  false
         completion(isEmailVerification)
-    }
-    
-    
-    //MARK:- CREATE ROOM NODE
-    //=======================
-    static func createRoomNode(roomId: String,
-                               roomImage: String,
-                               roomName: String,
-                               roomType: String,
-                               userInfo: [String:Any],
-                               userTypingStatus: [String:Any]) {
-        db.collection(ApiKey.roomInfo).document(roomId).setData([ApiKey.roomId : roomId,
-                                                                 ApiKey.roomImage:roomImage,
-                                                                 ApiKey.roomName:roomName,
-                                                                 ApiKey.roomType:roomType,
-                                                                 ApiKey.userInfo:userInfo,
-                                                                 ApiKey.typingStatus:userTypingStatus])
     }
     
     //MARK:- CREATE USER NODE
@@ -587,14 +531,31 @@ class FirestoreController:NSObject{
     
     //MARK:- Update Dexcom creds
     //================================
-    static func updateDexcomCreds(shareUserName: String,sharePassword:String) {
+    static func updateDexcomCreds(shareUserName: String,sharePassword:String, completion: @escaping () -> Void,
+                                  failure: @escaping FailureResponse) {
         let uid = Auth.auth().currentUser?.uid ?? ""
         guard !uid.isEmpty else {
             return
         }
-        if let encrypedData = AES256Crypter.encryptionAESModeECB(messageData: sharePassword.data(using: String.Encoding.utf8)!, key: "Luna"){
-            let encryptedSharePassword = (String(bytes: encrypedData, encoding: String.Encoding.utf8) ?? "")
-            db.collection(ApiKey.users).document(uid).updateData([ApiKey.shareUserName:shareUserName,ApiKey.sharePassword:encryptedSharePassword])
+        if sharePassword.isEmpty || shareUserName.isEmpty {
+            db.collection(ApiKey.users).document(uid).updateData([ApiKey.shareUserName: shareUserName,ApiKey.sharePassword: sharePassword]){ (error) in
+                if let err = error {
+                    failure(err)
+                } else {
+                    completion()
+                }
+            }
+        }else{
+            if let encrypedData = AES256Crypter.encryptionAESModeECB(messageData: sharePassword.data(using: String.Encoding.utf8)!, key: "Luna"){
+                let encryptedSharePassword = (String(bytes: encrypedData, encoding: String.Encoding.utf8) ?? "")
+                db.collection(ApiKey.users).document(uid).updateData([ApiKey.shareUserName:shareUserName,ApiKey.sharePassword:encryptedSharePassword]){ (error) in
+                    if let err = error {
+                        failure(err)
+                    } else {
+                        completion()
+                    }
+                }
+            }
         }
     }
     
@@ -711,57 +672,6 @@ class FirestoreController:NSObject{
         }
     }
     
-    //MARK:- CREATE LAST MESSAGE NODE
-    //===============================
-    static func createLastMessageNode(roomId:String,messageText:String,messageTime:FieldValue,messageId:String,messageType:String,messageStatus:Int,senderId:String,receiverId:String,mediaUrl:String,blocked: Bool, thumbNailURL: String,messageDuration: Int,price: Double, amIBlocked : Bool) {
-        
-        db.collection(ApiKey.lastMessage)
-            .document(roomId)
-            .collection(ApiKey.chat)
-            .document(ApiKey.message)
-            .setData([ApiKey.messageText:messageText,
-                      ApiKey.messageId:messageId,
-                      ApiKey.messageTime:FieldValue.serverTimestamp(),
-                      ApiKey.messageStatus:messageStatus,
-                      ApiKey.messageType:messageType,
-                      ApiKey.senderId:senderId,
-                      ApiKey.receiverId:receiverId,
-                      ApiKey.roomId:roomId,
-                      ApiKey.mediaUrl : mediaUrl,
-                      ApiKey.blocked :blocked,
-                      ApiKey.price: price,
-                      ApiKey.messageDuration : messageDuration])
-        
-        if !amIBlocked {
-            db.collection(ApiKey.lastMessage)
-                .document(roomId)
-                .collection(ApiKey.chat)
-                .document(receiverId).delete()
-        }
-    }
-    
-    //MARK:- CREATE LAST MESSAGE NODE AFTER DELETE MESSAGE
-    //===============================
-    static func createLastMessageNodeAfterDeleteMessage(roomId:String,messageText:String,messageTime:Timestamp,messageId:String,messageType:String,messageStatus:Int,senderId:String,receiverId:String,mediaUrl:String,blocked: Bool, thumbNailURL: String,messageDuration: Int,price: Double, amIBlocked : Bool) {
-        
-        db.collection(ApiKey.lastMessage)
-            .document(roomId)
-            .collection(ApiKey.chat)
-            .document(ApiKey.message)
-            .setData([ApiKey.messageText:messageText,
-                      ApiKey.messageId:messageId,
-                      ApiKey.messageTime: messageTime,
-                      ApiKey.messageStatus:messageStatus,
-                      ApiKey.messageType:messageType,
-                      ApiKey.senderId:senderId,
-                      ApiKey.receiverId:receiverId,
-                      ApiKey.roomId:roomId,
-                      ApiKey.mediaUrl : mediaUrl,
-                      ApiKey.blocked :blocked,
-                      ApiKey.price: price,
-                      ApiKey.messageDuration : messageDuration])
-        
-    }
     
     //MARK:- CREATE LAST MESSAGE OF BLOCKED USER
     //==========================================
@@ -770,29 +680,6 @@ class FirestoreController:NSObject{
             .document(roomId)
             .collection(ApiKey.chat)
             .document(senderId).setData(messageModel)
-    }
-    
-    //MARK:- CREATE TOTAL MESSAGE COUNT
-    //=================================
-    static func getTotalMessagesCount(senderId: String) {
-        db.collection(ApiKey.batchCount).document(senderId).addSnapshotListener { (documentSnapshot, error) in
-            if  let error = error {
-                print(error.localizedDescription)
-            }else{
-                guard let documents = documentSnapshot?.data() else {return}
-                for totalUnreadMessages in documents{
-                    FirestoreController.otherUnreadCount = totalUnreadMessages.value as? Int ?? 0
-                }
-            }
-        }
-    }
-    
-    //MARK:- CREATE TOTAL MESSAGE NODE
-    //================================
-    static func createTotalMessageNode(receiverId: String) {
-        db.collection(ApiKey.batchCount)
-            .document(receiverId)
-            .setData([ApiKey.unreadCount: FirestoreController.otherUnreadCount + 1])
     }
     
     //MARK:-GetUnreadMessages
@@ -808,44 +695,6 @@ class FirestoreController:NSObject{
                 guard let data = document.data() else { return }
                 FirestoreController.otherUnreadCount =   data[ApiKey.unreadCount] as? Int ?? 0
             }
-    }
-    
-    static func updateUnreadMessages(senderId: String, receiverId: String, unread: Int) {
-        db.collection(ApiKey.inbox)
-            .document(receiverId)
-            .collection(ApiKey.chat)
-            .document(senderId)
-            .updateData([ApiKey.unreadCount : unread + 1])
-        
-        db.collection(ApiKey.batchCount).document(receiverId).getDocument { (document, error) in
-            if let doc = document {
-                if doc.exists {
-                    guard let count = doc.data()?[ApiKey.unreadCount] as? Int else { return }
-                    db.collection(ApiKey.batchCount).document(receiverId).setData([ApiKey.unreadCount : count + 1])
-                } else {
-                    db.collection(ApiKey.batchCount).document(receiverId).setData([ApiKey.unreadCount: 1])
-                }
-            }
-        }
-    }
-    
-    static func updateUnreadMessagesAfterDeleteMessage(senderId: String, receiverId: String, unread: Int) {
-        db.collection(ApiKey.inbox)
-            .document(receiverId)
-            .collection(ApiKey.chat)
-            .document(senderId)
-            .updateData([ApiKey.unreadCount : unread - 1])
-        
-        db.collection(ApiKey.batchCount).document(receiverId).getDocument { (document, error) in
-            if let doc = document {
-                if doc.exists {
-                    guard let count = doc.data()?[ApiKey.unreadCount] as? Int else { return }
-                    db.collection(ApiKey.batchCount).document(receiverId).setData([ApiKey.unreadCount : count - 1])
-                } else {
-                    db.collection(ApiKey.batchCount).document(receiverId).setData([ApiKey.unreadCount: 0])
-                }
-            }
-        }
     }
     
     static func uploadMedia(croppedImage: UIImage, progressEsc: @escaping (Progress)->(),completion: @escaping (_ url: String?) -> Void) {
@@ -974,28 +823,6 @@ class FirestoreController:NSObject{
         }
     }
     
-    //MARK:-UpdateLastMessagePath
-    //===========================
-    static func updateLastMessagePathInInbox(senderId:String,receiverId:String,roomId:String,success: @escaping ()-> ()){
-        
-        db.collection(ApiKey.inbox)
-            .document(receiverId)
-            .collection(ApiKey.chat)
-            .document(senderId)
-            .setData([ApiKey.roomId:roomId,
-                      ApiKey.roomInfo: db.collection(ApiKey.roomInfo).document(roomId),
-                      ApiKey.timeStamp: FieldValue.serverTimestamp(),
-                      ApiKey.lastMessage: db.collection(ApiKey.lastMessage).document(roomId).collection(ApiKey.chat).document(senderId),
-                      ApiKey.userDetails: db.collection(ApiKey.users).document(senderId)])
-            { err in
-                if let err = err {
-                    print("Error writing document: \(err)")
-                } else {
-                    print("Success")
-                }
-            }
-    }
-    
     //MARK:-CreateMessageNode
     //=======================
     static func createMessageNode(messageText:String,messageTime:FieldValue,messageId:String,messageType:String,senderId:String){
@@ -1009,14 +836,6 @@ class FirestoreController:NSObject{
         /// 0 - pending, 1 - sent, 2 - delivered, 3 - read
         
     }
-    
-//    //MARK:-CreateCGMDataNode
-//    //=======================
-//    static func createCGMDataNode(direction: String,sgv: Int,date: TimeInterval){
-//        let userId = Auth.auth().currentUser?.uid ?? ""
-//        db.collection(ApiKey.userSystemInfo).document(userId).collection(ApiKey.cgmData).document(String(date)).setData([ApiKey.sgv: sgv,ApiKey.direction: direction,ApiKey.date: date])
-//
-//    }
     
     static func createInsulinDataNode(insulinUnit: String,date: TimeInterval){
         guard let userId = Auth.auth().currentUser?.uid  else { return }
@@ -1204,19 +1023,6 @@ class FirestoreController:NSObject{
         // [END simple_transaction]
     }
     
-    //MARK:- Update last Updated CGM Date Value In User Info
-    //=======================
-    static func updateLastUpdatedCGMDate(currentDate:Double) {
-        guard let userId = Auth.auth().currentUser?.uid  else { return }
-//        db.collection(ApiKey.users).document(userId).getDocument { (snapshot, error ) in
-//            if  (snapshot?.exists)! {
-                db.collection(ApiKey.users).document(userId).updateData([ApiKey.lastUpdatedCGMDate: currentDate])
-//            } else {
-//                db.collection(ApiKey.sessionData).document(userId).updateData([ApiKey.lastUpdatedCGMDate: currentDate])
-//            }
-//        }
-    }
- 
     static func showAlert( title : String = "", msg : String,_ completion : (()->())? = nil) {
         let alertViewController = UIAlertController(title: title, message: msg, preferredStyle: UIAlertController.Style.alert)
         let okAction = UIAlertAction(title:"ok", style: UIAlertAction.Style.default) { (action : UIAlertAction) -> Void in

@@ -32,7 +32,6 @@ struct UserModel{
     var isSystemSetupCompleted : Bool
     var isBiometricOn: Bool
     var status : String
-    var userType : String
     var deviceId: String
     var isAlertsOn: Bool
     
@@ -50,7 +49,6 @@ struct UserModel{
         self.firstName = json[ApiKey.firstName].stringValue
         self.password = json[ApiKey.password].stringValue
         self.status = json[ApiKey.status].stringValue
-        self.userType = json[ApiKey.currentRole].stringValue
         self.isChangePassword = json[ApiKey.isChangePassword].boolValue
         self.isProfileStepCompleted = json[ApiKey.isProfileStepCompleted].boolValue
         self.isSystemSetupCompleted = json[ApiKey.isSystemSetupCompleted].boolValue
@@ -71,7 +69,6 @@ struct UserModel{
         model.emailVerified = dict[ApiKey.emailVerified] as? Bool ?? false
         model.image = dict[ApiKey.image] as? String ?? ""
         model.password = dict[ApiKey.password] as? String ?? ""
-        model.userType = dict[ApiKey.currentRole] as? String ?? ""
         model.isChangePassword = dict[ApiKey.isChangePassword] as? Bool ?? false
         model.isBiometricOn = dict[ApiKey.isBiometricOn] as? Bool ?? false
         model.dob =  dict[ApiKey.dob] as? String ?? ""
@@ -92,7 +89,6 @@ struct UserModel{
             ApiKey.image : image,
             ApiKey.password : password,
             ApiKey.status : status,
-            ApiKey.userType : userType,
             ApiKey.isChangePassword : isChangePassword,
             ApiKey.diabetesType: diabetesType,
             ApiKey.isBiometricOn : isBiometricOn,

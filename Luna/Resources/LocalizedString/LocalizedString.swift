@@ -145,6 +145,7 @@ enum LocalizedString : String {
     case per_day
     case change_Long_Acting_Insulin
     case change_CGM
+    case logout_From_Dexcom
     case change_connected_Luna_Device
     case alerts
     case explainer_what_they_do
@@ -165,6 +166,7 @@ enum LocalizedString : String {
     case touch_ID
     case are_you_sure_want_to_delete_account
     case are_you_sure_want_to_logout
+    case are_you_sure_want_to_logout_from_dexcom
     
     case no
     case yes

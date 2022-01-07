@@ -18,7 +18,7 @@ class BiometricIDAuth {
     init(policy: LAPolicy = .deviceOwnerAuthenticationWithBiometrics,
          localizedReason: String = "Verify your Identity",
          localizedFallbackTitle: String = "Enter App Password",
-         localizedCancelTitle: String = "Touch me not") {
+         localizedCancelTitle: String = "Cancel") {
         self.policy = policy
         self.localizedReason = localizedReason
         context.localizedFallbackTitle = localizedFallbackTitle

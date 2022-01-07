@@ -68,6 +68,7 @@
 "touch_ID" = "Touch ID";
 "are_you_sure_want_to_delete_account" = "Are you sure want to delete account?";
 "are_you_sure_want_to_logout" = "Are you sure want to logout?";
+"are_you_sure_want_to_logout_from_dexcom" = "Are you sure want to logout from Dexcom?";
 
 "no" = "No";
 "yes" = "Yes";
@@ -118,6 +119,7 @@
 "battery" = "Battery";
 "reservoir" = "Reservoir";
 "system" = "System";
+"logout_From_Dexcom" = "Logout From Dexcom";
 
 "old_password_must_contain_at_least_char" = "Old password must contain at least 6 char.";
 "new_password_must_contain_at_least_char" = "New password must contain at least 6 char.";

@@ -21,8 +21,8 @@ class CGMLoginVC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var emailTxt = ""
-    var passTxt = ""
+    var emailTxt: String = ""
+    var passTxt : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,32 +59,20 @@ class CGMLoginVC: UIViewController {
             if   SystemInfoModel.shared.isFromSetting {
                 CommonFunctions.showActivityLoader()
                 FirestoreController.checkUserExistInSystemDatabase {
-//                    FirestoreController.updateSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
                         FirestoreController.getUserSystemInfoData{
                             CommonFunctions.hideActivityLoader()
-//                            NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: [ApiKey.cgmData: cgmData])
                             self.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
                             CommonFunctions.showToastWithMessage("CGM info updated successfully.")
                         } failure: { (error) -> (Void) in
                             CommonFunctions.hideActivityLoader()
                             CommonFunctions.showToastWithMessage(error.localizedDescription)
                         }
-//                    }
-//                failure: { (error) -> (Void) in
-//                        CommonFunctions.hideActivityLoader()
-//                        CommonFunctions.showToastWithMessage(error.localizedDescription)
-//                    }
                 } failure: {
-//                    FirestoreController.setSystemInfoData(userId: AppUserDefaults.value(forKey: .uid).stringValue, longInsulinType: SystemInfoModel.shared.longInsulinType, longInsulinSubType: SystemInfoModel.shared.longInsulinSubType, insulinUnit: SystemInfoModel.shared.insulinUnit, cgmType: SystemInfoModel.shared.cgmType, cgmUnit: SystemInfoModel.shared.cgmUnit) {
                         CommonFunctions.hideActivityLoader()
                         NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: [ApiKey.cgmData: cgmData])
                         self.navigationController?.popToViewControllerOfType(classForCoder: SystemSetupVC.self)
                         CommonFunctions.showToastWithMessage("CGM info updated successfully.")
                         AppUserDefaults.save(value: true, forKey: .isSystemSetupCompleted)
-//                    } failure: { (error) -> (Void) in
-//                        CommonFunctions.hideActivityLoader()
-//                        CommonFunctions.showToastWithMessage(error.localizedDescription)
-//                    }
                 }
             }else {
                 NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: nil)

@@ -129,7 +129,6 @@ extension BottomSheetVC :  ChartViewDelegate {
         cgmChartView.leftAxis.setLabelCount(8, force: true)
         cgmChartView.rightAxis.gridLineDashLengths = [5.0, 5.0]
         cgmChartView.rightAxis.drawGridLinesEnabled = false
-//        cgmChartView.rightAxis.valueFormatter = ChartYMMOLValueFormatter()
         cgmChartView.rightAxis.granularityEnabled = true
         cgmChartView.rightAxis.granularity = 50
         

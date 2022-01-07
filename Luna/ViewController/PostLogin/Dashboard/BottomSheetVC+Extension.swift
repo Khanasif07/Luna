@@ -43,7 +43,9 @@ extension BottomSheetVC {
             latestMinAgoString = String(Int(deltaTime)) + " min ago"
         } else {
             self.timeAgoLbl.text = ""
-            latestMinAgoString = ""
+            self.latestMinAgoString = ""
+            self.cgmDirectionlbl.text = ""
+            self.cgmValueLbl.text = "--"
         }
     }
     

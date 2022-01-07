@@ -60,7 +60,6 @@ class SettingsVC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    public let db = Firestore.firestore()
     var sections: [(UIImage,SettingSection)] = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "system"),.app_settings),(#imageLiteral(resourceName: "about"),.about)]
     
     // MARK: - Lifecycle
@@ -186,10 +185,19 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
         cell.switchTapped = { [weak self] sender in
             guard let self = self else { return }
             if self.sections[indexPath.section].1 ==  .face_ID ||  self.sections[indexPath.section].1 ==  .touch_ID {
+                CommonFunctions.showActivityLoader()
                 let isOn = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
-                self.db.collection(ApiKey.users).document(UserModel.main.id).updateData([ApiKey.isBiometricOn: !isOn])
-                AppUserDefaults.save(value: !isOn, forKey: .isBiometricSelected)
-                self.settingTableView.reloadData()
+                FirestoreController.updateUserBiometricStatus(isBiometricOn: !isOn) {
+                    CommonFunctions.hideActivityLoader()
+                    AppUserDefaults.save(value: !isOn, forKey: .isBiometricSelected)
+                    self.settingTableView.reloadData()
+                } failure: { (err) -> (Void) in
+                    CommonFunctions.hideActivityLoader()
+                    CommonFunctions.showToastWithMessage(err.localizedDescription)
+                } failures: {
+                    CommonFunctions.hideActivityLoader()
+                    print("")
+                }
             }
         }
         return cell

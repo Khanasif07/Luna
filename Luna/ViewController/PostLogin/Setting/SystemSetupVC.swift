@@ -29,9 +29,8 @@ class SystemSetupVC: UIViewController {
     //===========================
     var backgroundView1 = UIView(frame: CGRect.zero)
     var customView: CustomView?
-    public let db = Firestore.firestore()
     var settingType : SettingType = .Luna
-    var sections: [(UIImage,String,String)] = [(#imageLiteral(resourceName: "changeLongActingInsulin"),LocalizedString.change_Long_Acting_Insulin.localized,""),(#imageLiteral(resourceName: "changeCgm"),LocalizedString.change_CGM.localized,""),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),LocalizedString.change_connected_Luna_Device.localized,""),(#imageLiteral(resourceName: "alerts"),LocalizedString.alerts.localized,LocalizedString.explainer_what_they_do.localized)]
+    var sections: [(UIImage,String,String)] = [(#imageLiteral(resourceName: "changeLongActingInsulin"),LocalizedString.change_Long_Acting_Insulin.localized,""),(#imageLiteral(resourceName: "changeCgm"),LocalizedString.change_CGM.localized,""),(#imageLiteral(resourceName: "changeCgm"),LocalizedString.logout_From_Dexcom.localized,""),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),LocalizedString.change_connected_Luna_Device.localized,""),(#imageLiteral(resourceName: "alerts"),LocalizedString.alerts.localized,LocalizedString.explainer_what_they_do.localized)]
     
     // MARK: - Lifecycle
     //===========================
@@ -107,7 +106,11 @@ extension SystemSetupVC {
         
         private func setUpSectionData(){
             if settingType == .Luna {
-                self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),LocalizedString.change_Long_Acting_Insulin.localized,"\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),LocalizedString.change_CGM.localized,"\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),LocalizedString.change_connected_Luna_Device.localized,BleManager.sharedInstance.myperipheral?.name ?? ""),(#imageLiteral(resourceName: "alerts"),LocalizedString.alerts.localized,LocalizedString.explainer_what_they_do.localized)]
+                if UserDefaultsRepository.shareUserName.value.isEmpty || UserDefaultsRepository.sharePassword.value.isEmpty{
+                    self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),LocalizedString.change_Long_Acting_Insulin.localized,"\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),LocalizedString.change_CGM.localized,"\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),LocalizedString.change_connected_Luna_Device.localized,BleManager.sharedInstance.myperipheral?.name ?? ""),(#imageLiteral(resourceName: "alerts"),LocalizedString.alerts.localized,LocalizedString.explainer_what_they_do.localized)]
+                }else {
+                    self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),LocalizedString.change_Long_Acting_Insulin.localized,"\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),LocalizedString.change_CGM.localized,"\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeCgm"),LocalizedString.logout_From_Dexcom.localized,""),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),LocalizedString.change_connected_Luna_Device.localized,BleManager.sharedInstance.myperipheral?.name ?? ""),(#imageLiteral(resourceName: "alerts"),LocalizedString.alerts.localized,LocalizedString.explainer_what_they_do.localized)]
+                }
             }else {
                 if !UserModel.main.isChangePassword {
                     self.sections = [(#imageLiteral(resourceName: "faceId"),!hasTopNotch ? LocalizedString.touch_ID.localized : LocalizedString.face_ID.localized,""),(#imageLiteral(resourceName: "appleHealth"),LocalizedString.apple_Health.localized,"")]
@@ -160,14 +163,6 @@ extension SystemSetupVC {
         if let infoView = self.customView {
             backgroundView1.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
             customView?.frame = CGRect(x: 20.0, y: UIDevice.height / 2.0 - (50.0), width: UIDevice.width - 40.0 , height: 120.0)
-//            notificationPopUp?.message.text = msg
-//            notificationPopUp?.yesBtn.setTitle(ApiKey.continueUpperCase, for: .normal)
-//            notificationPopUp?.noBtn.setTitle(ApiKey.cancel, for: .normal)
-//            notificationPopUp?.noBtn.backgroundColor = AppColors.disableGrayColor
-//            notificationPopUp?.noBtn.setTitleColor(AppColors.blackColor, for: .normal)
-//            notificationPopUp?.title.text = forSuccess ? ApiKey.successUpperCase : LocalizedString.are_you_sure.localized
-//            notificationPopUp?.button.isHidden = !forSuccess
-//            notificationPopUp?.stackView.isHidden = forSuccess
             backgroundView1.addSubview(infoView)
             self.view.addSubview(backgroundView1)
         }
@@ -203,7 +198,7 @@ extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
             cell.titleLbl.text = sections[indexPath.section].1
             cell.subTitlelbl.text = sections[indexPath.section].2
             cell.logoImgView.image = sections[indexPath.section].0
-            if indexPath.section == 3{
+            if self.sections[indexPath.section].1 == LocalizedString.alerts.localized{
                 cell.switchView.isUserInteractionEnabled = true
                 cell.nextBtn.isHidden = true
                 cell.switchView.isHidden = false
@@ -214,12 +209,21 @@ extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
             }
             cell.switchTapped = { [weak self] sender in
                 guard let self = self else { return }
-                if indexPath.section == 3 {
+                if self.sections[indexPath.section].1 == LocalizedString.alerts.localized {
+                    CommonFunctions.showActivityLoader()
                     let isOn = AppUserDefaults.value(forKey: .isAlertsOn).boolValue
-                    self.db.collection(ApiKey.users).document(UserModel.main.id).updateData([ApiKey.isAlertsOn: !isOn])
-                    AppUserDefaults.save(value: !isOn, forKey: .isAlertsOn)
-                    UserModel.main.isAlertsOn = !isOn
-                    self.systemTableView.reloadData()
+                    FirestoreController.updateUserAlertsStatus(isAlertsOn: !isOn) {
+                        CommonFunctions.hideActivityLoader()
+                        AppUserDefaults.save(value: !isOn, forKey: .isAlertsOn)
+                        UserModel.main.isAlertsOn = !isOn
+                        self.systemTableView.reloadData()
+                    } failure: { (err) -> (Void) in
+                        CommonFunctions.hideActivityLoader()
+                        CommonFunctions.showToastWithMessage(err.localizedDescription)
+                    } failures: {
+                        CommonFunctions.hideActivityLoader()
+                        print("Do nothing")
+                    }
                 }
             }
             return cell
@@ -240,10 +244,19 @@ extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
             cell.switchTapped = { [weak self] sender in
                 guard let self = self else { return }
                 if indexPath.section == 0 {
+                    CommonFunctions.showActivityLoader()
                     let isOn = AppUserDefaults.value(forKey: .isBiometricSelected).boolValue
-                    self.db.collection(ApiKey.users).document(UserModel.main.id).updateData([ApiKey.isBiometricOn: !isOn])
-                    AppUserDefaults.save(value: !isOn, forKey: .isBiometricSelected)
-                    self.systemTableView.reloadData()
+                    FirestoreController.updateUserBiometricStatus(isBiometricOn:  !isOn) {
+                        CommonFunctions.hideActivityLoader()
+                        AppUserDefaults.save(value: !isOn, forKey: .isBiometricSelected)
+                        self.systemTableView.reloadData()
+                    } failure: { (err) -> (Void) in
+                        CommonFunctions.hideActivityLoader()
+                        CommonFunctions.showToastWithMessage(err.localizedDescription)
+                    } failures: {
+                        CommonFunctions.hideActivityLoader()
+                        print("Do nothing")
+                    }
                 }
             }
             return cell
@@ -261,30 +274,40 @@ extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
             case 0:
                 print("Do Nothing.")
             case 1:
-//                UIApplication.openSettingsURLString
-//                showAlert(msg: "To modify which data Luna shares with Apple Health:Open the Health App,select sources tab and select Luna App,Set desired permissions.")
                 self.showPopupMsg()
-//                if let settingsUrl = URL(string: "x-apple-health://") {
-//                   UIApplication.shared.open(settingsUrl)
-//                 }
             default:
                 let vc = ChangePasswordVC.instantiate(fromAppStoryboard: .PostLogin)
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         default:
-            switch indexPath.section {
-            case 2:
+            switch self.sections[indexPath.section].1 {
+            case LocalizedString.change_connected_Luna_Device.localized:
                 SystemInfoModel.shared.isFromSetting = true
                 let vc = PairLunaVC.instantiate(fromAppStoryboard: .CGPStoryboard)
                 self.navigationController?.pushViewController(vc, animated: true)
-            case 0:
+            case LocalizedString.change_Long_Acting_Insulin.localized:
                 SystemInfoModel.shared.isFromSetting = true
                 let vc = InsulinStep1VC.instantiate(fromAppStoryboard: .SystemSetup)
                 self.navigationController?.pushViewController(vc, animated: true)
-            case 1:
+            case LocalizedString.change_CGM.localized:
                 SystemInfoModel.shared.isFromSetting = true
                 let vc = CGMSelectorVC.instantiate(fromAppStoryboard: .CGPStoryboard)
                 self.navigationController?.pushViewController(vc, animated: true)
+            case LocalizedString.logout_From_Dexcom.localized:
+                SystemInfoModel.shared.isFromSetting = true
+                showAlertWithAction(title: LocalizedString.logout_From_Dexcom.localized, msg: LocalizedString.are_you_sure_want_to_logout_from_dexcom.localized, cancelTitle: LocalizedString.no.localized, actionTitle: LocalizedString.yes.localized) {
+                    CommonFunctions.showActivityLoader()
+                    FirestoreController.updateDexcomCreds(shareUserName: "", sharePassword: "") {
+                        NotificationCenter.default.post(name: Notification.Name.cgmRemovedSuccessfully, object: nil)
+                        CommonFunctions.hideActivityLoader()
+                        self.pop()
+                    } failure: { (err) -> (Void) in
+                        CommonFunctions.hideActivityLoader()
+                        CommonFunctions.showToastWithMessage(err.localizedDescription)
+                    }
+                } cancelcompletion: {
+                    //MARK:- Handle Failure condition
+                }
             default:
                 print("Do Nothing.")
             }

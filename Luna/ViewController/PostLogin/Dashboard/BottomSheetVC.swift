@@ -173,6 +173,20 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
             }
         }
     }
+    
+    @objc func cgmDataRemovedSuccessfully(notification : NSNotification){
+        self.bgData = []
+        SystemInfoModel.shared.cgmData = []
+        UserDefaultsRepository.shareUserName.value = ""
+        UserDefaultsRepository.sharePassword.value = ""
+        let shareUserName = UserDefaultsRepository.shareUserName.value
+        let sharePassword = UserDefaultsRepository.sharePassword.value
+        let shareServer = UserDefaultsRepository.shareServer.value == "US" ?KnownShareServers.US.rawValue : KnownShareServers.NON_US.rawValue
+        dexShare = ShareClient(username: shareUserName, password: sharePassword, shareServer: shareServer )
+        updateMinAgo()
+        newChartSetUp()
+        createGraph()
+    }
 }
 
 //MARK:- Private functions
@@ -196,25 +210,26 @@ extension BottomSheetVC {
     }
     
     private func addObserver(){
-        NotificationCenter.default.addObserver(self, selector: #selector(xAxisLabelsDuplicateValue), name: .XAxisLabelsDuplicateValue, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(xAxisLabelsDuplicateValue), name: .XAxisLabelsDuplicateValue, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(batteryUpdateValue), name: .BatteryUpdateValue, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reservoirUpdateValue), name: .ReservoirUpdateValue, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(statusUpdateValue), name: .StatusUpdateValue, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(cgmDataReceivedSuccessfully), name: .cgmConnectedSuccessfully, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(cgmDataRemovedSuccessfully), name: .cgmRemovedSuccessfully, object: nil)
     }
     
-    @objc func xAxisLabelsDuplicateValue(notification : NSNotification){
-        if let lastData = bgData.last{
-            if lastData.date < dateTimeUtils.getNowTimeIntervalUTC() {
-                bgData.removeFirst()
-                bgData.append(ShareGlucoseData(sgv: lastData.sgv, date: lastData.date + 300.0, direction: lastData.direction ?? "", insulin: lastData.insulin ?? ""))
-                DispatchQueue.main.async {
-                    self.updateBGGraph()
-                }
-            }
-        }
-    }
+//    @objc func xAxisLabelsDuplicateValue(notification : NSNotification){
+//        if let lastData = bgData.last{
+//            if lastData.date < dateTimeUtils.getNowTimeIntervalUTC() {
+//                bgData.removeFirst()
+//                bgData.append(ShareGlucoseData(sgv: lastData.sgv, date: lastData.date + 300.0, direction: lastData.direction ?? "", insulin: lastData.insulin ?? ""))
+//                DispatchQueue.main.async {
+//                    self.updateBGGraph()
+//                }
+//            }
+//        }
+//    }
     
     @objc func bleDidUpdateValue(notification : NSNotification){
         DispatchQueue.main.async {

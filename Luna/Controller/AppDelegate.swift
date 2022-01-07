@@ -43,12 +43,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,GIDSignInDelegate{
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-
+        UIApplication.shared.isIdleTimerDisabled = false
         // This application should be called in background every X Minutes
-//        UIApplication.shared.setMinimumBackgroundFetchInterval(
-//            TimeInterval(UserDefaultsRepository.backgroundRefreshFrequency.value * 60)
-//        )
-        
+        UIApplication.shared.setMinimumBackgroundFetchInterval(
+            TimeInterval(UserDefaultsRepository.backgroundRefreshFrequency.value * 60)
+        )
         // set "prevent screen lock" to ON when the app is started for the first time
         if !UserDefaultsRepository.screenlockSwitchState.exists {
             UserDefaultsRepository.screenlockSwitchState.value = true
@@ -57,7 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,GIDSignInDelegate{
         // set the "prevent screen lock" option when the app is started
         // This method doesn't seem to be working anymore. Added to view controllers as solution offered on SO
         UIApplication.shared.isIdleTimerDisabled = UserDefaultsRepository.screenlockSwitchState.value
-        
         return true
     }
     

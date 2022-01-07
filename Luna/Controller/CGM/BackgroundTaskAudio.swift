@@ -27,7 +27,7 @@ class BackgroundTask {
     
     @objc fileprivate func interruptedAudio(_ notification: Notification) {
         if notification.name == AVAudioSession.interruptionNotification && notification.userInfo != nil {
-            var info = notification.userInfo!
+            let info = notification.userInfo!
             var intValue = 0
             (info[AVAudioSessionInterruptionTypeKey]! as AnyObject).getValue(&intValue)
             if intValue == 1 { //playAudio()
