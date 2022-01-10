@@ -101,7 +101,7 @@ extension  BottomSheetVC{
                 if self.bgTimer.isValid {
                     self.bgTimer.invalidate()
                 }
-                self.startBGTimer(time: 30)
+                self.startBGTimer(time: 60)
             }
             return
         }
@@ -120,7 +120,7 @@ extension  BottomSheetVC{
                     if self.bgTimer.isValid {
                         self.bgTimer.invalidate()
                     }
-                    self.startBGTimer(time: 30)
+                    self.startBGTimer(time: 60)
                 }
                 return
                 
@@ -134,7 +134,7 @@ extension  BottomSheetVC{
                     if self.bgTimer.isValid {
                         self.bgTimer.invalidate()
                     }
-                    self.startBGTimer(time: 30)
+                    self.startBGTimer(time: 60)
                 }
                 return
                 
@@ -157,7 +157,7 @@ extension  BottomSheetVC{
                     if self.bgTimer.isValid {
                         self.bgTimer.invalidate()
                     }
-                    self.startBGTimer(time: 30)
+                    self.startBGTimer(time: 60)
                 }
                 return
                 

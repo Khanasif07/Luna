@@ -90,7 +90,7 @@ class HomeVC: UIViewController {
     }
     
     @IBAction func notificationBtnTapped(_ sender: Any) {
-        let vc = SessionDescriptionVC.instantiate(fromAppStoryboard: .CGPStoryboard)
+        let vc = NotificationsVC.instantiate(fromAppStoryboard: .PostLogin)
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
