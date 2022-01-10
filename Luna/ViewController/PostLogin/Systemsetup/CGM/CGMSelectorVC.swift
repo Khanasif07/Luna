@@ -11,10 +11,11 @@ class CGMSelectorVC: UIViewController {
     
     // MARK: - IBOutlets
     //===========================
+    @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var introTitleLbl: UILabel!
     @IBOutlet weak var introLbl: UILabel!
     @IBOutlet weak var cgmTypesTV: UITableView!
     @IBOutlet weak var proceedBtn: AppButton!
-    var vcObj:UIViewController = UIViewController()
     
     // MARK: - Variables
     //===========================
@@ -27,7 +28,6 @@ class CGMSelectorVC: UIViewController {
         if #available(iOS 13.0, *) {
         overrideUserInterfaceStyle = .light
         }
-        self.proceedBtn.isEnabled = true
         initialSetup()
     }
     
@@ -46,10 +46,25 @@ class CGMSelectorVC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func proceedBtnAction(_ sender: UIButton) {
-        SystemInfoModel.shared.cgmType =  CGMTypeArray.first ?? ""
-        self.proceedBtn.isEnabled = true
-        let vc = CGMLoginVC.instantiate(fromAppStoryboard: .CGPStoryboard)
-        navigationController?.pushViewController(vc, animated: true)
+        if  UserDefaultsRepository.shareUserName.value.isEmpty || UserDefaultsRepository.sharePassword.value.isEmpty{
+            SystemInfoModel.shared.cgmType =  CGMTypeArray.first ?? ""
+            let vc = CGMLoginVC.instantiate(fromAppStoryboard: .CGPStoryboard)
+            navigationController?.pushViewController(vc, animated: true)
+        }else {
+            showAlertWithAction(title: LocalizedString.logout_From_Dexcom.localized, msg: LocalizedString.are_you_sure_want_to_logout_from_dexcom.localized, cancelTitle: LocalizedString.no.localized, actionTitle: LocalizedString.yes.localized) {
+                CommonFunctions.showActivityLoader()
+                FirestoreController.updateDexcomCreds(shareUserName: "", sharePassword: "") {
+                    NotificationCenter.default.post(name: Notification.Name.cgmRemovedSuccessfully, object: nil)
+                    CommonFunctions.hideActivityLoader()
+                    self.pop()
+                } failure: { (err) -> (Void) in
+                    CommonFunctions.hideActivityLoader()
+                    CommonFunctions.showToastWithMessage(err.localizedDescription)
+                }
+            } cancelcompletion: {
+                //MARK:- Handle Failure condition
+            }
+        }
     }
     
     @IBAction func backBtnTapped(_ sender: UIButton) {
@@ -64,7 +79,16 @@ class CGMSelectorVC: UIViewController {
 extension CGMSelectorVC {
     
     private func initialSetup() {
-        cgmTypesTV.isHidden = false
+        self.proceedBtn.isEnabled = true
+        if  UserDefaultsRepository.shareUserName.value.isEmpty || UserDefaultsRepository.sharePassword.value.isEmpty{
+            self.introTitleLbl.text = LocalizedString.connect_cgm.localized
+            self.proceedBtn.setTitle(LocalizedString.next.localized, for: .normal)
+        }else{
+            CGMTypeArray.removeAll()
+            self.introTitleLbl.text = LocalizedString.cgm_connected.localized
+            self.introLbl.text = ""
+            self.proceedBtn.setTitle(LocalizedString.logout_From_Dexcom.localized, for: .normal)
+        }
         self.proceedBtn.round(radius: 10.0)
         self.proceedBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
         self.introLbl.textColor = AppColors.fontPrimaryColor

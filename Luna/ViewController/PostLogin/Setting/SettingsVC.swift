@@ -60,7 +60,7 @@ class SettingsVC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var sections: [(UIImage,SettingSection)] = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "system"),.app_settings),(#imageLiteral(resourceName: "about"),.about)]
+    var sections: [(UIImage,SettingSection)] = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "appSettings"),.app_settings),(#imageLiteral(resourceName: "about"),.about)]
     
     // MARK: - Lifecycle
     //===========================
@@ -115,9 +115,9 @@ extension SettingsVC {
     
     private func setUpdata(){
         if !UserModel.main.isChangePassword {
-            self.sections = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "system"),.app_settings),(#imageLiteral(resourceName: "about"),.about)]
+            self.sections = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "appSettings"),.app_settings),(#imageLiteral(resourceName: "about"),.about)]
         } else{
-            self.sections = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "system"),.app_settings),(#imageLiteral(resourceName: "about"),.about)]
+            self.sections = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "appSettings"),.app_settings),(#imageLiteral(resourceName: "about"),.about)]
         }
     }
     

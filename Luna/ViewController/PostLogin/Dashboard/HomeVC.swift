@@ -89,7 +89,7 @@ class HomeVC: UIViewController {
         self.loadCoachMark()
     }
     
-    @IBAction func infoBtnTapped(_ sender: Any) {
+    @IBAction func notificationBtnTapped(_ sender: Any) {
         let vc = SessionDescriptionVC.instantiate(fromAppStoryboard: .CGPStoryboard)
         self.navigationController?.pushViewController(vc, animated: true)
     }

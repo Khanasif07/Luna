@@ -121,17 +121,17 @@
                                         <rect key="frame" x="0.0" y="44" width="414" height="50"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="be0-HF-ICo">
-                                                <rect key="frame" x="354" y="5" width="40" height="40"/>
+                                                <rect key="frame" x="304" y="5" width="90" height="40"/>
                                                 <subviews>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gOM-OM-7tS">
-                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="40"/>
-                                                        <state key="normal" image="infoIcon"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gOM-OM-7tS">
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                        <state key="normal" image="notificationIcon"/>
                                                         <connections>
-                                                            <action selector="infoBtnTapped:" destination="cCa-wJ-b6y" eventType="touchUpInside" id="ZB1-uK-zX4"/>
+                                                            <action selector="notificationBtnTapped:" destination="cCa-wJ-b6y" eventType="touchUpInside" id="vOb-XC-kd1"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtf-wj-Ftn">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="50" y="0.0" width="40" height="40"/>
                                                         <state key="normal" image="settingsIcon"/>
                                                         <connections>
                                                             <action selector="settingBtnTapped:" destination="cCa-wJ-b6y" eventType="touchUpInside" id="JiS-JL-WST"/>
@@ -1139,9 +1139,9 @@
         <image name="back" width="40" height="40"/>
         <image name="battery14" width="42" height="42"/>
         <image name="historyIcon" width="40" height="40"/>
-        <image name="infoIcon" width="40" height="40"/>
         <image name="manualIcon" width="40" height="40"/>
         <image name="notReady" width="32" height="32"/>
+        <image name="notificationIcon" width="40" height="40"/>
         <image name="reservoir1Bar" width="40" height="40"/>
         <image name="settingsIcon" width="40" height="40"/>
         <systemColor name="systemBackgroundColor">

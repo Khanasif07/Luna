@@ -30,7 +30,7 @@ class SystemSetupVC: UIViewController {
     var backgroundView1 = UIView(frame: CGRect.zero)
     var customView: CustomView?
     var settingType : SettingType = .Luna
-    var sections: [(UIImage,String,String)] = [(#imageLiteral(resourceName: "changeLongActingInsulin"),LocalizedString.change_Long_Acting_Insulin.localized,""),(#imageLiteral(resourceName: "changeCgm"),LocalizedString.change_CGM.localized,""),(#imageLiteral(resourceName: "changeCgm"),LocalizedString.logout_From_Dexcom.localized,""),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),LocalizedString.change_connected_Luna_Device.localized,""),(#imageLiteral(resourceName: "alerts"),LocalizedString.alerts.localized,LocalizedString.explainer_what_they_do.localized)]
+    var sections: [(UIImage,String,String)] = [(#imageLiteral(resourceName: "changeLongActingInsulin"),LocalizedString.change_Long_Acting_Insulin.localized,""),(#imageLiteral(resourceName: "changeCgm"),LocalizedString.change_CGM.localized,""),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),LocalizedString.change_connected_Luna_Device.localized,""),(#imageLiteral(resourceName: "alerts"),LocalizedString.alerts.localized,LocalizedString.explainer_what_they_do.localized)]
     
     // MARK: - Lifecycle
     //===========================
@@ -109,7 +109,7 @@ extension SystemSetupVC {
                 if UserDefaultsRepository.shareUserName.value.isEmpty || UserDefaultsRepository.sharePassword.value.isEmpty{
                     self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),LocalizedString.change_Long_Acting_Insulin.localized,"\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),LocalizedString.change_CGM.localized,"\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),LocalizedString.change_connected_Luna_Device.localized,BleManager.sharedInstance.myperipheral?.name ?? ""),(#imageLiteral(resourceName: "alerts"),LocalizedString.alerts.localized,LocalizedString.explainer_what_they_do.localized)]
                 }else {
-                    self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),LocalizedString.change_Long_Acting_Insulin.localized,"\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),LocalizedString.change_CGM.localized,"\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeCgm"),LocalizedString.logout_From_Dexcom.localized,""),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),LocalizedString.change_connected_Luna_Device.localized,BleManager.sharedInstance.myperipheral?.name ?? ""),(#imageLiteral(resourceName: "alerts"),LocalizedString.alerts.localized,LocalizedString.explainer_what_they_do.localized)]
+                    self.sections = [(#imageLiteral(resourceName: "changeLongActingInsulin"),LocalizedString.change_Long_Acting_Insulin.localized,"\(SystemInfoModel.shared.longInsulinType) | \(SystemInfoModel.shared.insulinUnit) units"),(#imageLiteral(resourceName: "changeCgm"),LocalizedString.change_CGM.localized,"\(SystemInfoModel.shared.cgmType)"),(#imageLiteral(resourceName: "changeConnectedLunaDevice"),LocalizedString.change_connected_Luna_Device.localized,BleManager.sharedInstance.myperipheral?.name ?? ""),(#imageLiteral(resourceName: "alerts"),LocalizedString.alerts.localized,LocalizedString.explainer_what_they_do.localized)]
                 }
             }else {
                 if !UserModel.main.isChangePassword {
@@ -293,21 +293,6 @@ extension SystemSetupVC : UITableViewDelegate, UITableViewDataSource {
                 SystemInfoModel.shared.isFromSetting = true
                 let vc = CGMSelectorVC.instantiate(fromAppStoryboard: .CGPStoryboard)
                 self.navigationController?.pushViewController(vc, animated: true)
-            case LocalizedString.logout_From_Dexcom.localized:
-                SystemInfoModel.shared.isFromSetting = true
-                showAlertWithAction(title: LocalizedString.logout_From_Dexcom.localized, msg: LocalizedString.are_you_sure_want_to_logout_from_dexcom.localized, cancelTitle: LocalizedString.no.localized, actionTitle: LocalizedString.yes.localized) {
-                    CommonFunctions.showActivityLoader()
-                    FirestoreController.updateDexcomCreds(shareUserName: "", sharePassword: "") {
-                        NotificationCenter.default.post(name: Notification.Name.cgmRemovedSuccessfully, object: nil)
-                        CommonFunctions.hideActivityLoader()
-                        self.pop()
-                    } failure: { (err) -> (Void) in
-                        CommonFunctions.hideActivityLoader()
-                        CommonFunctions.showToastWithMessage(err.localizedDescription)
-                    }
-                } cancelcompletion: {
-                    //MARK:- Handle Failure condition
-                }
             default:
                 print("Do Nothing.")
             }
