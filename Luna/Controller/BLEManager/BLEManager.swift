@@ -254,8 +254,6 @@ public class BleManager: NSObject{
                     SystemInfoModel.shared.dosingData[startIndexx].sessionCreated = true
                     SystemInfoModel.shared.dosingData[endIndexx].sessionCreated = true
                 }
-//                let dosingData = try! JSONEncoder().encode(SystemInfoModel.shared.dosingData)
-//                UserDefaults.standard.set(dosingData, forKey: ApiKey.dosingHistoryData)
                 //
                 FirestoreController.addBatchData(sessionId: FirestoreController.getSessionId(), startDate: UserDefaultsRepository.sessionStartDate.value, endDate: UserDefaultsRepository.sessionEndDate.value, array: rangeBgData) { (sessionId) in
                     print("Add CGM Batch Data Commited successfully")

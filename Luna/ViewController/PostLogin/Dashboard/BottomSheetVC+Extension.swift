@@ -79,8 +79,7 @@ extension BottomSheetVC {
         }
     }
     
-    func bgDirectionGraphic(_ value:String)->String
-    {
+    func bgDirectionGraphic(_ value:String)->String {
         let 
             graphics:[String:String]=["Flat":"→","DoubleUp":"↑↑","SingleUp":"↑","FortyFiveUp":"↗","FortyFiveDown":"↘︎","SingleDown":"↓","DoubleDown":"↓↓","None":"-","NONE":"-","NOT COMPUTABLE":"-","RATE OUT OF RANGE":"-", "": "-","NotComputable":  "-"]
         return graphics[value] ?? ""
@@ -89,19 +88,21 @@ extension BottomSheetVC {
     func persistentNotification(body: String){
         if !isNotificationProgress && UserModel.main.isAlertsOn{
             self.sendNotification(self,body: body)
+            FirestoreController.addNotificationData(notificationId: FirestoreController.getNotificationId(), array: [NotificationModel(title: "Notification", date: dateTimeUtils.getNowTimeIntervalUTC(), description: body, notificationId: FirestoreController.getNotificationId())], success: {
+                print("=====Notification added to Firestore====")
+            })
         }
     }
     
     func sendNotification(_ sender: Any,body: String) {
-        
-//        UNUserNotificationCenter.current().delegate = self
+        //        UNUserNotificationCenter.current().delegate = self
         self.isNotificationProgress = true
         let content = UNMutableNotificationContent()
         content.title = ""
         content.subtitle = ""
         content.categoryIdentifier = "category"
         content.body = body
-//        content.badge = 1
+        //        content.badge = 1
         // This is needed to trigger vibrate on watch and phone
         // TODO:
         // See if we can use .Critcal
@@ -118,28 +119,6 @@ extension BottomSheetVC {
         CommonFunctions.delay(delay: 10.0) {
             self.isNotificationProgress = false
         }
-//    }
-}
-    
-    
-    // General Notifications
-    
-    func sendGeneralNotification(_ sender: Any, title: String, subtitle: String, body: String, timer: TimeInterval) {
-        
-        UNUserNotificationCenter.current().delegate = self
-        
-        let content = UNMutableNotificationContent()
-        content.title = title
-        content.subtitle = subtitle
-        content.body = body
-        content.categoryIdentifier = "noAction"
-        content.sound = .default
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timer, repeats: false)
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-        
-        
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {

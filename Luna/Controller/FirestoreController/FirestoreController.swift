@@ -186,6 +186,29 @@ class FirestoreController:NSObject{
         }
     }
     
+    //MARK:- Get Notifications Data info
+    //=======================
+    static func getNotificationData(success: @escaping (_ notiArray: [NotificationModel]) -> Void,
+                                    failure:  @escaping FailureResponse){
+        if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
+            db.collection(ApiKey.notifications)
+                .document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.notificationsData).getDocuments { (snapshot, error) in
+                    if let error = error {
+                        failure(error)
+                    } else{
+                        print("============================")
+                        var notiModelArray = [NotificationModel]()
+                        guard let dicts = snapshot?.documents else { return }
+                        dicts.forEach { (queryDocumentSnapshot) in
+                            let notiModel = NotificationModel(queryDocumentSnapshot.data())
+                            notiModelArray.append(notiModel)
+                        }
+                        success(notiModelArray)
+                    }
+                }
+        }
+    }
+    
 //    MARK:- Get Insulin Data info
 //    =======================
     static func getFirebaseInsulinData(date:Double,success: @escaping (_ cgmModelArray: [ShareGlucoseData]) -> Void,
@@ -956,6 +979,32 @@ class FirestoreController:NSObject{
         guard let userId = Auth.auth().currentUser?.uid  else { return ""}
         let messageId = db.collection(ApiKey.sessionData).document(userId).collection(ApiKey.sessionHistoryData).document().documentID
         return messageId
+    }
+    
+    /// Mark:- Fetching the message ID
+    static func getNotificationId() -> String {
+        guard let userId = Auth.auth().currentUser?.uid  else { return ""}
+        let messageId = db.collection(ApiKey.notifications).document(userId).collection(ApiKey.notificationsData).document().documentID
+        return messageId
+    }
+    
+    //MARK:-Add  cgm data array through batch operation
+    //=======================
+    static func addNotificationData(notificationId: String,array:[NotificationModel],success: @escaping ()-> ()) {
+        guard let userId = Auth.auth().currentUser?.uid  else { return }
+        let batch = db.batch()
+        array.forEach { (doc) in
+            let docRef =  db.collection(ApiKey.notifications).document(userId).collection(ApiKey.notificationsData).document(doc.notificationId ?? "")
+            batch.setData([ApiKey.notificationId: doc.notificationId ?? "",ApiKey.title: doc.title ?? "",ApiKey.date: doc.date ?? dateTimeUtils.getNowTimeIntervalUTC(),ApiKey.description: doc.description ?? ""], forDocument: docRef)
+        }
+        batch.commit { (err) in
+            if let err = err{
+                print("Error occured \(err)")
+                CommonFunctions.showToastWithMessage(err.localizedDescription)
+            } else {
+                success()
+            }
+        }
     }
 
     //MARK:- simpleTransaction

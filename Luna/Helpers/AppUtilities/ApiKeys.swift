@@ -109,6 +109,8 @@ enum ApiKey {
     static var minDistance: String { return "minDistance" }
     static var beginCaps: String { return "BEGIN" }
     static var endCaps: String { return "END" }
+    static var notifications: String { return "notifications" }
+    static var notificationsData: String { return "notificationsData" }
 
     
     //     MARK: Firestore Keys
@@ -161,7 +163,8 @@ enum ApiKey {
     static var sgv  : String {return "sgv" }
     static var direction  : String {return "direction" }
     static var date  : String {return "date" }
-    
+    static var notificationId: String { return "notificationId"}
+    static var title: String { return "title"}
 }
 //MARK:- Api Code
 //=======================

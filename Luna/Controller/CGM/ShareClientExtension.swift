@@ -167,16 +167,9 @@ extension ShareClient {
             guard error == nil || result != nil else {
                 return callback(error, nil)
             }
-            
             // parse data to conanical form
             var shareData = [ShareGlucoseData]()
             for i in 0..<result!.count {
-                
-                //var trend = Int(result![i].trend)
-//                if(trend < 0 || trend > TrendTable.count-1) {
-//                    trend = 0
-//                }
-            
                 let newShareData = ShareGlucoseData(
                     sgv: Int(result![i].glucose),
                     date: result![i].timestamp.timeIntervalSince1970,
@@ -185,6 +178,6 @@ extension ShareClient {
                 shareData.append(newShareData)
             }
             callback(nil,shareData)
-         }
+        }
     }
 }

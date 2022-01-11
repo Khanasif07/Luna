@@ -127,3 +127,15 @@
 "new_password_must_contain_at_least_char" = "New password must contain at least 6 char.";
 "confirm_password_must_contain_at_least_char" = "Confirm password must contain at least 6 char.";
 "new_and_confirm_password_doesnt_match" = "New and confirm password doesn't match.";
+
+"minutesAgo" = "Minutes Ago";
+"oneMinuteAgo" = "1 Minutes Ago";
+"oneHourAgo" = "1 Hours Ago";
+"hoursAgo" = "Hours Ago";
+"daysAgo" = "Days Ago";
+"lastWeek" = "Last Week";
+"secondsAgo" = "Seconds Ago";
+"weeksAgo" = "Weeks Ago";
+"lastMonth" = "Last Month";
+"monthsAgo" = "Months Ago";
+"lastYear" = "Last Year";

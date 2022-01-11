@@ -47,6 +47,16 @@ extension Double {
        
     }
     
+    public func getChatDateTimeFromTimeInterval(_ dateFormat: String)-> String{
+        //Convert to Date
+        //let date = NSDate(timeIntervalSince1970: self / 1000.0)
+        let nsDate = NSDate(timeIntervalSince1970: TimeInterval(self))
+        //Date formatting
+        let date = nsDate as Date
+        return date.timeAgoSince
+       
+    }
+    
     public func getMonthInterval(_ dateFormat: String = "hh a")-> String{
         //Convert to Date
         //let date = NSDate(timeIntervalSince1970: self / 1000.0)

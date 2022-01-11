@@ -94,6 +94,7 @@
 		842E9B1E2695710300F36A3D /* InsulinStep4VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842E9B1D2695710300F36A3D /* InsulinStep4VC.swift */; };
 		8432A1992672294200859B47 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8432A19B2672294200859B47 /* Localizable.strings */; };
 		8432A19F2672319B00859B47 /* BiometricIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8432A19E2672319B00859B47 /* BiometricIDAuth.swift */; };
+		843C4569278DB59400C99AE5 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C4568278DB59400C99AE5 /* NotificationModel.swift */; };
 		843E3343276869B90081C1A9 /* SettingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843E3342276869B90081C1A9 /* SettingHeaderView.swift */; };
 		843E3346276869E10081C1A9 /* SettingHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843E3345276869E10081C1A9 /* SettingHeaderView.xib */; };
 		8445788726AFE14B008B93AD /* PairLunaProblemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8445788626AFE14B008B93AD /* PairLunaProblemVC.swift */; };
@@ -325,6 +326,7 @@
 		842E9B1D2695710300F36A3D /* InsulinStep4VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinStep4VC.swift; sourceTree = "<group>"; };
 		8432A19A2672294200859B47 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8432A19E2672319B00859B47 /* BiometricIDAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuth.swift; sourceTree = "<group>"; };
+		843C4568278DB59400C99AE5 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		843E3342276869B90081C1A9 /* SettingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderView.swift; sourceTree = "<group>"; };
 		843E3345276869E10081C1A9 /* SettingHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingHeaderView.xib; sourceTree = "<group>"; };
 		8445788626AFE14B008B93AD /* PairLunaProblemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairLunaProblemVC.swift; sourceTree = "<group>"; };
@@ -1074,6 +1076,7 @@
 				8410611B26A9DC8E00BF7953 /* SystemInfoModel.swift */,
 				84B5A05926C28CD20051C06A /* InsulinModel.swift */,
 				84606118270C3DF900DFD22A /* SessionHistory.swift */,
+				843C4568278DB59400C99AE5 /* NotificationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1410,6 +1413,7 @@
 				84CC13192668D25B009316FC /* UIView+Extension.swift in Sources */,
 				84F2A278269849ED000FDCD5 /* BottomSheetInsulinCell.swift in Sources */,
 				84AA00902716C04200E7E1F8 /* CustomLineChartView.swift in Sources */,
+				843C4569278DB59400C99AE5 /* NotificationModel.swift in Sources */,
 				84CC130D2668D1F3009316FC /* Dictionary+Extension.swift in Sources */,
 				84E78B9E2685E8C500FABDCD /* UserModel.swift in Sources */,
 				8455491C2678DDBA000CC13D /* SignupViewController.swift in Sources */,

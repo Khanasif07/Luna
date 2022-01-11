@@ -15,6 +15,7 @@ class NotificationsVC : UIViewController{
     @IBOutlet var titleLbl: UILabel!
     // MARK: - Variables
     //===========================
+    var notificationListing = [NotificationModel]()
     
     // MARK: - Lifecycle
     //===========================
@@ -37,6 +38,7 @@ extension NotificationsVC {
     
     private func initialSetup() {
         self.tableViewSetup()
+        self.getNotificationListing()
     }
     
     private func tableViewSetup(){
@@ -45,6 +47,19 @@ extension NotificationsVC {
         self.notiTableView.registerHeaderFooter(with: SettingHeaderView.self)
         self.notiTableView.registerCell(with: NotificationsCell.self)
     }
+    
+    private func getNotificationListing(){
+        CommonFunctions.showActivityLoader()
+        FirestoreController.getNotificationData { (notiListing) in
+            self.notificationListing = notiListing
+            self.notiTableView.reloadData()
+            CommonFunctions.hideActivityLoader()
+        } failure: { (error) -> (Void) in
+            CommonFunctions.showToastWithMessage(error.localizedDescription)
+            CommonFunctions.hideActivityLoader()
+        }
+
+    }
 }
 
 // MARK: - Extension For TableView
@@ -52,15 +67,12 @@ extension NotificationsVC {
 extension NotificationsVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return self.notificationListing.endIndex
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(with: NotificationsCell.self)
-//        cell.titleLbl.text = sections[indexPath.section].1
-//        cell.logoImgView.image = sections[indexPath.section].0
-//        cell.nextBtn.isHidden = false
-//        cell.switchView.isHidden = true
+        cell.populateCell(model: self.notificationListing[indexPath.row])
         return cell
     }
 }

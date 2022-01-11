@@ -35,8 +35,8 @@ class NotificationsCell: UITableViewCell {
         self.timerLbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x12)
     }
     
-    // MARK: - IBActions
-    //===========================
-    
-    
+    public func populateCell(model: NotificationModel){
+        self.descLbl.text = model.description
+        timerLbl.text = model.date?.getChatDateTimeFromTimeInterval(Date.DateFormat.hour12.rawValue)
+    }
 }
