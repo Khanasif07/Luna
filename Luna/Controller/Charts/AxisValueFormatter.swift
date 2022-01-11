@@ -149,18 +149,18 @@ final  class XAxisCustomRenderer: XAxisRenderer {
                 for entry in selectedEnteries {
                     if entry.2 == i {
                         if entry.3 == "0.25"{
-                            let rawIcon = #imageLiteral(resourceName: "lunaEndLine")
+                            let rawIcon = #imageLiteral(resourceName: "lunaStartLine")
                             icon = rawIcon.cgImage!
                             if let myImage = icon{
                                 let minutes = ((entry.1) * 48.35416666418314) / minGapBwTwoLabels
-                                context.draw(myImage, in: CGRect(x: position.x - 0.5 + CGFloat(minutes), y: position.y - 266.0, width: CGFloat(1), height: CGFloat(263)))
+                                context.draw(myImage, in: CGRect(x: position.x - 1 + CGFloat(minutes), y: position.y - 266.0, width: CGFloat(2), height: CGFloat(263)))
                             }
                         }else if entry.3 == "0.75" {
                             let rawIcon = #imageLiteral(resourceName: "lunaEndLine")
                             icon = rawIcon.cgImage!
                             if let myImage = icon{
-                                let minutes = ((entry.1) * 48.35) / minGapBwTwoLabels
-                                context.draw(myImage, in: CGRect(x: position.x - 0.5 + CGFloat(minutes), y: position.y - 266.0, width: CGFloat(1), height: CGFloat(263)))
+                                let minutes = ((entry.1) * 48.35416666418314) / minGapBwTwoLabels
+                                context.draw(myImage, in: CGRect(x: position.x - 1 + CGFloat(minutes), y: position.y - 266.0, width: CGFloat(2), height: CGFloat(263)))
                             }
                         } else {
                             let rawIcon = #imageLiteral(resourceName: "lineOne")

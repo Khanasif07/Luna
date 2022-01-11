@@ -837,12 +837,6 @@ class FirestoreController:NSObject{
         
     }
     
-    static func createInsulinDataNode(insulinUnit: String,date: TimeInterval){
-        guard let userId = Auth.auth().currentUser?.uid  else { return }
-        db.collection(ApiKey.userSystemInfo).document(userId).collection(ApiKey.insulinData).document(String(date)).setData([ApiKey.insulinUnit: insulinUnit,ApiKey.date: date])
-    }
-    
-    
     static func delete(batchSize: Int = 288,success: @escaping ()-> ()) {
         guard let userId = Auth.auth().currentUser?.uid  else { return }
         // Limit query to avoid out-of-memory errors on large collections.
@@ -868,7 +862,6 @@ class FirestoreController:NSObject{
         guard let userId = Auth.auth().currentUser?.uid  else { return }
         let batch = db.batch()
         array.forEach { (doc) in
-//            let docKey = String(startDate) + "_" + String(endDate)
             let docKey = sessionId
             let docRef =  db.collection(ApiKey.sessionData).document(userId).collection(docKey).document(String(doc.date))
             batch.setData([ApiKey.sgv: doc.sgv,ApiKey.direction: doc.direction ?? "",ApiKey.date: doc.date,ApiKey.insulin: doc.insulin ?? ""], forDocument: docRef)
