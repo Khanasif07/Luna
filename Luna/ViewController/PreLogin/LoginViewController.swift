@@ -180,7 +180,7 @@ extension LoginViewController {
                         }
                     } else {
                         if (error! as NSError).code != -2 {
-                            CommonFunctions.showToastWithMessage("")
+//                            CommonFunctions.showToastWithMessage("")
                         }
                     }
                   }

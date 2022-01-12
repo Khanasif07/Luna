@@ -15,9 +15,9 @@ class BiometricIDAuth {
 
     private var error: NSError?
 
-    init(policy: LAPolicy = .deviceOwnerAuthenticationWithBiometrics,
+    init(policy: LAPolicy = .deviceOwnerAuthentication,
          localizedReason: String = "Touch ID to Verify Your Identity.",
-         localizedFallbackTitle: String = "Enter App Password",
+         localizedFallbackTitle: String = "Enter Passcode",
          localizedCancelTitle: String = "Cancel") {
         self.policy = policy
         self.localizedReason = localizedReason
