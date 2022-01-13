@@ -350,19 +350,19 @@ extension BleManager: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         switch characteristic.uuid {
         case batteryCharacteristicCBUUID:
-            print("handled Characteristic Value for Battery Level: \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
+            print("handled Characteristic Value for Battery Level: \(data)")
             self.batteryData = data
             NotificationCenter.default.post(name: Notification.Name.BatteryUpdateValue, object: nil)
         case ReservoirLevelCharacteristicCBUUID:
-            print("handled Characteristic Value for Reservoir Level: \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-            AppUserDefaults.save(value: data == "-1" ? "" : data, forKey: .reservoirLevel)
+            print("handled Characteristic Value for Reservoir Level: \(data)")
+//            AppUserDefaults.save(value: data == "-1" ? "" : data, forKey: .reservoirLevel)
             self.reservoirLevelData = data
             NotificationCenter.default.post(name: Notification.Name.ReservoirUpdateValue, object: nil)
         case statusCBUUID:
-            print("handled Characteristic Value for status : \(String(describing: characteristic.value))")
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
+            print("handled Characteristic Value for status : \(data)")
             self.systemStatusData = data
             NotificationCenter.default.post(name: Notification.Name.StatusUpdateValue, object: nil)
         case firmwareRevisionString:
