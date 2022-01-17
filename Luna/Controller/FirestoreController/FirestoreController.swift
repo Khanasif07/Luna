@@ -192,7 +192,7 @@ class FirestoreController:NSObject{
                                     failure:  @escaping FailureResponse){
         if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
             db.collection(ApiKey.notifications)
-                .document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.notificationsData).getDocuments { (snapshot, error) in
+                .document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.notificationsData).order(by: ApiKey.date).getDocuments { (snapshot, error) in
                     if let error = error {
                         failure(error)
                     } else{
@@ -1009,7 +1009,8 @@ class FirestoreController:NSObject{
 
     //MARK:- simpleTransaction
     //=======================
-    static func simpleTransactionToAddCGMData(sessionId: String,startDate:Double,range:Double,endDate:Double,insulin:Int) {
+    static func simpleTransactionToAddCGMData(sessionId: String,startDate:Double,range:Double,endDate:Double,insulin:Int,success: @escaping () -> Void,
+                                              failure:  @escaping FailureResponse) {
         guard let userId = Auth.auth().currentUser?.uid  else { return }
         let sfReference = db.collection(ApiKey.sessionData).document(userId)
         
@@ -1058,8 +1059,10 @@ class FirestoreController:NSObject{
         }) { (object, error) in
             if let error = error {
                 print("Transaction failed: \(error)")
+                failure(error)
             } else {
                 print("Transaction successfully committed!")
+                success()
             }
         }
         // [END simple_transaction]

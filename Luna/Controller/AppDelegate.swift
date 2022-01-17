@@ -140,12 +140,12 @@ extension AppDelegate {
         if let options = FirebaseOptions(contentsOfFile: filePath) {
             FirebaseApp.configure(options: options)
             Database.database().isPersistenceEnabled = true
-            let all = Database.database().reference(withPath: "all")
+            let all = Database.database().reference(withPath: ApiKey.sessionData)
             all.keepSynced(true)
         } else {
             FirebaseApp.configure()
             Database.database().isPersistenceEnabled = true
-            let all = Database.database().reference(withPath:  "all")
+            let all = Database.database().reference(withPath:  ApiKey.sessionData)
             all.keepSynced(true)
         }
     }

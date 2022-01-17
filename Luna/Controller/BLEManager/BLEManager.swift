@@ -49,7 +49,7 @@ public class BleManager: NSObject{
     var rescanTimer :Timer?
     var batteryData: String = ""
     var reservoirLevelData: String = ""
-    var systemStatusData : String = ""
+    var systemStatusData : [String] = []
     var iobData: Double = 0.0
     var insulinData : [ShareGlucoseData] = []
     var isKeepConnect = true
@@ -245,9 +245,11 @@ public class BleManager: NSObject{
                     }
                 }
                 //
-                let rangeBgData = (SystemInfoModel.shared.cgmData?[myRange] ?? []).map { (bgData) -> ShareGlucoseData in
+                var rangeBgData = (SystemInfoModel.shared.cgmData?[myRange] ?? []).map { (bgData) -> ShareGlucoseData in
                     ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: bgData.insulin ?? "")
                 }
+                rangeBgData[0].insulin = "0.25"
+                rangeBgData[rangeBgData.endIndex - 1].insulin = "0.75"
                 let startSession = SystemInfoModel.shared.dosingData.firstIndex(where: {$0.sessionTime == UserDefaultsRepository.sessionStartDate.value})
                 let endSession = SystemInfoModel.shared.dosingData.firstIndex(where: {$0.sessionTime == UserDefaultsRepository.sessionEndDate.value})
                 if let startIndexx = startSession,let endIndexx = endSession{
@@ -258,10 +260,13 @@ public class BleManager: NSObject{
                 FirestoreController.addBatchData(sessionId: FirestoreController.getSessionId(), startDate: UserDefaultsRepository.sessionStartDate.value, endDate: UserDefaultsRepository.sessionEndDate.value, array: rangeBgData) { (sessionId) in
                     print("Add CGM Batch Data Commited successfully")
                     if UserDefaultsRepository.sessionStartDate.value != 0.0 && UserDefaultsRepository.sessionEndDate.value != 0.0 {
-                        FirestoreController.simpleTransactionToAddCGMData(sessionId: sessionId,startDate:UserDefaultsRepository.sessionStartDate.value,range: self.getRangeValue(bgData: rangeBgData, isShowPer: true),endDate: UserDefaultsRepository.sessionEndDate.value,insulin: self.getInsulinDosesValue(bgData: rangeBgData))
+                        FirestoreController.simpleTransactionToAddCGMData(sessionId: sessionId,startDate:UserDefaultsRepository.sessionStartDate.value,range: self.getRangeValue(bgData: rangeBgData, isShowPer: true),endDate: UserDefaultsRepository.sessionEndDate.value,insulin: self.getInsulinDosesValue(bgData: rangeBgData)) {
+                            UserDefaultsRepository.sessionStartDate.value = 0.0
+                            UserDefaultsRepository.sessionEndDate.value = 0.0
+                        } failure: { (err) -> (Void) in
+                            CommonFunctions.showToastWithMessage(err.localizedDescription)
+                        }
                     }
-                    UserDefaultsRepository.sessionStartDate.value = 0.0
-                    UserDefaultsRepository.sessionEndDate.value = 0.0
                 }
             }
         }
@@ -357,13 +362,13 @@ extension BleManager: CBPeripheralDelegate {
         case ReservoirLevelCharacteristicCBUUID:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for Reservoir Level: \(data)")
-//            AppUserDefaults.save(value: data == "-1" ? "" : data, forKey: .reservoirLevel)
             self.reservoirLevelData = data
             NotificationCenter.default.post(name: Notification.Name.ReservoirUpdateValue, object: nil)
         case statusCBUUID:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-            print("handled Characteristic Value for status : \(data)")
-            self.systemStatusData = data
+            let dataArray = data.split{$0 == ","}.map(String.init)
+            print("handled Characteristic Value for status : \(dataArray)")
+            self.systemStatusData = dataArray
             NotificationCenter.default.post(name: Notification.Name.StatusUpdateValue, object: nil)
         case firmwareRevisionString:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
@@ -379,10 +384,10 @@ extension BleManager: CBPeripheralDelegate {
             let filterDataArray = dataArray.map { (stringValue) -> [String] in
                 return stringValue.split{$0 == ":"}.map(String.init)
             }
-            if !filterDataArray.isEmpty && !self.isDataOutPutProcess{
-                    self.isDataOutPutProcess = true
-                    self.manageInsulinData(data: filterDataArray,bytes: characteristic.value?.count ?? 0)
-            }
+//            if !filterDataArray.isEmpty && !self.isDataOutPutProcess{
+//                    self.isDataOutPutProcess = true
+//                    self.manageInsulinData(data: filterDataArray,bytes: characteristic.value?.count ?? 0)
+//            }
             print("handled Characteristic Value for dataOutCBUUID: \(String(describing: data))")
         case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
             print("handled Characteristic Value for: \(String(describing: characteristic.value))")
@@ -436,7 +441,7 @@ extension BleManager: CBCentralManagerDelegate {
             print("central.state is .unauthorized")
         case .poweredOff:
             print("central.state is .poweredOff")
-            self.systemStatusData = ""
+            self.systemStatusData = []
             NotificationCenter.default.post(name: Notification.Name.BLEOnOffState, object: nil)
         case .poweredOn:
             print("central.state is .poweredOn")
@@ -475,10 +480,10 @@ extension BleManager: CBCentralManagerDelegate {
     public func centralManager (_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("DisConnected!")
         if !isUnpaired{
-            systemStatusData = ""
+            systemStatusData = []
             centralManager.connect(peripheral, options: nil)}
         else{
-            systemStatusData = ""
+            systemStatusData = []
             batteryData = ""
             reservoirLevelData = ""
             iobData = 0.0
@@ -505,7 +510,7 @@ extension BleManager: CBCentralManagerDelegate {
         delegate?.didDisconnect?()
         myperipheral?.delegate = nil
         myperipheral = nil
-        systemStatusData = ""
+        systemStatusData = []
         batteryData = ""
         reservoirLevelData = ""
     }

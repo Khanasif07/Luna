@@ -80,7 +80,7 @@ enum DeviceStatus {
         case 22:
             return ("Full",#imageLiteral(resourceName: "reservoir10Bars"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         default:
-            return ("",#imageLiteral(resourceName: "reservoir0Bars"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
+            return ("Full",#imageLiteral(resourceName: "reservoir10Bars"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         }
     }
     
