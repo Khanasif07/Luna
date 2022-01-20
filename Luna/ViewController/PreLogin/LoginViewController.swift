@@ -211,7 +211,7 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
             [cell.emailIdTxtField,cell.passTxtField].forEach({$0?.delegate = self})
             cell.thumbBtnAction = { [weak self]  (sender) in
                 guard let `self` = self else { return }
-                self.bioMetricSignin()
+                self.showBiometricAuthentication()
             }
             //MARK: - Login Button Action
             cell.signUpBtnTapped = { [weak self]  (sender) in

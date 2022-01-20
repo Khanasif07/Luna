@@ -60,16 +60,16 @@ extension UIView {
     }
     
     ///Returns the parent view controller ( if any ) of the view
-    var parentViewController: UIViewController? {
-        var parentResponder: UIResponder? = self
-        while let responder = parentResponder {
-            parentResponder = responder.next
-            if let viewController = parentResponder as? UIViewController {
-                return viewController
-            }
-        }
-        return nil
-    }
+//    var parentViewController: UIViewController? {
+//        var parentResponder: UIResponder? = self
+//        while let responder = parentResponder {
+//            parentResponder = responder.next
+//            if let viewController = parentResponder as? UIViewController {
+//                return viewController
+//            }
+//        }
+//        return nil
+//    }
     
     ///Adds the slope in view
     var addSlope:Void{
@@ -381,6 +381,14 @@ extension UIView {
         return renderer.image { rendererContext in
             layer.render(in: rendererContext.cgContext)
         }
+    }
+}
+
+extension UIView {
+    var parentViewController: UIViewController? {
+        sequence(first: self) { $0.next }
+            .first(where: { $0 is UIViewController })
+            .flatMap { $0 as? UIViewController }
     }
 }
 
