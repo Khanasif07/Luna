@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,GIDSignInDelegate{
         getGoogleInfoPlist()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
-        removeAllNotifications()
+       // removeAllNotifications()
         registerPushNotification()
         Messaging.messaging().delegate = self
         Instabug.start(withToken: "", invocationEvents: [.shake,.screenshot])
@@ -192,12 +192,17 @@ extension AppDelegate:MessagingDelegate,UNUserNotificationCenterDelegate{
         }
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         guard let userInfo = response.notification.request.content.userInfo as? [String: Any] else { return }
         print(userInfo)
-        completionHandler(.alert)
+        if UserModel.main.isSystemSetupCompleted {
+            AppRouter.goToNotificationVC()
+        }else if UserModel.main.isProfileStepCompleted  {
+            AppRouter.gotoSystemSetupVC()
+        }else {
+            AppRouter.goToProfileSetupVC()
+        }
+        completionHandler()
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {

@@ -53,37 +53,47 @@ class SignUpTopTableCell: UITableViewCell {
         self.signUpBtn.backgroundColor = AppColors.primaryBlueColor
         self.signUpBtn.isEnabled = false
         self.passTxtField.isSecureTextEntry = true
-//        let show = UIButton()
-//        show.isSelected = false
-//        show.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
-//        show.addTarget(self, action: #selector(secureTextField(_:)), for: .touchUpInside)
-//        self.passTxtField.setButtonToRightView(btn: show, selectedImage: #imageLiteral(resourceName: "eyeClosedIcon"), normalImage: #imageLiteral(resourceName: "eyeOpenIcon"), size: CGSize(width: 22, height: 22))
-        //
-        let show = UIButton(type: .custom)
-        show.isSelected = false
-        show.setImage(#imageLiteral(resourceName: "eyeClosedIcon"), for: .selected)
-        show.setImage(#imageLiteral(resourceName: "eyeOpenIcon"), for: .normal)
-        show.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
-        show.addTarget(self, action: #selector(secureTextField(_:)), for: .touchUpInside)
-        show.frame = CGRect( x: 22, y: 0, width: 22, height: 22 )
-        
-        let thumbBtn = UIButton(type: .custom)
-        thumbBtn.isSelected = false
-        thumbBtn.setImage(#imageLiteral(resourceName: "thumbprint"), for: .normal)
-        thumbBtn.setImage(#imageLiteral(resourceName: "thumbprint"), for: .selected)
-        thumbBtn.addTarget(self, action: #selector(thumbBtnTapped(_:)), for: .touchUpInside)
-        thumbBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 16)
-        thumbBtn.frame = CGRect( x: 0, y: 0, width: 22, height: 22 )
-        
-        let wV = UIView()
-        wV.frame = CGRect( x:0, y:0, width: 27 * 2, height: 22 )
-        wV.addSubview(show)
-        wV.addSubview(thumbBtn)
-        
-        passTxtField.rightView = wV
-        passTxtField.rightView!.frame.size = wV.frame.size
-        passTxtField.rightViewMode = .always
-        //
+        print(self.parentViewController)
+        if let parentVC = self.getOwningViewController() {
+            if let parentVC = parentVC as? LoginViewController {
+                // parentVC is someViewController
+                print("LoginViewController")
+            } else {
+                // parentVC is anotherViewController
+            }
+        }
+          
+//        if self.parentViewController is LoginViewController{
+            let show = UIButton(type: .custom)
+            show.isSelected = false
+            show.setImage(#imageLiteral(resourceName: "eyeClosedIcon"), for: .selected)
+            show.setImage(#imageLiteral(resourceName: "eyeOpenIcon"), for: .normal)
+//            show.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
+            show.addTarget(self, action: #selector(secureTextField(_:)), for: .touchUpInside)
+            show.frame = CGRect( x: 30, y: 0, width: 22, height: 22 )
+            
+            let thumbBtn = UIButton(type: .custom)
+            thumbBtn.isSelected = false
+            thumbBtn.setImage(#imageLiteral(resourceName: "thumbprint"), for: .normal)
+            thumbBtn.setImage(#imageLiteral(resourceName: "thumbprint"), for: .selected)
+            thumbBtn.addTarget(self, action: #selector(thumbBtnTapped(_:)), for: .touchUpInside)
+            thumbBtn.frame = CGRect( x: 0, y: 0, width: 22, height: 22 )
+            
+            let wV = UIView()
+            wV.frame = CGRect( x:0, y:0, width: 30 * 2, height: 22 )
+            wV.addSubview(show)
+            wV.addSubview(thumbBtn)
+            
+            passTxtField.rightView = wV
+            passTxtField.rightView!.frame.size = wV.frame.size
+            passTxtField.rightViewMode = .always
+//        }else{
+//            let show = UIButton()
+//            show.isSelected = false
+//            show.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
+//            show.addTarget(self, action: #selector(secureTextField(_:)), for: .touchUpInside)
+//            self.passTxtField.setButtonToRightView(btn: show, selectedImage: #imageLiteral(resourceName: "eyeClosedIcon"), normalImage: #imageLiteral(resourceName: "eyeOpenIcon"), size: CGSize(width: 22, height: 22))
+//        }
     }
     
     public func configureCellSignInScreen(emailTxt:String,passTxt:String){

@@ -93,6 +93,21 @@ enum AppRouter {
         setAsWindowRoot(homeScene)
     }
     
+    // Redirect  to   ONETOONECHATVC
+    static func goToNotificationVC() {
+        guard let nav: UINavigationController = AppDelegate.shared.window?.rootViewController as? UINavigationController else { return }
+        if let homeScene = nav.hasViewController(ofKind: HomeVC.self) as? HomeVC {
+            let navigationController = UINavigationController(rootViewController: homeScene)
+            navigationController.setNavigationBarHidden(true, animated: false)
+            defaultSetAsWindowRoot(navigationController)
+            let notificationScene = NotificationsVC.instantiate(fromAppStoryboard: .PostLogin)
+            navigationController.pushViewController(notificationScene, animated: true)
+        } else {
+            AppUserDefaults.removeAllValues()
+            self.goToTermsConditionVC()
+        }
+    }
+    
     static func goToSignUpVC() {
         //        let loginVC = LoginViewController.instantiate(fromAppStoryboard: .PreLogin)
         //        let navigationController = UINavigationController(rootViewController: loginVC)
