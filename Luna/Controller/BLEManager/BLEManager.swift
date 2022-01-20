@@ -13,6 +13,10 @@ let batteryCharacteristicCBUUID = CBUUID(string: "378EC9D6-075C-4BF6-89DC-9F0D6E
 let ReservoirLevelCharacteristicCBUUID = CBUUID(string: "378ec9d6-075c-4bf6-89dc-0c6f73b4b761")
 let statusCBUUID = CBUUID(string: "378ec9d6-075c-4bf6-89dc-a6d767548715")
 let firmwareRevisionString = CBUUID(string: "2A26")
+let SerialNumberString = CBUUID(string: "2A25")
+let SoftwareRevisionString = CBUUID(string: "2A28")
+let CGMEGV_Timestamp = CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9")
+let ExternalDose_Timestamp = CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c")
 let writableCharacteristicCBUUID = CBUUID(string: "aa6b9004-9da2-4f80-9001-409abcc3dcef")
 let dataInCBUUID = CBUUID(string: "aa9ec828-43ba-4281-a122-48932207c8f3")
 let dataOutCBUUID = CBUUID(string: "aa9ec828-43ba-4281-a122-d17566d67c42")
@@ -21,6 +25,7 @@ let IOBout = CBUUID(string: "378ec9d6-075c-4bf6-89dc-0a8267f7b7b7")
 let TDBD = CBUUID(string: "5927a433-a277-40b7-b2d4-e005330c5d99")
 let iobInput = CBUUID(string: "5927a433-a277-40b7-b2d4-92ff77eada32")
 let WriteAcknowledgement = CBUUID(string: "5927A433-A277-40B7-B2D4-B6FF29B861A6")
+   // CBUUID(string: "5927a433-a277-40b7-b2d4-0242ac130003")
 let CGMWriteCharacteristicCBUUID = CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9")
 let collectionInsulinDoses = CBUUID(string: "ad4e6052-390a-4107-8e2d-11af2d258189")
 //
@@ -248,6 +253,13 @@ public class BleManager: NSObject{
                 var rangeBgData = (SystemInfoModel.shared.cgmData?[myRange] ?? []).map { (bgData) -> ShareGlucoseData in
                     ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: bgData.insulin ?? "")
                 }
+                rangeBgData = rangeBgData.map { (bgData) -> ShareGlucoseData in
+                    if bgData.insulin == "0.25" || bgData.insulin == "0.75" {
+                    return ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: "0")
+                    } else{
+                      return ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: bgData.insulin ?? "")
+                    }
+                }
                 rangeBgData[0].insulin = "0.25"
                 rangeBgData[rangeBgData.endIndex - 1].insulin = "0.75"
                 let startSession = SystemInfoModel.shared.dosingData.firstIndex(where: {$0.sessionTime == UserDefaultsRepository.sessionStartDate.value})
@@ -283,7 +295,7 @@ public class BleManager: NSObject{
             UserDefaults.standard.set(dosingData, forKey: ApiKey.dosingHistoryData)
         }
         if let dataInCharacteristic = self.cgmDataInCharacteristic{
-            if !data.isEmpty && bytes > 1{
+            if !data.isEmpty && bytes >= 1{
                 CommonFunctions.delay(delay: 10.0) {
                     self.isDataOutPutProcess = false
                     self.writeValue(myCharacteristic: dataInCharacteristic,value: "#CLEAR_DOSE_DATA")
@@ -329,22 +341,23 @@ extension BleManager: CBPeripheralDelegate {
                 switch characteristic.uuid {
                 case dataInCBUUID:
                     self.cgmDataInCharacteristic = characteristic
-                    peripheral.setNotifyValue(true, for: characteristic)
-                case iobInput:
-                    writeValue(myCharacteristic: characteristic,value:  "8")
-                    peripheral.setNotifyValue(true, for: characteristic)
-                case CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9"):
+//                    peripheral.setNotifyValue(true, for: characteristic)
+//                case iobInput:
+//                    writeValue(myCharacteristic: characteristic,value:  "0.1")
+//                    peripheral.setNotifyValue(true, for: characteristic)
+                case CGMEGV_Timestamp:
                     self.cgmWriteCBCharacteristic = characteristic
-                case dataOutCBUUID:
-                    peripheral.setNotifyValue(true, for: characteristic)
-                case batteryCharacteristicCBUUID:
-                    peripheral.setNotifyValue(true, for: characteristic)
-                case ReservoirLevelCharacteristicCBUUID:
-                    peripheral.setNotifyValue(true, for: characteristic)
-                case statusCBUUID:
-                    peripheral.setNotifyValue(true, for: characteristic)
-                case TDBD:
-                    writeValue(myCharacteristic: characteristic,value:  "8")
+//                case dataOutCBUUID:
+//                    peripheral.setNotifyValue(true, for: characteristic)
+//                case batteryCharacteristicCBUUID:
+//                    peripheral.setNotifyValue(true, for: characteristic)
+//                case ReservoirLevelCharacteristicCBUUID:
+//                    peripheral.setNotifyValue(true, for: characteristic)
+//                case statusCBUUID:
+//                    peripheral.setNotifyValue(true, for: characteristic)
+//                case TDBD:
+//                    print(TDBD)
+//                    writeValue(myCharacteristic: characteristic,value:  "8")
                 default:
                     peripheral.setNotifyValue(true, for: characteristic)
                 }
@@ -373,26 +386,34 @@ extension BleManager: CBPeripheralDelegate {
         case firmwareRevisionString:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for firmwareRevisionString:  \(data)")
+        case SerialNumberString:
+            let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
+            print("handled Characteristic Value for SerialNumberString:  \(data)")
+        case SoftwareRevisionString:
+            let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
+            print("handled Characteristic Value for SoftwareRevisionString:  \(data)")
         case writableCharacteristicCBUUID:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print(data)
-        case dataInCBUUID:
-            print("handled Characteristic Value for dataInCBUUID: \(String(describing: characteristic.value))")
         case dataOutCBUUID:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             let dataArray = data.split{$0 == ";"}.map(String.init)
             let filterDataArray = dataArray.map { (stringValue) -> [String] in
                 return stringValue.split{$0 == ":"}.map(String.init)
             }
-//            if !filterDataArray.isEmpty && !self.isDataOutPutProcess{
-//                    self.isDataOutPutProcess = true
-//                    self.manageInsulinData(data: filterDataArray,bytes: characteristic.value?.count ?? 0)
-//            }
+            if !filterDataArray.isEmpty && !self.isDataOutPutProcess{
+                    self.isDataOutPutProcess = true
+                    self.manageInsulinData(data: filterDataArray,bytes: characteristic.value?.count ?? 0)
+            }
             print("handled Characteristic Value for dataOutCBUUID: \(String(describing: data))")
-        case CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c"):
-            print("handled Characteristic Value for: \(String(describing: characteristic.value))")
-        case CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9"):
-            print("handled Characteristic Value for: \(String(describing: characteristic.value))")
+        case ExternalDose_Timestamp:
+            let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
+            print(data)
+            print("handled Characteristic Value for ExternalDose_Timestamp: \(String(describing: data))")
+        case CGMEGV_Timestamp:
+            let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
+            print(data)
+            print("handled Characteristic Value for CGMEGV_Timestamp: \(String(describing: data))")
         case IOBout:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.iobData = (Double(data) ?? 0.0).roundToDecimal(1)

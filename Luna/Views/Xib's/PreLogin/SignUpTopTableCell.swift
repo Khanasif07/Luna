@@ -21,6 +21,7 @@ class SignUpTopTableCell: UITableViewCell {
     //==========================================
     var signUpBtnTapped: BtnTapAction = nil
     var forgotPassBtnTapped: BtnTapAction = nil
+    var thumbBtnAction: BtnTapAction = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -52,11 +53,37 @@ class SignUpTopTableCell: UITableViewCell {
         self.signUpBtn.backgroundColor = AppColors.primaryBlueColor
         self.signUpBtn.isEnabled = false
         self.passTxtField.isSecureTextEntry = true
-        let show = UIButton()
+//        let show = UIButton()
+//        show.isSelected = false
+//        show.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
+//        show.addTarget(self, action: #selector(secureTextField(_:)), for: .touchUpInside)
+//        self.passTxtField.setButtonToRightView(btn: show, selectedImage: #imageLiteral(resourceName: "eyeClosedIcon"), normalImage: #imageLiteral(resourceName: "eyeOpenIcon"), size: CGSize(width: 22, height: 22))
+        //
+        let show = UIButton(type: .custom)
         show.isSelected = false
+        show.setImage(#imageLiteral(resourceName: "eyeClosedIcon"), for: .selected)
+        show.setImage(#imageLiteral(resourceName: "eyeOpenIcon"), for: .normal)
         show.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
         show.addTarget(self, action: #selector(secureTextField(_:)), for: .touchUpInside)
-        self.passTxtField.setButtonToRightView(btn: show, selectedImage: #imageLiteral(resourceName: "eyeClosedIcon"), normalImage: #imageLiteral(resourceName: "eyeOpenIcon"), size: CGSize(width: 22, height: 22))
+        show.frame = CGRect( x: 22, y: 0, width: 22, height: 22 )
+        
+        let thumbBtn = UIButton(type: .custom)
+        thumbBtn.isSelected = false
+        thumbBtn.setImage(#imageLiteral(resourceName: "thumbprint"), for: .normal)
+        thumbBtn.setImage(#imageLiteral(resourceName: "thumbprint"), for: .selected)
+        thumbBtn.addTarget(self, action: #selector(thumbBtnTapped(_:)), for: .touchUpInside)
+        thumbBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 16)
+        thumbBtn.frame = CGRect( x: 0, y: 0, width: 22, height: 22 )
+        
+        let wV = UIView()
+        wV.frame = CGRect( x:0, y:0, width: 27 * 2, height: 22 )
+        wV.addSubview(show)
+        wV.addSubview(thumbBtn)
+        
+        passTxtField.rightView = wV
+        passTxtField.rightView!.frame.size = wV.frame.size
+        passTxtField.rightViewMode = .always
+        //
     }
     
     public func configureCellSignInScreen(emailTxt:String,passTxt:String){
@@ -78,6 +105,12 @@ class SignUpTopTableCell: UITableViewCell {
     @objc func secureTextField(_ sender: UIButton){
         sender.isSelected.toggle()
         self.passTxtField.isSecureTextEntry = !sender.isSelected
+    }
+    
+    @objc func thumbBtnTapped(_ sender: UIButton){
+        if let handle = thumbBtnAction{
+            handle(sender)
+        }
     }
     
     //MARK:-IBActions

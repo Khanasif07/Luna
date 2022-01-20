@@ -85,20 +85,20 @@ extension BottomSheetVC {
         return graphics[value] ?? ""
     }
     
-    func persistentNotification(body: String){
+    func persistentNotification(body: String,title: String = "Notification"){
         if !isNotificationProgress && UserModel.main.isAlertsOn{
-            self.sendNotification(self,body: body)
-//            FirestoreController.addNotificationData(notificationId: FirestoreController.getNotificationId(), array: [NotificationModel(title: "Notification", date: dateTimeUtils.getNowTimeIntervalUTC(), description: body, notificationId: FirestoreController.getNotificationId())], success: {
-//                print("=====Notification added to Firestore====")
-//            })
+            self.sendNotification(self,body: body,title: title)
+            FirestoreController.addNotificationData(notificationId: FirestoreController.getNotificationId(), array: [NotificationModel(title: title, date: dateTimeUtils.getNowTimeIntervalUTC(), description: body, notificationId: FirestoreController.getNotificationId())], success: {
+                print("=====Notification added to Firestore====")
+            })
         }
     }
     
-    func sendNotification(_ sender: Any,body: String) {
+    func sendNotification(_ sender: Any,body: String,title:String = "") {
         //        UNUserNotificationCenter.current().delegate = self
         self.isNotificationProgress = true
         let content = UNMutableNotificationContent()
-        content.title = ""
+        content.title = title
         content.subtitle = ""
         content.categoryIdentifier = "category"
         content.body = body

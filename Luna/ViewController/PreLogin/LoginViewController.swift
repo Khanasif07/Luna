@@ -209,6 +209,10 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
             cell.configureCellSignInScreen(emailTxt:emailTxt,passTxt:passTxt)
             cell.signUpBtn.isEnabled = signUpBtnStatus()
             [cell.emailIdTxtField,cell.passTxtField].forEach({$0?.delegate = self})
+            cell.thumbBtnAction = { [weak self]  (sender) in
+                guard let `self` = self else { return }
+                self.bioMetricSignin()
+            }
             //MARK: - Login Button Action
             cell.signUpBtnTapped = { [weak self]  (sender) in
                 guard let `self` = self else { return }
@@ -267,6 +271,10 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                                         if let uuid = UIDevice.current.identifierForVendor?.uuidString {
                                             FirestoreController.updateDeviceID(deviceId: uuid)
                                         }
+                                        //New Change
+                                        KeychainWrapper.standard.set(self.emailTxt, forKey: ApiKey.email)
+                                        KeychainWrapper.standard.set(self.passTxt, forKey: ApiKey.password)
+                                        //
                                         AppRouter.gotoHomeVC()
                                         return
                                     }else if UserModel.main.isProfileStepCompleted  {
@@ -402,7 +410,7 @@ extension LoginViewController : UITextFieldDelegate{
         case cell?.emailIdTxtField:
             return (string.checkIfValidCharaters(.email) || string.isEmpty) && newString.length <= 50
         case cell?.passTxtField:
-            return (string.checkIfValidCharaters(.email) || string.isEmpty)
+            return (string.checkIfValidCharaters(.email) || string.isEmpty)  && newString.length <= 25
         default:
             return false
         }

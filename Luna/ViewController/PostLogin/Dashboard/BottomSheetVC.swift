@@ -217,6 +217,7 @@ extension BottomSheetVC {
         NotificationCenter.default.addObserver(self, selector: #selector(statusUpdateValue), name: .StatusUpdateValue, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(cgmDataReceivedSuccessfully), name: .cgmConnectedSuccessfully, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(cgmDataRemovedSuccessfully), name: .cgmRemovedSuccessfully, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .BLEOnOffState, object: nil)
     }
     
 //    @objc func xAxisLabelsDuplicateValue(notification : NSNotification){
@@ -230,6 +231,11 @@ extension BottomSheetVC {
 //            }
 //        }
 //    }
+    
+    @objc func bLEOnOffStateChanged(){
+        let bodyText  = "Turn on Bluetooth to receive alerts,alarms, or sensor glucose readings."
+        self.persistentNotification(body: bodyText,title: "Bluetooth Off Alert")
+    }
     
     @objc func bleDidUpdateValue(notification : NSNotification){
         DispatchQueue.main.async {
@@ -305,11 +311,12 @@ extension BottomSheetVC {
     }
     
     private func setupfooterView(){
+        let now = dateTimeUtils.getNowTimeIntervalUTC()
         let view = UIView.init(frame: CGRect.init(origin: CGPoint.zero, size: CGSize.init(width: self.view.frame.width, height: 100.0)))
         self.mainTableView.tableFooterView = view
         if let fetchedData = UserDefaults.standard.data(forKey: ApiKey.dosingHistoryData) {
             let fetchedDosingData = try! JSONDecoder().decode([DosingHistory].self, from: fetchedData)
-            SystemInfoModel.shared.dosingData = fetchedDosingData
+            SystemInfoModel.shared.dosingData = fetchedDosingData.filter({ (now - $0.sessionTime <= 86400.0)})
             DispatchQueue.main.async {
                 self.mainTableView.reloadData()
             }

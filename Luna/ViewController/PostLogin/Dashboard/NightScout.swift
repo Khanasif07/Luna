@@ -268,10 +268,11 @@ extension  BottomSheetVC{
         //
         print(SystemInfoModel.shared.dosingData)
         if SystemInfoModel.shared.dosingData.isEmpty{
-        if let fetchedData = UserDefaults.standard.data(forKey: ApiKey.dosingHistoryData) {
-            let fetchedDosingData = try! JSONDecoder().decode([DosingHistory].self, from: fetchedData)
-            if !fetchedDosingData.isEmpty{SystemInfoModel.shared.dosingData = fetchedDosingData}
-        }
+            if let fetchedData = UserDefaults.standard.data(forKey: ApiKey.dosingHistoryData) {
+                let fetchedDosingData = try! JSONDecoder().decode([DosingHistory].self, from: fetchedData)
+                if !fetchedDosingData.isEmpty{
+                    SystemInfoModel.shared.dosingData = fetchedDosingData.filter({ (now - $0.sessionTime <= 86400.0)})}
+            }
         }
         SystemInfoModel.shared.dosingData.forEach { (dosingHistory) in
            if let indexx = SystemInfoModel.shared.cgmData?.firstIndex(where: { (bgData) -> Bool in
