@@ -198,7 +198,7 @@ class FirestoreController:NSObject{
                     } else{
                         print("============================")
                         var notiModelArray = [NotificationModel]()
-                        guard let dicts = snapshot?.documents else { return }
+                        guard let dicts = snapshot?.documents.reversed() else { return }
                         dicts.forEach { (queryDocumentSnapshot) in
                             let notiModel = NotificationModel(queryDocumentSnapshot.data())
                             notiModelArray.append(notiModel)
