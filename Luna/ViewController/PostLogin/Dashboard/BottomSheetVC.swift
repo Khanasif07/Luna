@@ -113,7 +113,6 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     }
     
     private func cgmSetUp(){
-//        UserDefaultsRepository.infoNames.value.removeAll()
         // TODO: need non-us server ?
         let shareUserName = UserDefaultsRepository.shareUserName.value
         let sharePassword = UserDefaultsRepository.sharePassword.value
@@ -210,7 +209,7 @@ extension BottomSheetVC {
     }
     
     private func addObserver(){
-//        NotificationCenter.default.addObserver(self, selector: #selector(xAxisLabelsDuplicateValue), name: .XAxisLabelsDuplicateValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationIsTerminated), name: .ApplicationIsTerminated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(batteryUpdateValue), name: .BatteryUpdateValue, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reservoirUpdateValue), name: .ReservoirUpdateValue, object: nil)
@@ -231,6 +230,10 @@ extension BottomSheetVC {
 //            }
 //        }
 //    }
+    
+    @objc func applicationIsTerminated(){
+        self.persistentNotification(body: "Tap to open app. No sensor readings or alerts until it's open.In the future ,keep app running in the background, don't swipe it closed. ",title: "App is closed.")
+    }
     
     @objc func bLEOnOffStateChanged(){
         let bodyText  = "Turn on Bluetooth to receive alerts,alarms, or sensor glucose readings."

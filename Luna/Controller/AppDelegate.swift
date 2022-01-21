@@ -192,6 +192,11 @@ extension AppDelegate:MessagingDelegate,UNUserNotificationCenterDelegate{
         }
     }
     
+    func applicationWillTerminate(_ application: UIApplication) {
+        print("terminated")
+        NotificationCenter.default.post(name: Notification.Name.ApplicationIsTerminated, object: [:])
+    }
+    
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         guard let userInfo = response.notification.request.content.userInfo as? [String: Any] else { return }
         print(userInfo)

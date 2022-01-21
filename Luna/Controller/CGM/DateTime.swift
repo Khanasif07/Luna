@@ -57,6 +57,19 @@ public class dateTimeUtils {
         return utcTime
     }
     
+    static func getOneWeekOldTimeIntervalUTC() -> TimeInterval {
+        let today = Date()
+        let now = Calendar.current.date(byAdding: .day, value: -7, to: today)  ?? Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        let utc = formatter.string(from: now)
+        let day = formatter.date(from: utc)
+        guard let utcTime = day?.timeIntervalSince1970 else { return 0 }
+        return utcTime
+    }
+    
     static func nowMinus24HoursTimeInterval() -> String {
         let today = Date()
         let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: today)  ?? Date()

@@ -190,9 +190,10 @@ class FirestoreController:NSObject{
     //=======================
     static func getNotificationData(success: @escaping (_ notiArray: [NotificationModel]) -> Void,
                                     failure:  @escaping FailureResponse){
+        let weekOldTime = dateTimeUtils.getOneWeekOldTimeIntervalUTC()
         if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
             db.collection(ApiKey.notifications)
-                .document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.notificationsData).order(by: ApiKey.date).getDocuments { (snapshot, error) in
+                .document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.notificationsData).whereField(ApiKey.date, isGreaterThan: weekOldTime).order(by: ApiKey.date).getDocuments { (snapshot, error) in
                     if let error = error {
                         failure(error)
                     } else{
