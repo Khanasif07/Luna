@@ -87,12 +87,12 @@ final  class XAxisCustomRenderer: XAxisRenderer {
                     entriesTuplesArray.insert((true, insulinData[j].date - entries[i],i,insulinData[j].insulin!) , at: i)
                 }else if entries[i+1] == insulinData[j].date {
                     entriesTuplesArray.insert((true, insulinData[j].date - entries[i],i,insulinData[j].insulin!) , at: i)
+                    //Updated change
                 }else if entries[i+1] < insulinData[j].date && (entries[i+1] + minGapBwTwoLabels) > insulinData[j].date{
                     entriesTuplesArray.insert((true, insulinData[j].date - entries[i],i,insulinData[j].insulin!) , at: i)
-                    print(insulinData[j].date - entries[i+1])
-                    print(entries[i+1])
-                    print(insulinData[j].date)
-                    print(minGapBwTwoLabels)
+                    //Updated change
+                }else if (entries[i] - minGapBwTwoLabels) < insulinData[j].date && entries[i] > insulinData[j].date{
+                    entriesTuplesArray.insert((true, insulinData[j].date - entries[i] ,i,insulinData[j].insulin!) , at: i)
                 }else{
                     entriesTuplesArray.insert((false, 0,i,""), at: i)
                 }
