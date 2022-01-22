@@ -132,6 +132,7 @@ class SessionDescriptionVC: UIViewController {
         FirestoreController.getFirebaseCGMData(sessionId: sessionModel?.sessionId ?? "",startDate: sessionStartDate ?? 0.0,endDate: sessionEndDate ?? 0.0) { (bgData) in
             CommonFunctions.hideActivityLoader()
             self.cgmDataArray = bgData
+            print(bgData)
             self.filterInsulinDosesListing()
             let sortedCgmData = bgData.sorted(by: { (model1, model2) -> Bool in
                 return model1.sgv < model2.sgv

@@ -7,32 +7,30 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A162F717-75F4-43A6-AA71-216DB711AB42"
+            uuid = "DB09F9A2-634F-436C-8D0B-984FE1E646E1"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Luna/ViewController/PostLogin/Dashboard/BottomSheetVC+Extension.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "userNotificationCenter(_:willPresent:withCompletionHandler:)"
-            landmarkType = "7">
+            startingLineNumber = "148"
+            endingLineNumber = "148">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "79C747F6-6255-4D38-A229-2D9669A25986"
+            uuid = "FCFC9C04-EE1E-49CC-9237-F034ACC7970E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Luna/ViewController/PostLogin/Dashboard/BottomSheetVC+Extension.swift"
+            filePath = "Luna/Controller/Charts/AxisValueFormatter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
-            landmarkName = "userNotificationCenter(_:willPresent:withCompletionHandler:)"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "drawLabels(context:pos:anchor:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

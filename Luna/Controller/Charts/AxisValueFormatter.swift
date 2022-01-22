@@ -71,16 +71,28 @@ final  class XAxisCustomRenderer: XAxisRenderer {
         }
 
         let entries = xAxis.entries
+        if entries.endIndex > 1{
+            minGapBwTwoLabels = entries[1] - entries[0]
+        }
         //
+        print(insulinData)
         var entriesTuplesArray = [(Bool,Double,Int,String)]()
         for j in stride(from: 0, to: insulinData.count, by: 1){
+            print(j)
             for i in stride(from: 0, to: entries.count - 1, by: 1){
+                print(i)
                 if entries[i] < insulinData[j].date && entries[i+1] > insulinData[j].date{
                     entriesTuplesArray.insert((true, insulinData[j].date - entries[i],i,insulinData[j].insulin!) , at: i)
                 }else if entries[i] == insulinData[j].date{
                     entriesTuplesArray.insert((true, insulinData[j].date - entries[i],i,insulinData[j].insulin!) , at: i)
                 }else if entries[i+1] == insulinData[j].date {
                     entriesTuplesArray.insert((true, insulinData[j].date - entries[i],i,insulinData[j].insulin!) , at: i)
+                }else if entries[i+1] < insulinData[j].date && (entries[i+1] + minGapBwTwoLabels) > insulinData[j].date{
+                    entriesTuplesArray.insert((true, insulinData[j].date - entries[i],i,insulinData[j].insulin!) , at: i)
+                    print(insulinData[j].date - entries[i+1])
+                    print(entries[i+1])
+                    print(insulinData[j].date)
+                    print(minGapBwTwoLabels)
                 }else{
                     entriesTuplesArray.insert((false, 0,i,""), at: i)
                 }
@@ -89,9 +101,7 @@ final  class XAxisCustomRenderer: XAxisRenderer {
         let selectedEnteries = entriesTuplesArray.filter { (tuples) -> Bool in
             return tuples.0
         }
-        if entries.endIndex > 1{
-            minGapBwTwoLabels = entries[1] - entries[0]
-        }
+        print(selectedEnteries)
         //
         for i in stride(from: 0, to: entries.count, by: 1){
             if centeringEnabled{
@@ -144,7 +154,7 @@ final  class XAxisCustomRenderer: XAxisRenderer {
                 context.move(to: CGPoint(x: position.x, y: position.y))
                 context.addLine(to: CGPoint(x: position.x, y: self.viewPortHandler.contentBottom))
                 context.strokePath()
-                
+                //MARK:- Used to draw session and dosing vertical line
                 var icon: CGImage?
                 for entry in selectedEnteries {
                     if entry.2 == i {
