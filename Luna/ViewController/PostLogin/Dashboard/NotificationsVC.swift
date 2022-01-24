@@ -54,6 +54,9 @@ extension NotificationsVC {
             self.notificationListing = notiListing
             self.notiTableView.reloadData()
             CommonFunctions.hideActivityLoader()
+            FirestoreController.deleteNotificationDataOlderThanWeek {
+                print("OneWeekOldNotificationDeleted.")
+            }
         } failure: { (error) -> (Void) in
             CommonFunctions.showToastWithMessage(error.localizedDescription)
             CommonFunctions.hideActivityLoader()

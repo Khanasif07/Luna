@@ -74,8 +74,11 @@ public class bgUnits {
     static func toSendCGMTimeStampsUnits(_ date: String,_ sgv: String) -> String {
         print("\(sgv)" + ":" + "\(bgUnits.removeDecimals(date));")
         return "\(sgv)" + ":" + "\(bgUnits.removeDecimals(date));"
-//        return "\(300)" + ":" + "\(bgUnits.removeDecimals(date));"
-        //“600:1631566277;”
+    }
+    
+    static func toSendExternalDoseStampsUnits(_ date: String,_ dose: String) -> String {
+        print("\(dose)" + ":" + "\(bgUnits.removeDecimals(date));")
+        return "\(dose)" + ":" + "\(bgUnits.removeDecimals(date));"
     }
 
     // if a "." is contained, simply takes the left part of the string only

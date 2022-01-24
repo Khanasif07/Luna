@@ -319,7 +319,7 @@ extension  BottomSheetVC{
             let randomBGValue = Int.random(in: 275..<325)
 //            let updatedBG = latestBG > 120 ? randomBGValue : latestBG + 100
 //            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(latestBG)))
-            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(randomBGValue)))
+            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(randomBGValue)),externalDoseData: bgUnits.toSendExternalDoseStampsUnits(String(latestDate), "1"))
             if let directionBG = entries[latestEntryi].direction {
                 self.cgmDirectionlbl.text = self.bgDirectionGraphic(directionBG)
                 self.latestDirectionString = self.bgDirectionGraphic(directionBG)

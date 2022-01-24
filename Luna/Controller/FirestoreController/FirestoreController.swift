@@ -861,21 +861,19 @@ class FirestoreController:NSObject{
         
     }
     
-    static func delete(batchSize: Int = 288,success: @escaping ()-> ()) {
+    static func deleteNotificationDataOlderThanWeek(success: @escaping ()-> ()) {
         guard let userId = Auth.auth().currentUser?.uid  else { return }
+        let weekOldTime = dateTimeUtils.getOneWeekOldTimeIntervalUTC()
         // Limit query to avoid out-of-memory errors on large collections.
         // When deleting a collection guaranteed to fit in memory, batching can be avoided entirely.
-        db.collection(ApiKey.userSystemInfo).document(userId).collection(ApiKey.cgmData).limit(to: batchSize).getDocuments { (docset, error) in
+        db.collection(ApiKey.notifications).document(userId).collection(ApiKey.notificationsData).whereField(ApiKey.date, isLessThan: weekOldTime).getDocuments { (docset, error) in
             // An error occurred.
             let docset = docset
-            
-            //            let batch = collection.firestore.batch()
             let batch = db.batch()
             docset?.documents.forEach { batch.deleteDocument($0.reference) }
             
             batch.commit {_ in
                 success()
-                //                self.delete(batchSize: batchSize)
             }
         }
     }

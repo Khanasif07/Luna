@@ -51,6 +51,7 @@ public class BleManager: NSObject{
     var myperipheral :CBPeripheral?
     var cgmWriteCBCharacteristic : CBCharacteristic?
     var cgmDataInCharacteristic : CBCharacteristic?
+    var externalDoseCBCharacteristic: CBCharacteristic?
     var rescanTimer :Timer?
     var batteryData: String = ""
     var reservoirLevelData: String = ""
@@ -111,12 +112,15 @@ public class BleManager: NSObject{
         }
     }
     
-    public func writeCGMTimeStampValue(value: String = "50") {
+    public func writeCGMTimeStampValue(value: String,externalDoseData: String = "") {
         if isMyPeripheralConected { //check if myPeripheral is connected to send data
             let dataToSend: Data = value.data(using: String.Encoding.utf8)!
             if let  cgmWriteCBCharacteristic = self.cgmWriteCBCharacteristic{
                 myperipheral?.writeValue(dataToSend as Data, for: cgmWriteCBCharacteristic , type: CBCharacteristicWriteType.withResponse)
             }
+//            if let  externalCharacteristic = self.externalDoseCBCharacteristic{
+//                myperipheral?.writeValue(externalDoseData.data(using: String.Encoding.utf8)!, for: externalCharacteristic , type: CBCharacteristicWriteType.withResponse)
+//            }
         } else {
             print("Not connected")
         }
@@ -341,25 +345,12 @@ extension BleManager: CBPeripheralDelegate {
                 switch characteristic.uuid {
                 case dataInCBUUID:
                     self.cgmDataInCharacteristic = characteristic
-//                    peripheral.setNotifyValue(true, for: characteristic)
-//                case iobInput:
-//                    writeValue(myCharacteristic: characteristic,value:  "0.1")
-//                    peripheral.setNotifyValue(true, for: characteristic)
                 case CGMEGV_Timestamp:
                     self.cgmWriteCBCharacteristic = characteristic
-//                case dataOutCBUUID:
-//                    peripheral.setNotifyValue(true, for: characteristic)
-//                case batteryCharacteristicCBUUID:
-//                    peripheral.setNotifyValue(true, for: characteristic)
-//                case ReservoirLevelCharacteristicCBUUID:
-//                    peripheral.setNotifyValue(true, for: characteristic)
-//                case statusCBUUID:
-//                    peripheral.setNotifyValue(true, for: characteristic)
-//                case TDBD:
-//                    print(TDBD)
-//                    writeValue(myCharacteristic: characteristic,value:  "8")
+                case ExternalDose_Timestamp:
+                    self.externalDoseCBCharacteristic = characteristic
                 default:
-                    peripheral.setNotifyValue(true, for: characteristic)
+                    print(characteristic.uuid)
                 }
             }
         }
