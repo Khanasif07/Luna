@@ -272,8 +272,14 @@ extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
                                             FirestoreController.updateDeviceID(deviceId: uuid)
                                         }
                                         //New Change
-                                        KeychainWrapper.standard.set(self.emailTxt, forKey: ApiKey.email)
-                                        KeychainWrapper.standard.set(self.passTxt, forKey: ApiKey.password)
+                                        if AppUserDefaults.value(forKey: .isBiometricCompleted).boolValue {
+                                            if  AppUserDefaults.value(forKey: .isBiometricSelected).boolValue{
+                                                KeychainWrapper.standard.set(self.emailTxt, forKey: ApiKey.email)
+                                                KeychainWrapper.standard.set(self.passTxt, forKey: ApiKey.password)
+                                            }else {
+                                                print("Do Not show biometric popup")
+                                            }
+                                        }
                                         //
                                         AppRouter.gotoHomeVC()
                                         return

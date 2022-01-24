@@ -75,12 +75,9 @@ final  class XAxisCustomRenderer: XAxisRenderer {
             minGapBwTwoLabels = entries[1] - entries[0]
         }
         //
-        print(insulinData)
         var entriesTuplesArray = [(Bool,Double,Int,String)]()
         for j in stride(from: 0, to: insulinData.count, by: 1){
-            print(j)
             for i in stride(from: 0, to: entries.count - 1, by: 1){
-                print(i)
                 if entries[i] < insulinData[j].date && entries[i+1] > insulinData[j].date{
                     entriesTuplesArray.insert((true, insulinData[j].date - entries[i],i,insulinData[j].insulin!) , at: i)
                 }else if entries[i] == insulinData[j].date{
@@ -101,7 +98,6 @@ final  class XAxisCustomRenderer: XAxisRenderer {
         let selectedEnteries = entriesTuplesArray.filter { (tuples) -> Bool in
             return tuples.0
         }
-        print(selectedEnteries)
         //
         for i in stride(from: 0, to: entries.count, by: 1){
             if centeringEnabled{
