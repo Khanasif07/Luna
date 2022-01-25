@@ -48,12 +48,16 @@ extension SessionHistoryVC {
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
-        self.sessionHistoryTV.registerCell(with: SessionHistoryTableViewCell.self)
-        self.sessionHistoryTV.delegate = self
-        self.sessionHistoryTV.dataSource = self
+        self.setUpTableView()
         FirestoreController.getNetworkStatus { (isNetworkAvailable) in
             self.getSessionHistoryData(isNetworkAvailable)
         }
+    }
+    
+    private func setUpTableView(){
+        self.sessionHistoryTV.registerCell(with: SessionHistoryTableViewCell.self)
+        self.sessionHistoryTV.delegate = self
+        self.sessionHistoryTV.dataSource = self
     }
     
     private func getSessionHistoryData(_ isNetworkAvailable: Bool){
@@ -62,7 +66,7 @@ extension SessionHistoryVC {
             CommonFunctions.hideActivityLoader()
         }
         FirestoreController.getFirebaseSessionHistoryData(isNetworkAvailable: isNetworkAvailable) { (sessionHistoryArray) in
-            self.sessionHistory  = []
+            self.insulinSectionDataArray  = []
             self.sessionHistory = sessionHistoryArray
             self.sessionHistory = self.sessionHistory.sorted(by: { $0.startDate > $1.startDate})
             self.sessionHistory.forEach({ (data) in
