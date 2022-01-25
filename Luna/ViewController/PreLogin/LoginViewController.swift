@@ -31,7 +31,7 @@ class LoginViewController: UIViewController {
     var passTxt : String =  ""
     var currentNonce : String?
     var isComeFromMail: Bool = false
-    private let biometricIDAuth = BiometricIDAuth()
+    private var biometricIDAuth = BiometricIDAuth()
     
     // MARK: - Lifecycle
     //===========================
@@ -178,6 +178,7 @@ extension LoginViewController {
                             self.passTxt = password
                             self.loginTableView.reloadData()
                         }
+                        self.biometricIDAuth = BiometricIDAuth()
                     } else {
                         if (error! as NSError).code != -2 {
 //                            CommonFunctions.showToastWithMessage("")

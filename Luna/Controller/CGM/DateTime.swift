@@ -57,9 +57,9 @@ public class dateTimeUtils {
         return utcTime
     }
     
-    static func getOneWeekOldTimeIntervalUTC() -> TimeInterval {
+    static func getOldTimeIntervalUTC(value: Int = -7) -> TimeInterval {
         let today = Date()
-        let now = Calendar.current.date(byAdding: .day, value: -7, to: today)  ?? Date()
+        let now = Calendar.current.date(byAdding: .day, value: value, to: today)  ?? Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         formatter.locale = Locale(identifier: "en_US")

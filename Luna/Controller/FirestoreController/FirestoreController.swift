@@ -190,7 +190,7 @@ class FirestoreController:NSObject{
     //=======================
     static func getNotificationData(success: @escaping (_ notiArray: [NotificationModel]) -> Void,
                                     failure:  @escaping FailureResponse){
-        let weekOldTime = dateTimeUtils.getOneWeekOldTimeIntervalUTC()
+        let weekOldTime = dateTimeUtils.getOldTimeIntervalUTC()
         if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
             db.collection(ApiKey.notifications)
                 .document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.notificationsData).whereField(ApiKey.date, isGreaterThan: weekOldTime).order(by: ApiKey.date).getDocuments { (snapshot, error) in
@@ -235,9 +235,10 @@ class FirestoreController:NSObject{
     
     //MARK:- Get Session History Data
     //=======================
-    static func getFirebaseSessionHistoryData(success: @escaping (_ cgmModelArray: [SessionHistory]) -> Void,
+    static func getFirebaseSessionHistoryData(isNetworkAvailable: Bool, success: @escaping (_ cgmModelArray: [SessionHistory]) -> Void,
                                               failure:  @escaping  () -> Void){
         if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
+            let monthOldTime = dateTimeUtils.getOldTimeIntervalUTC(value: -30)
             db.collection(ApiKey.sessionData).document(Auth.auth().currentUser?.uid ?? "").getDocument(source: .default) { (document, error) in
                     if let document = document, document.exists {
                         if  let dataDescription = document.data(){
@@ -246,7 +247,13 @@ class FirestoreController:NSObject{
                             if  let dict = dataDescription[ApiKey.sessionHistoryData] as? [[String:Any]]{
                                 if let data = try? JSONSerialization.data(withJSONObject: dict, options: []){
                                     let historyData = try? decoder.decode([SessionHistory].self, from: data)
-                                    success(historyData ?? [])
+                                    if isNetworkAvailable {
+                                        success(historyData ?? [])
+                                    }else{
+                                        if let filteredHistoryData = historyData?.filter({ $0.endDate >= monthOldTime}){
+                                            success(filteredHistoryData)
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -696,6 +703,18 @@ class FirestoreController:NSObject{
         }
     }
     
+    static func getNetworkStatus(status: @escaping (Bool) -> Void){
+        let connectedRef = Database.database().reference(withPath: ".info/connected")
+        connectedRef.observe(.value, with: { snapshot in
+            if let connected = snapshot.value as? Bool, connected {
+                print("Connected")
+                status(true)
+            } else {
+                print("Not connected")
+                status(false)
+            }
+        })
+    }
     
     //MARK:- CREATE LAST MESSAGE OF BLOCKED USER
     //==========================================
@@ -863,7 +882,7 @@ class FirestoreController:NSObject{
     
     static func deleteNotificationDataOlderThanWeek(success: @escaping ()-> ()) {
         guard let userId = Auth.auth().currentUser?.uid  else { return }
-        let weekOldTime = dateTimeUtils.getOneWeekOldTimeIntervalUTC()
+        let weekOldTime = dateTimeUtils.getOldTimeIntervalUTC(value: -7)
         // Limit query to avoid out-of-memory errors on large collections.
         // When deleting a collection guaranteed to fit in memory, batching can be avoided entirely.
         db.collection(ApiKey.notifications).document(userId).collection(ApiKey.notificationsData).whereField(ApiKey.date, isLessThan: weekOldTime).getDocuments { (docset, error) in

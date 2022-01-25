@@ -232,12 +232,16 @@ extension BottomSheetVC {
 //    }
     
     @objc func applicationIsTerminated(){
-        self.persistentNotification(body: "Tap to open app. No sensor readings or alerts until it's open.In the future ,keep app running in the background, don't swipe it closed. ",title: "App is closed.")
+        CommonFunctions.delay(delay: 10.0) {
+            self.persistentNotification(body: "Tap to open app. Luna will not function until until the app is open. In the future, keep app running in the background, don't swipe it closed. ",title: "App is closed.")
+        }
     }
     
     @objc func bLEOnOffStateChanged(){
-        let bodyText  = "Turn on Bluetooth to receive alerts,alarms, or sensor glucose readings."
+        CommonFunctions.delay(delay: 10.0) {
+        let bodyText  = "Turn on Bluetooth to receive alerts, alarms, or sensor glucose readings."
         self.persistentNotification(body: bodyText,title: "Bluetooth Off Alert")
+        }
     }
     
     @objc func bleDidUpdateValue(notification : NSNotification){

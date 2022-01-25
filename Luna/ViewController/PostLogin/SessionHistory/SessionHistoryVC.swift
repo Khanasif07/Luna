@@ -51,16 +51,19 @@ extension SessionHistoryVC {
         self.sessionHistoryTV.registerCell(with: SessionHistoryTableViewCell.self)
         self.sessionHistoryTV.delegate = self
         self.sessionHistoryTV.dataSource = self
-        self.getSessionHistoryData()
+        FirestoreController.getNetworkStatus { (isNetworkAvailable) in
+            self.getSessionHistoryData(isNetworkAvailable)
+        }
     }
     
-    private func getSessionHistoryData(){
+    private func getSessionHistoryData(_ isNetworkAvailable: Bool){
         CommonFunctions.showActivityLoader()
         CommonFunctions.delay(delay: 10.0) {
             CommonFunctions.hideActivityLoader()
         }
-        FirestoreController.getFirebaseSessionHistoryData{ (dataArray) in
-            self.sessionHistory = dataArray
+        FirestoreController.getFirebaseSessionHistoryData(isNetworkAvailable: isNetworkAvailable) { (sessionHistoryArray) in
+            self.sessionHistory  = []
+            self.sessionHistory = sessionHistoryArray
             self.sessionHistory = self.sessionHistory.sorted(by: { $0.startDate > $1.startDate})
             self.sessionHistory.forEach({ (data) in
                 let month = data.startDate.getMonthInterval()
@@ -85,8 +88,6 @@ extension SessionHistoryVC {
             CommonFunctions.hideActivityLoader()
         }
     }
-    
-    
 }
 
 
