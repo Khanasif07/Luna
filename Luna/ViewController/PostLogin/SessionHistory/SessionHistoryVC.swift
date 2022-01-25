@@ -49,6 +49,7 @@ extension SessionHistoryVC {
             overrideUserInterfaceStyle = .light
         }
         self.setUpTableView()
+        CommonFunctions.showActivityLoader()
         FirestoreController.getNetworkStatus { (isNetworkAvailable) in
             self.getSessionHistoryData(isNetworkAvailable)
         }
@@ -61,10 +62,6 @@ extension SessionHistoryVC {
     }
     
     private func getSessionHistoryData(_ isNetworkAvailable: Bool){
-        CommonFunctions.showActivityLoader()
-        CommonFunctions.delay(delay: 10.0) {
-            CommonFunctions.hideActivityLoader()
-        }
         FirestoreController.getFirebaseSessionHistoryData(isNetworkAvailable: isNetworkAvailable) { (sessionHistoryArray) in
             self.insulinSectionDataArray  = []
             self.sessionHistory = sessionHistoryArray

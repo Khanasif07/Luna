@@ -116,7 +116,7 @@ extension BottomSheetVC {
         let action = UNNotificationAction(identifier: "snooze", title: "Snooze", options: [])
         let category = UNNotificationCategory(identifier: "category", actions: [action], intentIdentifiers: [], options: [])
         UNUserNotificationCenter.current().setNotificationCategories([category])
-        CommonFunctions.delay(delay: 15.0) {
+        CommonFunctions.delay(delay: 10.0) {
             self.isNotificationProgress = false
         }
     }

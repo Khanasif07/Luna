@@ -54,8 +54,6 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     var bgCheckData: [ShareGlucoseData] = []
     var bgData: [ShareGlucoseData] = []
     
-    var newBGPulled = false
-    var lastCalDate: Double = 0
     var latestDirectionString = ""
     var latestMinAgoString = ""
     var latestDeltaString = ""
@@ -80,7 +78,7 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
             self.mainTableView.reloadData()
         }
     }
-   
+    
     //MARK:- VIEW LIFE CYCLE
     //======================
     override func viewDidLoad() {
@@ -219,28 +217,26 @@ extension BottomSheetVC {
         NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .BLEOnOffState, object: nil)
     }
     
-//    @objc func xAxisLabelsDuplicateValue(notification : NSNotification){
-//        if let lastData = bgData.last{
-//            if lastData.date < dateTimeUtils.getNowTimeIntervalUTC() {
-//                bgData.removeFirst()
-//                bgData.append(ShareGlucoseData(sgv: lastData.sgv, date: lastData.date + 300.0, direction: lastData.direction ?? "", insulin: lastData.insulin ?? ""))
-//                DispatchQueue.main.async {
-//                    self.updateBGGraph()
-//                }
-//            }
-//        }
-//    }
+    //    @objc func xAxisLabelsDuplicateValue(notification : NSNotification){
+    //        if let lastData = bgData.last{
+    //            if lastData.date < dateTimeUtils.getNowTimeIntervalUTC() {
+    //                bgData.removeFirst()
+    //                bgData.append(ShareGlucoseData(sgv: lastData.sgv, date: lastData.date + 300.0, direction: lastData.direction ?? "", insulin: lastData.insulin ?? ""))
+    //                DispatchQueue.main.async {
+    //                    self.updateBGGraph()
+    //                }
+    //            }
+    //        }
+    //    }
     
     @objc func applicationIsTerminated(){
-        CommonFunctions.delay(delay: 10.0) {
-            self.persistentNotification(body: "Tap to open app. Luna will not function until until the app is open. In the future, keep app running in the background, don't swipe it closed. ",title: "App is closed.")
-        }
+        self.persistentNotification(body: "Tap to open app. Luna will not function until until the app is open. In the future, keep app running in the background, don't swipe it closed. ",title: "App is closed.")
     }
     
     @objc func bLEOnOffStateChanged(){
-        CommonFunctions.delay(delay: 10.0) {
-        let bodyText  = "Turn on Bluetooth to receive alerts, alarms, or sensor glucose readings."
-        self.persistentNotification(body: bodyText,title: "Bluetooth Off Alert")
+        CommonFunctions.delay(delay: 7.5) {
+            let bodyText  = "Turn on Bluetooth to receive alerts, alarms, or sensor glucose readings."
+            self.persistentNotification(body: bodyText,title: "Bluetooth Off Alert")
         }
     }
     
@@ -351,7 +347,7 @@ extension BottomSheetVC {
             self.view.layoutIfNeeded()
         })
     }
-          
+    
 }
 
 //MARK:- UITableViewDelegate

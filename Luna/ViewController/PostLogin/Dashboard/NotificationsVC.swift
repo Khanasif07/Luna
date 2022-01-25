@@ -58,10 +58,9 @@ extension NotificationsVC {
                 print("OneWeekOldNotificationDeleted.")
             }
         } failure: { (error) -> (Void) in
-            CommonFunctions.showToastWithMessage(error.localizedDescription)
+            CommonFunctions.showToastWithMessage("No Notification data available.")
             CommonFunctions.hideActivityLoader()
         }
-
     }
 }
 

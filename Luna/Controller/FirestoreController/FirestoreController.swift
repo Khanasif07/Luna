@@ -141,7 +141,6 @@ class FirestoreController:NSObject{
                         SystemInfoModel.shared.longInsulinSubType = data[ApiKey.longInsulinSubType] as? String ?? ""
                         SystemInfoModel.shared.insulinUnit = data[ApiKey.insulinUnit] as? Int ?? -1
                         SystemInfoModel.shared.cgmUnit = data[ApiKey.cgmUnit] as? Int ?? -1
-//                        SystemInfoModel.shared.cgmType = data[ApiKey.cgmType] as? String ?? ""
                         success()
                     }
                 }
@@ -193,7 +192,8 @@ class FirestoreController:NSObject{
         let weekOldTime = dateTimeUtils.getOldTimeIntervalUTC()
         if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
             db.collection(ApiKey.notifications)
-                .document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.notificationsData).whereField(ApiKey.date, isGreaterThan: weekOldTime).order(by: ApiKey.date).getDocuments { (snapshot, error) in
+                .document(Auth.auth().currentUser?.uid ?? "").collection(ApiKey.notificationsData).whereField(ApiKey.date, isGreaterThan: weekOldTime).order(by: ApiKey.date).getDocuments(source: .server, completion: {
+                    (snapshot, error) in
                     if let error = error {
                         failure(error)
                     } else{
@@ -206,14 +206,14 @@ class FirestoreController:NSObject{
                         }
                         success(notiModelArray)
                     }
-                }
+                })
         }
     }
     
-//    MARK:- Get Insulin Data info
-//    =======================
+    //    MARK:- Get Insulin Data info
+    //    =======================
     static func getFirebaseInsulinData(date:Double,success: @escaping (_ cgmModelArray: [ShareGlucoseData]) -> Void,
-                                   failure:  @escaping FailureResponse){
+                                       failure:  @escaping FailureResponse){
         if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
             db.collection(ApiKey.insulinData)
                 .document(Auth.auth().currentUser?.uid ?? "").collection(String(date)).getDocuments { (snapshot, error) in
@@ -240,30 +240,30 @@ class FirestoreController:NSObject{
         if !(Auth.auth().currentUser?.uid ?? "").isEmpty {
             let monthOldTime = dateTimeUtils.getOldTimeIntervalUTC(value: -30)
             db.collection(ApiKey.sessionData).document(Auth.auth().currentUser?.uid ?? "").getDocument(source: .default) { (document, error) in
-                    if let document = document, document.exists {
-                        if  let dataDescription = document.data(){
-                            print("Document data: \(dataDescription)")
-                            let decoder = JSONDecoder()
-                            if  let dict = dataDescription[ApiKey.sessionHistoryData] as? [[String:Any]]{
-                                if let data = try? JSONSerialization.data(withJSONObject: dict, options: []){
-                                    let historyData = try? decoder.decode([SessionHistory].self, from: data)
-                                    if isNetworkAvailable {
-                                        success(historyData ?? [])
-                                    }else{
-                                        if let filteredHistoryData = historyData?.filter({ $0.endDate >= monthOldTime}){
-                                            success(filteredHistoryData)
-                                        }
+                if let document = document, document.exists {
+                    if  let dataDescription = document.data(){
+                        print("Document data: \(dataDescription)")
+                        let decoder = JSONDecoder()
+                        if  let dict = dataDescription[ApiKey.sessionHistoryData] as? [[String:Any]]{
+                            if let data = try? JSONSerialization.data(withJSONObject: dict, options: []){
+                                let historyData = try? decoder.decode([SessionHistory].self, from: data)
+                                if isNetworkAvailable {
+                                    success(historyData ?? [])
+                                }else{
+                                    if let filteredHistoryData = historyData?.filter({ $0.endDate >= monthOldTime}){
+                                        success(filteredHistoryData)
                                     }
                                 }
                             }
                         }
-                    } else {
-                        print("Document does not exist")
-                        failure()
                     }
+                } else {
+                    print("Document does not exist")
+                    failure()
                 }
             }
         }
+    }
     
     //MARK:- Get info
     //=======================
@@ -519,7 +519,7 @@ class FirestoreController:NSObject{
     //MARK:- Update Alerts status
     //================================
     static func updateUserAlertsStatus(isAlertsOn: Bool, completion: @escaping () -> Void,
-                                          failure: @escaping FailureResponse,failures: @escaping () -> Void) {
+                                       failure: @escaping FailureResponse,failures: @escaping () -> Void) {
         let uid = Auth.auth().currentUser?.uid ?? ""
         guard !uid.isEmpty else {
             failures()
@@ -871,10 +871,10 @@ class FirestoreController:NSObject{
     static func createMessageNode(messageText:String,messageTime:FieldValue,messageId:String,messageType:String,senderId:String){
         guard let userId = Auth.auth().currentUser?.uid  else { return }
         db.collection(ApiKey.messages).document(userId).collection(ApiKey.contactUs).document(messageId).setData([ApiKey.messageText:messageText,
-                                                                                                             ApiKey.messageId:messageId,
-                                                                                                             ApiKey.messageTime:FieldValue.serverTimestamp(),
-                                                                                                             ApiKey.messageType:messageType,
-                                                                                                             ApiKey.senderId:senderId           ])
+                                                                                                                  ApiKey.messageId:messageId,
+                                                                                                                  ApiKey.messageTime:FieldValue.serverTimestamp(),
+                                                                                                                  ApiKey.messageType:messageType,
+                                                                                                                  ApiKey.senderId:senderId           ])
         /// States of the messages
         /// 0 - pending, 1 - sent, 2 - delivered, 3 - read
         
@@ -923,7 +923,7 @@ class FirestoreController:NSObject{
         guard let userId = Auth.auth().currentUser?.uid  else { return }
         let batch = db.batch()
         array.forEach { (doc) in
-        let docRef = db.collection(ApiKey.insulinData).document(userId).collection(String(currentDate)).document(String(doc.date))
+            let docRef = db.collection(ApiKey.insulinData).document(userId).collection(String(currentDate)).document(String(doc.date))
             batch.setData([ApiKey.sgv: doc.sgv ,ApiKey.date: doc.date,ApiKey.insulin: doc.insulin ?? ""], forDocument: docRef)
         }
         batch.commit { (err) in
@@ -1024,7 +1024,7 @@ class FirestoreController:NSObject{
             }
         }
     }
-
+    
     //MARK:- simpleTransaction
     //=======================
     static func simpleTransactionToAddCGMData(sessionId: String,startDate:Double,range:Double,endDate:Double,insulin:Int,success: @escaping () -> Void,
@@ -1049,17 +1049,17 @@ class FirestoreController:NSObject{
                 return nil
             }
             
-//            guard let oldPopulation = sfDocument.data() else {
-//                let error = NSError(
-//                    domain: "AppErrorDomain",
-//                    code: -1,
-//                    userInfo: [
-//                        NSLocalizedDescriptionKey: "Unable to retrieve population from snapshot \(sfDocument)"
-//                    ]
-//                )
-//                errorPointer?.pointee = error
-//                return nil
-//            }
+            //            guard let oldPopulation = sfDocument.data() else {
+            //                let error = NSError(
+            //                    domain: "AppErrorDomain",
+            //                    code: -1,
+            //                    userInfo: [
+            //                        NSLocalizedDescriptionKey: "Unable to retrieve population from snapshot \(sfDocument)"
+            //                    ]
+            //                )
+            //                errorPointer?.pointee = error
+            //                return nil
+            //            }
             
             // Note: this could be done without a transaction
             //       by updating the population using FieldValue.increment()
@@ -1096,14 +1096,14 @@ class FirestoreController:NSObject{
         AppDelegate.shared.window?.rootViewController?.present(alertViewController, animated: true, completion: nil)
     }
     
-   static func updateBadge(val: Int) {
+    static func updateBadge(val: Int) {
         DispatchQueue.main.async {
-        if UserDefaultsRepository.appBadge.value {
-            let latestBG = String(val)
-            UIApplication.shared.applicationIconBadgeNumber = Int(bgUnits.removePeriodForBadge(bgUnits.toDisplayUnits(latestBG))) ?? val
-        } else {
-            UIApplication.shared.applicationIconBadgeNumber = 0
-        }
+            if UserDefaultsRepository.appBadge.value {
+                let latestBG = String(val)
+                UIApplication.shared.applicationIconBadgeNumber = Int(bgUnits.removePeriodForBadge(bgUnits.toDisplayUnits(latestBG))) ?? val
+            } else {
+                UIApplication.shared.applicationIconBadgeNumber = 0
+            }
         }
     }
 }
