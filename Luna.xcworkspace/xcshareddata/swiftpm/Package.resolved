@@ -20,6 +20,15 @@
         }
       },
       {
+        "package": "Charts",
+        "repositoryURL": "https://github.com/danielgindi/Charts.git",
+        "state": {
+          "branch": null,
+          "revision": "66546404a6739173b8e436ab6bc1f2897cd08594",
+          "version": "3.6.0"
+        }
+      },
+      {
         "package": "Firebase",
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk.git",
         "state": {
@@ -74,6 +83,42 @@
         }
       },
       {
+        "package": "InputBarAccessoryView",
+        "repositoryURL": "https://github.com/nathantannar4/InputBarAccessoryView",
+        "state": {
+          "branch": null,
+          "revision": "6d3d205f29b80f8fa9a9616ad801c488293242bf",
+          "version": "5.4.0"
+        }
+      },
+      {
+        "package": "Instabug",
+        "repositoryURL": "https://github.com/Instabug/Instabug-SP.git",
+        "state": {
+          "branch": null,
+          "revision": "1277aa37a3c4d4cd52c09cdcfc97bf6290f0305a",
+          "version": "10.11.6"
+        }
+      },
+      {
+        "package": "IQKeyboardManagerSwift",
+        "repositoryURL": "https://github.com/hackiftekhar/IQKeyboardManager.git",
+        "state": {
+          "branch": null,
+          "revision": "4dc6bc7d1c9747bd0c261c8c055903f9fdef91f7",
+          "version": "6.5.6"
+        }
+      },
+      {
+        "package": "KDCircularProgress",
+        "repositoryURL": "https://github.com/kaandedeoglu/KDCircularProgress.git",
+        "state": {
+          "branch": null,
+          "revision": "a0f30e0605b7ac91ac1b243efd9914b3fd592ad3",
+          "version": "1.5.4"
+        }
+      },
+      {
         "package": "leveldb",
         "repositoryURL": "https://github.com/firebase/leveldb.git",
         "state": {
@@ -83,12 +128,30 @@
         }
       },
       {
+        "package": "MessageKit",
+        "repositoryURL": "https://github.com/MessageKit/MessageKit.git",
+        "state": {
+          "branch": null,
+          "revision": "7ec2a9680af3af0eee06d503362f48ef79374db1",
+          "version": "3.6.1"
+        }
+      },
+      {
         "package": "nanopb",
         "repositoryURL": "https://github.com/firebase/nanopb.git",
         "state": {
           "branch": null,
           "revision": "7ee9ef9f627d85cbe1b8c4f49a3ed26eed216c77",
           "version": "2.30908.0"
+        }
+      },
+      {
+        "package": "NVActivityIndicatorView",
+        "repositoryURL": "https://github.com/ninjaprox/NVActivityIndicatorView.git",
+        "state": {
+          "branch": null,
+          "revision": "bcb52371f2259254bac6690f92bb474a61768c47",
+          "version": "5.1.1"
         }
       },
       {
@@ -107,6 +170,24 @@
           "branch": null,
           "revision": "7e2c5f3cbbeea68e004915e3a8961e20bd11d824",
           "version": "1.18.0"
+        }
+      },
+      {
+        "package": "SwiftKeychainWrapper",
+        "repositoryURL": "https://github.com/jrendel/SwiftKeychainWrapper.git",
+        "state": {
+          "branch": null,
+          "revision": "185a3165346a03767101c4f62e9a545a0fe0530f",
+          "version": "4.0.1"
+        }
+      },
+      {
+        "package": "SwiftyJSON",
+        "repositoryURL": "https://github.com/SwiftyJSON/SwiftyJSON.git",
+        "state": {
+          "branch": null,
+          "revision": "b3dcd7dbd0d488e1a7077cb33b00f2083e382f07",
+          "version": "5.0.1"
         }
       }
     ]

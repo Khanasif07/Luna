@@ -4,9 +4,6 @@ PODS:
     - AppAuth/ExternalUserAgent (= 1.4.0)
   - AppAuth/Core (1.4.0)
   - AppAuth/ExternalUserAgent (1.4.0)
-  - Charts (3.6.0):
-    - Charts/Core (= 3.6.0)
-  - Charts/Core (3.6.0)
   - GoogleSignIn (5.0.2):
     - AppAuth (~> 1.2)
     - GTMAppAuth (~> 1.0)
@@ -14,67 +11,28 @@ PODS:
   - GTMAppAuth (1.2.2):
     - AppAuth/Core (~> 1.4)
     - GTMSessionFetcher/Core (~> 1.5)
-  - GTMSessionFetcher/Core (1.6.1)
-  - InputBarAccessoryView (5.3.1):
-    - InputBarAccessoryView/Core (= 5.3.1)
-  - InputBarAccessoryView/Core (5.3.1)
-  - Instabug (10.11.2)
-  - IQKeyboardManagerSwift (6.5.6)
-  - KDCircularProgress (1.5.4)
-  - MessageKit (3.6.1):
-    - InputBarAccessoryView (~> 5.3.1)
-  - NVActivityIndicatorView (5.1.1):
-    - NVActivityIndicatorView/Base (= 5.1.1)
-  - NVActivityIndicatorView/Base (5.1.1)
-  - SwiftKeychainWrapper (4.0.1)
-  - SwiftyJSON (5.0.1)
+  - GTMSessionFetcher/Core (1.7.0)
   - Toaster (2.3.0)
 
 DEPENDENCIES:
-  - Charts
   - GoogleSignIn (~> 5.0.2)
-  - Instabug
-  - IQKeyboardManagerSwift
-  - KDCircularProgress
-  - MessageKit
-  - NVActivityIndicatorView
-  - SwiftKeychainWrapper
-  - SwiftyJSON
   - Toaster
 
 SPEC REPOS:
   trunk:
     - AppAuth
-    - Charts
     - GoogleSignIn
     - GTMAppAuth
     - GTMSessionFetcher
-    - InputBarAccessoryView
-    - Instabug
-    - IQKeyboardManagerSwift
-    - KDCircularProgress
-    - MessageKit
-    - NVActivityIndicatorView
-    - SwiftKeychainWrapper
-    - SwiftyJSON
     - Toaster
 
 SPEC CHECKSUMS:
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
-  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
-  GTMSessionFetcher: 36689134877faeb055b27dfa4ccc9ceaa42e029e
-  InputBarAccessoryView: 1f75d8c9f75e5e57f3ffac36ed58635a8005e0bc
-  Instabug: ae95bb9177cc6d648ef36c5317f568ecee111e71
-  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
-  KDCircularProgress: 98200c6b8e85d22bc04eb644721d3b1e12b0686b
-  MessageKit: d153fbbbcb12f3f4045a1ba8874298924dacfb62
-  NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
-  SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
-  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
+  GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: 23400dc2bff73afdcfbb5389f3eb5ebd35a3e1f8
+PODFILE CHECKSUM: ba229a99c5c2b67065af1f923655cf5d576fb3e0
 
 COCOAPODS: 1.11.2

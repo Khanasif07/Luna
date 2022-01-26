@@ -6,15 +6,7 @@ target 'Luna' do
   use_frameworks!
 
   # Pods for Luna
-  pod 'NVActivityIndicatorView'
   pod 'Toaster'
-  pod 'SwiftyJSON'
-  pod 'IQKeyboardManagerSwift'
-  pod 'MessageKit'
   pod 'GoogleSignIn', '~> 5.0.2'
-  pod 'SwiftKeychainWrapper'
-  pod 'Charts'
-  pod 'KDCircularProgress'
-  pod 'Instabug'
-  
+
 end

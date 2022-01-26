@@ -7,6 +7,7 @@
 
 import Foundation
 import Charts
+import CoreGraphics
 
 final class OverrideFillFormatter: IFillFormatter {
     func getFillLinePosition(dataSet: ILineChartDataSet, dataProvider: LineChartDataProvider) -> CGFloat {
