@@ -261,6 +261,11 @@
 		BDFEC66927A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC66827A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift */; };
 		BDFEC66C27A2E5250070EAF1 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC66B27A2E5250070EAF1 /* Theme.swift */; };
 		BDFEC66E27A2FD4D0070EAF1 /* BridgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC66D27A2FD4D0070EAF1 /* BridgeView.swift */; };
+		BDFEC67027A30CC80070EAF1 /* BridgeUIHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC66F27A30CC80070EAF1 /* BridgeUIHostingController.swift */; };
+		BDFEC67227A343940070EAF1 /* PairCgmRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC67127A343940070EAF1 /* PairCgmRouter.swift */; };
+		BDFEC67527A346230070EAF1 /* PairLunaCgmSimulatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC67427A346230070EAF1 /* PairLunaCgmSimulatorViewModel.swift */; };
+		BDFEC67727A34DE20070EAF1 /* Exitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC67627A34DE20070EAF1 /* Exitable.swift */; };
+		BDFEC67C27A34EDA0070EAF1 /* LunaBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC67B27A34EDA0070EAF1 /* LunaBackButton.swift */; };
 		BDFFB0D527A20E0E00B15370 /* Instabug in Frameworks */ = {isa = PBXBuildFile; productRef = BDFFB0D427A20E0E00B15370 /* Instabug */; };
 /* End PBXBuildFile section */
 
@@ -509,6 +514,11 @@
 		BDFEC66827A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairLunaCgmSimulatorView.swift; sourceTree = "<group>"; };
 		BDFEC66B27A2E5250070EAF1 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		BDFEC66D27A2FD4D0070EAF1 /* BridgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeView.swift; sourceTree = "<group>"; };
+		BDFEC66F27A30CC80070EAF1 /* BridgeUIHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeUIHostingController.swift; sourceTree = "<group>"; };
+		BDFEC67127A343940070EAF1 /* PairCgmRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairCgmRouter.swift; sourceTree = "<group>"; };
+		BDFEC67427A346230070EAF1 /* PairLunaCgmSimulatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairLunaCgmSimulatorViewModel.swift; sourceTree = "<group>"; };
+		BDFEC67627A34DE20070EAF1 /* Exitable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exitable.swift; sourceTree = "<group>"; };
+		BDFEC67B27A34EDA0070EAF1 /* LunaBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunaBackButton.swift; sourceTree = "<group>"; };
 		F4623A1A786ED367659EFB05 /* Pods-Luna.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Luna.debug.xcconfig"; path = "Target Support Files/Pods-Luna/Pods-Luna.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -946,6 +956,7 @@
 		84CC12982668C822009316FC /* Luna */ = {
 			isa = PBXGroup;
 			children = (
+				BDFEC67927A34EAB0070EAF1 /* common */,
 				BDFEC66A27A2E5110070EAF1 /* theme */,
 				BD0D0C3D27A23AE2001117B3 /* app */,
 				BD0D0C3527A22024001117B3 /* firestore */,
@@ -1152,6 +1163,7 @@
 			isa = PBXGroup;
 			children = (
 				BD0D0C3A27A23722001117B3 /* view */,
+				BDFEC67327A346090070EAF1 /* viewmodel */,
 				BD0D0C2F27A2144A001117B3 /* firestore */,
 				BD0D0C2627A2124E001117B3 /* domain */,
 			);
@@ -1188,6 +1200,7 @@
 			children = (
 				BD0D0C3B27A23745001117B3 /* CgmViewExtensions.swift */,
 				BDFEC66827A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift */,
+				BDFEC67127A343940070EAF1 /* PairCgmRouter.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1196,7 +1209,6 @@
 			isa = PBXGroup;
 			children = (
 				BD0D0C3E27A23AF3001117B3 /* AppState.swift */,
-				BDFEC66D27A2FD4D0070EAF1 /* BridgeView.swift */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -1207,6 +1219,33 @@
 				BDFEC66B27A2E5250070EAF1 /* Theme.swift */,
 			);
 			path = theme;
+			sourceTree = "<group>";
+		};
+		BDFEC67327A346090070EAF1 /* viewmodel */ = {
+			isa = PBXGroup;
+			children = (
+				BDFEC67427A346230070EAF1 /* PairLunaCgmSimulatorViewModel.swift */,
+			);
+			path = viewmodel;
+			sourceTree = "<group>";
+		};
+		BDFEC67927A34EAB0070EAF1 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				BDFEC67A27A34EB00070EAF1 /* view */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		BDFEC67A27A34EB00070EAF1 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				BDFEC66D27A2FD4D0070EAF1 /* BridgeView.swift */,
+				BDFEC66F27A30CC80070EAF1 /* BridgeUIHostingController.swift */,
+				BDFEC67627A34DE20070EAF1 /* Exitable.swift */,
+				BDFEC67B27A34EDA0070EAF1 /* LunaBackButton.swift */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		F2201812782A54B48AE7EE35 /* Frameworks */ = {
@@ -1512,6 +1551,7 @@
 				84CC12E32668D042009316FC /* AppGlobals.swift in Sources */,
 				84AA878D26FAD1120047D86E /* Alarms.swift in Sources */,
 				188DB12D26E0993600FBF042 /* CoachMarkBodyDefaultView.swift in Sources */,
+				BDFEC67027A30CC80070EAF1 /* BridgeUIHostingController.swift in Sources */,
 				188DB13E26E0993600FBF042 /* CoachMarkSkipView.swift in Sources */,
 				84CC129A2668C822009316FC /* AppDelegate.swift in Sources */,
 				849B25662707116900323876 /* CustomTextView.swift in Sources */,
@@ -1581,8 +1621,10 @@
 				84F7BC51266F11BA006C94DA /* AppleLoginManager.swift in Sources */,
 				8455A3BF26805AA80061C55F /* InfoPlistParser.swift in Sources */,
 				84467271268D867600EC55FD /* BLEManager.swift in Sources */,
+				BDFEC67C27A34EDA0070EAF1 /* LunaBackButton.swift in Sources */,
 				840A7DF12696E95E005AA1E6 /* CGMSelectorVC.swift in Sources */,
 				84861D7F26848EDD004B046C /* ProfileTableCell.swift in Sources */,
+				BDFEC67527A346230070EAF1 /* PairLunaCgmSimulatorViewModel.swift in Sources */,
 				BD0D0C3127A21456001117B3 /* FirestoreCgmRepository.swift in Sources */,
 				188DB14226E0993600FBF042 /* ConfigurationChange.swift in Sources */,
 				8403F3B726F9C9F6004BFE8E /* BottomSheetVC+Extension.swift in Sources */,
@@ -1593,6 +1635,8 @@
 				8403F3C326F9D792004BFE8E /* DataStructs.swift in Sources */,
 				188DB12826E0993600FBF042 /* Instructions.swift in Sources */,
 				188DB13426E0993600FBF042 /* UIImage+Bundle.swift in Sources */,
+				BDFEC67727A34DE20070EAF1 /* Exitable.swift in Sources */,
+				BDFEC67227A343940070EAF1 /* PairCgmRouter.swift in Sources */,
 				840A7E662696F190005AA1E6 /* SessionHistoryTableViewCell.swift in Sources */,
 				188DB12B26E0993600FBF042 /* CoachMarksController.swift in Sources */,
 				84B5A05A26C28CD20051C06A /* InsulinModel.swift in Sources */,

@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import Combine
 
 class CGMSelectorVC: UIViewController {
     
@@ -64,11 +65,14 @@ class CGMSelectorVC: UIViewController {
     @IBAction func proceedBtnAction(_ sender: UIButton) {
         let selectedCgm = CGMTypeArray[selectedPath.row]
         if(selectedCgm == LocalizedString.lunaSimulator.localized) {
-            let pairingViewController = UIHostingController(
+            let router = PairCgmRouter()
+            let pairingViewController = BridgeUIHostingController(
+                router: router,
                 rootView: BridgeView {
-                    PairLunaCgmSimulatorView()
+                    PairCgmRouterView(router: router)
                 }
             )
+            
             pairingViewController.overrideUserInterfaceStyle = .light
             navigationController?.pushViewController(pairingViewController, animated: true)
         } else {

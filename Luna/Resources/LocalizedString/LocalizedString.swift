@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum LocalizedString : String {
     
@@ -170,6 +171,7 @@ enum LocalizedString : String {
     case are_you_sure_want_to_logout_from_dexcom
     case cgm_connected
     case connect_cgm
+    case pair_cgm_simulator
     
     case no
     case yes
@@ -715,6 +717,10 @@ enum LocalizedString : String {
 }
 
 extension LocalizedString {
+    var localizedKey: LocalizedStringKey {
+        return LocalizedStringKey(self.rawValue)
+    }
+    
     var localized : String {
         return self.rawValue.localizedString(lang: "en")
     }

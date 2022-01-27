@@ -71,6 +71,7 @@
 "are_you_sure_want_to_logout_from_dexcom" = "Are you sure want to logout from Dexcom?";
 "cgm_connected" = "CGM is connected";
 "connect_cgm" = "Connect your CGM";
+"pair_cgm_simulator" = "Pair CGM Simulator";
 "next" = "Next";
 "no" = "No";
 "yes" = "Yes";
