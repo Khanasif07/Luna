@@ -234,10 +234,8 @@ extension BottomSheetVC {
     }
     
     @objc func bLEOnOffStateChanged(){
-        CommonFunctions.delay(delay: 7.5) {
-            let bodyText  = "Turn on Bluetooth to receive alerts, alarms, or sensor glucose readings."
-            self.persistentNotification(body: bodyText,title: "Bluetooth Off Alert")
-        }
+        let bodyText  = "Turn on Bluetooth to receive alerts, alarms, or sensor glucose readings."
+        self.persistentNotification(body: bodyText,title: "Bluetooth Off Alert")
     }
     
     @objc func bleDidUpdateValue(notification : NSNotification){
