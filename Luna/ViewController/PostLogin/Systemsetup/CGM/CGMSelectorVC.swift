@@ -19,8 +19,16 @@ class CGMSelectorVC: UIViewController {
     
     // MARK: - Variables
     //===========================
-    var CGMTypeArray = [LocalizedString.dexcomG6.localized,LocalizedString.dexcomG7.localized,LocalizedString.freestyle_Libre2.localized,LocalizedString.freestyle_Libre3.localized]
+    var CGMTypeArray = [
+        LocalizedString.dexcomG6.localized,
+        LocalizedString.dexcomG7.localized,
+        LocalizedString.freestyle_Libre2.localized,
+        LocalizedString.freestyle_Libre3.localized,
+        LocalizedString.lunaSimulator.localized,
+    ]
 
+    var selectedPath = IndexPath(indexes: [0,0])
+    
     // MARK: - Lifecycle
     //===========================
     override func viewDidLoad() {
@@ -112,20 +120,31 @@ extension CGMSelectorVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(with: CGMTypeTableViewCell.self)
         cell.subTitlelbl.text = CGMTypeArray[indexPath.row]
-        if indexPath.row == 0{
-            cell.nextBtn.setImage(UIImage(named: "Radio_selected"), for: .normal)
-            cell.subTitlelbl.textColor = UIColor.black
-            cell.outerView.layer.borderColor = AppColors.appGreenColor.cgColor
+        if indexPath == selectedPath {
+            cell.selected()
         }
-        else{
-            cell.nextBtn.setImage(UIImage(named: "Radio_unselected"), for: .normal)
-            cell.subTitlelbl.textColor = AppColors.fontPrimaryColor
-            cell.outerView.layer.borderColor = AppColors.fontPrimaryColor.cgColor
+        else {
+            cell.unselected()
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        
+        let previousSelectedPath = selectedPath
+        if let previousCell = tableView.cellForRow(at: previousSelectedPath) as? CGMTypeTableViewCell {
+            previousCell.unselected()
+        }
+        
+        if let cell = tableView.cellForRow(at: indexPath) as? CGMTypeTableViewCell {
+            cell.selected()
+        }
+        
+        selectedPath = indexPath
     }
 }

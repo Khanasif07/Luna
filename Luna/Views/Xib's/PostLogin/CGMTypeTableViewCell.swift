@@ -28,4 +28,16 @@ class CGMTypeTableViewCell: UITableViewCell {
         self.outerView.round(radius: 10.0)
         self.outerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
     }
+    
+    func selected() {
+        nextBtn.setImage(UIImage(named: "Radio_selected"), for: .normal)
+        subTitlelbl.textColor = UIColor.black
+        outerView.layer.borderColor = AppColors.appGreenColor.cgColor
+    }
+    
+    func unselected() {
+        nextBtn.setImage(UIImage(named: "Radio_unselected"), for: .normal)
+        subTitlelbl.textColor = AppColors.fontPrimaryColor
+        outerView.layer.borderColor = AppColors.fontPrimaryColor.cgColor
+    }
 }
