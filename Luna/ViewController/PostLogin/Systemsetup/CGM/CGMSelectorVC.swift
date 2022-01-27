@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class CGMSelectorVC: UIViewController {
     
@@ -39,6 +40,13 @@ class CGMSelectorVC: UIViewController {
         initialSetup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // As part of visiting UIHostingController screen, the navigation bar is made visible.
+        // Whenever this view is about to appear, set the navigation bar hidden again.
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
             if userInterfaceStyle == .dark{
@@ -54,6 +62,25 @@ class CGMSelectorVC: UIViewController {
     // MARK: - IBActions
     //===========================
     @IBAction func proceedBtnAction(_ sender: UIButton) {
+        let selectedCgm = CGMTypeArray[selectedPath.row]
+        if(selectedCgm == LocalizedString.lunaSimulator.localized) {
+            let pairingViewController = UIHostingController(
+                rootView: BridgeView {
+                    PairLunaCgmSimulatorView()
+                }
+            )
+            pairingViewController.overrideUserInterfaceStyle = .light
+            navigationController?.pushViewController(pairingViewController, animated: true)
+        } else {
+            proceedButtonActionForDexcomG6()
+        }
+    }
+    
+    @IBAction func backBtnTapped(_ sender: UIButton) {
+        self.pop()
+    }
+    
+    private func proceedButtonActionForDexcomG6() {
         if  UserDefaultsRepository.shareUserName.value.isEmpty || UserDefaultsRepository.sharePassword.value.isEmpty{
             SystemInfoModel.shared.cgmType =  CGMTypeArray.first ?? ""
             let vc = CGMLoginVC.instantiate(fromAppStoryboard: .CGPStoryboard)
@@ -73,10 +100,6 @@ class CGMSelectorVC: UIViewController {
                 //MARK:- Handle Failure condition
             }
         }
-    }
-    
-    @IBAction func backBtnTapped(_ sender: UIButton) {
-        self.pop()
     }
 
 }
@@ -136,8 +159,7 @@ extension CGMSelectorVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
-        let previousSelectedPath = selectedPath
-        if let previousCell = tableView.cellForRow(at: previousSelectedPath) as? CGMTypeTableViewCell {
+        if let previousCell = tableView.cellForRow(at: selectedPath) as? CGMTypeTableViewCell {
             previousCell.unselected()
         }
         
