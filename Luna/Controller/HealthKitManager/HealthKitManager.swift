@@ -75,7 +75,7 @@ class HealthKitManager: NSObject {
         }
     }
     
-    func read(handler: (([InsulinModel]) -> Void)? = nil) {
+    func readInsulinFromAppleHealthKit(_ handler: (([InsulinModel]) -> Void)? = nil) {
         guard let insulinType = HKQuantityType.quantityType(forIdentifier: .insulinDelivery) else {
             return
         }

@@ -230,7 +230,7 @@ extension BottomSheetVC {
     //    }
     
     @objc func applicationIsTerminated(){
-        self.persistentNotification(body: "Tap to open app. Luna will not function until until the app is open. In the future, keep app running in the background, don't swipe it closed. ",title: "App is closed.")
+        self.persistentNotification(body: "Tap to open app. Luna will not function until the app is open. In the future, keep app running in the background, don't swipe it closed. ",title: "App is closed.")
     }
     
     @objc func bLEOnOffStateChanged(){

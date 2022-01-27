@@ -347,7 +347,6 @@ class FirestoreController:NSObject{
                 loginType = .apple
                 return
             }else{}
-            print(loginType.title)
         }
     }
     
