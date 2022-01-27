@@ -157,6 +157,16 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
         }
     }
     
+    //MARK:- Read Insulin from apple health kit
+    private func readInsulinFromAppleHealthKit(){
+        HealthKitManager.sharedInstance.readInsulinFromAppleHealthKit { (insulinData) in
+            print(insulinData)
+            let insulinRecords = insulinData.map({$0.value}).reduce(0, +)
+            AppUserDefaults.save(value: insulinRecords, forKey: .insulinFromApple)
+            BleManager.sharedInstance.writeAppleInsulinRecordsToController(value: bgUnits.toSendExternalDoseStampsUnits("", String(insulinRecords)))
+        }
+    }
+   
     @objc func cgmDataReceivedSuccessfully(notification : NSNotification){
         if let dict = notification.object as? NSDictionary {
             if let bgData = dict[ApiKey.cgmData] as? [ShareGlucoseData]{
@@ -191,10 +201,11 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
 extension BottomSheetVC {
     
     private func initialSetup() {
-        setupTableView()
-        addObserver()
-        setupSwipeGesture()
-        cgmSetUp()
+        self.setupTableView()
+        self.addObserver()
+        self.setupSwipeGesture()
+        self.cgmSetUp()
+        self.readInsulinFromAppleHealthKit()
     }
     
     private func setupTableView() {

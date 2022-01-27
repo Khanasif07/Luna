@@ -126,6 +126,7 @@
 		84602903268C50F800141E0D /* AboutTermsPolicyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84602902268C50F800141E0D /* AboutTermsPolicyVC.swift */; };
 		84606119270C3DF900DFD22A /* SessionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84606118270C3DF900DFD22A /* SessionHistory.swift */; };
 		8460611D270EC9BC00DFD22A /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460611C270EC9BC00DFD22A /* PushNotificationManager.swift */; };
+		84658E1727A2DC0700405EF8 /* InstabugBug.m in Sources */ = {isa = PBXBuildFile; fileRef = 84658E1627A2DC0700405EF8 /* InstabugBug.m */; };
 		847899732684824F00D1DF36 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847899722684824F00D1DF36 /* HomeVC.swift */; };
 		847899762684870F00D1DF36 /* AboutSectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847899752684870F00D1DF36 /* AboutSectionVC.swift */; };
 		847D1B292689A87A00220DAE /* SystemSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D1B282689A87A00220DAE /* SystemSetupVC.swift */; };
@@ -374,6 +375,7 @@
 		84602902268C50F800141E0D /* AboutTermsPolicyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTermsPolicyVC.swift; sourceTree = "<group>"; };
 		84606118270C3DF900DFD22A /* SessionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistory.swift; sourceTree = "<group>"; };
 		8460611C270EC9BC00DFD22A /* PushNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
+		84658E1627A2DC0700405EF8 /* InstabugBug.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InstabugBug.m; sourceTree = "<group>"; };
 		846F1A1F2678C2220034ACE0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		847899722684824F00D1DF36 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		847899752684870F00D1DF36 /* AboutSectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSectionVC.swift; sourceTree = "<group>"; };
@@ -847,6 +849,14 @@
 			path = PushNotificationManager;
 			sourceTree = "<group>";
 		};
+		84658E0B27A2DB6900405EF8 /* InstabugConsole */ = {
+			isa = PBXGroup;
+			children = (
+				84658E1627A2DC0700405EF8 /* InstabugBug.m */,
+			);
+			path = InstabugConsole;
+			sourceTree = "<group>";
+		};
 		846C83B8277C5593001F9259 /* CustomHealthView */ = {
 			isa = PBXGroup;
 			children = (
@@ -960,6 +970,7 @@
 		84CC12B52668CD10009316FC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				84658E0B27A2DB6900405EF8 /* InstabugConsole */,
 				84CC12C52668CF13009316FC /* LocalizedString */,
 				84D1F4DC2679D52700F131E0 /* Fonts */,
 				84CC12A22668C823009316FC /* Assets.xcassets */,
@@ -1175,6 +1186,7 @@
 				TargetAttributes = {
 					84CC12952668C822009316FC = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 					};
 				};
 			};
@@ -1351,6 +1363,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84658E1727A2DC0700405EF8 /* InstabugBug.m in Sources */,
 				8418D7D626B01F4E00BAB256 /* UserDefaultsValueGroups.swift in Sources */,
 				188DB13026E0993600FBF042 /* OverlaySnapshotView.swift in Sources */,
 				8403F3C026F9D2F8004BFE8E /* Chart.swift in Sources */,
@@ -1673,6 +1686,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -1687,6 +1701,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunadiabetes.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Prov;
+				SWIFT_OBJC_BRIDGING_HEADER = "Luna/instabugissue/Luna-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1698,6 +1714,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -1712,6 +1729,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunadiabetes.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Prov;
+				SWIFT_OBJC_BRIDGING_HEADER = "Luna/instabugissue/Luna-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

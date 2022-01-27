@@ -112,17 +112,23 @@ public class BleManager: NSObject{
         }
     }
     
-    public func writeCGMTimeStampValue(value: String,externalDoseData: String = "") {
+    public func writeCGMTimeStampValue(value: String) {
         if isMyPeripheralConected { //check if myPeripheral is connected to send data
             let dataToSend: Data = value.data(using: String.Encoding.utf8)!
             if let  cgmWriteCBCharacteristic = self.cgmWriteCBCharacteristic{
                 myperipheral?.writeValue(dataToSend as Data, for: cgmWriteCBCharacteristic , type: CBCharacteristicWriteType.withResponse)
             }
-//            if let  externalCharacteristic = self.externalDoseCBCharacteristic{
-//                myperipheral?.writeValue(externalDoseData.data(using: String.Encoding.utf8)!, for: externalCharacteristic , type: CBCharacteristicWriteType.withResponse)
-//            }
         } else {
             print("Not connected")
+        }
+    }
+    
+    public func writeAppleInsulinRecordsToController(value: String){
+        if isMyPeripheralConected { //check if myPeripheral is connected to send data
+            if let  externalCharacteristic = self.externalDoseCBCharacteristic{
+                let dataToSend: Data = value.data(using: String.Encoding.utf8)!
+                myperipheral?.writeValue(dataToSend as Data, for: externalCharacteristic , type: CBCharacteristicWriteType.withResponse)
+            }
         }
     }
     

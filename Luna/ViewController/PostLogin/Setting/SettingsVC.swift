@@ -103,9 +103,6 @@ extension SettingsVC {
         self.setUpdata()
         self.tableViewSetup()
         FirestoreController.getSessionLoginType()
-        HealthKitManager.sharedInstance.readInsulinFromAppleHealthKit { (insulinData) in
-            print(insulinData)
-        }
     }
     
     private func tableViewSetup(){
