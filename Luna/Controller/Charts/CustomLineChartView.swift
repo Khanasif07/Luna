@@ -6,6 +6,8 @@
 //
 import Charts
 import Foundation
+import CoreGraphics
+import UIKit
 
 class TappableLineChartView: LineChartView {
 

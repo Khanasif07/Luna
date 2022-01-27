@@ -5,6 +5,7 @@
 //  Created by Admin on 22/07/21.
 //
 import SwiftyJSON
+import UIKit
 import Foundation
 
 struct SystemInfoModel{

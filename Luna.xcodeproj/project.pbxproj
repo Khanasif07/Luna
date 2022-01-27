@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -236,6 +236,22 @@
 		84FDA0AD267DCB5600AC8BE9 /* MessageReceiverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84FDA0AB267DCB5600AC8BE9 /* MessageReceiverCell.xib */; };
 		84FDA0B1267DE8B600AC8BE9 /* DecisionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FDA0AF267DE8B600AC8BE9 /* DecisionCell.swift */; };
 		84FDA0B2267DE8B600AC8BE9 /* DecisionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84FDA0B0267DE8B600AC8BE9 /* DecisionCell.xib */; };
+		BD088BDC27A2040D007F2C4B /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BDB27A2040D007F2C4B /* NVActivityIndicatorView */; };
+		BD088BDF27A205BC007F2C4B /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BDE27A205BC007F2C4B /* SwiftyJSON */; };
+		BD088BE227A206A6007F2C4B /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BE127A206A6007F2C4B /* IQKeyboardManagerSwift */; };
+		BD088BE527A20700007F2C4B /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BE427A20700007F2C4B /* MessageKit */; };
+		BD088BE827A207F2007F2C4B /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BE727A207F2007F2C4B /* SwiftKeychainWrapper */; };
+		BD088BEB27A208B2007F2C4B /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BEA27A208B2007F2C4B /* Charts */; };
+		BD088BEE27A2093D007F2C4B /* KDCircularProgress in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BED27A2093D007F2C4B /* KDCircularProgress */; };
+		BDF0D78227A1FA1700A5F950 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78127A1FA1700A5F950 /* FirebaseAnalytics */; };
+		BDF0D78427A1FA1700A5F950 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78327A1FA1700A5F950 /* FirebaseCrashlytics */; };
+		BDF0D78627A1FA1700A5F950 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78527A1FA1700A5F950 /* FirebaseDatabase */; };
+		BDF0D78827A1FA1700A5F950 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78727A1FA1700A5F950 /* FirebaseFirestore */; };
+		BDF0D78A27A1FA1700A5F950 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78927A1FA1700A5F950 /* FirebaseMessaging */; };
+		BDF0D78C27A1FA1700A5F950 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78B27A1FA1700A5F950 /* FirebasePerformance */; };
+		BDF0D78E27A1FA1700A5F950 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78D27A1FA1700A5F950 /* FirebaseStorage */; };
+		BDF0D79027A1FA9300A5F950 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78F27A1FA9300A5F950 /* FirebaseAuth */; };
+		BDFFB0D527A20E0E00B15370 /* Instabug in Frameworks */ = {isa = PBXBuildFile; productRef = BDFFB0D427A20E0E00B15370 /* Instabug */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -481,8 +497,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDF0D78627A1FA1700A5F950 /* FirebaseDatabase in Frameworks */,
+				BDF0D79027A1FA9300A5F950 /* FirebaseAuth in Frameworks */,
+				BD088BE827A207F2007F2C4B /* SwiftKeychainWrapper in Frameworks */,
 				10BD91E0179A10717FF4BFEB /* Pods_Luna.framework in Frameworks */,
+				BD088BE527A20700007F2C4B /* MessageKit in Frameworks */,
+				BDF0D78E27A1FA1700A5F950 /* FirebaseStorage in Frameworks */,
+				BDF0D78A27A1FA1700A5F950 /* FirebaseMessaging in Frameworks */,
+				BDF0D78427A1FA1700A5F950 /* FirebaseCrashlytics in Frameworks */,
+				BD088BDF27A205BC007F2C4B /* SwiftyJSON in Frameworks */,
 				849B7432269D612000C059E5 /* HealthKit.framework in Frameworks */,
+				BDF0D78227A1FA1700A5F950 /* FirebaseAnalytics in Frameworks */,
+				BD088BEE27A2093D007F2C4B /* KDCircularProgress in Frameworks */,
+				BD088BEB27A208B2007F2C4B /* Charts in Frameworks */,
+				BD088BE227A206A6007F2C4B /* IQKeyboardManagerSwift in Frameworks */,
+				BD088BDC27A2040D007F2C4B /* NVActivityIndicatorView in Frameworks */,
+				BDFFB0D527A20E0E00B15370 /* Instabug in Frameworks */,
+				BDF0D78C27A1FA1700A5F950 /* FirebasePerformance in Frameworks */,
+				BDF0D78827A1FA1700A5F950 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1101,16 +1133,33 @@
 				84CC12922668C822009316FC /* Sources */,
 				84CC12932668C822009316FC /* Frameworks */,
 				84CC12942668C822009316FC /* Resources */,
-				0FACE4C3AD5ED6C1EDD27C15 /* [CP] Embed Pods Frameworks */,
-				8485E58326C10FC500B02E9A /* ShellScript */,
-				8485E59126C14BF200B02E9A /* ShellScript */,
-				32D9AF25EB9A28F05804B068 /* [CP] Copy Pods Resources */,
+				BDF0D79127A1FBF300A5F950 /* ShellScript */,
+				1D8F5E51C1DD86AF01407F51 /* [CP] Embed Pods Frameworks */,
+				2E7147292A5458C3A94E1034 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Luna;
+			packageProductDependencies = (
+				BDF0D78127A1FA1700A5F950 /* FirebaseAnalytics */,
+				BDF0D78327A1FA1700A5F950 /* FirebaseCrashlytics */,
+				BDF0D78527A1FA1700A5F950 /* FirebaseDatabase */,
+				BDF0D78727A1FA1700A5F950 /* FirebaseFirestore */,
+				BDF0D78927A1FA1700A5F950 /* FirebaseMessaging */,
+				BDF0D78B27A1FA1700A5F950 /* FirebasePerformance */,
+				BDF0D78D27A1FA1700A5F950 /* FirebaseStorage */,
+				BDF0D78F27A1FA9300A5F950 /* FirebaseAuth */,
+				BD088BDB27A2040D007F2C4B /* NVActivityIndicatorView */,
+				BD088BDE27A205BC007F2C4B /* SwiftyJSON */,
+				BD088BE127A206A6007F2C4B /* IQKeyboardManagerSwift */,
+				BD088BE427A20700007F2C4B /* MessageKit */,
+				BD088BE727A207F2007F2C4B /* SwiftKeychainWrapper */,
+				BD088BEA27A208B2007F2C4B /* Charts */,
+				BD088BED27A2093D007F2C4B /* KDCircularProgress */,
+				BDFFB0D427A20E0E00B15370 /* Instabug */,
+			);
 			productName = Luna;
 			productReference = 84CC12962668C822009316FC /* Luna.app */;
 			productType = "com.apple.product-type.application";
@@ -1138,6 +1187,17 @@
 				Base,
 			);
 			mainGroup = 84CC128D2668C822009316FC;
+			packageReferences = (
+				BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				BD088BDA27A2040D007F2C4B /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
+				BD088BDD27A205BC007F2C4B /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				BD088BE027A206A6007F2C4B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				BD088BE327A20700007F2C4B /* XCRemoteSwiftPackageReference "MessageKit" */,
+				BD088BE627A207F1007F2C4B /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
+				BD088BE927A208B2007F2C4B /* XCRemoteSwiftPackageReference "Charts" */,
+				BD088BEC27A2093D007F2C4B /* XCRemoteSwiftPackageReference "KDCircularProgress" */,
+				BDFFB0D327A20E0E00B15370 /* XCRemoteSwiftPackageReference "Instabug-SP" */,
+			);
 			productRefGroup = 84CC12972668C822009316FC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1211,7 +1271,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0FACE4C3AD5ED6C1EDD27C15 /* [CP] Embed Pods Frameworks */ = {
+		1D8F5E51C1DD86AF01407F51 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1228,7 +1288,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Luna/Pods-Luna-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		32D9AF25EB9A28F05804B068 /* [CP] Copy Pods Resources */ = {
+		2E7147292A5458C3A94E1034 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1267,27 +1327,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8485E58326C10FC500B02E9A /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
-				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
-		};
-		8485E59126C14BF200B02E9A /* ShellScript */ = {
+		BDF0D79127A1FBF300A5F950 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1302,7 +1342,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/upload-symbols\" -gsp \"${PROJECT_DIR}/Luna/Resources/GoogleService-Info.plist\" -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\n";
+			shellScript = "${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1699,6 +1739,164 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BD088BDA27A2040D007F2C4B /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ninjaprox/NVActivityIndicatorView.git";
+			requirement = {
+				kind = exactVersion;
+				version = 5.1.1;
+			};
+		};
+		BD088BDD27A205BC007F2C4B /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = exactVersion;
+				version = 5.0.1;
+			};
+		};
+		BD088BE027A206A6007F2C4B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = exactVersion;
+				version = 6.5.6;
+			};
+		};
+		BD088BE327A20700007F2C4B /* XCRemoteSwiftPackageReference "MessageKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MessageKit/MessageKit.git";
+			requirement = {
+				kind = exactVersion;
+				version = 3.6.1;
+			};
+		};
+		BD088BE627A207F1007F2C4B /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper.git";
+			requirement = {
+				kind = exactVersion;
+				version = 4.0.1;
+			};
+		};
+		BD088BE927A208B2007F2C4B /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = exactVersion;
+				version = 3.6.0;
+			};
+		};
+		BD088BEC27A2093D007F2C4B /* XCRemoteSwiftPackageReference "KDCircularProgress" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kaandedeoglu/KDCircularProgress.git";
+			requirement = {
+				kind = exactVersion;
+				version = 1.5.4;
+			};
+		};
+		BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = exactVersion;
+				version = 8.11.0;
+			};
+		};
+		BDFFB0D327A20E0E00B15370 /* XCRemoteSwiftPackageReference "Instabug-SP" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Instabug/Instabug-SP.git";
+			requirement = {
+				kind = exactVersion;
+				version = 10.11.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BD088BDB27A2040D007F2C4B /* NVActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BD088BDA27A2040D007F2C4B /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
+			productName = NVActivityIndicatorView;
+		};
+		BD088BDE27A205BC007F2C4B /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BD088BDD27A205BC007F2C4B /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		BD088BE127A206A6007F2C4B /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BD088BE027A206A6007F2C4B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+		BD088BE427A20700007F2C4B /* MessageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BD088BE327A20700007F2C4B /* XCRemoteSwiftPackageReference "MessageKit" */;
+			productName = MessageKit;
+		};
+		BD088BE727A207F2007F2C4B /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BD088BE627A207F1007F2C4B /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
+		};
+		BD088BEA27A208B2007F2C4B /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BD088BE927A208B2007F2C4B /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = Charts;
+		};
+		BD088BED27A2093D007F2C4B /* KDCircularProgress */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BD088BEC27A2093D007F2C4B /* XCRemoteSwiftPackageReference "KDCircularProgress" */;
+			productName = KDCircularProgress;
+		};
+		BDF0D78127A1FA1700A5F950 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		BDF0D78327A1FA1700A5F950 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		BDF0D78527A1FA1700A5F950 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		BDF0D78727A1FA1700A5F950 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		BDF0D78927A1FA1700A5F950 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		BDF0D78B27A1FA1700A5F950 /* FirebasePerformance */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebasePerformance;
+		};
+		BDF0D78D27A1FA1700A5F950 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		BDF0D78F27A1FA9300A5F950 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		BDFFB0D427A20E0E00B15370 /* Instabug */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BDFFB0D327A20E0E00B15370 /* XCRemoteSwiftPackageReference "Instabug-SP" */;
+			productName = Instabug;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		8418D7D026B01F4E00BAB256 /* UserData.xcdatamodeld */ = {

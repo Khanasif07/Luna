@@ -6,25 +6,7 @@ target 'Luna' do
   use_frameworks!
 
   # Pods for Luna
-  pod 'NVActivityIndicatorView'
   pod 'Toaster'
-  pod 'SwiftyJSON'
-  pod 'IQKeyboardManagerSwift'
-  pod 'Firebase/Auth'
-  pod 'Firebase/Database'
-  pod 'Firebase/Messaging'
-  pod 'Firebase/Firestore'
-  pod 'MessageKit'
-  pod 'Firebase/Storage'
-  pod 'Firebase/Crashlytics'
-  pod 'Firebase/Analytics', '8.1.0'
-  pod 'Firebase/Core'
-  pod 'Firebase/Storage'
   pod 'GoogleSignIn', '~> 5.0.2'
-  pod 'SwiftKeychainWrapper'
-  pod 'Charts'
-  pod 'KDCircularProgress'
-  pod 'Instabug'
-  pod 'Firebase/Performance'
-  
+
 end
