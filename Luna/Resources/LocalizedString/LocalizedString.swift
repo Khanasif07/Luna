@@ -205,6 +205,7 @@ enum LocalizedString : String {
     case dexcomG7
     case freestyle_Libre2
     case freestyle_Libre3
+    case lunaSimulator
     
     case battery
     case reservoir

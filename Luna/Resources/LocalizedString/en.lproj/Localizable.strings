@@ -117,6 +117,7 @@
 "dexcomG7" = "Dexcom G7";
 "freestyle_Libre2" = "Freestyle Libre 2";
 "freestyle_Libre3" = "Freestyle Libre 3";
+"lunaSimulator" = "Luna CGM Simulator";
 
 "battery" = "Battery";
 "reservoir" = "Reservoir";
