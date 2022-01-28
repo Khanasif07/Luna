@@ -91,7 +91,6 @@ extension AppUserDefaults {
         case currentUserType
         case phoneNoVerified
         case emailVerified
-        case isGarrage
         case fullUserProfile
         case forgotPassword
         case checkInDetails
@@ -105,11 +104,7 @@ extension AppUserDefaults {
         case defaultPassword
         case fcmToken
         case token
-        case longitude
-        case language
         case loggedOut
-        case garageName
-        case garageAddress
         case name
         case userId
         case pushNotificationStatus
@@ -124,6 +119,8 @@ extension AppUserDefaults {
         case lastUpdatedCGMDate
         case isAlertsOn
         case reservoirLevel
+        case language
+        case insulinFromApple
     }
 }
 

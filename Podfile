@@ -7,6 +7,5 @@ target 'Luna' do
 
   # Pods for Luna
   pod 'Toaster'
-  pod 'GoogleSignIn', '~> 5.0.2'
 
 end

@@ -142,6 +142,7 @@
 		849B5A4A2697143B000AA5DC /* BottomSheetTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849B5A482697143B000AA5DC /* BottomSheetTopCell.xib */; };
 		849B7432269D612000C059E5 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849B7431269D612000C059E5 /* HealthKit.framework */; };
 		849B7436269D710600C059E5 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7435269D710600C059E5 /* HealthKitManager.swift */; };
+		849BC0D527A3ABC3009E054C /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 849BC0D427A3ABC3009E054C /* GoogleSignIn */; };
 		84A18911278C2FD3003ED8D9 /* NotificationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A18910278C2FD3003ED8D9 /* NotificationsVC.swift */; };
 		84A18915278C318A003ED8D9 /* NotificationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A18913278C318A003ED8D9 /* NotificationsCell.swift */; };
 		84A18916278C318A003ED8D9 /* NotificationsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A18914278C318A003ED8D9 /* NotificationsCell.xib */; };
@@ -391,6 +392,7 @@
 		849B5A482697143B000AA5DC /* BottomSheetTopCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetTopCell.xib; sourceTree = "<group>"; };
 		849B7431269D612000C059E5 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		849B7435269D710600C059E5 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		849BC0D127A39800009E054C /* Luna-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Luna-Bridging-Header.h"; sourceTree = "<group>"; };
 		84A18910278C2FD3003ED8D9 /* NotificationsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsVC.swift; sourceTree = "<group>"; };
 		84A18913278C318A003ED8D9 /* NotificationsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsCell.swift; sourceTree = "<group>"; };
 		84A18914278C318A003ED8D9 /* NotificationsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationsCell.xib; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 				BDF0D78627A1FA1700A5F950 /* FirebaseDatabase in Frameworks */,
 				BDF0D79027A1FA9300A5F950 /* FirebaseAuth in Frameworks */,
 				BD088BE827A207F2007F2C4B /* SwiftKeychainWrapper in Frameworks */,
+				849BC0D527A3ABC3009E054C /* GoogleSignIn in Frameworks */,
 				10BD91E0179A10717FF4BFEB /* Pods_Luna.framework in Frameworks */,
 				BD088BE527A20700007F2C4B /* MessageKit in Frameworks */,
 				BDF0D78E27A1FA1700A5F950 /* FirebaseStorage in Frameworks */,
@@ -847,6 +850,14 @@
 			path = PushNotificationManager;
 			sourceTree = "<group>";
 		};
+		84658E1927A2DCAD00405EF8 /* InstabugDebugger */ = {
+			isa = PBXGroup;
+			children = (
+				849BC0D127A39800009E054C /* Luna-Bridging-Header.h */,
+			);
+			path = InstabugDebugger;
+			sourceTree = "<group>";
+		};
 		846C83B8277C5593001F9259 /* CustomHealthView */ = {
 			isa = PBXGroup;
 			children = (
@@ -917,6 +928,7 @@
 			isa = PBXGroup;
 			children = (
 				84F7BC4E266F06A1006C94DA /* Luna.entitlements */,
+				84658E1927A2DCAD00405EF8 /* InstabugDebugger */,
 				84E78B9C2685E8B800FABDCD /* Model */,
 				84CC12B12668C8E7009316FC /* Views */,
 				84CC12B32668CCE8009316FC /* ViewController */,
@@ -1135,7 +1147,6 @@
 				84CC12942668C822009316FC /* Resources */,
 				BDF0D79127A1FBF300A5F950 /* ShellScript */,
 				1D8F5E51C1DD86AF01407F51 /* [CP] Embed Pods Frameworks */,
-				2E7147292A5458C3A94E1034 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1159,6 +1170,7 @@
 				BD088BEA27A208B2007F2C4B /* Charts */,
 				BD088BED27A2093D007F2C4B /* KDCircularProgress */,
 				BDFFB0D427A20E0E00B15370 /* Instabug */,
+				849BC0D427A3ABC3009E054C /* GoogleSignIn */,
 			);
 			productName = Luna;
 			productReference = 84CC12962668C822009316FC /* Luna.app */;
@@ -1175,6 +1187,7 @@
 				TargetAttributes = {
 					84CC12952668C822009316FC = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 					};
 				};
 			};
@@ -1197,6 +1210,7 @@
 				BD088BE927A208B2007F2C4B /* XCRemoteSwiftPackageReference "Charts" */,
 				BD088BEC27A2093D007F2C4B /* XCRemoteSwiftPackageReference "KDCircularProgress" */,
 				BDFFB0D327A20E0E00B15370 /* XCRemoteSwiftPackageReference "Instabug-SP" */,
+				849BC0D327A3ABC3009E054C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 84CC12972668C822009316FC /* Products */;
 			projectDirPath = "";
@@ -1286,23 +1300,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Luna/Pods-Luna-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2E7147292A5458C3A94E1034 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Luna/Pods-Luna-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Luna/Pods-Luna-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Luna/Pods-Luna-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7C8524774A5FCF0BEFA25AA3 /* [CP] Check Pods Manifest.lock */ = {
@@ -1673,6 +1670,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -1687,6 +1685,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunadiabetes.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Prov;
+				SWIFT_OBJC_BRIDGING_HEADER = "Luna/InstabugDebugger/Luna-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1698,6 +1698,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -1712,6 +1713,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunadiabetes.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Prov;
+				SWIFT_OBJC_BRIDGING_HEADER = "Luna/InstabugDebugger/Luna-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1741,6 +1743,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		849BC0D327A3ABC3009E054C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.1.0;
+			};
+		};
 		BD088BDA27A2040D007F2C4B /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ninjaprox/NVActivityIndicatorView.git";
@@ -1816,6 +1826,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		849BC0D427A3ABC3009E054C /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 849BC0D327A3ABC3009E054C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
 		BD088BDB27A2040D007F2C4B /* NVActivityIndicatorView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BD088BDA27A2040D007F2C4B /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;

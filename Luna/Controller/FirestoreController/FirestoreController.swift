@@ -327,6 +327,29 @@ class FirestoreController:NSObject{
         }
     }
     
+    static  func getSessionLoginType(){
+        if let providerData = Auth.auth().currentUser?.providerData {
+            if providerData.contains(where: { (userInfo) -> Bool in
+                return userInfo.providerID == LoginType.email_password.title
+            }) {
+                loginType = .email_password
+                return
+            }else{}
+            if providerData.contains(where: { (userInfo) -> Bool in
+                return userInfo.providerID == LoginType.google.title
+            }){
+                loginType = .google
+                return
+            }else{}
+            if providerData.contains(where: { (userInfo) -> Bool in
+                return userInfo.providerID == LoginType.apple.title
+            }){
+                loginType = .apple
+                return
+            }else{}
+        }
+    }
+    
     //MARK:- RemoveKeychain
     //=======================
     static func  removeKeychain(){

@@ -9,8 +9,7 @@
 import UIKit
 import SwiftKeychainWrapper
 import FirebaseAuth
-import FirebaseDatabase
-import Firebase
+import FirebaseFirestore
 
 class SettingsVC: UIViewController {
     
@@ -103,7 +102,7 @@ extension SettingsVC {
         }
         self.setUpdata()
         self.tableViewSetup()
-        self.getLoginType()
+        FirestoreController.getSessionLoginType()
     }
     
     private func tableViewSetup(){
@@ -118,26 +117,6 @@ extension SettingsVC {
             self.sections = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "appSettings"),.app_settings),(#imageLiteral(resourceName: "about"),.about)]
         } else{
             self.sections = [(#imageLiteral(resourceName: "profile"),.profile),(#imageLiteral(resourceName: "system"),.luna_settings),(#imageLiteral(resourceName: "appSettings"),.app_settings),(#imageLiteral(resourceName: "about"),.about)]
-        }
-    }
-    
-    private func getLoginType(){
-        if let providerData = Auth.auth().currentUser?.providerData.last {
-//            for userInfo in providerData {
-                switch providerData.providerID {
-                case LoginType.google.title:
-                    loginType = .google
-                    return
-                case LoginType.apple.title:
-                    loginType = .apple
-                    return
-                case LoginType.email_password.title:
-                    loginType = .email_password
-                    return
-                default:
-                    print("provider is \(providerData.providerID)")
-                }
-//            }
         }
     }
     
