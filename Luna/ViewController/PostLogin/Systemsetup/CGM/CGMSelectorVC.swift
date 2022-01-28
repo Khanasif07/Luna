@@ -65,7 +65,7 @@ class CGMSelectorVC: UIViewController {
     @IBAction func proceedBtnAction(_ sender: UIButton) {
         let selectedCgm = CGMTypeArray[selectedPath.row]
         if(selectedCgm == LocalizedString.lunaSimulator.localized) {
-            let router = PairCgmRouter()
+            let router = AppDelegate.shared.appState.pairCgmRouter()
             let pairingViewController = BridgeUIHostingController(
                 router: router,
                 rootView: BridgeView {

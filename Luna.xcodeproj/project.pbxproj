@@ -250,6 +250,10 @@
 		BD0D0C3927A22F05001117B3 /* CgmConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0D0C3827A22F05001117B3 /* CgmConnection.swift */; };
 		BD0D0C3C27A23745001117B3 /* CgmViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0D0C3B27A23745001117B3 /* CgmViewExtensions.swift */; };
 		BD0D0C3F27A23AF3001117B3 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0D0C3E27A23AF3001117B3 /* AppState.swift */; };
+		BD2B66C427A47820004F0A35 /* ConnectLunaCgmSimulatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2B66C327A47820004F0A35 /* ConnectLunaCgmSimulatorView.swift */; };
+		BD2B66C627A478BB004F0A35 /* ConnectLunaCgmSimulatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2B66C527A478BB004F0A35 /* ConnectLunaCgmSimulatorViewModel.swift */; };
+		BD2B66C827A4A4FE004F0A35 /* PairingConnectInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2B66C727A4A4FE004F0A35 /* PairingConnectInteractor.swift */; };
+		BD2B66CA27A4A5B9004F0A35 /* LunaCgmSimulatorConnectInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2B66C927A4A5B9004F0A35 /* LunaCgmSimulatorConnectInteractor.swift */; };
 		BDF0D78227A1FA1700A5F950 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78127A1FA1700A5F950 /* FirebaseAnalytics */; };
 		BDF0D78427A1FA1700A5F950 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78327A1FA1700A5F950 /* FirebaseCrashlytics */; };
 		BDF0D78627A1FA1700A5F950 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78527A1FA1700A5F950 /* FirebaseDatabase */; };
@@ -258,6 +262,10 @@
 		BDF0D78C27A1FA1700A5F950 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78B27A1FA1700A5F950 /* FirebasePerformance */; };
 		BDF0D78E27A1FA1700A5F950 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78D27A1FA1700A5F950 /* FirebaseStorage */; };
 		BDF0D79027A1FA9300A5F950 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78F27A1FA9300A5F950 /* FirebaseAuth */; };
+		BDF765FE27A44ED2009BE8DF /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 849BC0D427A3ABC3009E054C /* GoogleSignIn */; };
+		BDF7660127A45351009BE8DF /* LunaBluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = BDF7660027A45351009BE8DF /* LunaBluetooth */; };
+		BDF7660527A45EB6009BE8DF /* PairingScannerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF7660427A45EB6009BE8DF /* PairingScannerInteractor.swift */; };
+		BDF7660727A465A0009BE8DF /* LunaCgmSimulatorScanningInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF7660627A465A0009BE8DF /* LunaCgmSimulatorScanningInteractor.swift */; };
 		BDFEC66927A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC66827A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift */; };
 		BDFEC66C27A2E5250070EAF1 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC66B27A2E5250070EAF1 /* Theme.swift */; };
 		BDFEC66E27A2FD4D0070EAF1 /* BridgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC66D27A2FD4D0070EAF1 /* BridgeView.swift */; };
@@ -511,6 +519,12 @@
 		BD0D0C3827A22F05001117B3 /* CgmConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CgmConnection.swift; sourceTree = "<group>"; };
 		BD0D0C3B27A23745001117B3 /* CgmViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CgmViewExtensions.swift; sourceTree = "<group>"; };
 		BD0D0C3E27A23AF3001117B3 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		BD2B66C327A47820004F0A35 /* ConnectLunaCgmSimulatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectLunaCgmSimulatorView.swift; sourceTree = "<group>"; };
+		BD2B66C527A478BB004F0A35 /* ConnectLunaCgmSimulatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectLunaCgmSimulatorViewModel.swift; sourceTree = "<group>"; };
+		BD2B66C727A4A4FE004F0A35 /* PairingConnectInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingConnectInteractor.swift; sourceTree = "<group>"; };
+		BD2B66C927A4A5B9004F0A35 /* LunaCgmSimulatorConnectInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunaCgmSimulatorConnectInteractor.swift; sourceTree = "<group>"; };
+		BDF7660427A45EB6009BE8DF /* PairingScannerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingScannerInteractor.swift; sourceTree = "<group>"; };
+		BDF7660627A465A0009BE8DF /* LunaCgmSimulatorScanningInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunaCgmSimulatorScanningInteractor.swift; sourceTree = "<group>"; };
 		BDFEC66827A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairLunaCgmSimulatorView.swift; sourceTree = "<group>"; };
 		BDFEC66B27A2E5250070EAF1 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		BDFEC66D27A2FD4D0070EAF1 /* BridgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeView.swift; sourceTree = "<group>"; };
@@ -530,12 +544,13 @@
 				BDF0D78627A1FA1700A5F950 /* FirebaseDatabase in Frameworks */,
 				BDF0D79027A1FA9300A5F950 /* FirebaseAuth in Frameworks */,
 				BD088BE827A207F2007F2C4B /* SwiftKeychainWrapper in Frameworks */,
-				849BC0D527A3ABC3009E054C /* GoogleSignIn in Frameworks */,
 				10BD91E0179A10717FF4BFEB /* Pods_Luna.framework in Frameworks */,
 				BD088BE527A20700007F2C4B /* MessageKit in Frameworks */,
+				BDF765FE27A44ED2009BE8DF /* GoogleSignIn in Frameworks */,
 				BDF0D78E27A1FA1700A5F950 /* FirebaseStorage in Frameworks */,
 				BDF0D78A27A1FA1700A5F950 /* FirebaseMessaging in Frameworks */,
 				BDF0D78427A1FA1700A5F950 /* FirebaseCrashlytics in Frameworks */,
+				BDF7660127A45351009BE8DF /* LunaBluetooth in Frameworks */,
 				BD088BDF27A205BC007F2C4B /* SwiftyJSON in Frameworks */,
 				BD0D0C3327A215CE001117B3 /* FirebaseFirestoreSwift-Beta in Frameworks */,
 				849B7432269D612000C059E5 /* HealthKit.framework in Frameworks */,
@@ -1162,10 +1177,11 @@
 		BD0D0C2527A21240001117B3 /* cgm */ = {
 			isa = PBXGroup;
 			children = (
+				BD0D0C2627A2124E001117B3 /* domain */,
+				BD0D0C2F27A2144A001117B3 /* firestore */,
+				BDF7660327A45E9C009BE8DF /* interactor */,
 				BD0D0C3A27A23722001117B3 /* view */,
 				BDFEC67327A346090070EAF1 /* viewmodel */,
-				BD0D0C2F27A2144A001117B3 /* firestore */,
-				BD0D0C2627A2124E001117B3 /* domain */,
 			);
 			path = cgm;
 			sourceTree = "<group>";
@@ -1199,8 +1215,9 @@
 			isa = PBXGroup;
 			children = (
 				BD0D0C3B27A23745001117B3 /* CgmViewExtensions.swift */,
-				BDFEC66827A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift */,
+				BD2B66C327A47820004F0A35 /* ConnectLunaCgmSimulatorView.swift */,
 				BDFEC67127A343940070EAF1 /* PairCgmRouter.swift */,
+				BDFEC66827A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1211,6 +1228,17 @@
 				BD0D0C3E27A23AF3001117B3 /* AppState.swift */,
 			);
 			path = app;
+			sourceTree = "<group>";
+		};
+		BDF7660327A45E9C009BE8DF /* interactor */ = {
+			isa = PBXGroup;
+			children = (
+				BD2B66C927A4A5B9004F0A35 /* LunaCgmSimulatorConnectInteractor.swift */,
+				BDF7660627A465A0009BE8DF /* LunaCgmSimulatorScanningInteractor.swift */,
+				BD2B66C727A4A4FE004F0A35 /* PairingConnectInteractor.swift */,
+				BDF7660427A45EB6009BE8DF /* PairingScannerInteractor.swift */,
+			);
+			path = interactor;
 			sourceTree = "<group>";
 		};
 		BDFEC66A27A2E5110070EAF1 /* theme */ = {
@@ -1225,6 +1253,7 @@
 			isa = PBXGroup;
 			children = (
 				BDFEC67427A346230070EAF1 /* PairLunaCgmSimulatorViewModel.swift */,
+				BD2B66C527A478BB004F0A35 /* ConnectLunaCgmSimulatorViewModel.swift */,
 			);
 			path = viewmodel;
 			sourceTree = "<group>";
@@ -1295,6 +1324,7 @@
 				BDFFB0D427A20E0E00B15370 /* Instabug */,
 				849BC0D427A3ABC3009E054C /* GoogleSignIn */,
 				BD0D0C3227A215CE001117B3 /* FirebaseFirestoreSwift-Beta */,
+				BDF7660027A45351009BE8DF /* LunaBluetooth */,
 			);
 			productName = Luna;
 			productReference = 84CC12962668C822009316FC /* Luna.app */;
@@ -1335,6 +1365,7 @@
 				BD088BEC27A2093D007F2C4B /* XCRemoteSwiftPackageReference "KDCircularProgress" */,
 				BDFFB0D327A20E0E00B15370 /* XCRemoteSwiftPackageReference "Instabug-SP" */,
 				849BC0D327A3ABC3009E054C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				BDF765FF27A45351009BE8DF /* XCRemoteSwiftPackageReference "ios-lunabluetooth" */,
 			);
 			productRefGroup = 84CC12972668C822009316FC /* Products */;
 			projectDirPath = "";
@@ -1524,6 +1555,8 @@
 				188DB13526E0993600FBF042 /* FlowManager.swift in Sources */,
 				8418D7DF26B0230100BAB256 /* AnyConvertible.swift in Sources */,
 				844BD1CB2701BBAE00ED224E /* Extension+LoginViewController.swift in Sources */,
+				BD2B66C427A47820004F0A35 /* ConnectLunaCgmSimulatorView.swift in Sources */,
+				BD2B66C827A4A4FE004F0A35 /* PairingConnectInteractor.swift in Sources */,
 				84E2D9B826B12C17000C0FD8 /* SettingManualVC.swift in Sources */,
 				840A7ED72697060E005AA1E6 /* SessionFilterVC.swift in Sources */,
 				8403F3BD26F9D016004BFE8E /* Graphs.swift in Sources */,
@@ -1535,6 +1568,7 @@
 				8448DBDF2701A9570040137F /* Pulsator.swift in Sources */,
 				84FDA0A7267DCB1000AC8BE9 /* MessageSenderCell.swift in Sources */,
 				84CC12BC2668CDF4009316FC /* FirestoreController.swift in Sources */,
+				BD2B66C627A478BB004F0A35 /* ConnectLunaCgmSimulatorViewModel.swift in Sources */,
 				84CC12F22668D0E6009316FC /* UITextFieldExtension.swift in Sources */,
 				1863AF8926E23C7100902838 /* CoachMarkViewApp.swift in Sources */,
 				84D1F5052679E95A00F131E0 /* ForgotPasswordVC.swift in Sources */,
@@ -1579,6 +1613,7 @@
 				84CC12E62668D057009316FC /* DeviceDetail.swift in Sources */,
 				84CC13192668D25B009316FC /* UIView+Extension.swift in Sources */,
 				84F2A278269849ED000FDCD5 /* BottomSheetInsulinCell.swift in Sources */,
+				BDF7660527A45EB6009BE8DF /* PairingScannerInteractor.swift in Sources */,
 				84AA00902716C04200E7E1F8 /* CustomLineChartView.swift in Sources */,
 				843C4569278DB59400C99AE5 /* NotificationModel.swift in Sources */,
 				84CC130D2668D1F3009316FC /* Dictionary+Extension.swift in Sources */,
@@ -1616,6 +1651,7 @@
 				84B06F0A269C0BE00059B293 /* SessionDescriptionVC.swift in Sources */,
 				188DB14A26E0993600FBF042 /* CoachMarkPosition.swift in Sources */,
 				84AAFFA72715780D00E7E1F8 /* CustomView.swift in Sources */,
+				BDF7660727A465A0009BE8DF /* LunaCgmSimulatorScanningInteractor.swift in Sources */,
 				8418D7CD26B01BC500BAB256 /* DateTime.swift in Sources */,
 				188DB14926E0993600FBF042 /* CoachMark.swift in Sources */,
 				84F7BC51266F11BA006C94DA /* AppleLoginManager.swift in Sources */,
@@ -1651,6 +1687,7 @@
 				84CC12D02668CFD8009316FC /* AppUserDefaults.swift in Sources */,
 				188DB14426E0993600FBF042 /* CoachMarkViewControllerDelegate.swift in Sources */,
 				188DB15026E0993600FBF042 /* CoachMarkAnimationManagement.swift in Sources */,
+				BD2B66CA27A4A5B9004F0A35 /* LunaCgmSimulatorConnectInteractor.swift in Sources */,
 				8455492D2678FFFD000CC13D /* LoginSocialTableCell.swift in Sources */,
 				188DB13626E0993600FBF042 /* DummyView.swift in Sources */,
 				847D1B292689A87A00220DAE /* SystemSetupVC.swift in Sources */,
@@ -1955,6 +1992,14 @@
 				version = 8.11.0;
 			};
 		};
+		BDF765FF27A45351009BE8DF /* XCRemoteSwiftPackageReference "ios-lunabluetooth" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@bitbucket.org:luna-ios-application/ios-lunabluetooth.git";
+			requirement = {
+				kind = revision;
+				revision = 9abd078006c240114cbe276d4fe76de2eb7954d7;
+			};
+		};
 		BDFFB0D327A20E0E00B15370 /* XCRemoteSwiftPackageReference "Instabug-SP" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Instabug/Instabug-SP.git";
@@ -2050,6 +2095,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		BDF7660027A45351009BE8DF /* LunaBluetooth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BDF765FF27A45351009BE8DF /* XCRemoteSwiftPackageReference "ios-lunabluetooth" */;
+			productName = LunaBluetooth;
 		};
 		BDFFB0D427A20E0E00B15370 /* Instabug */ = {
 			isa = XCSwiftPackageProductDependency;

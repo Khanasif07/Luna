@@ -6,25 +6,55 @@
 //
 
 import SwiftUI
+import LunaBluetooth
 
 struct PairLunaCgmSimulatorView : View {
     let router: PairCgmScreenRouter
     @StateObject var viewModel: PairLunaCgmSimulatorViewModel
     
     var body: some View {
-        
-        ZStack {
-            Text("Hello World")
-        }
-        .navigationTitle(LocalizedString.pair_cgm_simulator.localizedKey)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(leading: LunaBackButton(action: { router.exitPairing() }))
+        _PairLunaCgmSimulatorView(
+            router: router,
+            scanResults: viewModel.scanResults
+        )
+            .onAppear { viewModel.scan() }
+            .onDisappear { viewModel.stopScan() }
+            .navigationTitle("Pair CGM Simulator")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: LunaBackButton(action: { router.exitPairing() }))
     }
 }
 
+private struct _PairLunaCgmSimulatorView : View {
+    let router: PairCgmScreenRouter
+    let scanResults: [ViewScanResult]
+    
+    var body : some View {
+        VStack {
+            Text("To pair your Luna CGM Simulator, enable the simulator on your mac or iOS device")
+            
+            ZStack {
+                List(scanResults) { scanResult in
+                    NavigationLink(scanResult.name) {
+                        router.connectLunaCgmSimulator(scanResult: scanResult)
+                    }
+                }
+                
+                if(scanResults.isEmpty) {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                }
+            }
+        }
+        .padding(.vertical, 8)
+        
+    }
+}
 
 struct PairLunaCgmSimulatorView_Previews: PreviewProvider {
     static var previews: some View {
-        PairLunaCgmSimulatorView(router: PairCgmRouter(), viewModel: PairLunaCgmSimulatorViewModel())
+        PairLunaCgmSimulatorView(router: PairCgmRouter.preview, viewModel: PairLunaCgmSimulatorViewModel.preview)
     }
 }
