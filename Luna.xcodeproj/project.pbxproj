@@ -142,6 +142,7 @@
 		849B5A4A2697143B000AA5DC /* BottomSheetTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849B5A482697143B000AA5DC /* BottomSheetTopCell.xib */; };
 		849B7432269D612000C059E5 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849B7431269D612000C059E5 /* HealthKit.framework */; };
 		849B7436269D710600C059E5 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7435269D710600C059E5 /* HealthKitManager.swift */; };
+		849BC0D527A3ABC3009E054C /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 849BC0D427A3ABC3009E054C /* SwiftPackageProductDependency */; };
 		84A18911278C2FD3003ED8D9 /* NotificationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A18910278C2FD3003ED8D9 /* NotificationsVC.swift */; };
 		84A18915278C318A003ED8D9 /* NotificationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A18913278C318A003ED8D9 /* NotificationsCell.swift */; };
 		84A18916278C318A003ED8D9 /* NotificationsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A18914278C318A003ED8D9 /* NotificationsCell.xib */; };
@@ -236,22 +237,22 @@
 		84FDA0AD267DCB5600AC8BE9 /* MessageReceiverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84FDA0AB267DCB5600AC8BE9 /* MessageReceiverCell.xib */; };
 		84FDA0B1267DE8B600AC8BE9 /* DecisionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FDA0AF267DE8B600AC8BE9 /* DecisionCell.swift */; };
 		84FDA0B2267DE8B600AC8BE9 /* DecisionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84FDA0B0267DE8B600AC8BE9 /* DecisionCell.xib */; };
-		BD088BDC27A2040D007F2C4B /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BDB27A2040D007F2C4B /* NVActivityIndicatorView */; };
-		BD088BDF27A205BC007F2C4B /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BDE27A205BC007F2C4B /* SwiftyJSON */; };
-		BD088BE227A206A6007F2C4B /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BE127A206A6007F2C4B /* IQKeyboardManagerSwift */; };
-		BD088BE527A20700007F2C4B /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BE427A20700007F2C4B /* MessageKit */; };
-		BD088BE827A207F2007F2C4B /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BE727A207F2007F2C4B /* SwiftKeychainWrapper */; };
-		BD088BEB27A208B2007F2C4B /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BEA27A208B2007F2C4B /* Charts */; };
-		BD088BEE27A2093D007F2C4B /* KDCircularProgress in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BED27A2093D007F2C4B /* KDCircularProgress */; };
-		BDF0D78227A1FA1700A5F950 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78127A1FA1700A5F950 /* FirebaseAnalytics */; };
-		BDF0D78427A1FA1700A5F950 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78327A1FA1700A5F950 /* FirebaseCrashlytics */; };
-		BDF0D78627A1FA1700A5F950 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78527A1FA1700A5F950 /* FirebaseDatabase */; };
-		BDF0D78827A1FA1700A5F950 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78727A1FA1700A5F950 /* FirebaseFirestore */; };
-		BDF0D78A27A1FA1700A5F950 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78927A1FA1700A5F950 /* FirebaseMessaging */; };
-		BDF0D78C27A1FA1700A5F950 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78B27A1FA1700A5F950 /* FirebasePerformance */; };
-		BDF0D78E27A1FA1700A5F950 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78D27A1FA1700A5F950 /* FirebaseStorage */; };
-		BDF0D79027A1FA9300A5F950 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78F27A1FA9300A5F950 /* FirebaseAuth */; };
-		BDFFB0D527A20E0E00B15370 /* Instabug in Frameworks */ = {isa = PBXBuildFile; productRef = BDFFB0D427A20E0E00B15370 /* Instabug */; };
+		BD088BDC27A2040D007F2C4B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BDB27A2040D007F2C4B /* SwiftPackageProductDependency */; };
+		BD088BDF27A205BC007F2C4B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BDE27A205BC007F2C4B /* SwiftPackageProductDependency */; };
+		BD088BE227A206A6007F2C4B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BE127A206A6007F2C4B /* SwiftPackageProductDependency */; };
+		BD088BE527A20700007F2C4B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BE427A20700007F2C4B /* SwiftPackageProductDependency */; };
+		BD088BE827A207F2007F2C4B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BE727A207F2007F2C4B /* SwiftPackageProductDependency */; };
+		BD088BEB27A208B2007F2C4B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BEA27A208B2007F2C4B /* SwiftPackageProductDependency */; };
+		BD088BEE27A2093D007F2C4B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BED27A2093D007F2C4B /* SwiftPackageProductDependency */; };
+		BDF0D78227A1FA1700A5F950 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78127A1FA1700A5F950 /* SwiftPackageProductDependency */; };
+		BDF0D78427A1FA1700A5F950 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78327A1FA1700A5F950 /* SwiftPackageProductDependency */; };
+		BDF0D78627A1FA1700A5F950 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78527A1FA1700A5F950 /* SwiftPackageProductDependency */; };
+		BDF0D78827A1FA1700A5F950 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78727A1FA1700A5F950 /* SwiftPackageProductDependency */; };
+		BDF0D78A27A1FA1700A5F950 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78927A1FA1700A5F950 /* SwiftPackageProductDependency */; };
+		BDF0D78C27A1FA1700A5F950 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78B27A1FA1700A5F950 /* SwiftPackageProductDependency */; };
+		BDF0D78E27A1FA1700A5F950 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78D27A1FA1700A5F950 /* SwiftPackageProductDependency */; };
+		BDF0D79027A1FA9300A5F950 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78F27A1FA9300A5F950 /* SwiftPackageProductDependency */; };
+		BDFFB0D527A20E0E00B15370 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = BDFFB0D427A20E0E00B15370 /* SwiftPackageProductDependency */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -498,24 +499,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDF0D78627A1FA1700A5F950 /* FirebaseDatabase in Frameworks */,
-				BDF0D79027A1FA9300A5F950 /* FirebaseAuth in Frameworks */,
-				BD088BE827A207F2007F2C4B /* SwiftKeychainWrapper in Frameworks */,
+				BDF0D78627A1FA1700A5F950 /* BuildFile in Frameworks */,
+				BDF0D79027A1FA9300A5F950 /* BuildFile in Frameworks */,
+				BD088BE827A207F2007F2C4B /* BuildFile in Frameworks */,
+				849BC0D527A3ABC3009E054C /* BuildFile in Frameworks */,
 				10BD91E0179A10717FF4BFEB /* Pods_Luna.framework in Frameworks */,
-				BD088BE527A20700007F2C4B /* MessageKit in Frameworks */,
-				BDF0D78E27A1FA1700A5F950 /* FirebaseStorage in Frameworks */,
-				BDF0D78A27A1FA1700A5F950 /* FirebaseMessaging in Frameworks */,
-				BDF0D78427A1FA1700A5F950 /* FirebaseCrashlytics in Frameworks */,
-				BD088BDF27A205BC007F2C4B /* SwiftyJSON in Frameworks */,
+				BD088BE527A20700007F2C4B /* BuildFile in Frameworks */,
+				BDF0D78E27A1FA1700A5F950 /* BuildFile in Frameworks */,
+				BDF0D78A27A1FA1700A5F950 /* BuildFile in Frameworks */,
+				BDF0D78427A1FA1700A5F950 /* BuildFile in Frameworks */,
+				BD088BDF27A205BC007F2C4B /* BuildFile in Frameworks */,
 				849B7432269D612000C059E5 /* HealthKit.framework in Frameworks */,
-				BDF0D78227A1FA1700A5F950 /* FirebaseAnalytics in Frameworks */,
-				BD088BEE27A2093D007F2C4B /* KDCircularProgress in Frameworks */,
-				BD088BEB27A208B2007F2C4B /* Charts in Frameworks */,
-				BD088BE227A206A6007F2C4B /* IQKeyboardManagerSwift in Frameworks */,
-				BD088BDC27A2040D007F2C4B /* NVActivityIndicatorView in Frameworks */,
-				BDFFB0D527A20E0E00B15370 /* Instabug in Frameworks */,
-				BDF0D78C27A1FA1700A5F950 /* FirebasePerformance in Frameworks */,
-				BDF0D78827A1FA1700A5F950 /* FirebaseFirestore in Frameworks */,
+				BDF0D78227A1FA1700A5F950 /* BuildFile in Frameworks */,
+				BD088BEE27A2093D007F2C4B /* BuildFile in Frameworks */,
+				BD088BEB27A208B2007F2C4B /* BuildFile in Frameworks */,
+				BD088BE227A206A6007F2C4B /* BuildFile in Frameworks */,
+				BD088BDC27A2040D007F2C4B /* BuildFile in Frameworks */,
+				BDFFB0D527A20E0E00B15370 /* BuildFile in Frameworks */,
+				BDF0D78C27A1FA1700A5F950 /* BuildFile in Frameworks */,
+				BDF0D78827A1FA1700A5F950 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1145,7 +1147,6 @@
 				84CC12942668C822009316FC /* Resources */,
 				BDF0D79127A1FBF300A5F950 /* ShellScript */,
 				1D8F5E51C1DD86AF01407F51 /* [CP] Embed Pods Frameworks */,
-				2E7147292A5458C3A94E1034 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1153,22 +1154,23 @@
 			);
 			name = Luna;
 			packageProductDependencies = (
-				BDF0D78127A1FA1700A5F950 /* FirebaseAnalytics */,
-				BDF0D78327A1FA1700A5F950 /* FirebaseCrashlytics */,
-				BDF0D78527A1FA1700A5F950 /* FirebaseDatabase */,
-				BDF0D78727A1FA1700A5F950 /* FirebaseFirestore */,
-				BDF0D78927A1FA1700A5F950 /* FirebaseMessaging */,
-				BDF0D78B27A1FA1700A5F950 /* FirebasePerformance */,
-				BDF0D78D27A1FA1700A5F950 /* FirebaseStorage */,
-				BDF0D78F27A1FA9300A5F950 /* FirebaseAuth */,
-				BD088BDB27A2040D007F2C4B /* NVActivityIndicatorView */,
-				BD088BDE27A205BC007F2C4B /* SwiftyJSON */,
-				BD088BE127A206A6007F2C4B /* IQKeyboardManagerSwift */,
-				BD088BE427A20700007F2C4B /* MessageKit */,
-				BD088BE727A207F2007F2C4B /* SwiftKeychainWrapper */,
-				BD088BEA27A208B2007F2C4B /* Charts */,
-				BD088BED27A2093D007F2C4B /* KDCircularProgress */,
-				BDFFB0D427A20E0E00B15370 /* Instabug */,
+				BDF0D78127A1FA1700A5F950 /* SwiftPackageProductDependency */,
+				BDF0D78327A1FA1700A5F950 /* SwiftPackageProductDependency */,
+				BDF0D78527A1FA1700A5F950 /* SwiftPackageProductDependency */,
+				BDF0D78727A1FA1700A5F950 /* SwiftPackageProductDependency */,
+				BDF0D78927A1FA1700A5F950 /* SwiftPackageProductDependency */,
+				BDF0D78B27A1FA1700A5F950 /* SwiftPackageProductDependency */,
+				BDF0D78D27A1FA1700A5F950 /* SwiftPackageProductDependency */,
+				BDF0D78F27A1FA9300A5F950 /* SwiftPackageProductDependency */,
+				BD088BDB27A2040D007F2C4B /* SwiftPackageProductDependency */,
+				BD088BDE27A205BC007F2C4B /* SwiftPackageProductDependency */,
+				BD088BE127A206A6007F2C4B /* SwiftPackageProductDependency */,
+				BD088BE427A20700007F2C4B /* SwiftPackageProductDependency */,
+				BD088BE727A207F2007F2C4B /* SwiftPackageProductDependency */,
+				BD088BEA27A208B2007F2C4B /* SwiftPackageProductDependency */,
+				BD088BED27A2093D007F2C4B /* SwiftPackageProductDependency */,
+				BDFFB0D427A20E0E00B15370 /* SwiftPackageProductDependency */,
+				849BC0D427A3ABC3009E054C /* SwiftPackageProductDependency */,
 			);
 			productName = Luna;
 			productReference = 84CC12962668C822009316FC /* Luna.app */;
@@ -1199,15 +1201,16 @@
 			);
 			mainGroup = 84CC128D2668C822009316FC;
 			packageReferences = (
-				BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				BD088BDA27A2040D007F2C4B /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
-				BD088BDD27A205BC007F2C4B /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
-				BD088BE027A206A6007F2C4B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
-				BD088BE327A20700007F2C4B /* XCRemoteSwiftPackageReference "MessageKit" */,
-				BD088BE627A207F1007F2C4B /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
-				BD088BE927A208B2007F2C4B /* XCRemoteSwiftPackageReference "Charts" */,
-				BD088BEC27A2093D007F2C4B /* XCRemoteSwiftPackageReference "KDCircularProgress" */,
-				BDFFB0D327A20E0E00B15370 /* XCRemoteSwiftPackageReference "Instabug-SP" */,
+				BDF0D78027A1FA1700A5F950 /* RemoteSwiftPackageReference */,
+				BD088BDA27A2040D007F2C4B /* RemoteSwiftPackageReference */,
+				BD088BDD27A205BC007F2C4B /* RemoteSwiftPackageReference */,
+				BD088BE027A206A6007F2C4B /* RemoteSwiftPackageReference */,
+				BD088BE327A20700007F2C4B /* RemoteSwiftPackageReference */,
+				BD088BE627A207F1007F2C4B /* RemoteSwiftPackageReference */,
+				BD088BE927A208B2007F2C4B /* RemoteSwiftPackageReference */,
+				BD088BEC27A2093D007F2C4B /* RemoteSwiftPackageReference */,
+				BDFFB0D327A20E0E00B15370 /* RemoteSwiftPackageReference */,
+				849BC0D327A3ABC3009E054C /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 84CC12972668C822009316FC /* Products */;
 			projectDirPath = "";
@@ -1297,23 +1300,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Luna/Pods-Luna-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2E7147292A5458C3A94E1034 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Luna/Pods-Luna-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Luna/Pods-Luna-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Luna/Pods-Luna-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7C8524774A5FCF0BEFA25AA3 /* [CP] Check Pods Manifest.lock */ = {
@@ -1757,7 +1743,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		BD088BDA27A2040D007F2C4B /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */ = {
+		849BC0D327A3ABC3009E054C /* RemoteSwiftPackageReference */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.1.0;
+			};
+		};
+		BD088BDA27A2040D007F2C4B /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ninjaprox/NVActivityIndicatorView.git";
 			requirement = {
@@ -1765,7 +1759,7 @@
 				version = 5.1.1;
 			};
 		};
-		BD088BDD27A205BC007F2C4B /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+		BD088BDD27A205BC007F2C4B /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
 			requirement = {
@@ -1773,7 +1767,7 @@
 				version = 5.0.1;
 			};
 		};
-		BD088BE027A206A6007F2C4B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+		BD088BE027A206A6007F2C4B /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
 			requirement = {
@@ -1781,7 +1775,7 @@
 				version = 6.5.6;
 			};
 		};
-		BD088BE327A20700007F2C4B /* XCRemoteSwiftPackageReference "MessageKit" */ = {
+		BD088BE327A20700007F2C4B /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MessageKit/MessageKit.git";
 			requirement = {
@@ -1789,7 +1783,7 @@
 				version = 3.6.1;
 			};
 		};
-		BD088BE627A207F1007F2C4B /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+		BD088BE627A207F1007F2C4B /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper.git";
 			requirement = {
@@ -1797,7 +1791,7 @@
 				version = 4.0.1;
 			};
 		};
-		BD088BE927A208B2007F2C4B /* XCRemoteSwiftPackageReference "Charts" */ = {
+		BD088BE927A208B2007F2C4B /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/danielgindi/Charts.git";
 			requirement = {
@@ -1805,7 +1799,7 @@
 				version = 3.6.0;
 			};
 		};
-		BD088BEC27A2093D007F2C4B /* XCRemoteSwiftPackageReference "KDCircularProgress" */ = {
+		BD088BEC27A2093D007F2C4B /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kaandedeoglu/KDCircularProgress.git";
 			requirement = {
@@ -1813,7 +1807,7 @@
 				version = 1.5.4;
 			};
 		};
-		BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		BDF0D78027A1FA1700A5F950 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
@@ -1821,7 +1815,7 @@
 				version = 8.11.0;
 			};
 		};
-		BDFFB0D327A20E0E00B15370 /* XCRemoteSwiftPackageReference "Instabug-SP" */ = {
+		BDFFB0D327A20E0E00B15370 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Instabug/Instabug-SP.git";
 			requirement = {
@@ -1832,84 +1826,89 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BD088BDB27A2040D007F2C4B /* NVActivityIndicatorView */ = {
+		849BC0D427A3ABC3009E054C /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BD088BDA27A2040D007F2C4B /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
+			package = 849BC0D327A3ABC3009E054C /* RemoteSwiftPackageReference */;
+			productName = GoogleSignIn;
+		};
+		BD088BDB27A2040D007F2C4B /* SwiftPackageProductDependency */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BD088BDA27A2040D007F2C4B /* RemoteSwiftPackageReference */;
 			productName = NVActivityIndicatorView;
 		};
-		BD088BDE27A205BC007F2C4B /* SwiftyJSON */ = {
+		BD088BDE27A205BC007F2C4B /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BD088BDD27A205BC007F2C4B /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			package = BD088BDD27A205BC007F2C4B /* RemoteSwiftPackageReference */;
 			productName = SwiftyJSON;
 		};
-		BD088BE127A206A6007F2C4B /* IQKeyboardManagerSwift */ = {
+		BD088BE127A206A6007F2C4B /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BD088BE027A206A6007F2C4B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			package = BD088BE027A206A6007F2C4B /* RemoteSwiftPackageReference */;
 			productName = IQKeyboardManagerSwift;
 		};
-		BD088BE427A20700007F2C4B /* MessageKit */ = {
+		BD088BE427A20700007F2C4B /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BD088BE327A20700007F2C4B /* XCRemoteSwiftPackageReference "MessageKit" */;
+			package = BD088BE327A20700007F2C4B /* RemoteSwiftPackageReference */;
 			productName = MessageKit;
 		};
-		BD088BE727A207F2007F2C4B /* SwiftKeychainWrapper */ = {
+		BD088BE727A207F2007F2C4B /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BD088BE627A207F1007F2C4B /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			package = BD088BE627A207F1007F2C4B /* RemoteSwiftPackageReference */;
 			productName = SwiftKeychainWrapper;
 		};
-		BD088BEA27A208B2007F2C4B /* Charts */ = {
+		BD088BEA27A208B2007F2C4B /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BD088BE927A208B2007F2C4B /* XCRemoteSwiftPackageReference "Charts" */;
+			package = BD088BE927A208B2007F2C4B /* RemoteSwiftPackageReference */;
 			productName = Charts;
 		};
-		BD088BED27A2093D007F2C4B /* KDCircularProgress */ = {
+		BD088BED27A2093D007F2C4B /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BD088BEC27A2093D007F2C4B /* XCRemoteSwiftPackageReference "KDCircularProgress" */;
+			package = BD088BEC27A2093D007F2C4B /* RemoteSwiftPackageReference */;
 			productName = KDCircularProgress;
 		};
-		BDF0D78127A1FA1700A5F950 /* FirebaseAnalytics */ = {
+		BDF0D78127A1FA1700A5F950 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = BDF0D78027A1FA1700A5F950 /* RemoteSwiftPackageReference */;
 			productName = FirebaseAnalytics;
 		};
-		BDF0D78327A1FA1700A5F950 /* FirebaseCrashlytics */ = {
+		BDF0D78327A1FA1700A5F950 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = BDF0D78027A1FA1700A5F950 /* RemoteSwiftPackageReference */;
 			productName = FirebaseCrashlytics;
 		};
-		BDF0D78527A1FA1700A5F950 /* FirebaseDatabase */ = {
+		BDF0D78527A1FA1700A5F950 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = BDF0D78027A1FA1700A5F950 /* RemoteSwiftPackageReference */;
 			productName = FirebaseDatabase;
 		};
-		BDF0D78727A1FA1700A5F950 /* FirebaseFirestore */ = {
+		BDF0D78727A1FA1700A5F950 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = BDF0D78027A1FA1700A5F950 /* RemoteSwiftPackageReference */;
 			productName = FirebaseFirestore;
 		};
-		BDF0D78927A1FA1700A5F950 /* FirebaseMessaging */ = {
+		BDF0D78927A1FA1700A5F950 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = BDF0D78027A1FA1700A5F950 /* RemoteSwiftPackageReference */;
 			productName = FirebaseMessaging;
 		};
-		BDF0D78B27A1FA1700A5F950 /* FirebasePerformance */ = {
+		BDF0D78B27A1FA1700A5F950 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = BDF0D78027A1FA1700A5F950 /* RemoteSwiftPackageReference */;
 			productName = FirebasePerformance;
 		};
-		BDF0D78D27A1FA1700A5F950 /* FirebaseStorage */ = {
+		BDF0D78D27A1FA1700A5F950 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = BDF0D78027A1FA1700A5F950 /* RemoteSwiftPackageReference */;
 			productName = FirebaseStorage;
 		};
-		BDF0D78F27A1FA9300A5F950 /* FirebaseAuth */ = {
+		BDF0D78F27A1FA9300A5F950 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = BDF0D78027A1FA1700A5F950 /* RemoteSwiftPackageReference */;
 			productName = FirebaseAuth;
 		};
-		BDFFB0D427A20E0E00B15370 /* Instabug */ = {
+		BDFFB0D427A20E0E00B15370 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BDFFB0D327A20E0E00B15370 /* XCRemoteSwiftPackageReference "Instabug-SP" */;
+			package = BDFFB0D327A20E0E00B15370 /* RemoteSwiftPackageReference */;
 			productName = Instabug;
 		};
 /* End XCSwiftPackageProductDependency section */

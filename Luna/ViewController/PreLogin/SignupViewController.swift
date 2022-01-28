@@ -58,9 +58,12 @@ extension SignupViewController {
     }
     
     private func googleSetUp(){
-        GIDSignIn.sharedInstance()?.presentingViewController = self
-        GIDSignIn.sharedInstance().delegate=self
-        GIDSignIn.sharedInstance().signIn()
+//        GIDSignIn.sharedInstance()?.presentingViewController = self
+//        GIDSignIn.sharedInstance().delegate=self
+        let signInConfig = GIDConfiguration.init(clientID: FirebaseApp.app()?.options.clientID ?? "")
+        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { (gidUser, error) in
+            self.signWithGoogle(user: gidUser, withError: error)
+        }
     }
     
     public func tableViewSetUp(){
@@ -459,20 +462,20 @@ extension SignupViewController: ASAuthorizationControllerDelegate,ASAuthorizatio
 
 // MARK: - GIDSignInDelegate
 //===========================
-extension SignupViewController: GIDSignInDelegate {
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+extension SignupViewController {
+    func signWithGoogle( user: GIDGoogleUser!, withError error: Error!) {
         if error != nil {
             return
         }
         CommonFunctions.showActivityLoader()
-        print("User Email: \(user.profile.email ?? "No EMail")")
-        print("User Name: \(user.profile.name ?? "No Name")")
-        print("User FaMILYNAME: \(user.profile.familyName ?? "No Name")")
+        print("User Email: \(user.profile?.email ?? "No EMail")")
+        print("User Name: \(user.profile?.name ?? "No Name")")
+        print("User FaMILYNAME: \(user.profile?.familyName ?? "No Name")")
         print("User USERID: \(user.userID ?? "No Name")")
-        guard let authentication = user.authentication else { return }
-        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+        let authentication = user.authentication
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken ?? "",
                                                        accessToken: authentication.accessToken)
-        KeychainWrapper.standard.set(authentication.idToken, forKey: ApiKey.googleIdToken)
+        KeychainWrapper.standard.set(authentication.idToken ?? "", forKey: ApiKey.googleIdToken)
         KeychainWrapper.standard.set(authentication.accessToken, forKey: ApiKey.googleAccessToken)
         // Authenticate with Firebase using the credential object
         Auth.auth().signIn(with: credential) { (authResult, error) in
@@ -512,7 +515,7 @@ extension SignupViewController: GIDSignInDelegate {
                         CommonFunctions.showToastWithMessage(error.localizedDescription)
                     }
                 } failure: { () -> (Void) in
-                    FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: user.profile.name, lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isSystemSetupCompleted: false, isChangePassword: false, isBiometricOn: true, isAlertsOn: true) {
+                    FirestoreController.setFirebaseData(userId: currentUser.uid, email: currentUser.email ?? "", password: "", firstName: user.profile?.name ?? "", lastName: "", dob: "", diabetesType: "", isProfileStepCompleted: false, isSystemSetupCompleted: false, isChangePassword: false, isBiometricOn: true, isAlertsOn: true) {
                         CommonFunctions.hideActivityLoader()
                         DispatchQueue.main.async {
                             if UserModel.main.isSystemSetupCompleted {
@@ -540,45 +543,23 @@ extension SignupViewController: GIDSignInDelegate {
         }
     }
     
-    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-        // Perform any operations when the user disconnects from app here.
-        print("User has disconnected")
-    }
-    
-    func signIn(_ signIn: GIDSignIn!,
-                presentViewController viewController: UIViewController!) {
-        self.present(viewController, animated: true, completion: nil)
-    }
-    
-    func signIn(_ signIn: GIDSignIn!,
-                dismissViewController viewController: UIViewController!) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    func signInWillDispatch(signIn: GIDSignIn!, error: NSError!) {
-        // myActivityIndicator.stopAnimating()
-    }
+//    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+//        // Perform any operations when the user disconnects from app here.
+//        print("User has disconnected")
+//    }
+//
+//    func signIn(_ signIn: GIDSignIn!,
+//                presentViewController viewController: UIViewController!) {
+//        self.present(viewController, animated: true, completion: nil)
+//    }
+//
+//    func signIn(_ signIn: GIDSignIn!,
+//                dismissViewController viewController: UIViewController!) {
+//        self.dismiss(animated: true, completion: nil)
+//    }
+//
+//    func signInWillDispatch(signIn: GIDSignIn!, error: NSError!) {
+//        // myActivityIndicator.stopAnimating()
+//    }
     
 }
-
-//MARK:- HealthKit
-//=================
-//extension SignupViewController{
-//    func getStepCount(){
-//        HealthKitManager.sharedInstance.yesterdaySteps { (value, error) in
-//            if let err = error{
-//                print(err.localizedDescription)
-//            }
-//            print(value)
-//        }
-//    }
-    
-//    func getAgeSexAndBloodType(){
-//        do {
-//            let userInfo = try HealthKitManager.sharedInstance.getAgeSexAndBloodType()
-//            print(userInfo)
-//        } catch{ error
-//            print(error.localizedDescription)
-//        }
-//    }
-//}

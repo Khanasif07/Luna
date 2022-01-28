@@ -119,9 +119,13 @@ extension LoginViewController {
     }
     
     private func googleSetUp(){
-        GIDSignIn.sharedInstance()?.presentingViewController = self
-        GIDSignIn.sharedInstance().delegate=self
-        GIDSignIn.sharedInstance().signIn()
+//        GIDSignIn.sharedInstance.present
+//        sharedInstance()?.presentingViewController = self
+//        GIDSignIn.sharedInstance.delw
+        let signInConfig = GIDConfiguration.init(clientID: FirebaseApp.app()?.options.clientID ?? "")
+        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { (gidUser, error) in
+            self.signWithGoogle(user: gidUser, withError: error)
+        }
     }
     
     

@@ -15,7 +15,7 @@ import GoogleSignIn
 import FirebaseFirestore
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate ,GIDSignInDelegate{
+class AppDelegate: UIResponder, UIApplicationDelegate {
    
     
     public var window: UIWindow?
@@ -31,8 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,GIDSignInDelegate{
         sleep(2)
         setUpKeyboardSetup()
         getGoogleInfoPlist()
-        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        GIDSignIn.sharedInstance().delegate = self
+//        let signInConfig = GIDConfiguration.init(clientID: FirebaseApp.app()?.options.clientID ?? "")
+//        GIDSignIn.sharedInstance. = FirebaseApp.app()?.options.clientID
+//        GIDSignIn.sharedInstance.delegate = self
        // removeAllNotifications()
         registerPushNotification()
         Messaging.messaging().delegate = self
@@ -220,12 +221,12 @@ extension AppDelegate:MessagingDelegate,UNUserNotificationCenterDelegate{
             print(error.localizedDescription)
             return
         }
-        print("User Email: \(user.profile.email ?? "No EMail")")
-        print("User Email: \(user.profile.name ?? "No Name")")
-        print("User Email: \(user.profile.familyName ?? "No Name")")
+        print("User Email: \(user.profile?.email ?? "No EMail")")
+        print("User Email: \(user.profile?.name ?? "No Name")")
+        print("User Email: \(user.profile?.familyName ?? "No Name")")
         print("User Email: \(user.userID ?? "No Name")")
-        guard let authentication = user.authentication else { return }
-        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+        let authentication = user.authentication
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken ?? "",
                                                        accessToken: authentication.accessToken)
         print("User credential: \(credential)")
     }
@@ -305,7 +306,7 @@ extension AppDelegate:MessagingDelegate,UNUserNotificationCenterDelegate{
 extension AppDelegate {
     func application(_ app: UIApplication, open url: URL,
                      options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return GIDSignIn.sharedInstance().handle(url)
+        return GIDSignIn.sharedInstance.handle(url)
     }
 }
 
