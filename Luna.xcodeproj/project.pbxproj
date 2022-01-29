@@ -254,6 +254,13 @@
 		BD2B66C627A478BB004F0A35 /* ConnectLunaCgmSimulatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2B66C527A478BB004F0A35 /* ConnectLunaCgmSimulatorViewModel.swift */; };
 		BD2B66C827A4A4FE004F0A35 /* PairingConnectInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2B66C727A4A4FE004F0A35 /* PairingConnectInteractor.swift */; };
 		BD2B66CA27A4A5B9004F0A35 /* LunaCgmSimulatorConnectInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2B66C927A4A5B9004F0A35 /* LunaCgmSimulatorConnectInteractor.swift */; };
+		BDC2BDEA27A59E95003E4A13 /* Glucose.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDE927A59E95003E4A13 /* Glucose.swift */; };
+		BDC2BDEC27A5A0C8003E4A13 /* GlucoseReadRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDEB27A5A0C8003E4A13 /* GlucoseReadRepository.swift */; };
+		BDC2BDEF27A5A7B6003E4A13 /* GlucoseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDEE27A5A7B6003E4A13 /* GlucoseView.swift */; };
+		BDC2BDF127A5A7E7003E4A13 /* DisplayGlucose.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDF027A5A7E7003E4A13 /* DisplayGlucose.swift */; };
+		BDC2BDF327A5A80F003E4A13 /* GlucoseViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDF227A5A80F003E4A13 /* GlucoseViewExtensions.swift */; };
+		BDC2BDF527A5A884003E4A13 /* GlucoseFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDF427A5A884003E4A13 /* GlucoseFormatter.swift */; };
+		BDC2BDF727A5B231003E4A13 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDC2BDF627A5B231003E4A13 /* Colors.xcassets */; };
 		BDF0D78227A1FA1700A5F950 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78127A1FA1700A5F950 /* FirebaseAnalytics */; };
 		BDF0D78427A1FA1700A5F950 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78327A1FA1700A5F950 /* FirebaseCrashlytics */; };
 		BDF0D78627A1FA1700A5F950 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78527A1FA1700A5F950 /* FirebaseDatabase */; };
@@ -523,6 +530,13 @@
 		BD2B66C527A478BB004F0A35 /* ConnectLunaCgmSimulatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectLunaCgmSimulatorViewModel.swift; sourceTree = "<group>"; };
 		BD2B66C727A4A4FE004F0A35 /* PairingConnectInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingConnectInteractor.swift; sourceTree = "<group>"; };
 		BD2B66C927A4A5B9004F0A35 /* LunaCgmSimulatorConnectInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunaCgmSimulatorConnectInteractor.swift; sourceTree = "<group>"; };
+		BDC2BDE927A59E95003E4A13 /* Glucose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Glucose.swift; sourceTree = "<group>"; };
+		BDC2BDEB27A5A0C8003E4A13 /* GlucoseReadRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlucoseReadRepository.swift; sourceTree = "<group>"; };
+		BDC2BDEE27A5A7B6003E4A13 /* GlucoseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlucoseView.swift; sourceTree = "<group>"; };
+		BDC2BDF027A5A7E7003E4A13 /* DisplayGlucose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayGlucose.swift; sourceTree = "<group>"; };
+		BDC2BDF227A5A80F003E4A13 /* GlucoseViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlucoseViewExtensions.swift; sourceTree = "<group>"; };
+		BDC2BDF427A5A884003E4A13 /* GlucoseFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlucoseFormatter.swift; sourceTree = "<group>"; };
+		BDC2BDF627A5B231003E4A13 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		BDF7660427A45EB6009BE8DF /* PairingScannerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingScannerInteractor.swift; sourceTree = "<group>"; };
 		BDF7660627A465A0009BE8DF /* LunaCgmSimulatorScanningInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunaCgmSimulatorScanningInteractor.swift; sourceTree = "<group>"; };
 		BDFEC66827A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairLunaCgmSimulatorView.swift; sourceTree = "<group>"; };
@@ -974,7 +988,6 @@
 				BDFEC67927A34EAB0070EAF1 /* common */,
 				BDFEC66A27A2E5110070EAF1 /* theme */,
 				BD0D0C3D27A23AE2001117B3 /* app */,
-				BD0D0C3527A22024001117B3 /* firestore */,
 				BD0D0C2527A21240001117B3 /* cgm */,
 				84F7BC4E266F06A1006C94DA /* Luna.entitlements */,
 				84658E1927A2DCAD00405EF8 /* InstabugDebugger */,
@@ -1027,6 +1040,7 @@
 				849B25CC270B1E6600323876 /* blank.wav */,
 				84CC12A72668C823009316FC /* Info.plist */,
 				846F1A1F2678C2220034ACE0 /* GoogleService-Info.plist */,
+				BDC2BDF627A5B231003E4A13 /* Colors.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1191,6 +1205,8 @@
 			children = (
 				BD0D0C2727A2128B001117B3 /* CgmRepository.swift */,
 				BD0D0C3827A22F05001117B3 /* CgmConnection.swift */,
+				BDC2BDE927A59E95003E4A13 /* Glucose.swift */,
+				BDC2BDEB27A5A0C8003E4A13 /* GlucoseReadRepository.swift */,
 			);
 			path = domain;
 			sourceTree = "<group>";
@@ -1203,14 +1219,6 @@
 			path = firestore;
 			sourceTree = "<group>";
 		};
-		BD0D0C3527A22024001117B3 /* firestore */ = {
-			isa = PBXGroup;
-			children = (
-				BD0D0C3627A22032001117B3 /* FirestoreConstants.swift */,
-			);
-			path = firestore;
-			sourceTree = "<group>";
-		};
 		BD0D0C3A27A23722001117B3 /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -1218,6 +1226,10 @@
 				BD2B66C327A47820004F0A35 /* ConnectLunaCgmSimulatorView.swift */,
 				BDFEC67127A343940070EAF1 /* PairCgmRouter.swift */,
 				BDFEC66827A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift */,
+				BDC2BDEE27A5A7B6003E4A13 /* GlucoseView.swift */,
+				BDC2BDF027A5A7E7003E4A13 /* DisplayGlucose.swift */,
+				BDC2BDF227A5A80F003E4A13 /* GlucoseViewExtensions.swift */,
+				BDC2BDF427A5A884003E4A13 /* GlucoseFormatter.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1228,6 +1240,14 @@
 				BD0D0C3E27A23AF3001117B3 /* AppState.swift */,
 			);
 			path = app;
+			sourceTree = "<group>";
+		};
+		BDC2BDED27A5A132003E4A13 /* firestore */ = {
+			isa = PBXGroup;
+			children = (
+				BD0D0C3627A22032001117B3 /* FirestoreConstants.swift */,
+			);
+			path = firestore;
 			sourceTree = "<group>";
 		};
 		BDF7660327A45E9C009BE8DF /* interactor */ = {
@@ -1261,6 +1281,7 @@
 		BDFEC67927A34EAB0070EAF1 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				BDC2BDED27A5A132003E4A13 /* firestore */,
 				BDFEC67A27A34EB00070EAF1 /* view */,
 			);
 			path = common;
@@ -1426,6 +1447,7 @@
 				84E2D9BD26B12D26000C0FD8 /* SettingManualCell.xib in Resources */,
 				845B619026AAC2D900F9BC2A /* LICENSE in Resources */,
 				842E9B1826955E2400F36A3D /* InsulinStep2Cell.xib in Resources */,
+				BDC2BDF727A5B231003E4A13 /* Colors.xcassets in Resources */,
 				840A7E672696F190005AA1E6 /* SessionHistoryTableViewCell.xib in Resources */,
 				84467275268DAE1E00EC55FD /* SystemSetup.storyboard in Resources */,
 				1863AF8A26E23C7100902838 /* CoachMarkViewApp.xib in Resources */,
@@ -1517,6 +1539,7 @@
 				845B619426AAC31800F9BC2A /* ShareClientExtension.swift in Sources */,
 				8418D7DB26B021FA00BAB256 /* BackgroundTaskAudio.swift in Sources */,
 				8418D7D826B01F4E00BAB256 /* UserDefaultsValue.swift in Sources */,
+				BDC2BDEC27A5A0C8003E4A13 /* GlucoseReadRepository.swift in Sources */,
 				84CC12DD2668D023009316FC /* AppStoryboards.swift in Sources */,
 				188DB12726E0993600FBF042 /* OverlayStyleManager.swift in Sources */,
 				188DB15126E0993600FBF042 /* BlurringOverlayStyleManager.swift in Sources */,
@@ -1555,6 +1578,7 @@
 				188DB13526E0993600FBF042 /* FlowManager.swift in Sources */,
 				8418D7DF26B0230100BAB256 /* AnyConvertible.swift in Sources */,
 				844BD1CB2701BBAE00ED224E /* Extension+LoginViewController.swift in Sources */,
+				BDC2BDEF27A5A7B6003E4A13 /* GlucoseView.swift in Sources */,
 				BD2B66C427A47820004F0A35 /* ConnectLunaCgmSimulatorView.swift in Sources */,
 				BD2B66C827A4A4FE004F0A35 /* PairingConnectInteractor.swift in Sources */,
 				84E2D9B826B12C17000C0FD8 /* SettingManualVC.swift in Sources */,
@@ -1583,6 +1607,7 @@
 				84AA879026FAE8900047D86E /* BottomSheetVC.swift in Sources */,
 				188DB14B26E0993600FBF042 /* CoachMarkSkipDefaultView.swift in Sources */,
 				84CC12E32668D042009316FC /* AppGlobals.swift in Sources */,
+				BDC2BDEA27A59E95003E4A13 /* Glucose.swift in Sources */,
 				84AA878D26FAD1120047D86E /* Alarms.swift in Sources */,
 				188DB12D26E0993600FBF042 /* CoachMarkBodyDefaultView.swift in Sources */,
 				BDFEC67027A30CC80070EAF1 /* BridgeUIHostingController.swift in Sources */,
@@ -1597,6 +1622,7 @@
 				840A7E622696F0E6005AA1E6 /* SessionHistoryHeader.swift in Sources */,
 				842E9B1E2695710300F36A3D /* InsulinStep4VC.swift in Sources */,
 				840A7DF42696E95E005AA1E6 /* CGMLoginVC.swift in Sources */,
+				BDC2BDF527A5A884003E4A13 /* GlucoseFormatter.swift in Sources */,
 				188DB13F26E0993600FBF042 /* CoachMarkDisplayManager.swift in Sources */,
 				84F2A28126985398000FDCD5 /* LineDashedView.swift in Sources */,
 				8418D7E226B0235300BAB256 /* ObservationToken.swift in Sources */,
@@ -1683,6 +1709,7 @@
 				844B93BE2694427600B65BF8 /* InsulinStep2VC.swift in Sources */,
 				84861D7726848DB1004B046C /* ProfileVC.swift in Sources */,
 				8403F3C626F9DABC004BFE8E /* NightScout.swift in Sources */,
+				BDC2BDF127A5A7E7003E4A13 /* DisplayGlucose.swift in Sources */,
 				188DB13A26E0993600FBF042 /* CoachMarkAnimationManager.swift in Sources */,
 				84CC12D02668CFD8009316FC /* AppUserDefaults.swift in Sources */,
 				188DB14426E0993600FBF042 /* CoachMarkViewControllerDelegate.swift in Sources */,
@@ -1697,6 +1724,7 @@
 				8455A3C7268211770061C55F /* SettingTableCell.swift in Sources */,
 				188DB14326E0993600FBF042 /* CoachMarksViewController.swift in Sources */,
 				BDFEC66E27A2FD4D0070EAF1 /* BridgeView.swift in Sources */,
+				BDC2BDF327A5A80F003E4A13 /* GlucoseViewExtensions.swift in Sources */,
 				849B25622707101600323876 /* ContactsUsTableCell.swift in Sources */,
 				BD0D0C3927A22F05001117B3 /* CgmConnection.swift in Sources */,
 			);

@@ -36,8 +36,11 @@ private struct _ConnectLunaCgmSimulatorView : View {
         switch state {
         case .connecting:
             Text("Connecting to \(name)")
-        case .connected:
-            Text("Connected to \(name)")
+        case .connected(let glucose):
+            VStack {
+                Text("Connected to \(name)")
+                GlucoseView(glucose: glucose)
+            }
         case .error:
             Text("Failed to connect to \(name)")
         }

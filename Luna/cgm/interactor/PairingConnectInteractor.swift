@@ -14,6 +14,7 @@ protocol PairingConnectInteractor {
     
     func disconnect(from: ViewScanResult)
     
+    func observeLatestGlucose(for peripheralId: UUID) -> AnyPublisher<Glucose?, Never>
     func observeConnectionState(for peripheralId: UUID) -> AnyPublisher<ConnectionState, Never>
 }
 
@@ -25,6 +26,10 @@ struct MockPairingConnectInteractor : PairingConnectInteractor {
     }
     
     func disconnect(from: ViewScanResult) {
+    }
+    
+    func observeLatestGlucose(for peripheralId: UUID) -> AnyPublisher<Glucose?, Never> {
+        return Just(nil).eraseToAnyPublisher()
     }
     
     func observeConnectionState(for peripheralId: UUID) -> AnyPublisher<ConnectionState, Never> {

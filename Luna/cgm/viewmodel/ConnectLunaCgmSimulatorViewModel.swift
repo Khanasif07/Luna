@@ -10,7 +10,7 @@ import Combine
 
 enum ConnectLunaCgmSimulatorViewState {
     case connecting
-    case connected
+    case connected(glucose: Glucose?)
     case error
 }
 
@@ -28,11 +28,11 @@ class ConnectLunaCgmSimulatorViewModel : ObservableObject {
     
     func connect() {
         connectCancellable = pairing.observeConnectionState(for: scanResult.id)
+            .combineLatest(pairing.observeLatestGlucose(for: scanResult.id))
             .receive(on: RunLoop.main)
-            .sink { connectionState in
-                print("ConnectionState is \(connectionState)")
+            .sink { connectionState, glucose in
                 if(connectionState == .interactive) {
-                    self.state = .connected
+                    self.state = .connected(glucose: glucose)
                 }
             }
         
