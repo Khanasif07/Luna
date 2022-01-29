@@ -45,7 +45,7 @@ class FirestoreCgmRepository : CgmRepository {
     }
 }
 
-private enum FirestoreCgmType : String, Codable {
+private enum FirestoreCgmSource : String, Codable {
     case dexcomG6 = "DexcomG6"
     case dexcomG7 = "DexcomG7"
     case freestyleLibre2 = "FreestyleLibre2"
@@ -58,7 +58,7 @@ private struct FirestoreCgmSettings : Codable {
     
     var uid: String
     var lastModifiedTime: Date = Date()
-    var cgmType: FirestoreCgmType? = nil
+    var cgmSource: FirestoreCgmSource? = nil
     var dexcomG6: DexcomG6Settings? = nil
     var lunaSimulator: LunaSimulatorSettings? = nil
     
@@ -76,8 +76,8 @@ private struct FirestoreCgmSettings : Codable {
 
 extension FirestoreCgmSettings {
     func toCgmConnection() -> CgmConnection? {
-        guard let cgmType = cgmType else { return nil }
-        switch(cgmType) {
+        guard let cgmSource = cgmSource else { return nil }
+        switch(cgmSource) {
         case .dexcomG6:
             guard let settings = dexcomG6 else { return nil }
             guard settings.os == .ios else { return nil }
@@ -102,16 +102,16 @@ extension CgmConnection {
         switch(self) {
         case .dexcomG6(let credentialId):
             let settings = FirestoreCgmSettings.DexcomG6Settings(os: .ios, credentialId: credentialId)
-            return FirestoreCgmSettings(uid: uid, cgmType: .dexcomG6, dexcomG6: settings)
+            return FirestoreCgmSettings(uid: uid, cgmSource: .dexcomG6, dexcomG6: settings)
         case .dexcomG7:
-            return FirestoreCgmSettings(uid: uid, cgmType: .dexcomG7)
+            return FirestoreCgmSettings(uid: uid, cgmSource: .dexcomG7)
         case .freestyleLibre2:
-            return FirestoreCgmSettings(uid: uid, cgmType: .freestyleLibre2)
+            return FirestoreCgmSettings(uid: uid, cgmSource: .freestyleLibre2)
         case .freestyleLibre3:
-            return FirestoreCgmSettings(uid: uid, cgmType: .freestyleLibre3)
+            return FirestoreCgmSettings(uid: uid, cgmSource: .freestyleLibre3)
         case .lunaSimulator(let deviceId, let deviceName):
             let settings = FirestoreCgmSettings.LunaSimulatorSettings(os: .ios, deviceId: deviceId.uuidString, deviceName: deviceName)
-            return FirestoreCgmSettings(uid: uid, cgmType: .lunaSimulator, lunaSimulator: settings)
+            return FirestoreCgmSettings(uid: uid, cgmSource: .lunaSimulator, lunaSimulator: settings)
         }
     }
 }
