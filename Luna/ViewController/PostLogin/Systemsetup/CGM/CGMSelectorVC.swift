@@ -30,6 +30,8 @@ class CGMSelectorVC: UIViewController {
     ]
 
     var selectedPath = IndexPath(indexes: [0,0])
+    var userRepository: UserRepository!
+    var cgmRepository: CgmRepository!
     
     // MARK: - Lifecycle
     //===========================
@@ -38,7 +40,46 @@ class CGMSelectorVC: UIViewController {
         if #available(iOS 13.0, *) {
         overrideUserInterfaceStyle = .light
         }
+        
         initialSetup()
+        
+        let appState = AppDelegate.shared.appState
+        userRepository = appState.userRepository
+        cgmRepository = appState.cgmRepository
+        
+        Task {
+            await viewDidLoadAsync()
+        }
+    }
+    
+    @MainActor
+    private func viewDidLoadAsync() async {
+        do {
+            guard let uid = try await self.userRepository.getCurrentUid() else { return }
+            if let connection = try await self.cgmRepository.getCgmConnection(uid: uid) {
+                switch(connection) {
+                case .dexcomG6(_):
+                    if(isDexcomShareCredentialsValid) {
+                        setupDexcomG6View()
+                    } else {
+                        setupCgmSelectionView()
+                    }
+                case .dexcomG7:
+                    setupCgmSelectionView()
+                case .freestyleLibre2:
+                    setupCgmSelectionView()
+                case .freestyleLibre3:
+                    setupCgmSelectionView()
+                case .lunaSimulator(let deviceId, let deviceName):
+                    setupLunaCgmSimulatorView(deviceId: deviceId, deviceName: deviceName)
+                }
+            } else {
+                print("Connection is not available")
+                setupCgmSelectionView()
+            }
+        } catch {
+            print("An error occurred")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,15 +156,6 @@ extension CGMSelectorVC {
     
     private func initialSetup() {
         self.proceedBtn.isEnabled = true
-        if  UserDefaultsRepository.shareUserName.value.isEmpty || UserDefaultsRepository.sharePassword.value.isEmpty{
-            self.introTitleLbl.text = LocalizedString.connect_cgm.localized
-            self.proceedBtn.setTitle(LocalizedString.next.localized, for: .normal)
-        }else{
-            CGMTypeArray.removeAll()
-            self.introTitleLbl.text = LocalizedString.cgm_connected.localized
-            self.introLbl.text = ""
-            self.proceedBtn.setTitle(LocalizedString.logout_From_Dexcom.localized, for: .normal)
-        }
         self.proceedBtn.round(radius: 10.0)
         self.proceedBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
         self.introLbl.textColor = AppColors.fontPrimaryColor
@@ -133,6 +165,25 @@ extension CGMSelectorVC {
         cgmTypesTV.reloadData()
     }
     
+    private var isDexcomShareCredentialsValid : Bool {
+        UserDefaultsRepository.shareUserName.value.isEmpty || UserDefaultsRepository.sharePassword.value.isEmpty
+    }
+    
+    private func setupCgmSelectionView() {
+        self.introTitleLbl.text = LocalizedString.connect_cgm.localized
+        self.proceedBtn.setTitle(LocalizedString.next.localized, for: .normal)
+    }
+    
+    private func setupDexcomG6View() {
+        CGMTypeArray.removeAll()
+        self.introTitleLbl.text = LocalizedString.cgm_connected.localized
+        self.introLbl.text = ""
+        self.proceedBtn.setTitle(LocalizedString.logout_From_Dexcom.localized, for: .normal)
+    }
+    
+    private func setupLunaCgmSimulatorView(deviceId: UUID, deviceName: String?) {
+        
+    }
 }
 
 

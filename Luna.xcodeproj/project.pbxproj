@@ -261,6 +261,9 @@
 		BDC2BDF327A5A80F003E4A13 /* GlucoseViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDF227A5A80F003E4A13 /* GlucoseViewExtensions.swift */; };
 		BDC2BDF527A5A884003E4A13 /* GlucoseFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDF427A5A884003E4A13 /* GlucoseFormatter.swift */; };
 		BDC2BDF727A5B231003E4A13 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDC2BDF627A5B231003E4A13 /* Colors.xcassets */; };
+		BDC2BDFD27A5BB79003E4A13 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDFC27A5BB79003E4A13 /* UserRepository.swift */; };
+		BDC2BDFF27A5BBD4003E4A13 /* FirebaseUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDFE27A5BBD4003E4A13 /* FirebaseUserRepository.swift */; };
+		BDC2BE0127A5F613003E4A13 /* AlertModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0027A5F613003E4A13 /* AlertModal.swift */; };
 		BDF0D78227A1FA1700A5F950 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78127A1FA1700A5F950 /* FirebaseAnalytics */; };
 		BDF0D78427A1FA1700A5F950 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78327A1FA1700A5F950 /* FirebaseCrashlytics */; };
 		BDF0D78627A1FA1700A5F950 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78527A1FA1700A5F950 /* FirebaseDatabase */; };
@@ -537,6 +540,9 @@
 		BDC2BDF227A5A80F003E4A13 /* GlucoseViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlucoseViewExtensions.swift; sourceTree = "<group>"; };
 		BDC2BDF427A5A884003E4A13 /* GlucoseFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlucoseFormatter.swift; sourceTree = "<group>"; };
 		BDC2BDF627A5B231003E4A13 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		BDC2BDFC27A5BB79003E4A13 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		BDC2BDFE27A5BBD4003E4A13 /* FirebaseUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUserRepository.swift; sourceTree = "<group>"; };
+		BDC2BE0027A5F613003E4A13 /* AlertModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModal.swift; sourceTree = "<group>"; };
 		BDF7660427A45EB6009BE8DF /* PairingScannerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingScannerInteractor.swift; sourceTree = "<group>"; };
 		BDF7660627A465A0009BE8DF /* LunaCgmSimulatorScanningInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunaCgmSimulatorScanningInteractor.swift; sourceTree = "<group>"; };
 		BDFEC66827A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairLunaCgmSimulatorView.swift; sourceTree = "<group>"; };
@@ -985,6 +991,7 @@
 		84CC12982668C822009316FC /* Luna */ = {
 			isa = PBXGroup;
 			children = (
+				BDC2BDFA27A5BB63003E4A13 /* user */,
 				BDFEC67927A34EAB0070EAF1 /* common */,
 				BDFEC66A27A2E5110070EAF1 /* theme */,
 				BD0D0C3D27A23AE2001117B3 /* app */,
@@ -1250,6 +1257,23 @@
 			path = firestore;
 			sourceTree = "<group>";
 		};
+		BDC2BDFA27A5BB63003E4A13 /* user */ = {
+			isa = PBXGroup;
+			children = (
+				BDC2BDFB27A5BB69003E4A13 /* domain */,
+			);
+			path = user;
+			sourceTree = "<group>";
+		};
+		BDC2BDFB27A5BB69003E4A13 /* domain */ = {
+			isa = PBXGroup;
+			children = (
+				BDC2BDFC27A5BB79003E4A13 /* UserRepository.swift */,
+				BDC2BDFE27A5BBD4003E4A13 /* FirebaseUserRepository.swift */,
+			);
+			path = domain;
+			sourceTree = "<group>";
+		};
 		BDF7660327A45E9C009BE8DF /* interactor */ = {
 			isa = PBXGroup;
 			children = (
@@ -1294,6 +1318,7 @@
 				BDFEC66F27A30CC80070EAF1 /* BridgeUIHostingController.swift */,
 				BDFEC67627A34DE20070EAF1 /* Exitable.swift */,
 				BDFEC67B27A34EDA0070EAF1 /* LunaBackButton.swift */,
+				BDC2BE0027A5F613003E4A13 /* AlertModal.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1643,6 +1668,7 @@
 				84AA00902716C04200E7E1F8 /* CustomLineChartView.swift in Sources */,
 				843C4569278DB59400C99AE5 /* NotificationModel.swift in Sources */,
 				84CC130D2668D1F3009316FC /* Dictionary+Extension.swift in Sources */,
+				BDC2BDFD27A5BB79003E4A13 /* UserRepository.swift in Sources */,
 				84E78B9E2685E8C500FABDCD /* UserModel.swift in Sources */,
 				8455491C2678DDBA000CC13D /* SignupViewController.swift in Sources */,
 				84861D8326849FDB004B046C /* ChangePasswordVC.swift in Sources */,
@@ -1650,6 +1676,7 @@
 				188DB12926E0993600FBF042 /* CoachMarkBodyView.swift in Sources */,
 				BD0D0C3F27A23AF3001117B3 /* AppState.swift in Sources */,
 				84F2A27D26984F3D000FDCD5 /* BottomSheetBottomCell.swift in Sources */,
+				BDC2BE0127A5F613003E4A13 /* AlertModal.swift in Sources */,
 				188DB14E26E0993600FBF042 /* SkipViewDisplayManager.swift in Sources */,
 				84CC130A2668D1DB009316FC /* UIImage+Extension.swift in Sources */,
 				84602903268C50F800141E0D /* AboutTermsPolicyVC.swift in Sources */,
@@ -1661,6 +1688,7 @@
 				188DB13326E0993600FBF042 /* PresentationContext.swift in Sources */,
 				188DB14C26E0993600FBF042 /* TranslucentOverlayStyleManager.swift in Sources */,
 				84CC13162668D23C009316FC /* Url+Extension.swift in Sources */,
+				BDC2BDFF27A5BBD4003E4A13 /* FirebaseUserRepository.swift in Sources */,
 				84CE274327509CF80045F987 /* EncryptionController.swift in Sources */,
 				84CC13102668D20A009316FC /* String+Extension.swift in Sources */,
 				84CC13072668D1BD009316FC /* UIScreen+Extension.swift in Sources */,

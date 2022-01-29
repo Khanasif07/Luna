@@ -13,7 +13,7 @@ import LunaBluetooth
 protocol PairCgmScreenRouter {
     func exitPairing()
     func pairLunaCgmSimulator() -> PairLunaCgmSimulatorView
-    func connectLunaCgmSimulator(scanResult: ViewScanResult) -> ConnectLunaCgmSimulatorView
+    func connectLunaCgmSimulator(scanResult: ViewScanResult, showModal: Binding<Bool>) -> ConnectLunaCgmSimulatorView
 }
 
 class PairCgmRouter : ObservableObject, PairCgmScreenRouter, Exitable {
@@ -38,9 +38,9 @@ class PairCgmRouter : ObservableObject, PairCgmScreenRouter, Exitable {
         PairLunaCgmSimulatorView(router: self, viewModel: vm)
     }
     
-    @ViewBuilder func connectLunaCgmSimulator(scanResult: ViewScanResult) -> ConnectLunaCgmSimulatorView {
+    @ViewBuilder func connectLunaCgmSimulator(scanResult: ViewScanResult, showModal: Binding<Bool>) -> ConnectLunaCgmSimulatorView {
         let vm = ConnectLunaCgmSimulatorViewModel(scanResult: scanResult, pairing: lunaCgmConnect())
-        ConnectLunaCgmSimulatorView(router: self, viewModel: vm)
+        ConnectLunaCgmSimulatorView(router: self, viewModel: vm, showModal: showModal)
     }
 }
 

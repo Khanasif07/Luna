@@ -8,41 +8,49 @@
 import SwiftUI
 
 struct ConnectLunaCgmSimulatorView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     let router: PairCgmScreenRouter
     @StateObject var viewModel: ConnectLunaCgmSimulatorViewModel
+    @Binding var showModal: Bool
     
     var body: some View {
         _ConnectLunaCgmSimulatorView(
             name: viewModel.scanResult.name,
-            state: viewModel.state
+            state: viewModel.state,
+            cancel: {
+                viewModel.disconnect()
+                showModal = false
+            }
         )
             .onAppear { viewModel.connect() }
-            .navigationBarBackButtonHidden(true)
-            .navigationBarItems(
-                leading: LunaBackButton(action: {
-                    viewModel.disconnect()
-                    presentationMode.wrappedValue.dismiss()
-                })
-            )
     }
 }
 
 private struct _ConnectLunaCgmSimulatorView : View {
     let name: String
     let state: ConnectLunaCgmSimulatorViewState
+    var cancel: () -> Void
     
     var body: some View {
         switch state {
         case .connecting:
-            Text("Connecting to \(name)")
+            VStack {
+                Text("Connecting to \(name)")
+                Button("Cancel") {
+                    cancel()
+                }
+            }
         case .connected(let glucose):
             VStack {
                 Text("Connected to \(name)")
                 GlucoseView(glucose: glucose)
             }
         case .error:
-            Text("Failed to connect to \(name)")
+            VStack {
+                Text("Failed to connect to \(name)")
+                Button("Close") {
+                    cancel()
+                }
+            }
         }
     }
 }
@@ -52,7 +60,8 @@ struct ConnectLunaCgmSimulatorView_Previews: PreviewProvider {
         
         ConnectLunaCgmSimulatorView(
             router: PairCgmRouter.preview,
-            viewModel: ConnectLunaCgmSimulatorViewModel.preview
+            viewModel: ConnectLunaCgmSimulatorViewModel.preview,
+            showModal: .constant(true)
         )
     }
 }

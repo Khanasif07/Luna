@@ -29,29 +29,51 @@ struct PairLunaCgmSimulatorView : View {
 private struct _PairLunaCgmSimulatorView : View {
     let router: PairCgmScreenRouter
     let scanResults: [ViewScanResult]
+    @State var connectTo: ViewScanResult? = nil
+    @State var showModal: Bool = false
     
     var body : some View {
-        VStack {
-            Text("To pair your Luna CGM Simulator, enable the simulator on your mac or iOS device")
-            
-            ZStack {
-                List(scanResults) { scanResult in
-                    NavigationLink(scanResult.name) {
-                        router.connectLunaCgmSimulator(scanResult: scanResult)
+        ZStack(alignment: .center) {
+            VStack {
+                Text("To pair your Luna CGM Simulator, enable the simulator on your mac or iOS device")
+                
+                ZStack {
+                    List(scanResults) { scanResult in
+                        Button(scanResult.name) {
+                            connectTo = scanResult
+                            showModal = true
+                        }
+                    }
+                    
+                    if(scanResults.isEmpty) {
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     }
                 }
-                
-                if(scanResults.isEmpty) {
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            }
+            .padding(.vertical, 8)
+            .onChange(of: showModal) { newValue in
+                if(!newValue) {
+                    connectTo = nil
                 }
             }
+            .fullScreenCover(
+                isPresented: $showModal,
+                onDismiss: { connectTo = nil },
+                content: {
+                    ZStack {
+                        if let connectTo = connectTo {
+                            router.connectLunaCgmSimulator(scanResult: connectTo, showModal: $showModal)
+                        }
+                    }
+                    .alertModal()
+                }
+            )
         }
-        .padding(.vertical, 8)
-        
     }
 }
+
 
 struct PairLunaCgmSimulatorView_Previews: PreviewProvider {
     static var previews: some View {

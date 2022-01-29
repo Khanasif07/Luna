@@ -7,20 +7,25 @@
 
 import Foundation
 import Firebase
+import FirebaseAuth
 import FirebaseFirestore
 import LunaBluetooth
 
 class AppState {
     
     let firebaseApp: FirebaseApp
+    let firebaseAuth: Auth
     let firestore : Firestore
+    let userRepository : UserRepository
     let cgmRepository : CgmRepository
     
-    lazy var lunaCgmCentral : BluetoothCentral<SimulatorPeripheral> = { BluetoothCentral<SimulatorPeripheral>(centralId: "LunaCGM") }()
+    private lazy var lunaCgmCentral : BluetoothCentral<SimulatorPeripheral> = { BluetoothCentral<SimulatorPeripheral>(centralId: "LunaCGM") }()
     
     init(firebaseApp: FirebaseApp) {
         self.firebaseApp = firebaseApp
+        self.firebaseAuth = Auth.auth(app: firebaseApp)
         self.firestore = Firestore.firestore(app: firebaseApp)
+        self.userRepository = FirebaseUserRepository(auth: self.firebaseAuth)
         self.cgmRepository = FirestoreCgmRepository(firestore: self.firestore)
     }
     
