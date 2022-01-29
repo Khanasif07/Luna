@@ -38,11 +38,16 @@ private struct _ConnectLunaCgmSimulatorView : View {
                 Button("Cancel") {
                     cancel()
                 }
+                .fullWidthButton()
             }
         case .connected(let glucose):
             VStack {
                 Text("Connected to \(name)")
                 GlucoseView(glucose: glucose)
+                Button("Done") {
+                    cancel()
+                }
+                .fullWidthButton()
             }
         case .error:
             VStack {
@@ -50,6 +55,7 @@ private struct _ConnectLunaCgmSimulatorView : View {
                 Button("Close") {
                     cancel()
                 }
+                .fullWidthButton()
             }
         }
     }

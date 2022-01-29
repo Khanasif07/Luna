@@ -264,6 +264,7 @@
 		BDC2BDFD27A5BB79003E4A13 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDFC27A5BB79003E4A13 /* UserRepository.swift */; };
 		BDC2BDFF27A5BBD4003E4A13 /* FirebaseUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDFE27A5BBD4003E4A13 /* FirebaseUserRepository.swift */; };
 		BDC2BE0127A5F613003E4A13 /* AlertModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0027A5F613003E4A13 /* AlertModal.swift */; };
+		BDC2BE0327A5FCA5003E4A13 /* FullWidthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0227A5FCA5003E4A13 /* FullWidthButton.swift */; };
 		BDF0D78227A1FA1700A5F950 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78127A1FA1700A5F950 /* FirebaseAnalytics */; };
 		BDF0D78427A1FA1700A5F950 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78327A1FA1700A5F950 /* FirebaseCrashlytics */; };
 		BDF0D78627A1FA1700A5F950 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78527A1FA1700A5F950 /* FirebaseDatabase */; };
@@ -543,6 +544,7 @@
 		BDC2BDFC27A5BB79003E4A13 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		BDC2BDFE27A5BBD4003E4A13 /* FirebaseUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUserRepository.swift; sourceTree = "<group>"; };
 		BDC2BE0027A5F613003E4A13 /* AlertModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModal.swift; sourceTree = "<group>"; };
+		BDC2BE0227A5FCA5003E4A13 /* FullWidthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullWidthButton.swift; sourceTree = "<group>"; };
 		BDF7660427A45EB6009BE8DF /* PairingScannerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingScannerInteractor.swift; sourceTree = "<group>"; };
 		BDF7660627A465A0009BE8DF /* LunaCgmSimulatorScanningInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunaCgmSimulatorScanningInteractor.swift; sourceTree = "<group>"; };
 		BDFEC66827A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairLunaCgmSimulatorView.swift; sourceTree = "<group>"; };
@@ -1319,6 +1321,7 @@
 				BDFEC67627A34DE20070EAF1 /* Exitable.swift */,
 				BDFEC67B27A34EDA0070EAF1 /* LunaBackButton.swift */,
 				BDC2BE0027A5F613003E4A13 /* AlertModal.swift */,
+				BDC2BE0227A5FCA5003E4A13 /* FullWidthButton.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1575,6 +1578,7 @@
 				84CC13012668D191009316FC /* Date+Extension.swift in Sources */,
 				849B5A492697143B000AA5DC /* BottomSheetTopCell.swift in Sources */,
 				845549282678FAEF000CC13D /* SignUpTopTableCell.swift in Sources */,
+				BDC2BE0327A5FCA5003E4A13 /* FullWidthButton.swift in Sources */,
 				188DB14726E0993600FBF042 /* CoachMarkArrowDefaultView.swift in Sources */,
 				84CC12D32668CFE9009316FC /* ApiKeys.swift in Sources */,
 				84FDA0B1267DE8B600AC8BE9 /* DecisionCell.swift in Sources */,

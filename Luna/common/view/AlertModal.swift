@@ -13,13 +13,11 @@ struct AlertModal: ViewModifier {
         ZStack {
             Color.black.opacity(0.5)
             
-            ZStack {
-                content
-            }
-            .padding(8)
-            .background(Color.white)
-            .cornerRadius(8)
-            .padding(.horizontal, 8)
+            content
+                .padding(16)
+                .background(Color.white)
+                .cornerRadius(8)
+                .padding(8)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(BlurredBackground())
