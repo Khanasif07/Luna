@@ -51,6 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let firebaseApp = FirebaseApp.app() {
             _appState = AppState(firebaseApp: firebaseApp)
+            Task {
+                await _appState?.load()
+            }
         }
         
         AppRouter.checkAppInitializationFlow()

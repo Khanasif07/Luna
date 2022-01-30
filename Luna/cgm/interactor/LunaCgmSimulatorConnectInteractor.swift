@@ -10,14 +10,14 @@ import LunaBluetooth
 import Combine
 
 class LunaCgmSimulatorConnectInteractor : PairingConnectInteractor {
-    private let central: BluetoothCentral<SimulatorPeripheral>
+    private let service: LunaCgmSimulatorService
     private let userRepository: UserRepository
     private let cgmRepository: CgmRepository
     private var connectCancellable: AnyCancellable? = nil
     
     
-    init(central: BluetoothCentral<SimulatorPeripheral>, userRepository: UserRepository, cgmRepository: CgmRepository) {
-        self.central = central
+    init(service: LunaCgmSimulatorService, userRepository: UserRepository, cgmRepository: CgmRepository) {
+        self.service = service
         self.userRepository = userRepository
         self.cgmRepository = cgmRepository
     }
@@ -36,7 +36,7 @@ class LunaCgmSimulatorConnectInteractor : PairingConnectInteractor {
     }
     
     private func observeActivations(for peripheralId: UUID) -> AnyPublisher<SimulatorPeripheral, Never> {
-        return self.central.peripheralEvents
+        return self.service.peripheralEvents
             .compactMap { event -> SimulatorPeripheral? in
                 switch(event) {
                 case .activated(let peripheral):
@@ -53,15 +53,16 @@ class LunaCgmSimulatorConnectInteractor : PairingConnectInteractor {
     
     func connect(to result: ViewScanResult) {
         guard let peripheral = result.handle as? SimulatorPeripheral else { return }
-        self.central.connect(to: peripheral)
+        self.service.connect(to: peripheral)
     }
     
     func disconnect(from peripheralId: UUID) {
-        self.central.disconnect(from: peripheralId)
+        self.service.disconnect(from: peripheralId)
     }
     
     func saveCgmConnection(for scan: ViewScanResult) async throws {
         let cgmConnection = CgmConnection.lunaSimulator(deviceId: scan.id, deviceName: scan.name)
+        print("Saving \(scan.id)")
         try await cgmRepository.setCgmConnection(connection: cgmConnection)
     }
 }

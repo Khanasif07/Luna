@@ -10,17 +10,17 @@ import LunaBluetooth
 import Combine
 
 class LunaCgmSimulatorScanningInteractor : PairingScannerInteractor {
-    private let central: BluetoothCentral<SimulatorPeripheral>
+    private let service: LunaCgmSimulatorService
     private let _scanResults = PassthroughSubject<ViewScanResult, Never>()
     var scanResults: AnyPublisher<ViewScanResult, Never>
     
     private var scanResultsCancellable: AnyCancellable? = nil
     
-    init(central: BluetoothCentral<SimulatorPeripheral>) {
-        self.central = central
+    init(service: LunaCgmSimulatorService) {
+        self.service = service
         self.scanResults = _scanResults.eraseToAnyPublisher()
         
-        self.scanResultsCancellable = central.scanResults
+        self.scanResultsCancellable = service.scanResults
             .receive(on: RunLoop.main)
             .sink { scanResult in
                 let viewResult = ViewScanResult(id: scanResult.id, name: scanResult.name, handle: scanResult.peripheral)
@@ -29,10 +29,10 @@ class LunaCgmSimulatorScanningInteractor : PairingScannerInteractor {
     }
     
     func scan() {
-        self.central.scan()
+        service.scan()
     }
     
     func stopScan() {
-        self.central.stopScan()
+        service.stopScan()
     }
 }

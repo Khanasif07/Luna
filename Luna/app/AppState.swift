@@ -18,6 +18,7 @@ class AppState {
     let firestore : Firestore
     let userRepository : UserRepository
     let cgmRepository : CgmRepository
+    let cgmService: CgmService
     
     private lazy var lunaCgmCentral : BluetoothCentral<SimulatorPeripheral> = { BluetoothCentral<SimulatorPeripheral>(centralId: "LunaCGM") }()
     
@@ -27,13 +28,22 @@ class AppState {
         self.firestore = Firestore.firestore(app: firebaseApp)
         self.userRepository = FirebaseUserRepository(auth: self.firebaseAuth)
         self.cgmRepository = FirestoreCgmRepository(firestore: self.firestore, userRepository: userRepository)
+        self.cgmService = CgmService(cgmRepository: cgmRepository)
+    }
+    
+    func load() async {
+        do {
+            try await cgmService.load()
+        } catch {
+            print("Failed to load AppState")
+        }
     }
     
     func pairCgmRouter() -> PairCgmRouter {
         PairCgmRouter(
             cgmRepository: cgmRepository,
-            lunaCgmScanner: { LunaCgmSimulatorScanningInteractor(central: self.lunaCgmCentral) },
-            lunaCgmConnect: { LunaCgmSimulatorConnectInteractor(central: self.lunaCgmCentral, userRepository: self.userRepository, cgmRepository: self.cgmRepository) }
+            lunaCgmScanner: { LunaCgmSimulatorScanningInteractor(service: self.cgmService.lunaCgmSimulator) },
+            lunaCgmConnect: { LunaCgmSimulatorConnectInteractor(service: self.cgmService.lunaCgmSimulator, userRepository: self.userRepository, cgmRepository: self.cgmRepository) }
         )
     }
 }

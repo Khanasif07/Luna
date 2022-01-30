@@ -270,6 +270,8 @@
 		BDC2BE0A27A71A7F003E4A13 /* UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0927A71A7F003E4A13 /* UserError.swift */; };
 		BDC2BE0D27A71ADC003E4A13 /* CgmError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0C27A71ADC003E4A13 /* CgmError.swift */; };
 		BDC2BE0F27A71C85003E4A13 /* ConnectedLunaCgmSimulatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0E27A71C85003E4A13 /* ConnectedLunaCgmSimulatorViewModel.swift */; };
+		BDC2BE1727A73688003E4A13 /* CgmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE1627A73688003E4A13 /* CgmService.swift */; };
+		BDC2BE1927A74A15003E4A13 /* LunaCgmSimulatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE1827A74A15003E4A13 /* LunaCgmSimulatorService.swift */; };
 		BDF0D78227A1FA1700A5F950 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78127A1FA1700A5F950 /* FirebaseAnalytics */; };
 		BDF0D78427A1FA1700A5F950 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78327A1FA1700A5F950 /* FirebaseCrashlytics */; };
 		BDF0D78627A1FA1700A5F950 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78527A1FA1700A5F950 /* FirebaseDatabase */; };
@@ -555,6 +557,8 @@
 		BDC2BE0927A71A7F003E4A13 /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
 		BDC2BE0C27A71ADC003E4A13 /* CgmError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CgmError.swift; sourceTree = "<group>"; };
 		BDC2BE0E27A71C85003E4A13 /* ConnectedLunaCgmSimulatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedLunaCgmSimulatorViewModel.swift; sourceTree = "<group>"; };
+		BDC2BE1627A73688003E4A13 /* CgmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CgmService.swift; sourceTree = "<group>"; };
+		BDC2BE1827A74A15003E4A13 /* LunaCgmSimulatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunaCgmSimulatorService.swift; sourceTree = "<group>"; };
 		BDF7660427A45EB6009BE8DF /* PairingScannerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingScannerInteractor.swift; sourceTree = "<group>"; };
 		BDF7660627A465A0009BE8DF /* LunaCgmSimulatorScanningInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunaCgmSimulatorScanningInteractor.swift; sourceTree = "<group>"; };
 		BDFEC66827A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairLunaCgmSimulatorView.swift; sourceTree = "<group>"; };
@@ -1227,6 +1231,8 @@
 				BD0D0C3827A22F05001117B3 /* CgmConnection.swift */,
 				BDC2BDE927A59E95003E4A13 /* Glucose.swift */,
 				BDC2BDEB27A5A0C8003E4A13 /* GlucoseReadRepository.swift */,
+				BDC2BE1627A73688003E4A13 /* CgmService.swift */,
+				BDC2BE1827A74A15003E4A13 /* LunaCgmSimulatorService.swift */,
 			);
 			path = domain;
 			sourceTree = "<group>";
@@ -1640,6 +1646,7 @@
 				188DB13526E0993600FBF042 /* FlowManager.swift in Sources */,
 				8418D7DF26B0230100BAB256 /* AnyConvertible.swift in Sources */,
 				844BD1CB2701BBAE00ED224E /* Extension+LoginViewController.swift in Sources */,
+				BDC2BE1927A74A15003E4A13 /* LunaCgmSimulatorService.swift in Sources */,
 				BDC2BDEF27A5A7B6003E4A13 /* GlucoseView.swift in Sources */,
 				BD2B66C427A47820004F0A35 /* ConnectLunaCgmSimulatorView.swift in Sources */,
 				BD2B66C827A4A4FE004F0A35 /* PairingConnectInteractor.swift in Sources */,
@@ -1717,6 +1724,7 @@
 				BDC2BE0127A5F613003E4A13 /* AlertModal.swift in Sources */,
 				188DB14E26E0993600FBF042 /* SkipViewDisplayManager.swift in Sources */,
 				84CC130A2668D1DB009316FC /* UIImage+Extension.swift in Sources */,
+				BDC2BE1727A73688003E4A13 /* CgmService.swift in Sources */,
 				84602903268C50F800141E0D /* AboutTermsPolicyVC.swift in Sources */,
 				BDFEC66927A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift in Sources */,
 				188DB13726E0993600FBF042 /* CoachMarksControllerDataSource.swift in Sources */,
@@ -2093,7 +2101,7 @@
 			repositoryURL = "git@bitbucket.org:luna-ios-application/ios-lunabluetooth.git";
 			requirement = {
 				kind = revision;
-				revision = 38c58b7f27c27d97bdc4f8249cbc88e342c5e53f;
+				revision = fa32b9941beef2ed27535674bec32a65207ecd42;
 			};
 		};
 		BDFFB0D327A20E0E00B15370 /* XCRemoteSwiftPackageReference "Instabug-SP" */ = {
