@@ -55,8 +55,7 @@ class CGMSelectorVC: UIViewController {
     @MainActor
     private func viewDidLoadAsync() async {
         do {
-            guard let uid = try await self.userRepository.getCurrentUid() else { return }
-            if let connection = try await self.cgmRepository.getCgmConnection(uid: uid) {
+            if let connection = try await self.cgmRepository.getCgmConnection() {
                 switch(connection) {
                 case .dexcomG6(_):
                     if(isDexcomShareCredentialsValid) {
@@ -107,15 +106,15 @@ class CGMSelectorVC: UIViewController {
         let selectedCgm = CGMTypeArray[selectedPath.row]
         if(selectedCgm == LocalizedString.lunaSimulator.localized) {
             let router = AppDelegate.shared.appState.pairCgmRouter()
-            let pairingViewController = BridgeUIHostingController(
+            let viewController = BridgeUIHostingController(
                 router: router,
                 rootView: BridgeView {
                     PairCgmRouterView(router: router)
                 }
             )
             
-            pairingViewController.overrideUserInterfaceStyle = .light
-            navigationController?.pushViewController(pairingViewController, animated: true)
+            viewController.overrideUserInterfaceStyle = .light
+            navigationController?.pushViewController(viewController, animated: true)
         } else {
             proceedButtonActionForDexcomG6()
         }
@@ -182,16 +181,16 @@ extension CGMSelectorVC {
     }
     
     private func setupLunaCgmSimulatorView(deviceId: UUID, deviceName: String?) {
-//        let router = AppDelegate.shared.appState.pairCgmRouter()
-//        let viewController = BridgeUIHostingController(
-//            router: router,
-//            rootView: BridgeView {
-//                ConnectedLunaCgmSimulatorView()
-//            }
-//        )
-//        
-//        viewController.overrideUserInterfaceStyle = .light
-//        navigationController?.pushViewController(viewController, animated: true)
+        let router = AppDelegate.shared.appState.pairCgmRouter()
+        let viewController = BridgeUIHostingController(
+            router: router,
+            rootView: BridgeView {
+                PairCgmRouterView(router: router)
+            }
+        )
+
+        viewController.overrideUserInterfaceStyle = .light
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

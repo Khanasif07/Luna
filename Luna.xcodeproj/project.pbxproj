@@ -266,6 +266,10 @@
 		BDC2BE0127A5F613003E4A13 /* AlertModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0027A5F613003E4A13 /* AlertModal.swift */; };
 		BDC2BE0327A5FCA5003E4A13 /* FullWidthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0227A5FCA5003E4A13 /* FullWidthButton.swift */; };
 		BDC2BE0527A60A35003E4A13 /* CornerCancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0427A60A35003E4A13 /* CornerCancelButton.swift */; };
+		BDC2BE0727A62FDB003E4A13 /* ConnectedLunaCgmSimulatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0627A62FDB003E4A13 /* ConnectedLunaCgmSimulatorView.swift */; };
+		BDC2BE0A27A71A7F003E4A13 /* UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0927A71A7F003E4A13 /* UserError.swift */; };
+		BDC2BE0D27A71ADC003E4A13 /* CgmError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0C27A71ADC003E4A13 /* CgmError.swift */; };
+		BDC2BE0F27A71C85003E4A13 /* ConnectedLunaCgmSimulatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0E27A71C85003E4A13 /* ConnectedLunaCgmSimulatorViewModel.swift */; };
 		BDF0D78227A1FA1700A5F950 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78127A1FA1700A5F950 /* FirebaseAnalytics */; };
 		BDF0D78427A1FA1700A5F950 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78327A1FA1700A5F950 /* FirebaseCrashlytics */; };
 		BDF0D78627A1FA1700A5F950 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78527A1FA1700A5F950 /* FirebaseDatabase */; };
@@ -547,6 +551,10 @@
 		BDC2BE0027A5F613003E4A13 /* AlertModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModal.swift; sourceTree = "<group>"; };
 		BDC2BE0227A5FCA5003E4A13 /* FullWidthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullWidthButton.swift; sourceTree = "<group>"; };
 		BDC2BE0427A60A35003E4A13 /* CornerCancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerCancelButton.swift; sourceTree = "<group>"; };
+		BDC2BE0627A62FDB003E4A13 /* ConnectedLunaCgmSimulatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedLunaCgmSimulatorView.swift; sourceTree = "<group>"; };
+		BDC2BE0927A71A7F003E4A13 /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
+		BDC2BE0C27A71ADC003E4A13 /* CgmError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CgmError.swift; sourceTree = "<group>"; };
+		BDC2BE0E27A71C85003E4A13 /* ConnectedLunaCgmSimulatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedLunaCgmSimulatorViewModel.swift; sourceTree = "<group>"; };
 		BDF7660427A45EB6009BE8DF /* PairingScannerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingScannerInteractor.swift; sourceTree = "<group>"; };
 		BDF7660627A465A0009BE8DF /* LunaCgmSimulatorScanningInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunaCgmSimulatorScanningInteractor.swift; sourceTree = "<group>"; };
 		BDFEC66827A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairLunaCgmSimulatorView.swift; sourceTree = "<group>"; };
@@ -1202,6 +1210,7 @@
 		BD0D0C2527A21240001117B3 /* cgm */ = {
 			isa = PBXGroup;
 			children = (
+				BDC2BE0B27A71ACF003E4A13 /* errors */,
 				BD0D0C2627A2124E001117B3 /* domain */,
 				BD0D0C2F27A2144A001117B3 /* firestore */,
 				BDF7660327A45E9C009BE8DF /* interactor */,
@@ -1234,13 +1243,14 @@
 			isa = PBXGroup;
 			children = (
 				BD0D0C3B27A23745001117B3 /* CgmViewExtensions.swift */,
+				BDC2BE0627A62FDB003E4A13 /* ConnectedLunaCgmSimulatorView.swift */,
 				BD2B66C327A47820004F0A35 /* ConnectLunaCgmSimulatorView.swift */,
+				BDC2BDF027A5A7E7003E4A13 /* DisplayGlucose.swift */,
+				BDC2BDF427A5A884003E4A13 /* GlucoseFormatter.swift */,
+				BDC2BDEE27A5A7B6003E4A13 /* GlucoseView.swift */,
+				BDC2BDF227A5A80F003E4A13 /* GlucoseViewExtensions.swift */,
 				BDFEC67127A343940070EAF1 /* PairCgmRouter.swift */,
 				BDFEC66827A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift */,
-				BDC2BDEE27A5A7B6003E4A13 /* GlucoseView.swift */,
-				BDC2BDF027A5A7E7003E4A13 /* DisplayGlucose.swift */,
-				BDC2BDF227A5A80F003E4A13 /* GlucoseViewExtensions.swift */,
-				BDC2BDF427A5A884003E4A13 /* GlucoseFormatter.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1278,6 +1288,22 @@
 			path = domain;
 			sourceTree = "<group>";
 		};
+		BDC2BE0827A71A74003E4A13 /* errors */ = {
+			isa = PBXGroup;
+			children = (
+				BDC2BE0927A71A7F003E4A13 /* UserError.swift */,
+			);
+			path = errors;
+			sourceTree = "<group>";
+		};
+		BDC2BE0B27A71ACF003E4A13 /* errors */ = {
+			isa = PBXGroup;
+			children = (
+				BDC2BE0C27A71ADC003E4A13 /* CgmError.swift */,
+			);
+			path = errors;
+			sourceTree = "<group>";
+		};
 		BDF7660327A45E9C009BE8DF /* interactor */ = {
 			isa = PBXGroup;
 			children = (
@@ -1302,6 +1328,7 @@
 			children = (
 				BDFEC67427A346230070EAF1 /* PairLunaCgmSimulatorViewModel.swift */,
 				BD2B66C527A478BB004F0A35 /* ConnectLunaCgmSimulatorViewModel.swift */,
+				BDC2BE0E27A71C85003E4A13 /* ConnectedLunaCgmSimulatorViewModel.swift */,
 			);
 			path = viewmodel;
 			sourceTree = "<group>";
@@ -1309,6 +1336,7 @@
 		BDFEC67927A34EAB0070EAF1 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				BDC2BE0827A71A74003E4A13 /* errors */,
 				BDC2BDED27A5A132003E4A13 /* firestore */,
 				BDFEC67A27A34EB00070EAF1 /* view */,
 			);
@@ -1591,6 +1619,7 @@
 				188DB12C26E0993600FBF042 /* CoachMarkHelper.swift in Sources */,
 				188DB13826E0993600FBF042 /* PassthroughViews.swift in Sources */,
 				8418D7E526B023A700BAB256 /* CGMAppConstants.swift in Sources */,
+				BDC2BE0D27A71ADC003E4A13 /* CgmError.swift in Sources */,
 				84B34FF426CC99CC00ECF8F0 /* AxisValueFormatter.swift in Sources */,
 				188DB13C26E0993600FBF042 /* AccessibilityIdentifiers.swift in Sources */,
 				188DB12F26E0993600FBF042 /* CoachMarksController+Proxy.swift in Sources */,
@@ -1650,6 +1679,7 @@
 				84CC12DA2668D00E009316FC /* AppFonts.swift in Sources */,
 				84CC12CA2668CF8D009316FC /* AppEnums.swift in Sources */,
 				84CC12EF2668D0CE009316FC /* NotificationExtension.swift in Sources */,
+				BDC2BE0F27A71C85003E4A13 /* ConnectedLunaCgmSimulatorViewModel.swift in Sources */,
 				188DB12626E0993600FBF042 /* OverlayManager.swift in Sources */,
 				840A7E2E2696EDBB005AA1E6 /* SessionHistoryVC.swift in Sources */,
 				840A7E622696F0E6005AA1E6 /* SessionHistoryHeader.swift in Sources */,
@@ -1703,6 +1733,7 @@
 				84E78BC42685F9B400FABDCD /* CustomPickerView.swift in Sources */,
 				84F819A8267A12A500A4C758 /* PassResetPopUpVC.swift in Sources */,
 				188DB12E26E0993600FBF042 /* ViewControllerConfiguration.swift in Sources */,
+				BDC2BE0727A62FDB003E4A13 /* ConnectedLunaCgmSimulatorView.swift in Sources */,
 				840A7DFE2696E98C005AA1E6 /* SearchingDeviceVC.swift in Sources */,
 				188DB14826E0993600FBF042 /* PauseStyle.swift in Sources */,
 				188DB13126E0993600FBF042 /* CoachMarkView.swift in Sources */,
@@ -1724,6 +1755,7 @@
 				84861D7F26848EDD004B046C /* ProfileTableCell.swift in Sources */,
 				BDFEC67527A346230070EAF1 /* PairLunaCgmSimulatorViewModel.swift in Sources */,
 				BD0D0C3127A21456001117B3 /* FirestoreCgmRepository.swift in Sources */,
+				BDC2BE0A27A71A7F003E4A13 /* UserError.swift in Sources */,
 				188DB14226E0993600FBF042 /* ConfigurationChange.swift in Sources */,
 				8403F3B726F9C9F6004BFE8E /* BottomSheetVC+Extension.swift in Sources */,
 				84E5505A267E027A008C02F8 /* TypeTableCell.swift in Sources */,
@@ -2061,7 +2093,7 @@
 			repositoryURL = "git@bitbucket.org:luna-ios-application/ios-lunabluetooth.git";
 			requirement = {
 				kind = revision;
-				revision = 9abd078006c240114cbe276d4fe76de2eb7954d7;
+				revision = 38c58b7f27c27d97bdc4f8249cbc88e342c5e53f;
 			};
 		};
 		BDFFB0D327A20E0E00B15370 /* XCRemoteSwiftPackageReference "Instabug-SP" */ = {

@@ -12,5 +12,5 @@ enum CgmConnection {
     case dexcomG7
     case freestyleLibre2
     case freestyleLibre3
-    case lunaSimulator(deviceId: UUID, deviceName: String?)
+    case lunaSimulator(deviceId: UUID, deviceName: String)
 }

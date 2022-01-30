@@ -56,23 +56,13 @@ class LunaCgmSimulatorConnectInteractor : PairingConnectInteractor {
         self.central.connect(to: peripheral)
     }
     
-    func disconnect(from result: ViewScanResult) {
-        guard let peripheral = result.handle as? SimulatorPeripheral else { return }
-        self.central.disconnect(from: peripheral)
+    func disconnect(from peripheralId: UUID) {
+        self.central.disconnect(from: peripheralId)
     }
     
     func saveCgmConnection(for scan: ViewScanResult) async throws {
         let cgmConnection = CgmConnection.lunaSimulator(deviceId: scan.id, deviceName: scan.name)
-        if let uid = try await userRepository.getCurrentUid() {
-            try cgmRepository.setCgmConnection(uid: uid, connection: cgmConnection)
-        } else {
-            throw PairingError.userNotLoggedIn
-        }
-    }
-    
-    enum PairingError : Error {
-        case userNotLoggedIn
-        case connectError(_ message: String)
+        try await cgmRepository.setCgmConnection(connection: cgmConnection)
     }
 }
 

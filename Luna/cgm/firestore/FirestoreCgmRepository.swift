@@ -12,12 +12,15 @@ import FirebaseFirestoreSwift
 
 class FirestoreCgmRepository : CgmRepository {
     private let firestore: Firestore
+    private let userRepository: UserRepository
     
-    init(firestore: Firestore) {
+    init(firestore: Firestore, userRepository: UserRepository) {
         self.firestore = firestore
+        self.userRepository = userRepository
     }
     
-    func getCgmConnection(uid: String) async throws -> CgmConnection? {
+    func getCgmConnection() async throws -> CgmConnection? {
+        guard let uid = try await userRepository.getCurrentUid() else { throw UserError.userNotLoggedIn }
         let document = try await cgmSettingsRef(uid: uid).getDocument()
         
         do {
@@ -29,11 +32,18 @@ class FirestoreCgmRepository : CgmRepository {
         }
     }
     
-    func setCgmConnection(uid: String, connection: CgmConnection) throws {
+    func setCgmConnection(connection: CgmConnection) async throws {
+        guard let uid = try await userRepository.getCurrentUid() else { throw UserError.userNotLoggedIn }
         let data = connection.toFirestoreCgmSettings(uid: uid)
         
         let document = cgmSettingsRef(uid: uid)
         try document.setData(from: data)
+    }
+    
+    func clearCgmConnection() async throws {
+        guard let uid = try await userRepository.getCurrentUid() else { throw UserError.userNotLoggedIn }
+        let document = cgmSettingsRef(uid: uid)
+        try await document.delete()
     }
     
     private func cgmSettingsRef(uid: String) -> DocumentReference {
@@ -70,7 +80,7 @@ private struct FirestoreCgmSettings : Codable {
     struct LunaSimulatorSettings : Codable {
         var os: FirestoreOperatingSystem
         var deviceId: String
-        var deviceName: String? = nil
+        var deviceName: String
     }
 }
 

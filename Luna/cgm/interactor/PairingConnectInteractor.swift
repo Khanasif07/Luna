@@ -12,7 +12,7 @@ import Combine
 protocol PairingConnectInteractor {
     func connect(to: ViewScanResult)
     
-    func disconnect(from: ViewScanResult)
+    func disconnect(from peripheralId: UUID)
     
     func observeLatestGlucose(for peripheralId: UUID) -> AnyPublisher<Glucose?, Never>
     func observeConnectionState(for peripheralId: UUID) -> AnyPublisher<ConnectionState, Never>
@@ -27,7 +27,7 @@ struct MockPairingConnectInteractor : PairingConnectInteractor {
     func connect(to: ViewScanResult) {
     }
     
-    func disconnect(from: ViewScanResult) {
+    func disconnect(from peripheralId: UUID) {
     }
     
     func observeLatestGlucose(for peripheralId: UUID) -> AnyPublisher<Glucose?, Never> {

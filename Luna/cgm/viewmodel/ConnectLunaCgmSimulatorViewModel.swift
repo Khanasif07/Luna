@@ -49,7 +49,7 @@ class ConnectLunaCgmSimulatorViewModel : ObservableObject {
     
     func disconnect() {
         connectCancellable = nil
-        pairing.disconnect(from: scanResult)
+        pairing.disconnect(from: scanResult.id)
     }
 }
 

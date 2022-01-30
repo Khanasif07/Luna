@@ -26,11 +26,12 @@ class AppState {
         self.firebaseAuth = Auth.auth(app: firebaseApp)
         self.firestore = Firestore.firestore(app: firebaseApp)
         self.userRepository = FirebaseUserRepository(auth: self.firebaseAuth)
-        self.cgmRepository = FirestoreCgmRepository(firestore: self.firestore)
+        self.cgmRepository = FirestoreCgmRepository(firestore: self.firestore, userRepository: userRepository)
     }
     
     func pairCgmRouter() -> PairCgmRouter {
         PairCgmRouter(
+            cgmRepository: cgmRepository,
             lunaCgmScanner: { LunaCgmSimulatorScanningInteractor(central: self.lunaCgmCentral) },
             lunaCgmConnect: { LunaCgmSimulatorConnectInteractor(central: self.lunaCgmCentral, userRepository: self.userRepository, cgmRepository: self.cgmRepository) }
         )
