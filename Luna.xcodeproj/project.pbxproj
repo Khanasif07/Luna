@@ -265,6 +265,7 @@
 		BDC2BDFF27A5BBD4003E4A13 /* FirebaseUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDFE27A5BBD4003E4A13 /* FirebaseUserRepository.swift */; };
 		BDC2BE0127A5F613003E4A13 /* AlertModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0027A5F613003E4A13 /* AlertModal.swift */; };
 		BDC2BE0327A5FCA5003E4A13 /* FullWidthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0227A5FCA5003E4A13 /* FullWidthButton.swift */; };
+		BDC2BE0527A60A35003E4A13 /* CornerCancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0427A60A35003E4A13 /* CornerCancelButton.swift */; };
 		BDF0D78227A1FA1700A5F950 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78127A1FA1700A5F950 /* FirebaseAnalytics */; };
 		BDF0D78427A1FA1700A5F950 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78327A1FA1700A5F950 /* FirebaseCrashlytics */; };
 		BDF0D78627A1FA1700A5F950 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78527A1FA1700A5F950 /* FirebaseDatabase */; };
@@ -545,6 +546,7 @@
 		BDC2BDFE27A5BBD4003E4A13 /* FirebaseUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUserRepository.swift; sourceTree = "<group>"; };
 		BDC2BE0027A5F613003E4A13 /* AlertModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModal.swift; sourceTree = "<group>"; };
 		BDC2BE0227A5FCA5003E4A13 /* FullWidthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullWidthButton.swift; sourceTree = "<group>"; };
+		BDC2BE0427A60A35003E4A13 /* CornerCancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerCancelButton.swift; sourceTree = "<group>"; };
 		BDF7660427A45EB6009BE8DF /* PairingScannerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingScannerInteractor.swift; sourceTree = "<group>"; };
 		BDF7660627A465A0009BE8DF /* LunaCgmSimulatorScanningInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunaCgmSimulatorScanningInteractor.swift; sourceTree = "<group>"; };
 		BDFEC66827A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairLunaCgmSimulatorView.swift; sourceTree = "<group>"; };
@@ -1322,6 +1324,7 @@
 				BDFEC67B27A34EDA0070EAF1 /* LunaBackButton.swift */,
 				BDC2BE0027A5F613003E4A13 /* AlertModal.swift */,
 				BDC2BE0227A5FCA5003E4A13 /* FullWidthButton.swift */,
+				BDC2BE0427A60A35003E4A13 /* CornerCancelButton.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1591,6 +1594,7 @@
 				84B34FF426CC99CC00ECF8F0 /* AxisValueFormatter.swift in Sources */,
 				188DB13C26E0993600FBF042 /* AccessibilityIdentifiers.swift in Sources */,
 				188DB12F26E0993600FBF042 /* CoachMarksController+Proxy.swift in Sources */,
+				BDC2BE0527A60A35003E4A13 /* CornerCancelButton.swift in Sources */,
 				840A7DFC2696E98C005AA1E6 /* PairLunaVC.swift in Sources */,
 				84467287268DBECC00EC55FD /* InsulinStep1VC.swift in Sources */,
 				842E9B1B2695690B00F36A3D /* InsulinStep3VC.swift in Sources */,

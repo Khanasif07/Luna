@@ -32,7 +32,7 @@ class AppState {
     func pairCgmRouter() -> PairCgmRouter {
         PairCgmRouter(
             lunaCgmScanner: { LunaCgmSimulatorScanningInteractor(central: self.lunaCgmCentral) },
-            lunaCgmConnect: { LunaCgmSimulatorConnectInteractor(central: self.lunaCgmCentral) }
+            lunaCgmConnect: { LunaCgmSimulatorConnectInteractor(central: self.lunaCgmCentral, userRepository: self.userRepository, cgmRepository: self.cgmRepository) }
         )
     }
 }

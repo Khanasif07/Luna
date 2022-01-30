@@ -11,11 +11,15 @@ import Combine
 
 class LunaCgmSimulatorConnectInteractor : PairingConnectInteractor {
     private let central: BluetoothCentral<SimulatorPeripheral>
-    
+    private let userRepository: UserRepository
+    private let cgmRepository: CgmRepository
     private var connectCancellable: AnyCancellable? = nil
     
-    init(central: BluetoothCentral<SimulatorPeripheral>) {
+    
+    init(central: BluetoothCentral<SimulatorPeripheral>, userRepository: UserRepository, cgmRepository: CgmRepository) {
         self.central = central
+        self.userRepository = userRepository
+        self.cgmRepository = cgmRepository
     }
     
     func observeLatestGlucose(for peripheralId: UUID) -> AnyPublisher<Glucose?, Never> {
@@ -57,7 +61,17 @@ class LunaCgmSimulatorConnectInteractor : PairingConnectInteractor {
         self.central.disconnect(from: peripheral)
     }
     
+    func saveCgmConnection(for scan: ViewScanResult) async throws {
+        let cgmConnection = CgmConnection.lunaSimulator(deviceId: scan.id, deviceName: scan.name)
+        if let uid = try await userRepository.getCurrentUid() {
+            try cgmRepository.setCgmConnection(uid: uid, connection: cgmConnection)
+        } else {
+            throw PairingError.userNotLoggedIn
+        }
+    }
+    
     enum PairingError : Error {
+        case userNotLoggedIn
         case connectError(_ message: String)
     }
 }

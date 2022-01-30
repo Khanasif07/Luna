@@ -19,6 +19,10 @@ struct ConnectLunaCgmSimulatorView: View {
             cancel: {
                 viewModel.disconnect()
                 showModal = false
+            },
+            complete: {
+                showModal = false
+                router.exitPairing()
             }
         )
             .onAppear { viewModel.connect() }
@@ -29,23 +33,30 @@ private struct _ConnectLunaCgmSimulatorView : View {
     let name: String
     let state: ConnectLunaCgmSimulatorViewState
     var cancel: () -> Void
+    var complete: () -> Void
     
     var body: some View {
         switch state {
         case .connecting:
             VStack {
-                Text("Connecting to \(name)")
-                Button("Cancel") {
+                CornerCancelButton("Cancel") {
                     cancel()
                 }
-                .fullWidthButton()
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                
+                    
+                Text("Connecting to \(name)")
+                
+                ProgressView()
+                    .progressViewStyle(.circular)
+                    .padding()
             }
         case .connected(let glucose):
             VStack {
                 Text("Connected to \(name)")
                 GlucoseView(glucose: glucose)
                 Button("Done") {
-                    cancel()
+                    complete()
                 }
                 .fullWidthButton()
             }

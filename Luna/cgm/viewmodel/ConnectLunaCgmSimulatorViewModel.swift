@@ -26,13 +26,21 @@ class ConnectLunaCgmSimulatorViewModel : ObservableObject {
         self.pairing = pairing
     }
     
+    @MainActor
     func connect() {
         connectCancellable = pairing.observeConnectionState(for: scanResult.id)
             .combineLatest(pairing.observeLatestGlucose(for: scanResult.id))
             .receive(on: RunLoop.main)
             .sink { connectionState, glucose in
                 if(connectionState == .interactive) {
-                    self.state = .connected(glucose: glucose)
+                    Task {
+                        do {
+                            try await self.pairing.saveCgmConnection(for: self.scanResult)
+                            self.state = .connected(glucose: glucose)
+                        } catch {
+                            self.state = .error
+                        }
+                    }
                 }
             }
         

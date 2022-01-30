@@ -182,7 +182,16 @@ extension CGMSelectorVC {
     }
     
     private func setupLunaCgmSimulatorView(deviceId: UUID, deviceName: String?) {
-        
+//        let router = AppDelegate.shared.appState.pairCgmRouter()
+//        let viewController = BridgeUIHostingController(
+//            router: router,
+//            rootView: BridgeView {
+//                ConnectedLunaCgmSimulatorView()
+//            }
+//        )
+//        
+//        viewController.overrideUserInterfaceStyle = .light
+//        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
@@ -191,7 +200,6 @@ extension CGMSelectorVC {
 //===========================
 extension CGMSelectorVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(CGMTypeArray.count)
         return CGMTypeArray.count
     }
     
