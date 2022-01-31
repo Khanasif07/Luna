@@ -11,10 +11,14 @@ import LunaBluetooth
 
 class CgmService {
     private let cgmRepository: CgmRepository
-    let lunaCgmSimulator = LunaCgmSimulatorService()
+    private let glucoseRepository: GlucoseWriteRepository
+    let lunaCgmSimulator: LunaCgmSimulatorService
+    private let queue = DispatchQueue(label: "CgmService")
     
-    init(cgmRepository: CgmRepository) {
+    init(cgmRepository: CgmRepository, glucoseRepository: GlucoseWriteRepository) {
         self.cgmRepository = cgmRepository
+        self.glucoseRepository = glucoseRepository
+        self.lunaCgmSimulator = LunaCgmSimulatorService(glucoseRepository: glucoseRepository, queue: queue)
     }
     
     func load() async throws {

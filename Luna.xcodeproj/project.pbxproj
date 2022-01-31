@@ -272,6 +272,8 @@
 		BDC2BE0F27A71C85003E4A13 /* ConnectedLunaCgmSimulatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0E27A71C85003E4A13 /* ConnectedLunaCgmSimulatorViewModel.swift */; };
 		BDC2BE1727A73688003E4A13 /* CgmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE1627A73688003E4A13 /* CgmService.swift */; };
 		BDC2BE1927A74A15003E4A13 /* LunaCgmSimulatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE1827A74A15003E4A13 /* LunaCgmSimulatorService.swift */; };
+		BDC2BE1C27A767DC003E4A13 /* BridgingGlucoseWriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE1B27A767DC003E4A13 /* BridgingGlucoseWriteRepository.swift */; };
+		BDC2BE1E27A76C04003E4A13 /* GlucoseMapperExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE1D27A76C04003E4A13 /* GlucoseMapperExtension.swift */; };
 		BDF0D78227A1FA1700A5F950 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78127A1FA1700A5F950 /* FirebaseAnalytics */; };
 		BDF0D78427A1FA1700A5F950 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78327A1FA1700A5F950 /* FirebaseCrashlytics */; };
 		BDF0D78627A1FA1700A5F950 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78527A1FA1700A5F950 /* FirebaseDatabase */; };
@@ -559,6 +561,8 @@
 		BDC2BE0E27A71C85003E4A13 /* ConnectedLunaCgmSimulatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedLunaCgmSimulatorViewModel.swift; sourceTree = "<group>"; };
 		BDC2BE1627A73688003E4A13 /* CgmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CgmService.swift; sourceTree = "<group>"; };
 		BDC2BE1827A74A15003E4A13 /* LunaCgmSimulatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunaCgmSimulatorService.swift; sourceTree = "<group>"; };
+		BDC2BE1B27A767DC003E4A13 /* BridgingGlucoseWriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgingGlucoseWriteRepository.swift; sourceTree = "<group>"; };
+		BDC2BE1D27A76C04003E4A13 /* GlucoseMapperExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlucoseMapperExtension.swift; sourceTree = "<group>"; };
 		BDF7660427A45EB6009BE8DF /* PairingScannerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingScannerInteractor.swift; sourceTree = "<group>"; };
 		BDF7660627A465A0009BE8DF /* LunaCgmSimulatorScanningInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunaCgmSimulatorScanningInteractor.swift; sourceTree = "<group>"; };
 		BDFEC66827A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairLunaCgmSimulatorView.swift; sourceTree = "<group>"; };
@@ -1214,6 +1218,7 @@
 		BD0D0C2527A21240001117B3 /* cgm */ = {
 			isa = PBXGroup;
 			children = (
+				BDC2BE1A27A767B7003E4A13 /* bridge */,
 				BDC2BE0B27A71ACF003E4A13 /* errors */,
 				BD0D0C2627A2124E001117B3 /* domain */,
 				BD0D0C2F27A2144A001117B3 /* firestore */,
@@ -1231,8 +1236,6 @@
 				BD0D0C3827A22F05001117B3 /* CgmConnection.swift */,
 				BDC2BDE927A59E95003E4A13 /* Glucose.swift */,
 				BDC2BDEB27A5A0C8003E4A13 /* GlucoseReadRepository.swift */,
-				BDC2BE1627A73688003E4A13 /* CgmService.swift */,
-				BDC2BE1827A74A15003E4A13 /* LunaCgmSimulatorService.swift */,
 			);
 			path = domain;
 			sourceTree = "<group>";
@@ -1310,13 +1313,24 @@
 			path = errors;
 			sourceTree = "<group>";
 		};
+		BDC2BE1A27A767B7003E4A13 /* bridge */ = {
+			isa = PBXGroup;
+			children = (
+				BDC2BE1B27A767DC003E4A13 /* BridgingGlucoseWriteRepository.swift */,
+			);
+			path = bridge;
+			sourceTree = "<group>";
+		};
 		BDF7660327A45E9C009BE8DF /* interactor */ = {
 			isa = PBXGroup;
 			children = (
+				BDC2BE1627A73688003E4A13 /* CgmService.swift */,
+				BDC2BE1827A74A15003E4A13 /* LunaCgmSimulatorService.swift */,
 				BD2B66C927A4A5B9004F0A35 /* LunaCgmSimulatorConnectInteractor.swift */,
 				BDF7660627A465A0009BE8DF /* LunaCgmSimulatorScanningInteractor.swift */,
 				BD2B66C727A4A4FE004F0A35 /* PairingConnectInteractor.swift */,
 				BDF7660427A45EB6009BE8DF /* PairingScannerInteractor.swift */,
+				BDC2BE1D27A76C04003E4A13 /* GlucoseMapperExtension.swift */,
 			);
 			path = interactor;
 			sourceTree = "<group>";
@@ -1702,6 +1716,7 @@
 				849B7436269D710600C059E5 /* HealthKitManager.swift in Sources */,
 				84CC12CD2668CFBF009316FC /* AppRouter.swift in Sources */,
 				8418D7D726B01F4E00BAB256 /* UserDefaults.swift in Sources */,
+				BDC2BE1E27A76C04003E4A13 /* GlucoseMapperExtension.swift in Sources */,
 				84F2A27026981DD8000FDCD5 /* BottomSheetChartCell.swift in Sources */,
 				84CC13042668D1A6009316FC /* Double+Extension.swift in Sources */,
 				84CC13212668D588009316FC /* LocalizedString.swift in Sources */,
@@ -1802,6 +1817,7 @@
 				BDFEC66E27A2FD4D0070EAF1 /* BridgeView.swift in Sources */,
 				BDC2BDF327A5A80F003E4A13 /* GlucoseViewExtensions.swift in Sources */,
 				849B25622707101600323876 /* ContactsUsTableCell.swift in Sources */,
+				BDC2BE1C27A767DC003E4A13 /* BridgingGlucoseWriteRepository.swift in Sources */,
 				BD0D0C3927A22F05001117B3 /* CgmConnection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

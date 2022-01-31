@@ -81,7 +81,7 @@ extension BottomSheetVC {
     
     func bgDirectionGraphic(_ value:String)->String {
         let 
-            graphics:[String:String]=["Flat":"→","DoubleUp":"↑↑","SingleUp":"↑","FortyFiveUp":"↗","FortyFiveDown":"↘︎","SingleDown":"↓","DoubleDown":"↓↓","None":"-","NONE":"-","NOT COMPUTABLE":"-","RATE OUT OF RANGE":"-", "": "-","NotComputable":  "-"]
+            graphics:[String:String]=["Flat":"→","DoubleUp":"↑↑","SingleUp":"↑","FortyFiveUp":"↗","FortyFiveDown":"↘︎","SingleDown":"↓","DoubleDown":"↓↓","None":"","NONE":"","NOT COMPUTABLE":"","RATE OUT OF RANGE":"", "": "","NotComputable": ""]
         return graphics[value] ?? ""
     }
     

@@ -29,13 +29,25 @@ struct Glucose: Identifiable {
     let trendRate: Double?
     
     static let CREATE_ID = ""
+    static let SOURCE_DEXCOM_G6 = "DexcomG6"
+    static let SOURCE_LUNA_SIMULATOR = "LunaSimulator"
 }
 
-struct Record<T : Identifiable> {
+protocol Sourceable {
+    var id: String { get }
+}
+
+enum GlucoseSource: String, Sourceable {
+    case lunaCgmSimulator = "LunaCgmSimulator"
+    
+    var id: String { self.rawValue }
+}
+
+struct Record<T : Identifiable, Source : Sourceable> {
     var id: T.ID { value.id }
     let value: T
     let sourceId: String
-    let sourceType: String
+    let sourceType: Source
     let sourceEntityId: String?
     let receiveTime: Date
     let timeZone: TimeZone

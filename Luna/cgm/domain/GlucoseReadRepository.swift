@@ -17,6 +17,6 @@ protocol GlucoseReadRepository {
 }
 
 protocol GlucoseWriteRepository {
-    func writeGlucose(records: [Record<Glucose>]) async throws
+    func writeGlucose(records: [Record<Glucose, GlucoseSource>]) async throws
     func deleteAllGlucose(sourceId: String) async throws
 }

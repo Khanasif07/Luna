@@ -18,6 +18,7 @@ class AppState {
     let firestore : Firestore
     let userRepository : UserRepository
     let cgmRepository : CgmRepository
+    let glucoseRepository : GlucoseWriteRepository
     let cgmService: CgmService
     
     private lazy var lunaCgmCentral : BluetoothCentral<SimulatorPeripheral> = { BluetoothCentral<SimulatorPeripheral>(centralId: "LunaCGM") }()
@@ -28,7 +29,8 @@ class AppState {
         self.firestore = Firestore.firestore(app: firebaseApp)
         self.userRepository = FirebaseUserRepository(auth: self.firebaseAuth)
         self.cgmRepository = FirestoreCgmRepository(firestore: self.firestore, userRepository: userRepository)
-        self.cgmService = CgmService(cgmRepository: cgmRepository)
+        self.glucoseRepository = BridgingGlucoseWriteRepository()
+        self.cgmService = CgmService(cgmRepository: cgmRepository, glucoseRepository: glucoseRepository)
     }
     
     func load() async {
