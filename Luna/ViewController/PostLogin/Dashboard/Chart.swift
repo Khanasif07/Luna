@@ -26,16 +26,6 @@ final class ChartXValueFormatter: IAxisValueFormatter {
     
 //    var xAxisLabelsArray :[String] = []
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        
-       
-        //let timezoneOffset = TimeZone.current.secondsFromGMT()
-        //let epochTimezoneOffset = value + Double(timezoneOffset)
-//        if dateTimeUtils.is24Hour() {
-//            dateFormatter.setLocalizedDateFormatFromTemplate("HH:mm")
-//        } else {
-//            dateFormatter.setLocalizedDateFormatFromTemplate("hh:mm")
-//        }
-       
         if let lastCGMValue = SystemInfoModel.shared.cgmData?.last{
             if lastCGMValue.date - value <= 300 {
 //                let dateFormatter = DateFormatter()
@@ -75,11 +65,7 @@ final class ChartXValueFormatter: IAxisValueFormatter {
 final class ChartXValueFormatterSessionInfo: IAxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         let dateFormatter = DateFormatter()
-//        if SystemInfoModel.shared.cgmData?.endIndex ?? 67 >= 67{
-//            dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.cgmDate12.rawValue)
-//        }else{
         dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.hour12.rawValue)
-//        }
         let date = Date(timeIntervalSince1970: value)
         let formattedDate = dateFormatter.string(from: date)
         return formattedDate.lowercased()

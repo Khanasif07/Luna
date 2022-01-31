@@ -891,7 +891,7 @@ class FirestoreController:NSObject{
     
     //MARK:-CreateMessageNode
     //=======================
-    static func createMessageNode(messageText:String,messageTime:FieldValue,messageId:String,messageType:String,senderId:String){
+    static func createMessageNode(messageText:String,messageId:String,messageType:String,senderId:String){
         guard let userId = Auth.auth().currentUser?.uid  else { return }
         db.collection(ApiKey.messages).document(userId).collection(ApiKey.contactUs).document(messageId).setData([ApiKey.messageText:messageText,
                                                                                                                   ApiKey.messageId:messageId,
@@ -918,6 +918,66 @@ class FirestoreController:NSObject{
                 success()
             }
         }
+    }
+    
+    static func deleteAppleSignedCreds(idToken:String,rawNonce:String,success: @escaping () -> Void,
+                                       failure:  @escaping FailureResponse){
+        let appleCredential = OAuthProvider.credential(withProviderID: "apple.com",
+                                                       idToken: idToken,
+                                                       rawNonce: rawNonce)
+        Auth.auth().currentUser?.reauthenticate(with: appleCredential, completion: { (result, error) in
+            if let error = error {
+                failure(error)
+            }
+            else {
+                Auth.auth().currentUser?.delete { error in
+                    if let error = error {
+                        failure(error)
+                    } else {
+                        success()
+                    }
+                }
+            }
+        })
+    }
+    
+    static func deleteGoogleSignedCreds(idTokenString:String,accessToken:String,success: @escaping () -> Void,
+                                        failure:  @escaping FailureResponse){
+        let googleCredential = GoogleAuthProvider.credential(withIDToken: idTokenString,
+                                                       accessToken: accessToken)
+        Auth.auth().currentUser?.reauthenticate(with: googleCredential, completion: { (result, error) in
+            if let error = error {
+                failure(error)
+            }
+            else {
+                Auth.auth().currentUser?.delete { error in
+                    if let error = error {
+                        failure(error)
+                    } else {
+                        success()
+                    }
+                }
+            }
+        })
+    }
+    
+    static func deleteEmailPassSignedCreds(email:String,password:String,success: @escaping () -> Void,
+                                           failure:  @escaping FailureResponse){
+        let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+        Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (result, error) in
+            if let error = error {
+                failure(error)
+            }
+            else {
+                Auth.auth().currentUser?.delete { error in
+                    if let error = error {
+                        failure(error)
+                    } else {
+                        success()
+                    }
+                }
+            }
+        })
     }
     
     //MARK:-Add  cgm data array through batch operation
@@ -1015,7 +1075,7 @@ class FirestoreController:NSObject{
         })
     }
     
-    /// Mark:- Fetching the message ID
+    /// Mark:- Fetching the session ID
     static func getSessionId() -> String {
         guard let userId = Auth.auth().currentUser?.uid  else { return ""}
         let messageId = db.collection(ApiKey.sessionData).document(userId).collection(ApiKey.sessionHistoryData).document().documentID
@@ -1023,6 +1083,13 @@ class FirestoreController:NSObject{
     }
     
     /// Mark:- Fetching the message ID
+    static func getMessageId() -> String {
+        guard let userId = Auth.auth().currentUser?.uid  else { return ""}
+        let messageId = db.collection(ApiKey.messages).document(userId).collection(ApiKey.contactUs).document().documentID
+        return messageId
+    }
+    
+    /// Mark:- Fetching the notification ID
     static func getNotificationId() -> String {
         guard let userId = Auth.auth().currentUser?.uid  else { return ""}
         let messageId = db.collection(ApiKey.notifications).document(userId).collection(ApiKey.notificationsData).document().documentID

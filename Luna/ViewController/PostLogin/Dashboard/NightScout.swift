@@ -355,10 +355,7 @@ extension  BottomSheetVC{
             guard let data = data else {
                 return
             }
-            
-            
             let json = try? JSONSerialization.jsonObject(with: data) as? Dictionary<String, Any>
-            
             if let json = json {
                 DispatchQueue.main.async {
                     print(json)
@@ -382,7 +379,6 @@ extension  BottomSheetVC{
     
     func clearOldBGCheck(){
         self.bgCheckData.removeAll()
-       // self.updateBGCheckGraph()
     }
     
     func clearOldOverride(){

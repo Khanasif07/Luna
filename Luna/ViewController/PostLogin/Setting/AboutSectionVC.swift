@@ -6,11 +6,7 @@
 //
 
 import UIKit
-import MessageUI
 import SwiftKeychainWrapper
-import FirebaseAuth
-import FirebaseDatabase
-import Firebase
 
 class AboutSectionVC: UIViewController {
     
@@ -21,7 +17,6 @@ class AboutSectionVC: UIViewController {
     
     // MARK: - Variables
     //===========================
-//    (#imageLiteral(resourceName: "customerSupport"),LocalizedString.customer_Support.localized),
     var sections: [(UIImage,String)] = [(#imageLiteral(resourceName: "appVersion"),LocalizedString.app_Version.localized),(#imageLiteral(resourceName: "termsConditions"),LocalizedString.terms_Conditions.localized),(#imageLiteral(resourceName: "privacy"),LocalizedString.privacy.localized),(#imageLiteral(resourceName: "deleteAccount"),LocalizedString.delete_Account.localized),(#imageLiteral(resourceName: "logout"),LocalizedString.logout.localized)]
     
     // MARK: - Lifecycle
@@ -137,74 +132,38 @@ extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
                         CommonFunctions.hideActivityLoader()
                         return
                     }
-                    let appleCredential = OAuthProvider.credential(withProviderID: "apple.com",
-                                                                      idToken: idTokenString,
-                                                                      rawNonce: nonce)
-                    Auth.auth().currentUser?.reauthenticate(with: appleCredential, completion: { (result, error) in
-                        if let error = error {
-                            CommonFunctions.hideActivityLoader()
-                            CommonFunctions.showToastWithMessage(error.localizedDescription)
-                        }
-                        else {
-                            Auth.auth().currentUser?.delete { error in
-                                if let error = error {
-                                    CommonFunctions.hideActivityLoader()
-                                    CommonFunctions.showToastWithMessage(error.localizedDescription)
-                                } else {
-                                    CommonFunctions.hideActivityLoader()
-                                    FirestoreController.removeKeychain()
-                                    FirestoreController.performCleanUp(for_logout: false)
-                                }
-                            }
-                        }
-                    })
+                    FirestoreController.deleteAppleSignedCreds(idToken: idTokenString, rawNonce: nonce) {
+                        CommonFunctions.hideActivityLoader()
+                        FirestoreController.removeKeychain()
+                        FirestoreController.performCleanUp(for_logout: false)
+                    } failure:{ (error) -> (Void) in
+                        CommonFunctions.hideActivityLoader()
+                        CommonFunctions.showToastWithMessage(error.localizedDescription)
+                    }
                 case .google:
                     guard let idTokenString = KeychainWrapper.standard.string(forKey: ApiKey.googleIdToken), let accessToken = KeychainWrapper.standard.string(forKey: ApiKey.googleAccessToken) else {
                         CommonFunctions.hideActivityLoader()
                         return
                     }
-                    let googleCredential = GoogleAuthProvider.credential(withIDToken: idTokenString,
-                                                                   accessToken: accessToken)
-                    Auth.auth().currentUser?.reauthenticate(with: googleCredential, completion: { (result, error) in
-                        if let error = error {
-                            CommonFunctions.hideActivityLoader()
-                            CommonFunctions.showToastWithMessage(error.localizedDescription)
-                        }
-                        else {
-                            Auth.auth().currentUser?.delete { error in
-                                if let error = error {
-                                    CommonFunctions.hideActivityLoader()
-                                    CommonFunctions.showToastWithMessage(error.localizedDescription)
-                                } else {
-                                    CommonFunctions.hideActivityLoader()
-                                    FirestoreController.removeKeychain()
-                                    FirestoreController.performCleanUp(for_logout: false)
-                                }
-                            }
-                        }
-                    })
+                    FirestoreController.deleteGoogleSignedCreds(idTokenString: idTokenString, accessToken: accessToken) {
+                        CommonFunctions.hideActivityLoader()
+                        FirestoreController.removeKeychain()
+                        FirestoreController.performCleanUp(for_logout: false)
+                    } failure:{ (error) -> (Void) in
+                        CommonFunctions.hideActivityLoader()
+                        CommonFunctions.showToastWithMessage(error.localizedDescription)
+                    }
                 case .email_password:
-                    let email = UserModel.main.email
-                    let password = UserModel.main.password
-                    let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-                    Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (result, error) in
-                        if let error = error {
-                            CommonFunctions.hideActivityLoader()
-                            CommonFunctions.showToastWithMessage(error.localizedDescription)
-                        }
-                        else {
-                            Auth.auth().currentUser?.delete { error in
-                                if let error = error {
-                                    CommonFunctions.hideActivityLoader()
-                                    CommonFunctions.showToastWithMessage(error.localizedDescription)
-                                } else {
-                                    CommonFunctions.hideActivityLoader()
-                                    FirestoreController.removeKeychain()
-                                    FirestoreController.performCleanUp(for_logout: false)
-                                }
-                            }
-                        }
-                    })
+                    let email = AppUserDefaults.value(forKey: .defaultEmail).stringValue
+                    let password = AppUserDefaults.value(forKey: .defaultPassword).stringValue
+                    FirestoreController.deleteEmailPassSignedCreds(email: email, password: password){
+                        CommonFunctions.hideActivityLoader()
+                        FirestoreController.removeKeychain()
+                        FirestoreController.performCleanUp(for_logout: false)
+                    } failure: { (error) -> (Void) in
+                        CommonFunctions.hideActivityLoader()
+                        CommonFunctions.showToastWithMessage(error.localizedDescription)
+                    }
                 }
             } cancelcompletion: {
                 //MARK:- Handle Failure condition

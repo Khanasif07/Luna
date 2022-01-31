@@ -6,11 +6,6 @@
 //
 
 import UIKit
-import Firebase
-import FirebaseStorage
-import FirebaseAuth
-import FirebaseDatabase
-import FirebaseCore
 
 class SystemSetupVC: UIViewController {
     

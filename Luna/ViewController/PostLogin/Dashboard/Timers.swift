@@ -8,9 +8,7 @@
 import Foundation
 import UIKit
 
-
 extension BottomSheetVC {
-    
     func restartAllTimers() {
         if !UserDefaultsRepository.shareUserName.value.isEmpty && !UserDefaultsRepository.sharePassword.value.isEmpty {
             if !bgTimer.isValid { self.startBGTimer(time: 10) }
@@ -18,8 +16,6 @@ extension BottomSheetVC {
         } else {
         }
     }
-    
-    
     // min Ago Timer
     func startMinAgoTimer(time: TimeInterval) {
         minAgoTimer = Timer.scheduledTimer(timeInterval: time,
@@ -28,10 +24,8 @@ extension BottomSheetVC {
                                            userInfo: nil,
                                            repeats: true)
     }
-    
     // Updates Min Ago display
     @objc func minAgoTimerDidEnd(_ timer:Timer) {
-        
         // print("min ago timer ended")
         if bgData.count > 0 {
             let bgSeconds = bgData.last!.date
@@ -68,27 +62,6 @@ extension BottomSheetVC {
         
     }
     
-    // Runs a 60 second timer when an alarm is snoozed
-    // Prevents the alarm from triggering again while saving the snooze time to settings
-    // End function needs nothing done
-//    func startCheckAlarmTimer(time: TimeInterval = 60) {
-//
-//        checkAlarmTimer = Timer.scheduledTimer(timeInterval: time,
-//                                               target: self,
-//                                               selector: #selector(self.checkAlarmTimerDidEnd(_:)),
-//                                               userInfo: nil,
-//                                               repeats: false)
-//    }
-    
-//    @objc func checkAlarmTimerDidEnd(_ timer:Timer) {
-//    }
-    
-    // BG Timer
-    // Runs to 5:10 after last reading timestamp
-    // Failed or no reading re-attempts after 10 second delay
-    // Changes to 30 second increments after 7:00
-    // Changes to 1 minute increments after 10:00
-    // Changes to 5 minute increments after 20:00 stale data
     func startBGTimer(time: TimeInterval =  60 * 5) {
         bgTimer = Timer.scheduledTimer(timeInterval: time,
                                                target: self,
@@ -104,9 +77,7 @@ extension BottomSheetVC {
             startBGTimer(time: 5 * 60)
             return
         }
-        
         var onlyPullLastRecord = false
-        
         // Check if the last reading is less than 10 minutes ago
         // to only pull 1 reading if that's all we need
         if bgData.count > 0 {
@@ -117,9 +88,7 @@ extension BottomSheetVC {
                 onlyPullLastRecord = true
             }
         }
-        
         if UserDefaultsRepository.alwaysDownloadAllBG.value { onlyPullLastRecord = false }
-        
         if !UserDefaultsRepository.shareUserName.value.isEmpty && !UserDefaultsRepository.sharePassword.value.isEmpty {
             webLoadDexShare(onlyPullLastRecord: onlyPullLastRecord)
         } else {
@@ -143,13 +112,11 @@ extension BottomSheetVC {
     }
     
     @objc func deviceStatusTimerDidEnd(_ timer:Timer) {
-
         // reset timer to 1 minute if settings aren't entered
         if UserDefaultsRepository.url.value == "" || UserDefaultsRepository.onlyDownloadBG.value {
             startDeviceStatusTimer(time: 60)
             return
         }
-
         if UserDefaultsRepository.url.value != "" {
 //            webLoadNSDeviceStatus()
         }
@@ -179,21 +146,5 @@ extension BottomSheetVC {
             startProfileTimer()
         }
     }
-    
-    // Alarm Timer
-    // Run the alarm checker every 15 seconds
-//    func startAlarmTimer(time: TimeInterval) {
-//        alarmTimer = Timer.scheduledTimer(timeInterval: time,
-//                                         target: self,
-//                                         selector: #selector(self.alarmTimerDidEnd(_:)),
-//                                         userInfo: nil,
-//                                         repeats: true)
-//
-//    }
-    
-//    @objc func alarmTimerDidEnd(_ timer:Timer) {
-//        if bgData.count > 0 {
-//            self.checkAlarms(bgs: bgData)
-//        }
-//    }
+
 }

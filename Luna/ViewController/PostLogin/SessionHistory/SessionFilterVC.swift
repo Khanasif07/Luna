@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 protocol SessionFilterVCDelegate: class {
     func filterApplied(startDate: Date?,endDate: Date?)
     func resetFilter()
@@ -50,7 +51,6 @@ class SessionFilterVC: UIViewController {
     
     private lazy var endTimePicker: UIDatePicker = {
         let picker = UIDatePicker()
-//        picker.minimumDate = Calendar.current.date(byAdding: .day, value: 0, to:  Date())
         picker.maximumDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())
         picker.backgroundColor = .white
         picker.datePickerMode = UIDatePicker.Mode.date
@@ -62,7 +62,6 @@ class SessionFilterVC: UIViewController {
         }
         return picker
     }()
-    
     weak var delegate: SessionFilterVCDelegate?
     
     override func viewDidLoad() {
@@ -212,7 +211,6 @@ extension SessionFilterVC {
         view.endEditing(true)
         self.endTF.text = ""
         self.enddate = nil
-//        endTimePicker.maximumDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())
         endTimePicker.minimumDate = Calendar.current.date(byAdding: .day, value: 0, to: startTimePicker.date)
         self.proceedBtn.isEnabled = (self.startdate != nil && self.enddate != nil)
     }
