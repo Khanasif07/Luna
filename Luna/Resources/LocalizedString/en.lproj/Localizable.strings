@@ -141,3 +141,15 @@
 "lastMonth" = "Last Month";
 "monthsAgo" = "Months Ago";
 "lastYear" = "Last Year";
+
+"Connecting to %@" = "Connecting to %@";
+"Connected to %@" = "Connected to %@";
+"Failed to connect to %@" = "Failed to connect to %@";
+"disconnect" = "Disconnect";
+"failedToDisconnect" = "Failed to disconnect";
+"pleaseTryAgain" = "Please try again";
+"dismiss" = "Dismiss";
+"Cancel" = "Cancel";
+"close" = "Close";
+"mg/dl" = "mg/dl";
+"pairLunaCgmSimExplanation" = "To pair your Luna CGM Simulator, enable the simulator on your mac or iOS device";

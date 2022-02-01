@@ -18,7 +18,7 @@ struct ConnectedLunaCgmSimulatorView: View {
             disconnect: { Task { await viewModel.disconnect() } }
         )
             .padding()
-            .navigationTitle("Luna CGM Simulator")
+            .navigationTitle(LocalizedString.lunaSimulator.localizedKey)
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: LunaBackButton(action: { router.exitPairing() }))
@@ -36,18 +36,18 @@ private struct ConnectedLunaCgmSimulatorContentView: View {
     var body: some View {
         VStack {
             Spacer()
-            Text("Connecting to \(deviceName)")
+            Text("Connected to \(deviceName)") // i18n: Localizable.strings
             Spacer()
-            Button("Disconnect") {
+            Button(LocalizedString.disconnect.localizedKey) {
                 disconnect()
             }
             .fullWidthButton()
         }
         .alert(isPresented: $showError) {
             Alert(
-                title: Text("Failed to disconnect"),
-                message: Text("Please try again"),
-                dismissButton: .default(Text("Dismiss"))
+                title: Text(LocalizedString.failedToDisconnect.localizedKey),
+                message: Text(LocalizedString.pleaseTryAgain.localizedKey),
+                dismissButton: .default(Text(LocalizedString.dismiss.localizedKey))
             )
         }
     }

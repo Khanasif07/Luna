@@ -15,7 +15,7 @@ struct LatestGlucoseView : View {
     var body: some View {
         VStack {
             GlucoseView(glucose: glucose, color: color)
-            Text("mg/dl")
+            Text(LocalizedString.mgdl.localizedKey)
                 .font(.title2)
                 .fixedSize()
         }

@@ -39,13 +39,13 @@ private struct _ConnectLunaCgmSimulatorView : View {
         switch state {
         case .connecting:
             VStack {
-                CornerCancelButton("Cancel") {
+                CornerCancelButton(LocalizedString.cancel.localizedKey) {
                     cancel()
                 }
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 
                     
-                Text("Connecting to \(name)")
+                Text("Connecting to \(name)") // i18n: Localizable.strings
                 
                 ProgressView()
                     .progressViewStyle(.circular)
@@ -53,17 +53,17 @@ private struct _ConnectLunaCgmSimulatorView : View {
             }
         case .connected(let glucose):
             VStack {
-                Text("Connected to \(name)")
+                Text("Connected to \(name)") // i18n: Localizable.strings
                 GlucoseView(glucose: glucose)
-                Button("Done") {
+                Button(LocalizedString.done.localizedKey) {
                     complete()
                 }
                 .fullWidthButton()
             }
         case .error:
             VStack {
-                Text("Failed to connect to \(name)")
-                Button("Close") {
+                Text("Failed to connect to \(name)") // i18n: Localizable.strings
+                Button(LocalizedString.close.localizedKey) {
                     cancel()
                 }
                 .fullWidthButton()

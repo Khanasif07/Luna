@@ -19,7 +19,7 @@ struct PairLunaCgmSimulatorView : View {
         )
             .onAppear { viewModel.scan() }
             .onDisappear { viewModel.stopScan() }
-            .navigationTitle("Pair CGM Simulator")
+            .navigationTitle(LocalizedString.pair_cgm_simulator.localizedKey)
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: LunaBackButton(action: { router.exitPairing() }))
@@ -35,7 +35,7 @@ private struct _PairLunaCgmSimulatorView : View {
     var body : some View {
         ZStack(alignment: .center) {
             VStack {
-                Text("To pair your Luna CGM Simulator, enable the simulator on your mac or iOS device")
+                Text(LocalizedString.pairLunaCgmSimExplanation.localizedKey)
                 
                 ZStack {
                     List(scanResults) { scanResult in

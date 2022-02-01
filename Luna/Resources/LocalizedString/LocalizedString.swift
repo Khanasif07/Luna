@@ -172,6 +172,7 @@ enum LocalizedString : String {
     case cgm_connected
     case connect_cgm
     case pair_cgm_simulator
+    case pairLunaCgmSimExplanation
     
     case no
     case yes
@@ -208,6 +209,14 @@ enum LocalizedString : String {
     case freestyle_Libre2
     case freestyle_Libre3
     case lunaSimulator
+    
+    case connectingToCgm
+    case disconnect
+    case failedToDisconnect
+    case pleaseTryAgain
+    case dismiss
+    case close
+    case mgdl = "mg/dl"
     
     case battery
     case reservoir
