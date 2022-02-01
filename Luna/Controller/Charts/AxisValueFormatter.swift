@@ -12,10 +12,6 @@ import CoreGraphics
 final class XAxisNameFormater: NSObject, IAxisValueFormatter {
     
     func stringForValue( _ value: Double, axis _: AxisBase?) -> String {
-
-//        let formatter = DateFormatter()
-//        formatter.locale = Locale(identifier: "en_US_POSIX")
-//        formatter.dateFormat = "dd.MM"
         let index = Int(value)
         if let lastIndex = SystemInfoModel.shared.cgmData?.endIndex{
             let value =  SystemInfoModel.shared.cgmData?[(lastIndex - index - 1)].date ?? 0.0
@@ -74,7 +70,7 @@ final  class XAxisCustomRenderer: XAxisRenderer {
         if entries.endIndex > 1{
             minGapBwTwoLabels = entries[1] - entries[0]
         }
-        //
+        //Get position as well as numbers of insulin markers
         var entriesTuplesArray = [(Bool,Double,Int,String)]()
         for j in stride(from: 0, to: insulinData.count, by: 1){
             for i in stride(from: 0, to: entries.count - 1, by: 1){
@@ -84,11 +80,11 @@ final  class XAxisCustomRenderer: XAxisRenderer {
                     entriesTuplesArray.insert((true, insulinData[j].date - entries[i],i,insulinData[j].insulin!) , at: i)
                 }else if entries[i+1] == insulinData[j].date {
                     entriesTuplesArray.insert((true, insulinData[j].date - entries[i],i,insulinData[j].insulin!) , at: i)
-                    //Updated change
-                }else if entries[i+1] < insulinData[j].date && (entries[i+1] + minGapBwTwoLabels) > insulinData[j].date{
+                    //Updated change minGapBwTwoLabels to 60.0 seconds
+                }else if entries[i+1] < insulinData[j].date && (entries[i+1] + 60.0) > insulinData[j].date{
                     entriesTuplesArray.insert((true, insulinData[j].date - entries[i],i,insulinData[j].insulin!) , at: i)
-                    //Updated change
-                }else if (entries[i] - minGapBwTwoLabels) < insulinData[j].date && entries[i] > insulinData[j].date{
+                    //Updated change minGapBwTwoLabels to 60.0 seconds
+                }else if (entries[i] - 60.0) < insulinData[j].date && entries[i] > insulinData[j].date{
                     entriesTuplesArray.insert((true, insulinData[j].date - entries[i] ,i,insulinData[j].insulin!) , at: i)
                 }else{
                     entriesTuplesArray.insert((false, 0,i,""), at: i)
