@@ -30,6 +30,7 @@ final  class XAxisCustomRenderer: XAxisRenderer {
 
     init(viewPortHandler: ViewPortHandler, xAxis: XAxis, transformer: Transformer, cgmData: [ShareGlucoseData],insulinData: [ShareGlucoseData]) {
         self.cgmData = cgmData
+        xAxis.wordWrapWidthPercent = 2.0
         self.insulinData = insulinData.sorted(by: { $0.date < $1.date })
         super.init(viewPortHandler: viewPortHandler, xAxis: xAxis, transformer: transformer)
     }

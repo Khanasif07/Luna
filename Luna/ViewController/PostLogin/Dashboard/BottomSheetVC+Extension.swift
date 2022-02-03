@@ -88,9 +88,9 @@ extension BottomSheetVC {
     func persistentNotification(body: String,title: String = "Notification"){
         if !isNotificationProgress && UserModel.main.isAlertsOn{
             self.sendNotification(self,body: body,title: title)
-            FirestoreController.addNotificationData(notificationId: FirestoreController.getNotificationId(), array: [NotificationModel(title: title, date: dateTimeUtils.getNowTimeIntervalUTC(), description: body, notificationId: FirestoreController.getNotificationId())], success: {
-                print("=====Notification added to Firestore====")
-            })
+//            FirestoreController.addNotificationData(notificationId: FirestoreController.getNotificationId(), array: [NotificationModel(title: title, date: dateTimeUtils.getNowTimeIntervalUTC(), description: body, notificationId: FirestoreController.getNotificationId())], success: {
+//                print("=====Notification added to Firestore====")
+//            })
         }
     }
     

@@ -22,6 +22,9 @@
         <array key="SF-Pro-Display-Semibold.otf">
             <string>SFProDisplay-Semibold</string>
         </array>
+        <array key="TimesNewRoman.ttf">
+            <string>.SFUI-Regular</string>
+        </array>
     </customFonts>
     <scenes>
         <!--SelectorVC-->
@@ -1494,7 +1497,7 @@ Luna devices</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2/26 - 2/27" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4u6-yT-gjs">
-                                                <rect key="frame" x="162" y="14.5" width="90" height="21.5"/>
+                                                <rect key="frame" x="162.5" y="14.5" width="89.5" height="21"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -1521,16 +1524,16 @@ Luna devices</string>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="nlv-ag-Wy2">
-                                                    <rect key="frame" x="83.5" y="156" width="48.5" height="38.5"/>
+                                                    <rect key="frame" x="82.5" y="156.5" width="50.5" height="37.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="0.0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhJ-PB-M7X">
-                                                            <rect key="frame" x="2.5" y="0.0" width="43.5" height="21.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhJ-PB-M7X">
+                                                            <rect key="frame" x="3.5" y="0.0" width="43.5" height="21"/>
                                                             <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="in range" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbL-CF-GC1">
-                                                            <rect key="frame" x="0.0" y="21.5" width="48.5" height="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="in range" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbL-CF-GC1">
+                                                            <rect key="frame" x="0.0" y="21" width="50.5" height="16.5"/>
                                                             <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
                                                             <color key="textColor" red="0.45098039215686275" green="0.46274509803921571" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -1538,9 +1541,9 @@ Luna devices</string>
                                                     </subviews>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Summary" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z1w-8c-JHS">
-                                                    <rect key="frame" x="20" y="28.5" width="68.5" height="40.5"/>
-                                                    <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
-                                                    <color key="textColor" red="0.50544291730000002" green="0.51735407109999998" blue="0.53810626269999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <rect key="frame" x="20" y="28.5" width="66.5" height="40.5"/>
+                                                    <fontDescription key="fontDescription" name=".SFUI-Regular" family=".AppleSystemUIFont" pointSize="17"/>
+                                                    <color key="textColor" name="label"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kks-vg-SYe" customClass="KDCircularProgress" customModule="KDCircularProgress">
@@ -1552,19 +1555,19 @@ Luna devices</string>
                                                     </constraints>
                                                 </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="6oj-jj-FZr">
-                                                    <rect key="frame" x="231" y="97.5" width="95" height="155"/>
+                                                    <rect key="frame" x="231" y="97.5" width="101" height="155"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="U0n-bQ-gCO">
-                                                            <rect key="frame" x="0.0" y="0.0" width="95" height="43.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="101" height="42.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insulin delivered" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGv-Rf-f9Z">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="95" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="101" height="16.5"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                                     <color key="textColor" red="0.50544291730000002" green="0.51735407109999998" blue="0.53810626269999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-- units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hxt-Mg-nmH">
-                                                                    <rect key="frame" x="0.0" y="24" width="95" height="19.5"/>
+                                                                    <rect key="frame" x="0.0" y="23.5" width="101" height="19"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -1572,16 +1575,16 @@ Luna devices</string>
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="HXu-mF-aw1">
-                                                            <rect key="frame" x="0.0" y="56" width="95" height="43.5"/>
+                                                            <rect key="frame" x="0.0" y="56.5" width="101" height="42.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Highest glucose" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2xy-FZ-qZx">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="95" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="101" height="16.5"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                                     <color key="textColor" red="0.50544291730000002" green="0.51735407109999998" blue="0.53810626269999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-- mg/dl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQK-HD-W4x">
-                                                                    <rect key="frame" x="0.0" y="24" width="95" height="19.5"/>
+                                                                    <rect key="frame" x="0.0" y="23.5" width="101" height="19"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -1589,16 +1592,16 @@ Luna devices</string>
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="9Od-ps-6S1">
-                                                            <rect key="frame" x="0.0" y="111.5" width="95" height="43.5"/>
+                                                            <rect key="frame" x="0.0" y="112.5" width="101" height="42.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lowest glucose" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9S-HH-xdE">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="95" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="101" height="16.5"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                                     <color key="textColor" red="0.50544291730000002" green="0.51735407109999998" blue="0.53810626269999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-- mg/dl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yai-eT-aoc">
-                                                                    <rect key="frame" x="0.0" y="24" width="95" height="19.5"/>
+                                                                    <rect key="frame" x="0.0" y="23.5" width="101" height="19"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -1664,6 +1667,7 @@ Luna devices</string>
                         <outlet property="mainTaeView" destination="ei7-5w-O73" id="JZY-4p-8H2"/>
                         <outlet property="progress" destination="kks-vg-SYe" id="fI6-1L-0Vt"/>
                         <outlet property="rangePerValueLbl" destination="uhJ-PB-M7X" id="dyD-dN-pdX"/>
+                        <outlet property="summaryTitleLbl" destination="z1w-8c-JHS" id="EhX-NW-JIv"/>
                         <outlet property="titleLbl" destination="4u6-yT-gjs" id="NR0-yx-Db0"/>
                         <outlet property="topNavView" destination="XNF-US-wqr" id="vjr-mk-37f"/>
                     </connections>
@@ -1883,6 +1887,9 @@ Luna devices</string>
         <image name="help" width="40" height="40"/>
         <image name="pairlunaIllustration" width="264.5" height="137"/>
         <image name="step1Devicepaired" width="104" height="102"/>
+        <namedColor name="label">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </namedColor>
         <namedColor name="outgoingMessageBackground">
             <color red="0.20399998128414154" green="0.77999997138977051" blue="0.34899997711181641" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

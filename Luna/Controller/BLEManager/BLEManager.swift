@@ -264,11 +264,8 @@ public class BleManager: NSObject{
                     ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: bgData.insulin ?? "")
                 }
                 rangeBgData = rangeBgData.map { (bgData) -> ShareGlucoseData in
-                    if bgData.insulin == "0.25" || bgData.insulin == "0.75" {
-                    return ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: "0")
-                    } else{
-                      return ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: bgData.insulin ?? "")
-                    }
+                    return  (bgData.insulin == "0.25" || bgData.insulin == "0.75") ? ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: "0")
+                        : ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: bgData.insulin ?? "")
                 }
                 rangeBgData[0].insulin = "0.25"
                 rangeBgData[rangeBgData.endIndex - 1].insulin = "0.75"
