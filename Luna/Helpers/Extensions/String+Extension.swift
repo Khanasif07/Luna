@@ -8,6 +8,15 @@
 import Foundation
 import UIKit
 
+func toString(_ value: Any?) -> String {
+  return String(describing: value ?? "")
+}
+
+func sliceString(str: String, start: Int, end: Int) -> String {
+    let data = Array(str)
+    return String(data[start..<end])
+}
+
 extension String {
     
     ///Removes all spaces from the string

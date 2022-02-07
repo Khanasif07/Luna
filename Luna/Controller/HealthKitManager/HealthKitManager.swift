@@ -19,11 +19,8 @@ class HealthKitManager: NSObject {
     
     var isEnabled = false
     var insulinUnit = HKUnit(from: "IU")
-    
     let healthStore = HKHealthStore()
-    
     var anchor: HKQueryAnchor?
-    
     var heartRateDelegate: HeartRateDelegate?
     
     // access HealthKit API logic.

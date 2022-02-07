@@ -306,11 +306,11 @@ public class BleManager: NSObject{
                 CommonFunctions.delay(delay: 10.0) {
                     self.isDataOutPutProcess = false
                     self.writeValue(myCharacteristic: dataInCharacteristic,value: "#CLEAR_DOSE_DATA")
+                    NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
                 }
             }
         }
-        NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
-        print(SystemInfoModel.shared.dosingData)
+//        print(SystemInfoModel.shared.dosingData)
     }
 }
 // MARK: - Extension For CBPeripheralDelegate
@@ -475,6 +475,10 @@ extension BleManager: CBCentralManagerDelegate {
                                advertisementData: [String: Any], rssi RSSI: NSNumber) {
         print(peripheral.name ?? "")
         print(peripheral.identifier)
+        if let kCBAdvDataServiceUUID =  advertisementData["kCBAdvDataServiceUUIDs"]{
+            print("kCBAdvDataServiceUUID : \(kCBAdvDataServiceUUID)")
+//            sliceString(str: toString(kCBAdvDataServiceUUID), start: "0", end: 3)
+        }
         if peripheral.name == AppConstants.appName{
         myperipheral = peripheral
         myperipheral?.delegate = self
