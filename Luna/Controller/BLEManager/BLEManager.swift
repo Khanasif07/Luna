@@ -475,21 +475,23 @@ extension BleManager: CBCentralManagerDelegate {
                                advertisementData: [String: Any], rssi RSSI: NSNumber) {
         print(peripheral.name ?? "")
         print(peripheral.identifier)
-        if let kCBAdvDataServiceUUID =  (advertisementData["kCBAdvDataServiceUUIDs"] as? [String])?.first{
+        if let kCBAdvDataServiceUUID =  ((advertisementData["kCBAdvDataServiceUUIDs"] as? NSArray)?.firstObject){
             print("kCBAdvDataServiceUUID: ")
-            print(toString((advertisementData["kCBAdvDataServiceUUIDs"] as? NSArray)?.firstObject))
-        }
-        if peripheral.name == AppConstants.appName{
-        myperipheral = peripheral
-        myperipheral?.delegate = self
-        centralManager.stopScan()
-        centralManager.connect(myperipheral!, options: [CBConnectPeripheralOptionNotifyOnConnectionKey:true, CBConnectPeripheralOptionNotifyOnDisconnectionKey: true])
+            print(toString(kCBAdvDataServiceUUID))
+            //MARK:- Update New BLE UUID To Firestore.
+            if UserModel.main.kCBAdvDataServiceUUID.isEmpty && (peripheral.name == AppConstants.appName) {
+                FirestoreController.updateBLEUniqueUUID(uuid: toString(kCBAdvDataServiceUUID))
+            }
+            if (peripheral.name == AppConstants.appName) &&  UserModel.main.kCBAdvDataServiceUUID == toString(kCBAdvDataServiceUUID){
+                myperipheral = peripheral
+                myperipheral?.delegate = self
+                centralManager.stopScan()
+                centralManager.connect(myperipheral!, options: [CBConnectPeripheralOptionNotifyOnConnectionKey:true, CBConnectPeripheralOptionNotifyOnDisconnectionKey: true])
+            }
         }
     }
     
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        print("Connected!")
-        //MARK:- STATIC DATA USING
         isMyPeripheralConected = true
         myperipheral?.discoverServices(nil)
         CommonFunctions.showToastWithMessage("Bluetooth connected.")

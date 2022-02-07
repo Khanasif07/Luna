@@ -32,6 +32,7 @@ struct UserModel{
     var isSystemSetupCompleted : Bool
     var isBiometricOn: Bool
     var status : String
+    var kCBAdvDataServiceUUID: String
     var deviceId: String
     var isAlertsOn: Bool
     
@@ -49,6 +50,7 @@ struct UserModel{
         self.firstName = json[ApiKey.firstName].stringValue
         self.password = json[ApiKey.password].stringValue
         self.status = json[ApiKey.status].stringValue
+        self.kCBAdvDataServiceUUID = json[ApiKey.kCBAdvDataServiceUUID].stringValue
         self.isChangePassword = json[ApiKey.isChangePassword].boolValue
         self.isProfileStepCompleted = json[ApiKey.isProfileStepCompleted].boolValue
         self.isSystemSetupCompleted = json[ApiKey.isSystemSetupCompleted].boolValue
@@ -89,6 +91,7 @@ struct UserModel{
             ApiKey.image : image,
             ApiKey.password : password,
             ApiKey.status : status,
+            ApiKey.kCBAdvDataServiceUUID: kCBAdvDataServiceUUID,
             ApiKey.isChangePassword : isChangePassword,
             ApiKey.diabetesType: diabetesType,
             ApiKey.isBiometricOn : isBiometricOn,

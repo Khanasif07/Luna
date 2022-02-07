@@ -104,6 +104,7 @@ class FirestoreController:NSObject{
                         user.isChangePassword = data[ApiKey.isChangePassword] as? Bool ?? false
                         user.deviceId = data[ApiKey.deviceId] as? String ?? ""
                         user.isAlertsOn = data[ApiKey.isAlertsOn] as? Bool ?? false
+                        user.kCBAdvDataServiceUUID = data[ApiKey.kCBAdvDataServiceUUID] as? String ?? ""
                         UserModel.main = user
                         //MARK:- Important
                         UserDefaultsRepository.shareUserName.value = data[ApiKey.shareUserName] as? String ?? ""
@@ -707,6 +708,15 @@ class FirestoreController:NSObject{
         let uid = AppUserDefaults.value(forKey: .uid).stringValue
         guard !uid.isEmpty else { return }
         db.collection(ApiKey.users).document(uid).updateData([ApiKey.deviceToken: token])
+    }
+    
+    //MARK:- Update BLE UNique UUID
+    //================================
+    static func updateBLEUniqueUUID(uuid: String) {
+        let uid = AppUserDefaults.value(forKey: .uid).stringValue
+        guard !uid.isEmpty else { return }
+        db.collection(ApiKey.users).document(uid).updateData([ApiKey.kCBAdvDataServiceUUID: uuid])
+        UserModel.main.kCBAdvDataServiceUUID = uuid
     }
     
     //MARK:-Fetching Listing
