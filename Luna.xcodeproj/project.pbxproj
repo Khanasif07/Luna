@@ -142,7 +142,6 @@
 		849B5A4A2697143B000AA5DC /* BottomSheetTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849B5A482697143B000AA5DC /* BottomSheetTopCell.xib */; };
 		849B7432269D612000C059E5 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849B7431269D612000C059E5 /* HealthKit.framework */; };
 		849B7436269D710600C059E5 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7435269D710600C059E5 /* HealthKitManager.swift */; };
-		849BC0D527A3ABC3009E054C /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 849BC0D427A3ABC3009E054C /* GoogleSignIn */; };
 		84A18911278C2FD3003ED8D9 /* NotificationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A18910278C2FD3003ED8D9 /* NotificationsVC.swift */; };
 		84A18915278C318A003ED8D9 /* NotificationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A18913278C318A003ED8D9 /* NotificationsCell.swift */; };
 		84A18916278C318A003ED8D9 /* NotificationsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A18914278C318A003ED8D9 /* NotificationsCell.xib */; };
@@ -244,6 +243,37 @@
 		BD088BE827A207F2007F2C4B /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BE727A207F2007F2C4B /* SwiftKeychainWrapper */; };
 		BD088BEB27A208B2007F2C4B /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BEA27A208B2007F2C4B /* Charts */; };
 		BD088BEE27A2093D007F2C4B /* KDCircularProgress in Frameworks */ = {isa = PBXBuildFile; productRef = BD088BED27A2093D007F2C4B /* KDCircularProgress */; };
+		BD0D0C2827A2128B001117B3 /* CgmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0D0C2727A2128B001117B3 /* CgmRepository.swift */; };
+		BD0D0C3127A21456001117B3 /* FirestoreCgmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0D0C3027A21456001117B3 /* FirestoreCgmRepository.swift */; };
+		BD0D0C3327A215CE001117B3 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = BD0D0C3227A215CE001117B3 /* FirebaseFirestoreSwift-Beta */; };
+		BD0D0C3727A22032001117B3 /* FirestoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0D0C3627A22032001117B3 /* FirestoreConstants.swift */; };
+		BD0D0C3927A22F05001117B3 /* CgmConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0D0C3827A22F05001117B3 /* CgmConnection.swift */; };
+		BD0D0C3C27A23745001117B3 /* CgmViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0D0C3B27A23745001117B3 /* CgmViewExtensions.swift */; };
+		BD0D0C3F27A23AF3001117B3 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0D0C3E27A23AF3001117B3 /* AppState.swift */; };
+		BD2B66C427A47820004F0A35 /* ConnectLunaCgmSimulatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2B66C327A47820004F0A35 /* ConnectLunaCgmSimulatorView.swift */; };
+		BD2B66C627A478BB004F0A35 /* ConnectLunaCgmSimulatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2B66C527A478BB004F0A35 /* ConnectLunaCgmSimulatorViewModel.swift */; };
+		BD2B66C827A4A4FE004F0A35 /* PairingConnectInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2B66C727A4A4FE004F0A35 /* PairingConnectInteractor.swift */; };
+		BD2B66CA27A4A5B9004F0A35 /* LunaCgmSimulatorConnectInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2B66C927A4A5B9004F0A35 /* LunaCgmSimulatorConnectInteractor.swift */; };
+		BDC2BDEA27A59E95003E4A13 /* Glucose.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDE927A59E95003E4A13 /* Glucose.swift */; };
+		BDC2BDEC27A5A0C8003E4A13 /* GlucoseReadRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDEB27A5A0C8003E4A13 /* GlucoseReadRepository.swift */; };
+		BDC2BDEF27A5A7B6003E4A13 /* GlucoseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDEE27A5A7B6003E4A13 /* GlucoseView.swift */; };
+		BDC2BDF127A5A7E7003E4A13 /* DisplayGlucose.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDF027A5A7E7003E4A13 /* DisplayGlucose.swift */; };
+		BDC2BDF327A5A80F003E4A13 /* GlucoseViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDF227A5A80F003E4A13 /* GlucoseViewExtensions.swift */; };
+		BDC2BDF527A5A884003E4A13 /* GlucoseFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDF427A5A884003E4A13 /* GlucoseFormatter.swift */; };
+		BDC2BDF727A5B231003E4A13 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDC2BDF627A5B231003E4A13 /* Colors.xcassets */; };
+		BDC2BDFD27A5BB79003E4A13 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDFC27A5BB79003E4A13 /* UserRepository.swift */; };
+		BDC2BDFF27A5BBD4003E4A13 /* FirebaseUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDFE27A5BBD4003E4A13 /* FirebaseUserRepository.swift */; };
+		BDC2BE0127A5F613003E4A13 /* AlertModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0027A5F613003E4A13 /* AlertModal.swift */; };
+		BDC2BE0327A5FCA5003E4A13 /* FullWidthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0227A5FCA5003E4A13 /* FullWidthButton.swift */; };
+		BDC2BE0527A60A35003E4A13 /* CornerCancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0427A60A35003E4A13 /* CornerCancelButton.swift */; };
+		BDC2BE0727A62FDB003E4A13 /* ConnectedLunaCgmSimulatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0627A62FDB003E4A13 /* ConnectedLunaCgmSimulatorView.swift */; };
+		BDC2BE0A27A71A7F003E4A13 /* UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0927A71A7F003E4A13 /* UserError.swift */; };
+		BDC2BE0D27A71ADC003E4A13 /* CgmError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0C27A71ADC003E4A13 /* CgmError.swift */; };
+		BDC2BE0F27A71C85003E4A13 /* ConnectedLunaCgmSimulatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE0E27A71C85003E4A13 /* ConnectedLunaCgmSimulatorViewModel.swift */; };
+		BDC2BE1727A73688003E4A13 /* CgmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE1627A73688003E4A13 /* CgmService.swift */; };
+		BDC2BE1927A74A15003E4A13 /* LunaCgmSimulatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE1827A74A15003E4A13 /* LunaCgmSimulatorService.swift */; };
+		BDC2BE1C27A767DC003E4A13 /* BridgingGlucoseWriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE1B27A767DC003E4A13 /* BridgingGlucoseWriteRepository.swift */; };
+		BDC2BE1E27A76C04003E4A13 /* GlucoseMapperExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BE1D27A76C04003E4A13 /* GlucoseMapperExtension.swift */; };
 		BDF0D78227A1FA1700A5F950 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78127A1FA1700A5F950 /* FirebaseAnalytics */; };
 		BDF0D78427A1FA1700A5F950 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78327A1FA1700A5F950 /* FirebaseCrashlytics */; };
 		BDF0D78627A1FA1700A5F950 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78527A1FA1700A5F950 /* FirebaseDatabase */; };
@@ -252,6 +282,18 @@
 		BDF0D78C27A1FA1700A5F950 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78B27A1FA1700A5F950 /* FirebasePerformance */; };
 		BDF0D78E27A1FA1700A5F950 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78D27A1FA1700A5F950 /* FirebaseStorage */; };
 		BDF0D79027A1FA9300A5F950 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78F27A1FA9300A5F950 /* FirebaseAuth */; };
+		BDF765FE27A44ED2009BE8DF /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 849BC0D427A3ABC3009E054C /* GoogleSignIn */; };
+		BDF7660127A45351009BE8DF /* LunaBluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = BDF7660027A45351009BE8DF /* LunaBluetooth */; };
+		BDF7660527A45EB6009BE8DF /* PairingScannerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF7660427A45EB6009BE8DF /* PairingScannerInteractor.swift */; };
+		BDF7660727A465A0009BE8DF /* LunaCgmSimulatorScanningInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF7660627A465A0009BE8DF /* LunaCgmSimulatorScanningInteractor.swift */; };
+		BDFEC66927A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC66827A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift */; };
+		BDFEC66C27A2E5250070EAF1 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC66B27A2E5250070EAF1 /* Theme.swift */; };
+		BDFEC66E27A2FD4D0070EAF1 /* BridgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC66D27A2FD4D0070EAF1 /* BridgeView.swift */; };
+		BDFEC67027A30CC80070EAF1 /* BridgeUIHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC66F27A30CC80070EAF1 /* BridgeUIHostingController.swift */; };
+		BDFEC67227A343940070EAF1 /* PairCgmRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC67127A343940070EAF1 /* PairCgmRouter.swift */; };
+		BDFEC67527A346230070EAF1 /* PairLunaCgmSimulatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC67427A346230070EAF1 /* PairLunaCgmSimulatorViewModel.swift */; };
+		BDFEC67727A34DE20070EAF1 /* Exitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC67627A34DE20070EAF1 /* Exitable.swift */; };
+		BDFEC67C27A34EDA0070EAF1 /* LunaBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC67B27A34EDA0070EAF1 /* LunaBackButton.swift */; };
 		BDFFB0D527A20E0E00B15370 /* Instabug in Frameworks */ = {isa = PBXBuildFile; productRef = BDFFB0D427A20E0E00B15370 /* Instabug */; };
 /* End PBXBuildFile section */
 
@@ -491,6 +533,46 @@
 		84FDA0AF267DE8B600AC8BE9 /* DecisionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionCell.swift; sourceTree = "<group>"; };
 		84FDA0B0267DE8B600AC8BE9 /* DecisionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DecisionCell.xib; sourceTree = "<group>"; };
 		8AEA7181BDAC85A8A469C807 /* Pods-Luna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Luna.release.xcconfig"; path = "Target Support Files/Pods-Luna/Pods-Luna.release.xcconfig"; sourceTree = "<group>"; };
+		BD0D0C2727A2128B001117B3 /* CgmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CgmRepository.swift; sourceTree = "<group>"; };
+		BD0D0C3027A21456001117B3 /* FirestoreCgmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreCgmRepository.swift; sourceTree = "<group>"; };
+		BD0D0C3627A22032001117B3 /* FirestoreConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreConstants.swift; sourceTree = "<group>"; };
+		BD0D0C3827A22F05001117B3 /* CgmConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CgmConnection.swift; sourceTree = "<group>"; };
+		BD0D0C3B27A23745001117B3 /* CgmViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CgmViewExtensions.swift; sourceTree = "<group>"; };
+		BD0D0C3E27A23AF3001117B3 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		BD2B66C327A47820004F0A35 /* ConnectLunaCgmSimulatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectLunaCgmSimulatorView.swift; sourceTree = "<group>"; };
+		BD2B66C527A478BB004F0A35 /* ConnectLunaCgmSimulatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectLunaCgmSimulatorViewModel.swift; sourceTree = "<group>"; };
+		BD2B66C727A4A4FE004F0A35 /* PairingConnectInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingConnectInteractor.swift; sourceTree = "<group>"; };
+		BD2B66C927A4A5B9004F0A35 /* LunaCgmSimulatorConnectInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunaCgmSimulatorConnectInteractor.swift; sourceTree = "<group>"; };
+		BDC2BDE927A59E95003E4A13 /* Glucose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Glucose.swift; sourceTree = "<group>"; };
+		BDC2BDEB27A5A0C8003E4A13 /* GlucoseReadRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlucoseReadRepository.swift; sourceTree = "<group>"; };
+		BDC2BDEE27A5A7B6003E4A13 /* GlucoseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlucoseView.swift; sourceTree = "<group>"; };
+		BDC2BDF027A5A7E7003E4A13 /* DisplayGlucose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayGlucose.swift; sourceTree = "<group>"; };
+		BDC2BDF227A5A80F003E4A13 /* GlucoseViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlucoseViewExtensions.swift; sourceTree = "<group>"; };
+		BDC2BDF427A5A884003E4A13 /* GlucoseFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlucoseFormatter.swift; sourceTree = "<group>"; };
+		BDC2BDF627A5B231003E4A13 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		BDC2BDFC27A5BB79003E4A13 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		BDC2BDFE27A5BBD4003E4A13 /* FirebaseUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUserRepository.swift; sourceTree = "<group>"; };
+		BDC2BE0027A5F613003E4A13 /* AlertModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModal.swift; sourceTree = "<group>"; };
+		BDC2BE0227A5FCA5003E4A13 /* FullWidthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullWidthButton.swift; sourceTree = "<group>"; };
+		BDC2BE0427A60A35003E4A13 /* CornerCancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerCancelButton.swift; sourceTree = "<group>"; };
+		BDC2BE0627A62FDB003E4A13 /* ConnectedLunaCgmSimulatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedLunaCgmSimulatorView.swift; sourceTree = "<group>"; };
+		BDC2BE0927A71A7F003E4A13 /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
+		BDC2BE0C27A71ADC003E4A13 /* CgmError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CgmError.swift; sourceTree = "<group>"; };
+		BDC2BE0E27A71C85003E4A13 /* ConnectedLunaCgmSimulatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedLunaCgmSimulatorViewModel.swift; sourceTree = "<group>"; };
+		BDC2BE1627A73688003E4A13 /* CgmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CgmService.swift; sourceTree = "<group>"; };
+		BDC2BE1827A74A15003E4A13 /* LunaCgmSimulatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunaCgmSimulatorService.swift; sourceTree = "<group>"; };
+		BDC2BE1B27A767DC003E4A13 /* BridgingGlucoseWriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgingGlucoseWriteRepository.swift; sourceTree = "<group>"; };
+		BDC2BE1D27A76C04003E4A13 /* GlucoseMapperExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlucoseMapperExtension.swift; sourceTree = "<group>"; };
+		BDF7660427A45EB6009BE8DF /* PairingScannerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingScannerInteractor.swift; sourceTree = "<group>"; };
+		BDF7660627A465A0009BE8DF /* LunaCgmSimulatorScanningInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunaCgmSimulatorScanningInteractor.swift; sourceTree = "<group>"; };
+		BDFEC66827A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairLunaCgmSimulatorView.swift; sourceTree = "<group>"; };
+		BDFEC66B27A2E5250070EAF1 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		BDFEC66D27A2FD4D0070EAF1 /* BridgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeView.swift; sourceTree = "<group>"; };
+		BDFEC66F27A30CC80070EAF1 /* BridgeUIHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeUIHostingController.swift; sourceTree = "<group>"; };
+		BDFEC67127A343940070EAF1 /* PairCgmRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairCgmRouter.swift; sourceTree = "<group>"; };
+		BDFEC67427A346230070EAF1 /* PairLunaCgmSimulatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairLunaCgmSimulatorViewModel.swift; sourceTree = "<group>"; };
+		BDFEC67627A34DE20070EAF1 /* Exitable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exitable.swift; sourceTree = "<group>"; };
+		BDFEC67B27A34EDA0070EAF1 /* LunaBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunaBackButton.swift; sourceTree = "<group>"; };
 		F4623A1A786ED367659EFB05 /* Pods-Luna.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Luna.debug.xcconfig"; path = "Target Support Files/Pods-Luna/Pods-Luna.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -502,13 +584,15 @@
 				BDF0D78627A1FA1700A5F950 /* FirebaseDatabase in Frameworks */,
 				BDF0D79027A1FA9300A5F950 /* FirebaseAuth in Frameworks */,
 				BD088BE827A207F2007F2C4B /* SwiftKeychainWrapper in Frameworks */,
-				849BC0D527A3ABC3009E054C /* GoogleSignIn in Frameworks */,
 				10BD91E0179A10717FF4BFEB /* Pods_Luna.framework in Frameworks */,
 				BD088BE527A20700007F2C4B /* MessageKit in Frameworks */,
+				BDF765FE27A44ED2009BE8DF /* GoogleSignIn in Frameworks */,
 				BDF0D78E27A1FA1700A5F950 /* FirebaseStorage in Frameworks */,
 				BDF0D78A27A1FA1700A5F950 /* FirebaseMessaging in Frameworks */,
 				BDF0D78427A1FA1700A5F950 /* FirebaseCrashlytics in Frameworks */,
+				BDF7660127A45351009BE8DF /* LunaBluetooth in Frameworks */,
 				BD088BDF27A205BC007F2C4B /* SwiftyJSON in Frameworks */,
+				BD0D0C3327A215CE001117B3 /* FirebaseFirestoreSwift-Beta in Frameworks */,
 				849B7432269D612000C059E5 /* HealthKit.framework in Frameworks */,
 				BDF0D78227A1FA1700A5F950 /* FirebaseAnalytics in Frameworks */,
 				BD088BEE27A2093D007F2C4B /* KDCircularProgress in Frameworks */,
@@ -927,6 +1011,11 @@
 		84CC12982668C822009316FC /* Luna */ = {
 			isa = PBXGroup;
 			children = (
+				BDC2BDFA27A5BB63003E4A13 /* user */,
+				BDFEC67927A34EAB0070EAF1 /* common */,
+				BDFEC66A27A2E5110070EAF1 /* theme */,
+				BD0D0C3D27A23AE2001117B3 /* app */,
+				BD0D0C2527A21240001117B3 /* cgm */,
 				84F7BC4E266F06A1006C94DA /* Luna.entitlements */,
 				84658E1927A2DCAD00405EF8 /* InstabugDebugger */,
 				84E78B9C2685E8B800FABDCD /* Model */,
@@ -978,6 +1067,7 @@
 				849B25CC270B1E6600323876 /* blank.wav */,
 				84CC12A72668C823009316FC /* Info.plist */,
 				846F1A1F2678C2220034ACE0 /* GoogleService-Info.plist */,
+				BDC2BDF627A5B231003E4A13 /* Colors.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1125,6 +1215,168 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		BD0D0C2527A21240001117B3 /* cgm */ = {
+			isa = PBXGroup;
+			children = (
+				BDC2BE1A27A767B7003E4A13 /* bridge */,
+				BDC2BE0B27A71ACF003E4A13 /* errors */,
+				BD0D0C2627A2124E001117B3 /* domain */,
+				BD0D0C2F27A2144A001117B3 /* firestore */,
+				BDF7660327A45E9C009BE8DF /* interactor */,
+				BD0D0C3A27A23722001117B3 /* view */,
+				BDFEC67327A346090070EAF1 /* viewmodel */,
+			);
+			path = cgm;
+			sourceTree = "<group>";
+		};
+		BD0D0C2627A2124E001117B3 /* domain */ = {
+			isa = PBXGroup;
+			children = (
+				BD0D0C2727A2128B001117B3 /* CgmRepository.swift */,
+				BD0D0C3827A22F05001117B3 /* CgmConnection.swift */,
+				BDC2BDE927A59E95003E4A13 /* Glucose.swift */,
+				BDC2BDEB27A5A0C8003E4A13 /* GlucoseReadRepository.swift */,
+			);
+			path = domain;
+			sourceTree = "<group>";
+		};
+		BD0D0C2F27A2144A001117B3 /* firestore */ = {
+			isa = PBXGroup;
+			children = (
+				BD0D0C3027A21456001117B3 /* FirestoreCgmRepository.swift */,
+			);
+			path = firestore;
+			sourceTree = "<group>";
+		};
+		BD0D0C3A27A23722001117B3 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				BD0D0C3B27A23745001117B3 /* CgmViewExtensions.swift */,
+				BDC2BE0627A62FDB003E4A13 /* ConnectedLunaCgmSimulatorView.swift */,
+				BD2B66C327A47820004F0A35 /* ConnectLunaCgmSimulatorView.swift */,
+				BDC2BDF027A5A7E7003E4A13 /* DisplayGlucose.swift */,
+				BDC2BDF427A5A884003E4A13 /* GlucoseFormatter.swift */,
+				BDC2BDEE27A5A7B6003E4A13 /* GlucoseView.swift */,
+				BDC2BDF227A5A80F003E4A13 /* GlucoseViewExtensions.swift */,
+				BDFEC67127A343940070EAF1 /* PairCgmRouter.swift */,
+				BDFEC66827A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		BD0D0C3D27A23AE2001117B3 /* app */ = {
+			isa = PBXGroup;
+			children = (
+				BD0D0C3E27A23AF3001117B3 /* AppState.swift */,
+			);
+			path = app;
+			sourceTree = "<group>";
+		};
+		BDC2BDED27A5A132003E4A13 /* firestore */ = {
+			isa = PBXGroup;
+			children = (
+				BD0D0C3627A22032001117B3 /* FirestoreConstants.swift */,
+			);
+			path = firestore;
+			sourceTree = "<group>";
+		};
+		BDC2BDFA27A5BB63003E4A13 /* user */ = {
+			isa = PBXGroup;
+			children = (
+				BDC2BDFB27A5BB69003E4A13 /* domain */,
+			);
+			path = user;
+			sourceTree = "<group>";
+		};
+		BDC2BDFB27A5BB69003E4A13 /* domain */ = {
+			isa = PBXGroup;
+			children = (
+				BDC2BDFC27A5BB79003E4A13 /* UserRepository.swift */,
+				BDC2BDFE27A5BBD4003E4A13 /* FirebaseUserRepository.swift */,
+			);
+			path = domain;
+			sourceTree = "<group>";
+		};
+		BDC2BE0827A71A74003E4A13 /* errors */ = {
+			isa = PBXGroup;
+			children = (
+				BDC2BE0927A71A7F003E4A13 /* UserError.swift */,
+			);
+			path = errors;
+			sourceTree = "<group>";
+		};
+		BDC2BE0B27A71ACF003E4A13 /* errors */ = {
+			isa = PBXGroup;
+			children = (
+				BDC2BE0C27A71ADC003E4A13 /* CgmError.swift */,
+			);
+			path = errors;
+			sourceTree = "<group>";
+		};
+		BDC2BE1A27A767B7003E4A13 /* bridge */ = {
+			isa = PBXGroup;
+			children = (
+				BDC2BE1B27A767DC003E4A13 /* BridgingGlucoseWriteRepository.swift */,
+			);
+			path = bridge;
+			sourceTree = "<group>";
+		};
+		BDF7660327A45E9C009BE8DF /* interactor */ = {
+			isa = PBXGroup;
+			children = (
+				BDC2BE1627A73688003E4A13 /* CgmService.swift */,
+				BDC2BE1827A74A15003E4A13 /* LunaCgmSimulatorService.swift */,
+				BD2B66C927A4A5B9004F0A35 /* LunaCgmSimulatorConnectInteractor.swift */,
+				BDF7660627A465A0009BE8DF /* LunaCgmSimulatorScanningInteractor.swift */,
+				BD2B66C727A4A4FE004F0A35 /* PairingConnectInteractor.swift */,
+				BDF7660427A45EB6009BE8DF /* PairingScannerInteractor.swift */,
+				BDC2BE1D27A76C04003E4A13 /* GlucoseMapperExtension.swift */,
+			);
+			path = interactor;
+			sourceTree = "<group>";
+		};
+		BDFEC66A27A2E5110070EAF1 /* theme */ = {
+			isa = PBXGroup;
+			children = (
+				BDFEC66B27A2E5250070EAF1 /* Theme.swift */,
+			);
+			path = theme;
+			sourceTree = "<group>";
+		};
+		BDFEC67327A346090070EAF1 /* viewmodel */ = {
+			isa = PBXGroup;
+			children = (
+				BDFEC67427A346230070EAF1 /* PairLunaCgmSimulatorViewModel.swift */,
+				BD2B66C527A478BB004F0A35 /* ConnectLunaCgmSimulatorViewModel.swift */,
+				BDC2BE0E27A71C85003E4A13 /* ConnectedLunaCgmSimulatorViewModel.swift */,
+			);
+			path = viewmodel;
+			sourceTree = "<group>";
+		};
+		BDFEC67927A34EAB0070EAF1 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				BDC2BE0827A71A74003E4A13 /* errors */,
+				BDC2BDED27A5A132003E4A13 /* firestore */,
+				BDFEC67A27A34EB00070EAF1 /* view */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		BDFEC67A27A34EB00070EAF1 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				BDFEC66D27A2FD4D0070EAF1 /* BridgeView.swift */,
+				BDFEC66F27A30CC80070EAF1 /* BridgeUIHostingController.swift */,
+				BDFEC67627A34DE20070EAF1 /* Exitable.swift */,
+				BDFEC67B27A34EDA0070EAF1 /* LunaBackButton.swift */,
+				BDC2BE0027A5F613003E4A13 /* AlertModal.swift */,
+				BDC2BE0227A5FCA5003E4A13 /* FullWidthButton.swift */,
+				BDC2BE0427A60A35003E4A13 /* CornerCancelButton.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		F2201812782A54B48AE7EE35 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1171,6 +1423,8 @@
 				BD088BED27A2093D007F2C4B /* KDCircularProgress */,
 				BDFFB0D427A20E0E00B15370 /* Instabug */,
 				849BC0D427A3ABC3009E054C /* GoogleSignIn */,
+				BD0D0C3227A215CE001117B3 /* FirebaseFirestoreSwift-Beta */,
+				BDF7660027A45351009BE8DF /* LunaBluetooth */,
 			);
 			productName = Luna;
 			productReference = 84CC12962668C822009316FC /* Luna.app */;
@@ -1211,6 +1465,7 @@
 				BD088BEC27A2093D007F2C4B /* XCRemoteSwiftPackageReference "KDCircularProgress" */,
 				BDFFB0D327A20E0E00B15370 /* XCRemoteSwiftPackageReference "Instabug-SP" */,
 				849BC0D327A3ABC3009E054C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				BDF765FF27A45351009BE8DF /* XCRemoteSwiftPackageReference "ios-lunabluetooth" */,
 			);
 			productRefGroup = 84CC12972668C822009316FC /* Products */;
 			projectDirPath = "";
@@ -1271,6 +1526,7 @@
 				84E2D9BD26B12D26000C0FD8 /* SettingManualCell.xib in Resources */,
 				845B619026AAC2D900F9BC2A /* LICENSE in Resources */,
 				842E9B1826955E2400F36A3D /* InsulinStep2Cell.xib in Resources */,
+				BDC2BDF727A5B231003E4A13 /* Colors.xcassets in Resources */,
 				840A7E672696F190005AA1E6 /* SessionHistoryTableViewCell.xib in Resources */,
 				84467275268DAE1E00EC55FD /* SystemSetup.storyboard in Resources */,
 				1863AF8A26E23C7100902838 /* CoachMarkViewApp.xib in Resources */,
@@ -1350,8 +1606,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD0D0C2827A2128B001117B3 /* CgmRepository.swift in Sources */,
 				8418D7D626B01F4E00BAB256 /* UserDefaultsValueGroups.swift in Sources */,
 				188DB13026E0993600FBF042 /* OverlaySnapshotView.swift in Sources */,
+				BD0D0C3C27A23745001117B3 /* CgmViewExtensions.swift in Sources */,
 				8403F3C026F9D2F8004BFE8E /* Chart.swift in Sources */,
 				840A7DF32696E95E005AA1E6 /* CGMConnectedVC.swift in Sources */,
 				188DB13926E0993600FBF042 /* CoachMarkArrowOrientation.swift in Sources */,
@@ -1360,6 +1618,7 @@
 				845B619426AAC31800F9BC2A /* ShareClientExtension.swift in Sources */,
 				8418D7DB26B021FA00BAB256 /* BackgroundTaskAudio.swift in Sources */,
 				8418D7D826B01F4E00BAB256 /* UserDefaultsValue.swift in Sources */,
+				BDC2BDEC27A5A0C8003E4A13 /* GlucoseReadRepository.swift in Sources */,
 				84CC12DD2668D023009316FC /* AppStoryboards.swift in Sources */,
 				188DB12726E0993600FBF042 /* OverlayStyleManager.swift in Sources */,
 				188DB15126E0993600FBF042 /* BlurringOverlayStyleManager.swift in Sources */,
@@ -1370,6 +1629,7 @@
 				84CC13012668D191009316FC /* Date+Extension.swift in Sources */,
 				849B5A492697143B000AA5DC /* BottomSheetTopCell.swift in Sources */,
 				845549282678FAEF000CC13D /* SignUpTopTableCell.swift in Sources */,
+				BDC2BE0327A5FCA5003E4A13 /* FullWidthButton.swift in Sources */,
 				188DB14726E0993600FBF042 /* CoachMarkArrowDefaultView.swift in Sources */,
 				84CC12D32668CFE9009316FC /* ApiKeys.swift in Sources */,
 				84FDA0B1267DE8B600AC8BE9 /* DecisionCell.swift in Sources */,
@@ -1379,9 +1639,11 @@
 				188DB12C26E0993600FBF042 /* CoachMarkHelper.swift in Sources */,
 				188DB13826E0993600FBF042 /* PassthroughViews.swift in Sources */,
 				8418D7E526B023A700BAB256 /* CGMAppConstants.swift in Sources */,
+				BDC2BE0D27A71ADC003E4A13 /* CgmError.swift in Sources */,
 				84B34FF426CC99CC00ECF8F0 /* AxisValueFormatter.swift in Sources */,
 				188DB13C26E0993600FBF042 /* AccessibilityIdentifiers.swift in Sources */,
 				188DB12F26E0993600FBF042 /* CoachMarksController+Proxy.swift in Sources */,
+				BDC2BE0527A60A35003E4A13 /* CornerCancelButton.swift in Sources */,
 				840A7DFC2696E98C005AA1E6 /* PairLunaVC.swift in Sources */,
 				84467287268DBECC00EC55FD /* InsulinStep1VC.swift in Sources */,
 				842E9B1B2695690B00F36A3D /* InsulinStep3VC.swift in Sources */,
@@ -1398,6 +1660,10 @@
 				188DB13526E0993600FBF042 /* FlowManager.swift in Sources */,
 				8418D7DF26B0230100BAB256 /* AnyConvertible.swift in Sources */,
 				844BD1CB2701BBAE00ED224E /* Extension+LoginViewController.swift in Sources */,
+				BDC2BE1927A74A15003E4A13 /* LunaCgmSimulatorService.swift in Sources */,
+				BDC2BDEF27A5A7B6003E4A13 /* GlucoseView.swift in Sources */,
+				BD2B66C427A47820004F0A35 /* ConnectLunaCgmSimulatorView.swift in Sources */,
+				BD2B66C827A4A4FE004F0A35 /* PairingConnectInteractor.swift in Sources */,
 				84E2D9B826B12C17000C0FD8 /* SettingManualVC.swift in Sources */,
 				840A7ED72697060E005AA1E6 /* SessionFilterVC.swift in Sources */,
 				8403F3BD26F9D016004BFE8E /* Graphs.swift in Sources */,
@@ -1409,6 +1675,7 @@
 				8448DBDF2701A9570040137F /* Pulsator.swift in Sources */,
 				84FDA0A7267DCB1000AC8BE9 /* MessageSenderCell.swift in Sources */,
 				84CC12BC2668CDF4009316FC /* FirestoreController.swift in Sources */,
+				BD2B66C627A478BB004F0A35 /* ConnectLunaCgmSimulatorViewModel.swift in Sources */,
 				84CC12F22668D0E6009316FC /* UITextFieldExtension.swift in Sources */,
 				1863AF8926E23C7100902838 /* CoachMarkViewApp.swift in Sources */,
 				84D1F5052679E95A00F131E0 /* ForgotPasswordVC.swift in Sources */,
@@ -1417,24 +1684,29 @@
 				84A18911278C2FD3003ED8D9 /* NotificationsVC.swift in Sources */,
 				84CC12E02668D036009316FC /* AppConstants.swift in Sources */,
 				84B06BB926E29275004902E4 /* CoachMarkArrowViewApp.swift in Sources */,
+				BDFEC66C27A2E5250070EAF1 /* Theme.swift in Sources */,
 				84606119270C3DF900DFD22A /* SessionHistory.swift in Sources */,
 				84D1F4B42679C12900F131E0 /* TermsConditionVC.swift in Sources */,
 				84AA879026FAE8900047D86E /* BottomSheetVC.swift in Sources */,
 				188DB14B26E0993600FBF042 /* CoachMarkSkipDefaultView.swift in Sources */,
 				84CC12E32668D042009316FC /* AppGlobals.swift in Sources */,
+				BDC2BDEA27A59E95003E4A13 /* Glucose.swift in Sources */,
 				84AA878D26FAD1120047D86E /* Alarms.swift in Sources */,
 				188DB12D26E0993600FBF042 /* CoachMarkBodyDefaultView.swift in Sources */,
+				BDFEC67027A30CC80070EAF1 /* BridgeUIHostingController.swift in Sources */,
 				188DB13E26E0993600FBF042 /* CoachMarkSkipView.swift in Sources */,
 				84CC129A2668C822009316FC /* AppDelegate.swift in Sources */,
 				849B25662707116900323876 /* CustomTextView.swift in Sources */,
 				84CC12DA2668D00E009316FC /* AppFonts.swift in Sources */,
 				84CC12CA2668CF8D009316FC /* AppEnums.swift in Sources */,
 				84CC12EF2668D0CE009316FC /* NotificationExtension.swift in Sources */,
+				BDC2BE0F27A71C85003E4A13 /* ConnectedLunaCgmSimulatorViewModel.swift in Sources */,
 				188DB12626E0993600FBF042 /* OverlayManager.swift in Sources */,
 				840A7E2E2696EDBB005AA1E6 /* SessionHistoryVC.swift in Sources */,
 				840A7E622696F0E6005AA1E6 /* SessionHistoryHeader.swift in Sources */,
 				842E9B1E2695710300F36A3D /* InsulinStep4VC.swift in Sources */,
 				840A7DF42696E95E005AA1E6 /* CGMLoginVC.swift in Sources */,
+				BDC2BDF527A5A884003E4A13 /* GlucoseFormatter.swift in Sources */,
 				188DB13F26E0993600FBF042 /* CoachMarkDisplayManager.swift in Sources */,
 				84F2A28126985398000FDCD5 /* LineDashedView.swift in Sources */,
 				8418D7E226B0235300BAB256 /* ObservationToken.swift in Sources */,
@@ -1444,6 +1716,7 @@
 				849B7436269D710600C059E5 /* HealthKitManager.swift in Sources */,
 				84CC12CD2668CFBF009316FC /* AppRouter.swift in Sources */,
 				8418D7D726B01F4E00BAB256 /* UserDefaults.swift in Sources */,
+				BDC2BE1E27A76C04003E4A13 /* GlucoseMapperExtension.swift in Sources */,
 				84F2A27026981DD8000FDCD5 /* BottomSheetChartCell.swift in Sources */,
 				84CC13042668D1A6009316FC /* Double+Extension.swift in Sources */,
 				84CC13212668D588009316FC /* LocalizedString.swift in Sources */,
@@ -1451,18 +1724,24 @@
 				84CC12E62668D057009316FC /* DeviceDetail.swift in Sources */,
 				84CC13192668D25B009316FC /* UIView+Extension.swift in Sources */,
 				84F2A278269849ED000FDCD5 /* BottomSheetInsulinCell.swift in Sources */,
+				BDF7660527A45EB6009BE8DF /* PairingScannerInteractor.swift in Sources */,
 				84AA00902716C04200E7E1F8 /* CustomLineChartView.swift in Sources */,
 				843C4569278DB59400C99AE5 /* NotificationModel.swift in Sources */,
 				84CC130D2668D1F3009316FC /* Dictionary+Extension.swift in Sources */,
+				BDC2BDFD27A5BB79003E4A13 /* UserRepository.swift in Sources */,
 				84E78B9E2685E8C500FABDCD /* UserModel.swift in Sources */,
 				8455491C2678DDBA000CC13D /* SignupViewController.swift in Sources */,
 				84861D8326849FDB004B046C /* ChangePasswordVC.swift in Sources */,
 				8403F3BA26F9CF49004BFE8E /* Timers.swift in Sources */,
 				188DB12926E0993600FBF042 /* CoachMarkBodyView.swift in Sources */,
+				BD0D0C3F27A23AF3001117B3 /* AppState.swift in Sources */,
 				84F2A27D26984F3D000FDCD5 /* BottomSheetBottomCell.swift in Sources */,
+				BDC2BE0127A5F613003E4A13 /* AlertModal.swift in Sources */,
 				188DB14E26E0993600FBF042 /* SkipViewDisplayManager.swift in Sources */,
 				84CC130A2668D1DB009316FC /* UIImage+Extension.swift in Sources */,
+				BDC2BE1727A73688003E4A13 /* CgmService.swift in Sources */,
 				84602903268C50F800141E0D /* AboutTermsPolicyVC.swift in Sources */,
+				BDFEC66927A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift in Sources */,
 				188DB13726E0993600FBF042 /* CoachMarksControllerDataSource.swift in Sources */,
 				840A7DF22696E95E005AA1E6 /* CGMDATASHAREVC.swift in Sources */,
 				188DB13226E0993600FBF042 /* CoachMarkBodyHighlightArrowDelegate.swift in Sources */,
@@ -1470,12 +1749,14 @@
 				188DB13326E0993600FBF042 /* PresentationContext.swift in Sources */,
 				188DB14C26E0993600FBF042 /* TranslucentOverlayStyleManager.swift in Sources */,
 				84CC13162668D23C009316FC /* Url+Extension.swift in Sources */,
+				BDC2BDFF27A5BBD4003E4A13 /* FirebaseUserRepository.swift in Sources */,
 				84CE274327509CF80045F987 /* EncryptionController.swift in Sources */,
 				84CC13102668D20A009316FC /* String+Extension.swift in Sources */,
 				84CC13072668D1BD009316FC /* UIScreen+Extension.swift in Sources */,
 				84E78BC42685F9B400FABDCD /* CustomPickerView.swift in Sources */,
 				84F819A8267A12A500A4C758 /* PassResetPopUpVC.swift in Sources */,
 				188DB12E26E0993600FBF042 /* ViewControllerConfiguration.swift in Sources */,
+				BDC2BE0727A62FDB003E4A13 /* ConnectedLunaCgmSimulatorView.swift in Sources */,
 				840A7DFE2696E98C005AA1E6 /* SearchingDeviceVC.swift in Sources */,
 				188DB14826E0993600FBF042 /* PauseStyle.swift in Sources */,
 				188DB13126E0993600FBF042 /* CoachMarkView.swift in Sources */,
@@ -1486,13 +1767,18 @@
 				84B06F0A269C0BE00059B293 /* SessionDescriptionVC.swift in Sources */,
 				188DB14A26E0993600FBF042 /* CoachMarkPosition.swift in Sources */,
 				84AAFFA72715780D00E7E1F8 /* CustomView.swift in Sources */,
+				BDF7660727A465A0009BE8DF /* LunaCgmSimulatorScanningInteractor.swift in Sources */,
 				8418D7CD26B01BC500BAB256 /* DateTime.swift in Sources */,
 				188DB14926E0993600FBF042 /* CoachMark.swift in Sources */,
 				84F7BC51266F11BA006C94DA /* AppleLoginManager.swift in Sources */,
 				8455A3BF26805AA80061C55F /* InfoPlistParser.swift in Sources */,
 				84467271268D867600EC55FD /* BLEManager.swift in Sources */,
+				BDFEC67C27A34EDA0070EAF1 /* LunaBackButton.swift in Sources */,
 				840A7DF12696E95E005AA1E6 /* CGMSelectorVC.swift in Sources */,
 				84861D7F26848EDD004B046C /* ProfileTableCell.swift in Sources */,
+				BDFEC67527A346230070EAF1 /* PairLunaCgmSimulatorViewModel.swift in Sources */,
+				BD0D0C3127A21456001117B3 /* FirestoreCgmRepository.swift in Sources */,
+				BDC2BE0A27A71A7F003E4A13 /* UserError.swift in Sources */,
 				188DB14226E0993600FBF042 /* ConfigurationChange.swift in Sources */,
 				8403F3B726F9C9F6004BFE8E /* BottomSheetVC+Extension.swift in Sources */,
 				84E5505A267E027A008C02F8 /* TypeTableCell.swift in Sources */,
@@ -1502,19 +1788,24 @@
 				8403F3C326F9D792004BFE8E /* DataStructs.swift in Sources */,
 				188DB12826E0993600FBF042 /* Instructions.swift in Sources */,
 				188DB13426E0993600FBF042 /* UIImage+Bundle.swift in Sources */,
+				BDFEC67727A34DE20070EAF1 /* Exitable.swift in Sources */,
+				BDFEC67227A343940070EAF1 /* PairCgmRouter.swift in Sources */,
 				840A7E662696F190005AA1E6 /* SessionHistoryTableViewCell.swift in Sources */,
 				188DB12B26E0993600FBF042 /* CoachMarksController.swift in Sources */,
 				84B5A05A26C28CD20051C06A /* InsulinModel.swift in Sources */,
 				84CC12D72668D005009316FC /* AppColors.swift in Sources */,
 				84CC12F82668D12D009316FC /* UIApplicationExtension.swift in Sources */,
 				8418D7D526B01F4E00BAB256 /* UserData.xcdatamodeld in Sources */,
+				BD0D0C3727A22032001117B3 /* FirestoreConstants.swift in Sources */,
 				844B93BE2694427600B65BF8 /* InsulinStep2VC.swift in Sources */,
 				84861D7726848DB1004B046C /* ProfileVC.swift in Sources */,
 				8403F3C626F9DABC004BFE8E /* NightScout.swift in Sources */,
+				BDC2BDF127A5A7E7003E4A13 /* DisplayGlucose.swift in Sources */,
 				188DB13A26E0993600FBF042 /* CoachMarkAnimationManager.swift in Sources */,
 				84CC12D02668CFD8009316FC /* AppUserDefaults.swift in Sources */,
 				188DB14426E0993600FBF042 /* CoachMarkViewControllerDelegate.swift in Sources */,
 				188DB15026E0993600FBF042 /* CoachMarkAnimationManagement.swift in Sources */,
+				BD2B66CA27A4A5B9004F0A35 /* LunaCgmSimulatorConnectInteractor.swift in Sources */,
 				8455492D2678FFFD000CC13D /* LoginSocialTableCell.swift in Sources */,
 				188DB13626E0993600FBF042 /* DummyView.swift in Sources */,
 				847D1B292689A87A00220DAE /* SystemSetupVC.swift in Sources */,
@@ -1523,7 +1814,11 @@
 				188DB13D26E0993600FBF042 /* UIView+Layout.swift in Sources */,
 				8455A3C7268211770061C55F /* SettingTableCell.swift in Sources */,
 				188DB14326E0993600FBF042 /* CoachMarksViewController.swift in Sources */,
+				BDFEC66E27A2FD4D0070EAF1 /* BridgeView.swift in Sources */,
+				BDC2BDF327A5A80F003E4A13 /* GlucoseViewExtensions.swift in Sources */,
 				849B25622707101600323876 /* ContactsUsTableCell.swift in Sources */,
+				BDC2BE1C27A767DC003E4A13 /* BridgingGlucoseWriteRepository.swift in Sources */,
+				BD0D0C3927A22F05001117B3 /* CgmConnection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1600,7 +1895,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1655,7 +1950,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1679,7 +1974,7 @@
 				CURRENT_PROJECT_VERSION = 29.0;
 				DEVELOPMENT_TEAM = 9S43J8Y2GN;
 				INFOPLIST_FILE = "$(SRCROOT)/Luna/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1707,7 +2002,7 @@
 				CURRENT_PROJECT_VERSION = 29.0;
 				DEVELOPMENT_TEAM = 9S43J8Y2GN;
 				INFOPLIST_FILE = "$(SRCROOT)/Luna/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1817,6 +2112,14 @@
 				version = 8.11.0;
 			};
 		};
+		BDF765FF27A45351009BE8DF /* XCRemoteSwiftPackageReference "ios-lunabluetooth" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@bitbucket.org:luna-ios-application/ios-lunabluetooth.git";
+			requirement = {
+				kind = exactVersion;
+				version = 0.2.1;
+			};
+		};
 		BDFFB0D327A20E0E00B15370 /* XCRemoteSwiftPackageReference "Instabug-SP" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Instabug/Instabug-SP.git";
@@ -1868,6 +2171,11 @@
 			package = BD088BEC27A2093D007F2C4B /* XCRemoteSwiftPackageReference "KDCircularProgress" */;
 			productName = KDCircularProgress;
 		};
+		BD0D0C3227A215CE001117B3 /* FirebaseFirestoreSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreSwift-Beta";
+		};
 		BDF0D78127A1FA1700A5F950 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -1907,6 +2215,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		BDF7660027A45351009BE8DF /* LunaBluetooth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BDF765FF27A45351009BE8DF /* XCRemoteSwiftPackageReference "ios-lunabluetooth" */;
+			productName = LunaBluetooth;
 		};
 		BDFFB0D427A20E0E00B15370 /* Instabug */ = {
 			isa = XCSwiftPackageProductDependency;

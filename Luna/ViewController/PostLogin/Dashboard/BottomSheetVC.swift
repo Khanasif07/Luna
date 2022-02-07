@@ -181,6 +181,31 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
         }
     }
     
+    @objc func cgmSimData(notification : NSNotification){
+        print("Reached here in BottomSheetVC")
+        DispatchQueue.main.async {
+            self.bgData = SystemInfoModel.shared.cgmData ?? []
+            if let latestBg = self.bgData.last {
+                self.cgmValueLbl.text = bgUnits.toDisplayUnits(String(latestBg.sgv),true)
+                if let direction = latestBg.direction {
+                    self.cgmDirectionlbl.text = self.bgDirectionGraphic(direction)
+                    self.latestDirectionString = self.bgDirectionGraphic(direction)
+                } else {
+                    self.cgmDirectionlbl.text = ""
+                    self.latestDirectionString = ""
+                }
+            } else {
+                self.cgmValueLbl.text = "--"
+                self.cgmDirectionlbl.text = ""
+                self.latestDirectionString = ""
+            }
+            
+            self.mainTableView.reloadData()
+            self.updateMinAgo()
+            self.updateBGGraph()
+        }
+    }
+    
     @objc func cgmDataRemovedSuccessfully(notification : NSNotification){
         self.bgData = []
         SystemInfoModel.shared.cgmData = []
@@ -225,6 +250,7 @@ extension BottomSheetVC {
         NotificationCenter.default.addObserver(self, selector: #selector(statusUpdateValue), name: .StatusUpdateValue, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(cgmDataReceivedSuccessfully), name: .cgmConnectedSuccessfully, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(cgmDataRemovedSuccessfully), name: .cgmRemovedSuccessfully, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(cgmSimData), name: .cgmSimData, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .BLEOnOffState, object: nil)
     }
     
