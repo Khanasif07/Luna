@@ -475,9 +475,9 @@ extension BleManager: CBCentralManagerDelegate {
                                advertisementData: [String: Any], rssi RSSI: NSNumber) {
         print(peripheral.name ?? "")
         print(peripheral.identifier)
-        if let kCBAdvDataServiceUUID =  advertisementData["kCBAdvDataServiceUUIDs"]{
-            print("kCBAdvDataServiceUUID : \(kCBAdvDataServiceUUID)")
-//            sliceString(str: toString(kCBAdvDataServiceUUID), start: "0", end: 3)
+        if let kCBAdvDataServiceUUID =  (advertisementData["kCBAdvDataServiceUUIDs"] as? [String])?.first{
+            print("kCBAdvDataServiceUUID: ")
+            print(toString((advertisementData["kCBAdvDataServiceUUIDs"] as? NSArray)?.firstObject))
         }
         if peripheral.name == AppConstants.appName{
         myperipheral = peripheral
