@@ -71,6 +71,7 @@
 "are_you_sure_want_to_logout_from_dexcom" = "Are you sure want to logout from Dexcom?";
 "cgm_connected" = "CGM is connected";
 "connect_cgm" = "Connect your CGM";
+"pair_cgm_simulator" = "Pair CGM Simulator";
 "next" = "Next";
 "no" = "No";
 "yes" = "Yes";
@@ -117,6 +118,7 @@
 "dexcomG7" = "Dexcom G7";
 "freestyle_Libre2" = "Freestyle Libre 2";
 "freestyle_Libre3" = "Freestyle Libre 3";
+"lunaSimulator" = "Luna CGM Simulator";
 
 "battery" = "Battery";
 "reservoir" = "Reservoir";
@@ -139,3 +141,15 @@
 "lastMonth" = "Last Month";
 "monthsAgo" = "Months Ago";
 "lastYear" = "Last Year";
+
+"Connecting to %@" = "Connecting to %@";
+"Connected to %@" = "Connected to %@";
+"Failed to connect to %@" = "Failed to connect to %@";
+"disconnect" = "Disconnect";
+"failedToDisconnect" = "Failed to disconnect";
+"pleaseTryAgain" = "Please try again";
+"dismiss" = "Dismiss";
+"Cancel" = "Cancel";
+"close" = "Close";
+"mg/dl" = "mg/dl";
+"pairLunaCgmSimExplanation" = "To pair your Luna CGM Simulator, enable the simulator on your mac or iOS device";

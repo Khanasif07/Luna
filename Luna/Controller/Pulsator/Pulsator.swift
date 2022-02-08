@@ -8,14 +8,14 @@
 
 #if os(iOS)
 import UIKit
-public typealias Color = UIColor
+private typealias Color = UIColor
     
 internal let screenScale = UIScreen.main.scale
 internal let applicationWillBecomeActiveNotfication = UIApplication.willEnterForegroundNotification
 internal let applicationDidResignActiveNotification = UIApplication.didEnterBackgroundNotification
 #elseif os(macOS)
 import Cocoa
-public typealias Color = NSColor
+private typealias Color = NSColor
     
 internal let screenScale = NSScreen.main?.backingScaleFactor ?? 0.0
 internal let applicationWillBecomeActiveNotfication = NSApplication.willBecomeActiveNotification

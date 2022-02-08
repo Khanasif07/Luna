@@ -26,7 +26,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         fatalError("invalid access of AppDelegate")
     }
-  
+    
+    private var _appState: AppState? = nil
+    var appState: AppState {
+        if let appState = _appState {
+            return appState
+        }
+        else {
+            fatalError("Invalid access of AppState")
+        }
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         sleep(2)
         setUpKeyboardSetup()
@@ -38,6 +48,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         registerPushNotification()
         Messaging.messaging().delegate = self
         Instabug.start(withToken: "", invocationEvents: [.shake,.screenshot])
+        
+        if let firebaseApp = FirebaseApp.app() {
+            _appState = AppState(firebaseApp: firebaseApp)
+            Task {
+                await _appState?.load()
+            }
+        }
+        
         AppRouter.checkAppInitializationFlow()
         return true
     }

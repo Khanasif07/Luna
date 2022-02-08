@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum LocalizedString : String {
     
@@ -170,6 +171,8 @@ enum LocalizedString : String {
     case are_you_sure_want_to_logout_from_dexcom
     case cgm_connected
     case connect_cgm
+    case pair_cgm_simulator
+    case pairLunaCgmSimExplanation
     
     case no
     case yes
@@ -205,6 +208,15 @@ enum LocalizedString : String {
     case dexcomG7
     case freestyle_Libre2
     case freestyle_Libre3
+    case lunaSimulator
+    
+    case connectingToCgm
+    case disconnect
+    case failedToDisconnect
+    case pleaseTryAgain
+    case dismiss
+    case close
+    case mgdl = "mg/dl"
     
     case battery
     case reservoir
@@ -714,6 +726,10 @@ enum LocalizedString : String {
 }
 
 extension LocalizedString {
+    var localizedKey: LocalizedStringKey {
+        return LocalizedStringKey(self.rawValue)
+    }
+    
     var localized : String {
         return self.rawValue.localizedString(lang: "en")
     }
