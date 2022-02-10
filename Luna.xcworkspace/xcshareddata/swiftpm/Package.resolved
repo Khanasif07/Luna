@@ -123,17 +123,8 @@
         "repositoryURL": "https://github.com/Instabug/Instabug-SP.git",
         "state": {
           "branch": null,
-          "revision": "1277aa37a3c4d4cd52c09cdcfc97bf6290f0305a",
-          "version": "10.11.6"
-        }
-      },
-      {
-        "package": "LunaBluetooth",
-        "repositoryURL": "git@bitbucket.org:luna-ios-application/ios-lunabluetooth.git",
-        "state": {
-          "branch": null,
-          "revision": "fa32b9941beef2ed27535674bec32a65207ecd42",
-          "version": "0.2.1"
+          "revision": "ed4aca7907488d3df4ac6ea2c16609ea10af4e1a",
+          "version": "10.11.7"
         }
       },
       {
