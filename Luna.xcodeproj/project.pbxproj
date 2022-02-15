@@ -90,7 +90,6 @@
 		842E9B1826955E2400F36A3D /* InsulinStep2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842E9B1626955E2400F36A3D /* InsulinStep2Cell.xib */; };
 		842E9B1B2695690B00F36A3D /* InsulinStep3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842E9B1A2695690B00F36A3D /* InsulinStep3VC.swift */; };
 		842E9B1E2695710300F36A3D /* InsulinStep4VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842E9B1D2695710300F36A3D /* InsulinStep4VC.swift */; };
-		8430C0C527B4A1FF005A7308 /* Instabug in Frameworks */ = {isa = PBXBuildFile; productRef = 8430C0C427B4A1FF005A7308 /* Instabug */; };
 		8432A1992672294200859B47 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8432A19B2672294200859B47 /* Localizable.strings */; };
 		8432A19F2672319B00859B47 /* BiometricIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8432A19E2672319B00859B47 /* BiometricIDAuth.swift */; };
 		843C4569278DB59400C99AE5 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C4568278DB59400C99AE5 /* NotificationModel.swift */; };
@@ -125,6 +124,7 @@
 		84602903268C50F800141E0D /* AboutTermsPolicyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84602902268C50F800141E0D /* AboutTermsPolicyVC.swift */; };
 		84606119270C3DF900DFD22A /* SessionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84606118270C3DF900DFD22A /* SessionHistory.swift */; };
 		8460611D270EC9BC00DFD22A /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460611C270EC9BC00DFD22A /* PushNotificationManager.swift */; };
+		84655BC827A4182C00620B50 /* Pods_Luna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48268DD2D5F8BF64205F2462 /* Pods_Luna.framework */; };
 		847899732684824F00D1DF36 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847899722684824F00D1DF36 /* HomeVC.swift */; };
 		847899762684870F00D1DF36 /* AboutSectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847899752684870F00D1DF36 /* AboutSectionVC.swift */; };
 		847D1B292689A87A00220DAE /* SystemSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D1B282689A87A00220DAE /* SystemSetupVC.swift */; };
@@ -281,6 +281,7 @@
 		BDF0D78E27A1FA1700A5F950 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78D27A1FA1700A5F950 /* FirebaseStorage */; };
 		BDF0D79027A1FA9300A5F950 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BDF0D78F27A1FA9300A5F950 /* FirebaseAuth */; };
 		BDF765FE27A44ED2009BE8DF /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 849BC0D427A3ABC3009E054C /* GoogleSignIn */; };
+		BDF7660127A45351009BE8DF /* LunaBluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = BDF7660027A45351009BE8DF /* LunaBluetooth */; };
 		BDF7660527A45EB6009BE8DF /* PairingScannerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF7660427A45EB6009BE8DF /* PairingScannerInteractor.swift */; };
 		BDF7660727A465A0009BE8DF /* LunaCgmSimulatorScanningInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF7660627A465A0009BE8DF /* LunaCgmSimulatorScanningInteractor.swift */; };
 		BDFEC66927A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC66827A2E0D00070EAF1 /* PairLunaCgmSimulatorView.swift */; };
@@ -291,6 +292,7 @@
 		BDFEC67527A346230070EAF1 /* PairLunaCgmSimulatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC67427A346230070EAF1 /* PairLunaCgmSimulatorViewModel.swift */; };
 		BDFEC67727A34DE20070EAF1 /* Exitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC67627A34DE20070EAF1 /* Exitable.swift */; };
 		BDFEC67C27A34EDA0070EAF1 /* LunaBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC67B27A34EDA0070EAF1 /* LunaBackButton.swift */; };
+		BDFFB0D527A20E0E00B15370 /* Instabug in Frameworks */ = {isa = PBXBuildFile; productRef = BDFFB0D427A20E0E00B15370 /* Instabug */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -578,20 +580,22 @@
 				BDF0D78627A1FA1700A5F950 /* FirebaseDatabase in Frameworks */,
 				BDF0D79027A1FA9300A5F950 /* FirebaseAuth in Frameworks */,
 				BD088BE827A207F2007F2C4B /* SwiftKeychainWrapper in Frameworks */,
+				10BD91E0179A10717FF4BFEB /* Pods_Luna.framework in Frameworks */,
 				BD088BE527A20700007F2C4B /* MessageKit in Frameworks */,
 				BDF765FE27A44ED2009BE8DF /* GoogleSignIn in Frameworks */,
 				BDF0D78E27A1FA1700A5F950 /* FirebaseStorage in Frameworks */,
 				BDF0D78A27A1FA1700A5F950 /* FirebaseMessaging in Frameworks */,
 				BDF0D78427A1FA1700A5F950 /* FirebaseCrashlytics in Frameworks */,
+				BDF7660127A45351009BE8DF /* LunaBluetooth in Frameworks */,
 				BD088BDF27A205BC007F2C4B /* SwiftyJSON in Frameworks */,
 				BD0D0C3327A215CE001117B3 /* FirebaseFirestoreSwift-Beta in Frameworks */,
 				849B7432269D612000C059E5 /* HealthKit.framework in Frameworks */,
 				BDF0D78227A1FA1700A5F950 /* FirebaseAnalytics in Frameworks */,
-				8430C0C527B4A1FF005A7308 /* Instabug in Frameworks */,
 				BD088BEE27A2093D007F2C4B /* KDCircularProgress in Frameworks */,
 				BD088BEB27A208B2007F2C4B /* Charts in Frameworks */,
 				BD088BE227A206A6007F2C4B /* IQKeyboardManagerSwift in Frameworks */,
 				BD088BDC27A2040D007F2C4B /* NVActivityIndicatorView in Frameworks */,
+				BDFFB0D527A20E0E00B15370 /* Instabug in Frameworks */,
 				BDF0D78C27A1FA1700A5F950 /* FirebasePerformance in Frameworks */,
 				BDF0D78827A1FA1700A5F950 /* FirebaseFirestore in Frameworks */,
 			);
@@ -1411,9 +1415,10 @@
 				BD088BE727A207F2007F2C4B /* SwiftKeychainWrapper */,
 				BD088BEA27A208B2007F2C4B /* Charts */,
 				BD088BED27A2093D007F2C4B /* KDCircularProgress */,
+				BDFFB0D427A20E0E00B15370 /* Instabug */,
 				849BC0D427A3ABC3009E054C /* GoogleSignIn */,
 				BD0D0C3227A215CE001117B3 /* FirebaseFirestoreSwift-Beta */,
-				8430C0C427B4A1FF005A7308 /* Instabug */,
+				BDF7660027A45351009BE8DF /* LunaBluetooth */,
 			);
 			productName = Luna;
 			productReference = 84CC12962668C822009316FC /* Luna.app */;
@@ -1452,8 +1457,9 @@
 				BD088BE627A207F1007F2C4B /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 				BD088BE927A208B2007F2C4B /* XCRemoteSwiftPackageReference "Charts" */,
 				BD088BEC27A2093D007F2C4B /* XCRemoteSwiftPackageReference "KDCircularProgress" */,
+				BDFFB0D327A20E0E00B15370 /* XCRemoteSwiftPackageReference "Instabug-SP" */,
 				849BC0D327A3ABC3009E054C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
-				8430C0C327B4A1FF005A7308 /* XCRemoteSwiftPackageReference "Instabug-SP" */,
+				BDF765FF27A45351009BE8DF /* XCRemoteSwiftPackageReference "ios-lunabluetooth" */,
 			);
 			productRefGroup = 84CC12972668C822009316FC /* Products */;
 			projectDirPath = "";
@@ -2028,14 +2034,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8430C0C327B4A1FF005A7308 /* XCRemoteSwiftPackageReference "Instabug-SP" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Instabug/Instabug-SP.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.11.7;
-			};
-		};
 		849BC0D327A3ABC3009E054C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
@@ -2108,14 +2106,25 @@
 				version = 8.11.0;
 			};
 		};
+		BDF765FF27A45351009BE8DF /* XCRemoteSwiftPackageReference "ios-lunabluetooth" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@bitbucket.org:luna-ios-application/ios-lunabluetooth.git";
+			requirement = {
+				kind = exactVersion;
+				version = 0.2.1;
+			};
+		};
+		BDFFB0D327A20E0E00B15370 /* XCRemoteSwiftPackageReference "Instabug-SP" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Instabug/Instabug-SP.git";
+			requirement = {
+				kind = exactVersion;
+				version = 10.11.6;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8430C0C427B4A1FF005A7308 /* Instabug */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8430C0C327B4A1FF005A7308 /* XCRemoteSwiftPackageReference "Instabug-SP" */;
-			productName = Instabug;
-		};
 		849BC0D427A3ABC3009E054C /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 849BC0D327A3ABC3009E054C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
@@ -2200,6 +2209,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BDF0D78027A1FA1700A5F950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		BDF7660027A45351009BE8DF /* LunaBluetooth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BDF765FF27A45351009BE8DF /* XCRemoteSwiftPackageReference "ios-lunabluetooth" */;
+			productName = LunaBluetooth;
+		};
+		BDFFB0D427A20E0E00B15370 /* Instabug */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BDFFB0D327A20E0E00B15370 /* XCRemoteSwiftPackageReference "Instabug-SP" */;
+			productName = Instabug;
 		};
 /* End XCSwiftPackageProductDependency section */
 
