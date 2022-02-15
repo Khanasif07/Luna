@@ -124,7 +124,6 @@
 		84602903268C50F800141E0D /* AboutTermsPolicyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84602902268C50F800141E0D /* AboutTermsPolicyVC.swift */; };
 		84606119270C3DF900DFD22A /* SessionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84606118270C3DF900DFD22A /* SessionHistory.swift */; };
 		8460611D270EC9BC00DFD22A /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460611C270EC9BC00DFD22A /* PushNotificationManager.swift */; };
-		84655BC827A4182C00620B50 /* Pods_Luna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48268DD2D5F8BF64205F2462 /* Pods_Luna.framework */; };
 		847899732684824F00D1DF36 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847899722684824F00D1DF36 /* HomeVC.swift */; };
 		847899762684870F00D1DF36 /* AboutSectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847899752684870F00D1DF36 /* AboutSectionVC.swift */; };
 		847D1B292689A87A00220DAE /* SystemSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D1B282689A87A00220DAE /* SystemSetupVC.swift */; };
@@ -580,7 +579,6 @@
 				BDF0D78627A1FA1700A5F950 /* FirebaseDatabase in Frameworks */,
 				BDF0D79027A1FA9300A5F950 /* FirebaseAuth in Frameworks */,
 				BD088BE827A207F2007F2C4B /* SwiftKeychainWrapper in Frameworks */,
-				10BD91E0179A10717FF4BFEB /* Pods_Luna.framework in Frameworks */,
 				BD088BE527A20700007F2C4B /* MessageKit in Frameworks */,
 				BDF765FE27A44ED2009BE8DF /* GoogleSignIn in Frameworks */,
 				BDF0D78E27A1FA1700A5F950 /* FirebaseStorage in Frameworks */,
@@ -1963,8 +1961,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 30.0;
 				DEVELOPMENT_TEAM = 9S43J8Y2GN;
 				INFOPLIST_FILE = "$(SRCROOT)/Luna/Resources/Info.plist";
@@ -1975,7 +1973,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunadiabetes.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Prov;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Luna/InstabugDebugger/Luna-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1991,8 +1989,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 30.0;
 				DEVELOPMENT_TEAM = 9S43J8Y2GN;
 				INFOPLIST_FILE = "$(SRCROOT)/Luna/Resources/Info.plist";
@@ -2003,7 +2001,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunadiabetes.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Prov;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Luna/InstabugDebugger/Luna-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
