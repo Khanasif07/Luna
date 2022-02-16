@@ -251,6 +251,9 @@
 		BD2B66C627A478BB004F0A35 /* ConnectLunaCgmSimulatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2B66C527A478BB004F0A35 /* ConnectLunaCgmSimulatorViewModel.swift */; };
 		BD2B66C827A4A4FE004F0A35 /* PairingConnectInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2B66C727A4A4FE004F0A35 /* PairingConnectInteractor.swift */; };
 		BD2B66CA27A4A5B9004F0A35 /* LunaCgmSimulatorConnectInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2B66C927A4A5B9004F0A35 /* LunaCgmSimulatorConnectInteractor.swift */; };
+		BD67C38E27BC83AA00684911 /* Insulin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD67C38B27BC83AA00684911 /* Insulin.swift */; };
+		BD67C38F27BC83AA00684911 /* IobCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD67C38C27BC83AA00684911 /* IobCalculator.swift */; };
+		BD67C39127BC83BB00684911 /* IobCalculatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD67C38D27BC83AA00684911 /* IobCalculatorTest.swift */; };
 		BDC2BDEA27A59E95003E4A13 /* Glucose.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDE927A59E95003E4A13 /* Glucose.swift */; };
 		BDC2BDEC27A5A0C8003E4A13 /* GlucoseReadRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDEB27A5A0C8003E4A13 /* GlucoseReadRepository.swift */; };
 		BDC2BDEF27A5A7B6003E4A13 /* GlucoseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC2BDEE27A5A7B6003E4A13 /* GlucoseView.swift */; };
@@ -293,6 +296,16 @@
 		BDFEC67C27A34EDA0070EAF1 /* LunaBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEC67B27A34EDA0070EAF1 /* LunaBackButton.swift */; };
 		BDFFB0D527A20E0E00B15370 /* Instabug in Frameworks */ = {isa = PBXBuildFile; productRef = BDFFB0D427A20E0E00B15370 /* Instabug */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BD67C37F27BC800B00684911 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84CC128E2668C822009316FC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84CC12952668C822009316FC;
+			remoteInfo = Luna;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1863AF8726E23C7100902838 /* CoachMarkViewApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkViewApp.swift; sourceTree = "<group>"; };
@@ -538,6 +551,10 @@
 		BD2B66C527A478BB004F0A35 /* ConnectLunaCgmSimulatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectLunaCgmSimulatorViewModel.swift; sourceTree = "<group>"; };
 		BD2B66C727A4A4FE004F0A35 /* PairingConnectInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingConnectInteractor.swift; sourceTree = "<group>"; };
 		BD2B66C927A4A5B9004F0A35 /* LunaCgmSimulatorConnectInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunaCgmSimulatorConnectInteractor.swift; sourceTree = "<group>"; };
+		BD67C37B27BC800B00684911 /* LunaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LunaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD67C38B27BC83AA00684911 /* Insulin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Insulin.swift; sourceTree = "<group>"; };
+		BD67C38C27BC83AA00684911 /* IobCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IobCalculator.swift; sourceTree = "<group>"; };
+		BD67C38D27BC83AA00684911 /* IobCalculatorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IobCalculatorTest.swift; sourceTree = "<group>"; };
 		BDC2BDE927A59E95003E4A13 /* Glucose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Glucose.swift; sourceTree = "<group>"; };
 		BDC2BDEB27A5A0C8003E4A13 /* GlucoseReadRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlucoseReadRepository.swift; sourceTree = "<group>"; };
 		BDC2BDEE27A5A7B6003E4A13 /* GlucoseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlucoseView.swift; sourceTree = "<group>"; };
@@ -596,6 +613,13 @@
 				BDFFB0D527A20E0E00B15370 /* Instabug in Frameworks */,
 				BDF0D78C27A1FA1700A5F950 /* FirebasePerformance in Frameworks */,
 				BDF0D78827A1FA1700A5F950 /* FirebaseFirestore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD67C37827BC800B00684911 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -986,6 +1010,7 @@
 			children = (
 				84CC12982668C822009316FC /* Luna */,
 				846F1A1B2678BFFE0034ACE0 /* Certificates */,
+				BD67C37C27BC800B00684911 /* LunaTests */,
 				84CC12972668C822009316FC /* Products */,
 				2D90EB116D7AE5068B0109C8 /* Pods */,
 				F2201812782A54B48AE7EE35 /* Frameworks */,
@@ -996,6 +1021,7 @@
 			isa = PBXGroup;
 			children = (
 				84CC12962668C822009316FC /* Luna.app */,
+				BD67C37B27BC800B00684911 /* LunaTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1003,6 +1029,7 @@
 		84CC12982668C822009316FC /* Luna */ = {
 			isa = PBXGroup;
 			children = (
+				BD67C38927BC83AA00684911 /* insulin */,
 				BDC2BDFA27A5BB63003E4A13 /* user */,
 				BDFEC67927A34EAB0070EAF1 /* common */,
 				BDFEC66A27A2E5110070EAF1 /* theme */,
@@ -1264,6 +1291,47 @@
 			path = app;
 			sourceTree = "<group>";
 		};
+		BD67C37C27BC800B00684911 /* LunaTests */ = {
+			isa = PBXGroup;
+			children = (
+				BD67C39227BC83C800684911 /* insulin */,
+			);
+			path = LunaTests;
+			sourceTree = "<group>";
+		};
+		BD67C38927BC83AA00684911 /* insulin */ = {
+			isa = PBXGroup;
+			children = (
+				BD67C38A27BC83AA00684911 /* domain */,
+			);
+			path = insulin;
+			sourceTree = "<group>";
+		};
+		BD67C38A27BC83AA00684911 /* domain */ = {
+			isa = PBXGroup;
+			children = (
+				BD67C38B27BC83AA00684911 /* Insulin.swift */,
+				BD67C38C27BC83AA00684911 /* IobCalculator.swift */,
+			);
+			path = domain;
+			sourceTree = "<group>";
+		};
+		BD67C39227BC83C800684911 /* insulin */ = {
+			isa = PBXGroup;
+			children = (
+				BD67C39327BC83CD00684911 /* domain */,
+			);
+			path = insulin;
+			sourceTree = "<group>";
+		};
+		BD67C39327BC83CD00684911 /* domain */ = {
+			isa = PBXGroup;
+			children = (
+				BD67C38D27BC83AA00684911 /* IobCalculatorTest.swift */,
+			);
+			path = domain;
+			sourceTree = "<group>";
+		};
 		BDC2BDED27A5A132003E4A13 /* firestore */ = {
 			isa = PBXGroup;
 			children = (
@@ -1422,18 +1490,40 @@
 			productReference = 84CC12962668C822009316FC /* Luna.app */;
 			productType = "com.apple.product-type.application";
 		};
+		BD67C37A27BC800B00684911 /* LunaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BD67C38327BC800B00684911 /* Build configuration list for PBXNativeTarget "LunaTests" */;
+			buildPhases = (
+				BD67C37727BC800B00684911 /* Sources */,
+				BD67C37827BC800B00684911 /* Frameworks */,
+				BD67C37927BC800B00684911 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BD67C38027BC800B00684911 /* PBXTargetDependency */,
+			);
+			name = LunaTests;
+			productName = LunaTests;
+			productReference = BD67C37B27BC800B00684911 /* LunaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		84CC128E2668C822009316FC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1220;
+				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1220;
 				TargetAttributes = {
 					84CC12952668C822009316FC = {
 						CreatedOnToolsVersion = 12.2;
 						LastSwiftMigration = 1220;
+					};
+					BD67C37A27BC800B00684911 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = 84CC12952668C822009316FC;
 					};
 				};
 			};
@@ -1464,6 +1554,7 @@
 			projectRoot = "";
 			targets = (
 				84CC12952668C822009316FC /* Luna */,
+				BD67C37A27BC800B00684911 /* LunaTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1527,6 +1618,13 @@
 				845549292678FAEF000CC13D /* SignUpTopTableCell.xib in Resources */,
 				84861D8026848EDD004B046C /* ProfileTableCell.xib in Resources */,
 				84FDA0B2267DE8B600AC8BE9 /* DecisionCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD67C37927BC800B00684911 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1654,6 +1752,7 @@
 				844BD1CB2701BBAE00ED224E /* Extension+LoginViewController.swift in Sources */,
 				BDC2BE1927A74A15003E4A13 /* LunaCgmSimulatorService.swift in Sources */,
 				BDC2BDEF27A5A7B6003E4A13 /* GlucoseView.swift in Sources */,
+				BD67C38E27BC83AA00684911 /* Insulin.swift in Sources */,
 				BD2B66C427A47820004F0A35 /* ConnectLunaCgmSimulatorView.swift in Sources */,
 				BD2B66C827A4A4FE004F0A35 /* PairingConnectInteractor.swift in Sources */,
 				84E2D9B826B12C17000C0FD8 /* SettingManualVC.swift in Sources */,
@@ -1805,6 +1904,7 @@
 				8455A3C7268211770061C55F /* SettingTableCell.swift in Sources */,
 				188DB14326E0993600FBF042 /* CoachMarksViewController.swift in Sources */,
 				BDFEC66E27A2FD4D0070EAF1 /* BridgeView.swift in Sources */,
+				BD67C38F27BC83AA00684911 /* IobCalculator.swift in Sources */,
 				BDC2BDF327A5A80F003E4A13 /* GlucoseViewExtensions.swift in Sources */,
 				849B25622707101600323876 /* ContactsUsTableCell.swift in Sources */,
 				BDC2BE1C27A767DC003E4A13 /* BridgingGlucoseWriteRepository.swift in Sources */,
@@ -1812,7 +1912,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BD67C37727BC800B00684911 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD67C39127BC83BB00684911 /* IobCalculatorTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BD67C38027BC800B00684911 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84CC12952668C822009316FC /* Luna */;
+			targetProxy = BD67C37F27BC800B00684911 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		8432A19B2672294200859B47 /* Localizable.strings */ = {
@@ -2008,6 +2124,47 @@
 			};
 			name = Release;
 		};
+		BD67C38127BC800B00684911 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 9S43J8Y2GN;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lunadiabetes.LunaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Luna.app/Luna";
+			};
+			name = Debug;
+		};
+		BD67C38227BC800B00684911 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9S43J8Y2GN;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lunadiabetes.LunaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Luna.app/Luna";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2025,6 +2182,15 @@
 			buildConfigurations = (
 				84CC12AB2668C823009316FC /* Debug */,
 				84CC12AC2668C823009316FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BD67C38327BC800B00684911 /* Build configuration list for PBXNativeTarget "LunaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD67C38127BC800B00684911 /* Debug */,
+				BD67C38227BC800B00684911 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
