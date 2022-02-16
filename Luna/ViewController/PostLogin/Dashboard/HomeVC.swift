@@ -106,11 +106,7 @@ extension HomeVC {
         self.setupHealthkit()
         self.addObserver()
         BleManager.sharedInstance.delegate = self
-        if BleManager.sharedInstance.myperipheral?.state == .connected{
-            self.setupSystemInfo()
-        }else{
-            self.setupSystemInfo()
-        }
+        self.setupSystemInfo()
         self.getUserInfoFromFirestore()
         self.getUserSystemFromFirestore()
         self.addUserSessionListener()

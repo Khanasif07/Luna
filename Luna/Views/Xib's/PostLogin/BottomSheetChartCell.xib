@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7R5-aQ-65O">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="320"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PqS-PC-gbP" customClass="LineChartView" customModule="Charts">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PqS-PC-gbP" customClass="TappableLineChartView" customModule="Luna" customModuleProvider="target">
                                 <rect key="frame" x="10" y="10" width="394" height="300"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -47,7 +47,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="cgmChartView" destination="PqS-PC-gbP" id="U3E-Jk-c0M"/>
+                <outlet property="cgmChartView" destination="PqS-PC-gbP" id="31h-0x-5xO"/>
             </connections>
             <point key="canvasLocation" x="120.28985507246378" y="113.16964285714285"/>
         </tableViewCell>

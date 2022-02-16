@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		10BD91E0179A10717FF4BFEB /* Pods_Luna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48268DD2D5F8BF64205F2462 /* Pods_Luna.framework */; };
 		1863AF8926E23C7100902838 /* CoachMarkViewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1863AF8726E23C7100902838 /* CoachMarkViewApp.swift */; };
 		1863AF8A26E23C7100902838 /* CoachMarkViewApp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1863AF8826E23C7100902838 /* CoachMarkViewApp.xib */; };
 		188DB12526E0993600FBF042 /* CoachMarkBodyDefaultViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188DB0F826E0993600FBF042 /* CoachMarkBodyDefaultViewHelper.swift */; };
@@ -59,7 +58,6 @@
 		8403F3BA26F9CF49004BFE8E /* Timers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3B926F9CF49004BFE8E /* Timers.swift */; };
 		8403F3BD26F9D016004BFE8E /* Graphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3BC26F9D016004BFE8E /* Graphs.swift */; };
 		8403F3C026F9D2F8004BFE8E /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3BF26F9D2F8004BFE8E /* Chart.swift */; };
-		8403F3C326F9D792004BFE8E /* DataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3C226F9D792004BFE8E /* DataStructs.swift */; };
 		8403F3C626F9DABC004BFE8E /* NightScout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403F3C526F9DABB004BFE8E /* NightScout.swift */; };
 		840A7DF12696E95E005AA1E6 /* CGMSelectorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7DED2696E95E005AA1E6 /* CGMSelectorVC.swift */; };
 		840A7DF22696E95E005AA1E6 /* CGMDATASHAREVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A7DEE2696E95E005AA1E6 /* CGMDATASHAREVC.swift */; };
@@ -146,7 +144,6 @@
 		84A18915278C318A003ED8D9 /* NotificationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A18913278C318A003ED8D9 /* NotificationsCell.swift */; };
 		84A18916278C318A003ED8D9 /* NotificationsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A18914278C318A003ED8D9 /* NotificationsCell.xib */; };
 		84AA00902716C04200E7E1F8 /* CustomLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA008F2716C04200E7E1F8 /* CustomLineChartView.swift */; };
-		84AA878D26FAD1120047D86E /* Alarms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA878C26FAD1120047D86E /* Alarms.swift */; };
 		84AA879026FAE8900047D86E /* BottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA878F26FAE8900047D86E /* BottomSheetVC.swift */; };
 		84AAFFA72715780D00E7E1F8 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AAFFA62715780D00E7E1F8 /* CustomView.swift */; };
 		84AAFFAA2715782400E7E1F8 /* CustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84AAFFA92715782400E7E1F8 /* CustomView.xib */; };
@@ -350,7 +347,6 @@
 		8403F3B926F9CF49004BFE8E /* Timers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timers.swift; sourceTree = "<group>"; };
 		8403F3BC26F9D016004BFE8E /* Graphs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphs.swift; sourceTree = "<group>"; };
 		8403F3BF26F9D2F8004BFE8E /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
-		8403F3C226F9D792004BFE8E /* DataStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructs.swift; sourceTree = "<group>"; };
 		8403F3C526F9DABB004BFE8E /* NightScout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightScout.swift; sourceTree = "<group>"; };
 		840A7DED2696E95E005AA1E6 /* CGMSelectorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMSelectorVC.swift; sourceTree = "<group>"; };
 		840A7DEE2696E95E005AA1E6 /* CGMDATASHAREVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMDATASHAREVC.swift; sourceTree = "<group>"; };
@@ -439,7 +435,6 @@
 		84A18913278C318A003ED8D9 /* NotificationsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsCell.swift; sourceTree = "<group>"; };
 		84A18914278C318A003ED8D9 /* NotificationsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationsCell.xib; sourceTree = "<group>"; };
 		84AA008F2716C04200E7E1F8 /* CustomLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLineChartView.swift; sourceTree = "<group>"; };
-		84AA878C26FAD1120047D86E /* Alarms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarms.swift; sourceTree = "<group>"; };
 		84AA878F26FAE8900047D86E /* BottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetVC.swift; sourceTree = "<group>"; };
 		84AAFFA62715780D00E7E1F8 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		84AAFFA92715782400E7E1F8 /* CustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomView.xib; sourceTree = "<group>"; };
@@ -584,7 +579,6 @@
 				BDF0D78627A1FA1700A5F950 /* FirebaseDatabase in Frameworks */,
 				BDF0D79027A1FA9300A5F950 /* FirebaseAuth in Frameworks */,
 				BD088BE827A207F2007F2C4B /* SwiftKeychainWrapper in Frameworks */,
-				10BD91E0179A10717FF4BFEB /* Pods_Luna.framework in Frameworks */,
 				BD088BE527A20700007F2C4B /* MessageKit in Frameworks */,
 				BDF765FE27A44ED2009BE8DF /* GoogleSignIn in Frameworks */,
 				BDF0D78E27A1FA1700A5F950 /* FirebaseStorage in Frameworks */,
@@ -772,14 +766,12 @@
 			children = (
 				847899722684824F00D1DF36 /* HomeVC.swift */,
 				84AA878F26FAE8900047D86E /* BottomSheetVC.swift */,
+				84A18910278C2FD3003ED8D9 /* NotificationsVC.swift */,
 				8403F3B626F9C9F6004BFE8E /* BottomSheetVC+Extension.swift */,
 				8403F3B926F9CF49004BFE8E /* Timers.swift */,
 				8403F3BC26F9D016004BFE8E /* Graphs.swift */,
 				8403F3BF26F9D2F8004BFE8E /* Chart.swift */,
-				8403F3C226F9D792004BFE8E /* DataStructs.swift */,
 				8403F3C526F9DABB004BFE8E /* NightScout.swift */,
-				84AA878C26FAD1120047D86E /* Alarms.swift */,
-				84A18910278C2FD3003ED8D9 /* NotificationsVC.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -1691,7 +1683,6 @@
 				188DB14B26E0993600FBF042 /* CoachMarkSkipDefaultView.swift in Sources */,
 				84CC12E32668D042009316FC /* AppGlobals.swift in Sources */,
 				BDC2BDEA27A59E95003E4A13 /* Glucose.swift in Sources */,
-				84AA878D26FAD1120047D86E /* Alarms.swift in Sources */,
 				188DB12D26E0993600FBF042 /* CoachMarkBodyDefaultView.swift in Sources */,
 				BDFEC67027A30CC80070EAF1 /* BridgeUIHostingController.swift in Sources */,
 				188DB13E26E0993600FBF042 /* CoachMarkSkipView.swift in Sources */,
@@ -1785,7 +1776,6 @@
 				188DB13B26E0993600FBF042 /* CoachMarksControllerAnimationDelegate.swift in Sources */,
 				188DB12A26E0993600FBF042 /* OverlayView.swift in Sources */,
 				188DB14026E0993600FBF042 /* CoachMarkInnerLayoutHelper.swift in Sources */,
-				8403F3C326F9D792004BFE8E /* DataStructs.swift in Sources */,
 				188DB12826E0993600FBF042 /* Instructions.swift in Sources */,
 				188DB13426E0993600FBF042 /* UIImage+Bundle.swift in Sources */,
 				BDFEC67727A34DE20070EAF1 /* Exitable.swift in Sources */,
@@ -1902,6 +1892,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1957,6 +1948,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1969,9 +1961,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 29.0;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 30.0;
 				DEVELOPMENT_TEAM = 9S43J8Y2GN;
 				INFOPLIST_FILE = "$(SRCROOT)/Luna/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1981,7 +1973,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunadiabetes.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Prov;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Luna/InstabugDebugger/Luna-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1997,9 +1989,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 29.0;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 30.0;
 				DEVELOPMENT_TEAM = 9S43J8Y2GN;
 				INFOPLIST_FILE = "$(SRCROOT)/Luna/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2009,7 +2001,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lunadiabetes.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Luna_Dev_Prov;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Luna/InstabugDebugger/Luna-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

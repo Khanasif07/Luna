@@ -12,7 +12,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
     
     // MARK: - IBOutlets
     //===========================
-    @IBOutlet weak var cgmChartView: LineChartView!
+    @IBOutlet weak var cgmChartView: TappableLineChartView!
     
     // MARK: - Variables
     //===========================
@@ -142,7 +142,7 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         cgmChartView.gridBackgroundColor = NSUIColor.clear
         cgmChartView.data?.highlightEnabled = true
         cgmChartView.highlightValue(nil, callDelegate: false)
-        cgmChartView.moveViewToAnimated(xValue: dateTimeUtils.getNowTimeIntervalUTC() - (cgmChartView.visibleXRange * 0.7), yValue: 0.0, axis: .right, duration: 1, easingOption: .easeInBack)
+//        cgmChartView.moveViewToAnimated(xValue: dateTimeUtils.getNowTimeIntervalUTC() - (cgmChartView.visibleXRange * 0.7), yValue: 0.0, axis: .right, duration: 1, easingOption: .easeInBack)
     }
     
     func setDataCount(_ count: Int, range: UInt32) {
@@ -163,7 +163,8 @@ class BottomSheetChartCell: UITableViewCell,ChartViewDelegate {
         
         let set1 = LineChartDataSet(entries: mainChart, label: "")
         set1.highlightColor = #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1) // color of the line
-        set1.highlightLineWidth = 1.0
+        set1.highlightLineWidth = 1.5
+        set1.highlightLineDashLengths = [10,2]
         set1.drawHorizontalHighlightIndicatorEnabled = true // hide horizontal line
         set1.drawVerticalHighlightIndicatorEnabled = true
         //

@@ -58,7 +58,6 @@ class InsulinStep4VC: UIViewController {
     @IBAction func crossBtnAction(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-    
 }
 
 // MARK: - Extension For Functions

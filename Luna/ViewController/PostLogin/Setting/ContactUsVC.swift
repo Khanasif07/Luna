@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Firebase
 
 class ContactUsVC : UIViewController{
     
@@ -66,15 +65,9 @@ extension ContactUsVC {
         self.submitBtn.titleLabel?.font = AppFonts.SF_Pro_Display_Semibold.withSize(.x16)
         self.submitBtn.isEnabled = false
     }
-    
-    /// Mark:- Fetching the message ID
-    private func getMessageId() -> String {
-        let messageId = Firestore.firestore().collection(ApiKey.messages).document(UserModel.main.id).collection(ApiKey.contactUs).document().documentID
-        return messageId
-    }
-    
+
     private func postQuery(_ desc: String){
-        FirestoreController.createMessageNode(messageText: desc, messageTime: FieldValue.serverTimestamp(), messageId:  getMessageId(), messageType: "Text", senderId: UserModel.main.id)
+        FirestoreController.createMessageNode(messageText: desc, messageId:  FirestoreController.getMessageId(), messageType: "Text", senderId: UserModel.main.id)
         CommonFunctions.showToastWithMessage("You query has been sent to admin successfully.")
         self.pop()
     }

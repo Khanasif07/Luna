@@ -266,7 +266,7 @@ extension  BottomSheetVC{
         //MARK:- Important
         SystemInfoModel.shared.cgmData = bgData
         //
-        print(SystemInfoModel.shared.dosingData)
+//        print(SystemInfoModel.shared.dosingData)
         if SystemInfoModel.shared.dosingData.isEmpty{
             if let fetchedData = UserDefaults.standard.data(forKey: ApiKey.dosingHistoryData) {
                 let fetchedDosingData = try! JSONDecoder().decode([DosingHistory].self, from: fetchedData)
@@ -316,10 +316,10 @@ extension  BottomSheetVC{
             self.setBGTextColor()
             //MARK:- Importants
             //Send time stamps to Luna Hardware
-            let randomBGValue = Int.random(in: 275..<325)
+//            let randomBGValue = Int.random(in: 275..<325)
 //            let updatedBG = latestBG > 120 ? randomBGValue : latestBG + 100
-//            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(latestBG)))
-            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(randomBGValue)))
+            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(latestBG)))
+//            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(randomBGValue)))
             if let directionBG = entries[latestEntryi].direction {
                 self.cgmDirectionlbl.text = self.bgDirectionGraphic(directionBG)
                 self.latestDirectionString = self.bgDirectionGraphic(directionBG)
@@ -355,10 +355,7 @@ extension  BottomSheetVC{
             guard let data = data else {
                 return
             }
-            
-            
             let json = try? JSONSerialization.jsonObject(with: data) as? Dictionary<String, Any>
-            
             if let json = json {
                 DispatchQueue.main.async {
                     print(json)
@@ -382,7 +379,6 @@ extension  BottomSheetVC{
     
     func clearOldBGCheck(){
         self.bgCheckData.removeAll()
-       // self.updateBGCheckGraph()
     }
     
     func clearOldOverride(){

@@ -12,6 +12,7 @@ class SessionDescriptionVC: UIViewController {
     
     // MARK: - IBOutlets
     //===========================
+    @IBOutlet weak var summaryTitleLbl: UILabel!
     @IBOutlet weak var rangePerValueLbl: UILabel!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var lowestGlucoseLbl: UILabel!
@@ -38,6 +39,7 @@ class SessionDescriptionVC: UIViewController {
             overrideUserInterfaceStyle = .light
         }
         self.titleLbl.text = titleValue
+        self.summaryTitleLbl.font = AppFonts.SF_Pro_Display_Medium.withSize(.x16)
         self.setupTableView()
         self.setupProgressBar()
         self.getCgmDataFromFirestore()

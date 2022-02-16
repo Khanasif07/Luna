@@ -264,11 +264,8 @@ public class BleManager: NSObject{
                     ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: bgData.insulin ?? "")
                 }
                 rangeBgData = rangeBgData.map { (bgData) -> ShareGlucoseData in
-                    if bgData.insulin == "0.25" || bgData.insulin == "0.75" {
-                    return ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: "0")
-                    } else{
-                      return ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: bgData.insulin ?? "")
-                    }
+                    return  (bgData.insulin == "0.25" || bgData.insulin == "0.75") ? ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: "0")
+                        : ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: bgData.insulin ?? "")
                 }
                 rangeBgData[0].insulin = "0.25"
                 rangeBgData[rangeBgData.endIndex - 1].insulin = "0.75"
@@ -309,11 +306,11 @@ public class BleManager: NSObject{
                 CommonFunctions.delay(delay: 10.0) {
                     self.isDataOutPutProcess = false
                     self.writeValue(myCharacteristic: dataInCharacteristic,value: "#CLEAR_DOSE_DATA")
+                    NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
                 }
             }
         }
-        NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
-        print(SystemInfoModel.shared.dosingData)
+//        print(SystemInfoModel.shared.dosingData)
     }
 }
 // MARK: - Extension For CBPeripheralDelegate
@@ -478,17 +475,23 @@ extension BleManager: CBCentralManagerDelegate {
                                advertisementData: [String: Any], rssi RSSI: NSNumber) {
         print(peripheral.name ?? "")
         print(peripheral.identifier)
-        if peripheral.name == AppConstants.appName{
-        myperipheral = peripheral
-        myperipheral?.delegate = self
-        centralManager.stopScan()
-        centralManager.connect(myperipheral!, options: [CBConnectPeripheralOptionNotifyOnConnectionKey:true, CBConnectPeripheralOptionNotifyOnDisconnectionKey: true])
+        if let kCBAdvDataServiceUUID =  ((advertisementData["kCBAdvDataServiceUUIDs"] as? NSArray)?.firstObject){
+            print("kCBAdvDataServiceUUID: ")
+            print(toString(kCBAdvDataServiceUUID))
+            //MARK:- Update New BLE UUID To Firestore.
+            if UserModel.main.kCBAdvDataServiceUUID.isEmpty && (peripheral.name == AppConstants.appName) {
+                FirestoreController.updateBLEUniqueUUID(uuid: toString(kCBAdvDataServiceUUID))
+            }
+            if (peripheral.name == AppConstants.appName) &&  UserModel.main.kCBAdvDataServiceUUID == toString(kCBAdvDataServiceUUID){
+                myperipheral = peripheral
+                myperipheral?.delegate = self
+                centralManager.stopScan()
+                centralManager.connect(myperipheral!, options: [CBConnectPeripheralOptionNotifyOnConnectionKey:true, CBConnectPeripheralOptionNotifyOnDisconnectionKey: true])
+            }
         }
     }
     
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        print("Connected!")
-        //MARK:- STATIC DATA USING
         isMyPeripheralConected = true
         myperipheral?.discoverServices(nil)
         CommonFunctions.showToastWithMessage("Bluetooth connected.")
