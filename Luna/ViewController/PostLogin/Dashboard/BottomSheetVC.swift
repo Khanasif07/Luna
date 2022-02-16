@@ -194,6 +194,8 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
                     self.cgmDirectionlbl.text = ""
                     self.latestDirectionString = ""
                 }
+                
+                BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestBg.date), String(latestBg.sgv)))
             } else {
                 self.cgmValueLbl.text = "--"
                 self.cgmDirectionlbl.text = ""
