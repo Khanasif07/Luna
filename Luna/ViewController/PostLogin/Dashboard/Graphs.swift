@@ -156,12 +156,8 @@ extension BottomSheetVC :  ChartViewDelegate {
         
         var colors = [NSUIColor]()
         for i in 0..<entries.count{
-//            if Float(entries[i].sgv) > topBG - maxBGOffset {
-//                topBG = Float(entries[i].sgv) + maxBGOffset
-//            }
             let value = ChartDataEntry(x: Double(entries[i].date), y: Double(entries[i].sgv), data: formatPillText(line1: bgUnits.toDisplayUnits(String(entries[i].sgv)), time: entries[i].date))
             mainChart.addEntry(value)
-            
             if Double(entries[i].sgv) >= Double(UserDefaultsRepository.highLine.value) {
                 colors.append(NSUIColor.systemYellow)
             } else if Double(entries[i].sgv) <= Double(UserDefaultsRepository.lowLine.value) {
@@ -182,7 +178,6 @@ extension BottomSheetVC :  ChartViewDelegate {
             }
         }
         cgmChartView.rightAxis.axisMaximum = Double(topBG)
-//        cgmChartView.setVisibleXRangeMinimum(600)
         cgmChartView.data?.dataSets[dataIndex].notifyDataSetChanged()
         cgmChartView.data?.notifyDataChanged()
         cgmChartView.notifyDataSetChanged()
