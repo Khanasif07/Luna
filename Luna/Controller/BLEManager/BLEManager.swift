@@ -246,7 +246,7 @@ public class BleManager: NSObject{
                 }
             }
         }
-        if (SystemInfoModel.shared.cgmData?.last?.date ?? 0.0) - (UserDefaultsRepository.sessionEndDate.value) > 180.0 {
+        if (SystemInfoModel.shared.cgmData?.last?.date ?? 0.0) - (UserDefaultsRepository.sessionEndDate.value) > 900.0 {
             if UserDefaultsRepository.sessionStartDate.value != 0.0 && UserDefaultsRepository.sessionEndDate.value != 0.0{
                 let startSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: {$0.date == UserDefaultsRepository.sessionStartDate.value})
                 let endSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: {$0.date == UserDefaultsRepository.sessionEndDate.value})

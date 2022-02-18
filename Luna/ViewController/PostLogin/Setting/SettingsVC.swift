@@ -189,6 +189,10 @@ extension SettingsVC : UITableViewDelegate, UITableViewDataSource {
         return 40.0
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNonzeroMagnitude
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }

@@ -168,6 +168,7 @@ extension  BottomSheetVC{
     
     // NS BG Data Response processor
     func processNSBGData(data: [ShareGlucoseData], onlyPullLastRecord: Bool, isNS: Bool = false){
+        if data.isEmpty{ return}
         var pullDate = data[data.count - 1].date
         if isNS {
             pullDate = data[data.count - 1].date / 1000
