@@ -246,12 +246,12 @@ public class BleManager: NSObject{
                 }
             }
         }
-        if (SystemInfoModel.shared.cgmData?.last?.date ?? 0.0) - (UserDefaultsRepository.sessionEndDate.value) > 900.0 {
+        if (SystemInfoModel.shared.cgmData?.last?.date ?? 0.0) - (UserDefaultsRepository.sessionEndDate.value) > 1800.0 {
             if UserDefaultsRepository.sessionStartDate.value != 0.0 && UserDefaultsRepository.sessionEndDate.value != 0.0{
                 let startSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: {$0.date == UserDefaultsRepository.sessionStartDate.value})
                 let endSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: {$0.date == UserDefaultsRepository.sessionEndDate.value})
                 if let startIndex = startSessionIndex,let endIndex = endSessionIndex{
-                    let myRange: ClosedRange = (startIndex-3)...(endIndex+3)
+                    let myRange: ClosedRange = (startIndex-6)...(endIndex+6)
                     //
                     SystemInfoModel.shared.dosingData.forEach { (dosingHistory) in
                         if let indexx = SystemInfoModel.shared.cgmData?.firstIndex(where: { (bgData) -> Bool in
@@ -265,8 +265,8 @@ public class BleManager: NSObject{
                         return  (bgData.insulin == "0.25" || bgData.insulin == "0.75") ? ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: "0")
                             : ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: bgData.insulin ?? "")
                     }
-                    rangeBgData[3].insulin = "0.25"
-                    rangeBgData[rangeBgData.endIndex - 4].insulin = "0.75"
+                    rangeBgData[6].insulin = "0.25"
+                    rangeBgData[rangeBgData.endIndex - 7].insulin = "0.75"
                     let startSession = SystemInfoModel.shared.dosingData.firstIndex(where: {$0.sessionTime == UserDefaultsRepository.sessionStartDate.value})
                     let endSession = SystemInfoModel.shared.dosingData.firstIndex(where: {$0.sessionTime == UserDefaultsRepository.sessionEndDate.value})
                     if let startIndexx = startSession,let endIndexx = endSession{
