@@ -80,8 +80,7 @@ public class BleManager: NSObject{
     public func beginScan(){
         if isScanning == false{
             isKeepConnect = true
-//            self.centralManager.scanForPeripherals(withServices: [lunaCBUUID], options: nil)
-            self.centralManager.scanForPeripherals(withServices: [], options: nil)
+            self.centralManager.scanForPeripherals(withServices: [lunaCBUUID], options: nil)
             self.rescanTimer =  Timer.scheduledTimer(timeInterval: 15,
                                                      target: self,
                                                      selector: #selector(scanningFinished),
@@ -100,6 +99,7 @@ public class BleManager: NSObject{
     public func disConnect (){
         isKeepConnect = false
         isUnpaired = true
+        FirestoreController.updateBLEUniqueUUID(uuid: "")
         centralManager.cancelPeripheralConnection(myperipheral!)
     }
     
@@ -458,7 +458,7 @@ extension BleManager: CBCentralManagerDelegate {
             NotificationCenter.default.post(name: Notification.Name.BLEOnOffState, object: nil)
         case .poweredOn:
             print("central.state is .poweredOn")
-            centralManager.scanForPeripherals(withServices: [],options: nil)
+            centralManager.scanForPeripherals(withServices: [lunaCBUUID],options: nil)
             self.rescanTimer =  Timer.scheduledTimer(timeInterval: 15,
                                                      target: self,
                                                      selector: #selector(scanningFinished),
@@ -473,19 +473,17 @@ extension BleManager: CBCentralManagerDelegate {
                                advertisementData: [String: Any], rssi RSSI: NSNumber) {
         print(peripheral.name ?? "")
         print(peripheral.identifier)
-        if let kCBAdvDataServiceUUID =  ((advertisementData["kCBAdvDataServiceUUIDs"] as? NSArray)?.firstObject){
-            print("kCBAdvDataServiceUUID: ")
-            print(toString(kCBAdvDataServiceUUID))
-            //MARK:- Update New BLE UUID To Firestore.
-            if UserModel.main.kCBAdvDataServiceUUID.isEmpty && (peripheral.name == AppConstants.appName) {
-                FirestoreController.updateBLEUniqueUUID(uuid: toString(kCBAdvDataServiceUUID))
-            }
-//            if (peripheral.name == AppConstants.appName) &&  UserModel.main.kCBAdvDataServiceUUID == toString(kCBAdvDataServiceUUID){
-                myperipheral = peripheral
-                myperipheral?.delegate = self
-                centralManager.stopScan()
-                centralManager.connect(myperipheral!, options: [CBConnectPeripheralOptionNotifyOnConnectionKey:true, CBConnectPeripheralOptionNotifyOnDisconnectionKey: true])
-//            }
+        //MARK:- Update New BLE UUID To Firestore.
+        if UserModel.main.lunaControllerPeripheralId.isEmpty && (peripheral.name?.lowercased() == AppConstants.appName.lowercased()) {
+            FirestoreController.updateBLEUniqueUUID(uuid: toString(peripheral.identifier))
+        }
+        
+        if !UserModel.main.lunaControllerPeripheralId.isEmpty {
+            print("Connecting to \(peripheral.identifier)")
+            myperipheral = peripheral
+            myperipheral?.delegate = self
+            centralManager.stopScan()
+            centralManager.connect(myperipheral!, options: [CBConnectPeripheralOptionNotifyOnConnectionKey:true, CBConnectPeripheralOptionNotifyOnDisconnectionKey: true])
         }
     }
     
