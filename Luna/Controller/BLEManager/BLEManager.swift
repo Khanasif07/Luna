@@ -207,7 +207,7 @@ public class BleManager: NSObject{
         return 0
     }
     
-    private func manageInsulinData(data: [[String]],bytes: Int){
+    public func manageInsulinData(data: [[String]],bytes: Int){
         //
         let now = dateTimeUtils.getNowTimeIntervalUTC()
         if let fetchedData = UserDefaults.standard.data(forKey: ApiKey.dosingHistoryData) {
@@ -246,44 +246,43 @@ public class BleManager: NSObject{
                 }
             }
         }
-        if UserDefaultsRepository.sessionStartDate.value != 0.0 && UserDefaultsRepository.sessionEndDate.value != 0.0{
-            let startSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: {$0.date == UserDefaultsRepository.sessionStartDate.value})
-            let endSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: {$0.date == UserDefaultsRepository.sessionEndDate.value})
-            if let startIndex = startSessionIndex,let endIndex = endSessionIndex{
-                let myRange: ClosedRange = (startIndex)...(endIndex)
-                //
-                SystemInfoModel.shared.dosingData.forEach { (dosingHistory) in
-                    if let indexx = SystemInfoModel.shared.cgmData?.firstIndex(where: { (bgData) -> Bool in
-                        bgData.date == dosingHistory.sessionTime
-                    }){
-                        SystemInfoModel.shared.cgmData?[indexx].insulin = dosingHistory.insulin
+        if (SystemInfoModel.shared.cgmData?.last?.date ?? 0.0) - (UserDefaultsRepository.sessionEndDate.value) > 1800.0 {
+            if UserDefaultsRepository.sessionStartDate.value != 0.0 && UserDefaultsRepository.sessionEndDate.value != 0.0{
+                let startSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: {$0.date == UserDefaultsRepository.sessionStartDate.value})
+                let endSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: {$0.date == UserDefaultsRepository.sessionEndDate.value})
+                if let startIndex = startSessionIndex,let endIndex = endSessionIndex{
+                    let myRange: ClosedRange = (startIndex-6)...(endIndex+6)
+                    //
+                    SystemInfoModel.shared.dosingData.forEach { (dosingHistory) in
+                        if let indexx = SystemInfoModel.shared.cgmData?.firstIndex(where: { (bgData) -> Bool in
+                            bgData.date == dosingHistory.sessionTime
+                        }){
+                            SystemInfoModel.shared.cgmData?[indexx].insulin = dosingHistory.insulin
+                        }
                     }
-                }
-                //
-                var rangeBgData = (SystemInfoModel.shared.cgmData?[myRange] ?? []).map { (bgData) -> ShareGlucoseData in
-                    ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: bgData.insulin ?? "")
-                }
-                rangeBgData = rangeBgData.map { (bgData) -> ShareGlucoseData in
-                    return  (bgData.insulin == "0.25" || bgData.insulin == "0.75") ? ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: "0")
-                        : ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: bgData.insulin ?? "")
-                }
-                rangeBgData[0].insulin = "0.25"
-                rangeBgData[rangeBgData.endIndex - 1].insulin = "0.75"
-                let startSession = SystemInfoModel.shared.dosingData.firstIndex(where: {$0.sessionTime == UserDefaultsRepository.sessionStartDate.value})
-                let endSession = SystemInfoModel.shared.dosingData.firstIndex(where: {$0.sessionTime == UserDefaultsRepository.sessionEndDate.value})
-                if let startIndexx = startSession,let endIndexx = endSession{
-                    SystemInfoModel.shared.dosingData[startIndexx].sessionCreated = true
-                    SystemInfoModel.shared.dosingData[endIndexx].sessionCreated = true
-                }
-                //
-                FirestoreController.addBatchData(sessionId: FirestoreController.getSessionId(), startDate: UserDefaultsRepository.sessionStartDate.value, endDate: UserDefaultsRepository.sessionEndDate.value, array: rangeBgData) { (sessionId) in
-                    print("Add CGM Batch Data Commited successfully")
-                    if UserDefaultsRepository.sessionStartDate.value != 0.0 && UserDefaultsRepository.sessionEndDate.value != 0.0 {
-                        FirestoreController.simpleTransactionToAddCGMData(sessionId: sessionId,startDate:UserDefaultsRepository.sessionStartDate.value,range: self.getRangeValue(bgData: rangeBgData, isShowPer: true),endDate: UserDefaultsRepository.sessionEndDate.value,insulin: self.getInsulinDosesValue(bgData: rangeBgData)) {
-                            UserDefaultsRepository.sessionStartDate.value = 0.0
-                            UserDefaultsRepository.sessionEndDate.value = 0.0
-                        } failure: { (err) -> (Void) in
-                            CommonFunctions.showToastWithMessage(err.localizedDescription)
+                    //
+                    var rangeBgData = (SystemInfoModel.shared.cgmData?[myRange] ?? []).map { (bgData) -> ShareGlucoseData in
+                        return  (bgData.insulin == "0.25" || bgData.insulin == "0.75") ? ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: "0")
+                            : ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: bgData.insulin ?? "")
+                    }
+                    rangeBgData[6].insulin = "0.25"
+                    rangeBgData[rangeBgData.endIndex - 7].insulin = "0.75"
+                    let startSession = SystemInfoModel.shared.dosingData.firstIndex(where: {$0.sessionTime == UserDefaultsRepository.sessionStartDate.value})
+                    let endSession = SystemInfoModel.shared.dosingData.firstIndex(where: {$0.sessionTime == UserDefaultsRepository.sessionEndDate.value})
+                    if let startIndexx = startSession,let endIndexx = endSession{
+                        SystemInfoModel.shared.dosingData[startIndexx].sessionCreated = true
+                        SystemInfoModel.shared.dosingData[endIndexx].sessionCreated = true
+                    }
+                    //
+                    FirestoreController.addBatchData(sessionId: FirestoreController.getSessionId(), startDate: UserDefaultsRepository.sessionStartDate.value, endDate: UserDefaultsRepository.sessionEndDate.value, array: rangeBgData) { (sessionId) in
+                        print("Add CGM Batch Data Commited successfully")
+                        if UserDefaultsRepository.sessionStartDate.value != 0.0 && UserDefaultsRepository.sessionEndDate.value != 0.0 {
+                            FirestoreController.simpleTransactionToAddCGMData(sessionId: sessionId,startDate:UserDefaultsRepository.sessionStartDate.value,range: self.getRangeValue(bgData: rangeBgData, isShowPer: true),endDate: UserDefaultsRepository.sessionEndDate.value,insulin: self.getInsulinDosesValue(bgData: rangeBgData)) {
+                                UserDefaultsRepository.sessionStartDate.value = 0.0
+                                UserDefaultsRepository.sessionEndDate.value = 0.0
+                            } failure: { (err) -> (Void) in
+                                CommonFunctions.showToastWithMessage(err.localizedDescription)
+                            }
                         }
                     }
                 }
@@ -302,7 +301,7 @@ public class BleManager: NSObject{
             UserDefaults.standard.set(dosingData, forKey: ApiKey.dosingHistoryData)
         }
         if let dataInCharacteristic = self.cgmDataInCharacteristic{
-            if !data.isEmpty && bytes >= 1{
+            if !data.isEmpty && bytes > 1{
                 CommonFunctions.delay(delay: 10.0) {
                     self.isDataOutPutProcess = false
                     self.writeValue(myCharacteristic: dataInCharacteristic,value: "#CLEAR_DOSE_DATA")
@@ -310,7 +309,7 @@ public class BleManager: NSObject{
                 }
             }
         }
-//        print(SystemInfoModel.shared.dosingData)
+        print(SystemInfoModel.shared.dosingData)
     }
 }
 // MARK: - Extension For CBPeripheralDelegate
@@ -421,9 +420,8 @@ extension BleManager: CBPeripheralDelegate {
             }
         case collectionInsulinDoses:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-            print("handled Characteristic Value for collectionInsulinDoses:  \(data)")
-        default:
-            let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
+            print("handled Characteristic Value for coll ectionInsulinDoses:  \(data)")
+        default:              let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("Unhandled Characteristic UUID: \(characteristic.uuid)")
             print(data)
         }
@@ -482,12 +480,12 @@ extension BleManager: CBCentralManagerDelegate {
             if UserModel.main.kCBAdvDataServiceUUID.isEmpty && (peripheral.name == AppConstants.appName) {
                 FirestoreController.updateBLEUniqueUUID(uuid: toString(kCBAdvDataServiceUUID))
             }
-            if (peripheral.name == AppConstants.appName) &&  UserModel.main.kCBAdvDataServiceUUID == toString(kCBAdvDataServiceUUID){
+//            if (peripheral.name == AppConstants.appName) &&  UserModel.main.kCBAdvDataServiceUUID == toString(kCBAdvDataServiceUUID){
                 myperipheral = peripheral
                 myperipheral?.delegate = self
                 centralManager.stopScan()
                 centralManager.connect(myperipheral!, options: [CBConnectPeripheralOptionNotifyOnConnectionKey:true, CBConnectPeripheralOptionNotifyOnDisconnectionKey: true])
-            }
+//            }
         }
     }
     

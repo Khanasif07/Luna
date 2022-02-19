@@ -35,7 +35,7 @@ extension  BottomSheetVC{
             // TODO: add error checking
              if(err == nil) {
                 let data = result!
-                self.ProcessNSBGData(data: data, onlyPullLastRecord: onlyPullLastRecord)
+                self.processNSBGData(data: data, onlyPullLastRecord: onlyPullLastRecord)
             } else {
                 if let lastData = self.bgData.last{
                     if lastData.date < dateTimeUtils.getNowTimeIntervalUTC() && dateTimeUtils.getNowTimeIntervalUTC() - lastData.date > 5 * 60{
@@ -145,7 +145,7 @@ extension  BottomSheetVC{
             if let entriesResponse = entriesResponse {
                 DispatchQueue.main.async {
                     // trigger the processor for the data after downloading.
-                    self.ProcessNSBGData(data: entriesResponse, onlyPullLastRecord: onlyPullLastRecord, isNS: true)
+                    self.processNSBGData(data: entriesResponse, onlyPullLastRecord: onlyPullLastRecord, isNS: true)
                     
                 }
             } else {
@@ -167,7 +167,8 @@ extension  BottomSheetVC{
     }
     
     // NS BG Data Response processor
-    func ProcessNSBGData(data: [ShareGlucoseData], onlyPullLastRecord: Bool, isNS: Bool = false){
+    func processNSBGData(data: [ShareGlucoseData], onlyPullLastRecord: Bool, isNS: Bool = false){
+        if data.isEmpty{ return}
         var pullDate = data[data.count - 1].date
         if isNS {
             pullDate = data[data.count - 1].date / 1000
@@ -240,16 +241,9 @@ extension  BottomSheetVC{
         } else if bgData[bgData.count - 1].date != pullDate {
             bgData.removeFirst()
             SystemInfoModel.shared.cgmData?.removeFirst()
-//            if data.count > 0 && UserDefaultsRepository.speakBG.value {
-//                speakBG(sgv: data[data.count - 1].sgv)
-//            }
         } else {
-//            if data.count > 0 {
-//              self.updateBadge(val: data[data.count - 1].sgv)
-//            }
             return
         }
-        
         // loop through the data so we can reverse the order to oldest first for the graph and convert the NS timestamp to seconds instead of milliseconds. Makes date comparisons easier for everything else.
         for i in 0..<data.count{
             var dateString = data[data.count - 1 - i].date
@@ -261,12 +255,10 @@ extension  BottomSheetVC{
                 let reading = ShareGlucoseData(sgv: data[data.count - 1 - i].sgv, date: dateString, direction: data[data.count - 1 - i].direction ?? "")
                 bgData.append(reading)
             }
-            
         }
         //MARK:- Important
         SystemInfoModel.shared.cgmData = bgData
         //
-//        print(SystemInfoModel.shared.dosingData)
         if SystemInfoModel.shared.dosingData.isEmpty{
             if let fetchedData = UserDefaults.standard.data(forKey: ApiKey.dosingHistoryData) {
                 let fetchedDosingData = try! JSONDecoder().decode([DosingHistory].self, from: fetchedData)
@@ -287,9 +279,10 @@ extension  BottomSheetVC{
         let insulinDataArray = self.bgData.filter { (bgData) -> Bool in
             return bgData.insulin == "0.25" || bgData.insulin == "0.5" || bgData.insulin == "0.75"
         }
-        SystemInfoModel.shared.insulinData = SystemInfoModel.shared.cgmData?.filter({$0.insulin == "0.5"}) ?? []
-        SystemInfoModel.shared.insulinData = SystemInfoModel.shared.insulinData.reversed()
+        SystemInfoModel.shared.insulinData = SystemInfoModel.shared.cgmData?.filter({$0.insulin == "0.5"}).reversed() ?? []
         viewUpdateNSBG(isNS: isNS)
+        //Update..
+        BleManager.sharedInstance.manageInsulinData(data: [[]], bytes: 0)
         let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
                                                     xAxis: cgmChartView.xAxis,
                                                     transformer: self.cgmChartView.getTransformer(forAxis: .left),
@@ -304,8 +297,6 @@ extension  BottomSheetVC{
             let entries = self.bgData
             if entries.count < 1 { return }
             self.updateBGGraph()
-            //            self.updateStats()
-            
             let latestEntryi = entries.count - 1
             let latestBG = entries[latestEntryi].sgv
             let priorBG = entries[latestEntryi - 1].sgv

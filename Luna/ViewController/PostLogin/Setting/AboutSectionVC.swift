@@ -88,7 +88,11 @@ extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 45.0
+        return 40.0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNonzeroMagnitude
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -179,36 +183,3 @@ extension AboutSectionVC : UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-//
-//// MARK: - Extension For MFMailComposeViewControllerDelegate
-////==========================================================
-//extension AboutSectionVC: MFMailComposeViewControllerDelegate{
-//
-//    func openMail() {
-//        if MFMailComposeViewController.canSendMail() {
-//            let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-//            UINavigationBar.appearance().barTintColor = UIColor.white
-//            let composeVC = MFMailComposeViewController()
-//            composeVC.mailComposeDelegate = self
-//            composeVC.setToRecipients(["support@lunadiabetes.com"])
-//            composeVC.setSubject("Luna iOS App Feedback")
-//            composeVC.setMessageBody("""
-//            ------------------------------
-//            Device Information
-//            ------------------------------
-//            iOS Version = \(DeviceDetail.os_version)
-//            Luna App Version = \(appVersion ?? "1.0")
-//            Phone = \(DeviceDetail.device_model)
-//            Thank you!
-//            """, isHTML: false)
-//            self.present(composeVC, animated: true, completion: nil)
-//        } else{
-//            showAlert(msg: "Mail not configured")
-//        }
-//    }
-//
-//    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-//        UINavigationBar.appearance().barTintColor = UIColor.black
-//        controller.dismiss(animated: true)
-//    }
-//}

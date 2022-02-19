@@ -245,12 +245,6 @@ extension CGMConnectedVC {
                         }
                     }
                 }
-                
-//                self.webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
-                
-//                if globalVariables.dexVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
-//                    globalVariables.dexVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
-//                }
             }
         }
     }
@@ -329,19 +323,8 @@ extension CGMConnectedVC {
             UserDefaultsRepository.shareUserName.value = AppUserDefaults.value(forKey: .shareUserName).stringValue
             UserDefaultsRepository.sharePassword.value = AppUserDefaults.value(forKey: .sharePassword).stringValue
             NotificationCenter.default.post(name: Notification.Name.cgmConnectedSuccessfully, object: [ApiKey.cgmData:entries])
-//            SystemInfoModel.shared.cgmData = self.bgData
-//            if SystemInfoModel.shared.isFromSetting {
-//                for cgmModel in entries {
-//                    FirestoreController.createCGMDataNode(direction: cgmModel.direction ?? "", sgv: cgmModel.sgv, date: cgmModel.date)
-//                }
-//            }
-//            NotificationCenter.default.post(name: Notification.Name.CgmDataReceivedSuccessfully, object: [:])
-//            self.updateBGGraph()
-//            self.updateStats()
-            
             let latestEntryi = entries.count - 1
             let latestBG = entries[latestEntryi].sgv
-            
             self.okBtn.isEnabled = true
             self.activityIndicator.stopAnimating()
             self.activityIndicator.isHidden = true
@@ -364,19 +347,6 @@ extension CGMConnectedVC {
 //                snoozerDirection = ""
                 self.latestDirectionString = ""
             }
-            
-//            if deltaBG < 0 {
-//                self.DeltaText.text = bgUnits.toDisplayUnits(String(deltaBG))
-//                snoozerDelta = bgUnits.toDisplayUnits(String(deltaBG))
-//                self.latestDeltaString = String(deltaBG)
-//            }
-//            else
-//            {
-//                self.DeltaText.text = "+" + bgUnits.toDisplayUnits(String(deltaBG))
-//                snoozerDelta = "+" + bgUnits.toDisplayUnits(String(deltaBG))
-//                self.latestDeltaString = "+" + String(deltaBG)
-//            }
-           // self.updateBadge(val: latestBG)
         }
         
     }
@@ -402,7 +372,7 @@ extension CGMConnectedVC {
     
     func bgDirectionGraphic(_ value:String)->String
     {
-        let //graphics:[String:String]=["Flat":"\u{2192}","DoubleUp":"\u{21C8}","SingleUp":"\u{2191}","FortyFiveUp":"\u{2197}\u{FE0E}","FortyFiveDown":"\u{2198}\u{FE0E}","SingleDown":"\u{2193}","DoubleDown":"\u{21CA}","None":"-","NOT COMPUTABLE":"-","RATE OUT OF RANGE":"-"]
+        let
         graphics:[String:String]=["Flat":"→","DoubleUp":"↑↑","SingleUp":"↑","FortyFiveUp":"↗","FortyFiveDown":"↘︎","SingleDown":"↓","DoubleDown":"↓↓","None":"-","NONE":"-","NOT COMPUTABLE":"-","RATE OUT OF RANGE":"-", "": "-"]
         return graphics[value] ?? ""
     }
