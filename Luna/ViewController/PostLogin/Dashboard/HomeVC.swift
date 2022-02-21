@@ -8,7 +8,6 @@ import CoreBluetooth
 import UIKit
 import HealthKit
 import Charts
-import Firebase
 
 class HomeVC: UIViewController {
     
@@ -236,7 +235,7 @@ extension HomeVC {
     private func setupSystemInfo(){
         let batteryData = BleManager.sharedInstance.batteryData
         let reservoirData = BleManager.sharedInstance.reservoirLevelData
-        let data = BleManager.sharedInstance.systemStatusData.first
+        let systemStatusdata = BleManager.sharedInstance.systemStatusData.first
         //MARK:- Battery Data Set Up
         self.batteryImgView.image = DeviceStatus.getBatteryImage(batteryInfo:batteryData).1
         if DeviceStatus.getBatteryImage(batteryInfo:batteryData).0.isEmpty{
@@ -265,13 +264,13 @@ extension HomeVC {
         }
         self.reservoirTitleLbl.text = DeviceStatus.ReservoirLevel.titleString
         //MARK:- System Status Data Set Up
-        self.systemImgView.image = DeviceStatus.getSystemImage(systemInfo:data ?? "").1
-        if DeviceStatus.getSystemImage(systemInfo:data ?? "").0.isEmpty{
+        self.systemImgView.image = DeviceStatus.getSystemImage(systemInfo: systemStatusdata ?? "").1
+        if DeviceStatus.getSystemImage(systemInfo: systemStatusdata ?? "").0.isEmpty{
             self.systemStatusLbl.alpha = 0
         }else {
             self.systemStatusLbl.alpha = 100
-            self.systemStatusLbl.text = DeviceStatus.getSystemImage(systemInfo:data ?? "").0
-            self.systemStatusLbl.textColor = DeviceStatus.getSystemImage(systemInfo:data ?? "").2
+            self.systemStatusLbl.text = DeviceStatus.getSystemImage(systemInfo: systemStatusdata ?? "").0
+            self.systemStatusLbl.textColor = DeviceStatus.getSystemImage(systemInfo: systemStatusdata ?? "").2
         }
         self.systemTitleLbl.text = DeviceStatus.System.titleString
     }

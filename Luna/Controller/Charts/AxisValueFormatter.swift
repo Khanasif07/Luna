@@ -24,9 +24,9 @@ final class XAxisNameFormater: NSObject, IAxisValueFormatter {
 
 final  class XAxisCustomRenderer: XAxisRenderer {
 
-    var cgmData : [ShareGlucoseData] = []
-    var insulinData : [ShareGlucoseData] = []
-    var minGapBwTwoLabels: Double =  0.0
+    private var cgmData : [ShareGlucoseData] = []
+    private var insulinData : [ShareGlucoseData] = []
+    private var minGapBwTwoLabels: Double =  0.0
 
     init(viewPortHandler: ViewPortHandler, xAxis: XAxis, transformer: Transformer, cgmData: [ShareGlucoseData],insulinData: [ShareGlucoseData]) {
         self.cgmData = cgmData
@@ -345,21 +345,10 @@ open class BalloonMarker: MarkerImage{
 
 
     
-    open override func refreshContent(entry: ChartDataEntry, highlight: Highlight)
-    {
+    open override func refreshContent(entry: ChartDataEntry, highlight: Highlight){
         setLabel(entry.data as? String ?? "")
     }
 
-//    open override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
-//        if entry.data != nil {
-//            //var multiplier = entry.data as! Double * 100.0
-//            //labelText = String(format: "%.0f%%", multiplier)
-//            label = entry.data as? String ?? ""
-//        } else {
-//            label = String(entry.y)
-//        }
-//    }
-    
     @objc open func setLabel(_ newLabel: String) {
          label = newLabel
         _drawAttributes.removeAll()

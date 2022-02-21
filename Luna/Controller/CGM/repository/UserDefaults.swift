@@ -64,5 +64,6 @@ class UserDefaultsRepository {
     static let onlyDownloadBG = UserDefaultsValue<Bool>(key: "onlyDownloadBG", default: false)
     static let alwaysDownloadAllBG = UserDefaultsValue<Bool>(key: "alwaysDownloadAllBG", default: true)
     static let bgUpdateDelay = UserDefaultsValue<Int>(key: "bgUpdateDelay", default: 10)
+    static let downloadDays = UserDefaultsValue<Int>(key: "downloadDays", default: 1)
     
 }

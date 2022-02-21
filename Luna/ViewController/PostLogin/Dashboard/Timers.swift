@@ -11,7 +11,7 @@ import UIKit
 extension BottomSheetVC {
     func restartAllTimers() {
         if !UserDefaultsRepository.shareUserName.value.isEmpty && !UserDefaultsRepository.sharePassword.value.isEmpty {
-            if !bgTimer.isValid { self.startBGTimer(time: 10) }
+            if !bgTimer.isValid { self.startBGTimer(time: 2) }
             if !minAgoTimer.isValid { self.startMinAgoTimer(time: minAgoTimeInterval) }
         } else {
         }

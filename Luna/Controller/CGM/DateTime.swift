@@ -45,6 +45,12 @@ public class dateTimeUtils {
         return yesterday.timeIntervalSince1970
     }
     
+    static func getTimeIntervalNHoursAgo(N: Int) -> TimeInterval {
+        let today = Date()
+        let nHoursAgo = Calendar.current.date(byAdding: .hour, value: -N, to: today)!
+        return nHoursAgo.timeIntervalSince1970
+    }
+    
     static func getNowTimeIntervalUTC() -> TimeInterval {
         let now = Date()
         let formatter = DateFormatter()

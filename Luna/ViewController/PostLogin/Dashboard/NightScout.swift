@@ -28,14 +28,32 @@ extension  BottomSheetVC{
     
     // Dex Share Web Call
     func webLoadDexShare(onlyPullLastRecord: Bool = false) {
-        var count = 288
+        let graphHours = 24 * UserDefaultsRepository.downloadDays.value
+        var count = graphHours * 12
         if onlyPullLastRecord { count = 1 }
         dexShare?.fetchData(count) { (err, result) -> () in
             
             // TODO: add error checking
              if(err == nil) {
                 let data = result!
-                self.processNSBGData(data: data, onlyPullLastRecord: onlyPullLastRecord)
+//                self.processNSBGData(data: data, onlyPullLastRecord: onlyPullLastRecord)
+                 //
+                 // If Dex data is old, load from NS instead
+                 let latestDate = data[0].date
+                 let now = dateTimeUtils.getNowTimeIntervalUTC()
+                 if (latestDate + 330) < now {
+                     self.webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
+                     print("dex didn't load, triggered NS attempt")
+                     return
+                 }
+                 
+                 // Dexcom only returns 24 hrs of data. If we need more, call NS.
+                 if graphHours > 24 && !onlyPullLastRecord {
+                     self.webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord, dexData: data)
+                 } else {
+                     self.processNSBGData(data: data, onlyPullLastRecord: onlyPullLastRecord)
+                 }
+                 //
             } else {
                 if let lastData = self.bgData.last{
                     if lastData.date < dateTimeUtils.getNowTimeIntervalUTC() && dateTimeUtils.getNowTimeIntervalUTC() - lastData.date > 5 * 60{
@@ -67,18 +85,18 @@ extension  BottomSheetVC{
                 // If we get an error, immediately try to pull NS BG Data
                 self.webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
                 
-//                if globalVariables.dexVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
-//                    globalVariables.dexVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
+                if globalVariables.dexVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
+                    globalVariables.dexVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
 ////                    DispatchQueue.main.async {
 //                        //                        self.sendNotification(title: "Dexcom Share Error", body: "Please double check user name and password, internet connection, and sharing status.")
 ////                    }
-//                }
+                }
             }
         }
     }
     
     // NS BG Data Web call
-    func webLoadNSBGData(onlyPullLastRecord: Bool = false) {
+    func webLoadNSBGData(onlyPullLastRecord: Bool = false ,dexData: [ShareGlucoseData] = []) {
         // Set the count= in the url either to pull 24 hours or only the last record
         var points = "1"
         if !onlyPullLastRecord {
@@ -93,10 +111,10 @@ extension  BottomSheetVC{
             urlBGDataPath = urlBGDataPath + "token=" + token + "&count=" + points
         }
         guard let urlBGData = URL(string: urlBGDataPath) else {
-//            if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
-//                globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
+            if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
+                globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
 //                //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
-//            }
+            }
             DispatchQueue.main.async {
                 if self.bgTimer.isValid {
                     self.bgTimer.invalidate()
@@ -112,24 +130,28 @@ extension  BottomSheetVC{
         let getBGTask = URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else {
                 print(error?.localizedDescription ?? "")
-//                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
-//                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
+                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
+                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
 //                    self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
-//                }
+                }
                 DispatchQueue.main.async {
                     if self.bgTimer.isValid {
                         self.bgTimer.invalidate()
                     }
                     self.startBGTimer(time: 60)
                 }
+                // if we have Dex data, use it
+                if !dexData.isEmpty {
+                    self.processNSBGData(data: dexData, onlyPullLastRecord: onlyPullLastRecord, isNS: false)
+                }
                 return
                 
             }
             guard let data = data else {
-//                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
-//                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
+                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
+                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
 //                    //self.sendNotification(title: "Nightscout Error", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
-//                }
+                }
                 DispatchQueue.main.async {
                     if self.bgTimer.isValid {
                         self.bgTimer.invalidate()
@@ -149,10 +171,10 @@ extension  BottomSheetVC{
                     
                 }
             } else {
-//                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
-//                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
+                if globalVariables.nsVerifiedAlert < dateTimeUtils.getNowTimeIntervalUTC() + 300 {
+                    globalVariables.nsVerifiedAlert = dateTimeUtils.getNowTimeIntervalUTC()
 //                    //self.sendNotification(title: "Nightscout Failure", body: "Please double check url, token, and internet connection. This may also indicate a temporary Nightscout issue")
-//                }
+                }
                 DispatchQueue.main.async {
                     if self.bgTimer.isValid {
                         self.bgTimer.invalidate()
@@ -168,21 +190,23 @@ extension  BottomSheetVC{
     
     // NS BG Data Response processor
     func processNSBGData(data: [ShareGlucoseData], onlyPullLastRecord: Bool, isNS: Bool = false){
+        let graphHours = 24 * UserDefaultsRepository.downloadDays.value
         if data.isEmpty{ return}
-        var pullDate = data[data.count - 1].date
-        if isNS {
-            pullDate = data[data.count - 1].date / 1000
-            pullDate.round(FloatingPointRoundingRule.toNearestOrEven)
-        }
+        let pullDate = data[data.count - 1].date
+//        if isNS {
+//            pullDate = data[data.count - 1].date / 1000
+//            pullDate.round(FloatingPointRoundingRule.toNearestOrEven)
+//        }
         
-        var latestDate = data[0].date
-        if isNS {
-            latestDate = data[0].date / 1000
-            latestDate.round(FloatingPointRoundingRule.toNearestOrEven)
-        }
+        let latestDate = data[0].date
+//        if isNS {
+//            latestDate = data[0].date / 1000
+//            latestDate.round(FloatingPointRoundingRule.toNearestOrEven)
+//        }
         
         let now = dateTimeUtils.getNowTimeIntervalUTC()
-        if !isNS && (latestDate + 330) < now {
+//        if !isNS && (latestDate + 330) < now {
+        if (latestDate + 330) < now {
             //
             if let lastData = self.bgData.last{
                 if lastData.date < dateTimeUtils.getNowTimeIntervalUTC() && dateTimeUtils.getNowTimeIntervalUTC() - lastData.date > 5 * 60{
@@ -193,11 +217,12 @@ extension  BottomSheetVC{
                     DispatchQueue.main.async {
                     self.updateBGGraph()
                     }
+                    CommonFunctions.showToastWithMessage("Dexcom CGM data unavailable")
                 }
             }
             //
             webLoadNSBGData(onlyPullLastRecord: onlyPullLastRecord)
-            CommonFunctions.showToastWithMessage("Dexcom CGM data unavailable")
+//            CommonFunctions.showToastWithMessage("Dexcom CGM data unavailable")
             //MARK:- TO DO
             return
         }
@@ -246,12 +271,12 @@ extension  BottomSheetVC{
         }
         // loop through the data so we can reverse the order to oldest first for the graph and convert the NS timestamp to seconds instead of milliseconds. Makes date comparisons easier for everything else.
         for i in 0..<data.count{
-            var dateString = data[data.count - 1 - i].date
-            if isNS {
-                dateString = data[data.count - 1 - i].date / 1000
-                dateString.round(FloatingPointRoundingRule.toNearestOrEven)
-            }
-            if dateString >= dateTimeUtils.getTimeInterval24HoursAgo() {
+            let dateString = data[data.count - 1 - i].date
+//            if isNS {
+//                dateString = data[data.count - 1 - i].date / 1000
+//                dateString.round(FloatingPointRoundingRule.toNearestOrEven)
+//            }
+            if dateString >= dateTimeUtils.getTimeIntervalNHoursAgo(N: graphHours) {
                 let reading = ShareGlucoseData(sgv: data[data.count - 1 - i].sgv, date: dateString, direction: data[data.count - 1 - i].direction ?? "")
                 bgData.append(reading)
             }
@@ -282,12 +307,16 @@ extension  BottomSheetVC{
         SystemInfoModel.shared.insulinData = SystemInfoModel.shared.cgmData?.filter({$0.insulin == "0.5"}).reversed() ?? []
         viewUpdateNSBG(isNS: isNS)
         //Update..
-        BleManager.sharedInstance.manageInsulinData(data: [[]], bytes: 0)
-        let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
+        if SystemInfoModel.shared.dosingData.contains(where: { dosing in
+            return dosing.sessionCreated == false && dosing.sessionStatus == ApiKey.beginCaps
+        }){
+            BleManager.sharedInstance.manageInsulinData(data: [[]], bytes: 0)
+        }
+        customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
                                                     xAxis: cgmChartView.xAxis,
                                                     transformer: self.cgmChartView.getTransformer(forAxis: .left),
                                                     cgmData: self.bgData,insulinData: insulinDataArray)
-        self.cgmChartView.xAxisRenderer = customXAxisRender
+        self.cgmChartView.xAxisRenderer = customXAxisRender!
     }
     
     // NS BG Data Front end updater

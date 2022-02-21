@@ -79,6 +79,8 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
         }
     }
     
+    var customXAxisRender : XAxisCustomRenderer?
+    
     //MARK:- VIEW LIFE CYCLE
     //======================
     override func viewDidLoad() {

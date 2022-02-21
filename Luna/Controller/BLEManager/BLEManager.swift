@@ -246,7 +246,7 @@ public class BleManager: NSObject{
                 }
             }
         }
-        if (SystemInfoModel.shared.cgmData?.last?.date ?? 0.0) - (UserDefaultsRepository.sessionEndDate.value) > 1800.0 {
+        if (SystemInfoModel.shared.cgmData?.last?.date ?? 0.0) - (UserDefaultsRepository.sessionEndDate.value) > 35*60 {
             if UserDefaultsRepository.sessionStartDate.value != 0.0 && UserDefaultsRepository.sessionEndDate.value != 0.0{
                 let startSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: {$0.date == UserDefaultsRepository.sessionStartDate.value})
                 let endSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: {$0.date == UserDefaultsRepository.sessionEndDate.value})
@@ -282,7 +282,17 @@ public class BleManager: NSObject{
                                 UserDefaultsRepository.sessionEndDate.value = 0.0
                             } failure: { (err) -> (Void) in
                                 CommonFunctions.showToastWithMessage(err.localizedDescription)
+                                if let startIndexx = startSession,let endIndexx = endSession{
+                                    SystemInfoModel.shared.dosingData[startIndexx].sessionCreated = false
+                                    SystemInfoModel.shared.dosingData[endIndexx].sessionCreated = false
+                                }
                             }
+                        }
+                    } failure: { (err) -> (Void) in
+                        CommonFunctions.showToastWithMessage(err.localizedDescription)
+                        if let startIndexx = startSession,let endIndexx = endSession{
+                            SystemInfoModel.shared.dosingData[startIndexx].sessionCreated = false
+                            SystemInfoModel.shared.dosingData[endIndexx].sessionCreated = false
                         }
                     }
                 }
@@ -410,6 +420,9 @@ extension BleManager: CBPeripheralDelegate {
         case IOBout:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             self.iobData = (Double(data) ?? 0.0).roundToDecimal(1)
+            if let dataInCharacteristic = self.cgmDataInCharacteristic{
+                writeValue(myCharacteristic: dataInCharacteristic,value: "#GET_DOSE_DATA")
+            }
             NotificationCenter.default.post(name: Notification.Name.ReservoirUpdateValue, object: nil)
             print("handled Characteristic Value for IOBout:  \(data)")
         case WriteAcknowledgement:
@@ -480,12 +493,12 @@ extension BleManager: CBCentralManagerDelegate {
             if UserModel.main.kCBAdvDataServiceUUID.isEmpty && (peripheral.name == AppConstants.appName) {
                 FirestoreController.updateBLEUniqueUUID(uuid: toString(kCBAdvDataServiceUUID))
             }
-//            if (peripheral.name == AppConstants.appName) &&  UserModel.main.kCBAdvDataServiceUUID == toString(kCBAdvDataServiceUUID){
+            if (peripheral.name == AppConstants.appName) &&  UserModel.main.kCBAdvDataServiceUUID == toString(kCBAdvDataServiceUUID){
                 myperipheral = peripheral
                 myperipheral?.delegate = self
                 centralManager.stopScan()
                 centralManager.connect(myperipheral!, options: [CBConnectPeripheralOptionNotifyOnConnectionKey:true, CBConnectPeripheralOptionNotifyOnDisconnectionKey: true])
-//            }
+            }
         }
     }
     
