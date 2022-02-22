@@ -97,6 +97,7 @@ extension TrendArrowView {
     }
 }
 
+#if DEBUG
 struct GlucoseView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
@@ -137,3 +138,4 @@ struct GlucoseView_Previews: PreviewProvider {
         .previewLayout(.sizeThatFits)
     }
 }
+#endif

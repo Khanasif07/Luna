@@ -74,9 +74,11 @@ private struct _PairLunaCgmSimulatorView : View {
     }
 }
 
-
+#if DEBUG
 struct PairLunaCgmSimulatorView_Previews: PreviewProvider {
     static var previews: some View {
         PairLunaCgmSimulatorView(router: PairCgmRouter.preview, viewModel: PairLunaCgmSimulatorViewModel.preview)
     }
 }
+
+#endif

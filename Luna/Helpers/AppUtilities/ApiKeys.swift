@@ -12,7 +12,7 @@ import Foundation
 enum ApiKey {
     
     static var status: String { return "status" }
-    static var kCBAdvDataServiceUUID: String { return "kCBAdvDataServiceUUID" }
+    static var lunaControllerPeripheralId: String { return "lunaControllerPeripheralId" }
     static var statusCode: String { return "statusCode" }
     static var code: String { return "CODE" }
     static var result: String { return "result" }
