@@ -491,6 +491,7 @@ extension BleManager: CBCentralManagerDelegate {
             print(toString(kCBAdvDataServiceUUID))
             //MARK:- Update New BLE UUID To Firestore.
             if UserModel.main.kCBAdvDataServiceUUID.isEmpty && (peripheral.name == AppConstants.appName) {
+                UserModel.main.kCBAdvDataServiceUUID = toString(kCBAdvDataServiceUUID)
                 FirestoreController.updateBLEUniqueUUID(uuid: toString(kCBAdvDataServiceUUID))
             }
             if (peripheral.name == AppConstants.appName) &&  UserModel.main.kCBAdvDataServiceUUID == toString(kCBAdvDataServiceUUID){
