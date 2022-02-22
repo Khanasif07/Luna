@@ -72,6 +72,8 @@ private struct _ConnectLunaCgmSimulatorView : View {
     }
 }
 
+#if DEBUG
+
 struct ConnectLunaCgmSimulatorView_Previews: PreviewProvider {
     static var previews: some View {
         
@@ -82,3 +84,5 @@ struct ConnectLunaCgmSimulatorView_Previews: PreviewProvider {
         )
     }
 }
+
+#endif

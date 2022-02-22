@@ -53,6 +53,7 @@ private struct ConnectedLunaCgmSimulatorContentView: View {
     }
 }
 
+#if DEBUG
 struct ConnectedLunaCgmSimulatorView_Previews: PreviewProvider {
     static var previews: some View {
         ConnectedLunaCgmSimulatorView(
@@ -75,3 +76,5 @@ struct ConnectedLunaCgmSimulatorAlertView_Previews: PreviewProvider {
         ).padding()
     }
 }
+
+#endif

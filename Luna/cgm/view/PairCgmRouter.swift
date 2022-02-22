@@ -107,6 +107,7 @@ struct PairCgmRouterView : View {
     }
 }
 
+#if DEBUG
 extension PairCgmRouter {
     static var preview: PairCgmRouter {
         PairCgmRouter(
@@ -116,3 +117,4 @@ extension PairCgmRouter {
         )
     }
 }
+#endif
