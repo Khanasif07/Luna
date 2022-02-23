@@ -92,7 +92,7 @@ enum DeviceStatus {
         case 1:
             return ("Not Ready",#imageLiteral(resourceName: "notReady"),#colorLiteral(red: 0.9450980392, green: 0.2705882353, blue: 0.2392156863, alpha: 1))
         case 2:
-            return ("",#imageLiteral(resourceName: "automating"),#colorLiteral(red: 0.9450980392, green: 0.2705882353, blue: 0.2392156863, alpha: 1))
+            return ("Ready",#imageLiteral(resourceName: "ready"),#colorLiteral(red: 0.9450980392, green: 0.2705882353, blue: 0.2392156863, alpha: 1))
         case 3:
             return ("",#imageLiteral(resourceName: "automating"),#colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         case 4:

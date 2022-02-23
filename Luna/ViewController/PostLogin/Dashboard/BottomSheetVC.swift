@@ -290,7 +290,7 @@ extension BottomSheetVC {
     @objc func batteryUpdateValue(notification : NSNotification){
         DispatchQueue.main.async {
             self.mainTableView.reloadData()
-            if (BleManager.sharedInstance.systemStatusData.contains("3") || BleManager.sharedInstance.systemStatusData.contains("5")) && Int(BleManager.sharedInstance.batteryData) ?? 0 <= 75 && (Int(BleManager.sharedInstance.batteryData) ?? 0) % 5 == 0 && SystemInfoModel.shared.dosingData.last?.sessionStatus == ApiKey.beginCaps {
+            if ((BleManager.sharedInstance.systemStatusData.contains("3") || BleManager.sharedInstance.systemStatusData.contains("5")) && Int(BleManager.sharedInstance.batteryData) ?? 0 <= 75 && (Int(BleManager.sharedInstance.batteryData) ?? 0) % 5 == 0 && SystemInfoModel.shared.dosingData.last?.sessionStatus != ApiKey.endCaps) {
                 var bodyText  = "Your Luna device is only "
                 bodyText += BleManager.sharedInstance.batteryData
                 bodyText += "% charged and may not last the entire session."
@@ -298,17 +298,16 @@ extension BottomSheetVC {
                 return
             }
             
-            if BleManager.sharedInstance.systemStatusData.contains("F7") || BleManager.sharedInstance.systemStatusData.contains("F8"){
+            if ((BleManager.sharedInstance.systemStatusData.contains("F7") || BleManager.sharedInstance.systemStatusData.contains("F8")) && Int(BleManager.sharedInstance.batteryData) ?? 0 <= 75 && (Int(BleManager.sharedInstance.batteryData) ?? 0) % 5 == 0 && SystemInfoModel.shared.dosingData.last?.sessionStatus != ApiKey.endCaps) {
                 var bodyText  = "Your Luna device is only "
                 bodyText += BleManager.sharedInstance.batteryData
                 bodyText += "% charged and may not last the entire session."
                 self.persistentNotification(body: bodyText)
                 return
             }
+            
             if BleManager.sharedInstance.systemStatusData.contains("0") || BleManager.sharedInstance.systemStatusData.contains("1"){
-                var bodyText  = "Your Luna device is only "
-                bodyText += BleManager.sharedInstance.batteryData
-                bodyText += "% charged and may not last the entire session."
+                let bodyText  = "Your Luna device neeeds to be charged and is not being charged."
                 self.persistentNotification(body: bodyText)
                 return
             }
