@@ -78,9 +78,6 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
             self.mainTableView.reloadData()
         }
     }
-    
-    var customXAxisRender : XAxisCustomRenderer?
-    
     //MARK:- VIEW LIFE CYCLE
     //======================
     override func viewDidLoad() {

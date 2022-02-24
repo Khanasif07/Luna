@@ -210,10 +210,10 @@ public class BleManager: NSObject{
     public func manageInsulinData(data: [[String]],bytes: Int){
         //
         let now = dateTimeUtils.getNowTimeIntervalUTC()
-        if let fetchedData = UserDefaults.standard.data(forKey: ApiKey.dosingHistoryData) {
-            let fetchedDosingData = try! JSONDecoder().decode([DosingHistory].self, from: fetchedData)
-            if !fetchedDosingData.isEmpty{SystemInfoModel.shared.dosingData = fetchedDosingData}
-        }
+//        if let fetchedData = UserDefaults.standard.data(forKey: ApiKey.dosingHistoryData) {
+//            let fetchedDosingData = try! JSONDecoder().decode([DosingHistory].self, from: fetchedData)
+//            if !fetchedDosingData.isEmpty{SystemInfoModel.shared.dosingData = fetchedDosingData}
+//        }
         data.forEach { (tupls) in
             let insulin =  ((tupls.first ?? "") == ApiKey.beginCaps ? "0.25" : ((tupls.first ?? "") == ApiKey.endCaps ? "0.75" : "0.5"))
             let  dosing = DosingHistory(sessionStatus: tupls.first ?? "", sessionTime: Double(tupls.last ?? "") ?? 0.0, insulin: insulin, sessionExpired: false,sessionCreated: false)
@@ -300,13 +300,13 @@ public class BleManager: NSObject{
         }
         //
         if SystemInfoModel.shared.dosingData.endIndex > 0 {
-            SystemInfoModel.shared.dosingData.forEach { (dosingHistory) in
-                if let indexx = SystemInfoModel.shared.cgmData?.firstIndex(where: { (bgData) -> Bool in
-                    bgData.date == dosingHistory.sessionTime
-                }){
-                    SystemInfoModel.shared.cgmData?[indexx].insulin = dosingHistory.insulin
-                }
-            }
+//            SystemInfoModel.shared.dosingData.forEach { (dosingHistory) in
+//                if let indexx = SystemInfoModel.shared.cgmData?.firstIndex(where: { (bgData) -> Bool in
+//                    bgData.date == dosingHistory.sessionTime
+//                }){
+//                    SystemInfoModel.shared.cgmData?[indexx].insulin = dosingHistory.insulin
+//                }
+//            }
             let dosingData = try! JSONEncoder().encode(SystemInfoModel.shared.dosingData)
             UserDefaults.standard.set(dosingData, forKey: ApiKey.dosingHistoryData)
         }
@@ -403,12 +403,13 @@ extension BleManager: CBPeripheralDelegate {
             let dataArray = data.split{$0 == ";"}.map(String.init)
             let filterDataArray = dataArray.map { (stringValue) -> [String] in
                 return stringValue.split{$0 == ":"}.map(String.init)
-            }
+            }.filter{ $0.count == 2}
             if !filterDataArray.isEmpty && !self.isDataOutPutProcess{
                     self.isDataOutPutProcess = true
                     self.manageInsulinData(data: filterDataArray,bytes: characteristic.value?.count ?? 0)
             }
             print("handled Characteristic Value for dataOutCBUUID: \(String(describing: data))")
+            print(filterDataArray)
         case ExternalDose_Timestamp:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print(data)

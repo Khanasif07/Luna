@@ -312,11 +312,11 @@ extension  BottomSheetVC{
         }){
             BleManager.sharedInstance.manageInsulinData(data: [[]], bytes: 0)
         }
-        customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
+        let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
                                                     xAxis: cgmChartView.xAxis,
                                                     transformer: self.cgmChartView.getTransformer(forAxis: .left),
                                                     cgmData: self.bgData,insulinData: insulinDataArray)
-        self.cgmChartView.xAxisRenderer = customXAxisRender!
+        self.cgmChartView.xAxisRenderer = customXAxisRender
     }
     
     // NS BG Data Front end updater
@@ -336,7 +336,7 @@ extension  BottomSheetVC{
             self.setBGTextColor()
             //MARK:- Importants
             //Send time stamps to Luna Hardware
-            let randomBGValue = Int.random(in: 250..<300)
+            let randomBGValue = Int.random(in: 250..<350)
 //            BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(latestBG)))
             BleManager.sharedInstance.writeCGMTimeStampValue(value: bgUnits.toSendCGMTimeStampsUnits(String(latestDate), String(randomBGValue)))
             if let directionBG = entries[latestEntryi].direction {
