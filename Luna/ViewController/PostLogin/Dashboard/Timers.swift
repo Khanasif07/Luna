@@ -59,6 +59,12 @@ extension BottomSheetVC {
         } else {
             self.timeAgoLbl.text = ""
         }
+        //Update iob data
+        let insulinData = SystemInfoModel.shared.insulinData.map({ (sharGlucoseData) -> (Insulin) in
+            return Insulin(time: sharGlucoseData.date.getDateFromTimeInterval(), amount: Double(sharGlucoseData.insulin ?? "") ?? 0.0)
+        })
+        BleManager.sharedInstance.iobData = IobCalculator.calculateIob(doses: insulinData, time: Date()).roundToDecimal(1)
+        self.mainTableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
         
     }
     

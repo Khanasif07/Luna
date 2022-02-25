@@ -47,6 +47,14 @@ extension Double {
        
     }
     
+    public func getDateFromTimeInterval()-> Date{
+        //Convert to Date
+        //let date = NSDate(timeIntervalSince1970: self / 1000.0)
+        let date = NSDate(timeIntervalSince1970: TimeInterval(self))
+        //Date formattin
+        return date as Date
+    }
+    
     public func getChatDateTimeFromTimeInterval(_ dateFormat: String)-> String{
         //Convert to Date
         //let date = NSDate(timeIntervalSince1970: self / 1000.0)
