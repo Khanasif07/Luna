@@ -124,6 +124,10 @@ extension SessionHistoryVC : UITableViewDelegate, UITableViewDataSource {
         return 50
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNonzeroMagnitude
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = SessionDescriptionVC.instantiate(fromAppStoryboard: .CGPStoryboard)
         vc.sessionModel = self.insulinSectionDataArray[indexPath.section].1[indexPath.row]

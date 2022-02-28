@@ -992,7 +992,7 @@ class FirestoreController:NSObject{
     
     //MARK:-Add  cgm data array through batch operation
     //=======================
-    static func addBatchData(sessionId: String,startDate: Double,endDate: Double,array:[ShareGlucoseData],success: @escaping (_ sessionId: String)-> ()) {
+    static func addBatchData(sessionId: String,startDate: Double,endDate: Double,array:[ShareGlucoseData],success: @escaping (_ sessionId: String)-> () ,failure:  @escaping FailureResponse) {
         guard let userId = Auth.auth().currentUser?.uid  else { return }
         let batch = db.batch()
         array.forEach { (doc) in
@@ -1002,8 +1002,8 @@ class FirestoreController:NSObject{
         }
         batch.commit { (err) in
             if let err = err{
-                print("Error occured \(err)")
                 CommonFunctions.showToastWithMessage(err.localizedDescription)
+                failure(err)
             } else {
                 success(sessionId)
             }

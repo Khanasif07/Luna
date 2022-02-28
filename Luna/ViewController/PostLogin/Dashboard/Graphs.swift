@@ -143,7 +143,11 @@ extension BottomSheetVC :  ChartViewDelegate {
         cgmChartView.data = data
         cgmChartView.animate(yAxisDuration: 2.5)
         cgmChartView.setExtraOffsets(left: 10, top: 0, right: 25, bottom: 0)
-        
+        let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
+                                                xAxis: cgmChartView.xAxis,
+                                                transformer: self.cgmChartView.getTransformer(forAxis: .left),
+                                                cgmData: self.bgData,insulinData: [])
+        cgmChartView.xAxisRenderer = customXAxisRender
     }
 
     func updateBGGraph() {

@@ -210,10 +210,6 @@ public class BleManager: NSObject{
     public func manageInsulinData(data: [[String]],bytes: Int){
         //
         let now = dateTimeUtils.getNowTimeIntervalUTC()
-        if let fetchedData = UserDefaults.standard.data(forKey: ApiKey.dosingHistoryData) {
-            let fetchedDosingData = try! JSONDecoder().decode([DosingHistory].self, from: fetchedData)
-            if !fetchedDosingData.isEmpty{SystemInfoModel.shared.dosingData = fetchedDosingData}
-        }
         data.forEach { (tupls) in
             let insulin =  ((tupls.first ?? "") == ApiKey.beginCaps ? "0.25" : ((tupls.first ?? "") == ApiKey.endCaps ? "0.75" : "0.5"))
             let  dosing = DosingHistory(sessionStatus: tupls.first ?? "", sessionTime: Double(tupls.last ?? "") ?? 0.0, insulin: insulin, sessionExpired: false,sessionCreated: false)
@@ -224,6 +220,9 @@ public class BleManager: NSObject{
                 }else if (SystemInfoModel.shared.dosingData.last?.sessionStatus) == dosing.sessionStatus && dosing.sessionStatus == ApiKey.endCaps{
                     SystemInfoModel.shared.dosingData.append(dosing)
                     SystemInfoModel.shared.dosingData.removeLast()
+                }else if (SystemInfoModel.shared.dosingData.last?.sessionStatus) == "0.5" && dosing.sessionStatus == ApiKey.beginCaps{
+                    let endDosing = DosingHistory(sessionStatus: ApiKey.endCaps, sessionTime: dosing.sessionTime, insulin: "0.75", sessionExpired: false,sessionCreated: false)
+                    SystemInfoModel.shared.dosingData.append(endDosing)
                 }else{
                     if dosing.sessionTime > SystemInfoModel.shared.dosingData.last?.sessionTime ?? 0.0 {
                         SystemInfoModel.shared.dosingData.append(dosing)
@@ -246,7 +245,7 @@ public class BleManager: NSObject{
                 }
             }
         }
-        if (SystemInfoModel.shared.cgmData?.last?.date ?? 0.0) - (UserDefaultsRepository.sessionEndDate.value) > 1800.0 {
+        if (SystemInfoModel.shared.cgmData?.last?.date ?? 0.0) - (UserDefaultsRepository.sessionEndDate.value) >= 35*60 {
             if UserDefaultsRepository.sessionStartDate.value != 0.0 && UserDefaultsRepository.sessionEndDate.value != 0.0{
                 let startSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: {$0.date == UserDefaultsRepository.sessionStartDate.value})
                 let endSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: {$0.date == UserDefaultsRepository.sessionEndDate.value})
@@ -282,7 +281,17 @@ public class BleManager: NSObject{
                                 UserDefaultsRepository.sessionEndDate.value = 0.0
                             } failure: { (err) -> (Void) in
                                 CommonFunctions.showToastWithMessage(err.localizedDescription)
+                                if let startIndexx = startSession,let endIndexx = endSession{
+                                    SystemInfoModel.shared.dosingData[startIndexx].sessionCreated = false
+                                    SystemInfoModel.shared.dosingData[endIndexx].sessionCreated = false
+                                }
                             }
+                        }
+                    } failure: { (err) -> (Void) in
+                        CommonFunctions.showToastWithMessage(err.localizedDescription)
+                        if let startIndexx = startSession,let endIndexx = endSession{
+                            SystemInfoModel.shared.dosingData[startIndexx].sessionCreated = false
+                            SystemInfoModel.shared.dosingData[endIndexx].sessionCreated = false
                         }
                     }
                 }
@@ -290,13 +299,6 @@ public class BleManager: NSObject{
         }
         //
         if SystemInfoModel.shared.dosingData.endIndex > 0 {
-            SystemInfoModel.shared.dosingData.forEach { (dosingHistory) in
-                if let indexx = SystemInfoModel.shared.cgmData?.firstIndex(where: { (bgData) -> Bool in
-                    bgData.date == dosingHistory.sessionTime
-                }){
-                    SystemInfoModel.shared.cgmData?[indexx].insulin = dosingHistory.insulin
-                }
-            }
             let dosingData = try! JSONEncoder().encode(SystemInfoModel.shared.dosingData)
             UserDefaults.standard.set(dosingData, forKey: ApiKey.dosingHistoryData)
         }
@@ -309,7 +311,6 @@ public class BleManager: NSObject{
                 }
             }
         }
-        print(SystemInfoModel.shared.dosingData)
     }
 }
 // MARK: - Extension For CBPeripheralDelegate
@@ -393,12 +394,13 @@ extension BleManager: CBPeripheralDelegate {
             let dataArray = data.split{$0 == ";"}.map(String.init)
             let filterDataArray = dataArray.map { (stringValue) -> [String] in
                 return stringValue.split{$0 == ":"}.map(String.init)
-            }
+            }.filter{ $0.count == 2}
             if !filterDataArray.isEmpty && !self.isDataOutPutProcess{
                     self.isDataOutPutProcess = true
                     self.manageInsulinData(data: filterDataArray,bytes: characteristic.value?.count ?? 0)
             }
             print("handled Characteristic Value for dataOutCBUUID: \(String(describing: data))")
+            print(filterDataArray)
         case ExternalDose_Timestamp:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print(data)
@@ -409,7 +411,10 @@ extension BleManager: CBPeripheralDelegate {
             print("handled Characteristic Value for CGMEGV_Timestamp: \(String(describing: data))")
         case IOBout:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-            self.iobData = (Double(data) ?? 0.0).roundToDecimal(1)
+//            self.iobData = (Double(data) ?? 0.0).roundToDecimal(1)
+            if let dataInCharacteristic = self.cgmDataInCharacteristic{
+                writeValue(myCharacteristic: dataInCharacteristic,value: "#GET_DOSE_DATA")
+            }
             NotificationCenter.default.post(name: Notification.Name.ReservoirUpdateValue, object: nil)
             print("handled Characteristic Value for IOBout:  \(data)")
         case WriteAcknowledgement:

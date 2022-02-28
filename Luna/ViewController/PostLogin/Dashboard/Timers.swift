@@ -11,7 +11,7 @@ import UIKit
 extension BottomSheetVC {
     func restartAllTimers() {
         if !UserDefaultsRepository.shareUserName.value.isEmpty && !UserDefaultsRepository.sharePassword.value.isEmpty {
-            if !bgTimer.isValid { self.startBGTimer(time: 10) }
+            if !bgTimer.isValid { self.startBGTimer(time: 2) }
             if !minAgoTimer.isValid { self.startMinAgoTimer(time: minAgoTimeInterval) }
         } else {
         }
@@ -59,6 +59,12 @@ extension BottomSheetVC {
         } else {
             self.timeAgoLbl.text = ""
         }
+        //Update iob data
+        let insulinData = SystemInfoModel.shared.insulinData.map({ (sharGlucoseData) -> (Insulin) in
+            return Insulin(time: sharGlucoseData.date.getDateFromTimeInterval(), amount: Double(sharGlucoseData.insulin ?? "") ?? 0.0)
+        })
+        BleManager.sharedInstance.iobData = IobCalculator.calculateIob(doses: insulinData, time: Date()).roundToDecimal(1)
+        self.mainTableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
         
     }
     
