@@ -10,23 +10,23 @@ import CoreBluetooth
 import UIKit
 
 let batteryCharacteristicCBUUID = CBUUID(string: "378EC9D6-075C-4BF6-89DC-9F0D6EA3B5C4")
-let ReservoirLevelCharacteristicCBUUID = CBUUID(string: "378ec9d6-075c-4bf6-89dc-0c6f73b4b761")
+let reservoirLevelCharacteristicCBUUID = CBUUID(string: "378ec9d6-075c-4bf6-89dc-0c6f73b4b761")
 let statusCBUUID = CBUUID(string: "378ec9d6-075c-4bf6-89dc-a6d767548715")
 let firmwareRevisionString = CBUUID(string: "2A26")
-let SerialNumberString = CBUUID(string: "2A25")
-let SoftwareRevisionString = CBUUID(string: "2A28")
-let CGMEGV_Timestamp = CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9")
-let ExternalDose_Timestamp = CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c")
+let serialNumberString = CBUUID(string: "2A25")
+let softwareRevisionString = CBUUID(string: "2A28")
+let cGMEGV_Timestamp = CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9")
+let externalDose_Timestamp = CBUUID(string: "5927a433-a277-40b7-b2d4-5bf796c0053c")
 let writableCharacteristicCBUUID = CBUUID(string: "aa6b9004-9da2-4f80-9001-409abcc3dcef")
 let dataInCBUUID = CBUUID(string: "aa9ec828-43ba-4281-a122-48932207c8f3")
 let dataOutCBUUID = CBUUID(string: "aa9ec828-43ba-4281-a122-d17566d67c42")
 let lunaCBUUID = CBUUID(string: "DE612C8C-46C0-46B6-B820-4C92A6E67D97")
-let IOBout = CBUUID(string: "378ec9d6-075c-4bf6-89dc-0a8267f7b7b7")
-let TDBD = CBUUID(string: "5927a433-a277-40b7-b2d4-e005330c5d99")
+let iOBout = CBUUID(string: "378ec9d6-075c-4bf6-89dc-0a8267f7b7b7")
+let tDBD = CBUUID(string: "5927a433-a277-40b7-b2d4-e005330c5d99")
 let iobInput = CBUUID(string: "5927a433-a277-40b7-b2d4-92ff77eada32")
-let WriteAcknowledgement = CBUUID(string: "5927A433-A277-40B7-B2D4-B6FF29B861A6")
+let writeAcknowledgement = CBUUID(string: "5927A433-A277-40B7-B2D4-B6FF29B861A6")
    // CBUUID(string: "5927a433-a277-40b7-b2d4-0242ac130003")
-let CGMWriteCharacteristicCBUUID = CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9")
+let cGMWriteCharacteristicCBUUID = CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9")
 let collectionInsulinDoses = CBUUID(string: "ad4e6052-390a-4107-8e2d-11af2d258189")
 //
 
@@ -52,6 +52,7 @@ public class BleManager: NSObject{
     var cgmWriteCBCharacteristic : CBCharacteristic?
     var cgmDataInCharacteristic : CBCharacteristic?
     var externalDoseCBCharacteristic: CBCharacteristic?
+    var tdbd: CBCharacteristic?
     var rescanTimer :Timer?
     var batteryData: String = ""
     var reservoirLevelData: String = ""
@@ -262,36 +263,31 @@ public class BleManager: NSObject{
                     //
                     var rangeBgData = (SystemInfoModel.shared.cgmData?[myRange] ?? []).map { (bgData) -> ShareGlucoseData in
                         return  (bgData.insulin == "0.25" || bgData.insulin == "0.75") ? ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: "0")
-                            : ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: bgData.insulin ?? "")
+                        : ShareGlucoseData(sgv: bgData.sgv, date: bgData.date, direction: bgData.direction ?? "", insulin: bgData.insulin ?? "")
                     }
                     rangeBgData[6].insulin = "0.25"
                     rangeBgData[rangeBgData.endIndex - 7].insulin = "0.75"
                     let startSession = SystemInfoModel.shared.dosingData.firstIndex(where: {$0.sessionTime == UserDefaultsRepository.sessionStartDate.value})
                     let endSession = SystemInfoModel.shared.dosingData.firstIndex(where: {$0.sessionTime == UserDefaultsRepository.sessionEndDate.value})
-                    if let startIndexx = startSession,let endIndexx = endSession{
-                        SystemInfoModel.shared.dosingData[startIndexx].sessionCreated = true
-                        SystemInfoModel.shared.dosingData[endIndexx].sessionCreated = true
-                    }
-                    //
-                    FirestoreController.addBatchData(sessionId: FirestoreController.getSessionId(), startDate: UserDefaultsRepository.sessionStartDate.value, endDate: UserDefaultsRepository.sessionEndDate.value, array: rangeBgData) { (sessionId) in
-                        print("Add CGM Batch Data Commited successfully")
-                        if UserDefaultsRepository.sessionStartDate.value != 0.0 && UserDefaultsRepository.sessionEndDate.value != 0.0 {
+                    
+                    if let startIndexx = startSession,let endIndexx = endSession {
+                        self.isDataOutPutProcess = true
+                        FirestoreController.addBatchData(sessionId: FirestoreController.getSessionId(), startDate: UserDefaultsRepository.sessionStartDate.value, endDate: UserDefaultsRepository.sessionEndDate.value, array: rangeBgData) { (sessionId) in
+                            print("Add CGM Batch Data Commited successfully")
                             FirestoreController.simpleTransactionToAddCGMData(sessionId: sessionId,startDate:UserDefaultsRepository.sessionStartDate.value,range: self.getRangeValue(bgData: rangeBgData, isShowPer: true),endDate: UserDefaultsRepository.sessionEndDate.value,insulin: self.getInsulinDosesValue(bgData: rangeBgData)) {
+                                print("Transaction successfully committed!")
+                                SystemInfoModel.shared.dosingData[startIndexx].sessionCreated = true
+                                SystemInfoModel.shared.dosingData[endIndexx].sessionCreated = true
                                 UserDefaultsRepository.sessionStartDate.value = 0.0
                                 UserDefaultsRepository.sessionEndDate.value = 0.0
+                                self.isDataOutPutProcess = false
                             } failure: { (err) -> (Void) in
+                                self.isDataOutPutProcess = false
                                 CommonFunctions.showToastWithMessage(err.localizedDescription)
-                                if let startIndexx = startSession,let endIndexx = endSession{
-                                    SystemInfoModel.shared.dosingData[startIndexx].sessionCreated = false
-                                    SystemInfoModel.shared.dosingData[endIndexx].sessionCreated = false
-                                }
                             }
-                        }
-                    } failure: { (err) -> (Void) in
-                        CommonFunctions.showToastWithMessage(err.localizedDescription)
-                        if let startIndexx = startSession,let endIndexx = endSession{
-                            SystemInfoModel.shared.dosingData[startIndexx].sessionCreated = false
-                            SystemInfoModel.shared.dosingData[endIndexx].sessionCreated = false
+                        } failure: { (err) -> (Void) in
+                            self.isDataOutPutProcess = false
+                            CommonFunctions.showToastWithMessage(err.localizedDescription)
                         }
                     }
                 }
@@ -348,10 +344,12 @@ extension BleManager: CBPeripheralDelegate {
                 switch characteristic.uuid {
                 case dataInCBUUID:
                     self.cgmDataInCharacteristic = characteristic
-                case CGMEGV_Timestamp:
+                case cGMEGV_Timestamp:
                     self.cgmWriteCBCharacteristic = characteristic
-                case ExternalDose_Timestamp:
+                case externalDose_Timestamp:
                     self.externalDoseCBCharacteristic = characteristic
+                case tDBD:
+                    self.tdbd = characteristic
                 default:
                     print(characteristic.uuid)
                 }
@@ -366,7 +364,7 @@ extension BleManager: CBPeripheralDelegate {
             print("handled Characteristic Value for Battery Level: \(data)")
             self.batteryData = data
             NotificationCenter.default.post(name: Notification.Name.BatteryUpdateValue, object: nil)
-        case ReservoirLevelCharacteristicCBUUID:
+        case reservoirLevelCharacteristicCBUUID:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for Reservoir Level: \(data)")
             self.reservoirLevelData = data
@@ -380,10 +378,10 @@ extension BleManager: CBPeripheralDelegate {
         case firmwareRevisionString:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for firmwareRevisionString:  \(data)")
-        case SerialNumberString:
+        case serialNumberString:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for SerialNumberString:  \(data)")
-        case SoftwareRevisionString:
+        case softwareRevisionString:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for SoftwareRevisionString:  \(data)")
         case writableCharacteristicCBUUID:
@@ -401,15 +399,15 @@ extension BleManager: CBPeripheralDelegate {
             }
             print("handled Characteristic Value for dataOutCBUUID: \(String(describing: data))")
             print(filterDataArray)
-        case ExternalDose_Timestamp:
+        case externalDose_Timestamp:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print(data)
             print("handled Characteristic Value for ExternalDose_Timestamp: \(String(describing: data))")
-        case CGMEGV_Timestamp:
+        case cGMEGV_Timestamp:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print(data)
             print("handled Characteristic Value for CGMEGV_Timestamp: \(String(describing: data))")
-        case IOBout:
+        case iOBout:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
 //            self.iobData = (Double(data) ?? 0.0).roundToDecimal(1)
             if let dataInCharacteristic = self.cgmDataInCharacteristic{
@@ -417,13 +415,13 @@ extension BleManager: CBPeripheralDelegate {
             }
             NotificationCenter.default.post(name: Notification.Name.ReservoirUpdateValue, object: nil)
             print("handled Characteristic Value for IOBout:  \(data)")
-        case WriteAcknowledgement:
+        case writeAcknowledgement:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for WriteAcknowledgement:  \(data)")
             if let dataInCharacteristic = self.cgmDataInCharacteristic{
                 writeValue(myCharacteristic: dataInCharacteristic,value: "#GET_DOSE_DATA")
             }
-        case collectionInsulinDoses:
+        case tDBD:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for coll ectionInsulinDoses:  \(data)")
         default:              let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""

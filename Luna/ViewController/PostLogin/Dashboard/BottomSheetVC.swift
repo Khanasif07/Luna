@@ -279,7 +279,6 @@ extension BottomSheetVC {
     @objc func bleDidUpdateValue(notification : NSNotification){
         DispatchQueue.main.async {
             self.mainTableView.reloadData()
-//            self.updateBGGraph()
             self.processNSBGData(data: self.bgData, onlyPullLastRecord: false)
         }
     }

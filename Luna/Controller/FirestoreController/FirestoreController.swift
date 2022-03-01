@@ -1148,22 +1148,20 @@ class FirestoreController:NSObject{
                 errorPointer?.pointee = fetchError
                 return nil
             }
-            
-            //            guard let oldPopulation = sfDocument.data() else {
-            //                let error = NSError(
-            //                    domain: "AppErrorDomain",
-            //                    code: -1,
-            //                    userInfo: [
-            //                        NSLocalizedDescriptionKey: "Unable to retrieve population from snapshot \(sfDocument)"
-            //                    ]
-            //                )
-            //                errorPointer?.pointee = error
-            //                return nil
-            //            }
+//            
+//                        guard let oldPopulation = sfDocument.data() else {
+//                            let error = NSError(
+//                                domain: "AppErrorDomain",
+//                                code: -1,
+//                                userInfo: [
+//                                    NSLocalizedDescriptionKey: "Unable to retrieve population from snapshot \(sfDocument)"
+//                                ]
+//                            )
+//                            errorPointer?.pointee = error
+//                            return nil
+//                        }
             
             // Note: this could be done without a transaction
-            //       by updating the population using FieldValue.increment()
-            //transaction.updateData(["population": oldPopulation + 1], forDocument: sfReference)
             if   (sfDocument.data()) != nil{
                 transaction.updateData([
                     ApiKey.sessionHistoryData: FieldValue.arrayUnion([specAdded])
@@ -1179,7 +1177,6 @@ class FirestoreController:NSObject{
                 print("Transaction failed: \(error)")
                 failure(error)
             } else {
-                print("Transaction successfully committed!")
                 success()
             }
         }
