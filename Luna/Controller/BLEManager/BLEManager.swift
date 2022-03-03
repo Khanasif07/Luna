@@ -25,7 +25,6 @@ let iOBout = CBUUID(string: "378ec9d6-075c-4bf6-89dc-0a8267f7b7b7")
 let tDBD = CBUUID(string: "5927a433-a277-40b7-b2d4-e005330c5d99")
 let iobInput = CBUUID(string: "5927a433-a277-40b7-b2d4-92ff77eada32")
 let writeAcknowledgement = CBUUID(string: "5927A433-A277-40B7-B2D4-B6FF29B861A6")
-   // CBUUID(string: "5927a433-a277-40b7-b2d4-0242ac130003")
 let cGMWriteCharacteristicCBUUID = CBUUID(string: "5927a433-a277-40b7-b2d4-d1ce2ffefef9")
 let collectionInsulinDoses = CBUUID(string: "ad4e6052-390a-4107-8e2d-11af2d258189")
 //
@@ -52,7 +51,7 @@ public class BleManager: NSObject{
     var cgmWriteCBCharacteristic : CBCharacteristic?
     var cgmDataInCharacteristic : CBCharacteristic?
     var externalDoseCBCharacteristic: CBCharacteristic?
-    var tdbd: CBCharacteristic?
+    var tdbdCBCharacteristic: CBCharacteristic?
     var rescanTimer :Timer?
     var batteryData: String = ""
     var reservoirLevelData: String = ""
@@ -61,6 +60,7 @@ public class BleManager: NSObject{
     var insulinData : [ShareGlucoseData] = []
     var isKeepConnect = true
     var isDataOutPutProcess :Bool = false
+    var isSessionProcess :Bool = false
     var isScanning :Bool = false
     var isMyPeripheralConected :Bool = false
     var isUnpaired :Bool = false
@@ -113,6 +113,19 @@ public class BleManager: NSObject{
         }
     }
     
+    //MARK:- write tdbd to luna controller
+    public func writeTDBDValue(value: String) {
+        if isMyPeripheralConected { //check if myPeripheral is connected to send data
+            let dataToSend: Data = value.data(using: String.Encoding.utf8)!
+            if let  tdbdCBCharacteristic = self.tdbdCBCharacteristic{
+                myperipheral?.writeValue(dataToSend as Data, for: tdbdCBCharacteristic , type: CBCharacteristicWriteType.withResponse)
+            }
+        } else {
+            print("Not connected")
+        }
+    }
+    
+    //MARK:- write cgm value to luna controller ,running algo 
     public func writeCGMTimeStampValue(value: String) {
         if isMyPeripheralConected { //check if myPeripheral is connected to send data
             let dataToSend: Data = value.data(using: String.Encoding.utf8)!
@@ -246,11 +259,13 @@ public class BleManager: NSObject{
                 }
             }
         }
+        //
         if (SystemInfoModel.shared.cgmData?.last?.date ?? 0.0) - (UserDefaultsRepository.sessionEndDate.value) >= 35*60 {
             if UserDefaultsRepository.sessionStartDate.value != 0.0 && UserDefaultsRepository.sessionEndDate.value != 0.0{
                 let startSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: {$0.date == UserDefaultsRepository.sessionStartDate.value})
                 let endSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: {$0.date == UserDefaultsRepository.sessionEndDate.value})
                 if let startIndex = startSessionIndex,let endIndex = endSessionIndex{
+                    self.isSessionProcess = true
                     let myRange: ClosedRange = (startIndex-6)...(endIndex+6)
                     //
                     SystemInfoModel.shared.dosingData.forEach { (dosingHistory) in
@@ -271,7 +286,7 @@ public class BleManager: NSObject{
                     let endSession = SystemInfoModel.shared.dosingData.firstIndex(where: {$0.sessionTime == UserDefaultsRepository.sessionEndDate.value})
                     
                     if let startIndexx = startSession,let endIndexx = endSession {
-                        self.isDataOutPutProcess = true
+                        self.isSessionProcess = true
                         FirestoreController.addBatchData(sessionId: FirestoreController.getSessionId(), startDate: UserDefaultsRepository.sessionStartDate.value, endDate: UserDefaultsRepository.sessionEndDate.value, array: rangeBgData) { (sessionId) in
                             print("Add CGM Batch Data Commited successfully")
                             FirestoreController.simpleTransactionToAddCGMData(sessionId: sessionId,startDate:UserDefaultsRepository.sessionStartDate.value,range: self.getRangeValue(bgData: rangeBgData, isShowPer: true),endDate: UserDefaultsRepository.sessionEndDate.value,insulin: self.getInsulinDosesValue(bgData: rangeBgData)) {
@@ -280,16 +295,16 @@ public class BleManager: NSObject{
                                 SystemInfoModel.shared.dosingData[endIndexx].sessionCreated = true
                                 UserDefaultsRepository.sessionStartDate.value = 0.0
                                 UserDefaultsRepository.sessionEndDate.value = 0.0
-                                self.isDataOutPutProcess = false
+                                self.isSessionProcess = false
                             } failure: { (err) -> (Void) in
                                 self.isDataOutPutProcess = false
                                 CommonFunctions.showToastWithMessage(err.localizedDescription)
                             }
                         } failure: { (err) -> (Void) in
-                            self.isDataOutPutProcess = false
+                            self.isSessionProcess = false
                             CommonFunctions.showToastWithMessage(err.localizedDescription)
                         }
-                    }
+                    }else{ self.isSessionProcess = false }
                 }
             }
         }
@@ -349,7 +364,8 @@ extension BleManager: CBPeripheralDelegate {
                 case externalDose_Timestamp:
                     self.externalDoseCBCharacteristic = characteristic
                 case tDBD:
-                    self.tdbd = characteristic
+                    self.tdbdCBCharacteristic = characteristic
+                    self.writeValue(myCharacteristic: self.tdbdCBCharacteristic!,value: "\(SystemInfoModel.shared.insulinUnit)")
                 default:
                     print(characteristic.uuid)
                 }
@@ -393,7 +409,7 @@ extension BleManager: CBPeripheralDelegate {
             let filterDataArray = dataArray.map { (stringValue) -> [String] in
                 return stringValue.split{$0 == ":"}.map(String.init)
             }.filter{ $0.count == 2}
-            if !filterDataArray.isEmpty && !self.isDataOutPutProcess{
+            if !filterDataArray.isEmpty && !self.isDataOutPutProcess && !self.isSessionProcess{
                     self.isDataOutPutProcess = true
                     self.manageInsulinData(data: filterDataArray,bytes: characteristic.value?.count ?? 0)
             }

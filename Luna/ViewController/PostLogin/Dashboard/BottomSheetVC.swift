@@ -253,6 +253,7 @@ extension BottomSheetVC {
         NotificationCenter.default.addObserver(self, selector: #selector(cgmDataRemovedSuccessfully), name: .cgmRemovedSuccessfully, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(cgmSimData), name: .cgmSimData, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .BLEOnOffState, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(insulinConnectedFinish), name: .insulinConnectedSuccessfully, object: nil)
     }
     
     //    @objc func xAxisLabelsDuplicateValue(notification : NSNotification){
@@ -274,6 +275,10 @@ extension BottomSheetVC {
     @objc func bLEOnOffStateChanged(){
         let bodyText  = "Turn on Bluetooth to receive alerts, alarms, or sensor glucose readings."
         self.persistentNotification(body: bodyText,title: "Bluetooth Off Alert")
+    }
+    
+    @objc func insulinConnectedFinish(){
+        BleManager.sharedInstance.writeTDBDValue( value: "\(SystemInfoModel.shared.insulinUnit)")
     }
     
     @objc func bleDidUpdateValue(notification : NSNotification){

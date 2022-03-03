@@ -309,7 +309,7 @@ extension  BottomSheetVC{
         //Update..
         if SystemInfoModel.shared.dosingData.contains(where: { dosing in
             return dosing.sessionCreated == false && dosing.sessionStatus == ApiKey.beginCaps
-        }){
+        }) && !BleManager.sharedInstance.isDataOutPutProcess && !BleManager.sharedInstance.isSessionProcess{
             BleManager.sharedInstance.manageInsulinData(data: [[]], bytes: 0)
         }
         let customXAxisRender = XAxisCustomRenderer(viewPortHandler: self.cgmChartView.viewPortHandler,
