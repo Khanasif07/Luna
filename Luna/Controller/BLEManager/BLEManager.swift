@@ -244,7 +244,7 @@ public class BleManager: NSObject{
                 }
             }
         }
-        //
+        //Filtered dosing list in last 24 hours
         SystemInfoModel.shared.dosingData = SystemInfoModel.shared.dosingData.filter({ (now - $0.sessionTime <= 86400.0)})
         UserDefaultsRepository.sessionStartDate.value = 0.0
         UserDefaultsRepository.sessionEndDate.value  = 0.0
@@ -259,7 +259,7 @@ public class BleManager: NSObject{
                 }
             }
         }
-        //
+        //session creation takes place only after session ends by half hours
         if (SystemInfoModel.shared.cgmData?.last?.date ?? 0.0) - (UserDefaultsRepository.sessionEndDate.value) >= 35*60 {
             if UserDefaultsRepository.sessionStartDate.value != 0.0 && UserDefaultsRepository.sessionEndDate.value != 0.0{
                 let startSessionIndex = SystemInfoModel.shared.cgmData?.firstIndex(where: {$0.date == UserDefaultsRepository.sessionStartDate.value})
@@ -365,6 +365,7 @@ extension BleManager: CBPeripheralDelegate {
                     self.externalDoseCBCharacteristic = characteristic
                 case tDBD:
                     self.tdbdCBCharacteristic = characteristic
+                    //write TDBD value to controller once,will write again in case of TDBD changed.
                     self.writeValue(myCharacteristic: self.tdbdCBCharacteristic!,value: "\(SystemInfoModel.shared.insulinUnit)")
                 default:
                     print(characteristic.uuid)
@@ -437,9 +438,6 @@ extension BleManager: CBPeripheralDelegate {
             if let dataInCharacteristic = self.cgmDataInCharacteristic{
                 writeValue(myCharacteristic: dataInCharacteristic,value: "#GET_DOSE_DATA")
             }
-        case tDBD:
-            let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
-            print("handled Characteristic Value for coll ectionInsulinDoses:  \(data)")
         default:              let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("Unhandled Characteristic UUID: \(characteristic.uuid)")
             print(data)
