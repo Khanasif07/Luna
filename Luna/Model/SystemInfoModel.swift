@@ -29,7 +29,7 @@ struct SystemInfoModel{
     
     init(_ json : JSON = JSON()){
         self.longInsulinImage = #imageLiteral(resourceName: "toujeo")
-        self.longInsulinType = json[ApiKey._id].stringValue
+        self.longInsulinType = json[ApiKey.longInsulinType].stringValue
         self.longInsulinSubType = json[ApiKey.longInsulinSubType].stringValue
         self.insulinUnit = json[ApiKey.insulinUnit].intValue
         self.cgmUnit = json[ApiKey.cgmUnit].intValue
