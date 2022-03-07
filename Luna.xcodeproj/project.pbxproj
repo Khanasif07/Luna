@@ -131,6 +131,8 @@
 		84861D7F26848EDD004B046C /* ProfileTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84861D7D26848EDD004B046C /* ProfileTableCell.swift */; };
 		84861D8026848EDD004B046C /* ProfileTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84861D7E26848EDD004B046C /* ProfileTableCell.xib */; };
 		84861D8326849FDB004B046C /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84861D8226849FDB004B046C /* ChangePasswordVC.swift */; };
+		8494A19327D5E17E00652418 /* NotificationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494A19227D5E17E00652418 /* NotificationRowView.swift */; };
+		8494A19527D5E77000652418 /* NotificationRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494A19427D5E77000652418 /* NotificationRowViewCell.swift */; };
 		849B255E27070CA000323876 /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B255D27070CA000323876 /* ContactUsVC.swift */; };
 		849B25622707101600323876 /* ContactsUsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B25602707101600323876 /* ContactsUsTableCell.swift */; };
 		849B25632707101600323876 /* ContactsUsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849B25612707101600323876 /* ContactsUsTableCell.xib */; };
@@ -434,6 +436,8 @@
 		84861D7D26848EDD004B046C /* ProfileTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableCell.swift; sourceTree = "<group>"; };
 		84861D7E26848EDD004B046C /* ProfileTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableCell.xib; sourceTree = "<group>"; };
 		84861D8226849FDB004B046C /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
+		8494A19227D5E17E00652418 /* NotificationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRowView.swift; sourceTree = "<group>"; };
+		8494A19427D5E77000652418 /* NotificationRowViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRowViewCell.swift; sourceTree = "<group>"; };
 		849B255D27070CA000323876 /* ContactUsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsVC.swift; sourceTree = "<group>"; };
 		849B25602707101600323876 /* ContactsUsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUsTableCell.swift; sourceTree = "<group>"; };
 		849B25612707101600323876 /* ContactsUsTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsUsTableCell.xib; sourceTree = "<group>"; };
@@ -905,6 +909,8 @@
 				843E3345276869E10081C1A9 /* SettingHeaderView.xib */,
 				84A18913278C318A003ED8D9 /* NotificationsCell.swift */,
 				84A18914278C318A003ED8D9 /* NotificationsCell.xib */,
+				8494A19227D5E17E00652418 /* NotificationRowView.swift */,
+				8494A19427D5E77000652418 /* NotificationRowViewCell.swift */,
 			);
 			path = PostLogin;
 			sourceTree = "<group>";
@@ -1758,6 +1764,7 @@
 				84E2D9B826B12C17000C0FD8 /* SettingManualVC.swift in Sources */,
 				840A7ED72697060E005AA1E6 /* SessionFilterVC.swift in Sources */,
 				8403F3BD26F9D016004BFE8E /* Graphs.swift in Sources */,
+				8494A19527D5E77000652418 /* NotificationRowViewCell.swift in Sources */,
 				840A7DFD2696E98C005AA1E6 /* DeviceConnectedVC.swift in Sources */,
 				84CC12E92668D083009316FC /* UITableView+ UITableViewCellExtension.swift in Sources */,
 				84FDA0A3267DC5D700AC8BE9 /* ProfileSetupVC.swift in Sources */,
@@ -1808,6 +1815,7 @@
 				8418D7D726B01F4E00BAB256 /* UserDefaults.swift in Sources */,
 				BDC2BE1E27A76C04003E4A13 /* GlucoseMapperExtension.swift in Sources */,
 				84F2A27026981DD8000FDCD5 /* BottomSheetChartCell.swift in Sources */,
+				8494A19327D5E17E00652418 /* NotificationRowView.swift in Sources */,
 				84CC13042668D1A6009316FC /* Double+Extension.swift in Sources */,
 				84CC13212668D588009316FC /* LocalizedString.swift in Sources */,
 				188DB14D26E0993600FBF042 /* CoachMarkArrowView.swift in Sources */,

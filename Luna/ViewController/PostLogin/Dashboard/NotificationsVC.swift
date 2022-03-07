@@ -44,8 +44,8 @@ extension NotificationsVC {
     private func tableViewSetup(){
         self.notiTableView.delegate = self
         self.notiTableView.dataSource = self
-        self.notiTableView.registerHeaderFooter(with: SettingHeaderView.self)
-        self.notiTableView.registerCell(with: NotificationsCell.self)
+//        self.notiTableView.registerHeaderFooter(with: SettingHeaderView.self)
+//        self.notiTableView.registerCell(with: NotificationsCell.self)
     }
     
     private func getNotificationListing(){
@@ -73,8 +73,9 @@ extension NotificationsVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueCell(with: NotificationsCell.self)
-        cell.populateCell(model: self.notificationListing[indexPath.row])
-        return cell
+        //        let cell = tableView.dequeueCell(with: NotificationsCell.self)
+        //        cell.populateCell(model: self.notificationListing[indexPath.row])
+        //        return cell
+        NotificationRowViewCell(model: self.notificationListing[indexPath.row])
     }
 }
