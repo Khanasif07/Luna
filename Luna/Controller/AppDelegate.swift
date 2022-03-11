@@ -41,9 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         sleep(2)
         setUpKeyboardSetup()
         getGoogleInfoPlist()
-//        let signInConfig = GIDConfiguration.init(clientID: FirebaseApp.app()?.options.clientID ?? "")
-//        GIDSignIn.sharedInstance. = FirebaseApp.app()?.options.clientID
-//        GIDSignIn.sharedInstance.delegate = self
        // removeAllNotifications()
         registerPushNotification()
         Messaging.messaging().delegate = self
@@ -177,7 +174,6 @@ extension AppDelegate:MessagingDelegate,UNUserNotificationCenterDelegate{
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
         AppUserDefaults.save(value: deviceTokenString, forKey: .token)
-        AppUserDefaults.save(value: deviceTokenString, forKey: .token)
         Messaging.messaging().apnsToken = deviceToken
         Auth.auth().setAPNSToken(deviceToken, type: .sandbox)
         FirestoreController.updateDeviceToken(token: deviceTokenString)
@@ -190,8 +186,16 @@ extension AppDelegate:MessagingDelegate,UNUserNotificationCenterDelegate{
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-            print("Push notification received in foreground.")
-            completionHandler([.alert, .badge, .sound])
+        print("Push notification received in foreground.")
+        print(notification.request.content.categoryIdentifier)
+        let userInfo = notification.request.content.userInfo
+        if let dict =  userInfo["aps"] as? [String:Any]{
+            if  let alert = dict["alert"] as? [String:Any]{
+                print(alert)
+                NotificationCenter.default.post(name: Notification.Name.receivedPushNotification, object: alert)
+            }
+        }
+        completionHandler([.alert, .badge, .sound])
     }
     
     func application(_ application: UIApplication,didReceiveRemoteNotification userInfo: [AnyHashable: Any],fetchCompletionHandler completionHandler:@escaping (UIBackgroundFetchResult) -> Void) {
@@ -213,7 +217,7 @@ extension AppDelegate:MessagingDelegate,UNUserNotificationCenterDelegate{
     
     func applicationWillTerminate(_ application: UIApplication) {
         print("terminated")
-        NotificationCenter.default.post(name: Notification.Name.ApplicationIsTerminated, object: [:])
+        NotificationCenter.default.post(name: Notification.Name.applicationIsTerminated, object: [:])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {

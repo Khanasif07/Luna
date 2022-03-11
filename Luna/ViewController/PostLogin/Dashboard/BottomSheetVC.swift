@@ -244,15 +244,16 @@ extension BottomSheetVC {
     }
     
     private func addObserver(){
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationIsTerminated), name: .ApplicationIsTerminated, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(batteryUpdateValue), name: .BatteryUpdateValue, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(reservoirUpdateValue), name: .ReservoirUpdateValue, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(statusUpdateValue), name: .StatusUpdateValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationIsTerminated), name: .applicationIsTerminated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(receivedPushNotification), name: .receivedPushNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .bleDidUpdateValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(batteryUpdateValue), name: .batteryUpdateValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reservoirUpdateValue), name: .reservoirUpdateValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(statusUpdateValue), name: .statusUpdateValue, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(cgmDataReceivedSuccessfully), name: .cgmConnectedSuccessfully, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(cgmDataRemovedSuccessfully), name: .cgmRemovedSuccessfully, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(cgmSimData), name: .cgmSimData, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .BLEOnOffState, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .bLEOnOffState, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(insulinConnectedFinish), name: .insulinConnectedSuccessfully, object: nil)
     }
     
@@ -270,6 +271,12 @@ extension BottomSheetVC {
     
     @objc func applicationIsTerminated(){
         self.persistentNotification(body: "Tap to open app. Luna will not function until the app is open. In the future, keep app running in the background, don't swipe it closed. ",title: "App is closed.")
+    }
+    
+    @objc func receivedPushNotification(notification : NSNotification){
+        if let dict = notification.object as? NSDictionary {
+            self.persistentNotification(body: dict["body"] as? String ?? "" ,title: dict["title"] as? String ?? "")
+        }
     }
     
     @objc func bLEOnOffStateChanged(){

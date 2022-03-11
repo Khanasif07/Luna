@@ -20,7 +20,7 @@ struct SessionHistoryRowView: View {
                 Text("\(Int(model.range))").font(Font.custom("SF_Pro_Display_Regular", size: 16))
                 Text("% in range").font(Font.custom("SF_Pro_Display_Regular", size: 16))
             }
-            Divider().foregroundColor(Color.white)
+             Divider().foregroundColor(Color.white)
         }.padding(.all, 20)
     }
 }
