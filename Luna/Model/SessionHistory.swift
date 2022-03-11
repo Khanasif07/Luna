@@ -20,6 +20,9 @@ struct SessionHistory :Codable{
             return  "\(startDate.getDateTimeFromTimeInterval(Date.DateFormat.mmdd.rawValue)) " + "-" + " \(endDate.getDateTimeFromTimeInterval(Date.DateFormat.mmdd.rawValue))"
         }
     }
+    var actualInsulin: String{
+        return (Double(insulin) / 2).roundToDecimal(1).stringValue
+    }
     
     init(){
     }

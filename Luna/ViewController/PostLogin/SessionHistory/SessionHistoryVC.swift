@@ -56,7 +56,7 @@ extension SessionHistoryVC {
     }
     
     private func setUpTableView(){
-        self.sessionHistoryTV.registerCell(with: SessionHistoryTableViewCell.self)
+//        self.sessionHistoryTV.registerCell(with: SessionHistoryTableViewCell.self)
         self.sessionHistoryTV.delegate = self
         self.sessionHistoryTV.dataSource = self
     }
@@ -105,14 +105,15 @@ extension SessionHistoryVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let cell = tableView.dequeueCell(with: SessionHistoryTableViewCell.self)
-        cell.configureCellData(model: self.insulinSectionDataArray[indexPath.section].1[indexPath.row])
-        return cell
+//        let cell = tableView.dequeueCell(with: SessionHistoryTableViewCell.self)
+//        cell.configureCellData(model: self.insulinSectionDataArray[indexPath.section].1[indexPath.row])
+//        return cell
+          SessionHistoryRowViewCell(model: self.insulinSectionDataArray[indexPath.section].1[indexPath.row])
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionHeaderView = Bundle.main.loadNibNamed("SessionHistoryHeader", owner: self, options: nil)?.first as! SessionHistoryHeader

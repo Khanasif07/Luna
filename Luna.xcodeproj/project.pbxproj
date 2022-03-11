@@ -133,6 +133,8 @@
 		84861D8326849FDB004B046C /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84861D8226849FDB004B046C /* ChangePasswordVC.swift */; };
 		8494A19327D5E17E00652418 /* NotificationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494A19227D5E17E00652418 /* NotificationRowView.swift */; };
 		8494A19527D5E77000652418 /* NotificationRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494A19427D5E77000652418 /* NotificationRowViewCell.swift */; };
+		8494A19727D8DADE00652418 /* SessionHistoryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494A19627D8DADE00652418 /* SessionHistoryRowView.swift */; };
+		8494A19927D8DCFD00652418 /* SessionHistoryRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494A19827D8DCFD00652418 /* SessionHistoryRowViewCell.swift */; };
 		849B255E27070CA000323876 /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B255D27070CA000323876 /* ContactUsVC.swift */; };
 		849B25622707101600323876 /* ContactsUsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B25602707101600323876 /* ContactsUsTableCell.swift */; };
 		849B25632707101600323876 /* ContactsUsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849B25612707101600323876 /* ContactsUsTableCell.xib */; };
@@ -438,6 +440,8 @@
 		84861D8226849FDB004B046C /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		8494A19227D5E17E00652418 /* NotificationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRowView.swift; sourceTree = "<group>"; };
 		8494A19427D5E77000652418 /* NotificationRowViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRowViewCell.swift; sourceTree = "<group>"; };
+		8494A19627D8DADE00652418 /* SessionHistoryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryRowView.swift; sourceTree = "<group>"; };
+		8494A19827D8DCFD00652418 /* SessionHistoryRowViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryRowViewCell.swift; sourceTree = "<group>"; };
 		849B255D27070CA000323876 /* ContactUsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsVC.swift; sourceTree = "<group>"; };
 		849B25602707101600323876 /* ContactsUsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUsTableCell.swift; sourceTree = "<group>"; };
 		849B25612707101600323876 /* ContactsUsTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsUsTableCell.xib; sourceTree = "<group>"; };
@@ -911,6 +915,8 @@
 				84A18914278C318A003ED8D9 /* NotificationsCell.xib */,
 				8494A19227D5E17E00652418 /* NotificationRowView.swift */,
 				8494A19427D5E77000652418 /* NotificationRowViewCell.swift */,
+				8494A19627D8DADE00652418 /* SessionHistoryRowView.swift */,
+				8494A19827D8DCFD00652418 /* SessionHistoryRowViewCell.swift */,
 			);
 			path = PostLogin;
 			sourceTree = "<group>";
@@ -1773,6 +1779,7 @@
 				8448DBDF2701A9570040137F /* Pulsator.swift in Sources */,
 				84FDA0A7267DCB1000AC8BE9 /* MessageSenderCell.swift in Sources */,
 				84CC12BC2668CDF4009316FC /* FirestoreController.swift in Sources */,
+				8494A19727D8DADE00652418 /* SessionHistoryRowView.swift in Sources */,
 				BD2B66C627A478BB004F0A35 /* ConnectLunaCgmSimulatorViewModel.swift in Sources */,
 				84CC12F22668D0E6009316FC /* UITextFieldExtension.swift in Sources */,
 				1863AF8926E23C7100902838 /* CoachMarkViewApp.swift in Sources */,
@@ -1905,6 +1912,7 @@
 				BD2B66CA27A4A5B9004F0A35 /* LunaCgmSimulatorConnectInteractor.swift in Sources */,
 				8455492D2678FFFD000CC13D /* LoginSocialTableCell.swift in Sources */,
 				188DB13626E0993600FBF042 /* DummyView.swift in Sources */,
+				8494A19927D8DCFD00652418 /* SessionHistoryRowViewCell.swift in Sources */,
 				847D1B292689A87A00220DAE /* SystemSetupVC.swift in Sources */,
 				84CC12F52668D10E009316FC /* UILabelExtension.swift in Sources */,
 				84CC129C2668C822009316FC /* SceneDelegate.swift in Sources */,
@@ -2087,7 +2095,7 @@
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 31.0;
+				CURRENT_PROJECT_VERSION = 32.0;
 				DEVELOPMENT_TEAM = 9S43J8Y2GN;
 				INFOPLIST_FILE = "$(SRCROOT)/Luna/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2115,7 +2123,7 @@
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 31.0;
+				CURRENT_PROJECT_VERSION = 32.0;
 				DEVELOPMENT_TEAM = 9S43J8Y2GN;
 				INFOPLIST_FILE = "$(SRCROOT)/Luna/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
