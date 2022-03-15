@@ -266,6 +266,8 @@ enum LocalizedString : String {
     case overrideBioMetricMessage = "Your biometric is already associated with one account. Do you want to replace your biometric with this account?";
     case error = "Error!";
     case biometric = "Biometric";
+    case no_session_history_data_available
+    case no_notification_data_available
     
     case TnC = """
 

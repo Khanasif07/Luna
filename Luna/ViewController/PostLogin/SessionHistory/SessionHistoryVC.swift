@@ -85,7 +85,7 @@ extension SessionHistoryVC {
             self.sessionHistoryTV.reloadData()
             CommonFunctions.hideActivityLoader()
         }failure: {
-            CommonFunctions.showToastWithMessage("No Session History data available.")
+            CommonFunctions.showToastWithMessage(LocalizedString.no_session_history_data_available.localized)
             CommonFunctions.hideActivityLoader()
         }
     }
@@ -97,6 +97,11 @@ extension SessionHistoryVC {
 extension SessionHistoryVC : UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        if self.insulinSectionDataArray.count == 0 {
+            self.sessionHistoryTV.setEmptyMessage(LocalizedString.no_session_history_data_available.localized)
+        } else {
+            self.sessionHistoryTV.restore()
+        }
         return self.insulinSectionDataArray.endIndex
     }
     
@@ -111,9 +116,9 @@ extension SessionHistoryVC : UITableViewDelegate, UITableViewDataSource {
           SessionHistoryRowViewCell(model: self.insulinSectionDataArray[indexPath.section].1[indexPath.row])
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionHeaderView = Bundle.main.loadNibNamed("SessionHistoryHeader", owner: self, options: nil)?.first as! SessionHistoryHeader

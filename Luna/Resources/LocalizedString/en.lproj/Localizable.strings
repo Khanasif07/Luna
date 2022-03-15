@@ -153,3 +153,5 @@
 "close" = "Close";
 "mg/dl" = "mg/dl";
 "pairLunaCgmSimExplanation" = "To pair your Luna CGM Simulator, enable the simulator on your mac or iOS device";
+"no_session_history_data_available" = "No Session History data available.";
+"no_notification_data_available" = "No Notification data available.";

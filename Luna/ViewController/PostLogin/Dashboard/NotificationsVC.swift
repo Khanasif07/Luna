@@ -58,7 +58,7 @@ extension NotificationsVC {
                 print("OneWeekOldNotificationDeleted.")
             }
         } failure: { (error) -> (Void) in
-            CommonFunctions.showToastWithMessage("No Notification data available.")
+            CommonFunctions.showToastWithMessage(LocalizedString.no_notification_data_available.localized)
             CommonFunctions.hideActivityLoader()
         }
     }
@@ -69,6 +69,11 @@ extension NotificationsVC {
 extension NotificationsVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.notificationListing.count == 0 {
+            self.notiTableView.setEmptyMessage(LocalizedString.no_notification_data_available.localized)
+        } else {
+            self.notiTableView.restore()
+        }
         return self.notificationListing.endIndex
     }
     
