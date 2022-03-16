@@ -21,7 +21,7 @@ struct UserModel{
     var createdAt : String
     var email : String
     var diabetesType: String
-    var emailVerified : Bool
+    var isEmailVerified : Bool
     var image : String
     var firstName : String
     var dob : String
@@ -45,7 +45,7 @@ struct UserModel{
         self.accessToken = json[ApiKey.authToken].stringValue
         self.createdAt = json[ApiKey.createdAt].stringValue
         self.email = json[ApiKey.email].stringValue
-        self.emailVerified = json[ApiKey.emailVerified].boolValue
+        self.isEmailVerified = json[ApiKey.isEmailVerified].boolValue
         self.image = json[ApiKey.image].stringValue
         self.firstName = json[ApiKey.firstName].stringValue
         self.password = json[ApiKey.password].stringValue
@@ -68,7 +68,7 @@ struct UserModel{
         model.accessToken = dict[ApiKey.authToken] as? String ?? ""
         model.createdAt = dict[ApiKey.createdAt] as? String ?? ""
         model.email = dict[ApiKey.email] as? String ?? ""
-        model.emailVerified = dict[ApiKey.emailVerified] as? Bool ?? false
+        model.isEmailVerified = dict[ApiKey.isEmailVerified] as? Bool ?? false
         model.image = dict[ApiKey.image] as? String ?? ""
         model.password = dict[ApiKey.password] as? String ?? ""
         model.isChangePassword = dict[ApiKey.isChangePassword] as? Bool ?? false
@@ -87,7 +87,7 @@ struct UserModel{
             ApiKey.authToken: accessToken,
             ApiKey.createdAt : createdAt,
             ApiKey.email : email,
-            ApiKey.emailVerified : emailVerified,
+            ApiKey.isEmailVerified : isEmailVerified,
             ApiKey.image : image,
             ApiKey.password : password,
             ApiKey.status : status,

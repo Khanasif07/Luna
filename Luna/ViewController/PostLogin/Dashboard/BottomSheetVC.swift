@@ -14,6 +14,24 @@ import Photos
 
 class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     
+    //MARK:- Setting Section Enum
+    enum SectionCount: Int{
+        case insulinCell
+        case insulinCellListing
+        case total
+        
+        var titleValue: String{
+            switch self {
+            case .insulinCell:
+                return LocalizedString.myProfile.localized
+            case .insulinCellListing:
+                return LocalizedString.change_Password.localized
+            case .total:
+                return LocalizedString.change_Password.localized
+            }
+        }
+    }
+    
     //MARK:- OUTLETS
     //==============
     @IBOutlet weak var cgmChartView: TappableLineChartView!
@@ -26,6 +44,7 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     
     //MARK:- VARIABLE
     //================
+    var sections: [(SectionCount)] = [.insulinCell,.insulinCellListing]
     // Variables for BG Charts
     let ScaleXMax:Float = 150.0
     var errMessage :String = ""
@@ -416,16 +435,16 @@ extension BottomSheetVC {
 //========================
 extension BottomSheetVC : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 1 ? (SystemInfoModel.shared.insulinData.endIndex) : 1
+        return sections[section] == .insulinCellListing ? (SystemInfoModel.shared.insulinData.endIndex) : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
+        switch sections[indexPath.section] {
+        case .insulinCell:
             let cell = tableView.dequeueCell(with: BottomSheetInsulinCell.self, indexPath: indexPath)
             cell.populateCell()
             return cell
-        case 1:
+        case .insulinCellListing:
             let cell = tableView.dequeueCell(with: BottomSheetBottomCell.self, indexPath: indexPath)
             cell.topLineDashView.isHidden = indexPath.row == 0
             cell.populateCell(model:SystemInfoModel.shared.insulinData[indexPath.row])
@@ -436,7 +455,7 @@ extension BottomSheetVC : UITableViewDelegate,UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return SectionCount.total.rawValue
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

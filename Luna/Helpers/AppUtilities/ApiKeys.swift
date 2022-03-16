@@ -77,7 +77,7 @@ enum ApiKey {
     
     static var authToken : String {return "authToken"}
     static var createdAt : String {return "createdAt"}
-    static var emailVerified : String {return "emailVerified"}
+    static var isEmailVerified : String {return "isEmailVerified"}
     static var isDelete : String {return "isDelete"}
     static var language : String {return "language"}
     static var otpExpiry : String {return "otpExpiry"}

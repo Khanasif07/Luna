@@ -7,11 +7,9 @@
 import UIKit
 import Foundation
 
-protocol CustomViewDelegate: class {
+protocol CustomViewDelegate: AnyObject {
     func successBtnAction()
 }
-
-
 
 class CustomView: UIView {
     

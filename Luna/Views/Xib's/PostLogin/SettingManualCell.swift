@@ -27,4 +27,12 @@ class SettingManualCell: UITableViewCell {
         self.queLbl.font = AppFonts.SF_Pro_Display_Medium.withSize(.x16)
         self.ansLbl.font = AppFonts.SF_Pro_Display_Regular.withSize(.x14)
     }
+    
+    public func configureCell(model: (UIImage,String,String,Bool)){
+        self.ansLbl.isHidden = !model.3
+        self.queLbl.text = model.1
+        self.ansLbl.text = model.2
+        self.logoBtn.setImage(model.0, for: .normal)
+        self.arrowBtn.setImage(model.3 ? #imageLiteral(resourceName: "uparrow") : #imageLiteral(resourceName: "dropdown") , for: .normal)
+    }
 }

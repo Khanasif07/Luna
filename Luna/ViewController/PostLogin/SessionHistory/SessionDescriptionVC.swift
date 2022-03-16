@@ -38,14 +38,7 @@ class SessionDescriptionVC: UIViewController {
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
-        self.titleLbl.text = titleValue
-        self.summaryTitleLbl.font = AppFonts.SF_Pro_Display_Medium.withSize(.x16)
-        self.setupTableView()
-        self.setupProgressBar()
-        self.getCgmDataFromFirestore()
-        CommonFunctions.delay(delay: 2.5) {
-            CommonFunctions.hideActivityLoader()
-        }
+        self.initialSetup()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -65,6 +58,17 @@ class SessionDescriptionVC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+    }
+    
+    private func initialSetup() {
+        self.titleLbl.text = titleValue
+        self.summaryTitleLbl.font = AppFonts.SF_Pro_Display_Medium.withSize(.x16)
+        self.setupTableView()
+        self.setupProgressBar()
+        self.getCgmDataFromFirestore()
+        CommonFunctions.delay(delay: 2.5) {
+            CommonFunctions.hideActivityLoader()
+        }
     }
     
     // MARK: - IBActions
