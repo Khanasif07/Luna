@@ -28,18 +28,6 @@ final class ChartXValueFormatter: IAxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         if let lastCGMValue = SystemInfoModel.shared.cgmData?.last{
             if lastCGMValue.date - value <= 300 {
-//                let dateFormatter = DateFormatter()
-//                dateFormatter.setLocalizedDateFormatFromTemplate(Date.DateFormat.cgmDate12.rawValue)
-//                let date = Date(timeIntervalSince1970: value)
-//                let formattedDate = dateFormatter.string(from: date)
-//                xAxisLabelsArray.append(formattedDate.lowercased())
-//                if xAxisLabelsArray.count == 7 {
-//                    let hasDuplicates = xAxisLabelsArray.count != Set(xAxisLabelsArray).count
-//                    if (xAxisLabelsArray[5] ==  xAxisLabelsArray[4]) && hasDuplicates{
-//                        NotificationCenter.default.post(name: Notification.Name.XAxisLabelsDuplicateValue, object: [:])
-//                    }
-//                }
-//                xAxisLabelsArray = []
                 return "now"
             }else {
                 let dateFormatter = DateFormatter()

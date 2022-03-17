@@ -214,6 +214,7 @@
 		84D1F4FF2679D52700F131E0 /* SF-Pro-Display-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 84D1F4ED2679D52700F131E0 /* SF-Pro-Display-ThinItalic.otf */; };
 		84D1F5002679D52700F131E0 /* SF-Pro-Display-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 84D1F4EE2679D52700F131E0 /* SF-Pro-Display-BoldItalic.otf */; };
 		84D1F5052679E95A00F131E0 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1F5042679E95A00F131E0 /* ForgotPasswordVC.swift */; };
+		84E0F2C427E2F802009BB926 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E0F2C327E2F802009BB926 /* Alerts.swift */; };
 		84E2D9B826B12C17000C0FD8 /* SettingManualVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2D9B726B12C17000C0FD8 /* SettingManualVC.swift */; };
 		84E2D9BC26B12D26000C0FD8 /* SettingManualCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2D9BA26B12D26000C0FD8 /* SettingManualCell.swift */; };
 		84E2D9BD26B12D26000C0FD8 /* SettingManualCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E2D9BB26B12D26000C0FD8 /* SettingManualCell.xib */; };
@@ -524,6 +525,7 @@
 		84D1F4ED2679D52700F131E0 /* SF-Pro-Display-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-ThinItalic.otf"; sourceTree = "<group>"; };
 		84D1F4EE2679D52700F131E0 /* SF-Pro-Display-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-BoldItalic.otf"; sourceTree = "<group>"; };
 		84D1F5042679E95A00F131E0 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
+		84E0F2C327E2F802009BB926 /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		84E2D9B726B12C17000C0FD8 /* SettingManualVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManualVC.swift; sourceTree = "<group>"; };
 		84E2D9BA26B12D26000C0FD8 /* SettingManualCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManualCell.swift; sourceTree = "<group>"; };
 		84E2D9BB26B12D26000C0FD8 /* SettingManualCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingManualCell.xib; sourceTree = "<group>"; };
@@ -804,6 +806,7 @@
 				8403F3BC26F9D016004BFE8E /* Graphs.swift */,
 				8403F3BF26F9D2F8004BFE8E /* Chart.swift */,
 				8403F3C526F9DABB004BFE8E /* NightScout.swift */,
+				84E0F2C327E2F802009BB926 /* Alerts.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -1882,6 +1885,7 @@
 				840A7DF12696E95E005AA1E6 /* CGMSelectorVC.swift in Sources */,
 				84861D7F26848EDD004B046C /* ProfileTableCell.swift in Sources */,
 				BDFEC67527A346230070EAF1 /* PairLunaCgmSimulatorViewModel.swift in Sources */,
+				84E0F2C427E2F802009BB926 /* Alerts.swift in Sources */,
 				BD0D0C3127A21456001117B3 /* FirestoreCgmRepository.swift in Sources */,
 				BDC2BE0A27A71A7F003E4A13 /* UserError.swift in Sources */,
 				188DB14226E0993600FBF042 /* ConfigurationChange.swift in Sources */,

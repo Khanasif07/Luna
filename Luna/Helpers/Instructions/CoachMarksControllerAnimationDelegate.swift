@@ -57,7 +57,7 @@ public extension CoachMarksControllerAnimationDelegate {
                               using manager: CoachMarkAnimationManager) { }
 }
 
-protocol CoachMarksControllerAnimationProxyDelegate: class {
+protocol CoachMarksControllerAnimationProxyDelegate: AnyObject {
     func fetchAppearanceTransition(OfCoachMark coachMarkView: UIView,
                                    at index: Int,
                                    using manager: CoachMarkTransitionManager)

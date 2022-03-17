@@ -20,7 +20,7 @@ class SessionHistoryRowViewCell: UITableViewCell {
         vc.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         vc.view.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
         vc.view.backgroundColor = .clear
-        
+        separatorInset = UIEdgeInsets(top: 0, left: 1000, bottom: 0, right: 0)
         accessoryType = .disclosureIndicator
         selectionStyle = .default
     }

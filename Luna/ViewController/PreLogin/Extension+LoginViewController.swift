@@ -247,24 +247,4 @@ extension LoginViewController {
             }
         }
     }
-    
-//    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-//        // Perform any operations when the user disconnects from app here.
-//        print("User has disconnected")
-//    }
-//
-//    func signIn(_ signIn: GIDSignIn!,
-//        presentViewController viewController: UIViewController!) {
-//      self.present(viewController, animated: true, completion: nil)
-//    }
-//
-//    func signIn(_ signIn: GIDSignIn!,
-//        dismissViewController viewController: UIViewController!) {
-//      self.dismiss(animated: true, completion: nil)
-//    }
-//
-//    func signInWillDispatch(signIn: GIDSignIn!, error: NSError!) {
-//        // myActivityIndicator.stopAnimating()
-//    }
-
 }

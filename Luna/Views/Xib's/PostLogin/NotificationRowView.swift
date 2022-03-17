@@ -22,6 +22,6 @@ struct NotificationRowView: View {
 
 struct NotificationRowView_Previews: PreviewProvider {
     static var previews: some View {
-        NotificationRowView(model: NotificationModel(title: "Notification",date: 1677890.0,description: "UITableViewAlertForLayoutOutsideViewHiera",notificationId: "23rdytfygh,"))
+        NotificationRowView(model: NotificationModel(title: "Notification",date: 1677890.0,description: "Hello",notificationId: "23rdytfygh,"))
     }
 }
