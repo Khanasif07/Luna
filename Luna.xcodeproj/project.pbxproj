@@ -131,6 +131,10 @@
 		84861D7F26848EDD004B046C /* ProfileTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84861D7D26848EDD004B046C /* ProfileTableCell.swift */; };
 		84861D8026848EDD004B046C /* ProfileTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84861D7E26848EDD004B046C /* ProfileTableCell.xib */; };
 		84861D8326849FDB004B046C /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84861D8226849FDB004B046C /* ChangePasswordVC.swift */; };
+		8494A19327D5E17E00652418 /* NotificationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494A19227D5E17E00652418 /* NotificationRowView.swift */; };
+		8494A19527D5E77000652418 /* NotificationRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494A19427D5E77000652418 /* NotificationRowViewCell.swift */; };
+		8494A19727D8DADE00652418 /* SessionHistoryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494A19627D8DADE00652418 /* SessionHistoryRowView.swift */; };
+		8494A19927D8DCFD00652418 /* SessionHistoryRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494A19827D8DCFD00652418 /* SessionHistoryRowViewCell.swift */; };
 		849B255E27070CA000323876 /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B255D27070CA000323876 /* ContactUsVC.swift */; };
 		849B25622707101600323876 /* ContactsUsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B25602707101600323876 /* ContactsUsTableCell.swift */; };
 		849B25632707101600323876 /* ContactsUsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849B25612707101600323876 /* ContactsUsTableCell.xib */; };
@@ -210,6 +214,7 @@
 		84D1F4FF2679D52700F131E0 /* SF-Pro-Display-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 84D1F4ED2679D52700F131E0 /* SF-Pro-Display-ThinItalic.otf */; };
 		84D1F5002679D52700F131E0 /* SF-Pro-Display-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 84D1F4EE2679D52700F131E0 /* SF-Pro-Display-BoldItalic.otf */; };
 		84D1F5052679E95A00F131E0 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1F5042679E95A00F131E0 /* ForgotPasswordVC.swift */; };
+		84E0F2C427E2F802009BB926 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E0F2C327E2F802009BB926 /* Alerts.swift */; };
 		84E2D9B826B12C17000C0FD8 /* SettingManualVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2D9B726B12C17000C0FD8 /* SettingManualVC.swift */; };
 		84E2D9BC26B12D26000C0FD8 /* SettingManualCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2D9BA26B12D26000C0FD8 /* SettingManualCell.swift */; };
 		84E2D9BD26B12D26000C0FD8 /* SettingManualCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E2D9BB26B12D26000C0FD8 /* SettingManualCell.xib */; };
@@ -434,6 +439,10 @@
 		84861D7D26848EDD004B046C /* ProfileTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableCell.swift; sourceTree = "<group>"; };
 		84861D7E26848EDD004B046C /* ProfileTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableCell.xib; sourceTree = "<group>"; };
 		84861D8226849FDB004B046C /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
+		8494A19227D5E17E00652418 /* NotificationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRowView.swift; sourceTree = "<group>"; };
+		8494A19427D5E77000652418 /* NotificationRowViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRowViewCell.swift; sourceTree = "<group>"; };
+		8494A19627D8DADE00652418 /* SessionHistoryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryRowView.swift; sourceTree = "<group>"; };
+		8494A19827D8DCFD00652418 /* SessionHistoryRowViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryRowViewCell.swift; sourceTree = "<group>"; };
 		849B255D27070CA000323876 /* ContactUsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsVC.swift; sourceTree = "<group>"; };
 		849B25602707101600323876 /* ContactsUsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUsTableCell.swift; sourceTree = "<group>"; };
 		849B25612707101600323876 /* ContactsUsTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsUsTableCell.xib; sourceTree = "<group>"; };
@@ -516,6 +525,7 @@
 		84D1F4ED2679D52700F131E0 /* SF-Pro-Display-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-ThinItalic.otf"; sourceTree = "<group>"; };
 		84D1F4EE2679D52700F131E0 /* SF-Pro-Display-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-BoldItalic.otf"; sourceTree = "<group>"; };
 		84D1F5042679E95A00F131E0 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
+		84E0F2C327E2F802009BB926 /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		84E2D9B726B12C17000C0FD8 /* SettingManualVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManualVC.swift; sourceTree = "<group>"; };
 		84E2D9BA26B12D26000C0FD8 /* SettingManualCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManualCell.swift; sourceTree = "<group>"; };
 		84E2D9BB26B12D26000C0FD8 /* SettingManualCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingManualCell.xib; sourceTree = "<group>"; };
@@ -796,6 +806,7 @@
 				8403F3BC26F9D016004BFE8E /* Graphs.swift */,
 				8403F3BF26F9D2F8004BFE8E /* Chart.swift */,
 				8403F3C526F9DABB004BFE8E /* NightScout.swift */,
+				84E0F2C327E2F802009BB926 /* Alerts.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -905,6 +916,10 @@
 				843E3345276869E10081C1A9 /* SettingHeaderView.xib */,
 				84A18913278C318A003ED8D9 /* NotificationsCell.swift */,
 				84A18914278C318A003ED8D9 /* NotificationsCell.xib */,
+				8494A19227D5E17E00652418 /* NotificationRowView.swift */,
+				8494A19427D5E77000652418 /* NotificationRowViewCell.swift */,
+				8494A19627D8DADE00652418 /* SessionHistoryRowView.swift */,
+				8494A19827D8DCFD00652418 /* SessionHistoryRowViewCell.swift */,
 			);
 			path = PostLogin;
 			sourceTree = "<group>";
@@ -1758,6 +1773,7 @@
 				84E2D9B826B12C17000C0FD8 /* SettingManualVC.swift in Sources */,
 				840A7ED72697060E005AA1E6 /* SessionFilterVC.swift in Sources */,
 				8403F3BD26F9D016004BFE8E /* Graphs.swift in Sources */,
+				8494A19527D5E77000652418 /* NotificationRowViewCell.swift in Sources */,
 				840A7DFD2696E98C005AA1E6 /* DeviceConnectedVC.swift in Sources */,
 				84CC12E92668D083009316FC /* UITableView+ UITableViewCellExtension.swift in Sources */,
 				84FDA0A3267DC5D700AC8BE9 /* ProfileSetupVC.swift in Sources */,
@@ -1766,6 +1782,7 @@
 				8448DBDF2701A9570040137F /* Pulsator.swift in Sources */,
 				84FDA0A7267DCB1000AC8BE9 /* MessageSenderCell.swift in Sources */,
 				84CC12BC2668CDF4009316FC /* FirestoreController.swift in Sources */,
+				8494A19727D8DADE00652418 /* SessionHistoryRowView.swift in Sources */,
 				BD2B66C627A478BB004F0A35 /* ConnectLunaCgmSimulatorViewModel.swift in Sources */,
 				84CC12F22668D0E6009316FC /* UITextFieldExtension.swift in Sources */,
 				1863AF8926E23C7100902838 /* CoachMarkViewApp.swift in Sources */,
@@ -1808,6 +1825,7 @@
 				8418D7D726B01F4E00BAB256 /* UserDefaults.swift in Sources */,
 				BDC2BE1E27A76C04003E4A13 /* GlucoseMapperExtension.swift in Sources */,
 				84F2A27026981DD8000FDCD5 /* BottomSheetChartCell.swift in Sources */,
+				8494A19327D5E17E00652418 /* NotificationRowView.swift in Sources */,
 				84CC13042668D1A6009316FC /* Double+Extension.swift in Sources */,
 				84CC13212668D588009316FC /* LocalizedString.swift in Sources */,
 				188DB14D26E0993600FBF042 /* CoachMarkArrowView.swift in Sources */,
@@ -1867,6 +1885,7 @@
 				840A7DF12696E95E005AA1E6 /* CGMSelectorVC.swift in Sources */,
 				84861D7F26848EDD004B046C /* ProfileTableCell.swift in Sources */,
 				BDFEC67527A346230070EAF1 /* PairLunaCgmSimulatorViewModel.swift in Sources */,
+				84E0F2C427E2F802009BB926 /* Alerts.swift in Sources */,
 				BD0D0C3127A21456001117B3 /* FirestoreCgmRepository.swift in Sources */,
 				BDC2BE0A27A71A7F003E4A13 /* UserError.swift in Sources */,
 				188DB14226E0993600FBF042 /* ConfigurationChange.swift in Sources */,
@@ -1897,6 +1916,7 @@
 				BD2B66CA27A4A5B9004F0A35 /* LunaCgmSimulatorConnectInteractor.swift in Sources */,
 				8455492D2678FFFD000CC13D /* LoginSocialTableCell.swift in Sources */,
 				188DB13626E0993600FBF042 /* DummyView.swift in Sources */,
+				8494A19927D8DCFD00652418 /* SessionHistoryRowViewCell.swift in Sources */,
 				847D1B292689A87A00220DAE /* SystemSetupVC.swift in Sources */,
 				84CC12F52668D10E009316FC /* UILabelExtension.swift in Sources */,
 				84CC129C2668C822009316FC /* SceneDelegate.swift in Sources */,
@@ -2079,7 +2099,7 @@
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 31.0;
+				CURRENT_PROJECT_VERSION = 32.0;
 				DEVELOPMENT_TEAM = 9S43J8Y2GN;
 				INFOPLIST_FILE = "$(SRCROOT)/Luna/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2107,7 +2127,7 @@
 				CODE_SIGN_ENTITLEMENTS = Luna/Luna.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 31.0;
+				CURRENT_PROJECT_VERSION = 32.0;
 				DEVELOPMENT_TEAM = 9S43J8Y2GN;
 				INFOPLIST_FILE = "$(SRCROOT)/Luna/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

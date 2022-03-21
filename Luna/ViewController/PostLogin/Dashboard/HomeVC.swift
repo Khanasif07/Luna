@@ -139,12 +139,12 @@ extension HomeVC {
         CommonFunctions.delay(delay: 10.0) {
             CommonFunctions.hideActivityLoader()
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(batteryUpdateValue), name: .BatteryUpdateValue, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(reservoirUpdateValue), name: .ReservoirUpdateValue, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(statusUpdateValue), name: .StatusUpdateValue, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .BLEOnOffState, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(bLEDidDisConnected), name: .BLEDidDisConnectSuccessfully, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(batteryUpdateValue), name: .batteryUpdateValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reservoirUpdateValue), name: .reservoirUpdateValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(statusUpdateValue), name: .statusUpdateValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .bleDidUpdateValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .bLEOnOffState, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(bLEDidDisConnected), name: .bLEDidDisConnectSuccessfully, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(cgmDataReceivedSuccessfully), name: .cgmConnectedSuccessfully, object: nil)
     }
     

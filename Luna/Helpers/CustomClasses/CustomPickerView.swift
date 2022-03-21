@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol WCCustomPickerViewDelegate : class{
+protocol WCCustomPickerViewDelegate : AnyObject{
     
     func userDidSelectRow(_ text : String)
 }

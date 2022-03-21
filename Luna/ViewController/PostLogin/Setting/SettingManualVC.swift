@@ -78,11 +78,7 @@ extension SettingManualVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(with: SettingManualCell.self)
-        cell.ansLbl.isHidden = !sections[indexPath.row].3
-        cell.queLbl.text = sections[indexPath.row].1
-        cell.ansLbl.text = sections[indexPath.row].2
-        cell.logoBtn.setImage(sections[indexPath.row].0, for: .normal)
-        cell.arrowBtn.setImage(sections[indexPath.row].3 ? #imageLiteral(resourceName: "uparrow") : #imageLiteral(resourceName: "dropdown") , for: .normal)
+        cell.configureCell(model: sections[indexPath.row])
         return cell
     }
     

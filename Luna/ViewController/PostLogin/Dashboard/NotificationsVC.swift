@@ -44,8 +44,8 @@ extension NotificationsVC {
     private func tableViewSetup(){
         self.notiTableView.delegate = self
         self.notiTableView.dataSource = self
-        self.notiTableView.registerHeaderFooter(with: SettingHeaderView.self)
-        self.notiTableView.registerCell(with: NotificationsCell.self)
+//        self.notiTableView.registerHeaderFooter(with: SettingHeaderView.self)
+//        self.notiTableView.registerCell(with: NotificationsCell.self)
     }
     
     private func getNotificationListing(){
@@ -58,7 +58,7 @@ extension NotificationsVC {
                 print("OneWeekOldNotificationDeleted.")
             }
         } failure: { (error) -> (Void) in
-            CommonFunctions.showToastWithMessage("No Notification data available.")
+            CommonFunctions.showToastWithMessage(LocalizedString.no_notification_data_available.localized)
             CommonFunctions.hideActivityLoader()
         }
     }
@@ -69,12 +69,18 @@ extension NotificationsVC {
 extension NotificationsVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.notificationListing.count == 0 {
+            self.notiTableView.setEmptyMessage(LocalizedString.no_notification_data_available.localized)
+        } else {
+            self.notiTableView.restore()
+        }
         return self.notificationListing.endIndex
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueCell(with: NotificationsCell.self)
-        cell.populateCell(model: self.notificationListing[indexPath.row])
-        return cell
+        //        let cell = tableView.dequeueCell(with: NotificationsCell.self)
+        //        cell.populateCell(model: self.notificationListing[indexPath.row])
+        //        return cell
+        NotificationRowViewCell(model: self.notificationListing[indexPath.row])
     }
 }

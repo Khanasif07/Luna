@@ -186,7 +186,7 @@ public class BleManager: NSObject{
             self.batteryData = ""
             self.reservoirLevelData = ""
             self.iobData = 0.0
-            NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
+            NotificationCenter.default.post(name: Notification.Name.bleDidUpdateValue, object: [:])
         }
         DispatchQueue.main.async {
             if self.statusTimer.isValid {
@@ -318,7 +318,7 @@ public class BleManager: NSObject{
                 CommonFunctions.delay(delay: 10.0) {
                     self.isDataOutPutProcess = false
                     self.writeValue(myCharacteristic: dataInCharacteristic,value: "#CLEAR_DOSE_DATA")
-                    NotificationCenter.default.post(name: Notification.Name.BleDidUpdateValue, object: [:])
+                    NotificationCenter.default.post(name: Notification.Name.bleDidUpdateValue, object: [:])
                 }
             }
         }
@@ -380,18 +380,18 @@ extension BleManager: CBPeripheralDelegate {
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for Battery Level: \(data)")
             self.batteryData = data
-            NotificationCenter.default.post(name: Notification.Name.BatteryUpdateValue, object: nil)
+            NotificationCenter.default.post(name: Notification.Name.batteryUpdateValue, object: nil)
         case reservoirLevelCharacteristicCBUUID:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for Reservoir Level: \(data)")
             self.reservoirLevelData = data
-            NotificationCenter.default.post(name: Notification.Name.ReservoirUpdateValue, object: nil)
+            NotificationCenter.default.post(name: Notification.Name.reservoirUpdateValue, object: nil)
         case statusCBUUID:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             let dataArray = data.split{$0 == ","}.map(String.init)
             print("handled Characteristic Value for status : \(dataArray)")
             self.systemStatusData = dataArray
-            NotificationCenter.default.post(name: Notification.Name.StatusUpdateValue, object: nil)
+            NotificationCenter.default.post(name: Notification.Name.statusUpdateValue, object: nil)
         case firmwareRevisionString:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
             print("handled Characteristic Value for firmwareRevisionString:  \(data)")
@@ -430,7 +430,7 @@ extension BleManager: CBPeripheralDelegate {
             if let dataInCharacteristic = self.cgmDataInCharacteristic{
                 writeValue(myCharacteristic: dataInCharacteristic,value: "#GET_DOSE_DATA")
             }
-            NotificationCenter.default.post(name: Notification.Name.ReservoirUpdateValue, object: nil)
+            NotificationCenter.default.post(name: Notification.Name.reservoirUpdateValue, object: nil)
             print("handled Characteristic Value for IOBout:  \(data)")
         case writeAcknowledgement:
             let data = String(bytes: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
@@ -472,7 +472,7 @@ extension BleManager: CBCentralManagerDelegate {
         case .poweredOff:
             print("central.state is .poweredOff")
             self.systemStatusData = []
-            NotificationCenter.default.post(name: Notification.Name.BLEOnOffState, object: nil)
+            NotificationCenter.default.post(name: Notification.Name.bLEOnOffState, object: nil)
         case .poweredOn:
             print("central.state is .poweredOn")
             centralManager.scanForPeripherals(withServices: [lunaCBUUID],options: nil)
@@ -524,7 +524,7 @@ extension BleManager: CBCentralManagerDelegate {
         }
         isUnpaired = false
         isMyPeripheralConected = false
-        NotificationCenter.default.post(name: Notification.Name.BLEDidDisConnectSuccessfully, object: nil)
+        NotificationCenter.default.post(name: Notification.Name.bLEDidDisConnectSuccessfully, object: nil)
         if !isUnpaired{
             DispatchQueue.main.async {
                 if self.statusTimer.isValid {

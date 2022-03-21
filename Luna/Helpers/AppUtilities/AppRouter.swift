@@ -31,8 +31,6 @@ enum AppRouter {
     // MARK: - Show Landing Screen
     //===========================
     static func checkAppInitializationFlow() {
-//                        AppRouter.goToTestingVC()
-//                return
         if isUserLoggedin {
             if   AppUserDefaults.value(forKey: .isSystemSetupCompleted).boolValue{
                 AppRouter.gotoHomeVC()
@@ -59,26 +57,12 @@ enum AppRouter {
     }
     
     static func checkEmailVerificationFlow(email: String) {
-//        guard let nav: UINavigationController = AppDelegate.shared.window?.rootViewController as? UINavigationController else { return }
-//        if let homeScene = nav.hasViewController(ofKind: LoginViewController.self) as? LoginViewController {
-//            homeScene.emailTxt = email
-//            homeScene.isComeFromMail = true
-//            let navigationController = UINavigationController(rootViewController: homeScene)
-//            navigationController.setNavigationBarHidden(true, animated: true)
-//            defaultSetAsWindowRoot(navigationController)
-//        } else {
-//            let loginVC = LoginViewController.instantiate(fromAppStoryboard: .PreLogin)
-//            loginVC.emailTxt = email
-//            loginVC.isComeFromMail = true
-//            setAsWindowRoot(loginVC)
-//        }
         let signupVC = SignupViewController.instantiate(fromAppStoryboard: .PreLogin)
         let navigationController = UINavigationController(rootViewController: signupVC)
         navigationController.setNavigationBarHidden(true, animated: false)
         defaultSetAsWindowRoot(navigationController)
         let loginVC = LoginViewController.instantiate(fromAppStoryboard: .PreLogin)
         loginVC.emailTxt = email
-//        loginVC.isComeFromMail = true
         navigationController.pushViewController(loginVC, animated: true)
     }
     
@@ -109,12 +93,6 @@ enum AppRouter {
     }
     
     static func goToSignUpVC() {
-        //        let loginVC = LoginViewController.instantiate(fromAppStoryboard: .PreLogin)
-        //        let navigationController = UINavigationController(rootViewController: loginVC)
-        //        navigationController.setNavigationBarHidden(true, animated: false)
-        //        defaultSetAsWindowRoot(navigationController)
-        //        let signupVC = SignupViewController.instantiate(fromAppStoryboard: .PreLogin)
-        //        navigationController.pushViewController(signupVC, animated: true)
         let signupVC = SignupViewController.instantiate(fromAppStoryboard: .PreLogin)
         setAsWindowRoot(signupVC)
     }
@@ -131,8 +109,6 @@ enum AppRouter {
         defaultSetAsWindowRoot(navigationController)
         let loginVC = LoginViewController.instantiate(fromAppStoryboard: .PreLogin)
         navigationController.pushViewController(loginVC, animated: true)
-        //        let loginVC = LoginViewController.instantiate(fromAppStoryboard: .PreLogin)
-        //        setAsWindowRoot(loginVC)
     }
     
     static func gotoSystemSetupVC(){

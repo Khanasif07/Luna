@@ -94,8 +94,6 @@ extension InsulinStep2VC {
 
 // MARK: - Extension For TableView
 //===========================
-// MARK: - Extension For TableView
-//===========================
 extension InsulinStep2VC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections.endIndex
@@ -103,11 +101,7 @@ extension InsulinStep2VC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(with: InsulinStep2Cell.self)
-        cell.insulinType.text = sections[indexPath.row].0
-        cell.insulinSubType.text = sections[indexPath.row].2
-        cell.logoImgView.image = sections[indexPath.row].3
-        cell.dataContainerView.setBorder(width: 1.0, color: !sections[indexPath.row].1 ? AppColors.fontPrimaryColor : AppColors.appGreenColor)
-        cell.radioBtn.isSelected = sections[indexPath.row].1
+        cell.configureCell(model: sections[indexPath.row])
         return cell
     }
     

@@ -20,6 +20,11 @@ import SwiftKeychainWrapper
 
 class LoginViewController: UIViewController {
     
+    enum RowsCount: CaseIterable{
+        case signUpTopTableCell
+        case loginSocialTableCell
+    }
+    
     // MARK: - IBOutlets
     //===========================
     @IBOutlet weak var headerView: UIView!
@@ -65,9 +70,6 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-    
-    // MARK: - IBActions
-    //===========================
 }
 
 // MARK: - Extension For Functions
@@ -119,9 +121,6 @@ extension LoginViewController {
     }
     
     private func googleSetUp(){
-//        GIDSignIn.sharedInstance.present
-//        sharedInstance()?.presentingViewController = self
-//        GIDSignIn.sharedInstance.delw
         let signInConfig = GIDConfiguration.init(clientID: FirebaseApp.app()?.options.clientID ?? "")
         GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { (gidUser, error) in
             self.signWithGoogle(user: gidUser, withError: error)
@@ -204,7 +203,7 @@ extension LoginViewController {
 extension LoginViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return RowsCount.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -46,6 +46,11 @@ class ContactsUsTableCell: UITableViewCell {
         self.nameTxtFld.placeholder = LocalizedString.first_Name.localized
         self.emailTxtFld.placeholder = LocalizedString.email.localized
     }
+    
+    public func configureCell(){
+        self.nameTxtFld.text = "\(UserModel.main.firstName)" + " \(UserModel.main.lastName)"
+        self.emailTxtFld.text = UserModel.main.email
+    }
 }
 
 

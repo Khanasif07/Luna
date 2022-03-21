@@ -96,7 +96,7 @@ extension SystemSetupVC {
         NotificationCenter.default.addObserver(self, selector: #selector(lunaPairedFinish), name: .lunaPairedSuccessfully, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(insulinConnectedFinish), name: .insulinConnectedSuccessfully, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(cgmConnectedFinish), name: .cgmConnectedSuccessfully, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(lunaPairedFinish), name: .BLEDidDisConnectSuccessfully, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(lunaPairedFinish), name: .bLEDidDisConnectSuccessfully, object: nil)
     }
     
     private func setUpSectionData(){

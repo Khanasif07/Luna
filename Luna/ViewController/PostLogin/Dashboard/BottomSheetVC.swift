@@ -14,6 +14,13 @@ import Photos
 
 class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     
+    //MARK:- Setting Section Enum
+    enum SectionCount: Int{
+        case insulinCell
+        case insulinCellListing
+        case total
+    }
+    
     //MARK:- OUTLETS
     //==============
     @IBOutlet weak var cgmChartView: TappableLineChartView!
@@ -26,6 +33,7 @@ class BottomSheetVC:  UIViewController,UNUserNotificationCenterDelegate {
     
     //MARK:- VARIABLE
     //================
+    var sections: [(SectionCount)] = [.insulinCell,.insulinCellListing]
     // Variables for BG Charts
     let ScaleXMax:Float = 150.0
     var errMessage :String = ""
@@ -244,37 +252,17 @@ extension BottomSheetVC {
     }
     
     private func addObserver(){
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationIsTerminated), name: .ApplicationIsTerminated, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .BleDidUpdateValue, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(batteryUpdateValue), name: .BatteryUpdateValue, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(reservoirUpdateValue), name: .ReservoirUpdateValue, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(statusUpdateValue), name: .StatusUpdateValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationIsTerminated), name: .applicationIsTerminated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(receivedPushNotification), name: .receivedPushNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(bleDidUpdateValue), name: .bleDidUpdateValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(batteryUpdateValue), name: .batteryUpdateValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reservoirUpdateValue), name: .reservoirUpdateValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(statusUpdateValue), name: .statusUpdateValue, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(cgmDataReceivedSuccessfully), name: .cgmConnectedSuccessfully, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(cgmDataRemovedSuccessfully), name: .cgmRemovedSuccessfully, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(cgmSimData), name: .cgmSimData, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .BLEOnOffState, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(bLEOnOffStateChanged), name: .bLEOnOffState, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(insulinConnectedFinish), name: .insulinConnectedSuccessfully, object: nil)
-    }
-    
-    //    @objc func xAxisLabelsDuplicateValue(notification : NSNotification){
-    //        if let lastData = bgData.last{
-    //            if lastData.date < dateTimeUtils.getNowTimeIntervalUTC() {
-    //                bgData.removeFirst()
-    //                bgData.append(ShareGlucoseData(sgv: lastData.sgv, date: lastData.date + 300.0, direction: lastData.direction ?? "", insulin: lastData.insulin ?? ""))
-    //                DispatchQueue.main.async {
-    //                    self.updateBGGraph()
-    //                }
-    //            }
-    //        }
-    //    }
-    
-    @objc func applicationIsTerminated(){
-        self.persistentNotification(body: "Tap to open app. Luna will not function until the app is open. In the future, keep app running in the background, don't swipe it closed. ",title: "App is closed.")
-    }
-    
-    @objc func bLEOnOffStateChanged(){
-        let bodyText  = "Turn on Bluetooth to receive alerts, alarms, or sensor glucose readings."
-        self.persistentNotification(body: bodyText,title: "Bluetooth Off Alert")
     }
     
     @objc func insulinConnectedFinish(){
@@ -285,86 +273,6 @@ extension BottomSheetVC {
         DispatchQueue.main.async {
             self.mainTableView.reloadData()
             self.processNSBGData(data: self.bgData, onlyPullLastRecord: false)
-        }
-    }
-    
-    @objc func batteryUpdateValue(notification : NSNotification){
-        DispatchQueue.main.async {
-            self.mainTableView.reloadData()
-            if ((BleManager.sharedInstance.systemStatusData.contains("3") || BleManager.sharedInstance.systemStatusData.contains("5")) && Int(BleManager.sharedInstance.batteryData) ?? 0 <= 75 && (Int(BleManager.sharedInstance.batteryData) ?? 0) % 5 == 0 && SystemInfoModel.shared.dosingData.last?.sessionStatus != ApiKey.endCaps) {
-                var bodyText  = "Your Luna device is only "
-                bodyText += BleManager.sharedInstance.batteryData
-                bodyText += "% charged and may not last the entire session."
-                self.persistentNotification(body: bodyText)
-                return
-            }
-            
-            if ((BleManager.sharedInstance.systemStatusData.contains("F7") || BleManager.sharedInstance.systemStatusData.contains("F8")) && Int(BleManager.sharedInstance.batteryData) ?? 0 <= 75 && (Int(BleManager.sharedInstance.batteryData) ?? 0) % 5 == 0 && SystemInfoModel.shared.dosingData.last?.sessionStatus != ApiKey.endCaps) {
-                var bodyText  = "Your Luna device is only "
-                bodyText += BleManager.sharedInstance.batteryData
-                bodyText += "% charged and may not last the entire session."
-                self.persistentNotification(body: bodyText)
-                return
-            }
-            
-            if BleManager.sharedInstance.systemStatusData.contains("0") || BleManager.sharedInstance.systemStatusData.contains("1"){
-                let bodyText  = "Your Luna device neeeds to be charged and is not being charged."
-                self.persistentNotification(body: bodyText)
-                return
-            }
-        }
-    }
-    
-    @objc func reservoirUpdateValue(notification : NSNotification){
-        DispatchQueue.main.async {
-            self.mainTableView.reloadData()
-            if BleManager.sharedInstance.reservoirLevelData == "-1" && BleManager.sharedInstance.iobData > 0.0{
-                var bodyText  = "Your session has been completed and you have "
-                bodyText += "\(BleManager.sharedInstance.iobData)"
-                bodyText += " units of active Insulin On Board. Make sure to consider this before making any diabetes related decisions for the next 6 hours."
-                self.persistentNotification(body: bodyText)
-                return
-            }
-            
-            if BleManager.sharedInstance.systemStatusData.contains("F6") || BleManager.sharedInstance.systemStatusData.contains("F5"){
-                self.persistentNotification(body: "Luna is not receiving CGM data. Check to see if your CGM is working and paired with Luna properly.")
-                return
-            }
-            
-            if BleManager.sharedInstance.systemStatusData.contains("FB"){
-                self.persistentNotification(body: "Luna has detected that there is no insulin in the Reservoir. Please discard this Reservoir and place the Luna Controller back on the Charger for 60 seconds to reset the device.")
-                return
-            }
-            
-            if BleManager.sharedInstance.systemStatusData.contains("F3") && SystemInfoModel.shared.dosingData.last?.sessionStatus == ApiKey.beginCaps {
-                self.persistentNotification(body: "Luna has detected an occlusion in the system. Please discard this reservoir and place the Luna Controller back on the Charger for 60 seconds to reset the device.")
-                return
-            }
-            
-            if (BleManager.sharedInstance.systemStatusData.contains("FA") || (BleManager.sharedInstance.systemStatusData.contains("F1") && BleManager.sharedInstance.systemStatusData.contains("F2") && BleManager.sharedInstance.systemStatusData.contains("F4") && BleManager.sharedInstance.systemStatusData.contains("F9"))) && SystemInfoModel.shared.dosingData.last?.sessionStatus != ApiKey.endCaps{
-                self.persistentNotification(body: "Luna has detected a failure in the system. Please check the dashboard on the App for more information. If the problem can’t be resolved, discard this Reservoir and place the Luna Controller back on the Charger for 60 seconds to reset the device.")
-                return
-            }
-        }
-    }
-    
-    @objc func statusUpdateValue(notification : NSNotification){
-        DispatchQueue.main.async {
-            self.mainTableView.reloadData()
-            if BleManager.sharedInstance.systemStatusData.contains("F6") || BleManager.sharedInstance.systemStatusData.contains("F5"){
-                self.persistentNotification(body: "Luna is not receiving CGM data. Check to see if your CGM is working and paired with Luna properly.")
-                return
-            }
-            
-            if BleManager.sharedInstance.systemStatusData.contains("F3") && SystemInfoModel.shared.dosingData.last?.sessionStatus == ApiKey.beginCaps {
-                self.persistentNotification(body: "Luna has detected an occlusion in the system. Please discard this reservoir and place the Luna Controller back on the Charger for 60 seconds to reset the device.")
-                return
-            }
-            
-            if (BleManager.sharedInstance.systemStatusData.contains("FA") || (BleManager.sharedInstance.systemStatusData.contains("F1") && BleManager.sharedInstance.systemStatusData.contains("F2") && BleManager.sharedInstance.systemStatusData.contains("F4") && BleManager.sharedInstance.systemStatusData.contains("F9"))) && SystemInfoModel.shared.dosingData.last?.sessionStatus == ApiKey.beginCaps{
-                self.persistentNotification(body: "Luna has detected a failure in the system. Please check the dashboard on the App for more information. If the problem can’t be resolved, discard this Reservoir and place the Luna Controller back on the Charger for 60 seconds to reset the device.")
-                return
-            }
         }
     }
     
@@ -409,16 +317,16 @@ extension BottomSheetVC {
 //========================
 extension BottomSheetVC : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 1 ? (SystemInfoModel.shared.insulinData.endIndex) : 1
+        return sections[section] == .insulinCellListing ? (SystemInfoModel.shared.insulinData.endIndex) : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
+        switch sections[indexPath.section] {
+        case .insulinCell:
             let cell = tableView.dequeueCell(with: BottomSheetInsulinCell.self, indexPath: indexPath)
             cell.populateCell()
             return cell
-        case 1:
+        case .insulinCellListing:
             let cell = tableView.dequeueCell(with: BottomSheetBottomCell.self, indexPath: indexPath)
             cell.topLineDashView.isHidden = indexPath.row == 0
             cell.populateCell(model:SystemInfoModel.shared.insulinData[indexPath.row])
@@ -429,7 +337,7 @@ extension BottomSheetVC : UITableViewDelegate,UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return SectionCount.total.rawValue
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

@@ -84,8 +84,7 @@ extension ContactUsVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(with: ContactsUsTableCell.self)
         cell.messageTxtView.delegate = self
-        cell.nameTxtFld.text = "\(UserModel.main.firstName)" + " \(UserModel.main.lastName)"
-        cell.emailTxtFld.text = UserModel.main.email
+        cell.configureCell()
         return cell
     }
 }

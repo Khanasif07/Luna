@@ -28,10 +28,7 @@ class SearchingDeviceVC: UIViewController {
         if #available(iOS 13.0, *) {
         overrideUserInterfaceStyle = .light
         }
-        self.bluetoothSetup()
-        self.addPulsator()
-        self.addBlurView()
-        IntroLbl.textColor =  AppColors.fontPrimaryColor
+        self.initialSetup()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -52,6 +49,13 @@ class SearchingDeviceVC: UIViewController {
         outerView.layer.cornerRadius = 10
         outerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
         pulsator.position = animatedView.layer.position
+    }
+    
+    private func initialSetup(){
+        self.bluetoothSetup()
+        self.addPulsator()
+        self.addBlurView()
+        IntroLbl.textColor =  AppColors.fontPrimaryColor
     }
     
     private func bluetoothSetup(){

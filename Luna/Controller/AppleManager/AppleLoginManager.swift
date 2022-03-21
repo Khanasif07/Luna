@@ -9,7 +9,7 @@ import Foundation
 import AuthenticationServices
 import UIKit
 
-protocol AppleSignInProtocal: class {
+protocol AppleSignInProtocal: AnyObject {
     func getAppleLoginData(loginData: [String:Any])
 }
 
