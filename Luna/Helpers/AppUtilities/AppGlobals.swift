@@ -14,11 +14,7 @@ typealias switchBtnAction = ((UISwitch)->())?
 
 var isUserLoggedin: Bool {
     let token = AppUserDefaults.value(forKey: .uid).stringValue
-    if !token.isEmpty {
-        return true
-    } else {
-        return false
-    }
+    return !token.isEmpty
 }
 
 var hasTopNotch: Bool {

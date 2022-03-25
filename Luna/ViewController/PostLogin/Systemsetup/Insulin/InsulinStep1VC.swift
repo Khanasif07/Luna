@@ -27,18 +27,6 @@ class InsulinStep1VC: UIViewController {
         initialSetup()
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        if #available(iOS 13.0, *) {
-            if userInterfaceStyle == .dark{
-                return .darkContent
-            }else{
-                return .darkContent
-            }
-        } else {
-            return .lightContent
-        }
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         backView.round()
@@ -64,9 +52,6 @@ class InsulinStep1VC: UIViewController {
 extension InsulinStep1VC {
     
     private func initialSetup() {
-        if #available(iOS 13.0, *) {
-        overrideUserInterfaceStyle = .light
-        }
         btmContainerView.setBorder(width: 1.0, color: UIColor.systemRed)
         importantBox.setBorder(width: 1.0, color: #colorLiteral(red: 0.2705882353, green: 0.7843137255, blue: 0.5803921569, alpha: 1))
         proceedBtn.isEnabled = true

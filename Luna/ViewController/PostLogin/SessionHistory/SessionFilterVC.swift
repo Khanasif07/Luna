@@ -107,9 +107,6 @@ class SessionFilterVC: UIViewController {
 extension SessionFilterVC {
     private func initialSetup() {
         proceedBtn.isEnabled = true
-        if #available(iOS 13.0, *) {
-            overrideUserInterfaceStyle = .light
-        }
         self.setupFontsAndColor()
     }
     

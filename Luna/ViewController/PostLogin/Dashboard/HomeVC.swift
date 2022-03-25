@@ -67,7 +67,7 @@ class HomeVC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        bottomSheetVC.view.dropShadow(color: UIColor.black16, opacity: 0.16, offSet: CGSize(width: 0, height: -3), radius: 10, scale: true)
+//        bottomSheetVC.view.dropShadow(color: UIColor.black16, opacity: 0.16, offSet: CGSize(width: 0, height: -3), radius: 10, scale: true)
         self.view.layoutIfNeeded()
     }
     
@@ -98,9 +98,6 @@ class HomeVC: UIViewController {
 //===========================
 extension HomeVC {
     private func initialSetup() {
-        if #available(iOS 13.0, *) {
-            overrideUserInterfaceStyle = .light
-        }
         self.setUpFont()
         self.setupHealthkit()
         self.addObserver()

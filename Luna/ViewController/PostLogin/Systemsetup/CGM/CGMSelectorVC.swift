@@ -37,16 +37,10 @@ class CGMSelectorVC: UIViewController {
     //===========================
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 13.0, *) {
-        overrideUserInterfaceStyle = .light
-        }
-        
         initialSetup()
-        
         let appState = AppDelegate.shared.appState
         userRepository = appState.userRepository
         cgmRepository = appState.cgmRepository
-        
         Task {
             await viewDidLoadAsync()
         }
@@ -88,18 +82,6 @@ class CGMSelectorVC: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        if #available(iOS 13.0, *) {
-            if userInterfaceStyle == .dark{
-                return .darkContent
-            }else{
-                return .darkContent
-            }
-        } else {
-            return .lightContent
-        }
-    }
-    
     // MARK: - IBActions
     //===========================
     @IBAction func proceedBtnAction(_ sender: UIButton) {
@@ -113,7 +95,7 @@ class CGMSelectorVC: UIViewController {
                 }
             )
             
-            viewController.overrideUserInterfaceStyle = .light
+//            viewController.overrideUserInterfaceStyle = .light
             navigationController?.pushViewController(viewController, animated: true)
         } else {
             proceedButtonActionForDexcomG6()
@@ -189,7 +171,7 @@ extension CGMSelectorVC {
             }
         )
 
-        viewController.overrideUserInterfaceStyle = .light
+//        viewController.overrideUserInterfaceStyle = .light
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

@@ -45,9 +45,6 @@ class SessionHistoryVC: UIViewController {
 extension SessionHistoryVC {
     
     private func initialSetup() {
-        if #available(iOS 13.0, *) {
-            overrideUserInterfaceStyle = .light
-        }
         self.setUpTableView()
         CommonFunctions.showActivityLoader()
         FirestoreController.getNetworkStatus { (isNetworkAvailable) in

@@ -38,18 +38,6 @@ class SystemSetupVC: UIViewController {
         super.viewWillAppear(animated)
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        if #available(iOS 13.0, *) {
-            if userInterfaceStyle == .dark{
-                return .darkContent
-            }else{
-                return .darkContent
-            }
-        } else {
-            return .lightContent
-        }
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         backView.round()
@@ -77,14 +65,11 @@ class SystemSetupVC: UIViewController {
 extension SystemSetupVC {
     
     private func initialSetup() {
-        if #available(iOS 13.0, *) {
-            overrideUserInterfaceStyle = .light
-        }
         if settingType == .Luna {
             self.getSystemInfo()
             self.titleLbl.text = LocalizedString.luna_settings.localized
         }
-        else{self.titleLbl.text = LocalizedString.app_settings.localized}
+        else{ self.titleLbl.text = LocalizedString.app_settings.localized}
         self.customView = CustomView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         self.customView?.delegate = self
         self.setUpSectionData()
