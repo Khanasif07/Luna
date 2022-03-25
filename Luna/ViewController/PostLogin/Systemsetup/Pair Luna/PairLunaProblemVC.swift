@@ -21,23 +21,8 @@ class PairLunaProblemVC: UIViewController {
     // MARK: - Lifecycle
     //===========================
     override func viewDidLoad() {
-        if #available(iOS 13.0, *) {
-        overrideUserInterfaceStyle = .light
-        }
         super.viewDidLoad()
         initialSetup()
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        if #available(iOS 13.0, *) {
-            if userInterfaceStyle == .dark{
-                return .darkContent
-            }else{
-                return .darkContent
-            }
-        } else {
-            return .lightContent
-        }
     }
     
     override func viewDidLayoutSubviews() {

@@ -273,7 +273,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="7Ge-dN-cdF" firstAttribute="centerY" secondItem="GfE-wD-EaN" secondAttribute="centerY" id="8c3-OI-XSY"/>
                                     <constraint firstItem="GfE-wD-EaN" firstAttribute="top" secondItem="H7M-77-cDu" secondAttribute="bottom" constant="15" id="9Wr-Kt-RCP"/>
@@ -325,7 +325,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sOn-uC-uaD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2605" y="61"/>
+            <point key="canvasLocation" x="2538" y="59"/>
         </scene>
         <!--About SectionVC-->
         <scene sceneID="FwC-e9-VAK">

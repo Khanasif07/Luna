@@ -30,18 +30,6 @@ class InsulinStep3VC: UIViewController {
         initialSetup()
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        if #available(iOS 13.0, *) {
-            if userInterfaceStyle == .dark{
-                return .darkContent
-            }else{
-                return .darkContent
-            }
-        } else {
-            return .lightContent
-        }
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         insulinCountTxtField?.round(radius: 8.0)
@@ -104,9 +92,6 @@ class InsulinStep3VC: UIViewController {
 extension InsulinStep3VC {
     
     private func initialSetup() {
-        if #available(iOS 13.0, *) {
-            overrideUserInterfaceStyle = .light
-        }
         registerNotification()
         insulinCountTxtField.delegate = self
         insulinCountTxtField.keyboardType = .numberPad

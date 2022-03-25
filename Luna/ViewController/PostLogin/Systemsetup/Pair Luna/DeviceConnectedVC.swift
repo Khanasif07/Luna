@@ -16,23 +16,19 @@ class DeviceConnectedVC: UIViewController {
     // MARK: - IBOutlets
     //===========================
     @IBOutlet weak var outerView: UIView!
-    @IBOutlet weak var OKBtn: UIButton!
+    @IBOutlet weak var okBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        if #available(iOS 13.0, *) {
-            if userInterfaceStyle == .dark{
-                return .darkContent
-            }else{
-                return .darkContent
-            }
-        } else {
-            return .lightContent
-        }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.okBtn.round(radius: 10.0)
+        self.okBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
+        outerView.round(radius: 10.0)
+        outerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
     }
     
     // MARK: - IBActions
@@ -56,15 +52,6 @@ class DeviceConnectedVC: UIViewController {
 extension DeviceConnectedVC {
     
     private func initialSetup() {
-        if #available(iOS 13.0, *) {
-        overrideUserInterfaceStyle = .light
-        }
-        self.OKBtn.isEnabled = true
-        self.OKBtn.round(radius: 10.0)
-        self.OKBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
-   
-        outerView.round(radius: 10.0)
-        outerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
-        
+        self.okBtn.isEnabled = true
     }
 }

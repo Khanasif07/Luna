@@ -38,7 +38,7 @@ class BottomSheetInsulinCell: UITableViewCell {
         let attributedString = NSMutableAttributedString(string: "\(BleManager.sharedInstance.reservoirLevelData)".isEmpty ? "--" : "\(BleManager.sharedInstance.iobData)", attributes: [
             .font: AppFonts.SF_Pro_Display_Bold.withSize(.x20)
         ])
-        let privactAttText = (NSAttributedString(string: " Units", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black,NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Medium.withSize(.x12)]))
+        let privactAttText = (NSAttributedString(string: " Units", attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: "color2")!,NSAttributedString.Key.font: AppFonts.SF_Pro_Display_Medium.withSize(.x12)]))
         attributedString.append(privactAttText)
         insulinCountLbl.attributedText = attributedString
     }

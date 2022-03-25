@@ -32,18 +32,6 @@ class SystemSetupStep1VC: UIViewController {
         initialSetup()
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        if #available(iOS 13.0, *) {
-            if userInterfaceStyle == .dark{
-                return .darkContent
-            }else{
-                return .darkContent
-            }
-        } else {
-            return .lightContent
-        }
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.manualView.round()
@@ -109,9 +97,6 @@ class SystemSetupStep1VC: UIViewController {
 extension SystemSetupStep1VC {
     
     private func initialSetup() {
-        if #available(iOS 13.0, *) {
-        overrideUserInterfaceStyle = .light
-        }
         self.addObserver()
         self.tableViewSetup()
         self.setupProgressView()

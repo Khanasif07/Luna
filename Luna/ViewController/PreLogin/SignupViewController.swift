@@ -56,15 +56,10 @@ class SignupViewController: UIViewController {
 extension SignupViewController {
     
     private func initialSetup() {
-        if #available(iOS 13.0, *) {
-            overrideUserInterfaceStyle = .light
-        }
         self.tableViewSetUp()
     }
     
     private func googleSetUp(){
-//        GIDSignIn.sharedInstance()?.presentingViewController = self
-//        GIDSignIn.sharedInstance().delegate=self
         let signInConfig = GIDConfiguration.init(clientID: FirebaseApp.app()?.options.clientID ?? "")
         GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { (gidUser, error) in
             self.signWithGoogle(user: gidUser, withError: error)

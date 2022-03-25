@@ -31,7 +31,7 @@ class CGMTypeTableViewCell: UITableViewCell {
     
     func selected() {
         nextBtn.setImage(UIImage(named: "Radio_selected"), for: .normal)
-        subTitlelbl.textColor = UIColor.black
+        subTitlelbl.textColor = UIColor(named: "color2")
         outerView.layer.borderColor = AppColors.appGreenColor.cgColor
     }
     

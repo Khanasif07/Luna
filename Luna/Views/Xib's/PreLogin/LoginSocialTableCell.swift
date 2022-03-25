@@ -33,8 +33,9 @@ class LoginSocialTableCell: UITableViewCell {
         self.setUpFont()
         self.setUpAttributedString()
         self.setUpButtonInset()
-        let imageView = UIImageView(image: UIImage(named: "apple"))
-        appleBtn.setImage(imageView.image, for: .normal)
+//        let imageView = UIImageView(image: UIImage(named: "apple"))
+//        appleBtn.setImage(imageView.image, for: .normal)
+        appleBtn.setImage(UIImage(named: "apple"), for: .normal)
     }
     
     override func layoutSubviews() {

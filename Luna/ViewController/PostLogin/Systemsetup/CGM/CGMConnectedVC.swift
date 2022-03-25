@@ -38,9 +38,6 @@ class CGMConnectedVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 13.0, *) {
-        overrideUserInterfaceStyle = .light
-        }
         initialSetup()
     }
     
@@ -50,18 +47,6 @@ class CGMConnectedVC: UIViewController {
         outerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
         self.okBtn.round(radius: 10.0)
         self.okBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        if #available(iOS 13.0, *) {
-            if userInterfaceStyle == .dark{
-                return .darkContent
-            }else{
-                return .darkContent
-            }
-        } else {
-            return .lightContent
-        }
     }
     
     // MARK: - IBActions
@@ -92,9 +77,6 @@ class CGMConnectedVC: UIViewController {
 extension CGMConnectedVC {
     
     private func initialSetup() {
-        if #available(iOS 13.0, *) {
-        overrideUserInterfaceStyle = .light
-        }
         self.dataSetup()
         self.connectDexcomAccount()
     }
@@ -102,7 +84,7 @@ extension CGMConnectedVC {
     private func dataSetup(){
         activityIndicator.isHidden = true
         self.unitLbl.text = UserDefaultsRepository.units.value
-        self.titleLbl.textColor = UIColor.black
+        self.titleLbl.textColor = UIColor(named: "color2")!
         self.subTitleLbl.textColor = AppColors.fontPrimaryColor
         if SystemInfoModel.shared.previousCgmReadingTime == "0" {
             self.subTitleLbl.text = "CGM Reading time - \(Date().convertToDefaultTimeString())"

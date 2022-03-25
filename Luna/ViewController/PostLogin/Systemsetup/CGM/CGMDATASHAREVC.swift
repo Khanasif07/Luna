@@ -23,22 +23,7 @@ class CGMDATASHAREVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 13.0, *) {
-        overrideUserInterfaceStyle = .light
-        }
         initialSetup()
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        if #available(iOS 13.0, *) {
-            if userInterfaceStyle == .dark{
-                return .darkContent
-            }else{
-                return .darkContent
-            }
-        } else {
-            return .lightContent
-        }
     }
     
     // MARK: - IBActions
@@ -61,12 +46,9 @@ class CGMDATASHAREVC: UIViewController {
 //===========================
 extension CGMDATASHAREVC {
     private func initialSetup() {
-        if #available(iOS 13.0, *) {
-        overrideUserInterfaceStyle = .light
-        }
-        self.titleLbl.textColor = UIColor.black
+        self.titleLbl.textColor = UIColor(named: "color2")!
         self.subTitleLbl.textColor = AppColors.fontPrimaryColor
-        self.conformLbl.textColor = UIColor.black
+        self.conformLbl.textColor = UIColor(named: "color2")!
         outerView.round(radius: 10.0)
         outerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
         self.okBtn.isEnabled = true
