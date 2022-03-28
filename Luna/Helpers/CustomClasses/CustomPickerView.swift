@@ -22,7 +22,7 @@ class WCCustomPickerView: UIView {
         
         super.init(frame: UIScreen.main.bounds)
         
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor.systemBackground
         
         self.frame = CGRect(x: 0.0, y: UIScreen.main.bounds.size.height, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height / 4)
         
@@ -110,7 +110,7 @@ class CustomDatePicker: UIView {
         
         super.init(frame: UIScreen.main.bounds)
         
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor.systemBackground
         
         self.frame = CGRect(x: 0.0, y: UIScreen.main.bounds.size.height, width: UIScreen.main.bounds.size.width, height: 200.0)
         
